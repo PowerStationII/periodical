@@ -1,0 +1,5 @@
+/**
+ * 期刊办公系统
+ * 业务流程控制包
+ */
+package com.cn.periodical.manager;

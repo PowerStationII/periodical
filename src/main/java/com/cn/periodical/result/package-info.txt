@@ -1,0 +1,5 @@
+/**
+ * 期刊办公系统
+ * 某个业务向页面返回执行结果类型包
+ */
+package com.cn.periodical.result;

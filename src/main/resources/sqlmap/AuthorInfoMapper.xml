@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AuthorInfoMapper">
+	<resultMap id="BaseResultMap" type="AuthorInfo">
+	  <id column="ID" jdbcType="DECIMAL" property="id" />
+	  <result column="article_id" jdbcType="VARCHAR" property="articleId" />
+	  <result column="author_id" jdbcType="VARCHAR" property="authorId" />
+	  <result column="author_name" jdbcType="VARCHAR" property="authorName" />
+	  <result column="email" jdbcType="VARCHAR" property="email" />
+	  <result column="author_name_spell" jdbcType="VARCHAR" property="authorNameSpell" />
+	  <result column="certificate_type" jdbcType="VARCHAR" property="certificateType" />
+	  <result column="sex" jdbcType="VARCHAR" property="sex" />
+	  <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+	  <result column="research_area" jdbcType="VARCHAR" property="researchArea" />
+	  <result column="degree" jdbcType="VARCHAR" property="degree" />
+	  <result column="academic_degree" jdbcType="VARCHAR" property="academicDegree" />
+	  <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+	  <result column="compay_type" jdbcType="VARCHAR" property="compayType" />
+	  <result column="company_department" jdbcType="VARCHAR" property="companyDepartment" />
+	  <result column="isreviewer" jdbcType="VARCHAR" property="isreviewer" />
+	  <result column="isfirstauthor" jdbcType="VARCHAR" property="isfirstauthor" />
+	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
+	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
+	  <result column="extend_3" jdbcType="VARCHAR" property="extend3" />
+	  <result column="extend_4" jdbcType="VARCHAR" property="extend4" />
+	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Page_Query_Begin">
+    select * from(select t.*,rownum rn from(
+  </sql>
+  <sql id="Page_Query_End">
+  	) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="articleId != null" >
+	      and article_id = #{articleId,jdbcType=VARCHAR}
+	    </if>
+      <if test="authorId != null" >
+	      and author_id = #{authorId,jdbcType=VARCHAR}
+	    </if>
+      <if test="authorName != null" >
+	      and author_name = #{authorName,jdbcType=VARCHAR}
+	    </if>
+      <if test="email != null" >
+	      and email = #{email,jdbcType=VARCHAR}
+	    </if>
+      <if test="authorNameSpell != null" >
+	      and author_name_spell = #{authorNameSpell,jdbcType=VARCHAR}
+	    </if>
+      <if test="certificateType != null" >
+	      and certificate_type = #{certificateType,jdbcType=VARCHAR}
+	    </if>
+      <if test="sex != null" >
+	      and sex = #{sex,jdbcType=VARCHAR}
+	    </if>
+      <if test="birthday != null" >
+	      and birthday = #{birthday,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="researchArea != null" >
+	      and research_area = #{researchArea,jdbcType=VARCHAR}
+	    </if>
+      <if test="degree != null" >
+	      and degree = #{degree,jdbcType=VARCHAR}
+	    </if>
+      <if test="academicDegree != null" >
+	      and academic_degree = #{academicDegree,jdbcType=VARCHAR}
+	    </if>
+      <if test="companyName != null" >
+	      and company_name = #{companyName,jdbcType=VARCHAR}
+	    </if>
+      <if test="compayType != null" >
+	      and compay_type = #{compayType,jdbcType=VARCHAR}
+	    </if>
+      <if test="companyDepartment != null" >
+	      and company_department = #{companyDepartment,jdbcType=VARCHAR}
+	    </if>
+      <if test="isreviewer != null" >
+	      and isreviewer = #{isreviewer,jdbcType=VARCHAR}
+	    </if>
+      <if test="isfirstauthor != null" >
+	      and isfirstauthor = #{isfirstauthor,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend1 != null" >
+	      and extend_1 = #{extend1,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend2 != null" >
+	      and extend_2 = #{extend2,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend3 != null" >
+	      and extend_3 = #{extend3,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend4 != null" >
+	      and extend_4 = #{extend4,jdbcType=VARCHAR}
+	    </if>
+      <if test="createTime != null" >
+	      and create_time = #{createTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updateTime != null" >
+	      and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="articleId != null">
+        article_id = #{articleId,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null">
+        author_id = #{authorId,jdbcType=VARCHAR},
+      </if>
+      <if test="authorName != null">
+        author_name = #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="authorNameSpell != null">
+        author_name_spell = #{authorNameSpell,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateType != null">
+        certificate_type = #{certificateType,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="researchArea != null">
+        research_area = #{researchArea,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="academicDegree != null">
+        academic_degree = #{academicDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="compayType != null">
+        compay_type = #{compayType,jdbcType=VARCHAR},
+      </if>
+      <if test="companyDepartment != null">
+        company_department = #{companyDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="isreviewer != null">
+        isreviewer = #{isreviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="isfirstauthor != null">
+        isfirstauthor = #{isfirstauthor,jdbcType=VARCHAR},
+      </if>
+      <if test="extend1 != null">
+        extend_1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        extend_2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null">
+        extend_3 = #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null">
+        extend_4 = #{extend4,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    id,
+    article_id,
+    author_id,
+    author_name,
+    email,
+    author_name_spell,
+    certificate_type,
+    sex,
+    birthday,
+    research_area,
+    degree,
+    academic_degree,
+    company_name,
+    compay_type,
+    company_department,
+    isreviewer,
+    isfirstauthor,
+    extend_1,
+    extend_2,
+    extend_3,
+    extend_4,
+    create_time,
+    update_time,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        article_id = #{articleId,jdbcType=VARCHAR},
+        author_id = #{authorId,jdbcType=VARCHAR},
+        author_name = #{authorName,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
+        author_name_spell = #{authorNameSpell,jdbcType=VARCHAR},
+        certificate_type = #{certificateType,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=VARCHAR},
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+        research_area = #{researchArea,jdbcType=VARCHAR},
+        degree = #{degree,jdbcType=VARCHAR},
+        academic_degree = #{academicDegree,jdbcType=VARCHAR},
+        company_name = #{companyName,jdbcType=VARCHAR},
+        compay_type = #{compayType,jdbcType=VARCHAR},
+        company_department = #{companyDepartment,jdbcType=VARCHAR},
+        isreviewer = #{isreviewer,jdbcType=VARCHAR},
+        isfirstauthor = #{isfirstauthor,jdbcType=VARCHAR},
+        extend_1 = #{extend1,jdbcType=VARCHAR},
+        extend_2 = #{extend2,jdbcType=VARCHAR},
+        extend_3 = #{extend3,jdbcType=VARCHAR},
+        extend_4 = #{extend4,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    ID,
+    <if test="articleId != null">
+      article_id,
+    </if>
+    <if test="authorId != null">
+      author_id,
+    </if>
+    <if test="authorName != null">
+      author_name,
+    </if>
+    <if test="email != null">
+      email,
+    </if>
+    <if test="authorNameSpell != null">
+      author_name_spell,
+    </if>
+    <if test="certificateType != null">
+      certificate_type,
+    </if>
+    <if test="sex != null">
+      sex,
+    </if>
+    <if test="birthday != null">
+      birthday,
+    </if>
+    <if test="researchArea != null">
+      research_area,
+    </if>
+    <if test="degree != null">
+      degree,
+    </if>
+    <if test="academicDegree != null">
+      academic_degree,
+    </if>
+    <if test="companyName != null">
+      company_name,
+    </if>
+    <if test="compayType != null">
+      compay_type,
+    </if>
+    <if test="companyDepartment != null">
+      company_department,
+    </if>
+    <if test="isreviewer != null">
+      isreviewer,
+    </if>
+    <if test="isfirstauthor != null">
+      isfirstauthor,
+    </if>
+    <if test="extend1 != null">
+      extend_1,
+    </if>
+    <if test="extend2 != null">
+      extend_2,
+    </if>
+    <if test="extend3 != null">
+      extend_3,
+    </if>
+    <if test="extend4 != null">
+      extend_4,
+    </if>
+    <if test="createTime != null">
+      create_time,
+    </if>
+    <if test="updateTime != null">
+      update_time,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{id,jdbcType=BIGINT},
+    #{articleId,jdbcType=VARCHAR},
+    #{authorId,jdbcType=VARCHAR},
+    #{authorName,jdbcType=VARCHAR},
+    #{email,jdbcType=VARCHAR},
+    #{authorNameSpell,jdbcType=VARCHAR},
+    #{certificateType,jdbcType=VARCHAR},
+    #{sex,jdbcType=VARCHAR},
+    #{birthday,jdbcType=TIMESTAMP},
+    #{researchArea,jdbcType=VARCHAR},
+    #{degree,jdbcType=VARCHAR},
+    #{academicDegree,jdbcType=VARCHAR},
+    #{companyName,jdbcType=VARCHAR},
+    #{compayType,jdbcType=VARCHAR},
+    #{companyDepartment,jdbcType=VARCHAR},
+    #{isreviewer,jdbcType=VARCHAR},
+    #{isfirstauthor,jdbcType=VARCHAR},
+    #{extend1,jdbcType=VARCHAR},
+    #{extend2,jdbcType=VARCHAR},
+    #{extend3,jdbcType=VARCHAR},
+    #{extend4,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP},
+    #{updateTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    SEQ_author_info.nextval,
+    <if test="articleId != null">
+      #{articleId,jdbcType=VARCHAR},
+    </if>
+    <if test="authorId != null">
+      #{authorId,jdbcType=VARCHAR},
+    </if>
+    <if test="authorName != null">
+      #{authorName,jdbcType=VARCHAR},
+    </if>
+    <if test="email != null">
+      #{email,jdbcType=VARCHAR},
+    </if>
+    <if test="authorNameSpell != null">
+      #{authorNameSpell,jdbcType=VARCHAR},
+    </if>
+    <if test="certificateType != null">
+      #{certificateType,jdbcType=VARCHAR},
+    </if>
+    <if test="sex != null">
+      #{sex,jdbcType=VARCHAR},
+    </if>
+    <if test="birthday != null">
+      #{birthday,jdbcType=TIMESTAMP},
+    </if>
+    <if test="researchArea != null">
+      #{researchArea,jdbcType=VARCHAR},
+    </if>
+    <if test="degree != null">
+      #{degree,jdbcType=VARCHAR},
+    </if>
+    <if test="academicDegree != null">
+      #{academicDegree,jdbcType=VARCHAR},
+    </if>
+    <if test="companyName != null">
+      #{companyName,jdbcType=VARCHAR},
+    </if>
+    <if test="compayType != null">
+      #{compayType,jdbcType=VARCHAR},
+    </if>
+    <if test="companyDepartment != null">
+      #{companyDepartment,jdbcType=VARCHAR},
+    </if>
+    <if test="isreviewer != null">
+      #{isreviewer,jdbcType=VARCHAR},
+    </if>
+    <if test="isfirstauthor != null">
+      #{isfirstauthor,jdbcType=VARCHAR},
+    </if>
+    <if test="extend1 != null">
+      #{extend1,jdbcType=VARCHAR},
+    </if>
+    <if test="extend2 != null">
+      #{extend2,jdbcType=VARCHAR},
+    </if>
+    <if test="extend3 != null">
+      #{extend3,jdbcType=VARCHAR},
+    </if>
+    <if test="extend4 != null">
+      #{extend4,jdbcType=VARCHAR},
+    </if>
+    <if test="createTime != null">
+      #{createTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updateTime != null">
+      #{updateTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="AuthorInfoQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from author_info
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from author_info
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from author_info
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="AuthorInfoQuery">
+    delete from author_info
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="AuthorInfo">
+    insert into author_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="AuthorInfo">
+    insert into author_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="AuthorInfoQuery" resultType="java.lang.Integer">
+    select count(*) from author_info
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="AuthorInfo">
+    update author_info
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="AuthorInfo">
+    update author_info
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectPageByExample" parameterType="AuthorInfoQuery" resultMap="BaseResultMap">
+  	<include refid="Page_Query_Begin" />
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from author_info
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+    <include refid="Page_Query_End" />
+  </select>
+</mapper>

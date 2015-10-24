@@ -1,0 +1,5 @@
+/**
+ * 期刊办公系统
+ * 某个业务请求实体类型[业务入参]
+ */
+package com.cn.periodical.request;

@@ -1,0 +1,5 @@
+/**
+ * 期刊办公系统
+ * 与数据库交互包
+ */
+package com.cn.periodical.dao;

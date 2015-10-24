@@ -1,0 +1,5 @@
+/**
+ * 期刊办公系统
+ * 与前台页面交互包
+ */
+package com.cn.periodical.controller;

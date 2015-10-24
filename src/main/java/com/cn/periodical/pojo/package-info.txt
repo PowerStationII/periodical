@@ -1,0 +1,5 @@
+/**
+ * 期刊办公系统
+ * 实体类
+ */
+package com.cn.periodical.pojo;

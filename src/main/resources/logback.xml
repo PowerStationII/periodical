@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="30 seconds">
+	
+	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level- %msg\t\t\t[%thread]%caller{1}</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="logFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.base}/logs/periodical.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.base}/logs/periodical.%d{yyyy-MM-dd}.zip</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n</Pattern>
+        </layout>
+    </appender>
+    
+    <appender name="taskLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${catalina.base}/logs/task.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+    <logger name="com.cn.periodical" level="info" />
+    
+   <!--  <logger name="com.chanjetpay.gaterouter.schedule" level="INFO">
+		<appender-ref ref="taskLog" />
+	</logger> -->
+	
+	<logger name="org.mybatis.spring" level="INFO" />
+	<logger name="org.apache.ibatis" level="TRACE" />
+	<logger name="java.sql.PreparedStatement" level="INFO" />
+	<logger name="java.sql.Statement" level="INFO" />
+	<logger name="java.sql.Connection" level="INFO" />
+	<logger name="java.sql.ResultSet" level="INFO" />
+		
+	<logger name="com.alibaba" level="INFO" />
+	<logger name="org.apache.zookeeper" level="INFO" />
+	<logger name="org.springframework" level="INFO" />
+	<logger name="org.quartz" level="INFO" />
+    
+    <root level="DEBUG">
+    	<appender-ref ref="Console" />
+        <appender-ref ref="logFile" />
+    </root>
+</configuration>

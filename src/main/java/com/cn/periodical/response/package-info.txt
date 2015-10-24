@@ -1,0 +1,5 @@
+/**
+ * 期刊办公系统
+ * 某个业务返回实体类型[业务出参]
+ */
+package com.cn.periodical.response;
