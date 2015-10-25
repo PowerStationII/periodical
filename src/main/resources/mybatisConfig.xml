@@ -36,5 +36,6 @@
 	<!-- 映射文件 -->
 	<mappers>
 		<mapper resource="sqlmap/AuthorInfoMapper.xml" />
+		<mapper resource="sqlmap/UserInfoMapper.xml"/>
 	</mappers>
 </configuration>
