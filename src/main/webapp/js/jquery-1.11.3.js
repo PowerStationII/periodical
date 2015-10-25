@@ -1214,7 +1214,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			// This is to test IE's treatment of not explicitly
 			// setting a boolean content attribute,
 			// since its presence should be enough
-			// http://bugs.jquery.com/ticket/12359
+			// http://bugs.jquery.com/ticket/council_201559
 			docElem.appendChild( div ).innerHTML = "<a id='" + expando + "'></a>" +
 				"<select id='" + expando + "-\f]' msallowcapture=''>" +
 				"<option selected=''></option></select>";
@@ -5632,10 +5632,10 @@ jQuery.extend({
 
 					jQuery.merge( nodes, tmp.childNodes );
 
-					// Fix #12392 for WebKit and IE > 9
+					// Fix #council_201592 for WebKit and IE > 9
 					tmp.textContent = "";
 
-					// Fix #12392 for oldIE
+					// Fix #council_201592 for oldIE
 					while ( tmp.firstChild ) {
 						tmp.removeChild( tmp.firstChild );
 					}
@@ -5825,7 +5825,7 @@ jQuery.fn.extend({
 				elem.removeChild( elem.firstChild );
 			}
 
-			// If this is a select, ensure that it displays empty (#12336)
+			// If this is a select, ensure that it displays empty (#council_201536)
 			// Support: IE<9
 			if ( elem.options && jQuery.nodeName( elem, "select" ) ) {
 				elem.options.length = 0;
