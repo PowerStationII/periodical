@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserInfoMapper">
+	<resultMap id="BaseResultMap" type="UserInfo">
+	  <id column="ID" jdbcType="DECIMAL" property="id" />
+	  <result column="user_id" jdbcType="VARCHAR" property="userId" />
+	  <result column="logon_name" jdbcType="VARCHAR" property="logonName" />
+	  <result column="logon_pwd" jdbcType="VARCHAR" property="logonPwd" />
+	  <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+	  <result column="retry_times" jdbcType="INTEGER" property="retryTimes" />
+	  <result column="status" jdbcType="VARCHAR" property="status" />
+	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
+	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
+	  <result column="extend_3" jdbcType="VARCHAR" property="extend3" />
+	  <result column="extend_4" jdbcType="VARCHAR" property="extend4" />
+	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Page_Query_Begin">
+    select * from(select t.*,id rn from(
+  </sql>
+  <sql id="Page_Query_End">
+  	) t where id &lt;= ${endRow}) k where rn &gt; ${startRow}
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="userId != null" >
+	      and user_id = #{userId,jdbcType=VARCHAR}
+	    </if>
+      <if test="logonName != null" >
+	      and logon_name = #{logonName,jdbcType=VARCHAR}
+	    </if>
+      <if test="logonPwd != null" >
+	      and logon_pwd = #{logonPwd,jdbcType=VARCHAR}
+	    </if>
+      <if test="roleId != null" >
+	      and role_id = #{roleId,jdbcType=VARCHAR}
+	    </if>
+      <if test="retryTimes != null" >
+	      and retry_times = #{retryTimes,jdbcType=INTEGER}
+	    </if>
+      <if test="status != null" >
+	      and status = #{status,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend1 != null" >
+	      and extend_1 = #{extend1,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend2 != null" >
+	      and extend_2 = #{extend2,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend3 != null" >
+	      and extend_3 = #{extend3,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend4 != null" >
+	      and extend_4 = #{extend4,jdbcType=VARCHAR}
+	    </if>
+      <if test="createTime != null" >
+	      and create_time = #{createTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updateTime != null" >
+	      and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="logonName != null">
+        logon_name = #{logonName,jdbcType=VARCHAR},
+      </if>
+      <if test="logonPwd != null">
+        logon_pwd = #{logonPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="retryTimes != null">
+        retry_times = #{retryTimes,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="extend1 != null">
+        extend_1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        extend_2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null">
+        extend_3 = #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null">
+        extend_4 = #{extend4,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    id,
+    user_id,
+    logon_name,
+    logon_pwd,
+    role_id,
+    retry_times,
+    status,
+    extend_1,
+    extend_2,
+    extend_3,
+    extend_4,
+    create_time,
+    update_time,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        user_id = #{userId,jdbcType=VARCHAR},
+        logon_name = #{logonName,jdbcType=VARCHAR},
+        logon_pwd = #{logonPwd,jdbcType=VARCHAR},
+        role_id = #{roleId,jdbcType=VARCHAR},
+        retry_times = #{retryTimes,jdbcType=INTEGER},
+        status = #{status,jdbcType=VARCHAR},
+        extend_1 = #{extend1,jdbcType=VARCHAR},
+        extend_2 = #{extend2,jdbcType=VARCHAR},
+        extend_3 = #{extend3,jdbcType=VARCHAR},
+        extend_4 = #{extend4,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    ID,
+    <if test="userId != null">
+      user_id,
+    </if>
+    <if test="logonName != null">
+      logon_name,
+    </if>
+    <if test="logonPwd != null">
+      logon_pwd,
+    </if>
+    <if test="roleId != null">
+      role_id,
+    </if>
+    <if test="retryTimes != null">
+      retry_times,
+    </if>
+    <if test="status != null">
+      status,
+    </if>
+    <if test="extend1 != null">
+      extend_1,
+    </if>
+    <if test="extend2 != null">
+      extend_2,
+    </if>
+    <if test="extend3 != null">
+      extend_3,
+    </if>
+    <if test="extend4 != null">
+      extend_4,
+    </if>
+    <if test="createTime != null">
+      create_time,
+    </if>
+    <if test="updateTime != null">
+      update_time,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{id,jdbcType=BIGINT},
+    #{userId,jdbcType=VARCHAR},
+    #{logonName,jdbcType=VARCHAR},
+    #{logonPwd,jdbcType=VARCHAR},
+    #{roleId,jdbcType=VARCHAR},
+    #{retryTimes,jdbcType=INTEGER},
+    #{status,jdbcType=VARCHAR},
+    #{extend1,jdbcType=VARCHAR},
+    #{extend2,jdbcType=VARCHAR},
+    #{extend3,jdbcType=VARCHAR},
+    #{extend4,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP},
+    #{updateTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    SEQ_user_info.nextval,
+    <if test="userId != null">
+      #{userId,jdbcType=VARCHAR},
+    </if>
+    <if test="logonName != null">
+      #{logonName,jdbcType=VARCHAR},
+    </if>
+    <if test="logonPwd != null">
+      #{logonPwd,jdbcType=VARCHAR},
+    </if>
+    <if test="roleId != null">
+      #{roleId,jdbcType=VARCHAR},
+    </if>
+    <if test="retryTimes != null">
+      #{retryTimes,jdbcType=INTEGER},
+    </if>
+    <if test="status != null">
+      #{status,jdbcType=VARCHAR},
+    </if>
+    <if test="extend1 != null">
+      #{extend1,jdbcType=VARCHAR},
+    </if>
+    <if test="extend2 != null">
+      #{extend2,jdbcType=VARCHAR},
+    </if>
+    <if test="extend3 != null">
+      #{extend3,jdbcType=VARCHAR},
+    </if>
+    <if test="extend4 != null">
+      #{extend4,jdbcType=VARCHAR},
+    </if>
+    <if test="createTime != null">
+      #{createTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updateTime != null">
+      #{updateTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="UserInfoQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from user_info
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from user_info
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_info
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="UserInfoQuery">
+    delete from user_info
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="UserInfo">
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="UserInfo">
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="UserInfoQuery" resultType="java.lang.Integer">
+    select count(*) from user_info
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="UserInfo">
+    update user_info
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="UserInfo">
+    update user_info
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectPageByExample" parameterType="UserInfoQuery" resultMap="BaseResultMap">
+  	<include refid="Page_Query_Begin" />
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from user_info
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+    <include refid="Page_Query_End" />
+  </select>
+</mapper>

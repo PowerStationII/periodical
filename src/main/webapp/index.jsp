@@ -114,7 +114,7 @@
 			height:35px;
 			line-height:35px;
 			font-size:14px;
-			background:url(../img/background-1.png) no-repeat;
+			background:url(img/background-1.png) no-repeat;
 			background-size:100%;
 			color:#FFFFFF;
 		}
@@ -166,7 +166,7 @@
 				      <div class="cover">
 						<div style="width:395px;height:35px;line-height:35px;margin-left:10px;">| 期刊封面及介绍</div>
 						<div style="width:394px;border:1px solid;"></div>
-						<div style="width:395px;height:476px;background:url(../../img/cover.png) no-repeat 10px 10px;
+						<div style="width:395px;height:476px;background:url(img/cover.png) no-repeat 10px 10px;
 									background-size:95% 95%;"></div>
 					  </div>
 				      <div class="notice">

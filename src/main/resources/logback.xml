@@ -4,7 +4,7 @@
 	
 	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level- %msg\t\t\t[%thread]%caller{1}</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
     
@@ -42,7 +42,6 @@
 	<logger name="java.sql.Statement" level="INFO" />
 	<logger name="java.sql.Connection" level="INFO" />
 	<logger name="java.sql.ResultSet" level="INFO" />
-		
 	<logger name="com.alibaba" level="INFO" />
 	<logger name="org.apache.zookeeper" level="INFO" />
 	<logger name="org.springframework" level="INFO" />

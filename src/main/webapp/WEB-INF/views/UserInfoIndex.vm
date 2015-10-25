@@ -1,0 +1,158 @@
+
+<form action="${rc.contextPath}/params/userInfoIndex" method="post" id="godownForma" name="godownForma">
+	<div class="main">
+		<div class="blank15"></div>
+		<div class="wrap">
+			<div class="con">
+				<div class="con_title">
+					<h3 class="left fs14 marglr3020">UserInfo管理</h3>
+					<span class="grey"></span>
+				</div>
+				<div class="main_con">
+					<div class="con_article_title tit_zindex3 linehei30">
+						<b class="left paddl67 paddr10">内容筛选</b> <a id="reg2_arrow"
+							class="margt10 btn_arrow_up" href="javascript:;"></a>
+					</div>
+					<div id="reg2_arrow_con" class="con_article_title02 tit_zindex6">
+						
+    					<div class="left wid280 margt10 rel_pos paddingl15">
+    						<label class="label_txt wid80 txtright margr8 margt11 paddingl0">用户id：</label>
+    						<div class="input_con_type_top wid190 margt4">
+    							<input type="text" value="$!{query.userId}" id="userId" name="userId" class="wid190 ip_input_con">
+    						</div>
+    					</div>
+    					<div class="left wid280 margt10 rel_pos paddingl15">
+    						<label class="label_txt wid80 txtright margr8 margt11 paddingl0">登录名：</label>
+    						<div class="input_con_type_top wid190 margt4">
+    							<input type="text" value="$!{query.logonName}" id="logonName" name="logonName" class="wid190 ip_input_con">
+    						</div>
+    					</div>
+    					<div class="left wid280 margt10 rel_pos paddingl15">
+    						<label class="label_txt wid80 txtright margr8 margt11 paddingl0">登录密码：</label>
+    						<div class="input_con_type_top wid190 margt4">
+    							<input type="text" value="$!{query.logonPwd}" id="logonPwd" name="logonPwd" class="wid190 ip_input_con">
+    						</div>
+    					</div>
+    					<div class="left wid280 margt10 rel_pos paddingl15">
+    						<label class="label_txt wid80 txtright margr8 margt11 paddingl0">：</label>
+    						<div class="input_con_type_top wid190 margt4">
+    							<input type="text" value="$!{query.roleId}" id="roleId" name="roleId" class="wid190 ip_input_con">
+    						</div>
+    					</div>
+    					<div class="left wid280 margt10 rel_pos paddingl15">
+    						<label class="label_txt wid80 txtright margr8 margt11 paddingl0">：</label>
+    						<div class="input_con_type_top wid190 margt4">
+    							<input type="text" value="$!{query.retryTimes}" id="retryTimes" name="retryTimes" class="wid190 ip_input_con">
+    						</div>
+    					</div>
+    					<div class="left wid280 margt10 rel_pos paddingl15">
+    						<label class="label_txt wid80 txtright margr8 margt11 paddingl0">：</label>
+    						<div class="input_con_type_top wid190 margt4">
+    							<input type="text" value="$!{query.status}" id="status" name="status" class="wid190 ip_input_con">
+    						</div>
+    					</div>
+    					<div class="left wid280 margt10 rel_pos paddingl15">
+    						<label class="label_txt wid80 txtright margr8 margt11 paddingl0">：</label>
+    						<div class="input_con_type_top wid190 margt4">
+    							<input type="text" value="$!{query.extend1}" id="extend1" name="extend1" class="wid190 ip_input_con">
+    						</div>
+    					</div>
+    					<div class="left wid280 margt10 rel_pos paddingl15">
+    						<label class="label_txt wid80 txtright margr8 margt11 paddingl0">：</label>
+    						<div class="input_con_type_top wid190 margt4">
+    							<input type="text" value="$!{query.extend2}" id="extend2" name="extend2" class="wid190 ip_input_con">
+    						</div>
+    					</div>
+    					<div class="left wid280 margt10 rel_pos paddingl15">
+    						<label class="label_txt wid80 txtright margr8 margt11 paddingl0">：</label>
+    						<div class="input_con_type_top wid190 margt4">
+    							<input type="text" value="$!{query.extend3}" id="extend3" name="extend3" class="wid190 ip_input_con">
+    						</div>
+    					</div>
+    					<div class="left wid280 margt10 rel_pos paddingl15">
+    						<label class="label_txt wid80 txtright margr8 margt11 paddingl0">：</label>
+    						<div class="input_con_type_top wid190 margt4">
+    							<input type="text" value="$!{query.extend4}" id="extend4" name="extend4" class="wid190 ip_input_con">
+    						</div>
+    					</div>
+    					<div class="left wid280 margt10 rel_pos paddingl15">
+    						<label class="label_txt wid80 txtright margr8 margt11 paddingl0">：</label>
+    						<div class="input_con_type_top wid190 margt4">
+    							<input type="text" value="$!{query.createTime}" id="createTime" name="createTime" class="wid190 ip_input_con">
+    						</div>
+    					</div>
+    					<div class="left wid280 margt10 rel_pos paddingl15">
+    						<label class="label_txt wid80 txtright margr8 margt11 paddingl0">：</label>
+    						<div class="input_con_type_top wid190 margt4">
+    							<input type="text" value="$!{query.updateTime}" id="updateTime" name="updateTime" class="wid190 ip_input_con">
+    						</div>
+    					</div>
+					 
+						<div class="con_article_title02 margt10 tit_zindex3">
+							<a onclick="document.getElementById('godownForma').submit();" class="right chan_btn wid60 margr66 margt5" href="javascript:;">查询</a> 
+							<a class="right chan_btn wid60 margr30 margt5" onclick="resetForm('godownForma')" href="javascript:;">清除</a>
+						</div>
+					</div>
+					<div class="bord11 margt10"></div>
+					<div class="con_core_info_main wid1125 paddl60 margt10">
+						<ul class="table_menu">
+							<li><a class="left chan_btn wid60 margl10 margt5" id="addBtn" href="${rc.contextPath}/params/toUserInfoAdd">新增</a>
+								<a class="left chan_btn wid80 margl10 margt5" onclick="exportExcel()" id="btnExport" href="javascript:;">导出Excel</a>
+							</li>
+						</ul>
+
+						<table id="user_table1" class="chan_table tb_bord01">
+							<thead id="terminalHead">
+								<tr>
+									<th width="5%">主键</th>
+									<th width="5%">用户id</th>
+									<th width="5%">登录名</th>
+									<th width="5%">登录密码</th>
+									<th width="5%"></th>
+									<th width="5%"></th>
+									<th width="5%"></th>
+									<th width="5%"></th>
+									<th width="5%"></th>
+									<th width="5%"></th>
+									<th width="5%"></th>
+									<th width="5%"></th>
+									<th width="5%"></th>
+									<th width="10%">操作</th>
+								</tr>
+							</thead>
+							<tbody id="godownRows">
+								#if($!{pageInfos}) #foreach($!{info} in $!{pageInfos})
+								<tr>
+  										<td><input type="checkbox" name="pageCheckbox" id="pageCheckbox" value="${info.id}" /></td>
+  										<td>$!{info.userId}</td>
+  										<td>$!{info.logonName}</td>
+  										<td>$!{info.logonPwd}</td>
+  										<td>$!{info.roleId}</td>
+  										<td>$!{info.retryTimes}</td>
+  										<td>$!{info.status}</td>
+  										<td>$!{info.extend1}</td>
+  										<td>$!{info.extend2}</td>
+  										<td>$!{info.extend3}</td>
+  										<td>$!{info.extend4}</td>
+  										<td>$!{info.createTime}</td>
+  										<td>$!{info.updateTime}</td>
+									
+									<td>
+										<a onclick="toRedirect('show','2014090900128001')" class="margr4" href="${rc.contextPath}/params/toUserInfoDetail?id=$!{info.id}">明细</a>
+										<a onclick="toRedirect('show','2014090900128001')" class="margr4" href="${rc.contextPath}/params/toUserInfoEdit?id=$!{info.id}">编辑</a>
+										<a onclick="toRedirect('show','2014090900128001')" class="margr4" href="${rc.contextPath}/params/deleteUserInfo?id=$!{info.id}">删除</a>
+									</td>
+								</tr>
+								#end #end
+							</tbody>
+						</table>
+					</div>
+					<input type="hidden" name="pageNo" value="${pagenation.pageNo}"id="pageNo">
+					<input type="hidden" name="pageSize" value="${pagenation.pageSize}" id="pageSize">  
+					#showPager($pagenation)
+					<div class="bord11 margt20"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
