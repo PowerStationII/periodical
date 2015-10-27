@@ -18,8 +18,12 @@ public class LoginController {
 	 * 跳转到登录页面
 	 */
 	@RequestMapping(value="/login",method = RequestMethod.GET)
-	public String toUserInfoAdd() {
-		return "login";
+	public ModelAndView login(@RequestParam("systemId") String systemId,
+			HttpServletRequest request) {
+		logger.info("systemId:["+systemId+"]");
+		ModelAndView mav = new ModelAndView("login");
+		mav.addObject("systemId", systemId);
+		return mav;
 	}
 	/**
 	 * 登录
@@ -28,11 +32,19 @@ public class LoginController {
 	public ModelAndView toLogin(@RequestParam("email") String email,@RequestParam("password") String password, 
 			HttpServletRequest request) {
 		logger.info("登录名["+email+"]&&登录密码["+password+"]");
+		logger.info(request.getParameter("systemId"));
 		/**
 		 * 根据用户名和密码查询用户角色
 		 * 根据角色不同,跳转到不同工作区页面
+		 * 待优化
 		 * */
 		ModelAndView mav = new ModelAndView("author_area");
+		
+		
+		
+		
+		
+		
 		
 		
 		

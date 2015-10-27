@@ -13,14 +13,13 @@
   <script type="text/javascript"> 	
 	function submitForm(){  
 	alert("33");
-		$('#sub').submit();;  
+		$('#sub').submit();
 	}  
   </script>
 
 
   <body>
     <div id="base" class="">
-
       <!-- Unnamed (Image) -->
       <div id="u0" class="ax_image">
         <img id="u0_img" class="img " src="img/portal/u0.png"/>
@@ -129,6 +128,8 @@
       <div id="u35" class="ax_text_field" data-label="password">
         <input id="u35_input" name="password" type="password" value=""/>
       </div>
+      
+      <input type="hidden" name="systemId" value=${systemId}></input>
       
       <!-- Unnamed (Shape) -->
       <div id="u24" class="ax_shape">
