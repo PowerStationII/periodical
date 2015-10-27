@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <link href="../../css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
-    <link href="../../css/data_styles.css" type="text/css" rel="stylesheet"/>
-    <link href="../../css/author_area_styles.css" type="text/css" rel="stylesheet"/>
+    <link href="css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="css/data_styles.css" type="text/css" rel="stylesheet"/>
+    <link href="css/author_area_styles.css" type="text/css" rel="stylesheet"/>
   </head>
   <body>
     <div id="base" class="">
 
       <!-- Unnamed (Shape) -->
       <div id="u0" class="ax_shape">
-        <img id="u0_img" class="img " src="../../img/author_area/u0.png"/>
+        <img id="u0_img" class="img " src="img/author_area/u0.png"/>
         <!-- Unnamed () -->
         <div id="u1" class="text">
           <p><span></span></p>
@@ -23,7 +23,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u2" class="ax_shape">
-        <img id="u2_img" class="img " src="../../img/author_area/u2.png"/>
+        <img id="u2_img" class="img " src="img/author_area/u2.png"/>
         <!-- Unnamed () -->
         <div id="u3" class="text">
           <p><span></span></p>
@@ -46,7 +46,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u5" class="ax_paragraph">
-        <img id="u5_img" class="img " src="../../img/portal/transparent.gif"/>
+        <img id="u5_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u6" class="text">
           <p><span>作者工作区</span></p>
@@ -55,7 +55,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u7" class="ax_shape">
-        <img id="u7_img" class="img " src="../../img/author_area/u7.png"/>
+        <img id="u7_img" class="img " src="img/author_area/u7.png"/>
         <!-- Unnamed () -->
         <div id="u8" class="text">
           <p><span></span></p>
@@ -64,7 +64,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u9" class="ax_shape">
-        <img id="u9_img" class="img " src="../../img/author_area/u9.png"/>
+        <img id="u9_img" class="img " src="img/author_area/u9.png"/>
         <!-- Unnamed () -->
         <div id="u10" class="text">
           <p><span></span></p>
@@ -73,7 +73,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u11" class="ax_shape">
-        <img id="u11_img" class="img " src="../../img/author_area/u11.png"/>
+        <img id="u11_img" class="img " src="img/author_area/u11.png"/>
         <!-- Unnamed () -->
         <div id="u12" class="text">
           <p><span></span></p>
@@ -82,7 +82,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u13" class="ax_shape">
-        <img id="u13_img" class="img " src="../../img/author_area/u9.png"/>
+        <img id="u13_img" class="img " src="img/author_area/u9.png"/>
         <!-- Unnamed () -->
         <div id="u14" class="text">
           <p><span></span></p>
@@ -91,7 +91,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u15" class="ax_shape">
-        <img id="u15_img" class="img " src="../../img/author_area/u15.png"/>
+        <img id="u15_img" class="img " src="img/author_area/u15.png"/>
         <!-- Unnamed () -->
         <div id="u16" class="text">
           <p><span></span></p>
@@ -100,7 +100,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u17" class="ax_paragraph">
-        <img id="u17_img" class="img " src="../../img/portal/transparent.gif"/>
+        <img id="u17_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u18" class="text">
           <p><span>稿件管理</span></p>
@@ -109,7 +109,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u19" class="ax_paragraph">
-        <img id="u19_img" class="img " src="../../img/portal/transparent.gif"/>
+        <img id="u19_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u20" class="text">
           <p><span>投稿</span></p>
@@ -118,21 +118,21 @@
 
       <!-- Unnamed (Horizontal Line) -->
       <div id="u21" class="ax_horizontal_line">
-        <img id="u21_start" class="img " src="../../img/portal/transparent.gif" alt="u21_start"/>
-        <img id="u21_end" class="img " src="../../img/portal/transparent.gif" alt="u21_end"/>
-        <img id="u21_line" class="img " src="../../img/author_area/u21_line.png" alt="u21_line"/>
+        <img id="u21_start" class="img " src="img/portal/transparent.gif" alt="u21_start"/>
+        <img id="u21_end" class="img " src="img/portal/transparent.gif" alt="u21_end"/>
+        <img id="u21_line" class="img " src="img/author_area/u21_line.png" alt="u21_line"/>
       </div>
 
       <!-- Unnamed (Horizontal Line) -->
       <div id="u22" class="ax_horizontal_line">
-        <img id="u22_start" class="img " src="../../img/portal/transparent.gif" alt="u22_start"/>
-        <img id="u22_end" class="img " src="../../img/portal/transparent.gif" alt="u22_end"/>
-        <img id="u22_line" class="img " src="../../img/author_area/u21_line.png" alt="u22_line"/>
+        <img id="u22_start" class="img " src="img/portal/transparent.gif" alt="u22_start"/>
+        <img id="u22_end" class="img " src="img/portal/transparent.gif" alt="u22_end"/>
+        <img id="u22_line" class="img " src="img/author_area/u21_line.png" alt="u22_line"/>
       </div>
 
       <!-- Unnamed (Shape) -->
       <div id="u23" class="ax_paragraph">
-        <img id="u23_img" class="img " src="../../img/portal/transparent.gif"/>
+        <img id="u23_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u24" class="text">
           <p><span>稿件查询</span></p>
@@ -141,14 +141,14 @@
 
       <!-- Unnamed (Horizontal Line) -->
       <div id="u25" class="ax_horizontal_line">
-        <img id="u25_start" class="img " src="../../img/portal/transparent.gif" alt="u25_start"/>
-        <img id="u25_end" class="img " src="../../img/portal/transparent.gif" alt="u25_end"/>
-        <img id="u25_line" class="img " src="../../img/author_area/u21_line.png" alt="u25_line"/>
+        <img id="u25_start" class="img " src="img/portal/transparent.gif" alt="u25_start"/>
+        <img id="u25_end" class="img " src="img/portal/transparent.gif" alt="u25_end"/>
+        <img id="u25_line" class="img " src="img/author_area/u21_line.png" alt="u25_line"/>
       </div>
 
       <!-- Unnamed (Shape) -->
       <div id="u26" class="ax_paragraph">
-        <img id="u26_img" class="img " src="../../img/portal/transparent.gif"/>
+        <img id="u26_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u27" class="text">
           <p><span>稿费查询</span></p>
@@ -157,7 +157,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u28" class="ax_shape">
-        <img id="u28_img" class="img " src="../../img/author_area/u28.png"/>
+        <img id="u28_img" class="img " src="img/author_area/u28.png"/>
         <!-- Unnamed () -->
         <div id="u29" class="text">
           <p><span></span></p>
@@ -166,7 +166,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u30" class="ax_shape">
-        <img id="u30_img" class="img " src="../../img/author_area/u30.png"/>
+        <img id="u30_img" class="img " src="img/author_area/u30.png"/>
         <!-- Unnamed () -->
         <div id="u31" class="text">
           <p><span></span></p>
@@ -175,7 +175,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u32" class="ax_paragraph">
-        <img id="u32_img" class="img " src="../../img/portal/transparent.gif"/>
+        <img id="u32_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u33" class="text">
           <p><span>修改个人信息</span></p>
@@ -184,14 +184,14 @@
 
       <!-- Unnamed (Horizontal Line) -->
       <div id="u34" class="ax_horizontal_line">
-        <img id="u34_start" class="img " src="../../img/portal/transparent.gif" alt="u34_start"/>
-        <img id="u34_end" class="img " src="../../img/portal/transparent.gif" alt="u34_end"/>
-        <img id="u34_line" class="img " src="../../img/author_area/u21_line.png" alt="u34_line"/>
+        <img id="u34_start" class="img " src="img/portal/transparent.gif" alt="u34_start"/>
+        <img id="u34_end" class="img " src="img/portal/transparent.gif" alt="u34_end"/>
+        <img id="u34_line" class="img " src="img/author_area/u21_line.png" alt="u34_line"/>
       </div>
 
       <!-- Unnamed (Shape) -->
       <div id="u35" class="ax_paragraph">
-        <img id="u35_img" class="img " src="../../img/portal/transparent.gif"/>
+        <img id="u35_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u36" class="text">
           <p><span>修改密码</span></p>
@@ -200,14 +200,14 @@
 
       <!-- Unnamed (Horizontal Line) -->
       <div id="u37" class="ax_horizontal_line">
-        <img id="u37_start" class="img " src="../../img/portal/transparent.gif" alt="u37_start"/>
-        <img id="u37_end" class="img " src="../../img/portal/transparent.gif" alt="u37_end"/>
-        <img id="u37_line" class="img " src="../../img/author_area/u21_line.png" alt="u37_line"/>
+        <img id="u37_start" class="img " src="img/portal/transparent.gif" alt="u37_start"/>
+        <img id="u37_end" class="img " src="img/portal/transparent.gif" alt="u37_end"/>
+        <img id="u37_line" class="img " src="img/author_area/u21_line.png" alt="u37_line"/>
       </div>
 
       <!-- Unnamed (Shape) -->
       <div id="u38" class="ax_paragraph">
-        <img id="u38_img" class="img " src="../../img/portal/transparent.gif"/>
+        <img id="u38_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u39" class="text">
           <p><span>个人信息设置</span></p>
@@ -216,7 +216,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u40" class="ax_paragraph">
-        <img id="u40_img" class="img " src="../../img/portal/transparent.gif"/>
+        <img id="u40_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u41" class="text">
           <p><span>作者工作区</span></p>
@@ -225,7 +225,7 @@
 
       <!-- Unnamed (Image) -->
       <div id="u42" class="ax_image">
-        <img id="u42_img" class="img " src="../../img/portal/u2.jpg"/>
+        <img id="u42_img" class="img " src="img/portal/u2.jpg"/>
         <!-- Unnamed () -->
         <div id="u43" class="text">
           <p><span></span></p>
@@ -234,7 +234,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u44" class="ax_paragraph">
-        <img id="u44_img" class="img " src="../../img/portal/transparent.gif"/>
+        <img id="u44_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u45" class="text">
           <p><span>欢迎访问《</span><span>&nbsp;</span><span>农药科学与管理</span><span>&nbsp; </span><span>》网站！</span></p>
@@ -243,7 +243,7 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u46" class="ax_paragraph">
-        <img id="u46_img" class="img " src="../../img/portal/transparent.gif"/>
+        <img id="u46_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u47" class="text">
           <p><span>退出系统</span></p>

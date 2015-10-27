@@ -5,36 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-	
     <link href="css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="css/data_styles.css" type="text/css" rel="stylesheet"/>
     <link href="css/portal_styles.css" type="text/css" rel="stylesheet"/>
    	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
-    
   </head>
-  <script type="text/javascript">
-  	$(function(){
-  		$('#u49').click(function(){
-  			//window.open('login.html','_self');
-			window.location.href('login?systemId=111');
-  		})
-		$('#u51').click(function(){
-  			//window.open('login.html','_self');
-			window.location.href('login?systemId=222');
-  		})
-		$('#u53').click(function(){
-  			//window.open('login.html','_self');
-			window.location.href('login?systemId=333');
-  		})
-		$('#u147').click(function(){
-  			//window.open('login.html','_self');
-			window.location.href('login?systemId=444');
-  		})
-  	})
-  </script>
   <body>
     <div id="base" class="">
-
       <!-- Unnamed (Image) -->
       <div id="u0" class="ax_image">
         <img id="u0_img" class="img " src="img/portal/u0.png"/>
@@ -85,7 +62,7 @@
         <img id="u10_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u11" class="text">
-          <p><span>首页</span></p>
+          <p><span>首页</span><span>|</span><span>期刊介绍</span><span>|</span></p>
         </div>
       </div>
 
@@ -256,7 +233,7 @@
         <img id="u48_img" class="img " src="img/portal/u48.png"/>
         <!-- Unnamed () -->
         <div id="u49" class="text">
-          <p><span>编辑办公系统</span></p>
+          <p><a href="login?systemId=111" style='text-decoration:none;'><span>编辑办公系统</span></a></p>
         </div>
       </div>
 
@@ -265,7 +242,7 @@
         <img id="u50_img" class="img " src="img/portal/u48.png"/>
         <!-- Unnamed () -->
         <div id="u51" class="text">
-          <p><span>专家审稿系统</span></p>
+          <p><a href="login?systemId=222" style='text-decoration:none;'><span>专家审稿系统</span></a></p>
         </div>
       </div>
 
@@ -274,7 +251,16 @@
         <img id="u52_img" class="img " src="img/portal/u48.png"/>
         <!-- Unnamed () -->
         <div id="u53" class="text">
-          <p><span>作者投稿系统</span></p>
+          <p><a href="login?systemId=333" style='text-decoration:none;'><span>作者投稿系统</span></a></p>
+        </div>
+      </div>
+      
+      <!-- Unnamed (Shape) -->
+      <div id="u146" class="ax_shape">
+        <img id="u146_img" class="img " src="img/portal/u48.png"/>
+        <!-- Unnamed () -->
+        <div id="u147" class="text">
+          <p><a href="login?systemId=444" style='text-decoration:none;'><span>读者订阅系统</span></a></p>
         </div>
       </div>
 
@@ -718,15 +704,6 @@
       </div>
 
       <!-- Unnamed (Shape) -->
-      <div id="u146" class="ax_shape">
-        <img id="u146_img" class="img " src="img/portal/u48.png"/>
-        <!-- Unnamed () -->
-        <div id="u147" class="text">
-          <p><span>读者</span><span>订阅</span><span>系统</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
       <div id="u148" class="ax_shape">
         <img id="u148_img" class="img " src="img/portal/u148.png"/>
         <!-- Unnamed () -->
@@ -740,7 +717,7 @@
         <img id="u150_img" class="img " src="img/portal/u148.png"/>
         <!-- Unnamed () -->
         <div id="u151" class="text">
-          <p><span>理事会</span><span>形象展示</span></p>
+          <p><span>理事会形象展示</span></p>
         </div>
       </div>
 

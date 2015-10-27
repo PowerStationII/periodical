@@ -10,16 +10,14 @@
     <link href="css/login_styles.css" type="text/css" rel="stylesheet"/>
 	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
   </head>
-  <script type="text/javascript">
-  	$(function(){
-  		$('#u29').click(function(){
-  			window.open('registered.html','_self');
-  		})
-  		$('#u25').click(function(){
-  			window.open('author_area.html','_self');
-  		})
-  	})
+  <script type="text/javascript"> 	
+	function submitForm(){  
+	alert("33");
+		$('#sub').submit();;  
+	}  
   </script>
+
+
   <body>
     <div id="base" class="">
 
@@ -103,7 +101,7 @@
           <p><span></span></p>
         </div>
       </div>
-
+<form action="toLogin" method="POST" id="sub" name="sub">
       <!-- Unnamed (Shape) -->
       <div id="u18" class="ax_paragraph">
         <img id="u18_img" class="img " src="img/portal/transparent.gif"/>
@@ -112,16 +110,12 @@
           <p><span>邮箱</span><span>：</span></p>
         </div>
       </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u20" class="ax_paragraph">
-        <img id="u20_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u21" class="text">
-          <p><span></span></p>
-        </div>
+      
+       <!-- name (Text Field) -->
+      <div id="u34" class="ax_text_field" data-label="name">
+        <input id="u34_input" type="text" name="email" value=""/>
       </div>
-
+     
       <!-- Unnamed (Shape) -->
       <div id="u22" class="ax_paragraph">
         <img id="u22_img" class="img " src="img/portal/transparent.gif"/>
@@ -131,15 +125,20 @@
         </div>
       </div>
 
+	  <!-- password (Text Field) -->
+      <div id="u35" class="ax_text_field" data-label="password">
+        <input id="u35_input" name="password" type="password" value=""/>
+      </div>
+      
       <!-- Unnamed (Shape) -->
       <div id="u24" class="ax_shape">
         <img id="u24_img" class="img " src="img/login/u24.png"/>
         <!-- Unnamed () -->
         <div id="u25" class="text">
-          <p><span>登录</span></p>
+          <p><a href="javascript:;" onclick="submitForm(this)">登录</a></p>
         </div>
       </div>
-
+</form>
       <!-- Unnamed (Checkbox) -->
       <div id="u26" class="ax_checkbox">
         <label for="u26_input">
@@ -178,40 +177,12 @@
         </div>
       </div>
 
-      <!-- name (Text Field) -->
-      <div id="u34" class="ax_text_field" data-label="name">
-        <input id="u34_input" type="text" value=""/>
-      </div>
-
-      <!-- password (Text Field) -->
-      <div id="u35" class="ax_text_field" data-label="password">
-        <input id="u35_input" type="password" value=""/>
-      </div>
-
       <!-- Unnamed (Shape) -->
       <div id="u36" class="ax_paragraph">
         <img id="u36_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u37" class="text">
           <p><span>农药</span><span>科学与管理</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u38" class="ax_paragraph">
-        <img id="u38_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u39" class="text">
-          <p><span>--</span><span>编辑办公</span><span>系统</span></p>
-        </div>
-      </div>
-
-      <!-- msg (Shape) -->
-      <div id="u40" class="ax_paragraph" data-label="msg">
-        <img id="u40_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u41" class="text">
-          <p><span></span></p>
         </div>
       </div>
     </div>
