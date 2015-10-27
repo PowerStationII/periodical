@@ -6,9 +6,13 @@ public enum RoleIdEnums {
 	 * */
 	AUTHOR("1001","AUTHOR"),
 	/**
-	 * 读者
+	 * 读者-个人
 	 * */
-	READER("1002","READER"),
+	READER_P("1002","READER_P"),
+	/**
+	 * 读者-省所/企业
+	 * */
+	READER_E("1011","READER_E"),
 	/**
 	 * 中文(稿件)专家
 	 * */

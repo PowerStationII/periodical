@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cn.periodical.enums.SystemIdEnums;
+
 @Controller
 public class LoginController {
 	
@@ -41,7 +43,7 @@ public class LoginController {
 		 * 4,根据role_id跳转不同的vm页面
 		 * ps:待优化,页面左侧功能列表先写死.会多写等同于角色数量的vm页面!
 		 * */
-		if("111".equals(systemId)){
+		if(SystemIdEnums.EDIT_SYS.getCode().equals(systemId)){
 			//编辑
 //			if("".equals(anObject)){
 //				
@@ -50,7 +52,7 @@ public class LoginController {
 //			}else{
 //				
 //			}
-		}else if("222".equals(systemId)){
+		}else if(SystemIdEnums.EXPERT_SYS.getCode().equals(systemId)){
 			//专家
 //			if(){
 //				
@@ -59,14 +61,21 @@ public class LoginController {
 //			}else{
 //				
 //			}
-		}else if("333".equals(systemId)){
+		}else if(SystemIdEnums.AUTHOR_SYS.getCode().equals(systemId)){
 			//作者
 			mav = new ModelAndView("author_area");
-		}else if("444".equals(systemId)){
+//			mav.addObject("userId", attributeValue);
+			
+		}else if(SystemIdEnums.READER_SYS.getCode().equals(systemId)){
 			//读者
+			/**
+			 * 需区分省所/个人登录
+			 * */
 			
 		}else{
-			
+			/**
+			 * 跳转首页
+			 * */
 		}
 		return mav;
 	}
