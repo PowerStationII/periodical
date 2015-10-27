@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>期刊征订</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="css/data_styles.css" type="text/css" rel="stylesheet"/>
+    <link href="css/reader_area_styles.css" type="text/css" rel="stylesheet"/>
+
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (Shape) -->
+      <div id="u0" class="ax_shape">
+        <img id="u0_img" class="img " src="img/author_area/u0.png"/>
+        <!-- Unnamed () -->
+        <div id="u1" class="text">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Image) -->
+      <div id="u2" class="ax_image">
+        <img id="u2_img" class="img " src="img/portal/u2.jpg"/>
+        <!-- Unnamed () -->
+        <div id="u3" class="text">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u4" class="ax_paragraph">
+        <img id="u4_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u5" class="text">
+          <p><span>欢迎访问《</span><span>&nbsp;</span><span>农药科学与管理</span><span>&nbsp; </span><span>》网站！</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u6" class="ax_paragraph">
+        <img id="u6_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u7" class="text">
+          <p><span>退出系统</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u8" class="ax_paragraph">
+        <img id="u8_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u9" class="text">
+          <p><span>审稿人未审回的稿件</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u10" class="ax_shape">
+        <img id="u10_img" class="img " src="img/author_area/u2.png"/>
+        <!-- Unnamed () -->
+        <div id="u11" class="text">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u12" class="ax_paragraph">
+        <img id="u12_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u13" class="text">
+          <p><span>订单管理</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u14" class="ax_shape">
+        <img id="u14_img" class="img " src="img/reader_area/u14.png"/>
+        <!-- Unnamed () -->
+        <div id="u15" class="text">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u16" class="ax_shape">
+        <img id="u16_img" class="img " src="img/reader_area/u16.png"/>
+        <!-- Unnamed () -->
+        <div id="u17" class="text">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u18" class="ax_paragraph">
+        <img id="u18_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u19" class="text">
+          <p><span>订单编号</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Horizontal Line) -->
+      <div id="u20" class="ax_horizontal_line">
+        <img id="u20_start" class="img " src="img/portal/transparent.gif" alt="u20_start"/>
+        <img id="u20_end" class="img " src="img/portal/transparent.gif" alt="u20_end"/>
+        <img id="u20_line" class="img " src="img/reader_area/u20_line.png" alt="u20_line"/>
+      </div>
+
+      <!-- Unnamed (Vertical Line) -->
+      <div id="u21" class="ax_vertical_line">
+        <img id="u21_start" class="img " src="img/portal/transparent.gif" alt="u21_start"/>
+        <img id="u21_end" class="img " src="img/portal/transparent.gif" alt="u21_end"/>
+        <img id="u21_line" class="img " src="img/reader_area/u21_line.png" alt="u21_line"/>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u22" class="ax_paragraph">
+        <img id="u22_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u23" class="text">
+          <p><span>订购年份</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u24" class="ax_paragraph">
+        <img id="u24_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u25" class="text">
+          <p><span>金额</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u26" class="ax_paragraph">
+        <img id="u26_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u27" class="text">
+          <p><span>银行汇款凭证</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u28" class="ax_paragraph">
+        <img id="u28_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u29" class="text">
+          <p><span>操作</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Vertical Line) -->
+      <div id="u30" class="ax_vertical_line">
+        <img id="u30_start" class="img " src="img/portal/transparent.gif" alt="u30_start"/>
+        <img id="u30_end" class="img " src="img/portal/transparent.gif" alt="u30_end"/>
+        <img id="u30_line" class="img " src="img/reader_area/u30_line.png" alt="u30_line"/>
+      </div>
+
+      <!-- Unnamed (Vertical Line) -->
+      <div id="u31" class="ax_vertical_line">
+        <img id="u31_start" class="img " src="img/portal/transparent.gif" alt="u31_start"/>
+        <img id="u31_end" class="img " src="img/portal/transparent.gif" alt="u31_end"/>
+        <img id="u31_line" class="img " src="img/reader_area/u30_line.png" alt="u31_line"/>
+      </div>
+
+      <!-- Unnamed (Vertical Line) -->
+      <div id="u32" class="ax_vertical_line">
+        <img id="u32_start" class="img " src="img/portal/transparent.gif" alt="u32_start"/>
+        <img id="u32_end" class="img " src="img/portal/transparent.gif" alt="u32_end"/>
+        <img id="u32_line" class="img " src="img/reader_area/u32_line.png" alt="u32_line"/>
+      </div>
+
+      <!-- Unnamed (Vertical Line) -->
+      <div id="u33" class="ax_vertical_line">
+        <img id="u33_start" class="img " src="img/portal/transparent.gif" alt="u33_start"/>
+        <img id="u33_end" class="img " src="img/portal/transparent.gif" alt="u33_end"/>
+        <img id="u33_line" class="img " src="img/reader_area/u32_line.png" alt="u33_line"/>
+      </div>
+
+      <!-- Unnamed (Vertical Line) -->
+      <div id="u34" class="ax_vertical_line">
+        <img id="u34_start" class="img " src="img/portal/transparent.gif" alt="u34_start"/>
+        <img id="u34_end" class="img " src="img/portal/transparent.gif" alt="u34_end"/>
+        <img id="u34_line" class="img " src="img/reader_area/u32_line.png" alt="u34_line"/>
+      </div>
+
+      <!-- Unnamed (Horizontal Line) -->
+      <div id="u35" class="ax_horizontal_line">
+        <img id="u35_start" class="img " src="img/portal/transparent.gif" alt="u35_start"/>
+        <img id="u35_end" class="img " src="img/portal/transparent.gif" alt="u35_end"/>
+        <img id="u35_line" class="img " src="img/reader_area/u20_line.png" alt="u35_line"/>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u36" class="ax_paragraph">
+        <img id="u36_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u37" class="text">
+          <p><span>20150506</span><span>0001</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u38" class="ax_paragraph">
+        <img id="u38_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u39" class="text">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u40" class="ax_shape">
+        <img id="u40_img" class="img " src="img/author_area/u7.png"/>
+        <!-- Unnamed () -->
+        <div id="u41" class="text">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u42" class="ax_shape">
+        <img id="u42_img" class="img " src="img/author_area/u9.png"/>
+        <!-- Unnamed () -->
+        <div id="u43" class="text">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u44" class="ax_shape">
+        <img id="u44_img" class="img " src="img/reader_area/u44.png"/>
+        <!-- Unnamed () -->
+        <div id="u45" class="text">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u46" class="ax_paragraph">
+        <img id="u46_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u47" class="text">
+          <p><span>期刊</span><span>征订</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u48" class="ax_paragraph">
+        <img id="u48_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u49" class="text">
+          <p><span>订单管理</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Horizontal Line) -->
+      <div id="u50" class="ax_horizontal_line">
+        <img id="u50_start" class="img " src="img/portal/transparent.gif" alt="u50_start"/>
+        <img id="u50_end" class="img " src="img/portal/transparent.gif" alt="u50_end"/>
+        <img id="u50_line" class="img " src="img/author_area/u21_line.png" alt="u50_line"/>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u51" class="ax_paragraph">
+        <img id="u51_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u52" class="text">
+          <p><span>新建订单</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Horizontal Line) -->
+      <div id="u53" class="ax_horizontal_line">
+        <img id="u53_start" class="img " src="img/portal/transparent.gif" alt="u53_start"/>
+        <img id="u53_end" class="img " src="img/portal/transparent.gif" alt="u53_end"/>
+        <img id="u53_line" class="img " src="img/author_area/u21_line.png" alt="u53_line"/>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u54" class="ax_shape">
+        <img id="u54_img" class="img " src="img/author_area/u28.png"/>
+        <!-- Unnamed () -->
+        <div id="u55" class="text">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u56" class="ax_shape">
+        <img id="u56_img" class="img " src="img/author_area/u30.png"/>
+        <!-- Unnamed () -->
+        <div id="u57" class="text">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u58" class="ax_paragraph">
+        <img id="u58_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u59" class="text">
+          <p><span>修改个人信息</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Horizontal Line) -->
+      <div id="u60" class="ax_horizontal_line">
+        <img id="u60_start" class="img " src="img/portal/transparent.gif" alt="u60_start"/>
+        <img id="u60_end" class="img " src="img/portal/transparent.gif" alt="u60_end"/>
+        <img id="u60_line" class="img " src="img/author_area/u21_line.png" alt="u60_line"/>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u61" class="ax_paragraph">
+        <img id="u61_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u62" class="text">
+          <p><span>修改密码</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u63" class="ax_paragraph">
+        <img id="u63_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u64" class="text">
+          <p><span>个人信息设置</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u65" class="ax_paragraph">
+        <img id="u65_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u66" class="text">
+          <p><span>2</span><span>016</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u67" class="ax_paragraph">
+        <img id="u67_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u68" class="text">
+          <p><span>数</span><span>量</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u69" class="ax_paragraph">
+        <img id="u69_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u70" class="text">
+          <p><span>审核日期</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u71" class="ax_paragraph">
+        <img id="u71_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u72" class="text">
+          <p><span>5</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u73" class="ax_paragraph">
+        <img id="u73_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u74" class="text">
+          <p><span>600</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Vertical Line) -->
+      <div id="u75" class="ax_vertical_line">
+        <img id="u75_start" class="img " src="img/portal/transparent.gif" alt="u75_start"/>
+        <img id="u75_end" class="img " src="img/portal/transparent.gif" alt="u75_end"/>
+        <img id="u75_line" class="img " src="img/reader_area/u21_line.png" alt="u75_line"/>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u76" class="ax_paragraph">
+        <img id="u76_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u77" class="text">
+          <p><span>提交日期</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u78" class="ax_paragraph">
+        <img id="u78_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u79" class="text">
+          <p><span>20150506</span><span>000</span><span>2</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u80" class="ax_paragraph">
+        <img id="u80_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u81" class="text">
+          <p><span>2</span><span>016</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u82" class="ax_paragraph">
+        <img id="u82_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u83" class="text">
+          <p><span>10</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u84" class="ax_paragraph">
+        <img id="u84_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u85" class="text">
+          <p><span>1200</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u86" class="ax_paragraph">
+        <img id="u86_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u87" class="text">
+          <p><span>201</span><span>5</span><span>-0</span><span>2</span><span>-09</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u88" class="ax_paragraph">
+        <img id="u88_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u89" class="text">
+          <p><span>201</span><span>5</span><span>-0</span><span>3</span><span>-09</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u90" class="ax_paragraph">
+        <img id="u90_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u91" class="text">
+          <p><span>201</span><span>5</span><span>-0</span><span>4</span><span>-09</span></p>
+        </div>
+      </div>
+
+      <!-- 提交按钮 (Shape) -->
+      <div id="u92" class="ax_shape" data-label="提交按钮">
+        <img id="u92_img" class="img " src="img/see_new_manuscript/u58.png"/>
+        <!-- Unnamed () -->
+        <div id="u93" class="text">
+          <p><span>新建</span><span>订单</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u94" class="ax_paragraph">
+        <img id="u94_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u95" class="text">
+          <p><span>下载</span></p>
+        </div>
+      </div>
+
+      <!-- 提交按钮 (Shape) -->
+      <div id="u96" class="ax_shape" data-label="提交按钮">
+        <img id="u96_img" class="img " src="img/see_new_manuscript/u58.png"/>
+        <!-- Unnamed () -->
+        <div id="u97" class="text">
+          <p><span>订购指南</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u98" class="ax_shape">
+        <img id="u98_img" class="img " src="img/order_management/u133.png"/>
+        <!-- Unnamed () -->
+        <div id="u99" class="text">
+          <p><span>查看审核信息</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u100" class="ax_paragraph">
+        <img id="u100_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u101" class="text">
+          <p><span>20150506</span><span>000</span><span>3</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u102" class="ax_paragraph">
+        <img id="u102_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u103" class="text">
+          <p><span>2</span><span>016</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u104" class="ax_paragraph">
+        <img id="u104_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u105" class="text">
+          <p><span>10</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u106" class="ax_paragraph">
+        <img id="u106_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u107" class="text">
+          <p><span>1200</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u108" class="ax_paragraph">
+        <img id="u108_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u109" class="text">
+          <p><span>201</span><span>5</span><span>-0</span><span>3</span><span>-09</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u110" class="ax_paragraph">
+        <img id="u110_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u111" class="text">
+          <p><span>201</span><span>5</span><span>-0</span><span>4</span><span>-09</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u112" class="ax_paragraph">
+        <img id="u112_img" class="img " src="img/portal/transparent.gif"/>
+        <!-- Unnamed () -->
+        <div id="u113" class="text">
+          <p><span>下载</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u114" class="ax_shape">
+        <img id="u114_img" class="img " src="img/order_management/u133.png"/>
+        <!-- Unnamed () -->
+        <div id="u115" class="text">
+          <p><span>查看审核信息</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u116" class="ax_shape">
+        <img id="u116_img" class="img " src="img/order_management/u133.png"/>
+        <!-- Unnamed () -->
+        <div id="u117" class="text">
+          <p><span>编辑订单</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
