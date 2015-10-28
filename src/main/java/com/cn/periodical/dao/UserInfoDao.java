@@ -1,3 +1,9 @@
+/*
+ * Powered By chanjetpay-code-generator
+ * Web Site: http://www.chanjetpay.com
+ * Since 2014 - 2015
+ */
+
 package com.cn.periodical.dao;
 
 import java.util.List;

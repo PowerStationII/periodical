@@ -21,7 +21,9 @@ public class UserInfoQuery extends PagingQuery {
 	private java.lang.String userId;
 	private java.lang.String logonName;
 	private java.lang.String logonPwd;
+	private java.lang.String refId;
 	private java.lang.String roleId;
+	private java.lang.String systemId;
 	private java.lang.Integer retryTimes;
 	private java.lang.String status;
 	private java.lang.String extend1;
@@ -32,7 +34,7 @@ public class UserInfoQuery extends PagingQuery {
 	private java.util.Date updateTime;
 
 	/**
-	 * 用户id
+	 * 系统生成用户id号
 	 * @param userId
 	 */
 	public void setUserId(java.lang.String userId) {
@@ -40,7 +42,7 @@ public class UserInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 用户id
+	 * 系统生成用户id号
 	 * @return
 	 */
 	public java.lang.String getUserId() {
@@ -77,7 +79,22 @@ public class UserInfoQuery extends PagingQuery {
 		return this.logonPwd;
 	}
 	/**
-	 * 
+	 * 关联id(根据role_id决定该值ref_id为哪个表的关联id)
+	 * @param refId
+	 */
+	public void setRefId(java.lang.String refId) {
+		this.refId = refId;
+	}
+	
+	/**
+	 * 关联id(根据role_id决定该值ref_id为哪个表的关联id)
+	 * @return
+	 */
+	public java.lang.String getRefId() {
+		return this.refId;
+	}
+	/**
+	 * 角色id
 	 * @param roleId
 	 */
 	public void setRoleId(java.lang.String roleId) {
@@ -85,14 +102,29 @@ public class UserInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 角色id
 	 * @return
 	 */
 	public java.lang.String getRoleId() {
 		return this.roleId;
 	}
 	/**
-	 * 
+	 * 系统id
+	 * @param systemId
+	 */
+	public void setSystemId(java.lang.String systemId) {
+		this.systemId = systemId;
+	}
+	
+	/**
+	 * 系统id
+	 * @return
+	 */
+	public java.lang.String getSystemId() {
+		return this.systemId;
+	}
+	/**
+	 * 密码重置次数(5次上限)
 	 * @param retryTimes
 	 */
 	public void setRetryTimes(java.lang.Integer retryTimes) {
@@ -100,14 +132,14 @@ public class UserInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 密码重置次数(5次上限)
 	 * @return
 	 */
 	public java.lang.Integer getRetryTimes() {
 		return this.retryTimes;
 	}
 	/**
-	 * 
+	 * 用户状态0:可用;1:不可用
 	 * @param status
 	 */
 	public void setStatus(java.lang.String status) {
@@ -115,7 +147,7 @@ public class UserInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 用户状态0:可用;1:不可用
 	 * @return
 	 */
 	public java.lang.String getStatus() {
