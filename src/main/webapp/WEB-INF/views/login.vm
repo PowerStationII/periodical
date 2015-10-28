@@ -156,7 +156,7 @@
         <img id="u28_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u29" class="text">
-          <p><span>注册</span></p>
+          <p><a href="register/toRegister?systemId=${systemId}" ><span>注册</span></a></p>
         </div>
       </div>
 
