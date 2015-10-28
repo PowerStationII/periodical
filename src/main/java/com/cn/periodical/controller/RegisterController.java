@@ -22,8 +22,8 @@ public class RegisterController {
 	@RequestMapping(value = "/toRegister", method = RequestMethod.GET)
 	public ModelAndView toRegister(@RequestParam("systemId") String systemId, HttpServletRequest request) {
 		logger.info("跳转去注册页面systemId:[" + systemId + "]");
-		ModelAndView mav = new ModelAndView("editor_area");
-//		mav.addObject("systemId", systemId);
+		ModelAndView mav = new ModelAndView("registered");
+		mav.addObject("systemId", systemId);
 		return mav;
 	}
 
