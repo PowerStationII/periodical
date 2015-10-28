@@ -1437,7 +1437,7 @@
 #macro(getsettleStatusDropdown)
 <a idkey="10000" class="sel_check" href="javascript:;" onclick="checkValue('settleStatus','','settleStatus_input2','请选择');">请选择</a>
 	<a idkey="10002" href="javascript:;" onclick="checkValue('settleStatus','0','settleStatus_input2','未清算');">未清算</a>
-	<a idkey="10003" href="javascript:;" onclick="checkValue('settleStatus','1','settleStatus_input2','已清算');"已清算</a>
+	<a idkey="10003" href="javascript:;" onclick="checkValue('settleStatus','1','settleStatus_input2','已清算');">已清算</a>
 #end
 
 #macro(getsettleStatusTitle $settleStatus)
@@ -1481,7 +1481,7 @@
 #macro(getsubjectStatusDropdown)
 <a idkey="10000" class="sel_check" href="javascript:;" onclick="checkValue('subjectStatus','','subjectStatus_input2','请选择');">请选择</a>
 	<a idkey="10002" href="javascript:;" onclick="checkValue('subjectStatus','0','subjectStatus_input2','有效');">有效</a>
-	<a idkey="10003" href="javascript:;" onclick="checkValue('subjectStatus','1','subjectStatus_input2','无效');"无效</a>
+	<a idkey="10003" href="javascript:;" onclick="checkValue('subjectStatus','1','subjectStatus_input2','无效');">无效</a>
 #end
 
 #macro(getsubjectStatusTitle $subjectStatus)
@@ -1523,8 +1523,8 @@
 #macro(getsysControlStatusDropdown)
 <a idkey="10000" class="sel_check" href="javascript:;" onclick="checkValue('sysControlStatus','','sysControlStatus_input2','请选择');">请选择</a>
 	<a idkey="10002" href="javascript:;" onclick="checkValue('sysControlStatus','0','sysControlStatus_input2','系统开放');">系统开放</a>
-	<a idkey="10003" href="javascript:;" onclick="checkValue('sysControlStatus','1','sysControlStatus_input2','运行中 ');"运行中 </a>
-	<a idkey="10003" href="javascript:;" onclick="checkValue('sysControlStatus','2','sysControlStatus_input2','系统维护 ');"系统维护 </a>
+	<a idkey="10003" href="javascript:;" onclick="checkValue('sysControlStatus','1','sysControlStatus_input2','运行中 ');">运行中 </a>
+	<a idkey="10003" href="javascript:;" onclick="checkValue('sysControlStatus','2','sysControlStatus_input2','系统维护 ');">系统维护 </a>
 #end
 
 #macro(getsysControlStatusTitle $sysControlStatus)
@@ -1571,10 +1571,10 @@
 #macro(gettaskStatusDropdown)
 <a idkey="10000" class="sel_check" href="javascript:;" onclick="checkValue('taskStatus','','taskStatus_input2','请选择');">请选择</a>
 	<a idkey="10002" href="javascript:;" onclick="checkValue('taskStatus','0','taskStatus_input2','静止');">静止</a>
-	<a idkey="10003" href="javascript:;" onclick="checkValue('taskStatus','1','taskStatus_input2','等待 ');等待 </a>
-	<a idkey="10003" href="javascript:;" onclick="checkValue('taskStatus','2','taskStatus_input2','正在执行 ');"正在执行 </a>
-	<a idkey="10004" href="javascript:;" onclick="checkValue('taskStatus','6','taskStatus_input2','执行成功 ');"执行成功 </a>
-	<a idkey="10005" href="javascript:;" onclick="checkValue('taskStatus','9','taskStatus_input2','执行失败 ');"执行失败 </a>
+	<a idkey="10003" href="javascript:;" onclick="checkValue('taskStatus','1','taskStatus_input2','等待 ');">等待 </a>
+	<a idkey="10003" href="javascript:;" onclick="checkValue('taskStatus','2','taskStatus_input2','正在执行 ');">正在执行 </a>
+	<a idkey="10004" href="javascript:;" onclick="checkValue('taskStatus','6','taskStatus_input2','执行成功 ');">执行成功 </a>
+	<a idkey="10005" href="javascript:;" onclick="checkValue('taskStatus','9','taskStatus_input2','执行失败 ');">执行失败 </a>
 #end
 
 #macro(gettaskStatusTitle $taskStatus)
@@ -1629,11 +1629,11 @@
 #macro(gettransFlowStatusDropdown)
 <a idkey="10000" class="sel_check" href="javascript:;" onclick="checkValue('transFlowStatus','','transFlowStatus_input2','请选择');">请选择</a>
 	<a idkey="10001" href="javascript:;" onclick="checkValue('transFlowStatus','1','transFlowStatus_input2','有效(未拆分录');">有效(未拆分录)</a>
-	<a idkey="10002" href="javascript:;" onclick="checkValue('transFlowStatus','2','transFlowStatus_input2','冲正参加平衡 ');"冲正参加平衡 </a>
-	<a idkey="10003" href="javascript:;" onclick="checkValue('transFlowStatus','3','transFlowStatus_input2','冲正不参加平衡 ');"冲正不参加平衡 </a>
-	<a idkey="10004" href="javascript:;" onclick="checkValue('transFlowStatus','6','transFlowStatus_input2','冲正不参加平衡 ');"分录流水抹帐 </a>
-	<a idkey="10005" href="javascript:;" onclick="checkValue('transFlowStatus','8','transFlowStatus_input2','冲正不参加平衡 ');"已拆分录流水 </a>
-	<a idkey="10006" href="javascript:;" onclick="checkValue('transFlowStatus','9','transFlowStatus_input2','无效 ');"无效 </a>
+	<a idkey="10002" href="javascript:;" onclick="checkValue('transFlowStatus','2','transFlowStatus_input2','冲正参加平衡 ');">冲正参加平衡 </a>
+	<a idkey="10003" href="javascript:;" onclick="checkValue('transFlowStatus','3','transFlowStatus_input2','冲正不参加平衡 ');">冲正不参加平衡 </a>
+	<a idkey="10004" href="javascript:;" onclick="checkValue('transFlowStatus','6','transFlowStatus_input2','冲正不参加平衡 ');">分录流水抹帐 </a>
+	<a idkey="10005" href="javascript:;" onclick="checkValue('transFlowStatus','8','transFlowStatus_input2','冲正不参加平衡 ');">已拆分录流水 </a>
+	<a idkey="10006" href="javascript:;" onclick="checkValue('transFlowStatus','9','transFlowStatus_input2','无效 ');">无效 </a>
 #end
 
 #macro(gettransFlowStatusTitle $transFlowStatus)
@@ -1694,8 +1694,8 @@
 #macro(gettransOrderStatusDropdown)
 <a idkey="10000" class="sel_check" href="javascript:;" onclick="checkValue('transOrderStatus','','transOrderStatus_input2','请选择');">请选择</a>
 	<a idkey="10002" href="javascript:;" onclick="checkValue('transOrderStatus','0','transOrderStatus_input2','未处理');">未处理</a>
-	<a idkey="10003" href="javascript:;" onclick="checkValue('transOrderStatus','1','transOrderStatus_input2','部分处理完成 ');"部分处理完成 </a>
-	<a idkey="10004" href="javascript:;" onclick="checkValue('transOrderStatus','2','transOrderStatus_input2','全部处理完成 ');"全部处理完成 </a>
+	<a idkey="10003" href="javascript:;" onclick="checkValue('transOrderStatus','1','transOrderStatus_input2','部分处理完成 ');">部分处理完成 </a>
+	<a idkey="10004" href="javascript:;" onclick="checkValue('transOrderStatus','2','transOrderStatus_input2','全部处理完成 ');">全部处理完成 </a>
 #end
 
 #macro(gettransOrderStatusTitle $transOrderStatus)
