@@ -187,14 +187,14 @@
   				else {
   					alert(true);
   					$('#form').form({    
-  	  				    url:'../register/register',    
-  	  				    onSubmit: function(){       
-  	  				    },    
-  	  				    success:function(data){    
-  	  				        alert(data)    
-  	  				    }    
-  	  				});    
-  	  				$('#form').submit(); 
+	  				    url:'../register/register',    
+	  				    onSubmit: function(){       
+	  				    },    
+	  				    success:function(data){    
+	  				        alert(data)    
+	  				    }    
+	  				});    
+	  				$('#form').submit(); 
   				}		
   			});
   			
@@ -260,10 +260,10 @@
 				
 				<!--证件-->
 				<a class="sign"   style="margin-left:94px;">*</a><a>证件：</a>
-				<select id="certificates" class="easyui-combobox" name="email" style="width:80px;"> 
-				    <option>身份证</option> 
-				    <option>护照</option>   
-				    <option>军警证</option>     
+				<select id="certificates" class="easyui-combobox" name="certifiType" style="width:80px;"> 
+				    <option  value="IDCARD">身份证</option> 
+				    <option  value="PASSPORT">护照</option>   
+				    <option  value="OFFICERCARD">军警证</option>     
 				</select><br>
 
 				<input id="certificate" class="easyui-validatebox" 
