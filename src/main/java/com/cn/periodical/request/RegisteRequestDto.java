@@ -87,6 +87,117 @@ public class RegisteRequestDto extends RequestDto {
 	 * 是否希望成为审稿专家
 	 * */
 	private String isreviewer;
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getRealName() {
+		return realName;
+	}
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+	public String getNameSpell() {
+		return nameSpell;
+	}
+	public void setNameSpell(String nameSpell) {
+		this.nameSpell = nameSpell;
+	}
+	public CertificatesTypeEnums getCertifiType() {
+		return certifiType;
+	}
+	public void setCertifiType(CertificatesTypeEnums certifiType) {
+		this.certifiType = certifiType;
+	}
+	public String getCertifiNo() {
+		return certifiNo;
+	}
+	public void setCertifiNo(String certifiNo) {
+		this.certifiNo = certifiNo;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public Date getBirthDay() {
+		return birthDay;
+	}
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
+	}
+	public String getContactPhone() {
+		return contactPhone;
+	}
+	public void setContactPhone(String contactPhone) {
+		this.contactPhone = contactPhone;
+	}
+	public String getPostAddress() {
+		return postAddress;
+	}
+	public void setPostAddress(String postAddress) {
+		this.postAddress = postAddress;
+	}
+	public String getPostCode() {
+		return postCode;
+	}
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
+	public String getResearchArea() {
+		return researchArea;
+	}
+	public void setResearchArea(String researchArea) {
+		this.researchArea = researchArea;
+	}
+	public DegreeEnums getDegree() {
+		return degree;
+	}
+	public void setDegree(DegreeEnums degree) {
+		this.degree = degree;
+	}
+	public AcademicDegreeEnums getAcademicDegree() {
+		return academicDegree;
+	}
+	public void setAcademicDegree(AcademicDegreeEnums academicDegree) {
+		this.academicDegree = academicDegree;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	public CompanyTypeEnums getCompanyType() {
+		return companyType;
+	}
+	public void setCompanyType(CompanyTypeEnums companyType) {
+		this.companyType = companyType;
+	}
+	public String getCompanyDepartment() {
+		return companyDepartment;
+	}
+	public void setCompanyDepartment(String companyDepartment) {
+		this.companyDepartment = companyDepartment;
+	}
+	public String getIsreviewer() {
+		return isreviewer;
+	}
+	public void setIsreviewer(String isreviewer) {
+		this.isreviewer = isreviewer;
+	}
+	
+	
+	
 	
 	
 	
