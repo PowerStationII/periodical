@@ -35,6 +35,7 @@ public class RegisterController {
 	public ModelAndView register(RegisteRequestDto registeRequestDto,
 			HttpServletRequest request) {
 		logger.info("email["+registeRequestDto.getEmail()+"]");
+		logger.info("证件类型：["+registeRequestDto.getCertifiType()+"]");
 		ModelAndView mav =null;
 		String systemId = request.getParameter("systemId");
 //		if(SystemIdEnums.EDIT_SYS.getCode().equals(systemId)){
