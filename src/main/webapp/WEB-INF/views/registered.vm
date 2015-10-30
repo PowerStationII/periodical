@@ -13,172 +13,341 @@
   </head>
   <script type="text/javascript">
   		$(function(){
-  			$.extend($.fn.validatebox.defaults.rules, {    
-  			    equals: {    
+  			$.extend($.fn.validatebox.defaults.rules, {  //校验
+  			    equals: { //判断密码是否相同
   			        validator: function(value,param){    
-  			            return value == $(param[0]).val();    
+  			            return value == $(param[0]).val();   
   			        },    
   			        message: '密码不同.'   
-  			    }    
+  			    },
+  			  	zip: {
+  		          validator: function (value, param) {
+  		            return /^[0-9]\d{5}$/.test(value);
+  		          },
+  		          message: '邮政编码不存在'
+  		        },
+  		      	mobileAndTel: {//手机和固话
+  		          validator: function (value, param) {
+  		            return /(^([0\+]\d{2,3})\d{3,4}\-\d{3,8}$)|(^([0\+]\d{2,3})\d{3,4}\d{3,8}$)|(^([0\+]\d{2,3}){0,1}13\d{9}$)|(^\d{3,4}\d{3,8}$)|(^\d{3,4}\-\d{3,8}$)/.test(value);
+  		          },
+  		          message: '请正确输入电话号码'
+  		        },
+  		      	idCode:{
+  		          validator:function(value,param){
+  		            return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value);
+  		          },
+  		          message: '请输入正确的身份证号'
+  		        },
+  		      	english:{// 验证英语
+  	              validator : function(value) {
+  	                  return /^[A-Za-z]+$/i.test(value);
+  	              },
+  	              message : '请输入拼音'
+  	          	},
+  	          	maxLength:{
+	  	            validator:function(value,param){
+	  	              return value.length<=param[0]
+	  	            },
+	  	            message:'最多{0}个字'
+  	          	},
+  	          	minLength:{
+	  	            validator:function(value,param){
+	  	              return value.length >=param[0]
+	  	            },
+	  	            message:'至少输入{0}个字'
+  	          }
   			});  
-  			/* $('#email').blur(function(){
-  					alert($('#email').validatebox('isValid'));
-  			}); */
   			
+  			$('#birthday').datebox({editable:false }); //日期禁止编辑
+  					
   			$('#registered').click(function(){
-  				//alert($('#ff').form('url'));
-  				$('#ff').form({    
-  				    url:'../register/register',    
-  				    onSubmit: function(){    
-  				         
-  				    },    
-  				    success:function(data){    
-  				        alert(data)    
-  				    }    
-  				});    
+  				//Email邮箱
+  				if($('#email').validatebox('isValid')==true){
+						$('#emailR').show();
+						$('#emailW').hide();
+				}
+				else {
+					$('#emailW').show();
+					$('#emailR').hide();
+				}
   				
-  				// submit the form    
-  				$('#ff').submit(); 
+  				//密码
+  				if($('#pwd').validatebox('isValid')==true){
+					$('#pwdR').show();
+					$('#pwdW').hide();
+				}
+				else {
+					$('#pwdW').show();
+					$('#pwdR').hide();
+				}
+  				
+  				//确认密码
+  				if($('#rpwd').validatebox('isValid')==true){
+					$('#rpwdR').show();
+					$('#rpwdW').hide();
+				}
+				else {
+					$('#rpwdW').show();
+					$('#rpwdR').hide();
+				}
+  				
+  				//姓名
+  				if($('#name').validatebox('isValid')==true){
+					$('#nameR').show();
+					$('#nameW').hide();
+				}
+				else {
+					$('#nameW').show();
+					$('#nameR').hide();
+				}
+  				
+  				//汉语拼音
+  				if($('#pinyin').validatebox('isValid')==true){
+					$('#pinyinR').show();
+					$('#pinyinW').hide();
+				}
+				else {
+					$('#pinyinW').show();
+					$('#pinyinR').hide();
+				}
+  				
+  				//证件
+  				if($('#certificate').validatebox('isValid')==true){
+					$('#certificateR').show();
+					$('#certificateW').hide();
+				}
+				else {
+					$('#certificateW').show();
+					$('#certificateR').hide();
+				}
+  			
+  				//联系电话
+  				if($('#phone').validatebox('isValid')==true){
+					$('#phoneR').show();
+					$('#phoneW').hide();
+				}
+				else {
+					$('#phoneW').show();
+					$('#phoneR').hide();
+				}
+  				
+  				//邮寄地址
+  				if($('#address').validatebox('isValid')==true){
+					$('#addressR').show();
+					$('#addressW').hide();
+				}
+				else {
+					$('#addressW').show();
+					$('#addressR').hide();
+				}
+  			
+  				//邮政编码
+  				if($('#postNum').validatebox('isValid')==true){
+					$('#postNumR').show();
+					$('#postNumW').hide();
+				}
+				else {
+					$('#postNumW').show();
+					$('#postNumR').hide();
+				}
+  			
+  				//研究领域
+  				if($('#area').validatebox('isValid')==true){
+					$('#areaR').show();
+					$('#areaW').hide();
+				}
+				else {
+					$('#areaW').show();
+					$('#areaR').hide();
+				}
+  			
+  				//单位名称
+  				if($('#danwei').validatebox('isValid')==true){
+					$('#danweiR').show();
+					$('#danweiW').hide();
+				}
+				else {
+					$('#danweiW').show();
+					$('#danweiR').hide();
+				}
+  			
+  				//部门或院系
+  				if($('#department').validatebox('isValid')==true){
+					$('#departmentR').show();
+					$('#departmentW').hide();
+				}
+				else {
+					$('#departmentW').show();
+					$('#departmentR').hide();
+				}
+  			
+  				if ($('.wrong').is(':visible')) {
+  					alert(false);
+  				}
+  				else {
+  					alert(true);
+  					$('#form').form({    
+  	  				    url:'../register/register',    
+  	  				    onSubmit: function(){       
+  	  				    },    
+  	  				    success:function(data){    
+  	  				        alert(data)    
+  	  				    }    
+  	  				});    
+  	  				$('#form').submit(); 
+  				}		
   			});
   			
   		});
   </script>
   <style>
-  		.all{width:80%;height:80%;margin:auto;}
-  		.mode1{margin-left:300px;}
+ 	    .top{height:86px;background-image:url("../img/portal/u0.png");line-height:86px;padding-left:30px;}
+  		.all{width:100%;height:100%;margin-top:10px;}
+  		.mode1{margin-left:200px;}
   		.sign{color:red;}
   		.wrong{color:red;}
   		.right{color:green;}
   		.tip{font-size:12px;margin-left:70px;}
+  		.titles{float:left;border:1px solid;width:100px;height:40px;line-height:40px;margin-top:25px;margin-left:10px;text-align:center;border-radius:5px;background:#ffffff;}
+  		.wrong,.right{display:none;}
   </style>
   <body>
+  	<div class="top">
+       	<div style="float:left;font-size:30px; font-weight:bold;}"><a>农药科学与管理</a></div>
+       	<div class="titles"  style="margin-left:400px;">投稿须知</div>
+       	<div class="titles">版权协议</div>
+       	<div class="titles">论文模板</div>
+       	<div class="titles">首页</div>
+       	<div class="titles">联系方式</div>
+    </div>
     <div class="all">
-    	<form id="ff" method="post">
+    	<form id="form" method="post">
 			<div class="mode1">
 				<!--Email-->
-				<a class="sign">*</a><a>Email：</a>
-				<input id="email"  name="email"   class="easyui-validatebox" 
+				<a class="sign"  style="margin-left:89px;">*</a><a>Email：</a>
+				<input id="email"  name="email11"   class="easyui-validatebox" 
 							data-options="required:true,validType:'email',
 													missingMessage:'不允许为空',
 													invalidMessage:'请输入正确的Email格式'" />
-				<a class="wrong">x</a><a class="right">√</a><br>
-				<a class="tip">邮箱地址只能包含字母、数字、句点 (.)、连字符 (-) 或下划线 (_)。</a><br><br>
+				<a class="wrong"  id="emailW">x</a><a class="right"  id="emailR">√</a><br>
+				<a class="tip"  style="margin-left:154px;">邮箱地址只能包含字母、数字、句点 (.)、连字符 (-) 或下划线 (_)。</a><br><br>
 				
 				<!--密码--> 
-				<a class="sign">*</a><a>密码：</a>
+				<a class="sign"  style="margin-left:95px;">*</a><a>密码：</a>
 				<input id="pwd" name="pwd" type="password" class="easyui-validatebox" 
-							data-options="required:true,missingMessage:'不允许为空'" />
-				<a class="wrong">x</a><a class="right">√</a><br>
-				<a class="tip">密码至少6个字符，请不要和登录名相同。</a><br><br>
+							data-options="required:true,missingMessage:'不允许为空'"   validType="minLength[6]" />
+				<a class="wrong"  id="pwdW">x</a><a class="right"  id="pwdR">√</a><br>
+				<a class="tip"  style="margin-left:154px;">密码至少6个字符，请不要和登录名相同。</a><br><br>
 				
 				<!--确认密码-->
-				<a class="sign">*</a><a>确认密码：</a>
+				<a class="sign"  style="margin-left:64px;">*</a><a>确认密码：</a>
 				<input id="rpwd" name="rpwd" type="password" class="easyui-validatebox"  
 							data-options="missingMessage:'不允许为空',"    
 				    		required="required"  validType="equals['#pwd']" />
-				<a class="wrong">x</a><a class="right">√</a><br><br>
+				<a class="wrong"  id="rpwdW">x</a><a class="right"  id="rpwdW">√</a><br><br>
 				
 				<!--姓名-->
-				<a class="sign">*</a><a>姓名：</a>
+				<a class="sign" style="margin-left:94px;">*</a><a>姓名：</a>
 				<input id="name" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" />
-				<a class="wrong">x</a><a class="right">√</a><br><br>
+				<a class="wrong"  id="nameW">x</a><a class="right"  id="nameR">√</a><br><br>
 				
 				<!--汉语拼音-->
-				<a class="sign">*</a><a>汉语拼音：</a>
-				<input id="pingyin" class="easyui-validatebox" 
-							data-options="required:true,missingMessage:'不允许为空'" />
-				<a class="wrong">x</a><a class="right">√</a><br><br>
+				<a class="sign"  style="margin-left:64px;">*</a><a>汉语拼音：</a>
+				<input id="pinyin" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'"   validType="english[]" />
+				<a class="wrong"  id="pinyinW">x</a><a class="right"  id="pinyinR">√</a><br><br>
 				
 				<!--证件-->
-				<a class="sign">*</a><a>证件：</a>
-				<select id="certificates" class="easyui-combobox" name="dept" style="width:80px;"> 
-				    <option value="aa">身份证</option> 
+				<a class="sign"   style="margin-left:94px;">*</a><a>证件：</a>
+				<select id="certificates" class="easyui-combobox" name="email" style="width:80px;"> 
+				    <option>身份证</option> 
 				    <option>护照</option>   
 				    <option>军警证</option>     
-				</select>
-				<input id="pingyin" class="easyui-validatebox" 
-							data-options="required:true,missingMessage:'不允许为空'" />
-				<a class="wrong">x</a><a class="right">√</a><br><br>  
+				</select><br>
+
+				<input id="certificate" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'"   style="margin-left:154px;"/>
+				<a class="wrong"  id="certificateW">x</a><a class="right"   id="certificateR">√</a><br><br>  
 				
 				<!--性别-->
-				<a class="sign">*</a><a> 性别：</a>
+				<a class="sign"   style="margin-left:90px;">*</a><a> 性别：</a>
 				<input type="radio" value="male" checked="checked" name="sex"/>男 
 				<input type="radio" value="female" name="sex"/>女<br><br>
 				
 				<!--出生日期-->
-				<a class="sign">*</a><a>出生日期：</a>
-				<input id="dd" type="text" class="easyui-datebox" required="required"></input>
-				<a class="wrong">x</a><a class="right">√</a><br><br> 
+				<a class="sign"  style="margin-left:64px;">*</a><a>出生日期：</a>
+				<input id="birthday" type="text" class="easyui-datebox" required="required"  value="1"></input>
+				<br><br> 
 			</div>
 			<div class="mode1">
 				<!--联系电话-->
-				<a class="sign">*</a><a>联系电话：</a>
-				<input id="pingyin" class="easyui-validatebox" 
-							data-options="required:true,missingMessage:'不允许为空'" />
-				<a class="wrong">x</a><a class="right">√</a><br><br>
+				<a class="sign"  style="margin-left:64px;">*</a><a>联系电话：</a>
+				<input id="phone" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'"  validType="mobileAndTel[]" />
+				<a class="wrong"  id="phoneW">x</a><a class="right"  id="phoneR">√</a><br><br>
 				<!--邮寄地址-->
-				<a class="sign">*</a><a>邮寄地址：</a>
-				<input id="pingyin" class="easyui-validatebox" 
+				<a class="sign"  style="margin-left:64px;">*</a><a>邮寄地址：</a>
+				<input id="address" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" />
-				<a class="wrong">x</a><a class="right">√</a><br><br>
+				<a class="wrong"  id="addressW">x</a><a class="right"  id="addressR">√</a><br><br>
 				<!--邮政编码-->
-				<a class="sign">*</a><a>邮政编码：</a>
-				<input id="pingyin" class="easyui-validatebox" 
-							data-options="required:true,missingMessage:'不允许为空'" />
-				<a class="wrong">x</a><a class="right">√</a><br><br>
+				<a class="sign"  style="margin-left:64px;">*</a><a>邮政编码：</a>
+				<input id="postNum" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'"  validType="zip[]" />
+				<a class="wrong"  id="postNumW">x</a><a class="right"   id="postNumR">√</a><br><br>
 			</div>
 			<div class="mode1">
 				<!--研究领域-->
-				<a class="sign">*</a><a>研究领域：</a>
-				<input id="pingyin" class="easyui-validatebox" 
+				<a class="sign"   style="margin-left:64px;">*</a><a>研究领域：</a>
+				<input id="area" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" />
-				<a class="wrong">x</a><a class="right">√</a><br><br>
+				<a class="wrong"  id="areaW">x</a><a class="right"   id="areaR">√</a><br><br>
 			</div>
 			<div class="mode1">
 				<!--学历-->
-				<a class="sign">*</a><a>学历：</a>
-				<select id="certificates" class="easyui-combobox" name="dept" style="width:100px;"> 
+				<a class="sign"  style="margin-left:95px;">*</a><a>学历：</a>
+				<select id="education" class="easyui-combobox" name="dept" style="width:100px;"> 
 				    <option value="aa">本科</option> 
 				    <option>大专</option> 
 				    <option>高中</option>   
 				    <option>其他</option>    
-				</select><a class="wrong">x</a><a class="right">√</a><br><br>
+				</select><br><br>
 				<!--学位-->
-				<a class="sign">*</a><a>学位：</a>
-				<select id="certificates" class="easyui-combobox" name="dept" style="width:100px;"> 
+				<a class="sign"   style="margin-left:95px;">*</a><a>学位：</a>
+				<select id="academicDegree" class="easyui-combobox" name="dept" style="width:100px;"> 
 				    <option value="aa">学士</option> 
 				    <option>硕士</option>   
 				    <option>博士</option>     
-				</select><a class="wrong">x</a><a class="right">√</a><br><br>
+				</select><br><br>
 			</div>
 			<div class="mode1">
 				<!--单位名称-->
-				<a class="sign">*</a><a>单位名称：</a>
-				<input id="pingyin" class="easyui-validatebox" 
+				<a class="sign"   style="margin-left:64px;">*</a><a>单位名称：</a>
+				<input id="danwei" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" />
-				<a class="wrong">x</a><a class="right">√</a><br><br>
+				<a class="wrong"  id="danweiW">x</a><a class="right"  id="danweiR">√</a><br><br>
 				<!--单位性质-->
-				<a class="sign">*</a><a>单位性质：</a>
-				<select id="certificates" class="easyui-combobox" name="dept" style="width:100px;"> 
+				<a class="sign"   style="margin-left:64px;">*</a><a>单位性质：</a>
+				<select id="nature" class="easyui-combobox" name="dept" style="width:100px;"> 
 				    <option value="aa">科研单位</option> 
 				    <option>大学</option>   
 				    <option>企业</option>     
 				    <option>其他</option>  
-				</select><a class="wrong">x</a><a class="right">√</a><br><br>
+				</select><br><br>
 				<!--部门或院系-->
-				<a class="sign">*</a><a>部门或院系：</a>
-				<input id="pingyin" class="easyui-validatebox" 
+				<a class="sign"  style="margin-left:45px;">*</a><a>部门或院系：</a>
+				<input id="department" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" />
-				<a class="wrong">x</a><a class="right">√</a><br><br>
+				<a class="wrong"  id="departmentW">x</a><a class="right"  id="departmentR">√</a><br><br>
 			</div>
 			<div class="mode1">
 				<!--希望成为审稿专家-->
 				<a class="sign">*</a><a>希望成为审稿专家：</a>
-				<select id="certificates" class="easyui-combobox" name="dept" style="width:200px;"> 
+				<select id="expert" class="easyui-combobox" name="dept" style="width:50px;"> 
 				    <option value="aa">否</option> 
 				    <option>是</option>    
-				</select><a class="wrong">x</a><a class="right">√</a><br><br>
+				</select><br><br>
 			</div>
 			<div class="mode1">
 				<!--提交按钮-->
