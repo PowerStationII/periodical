@@ -9,6 +9,7 @@
     <link href="../css/icon.css" type="text/css" rel="stylesheet"/>
  	<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 	<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
   </head>
   <script type="text/javascript">
   		$(function(){
@@ -20,9 +21,26 @@
   			        message: '密码不同.'   
   			    }    
   			});  
-  			$('#email').blur(function(){
+  			/* $('#email').blur(function(){
   					alert($('#email').validatebox('isValid'));
+  			}); */
+  			
+  			$('#registered').click(function(){
+  				//alert($('#ff').form('url'));
+  				$('#ff').form({    
+  				    url:'../register/register',    
+  				    onSubmit: function(){    
+  				         
+  				    },    
+  				    success:function(data){    
+  				        alert(data)    
+  				    }    
+  				});    
+  				
+  				// submit the form    
+  				$('#ff').submit(); 
   			});
+  			
   		});
   </script>
   <style>
@@ -31,69 +49,142 @@
   		.sign{color:red;}
   		.wrong{color:red;}
   		.right{color:green;}
-  		.tip{font-size:12px;}
+  		.tip{font-size:12px;margin-left:70px;}
   </style>
   <body>
     <div class="all">
-		<div class="mode1">
-			<!--Email-->
-			<a class="sign">*</a><a>Email：</a>
-			<input id="email" class="easyui-validatebox" 
-						data-options="required:true,validType:'email',
-												missingMessage:'不允许为空',
-												invalidMessage:'请输入正确的Email格式'" />
-			<a class="wrong">x</a><a class="right">√</a><br>
-			<a class="tip">邮箱地址只能包含字母、数字、句点 (.)、连字符 (-) 或下划线 (_)。</a><br><br>
-			
-			<!--密码--> 
-			<a class="sign">*</a><a>密码：</a>
-			<input id="pwd" name="pwd" type="password" class="easyui-validatebox" 
-						data-options="required:true,missingMessage:'不允许为空'" />
-			<a class="wrong">x</a><a class="right">√</a><br>
-			<a class="tip">密码至少6个字符，请不要和登录名相同。</a><br><br>
-			
-			<!--确认密码-->
-			<a class="sign">*</a><a>确认密码：</a>
-			<input id="rpwd" name="rpwd" type="password" class="easyui-validatebox"  
-						data-options="missingMessage:'不允许为空',"    
-			    		required="required"  validType="equals['#pwd']" />
-			<a class="wrong">x</a><a class="right">√</a><br><br>
-			
-			<!--姓名-->
-			<a class="sign">*</a><a>姓名：</a>
-			<input id="name" class="easyui-validatebox" 
-						data-options="required:true,missingMessage:'不允许为空'" />
-			<a class="wrong">x</a><a class="right">√</a><br><br>
-			
-			<!--汉语拼音-->
-			<a class="sign">*</a><a>汉语拼音：</a>
-			<input id="pingyin" class="easyui-validatebox" 
-						data-options="required:true,missingMessage:'不允许为空'" />
-			<a class="wrong">x</a><a class="right">√</a><br><br>
-			
-			<!--证件-->
-			<a class="sign">*</a><a>证件：</a>
-			<select id="certificates" class="easyui-combobox" name="dept" style="width:200px;"> 
-			    <option value="aa">身份证</option> 
-			    <option>护照</option>   
-			    <option>军警证</option>     
-			</select><a class="wrong">x</a><a class="right">√</a><br><br>  
-			
-			<!--出生日期-->
-			<a class="sign">*</a><a>出生日期：</a>
-			<input id="birthday" class="easyui-validatebox" 
-						data-options="required:true,missingMessage:'不允许为空'" />
-			<a class="wrong">x</a><a class="right">√</a><br><br> 
-			
-			<!--提交按钮-->
-			<input type="button"  value="注册"><input type="button"  value="返回">
-		</div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
+    	<form id="ff" method="post">
+			<div class="mode1">
+				<!--Email-->
+				<a class="sign">*</a><a>Email：</a>
+				<input id="email"  name="email"   class="easyui-validatebox" 
+							data-options="required:true,validType:'email',
+													missingMessage:'不允许为空',
+													invalidMessage:'请输入正确的Email格式'" />
+				<a class="wrong">x</a><a class="right">√</a><br>
+				<a class="tip">邮箱地址只能包含字母、数字、句点 (.)、连字符 (-) 或下划线 (_)。</a><br><br>
+				
+				<!--密码--> 
+				<a class="sign">*</a><a>密码：</a>
+				<input id="pwd" name="pwd" type="password" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" />
+				<a class="wrong">x</a><a class="right">√</a><br>
+				<a class="tip">密码至少6个字符，请不要和登录名相同。</a><br><br>
+				
+				<!--确认密码-->
+				<a class="sign">*</a><a>确认密码：</a>
+				<input id="rpwd" name="rpwd" type="password" class="easyui-validatebox"  
+							data-options="missingMessage:'不允许为空',"    
+				    		required="required"  validType="equals['#pwd']" />
+				<a class="wrong">x</a><a class="right">√</a><br><br>
+				
+				<!--姓名-->
+				<a class="sign">*</a><a>姓名：</a>
+				<input id="name" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" />
+				<a class="wrong">x</a><a class="right">√</a><br><br>
+				
+				<!--汉语拼音-->
+				<a class="sign">*</a><a>汉语拼音：</a>
+				<input id="pingyin" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" />
+				<a class="wrong">x</a><a class="right">√</a><br><br>
+				
+				<!--证件-->
+				<a class="sign">*</a><a>证件：</a>
+				<select id="certificates" class="easyui-combobox" name="dept" style="width:80px;"> 
+				    <option value="aa">身份证</option> 
+				    <option>护照</option>   
+				    <option>军警证</option>     
+				</select>
+				<input id="pingyin" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" />
+				<a class="wrong">x</a><a class="right">√</a><br><br>  
+				
+				<!--性别-->
+				<a class="sign">*</a><a> 性别：</a>
+				<input type="radio" value="male" checked="checked" name="sex"/>男 
+				<input type="radio" value="female" name="sex"/>女<br><br>
+				
+				<!--出生日期-->
+				<a class="sign">*</a><a>出生日期：</a>
+				<input id="dd" type="text" class="easyui-datebox" required="required"></input>
+				<a class="wrong">x</a><a class="right">√</a><br><br> 
+			</div>
+			<div class="mode1">
+				<!--联系电话-->
+				<a class="sign">*</a><a>联系电话：</a>
+				<input id="pingyin" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" />
+				<a class="wrong">x</a><a class="right">√</a><br><br>
+				<!--邮寄地址-->
+				<a class="sign">*</a><a>邮寄地址：</a>
+				<input id="pingyin" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" />
+				<a class="wrong">x</a><a class="right">√</a><br><br>
+				<!--邮政编码-->
+				<a class="sign">*</a><a>邮政编码：</a>
+				<input id="pingyin" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" />
+				<a class="wrong">x</a><a class="right">√</a><br><br>
+			</div>
+			<div class="mode1">
+				<!--研究领域-->
+				<a class="sign">*</a><a>研究领域：</a>
+				<input id="pingyin" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" />
+				<a class="wrong">x</a><a class="right">√</a><br><br>
+			</div>
+			<div class="mode1">
+				<!--学历-->
+				<a class="sign">*</a><a>学历：</a>
+				<select id="certificates" class="easyui-combobox" name="dept" style="width:100px;"> 
+				    <option value="aa">本科</option> 
+				    <option>大专</option> 
+				    <option>高中</option>   
+				    <option>其他</option>    
+				</select><a class="wrong">x</a><a class="right">√</a><br><br>
+				<!--学位-->
+				<a class="sign">*</a><a>学位：</a>
+				<select id="certificates" class="easyui-combobox" name="dept" style="width:100px;"> 
+				    <option value="aa">学士</option> 
+				    <option>硕士</option>   
+				    <option>博士</option>     
+				</select><a class="wrong">x</a><a class="right">√</a><br><br>
+			</div>
+			<div class="mode1">
+				<!--单位名称-->
+				<a class="sign">*</a><a>单位名称：</a>
+				<input id="pingyin" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" />
+				<a class="wrong">x</a><a class="right">√</a><br><br>
+				<!--单位性质-->
+				<a class="sign">*</a><a>单位性质：</a>
+				<select id="certificates" class="easyui-combobox" name="dept" style="width:100px;"> 
+				    <option value="aa">科研单位</option> 
+				    <option>大学</option>   
+				    <option>企业</option>     
+				    <option>其他</option>  
+				</select><a class="wrong">x</a><a class="right">√</a><br><br>
+				<!--部门或院系-->
+				<a class="sign">*</a><a>部门或院系：</a>
+				<input id="pingyin" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" />
+				<a class="wrong">x</a><a class="right">√</a><br><br>
+			</div>
+			<div class="mode1">
+				<!--希望成为审稿专家-->
+				<a class="sign">*</a><a>希望成为审稿专家：</a>
+				<select id="certificates" class="easyui-combobox" name="dept" style="width:200px;"> 
+				    <option value="aa">否</option> 
+				    <option>是</option>    
+				</select><a class="wrong">x</a><a class="right">√</a><br><br>
+			</div>
+			<div class="mode1">
+				<!--提交按钮-->
+				<input type="button"  value="注册"  id="registered"><input type="button"  value="返回">
+			</div>
+		</form>
     </div>
   </body>
 </html>
