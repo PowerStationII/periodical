@@ -87,6 +87,15 @@ public class RegisteRequestDto extends RequestDto {
 	 * 是否希望成为审稿专家
 	 * */
 	private String isreviewer;
+	
+	private String systemId;
+	
+	public String getSystemId() {
+		return systemId;
+	}
+	public void setSystemId(String systemId) {
+		this.systemId = systemId;
+	}
 	public String getEmail() {
 		return email;
 	}

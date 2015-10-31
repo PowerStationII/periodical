@@ -33,9 +33,10 @@ public class LoginController {
 
 	/**
 	 * 登录
+	 * ,method = RequestMethod.POST
 	 */
-	@RequestMapping(value="/toLogin",method = RequestMethod.POST)
-	public ModelAndView toLogin(@RequestParam("email") String email,@RequestParam("password") String password, 
+	@RequestMapping(value="/toLogin")
+	public ModelAndView toLogin(@RequestParam("email") String email,String password, 
 			HttpServletRequest request) {
 		logger.info("登录名["+email+"]&&登录密码["+password+"]");
 		ModelAndView mav =null;

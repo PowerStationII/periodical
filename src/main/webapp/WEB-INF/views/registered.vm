@@ -182,23 +182,29 @@
 				}
   			
   				if ($('.wrong').is(':visible')) {
-  					alert(false);
+  					alert("请正确添加注册相关信息!");
   				}
   				else {
-  					alert(true);
-  					$('#form').form({    
-	  				    url:'../register/register',    
-	  				    onSubmit: function(){       
-	  				    },    
-	  				    success:function(data){    
-	  				        alert(data)    
-	  				    }    
-	  				});    
-	  				$('#form').submit(); 
+  					submitForm();
+  					//alert(true);
+  					//$('#form').form({    
+	  				   // url:'../register/register',    
+	  				    //onSubmit: function(){       
+	  				    //},    
+	  				    //success:function(data){    
+	  				        //alert(data)    
+	  				    //}    
+	  				//});    
+	  				//$('#form').submit(); 
+  					
   				}		
   			});
   			
   		});
+  		
+  		function submitForm(){  
+				$('#form').submit();
+			} 
   </script>
   <style>
  	    .top{height:86px;background-image:url("../img/portal/u0.png");line-height:86px;padding-left:30px;}
@@ -221,7 +227,8 @@
        	<div class="titles">联系方式</div>
     </div>
     <div class="all">
-    	<form id="form" method="post">
+    	<form action="../register/register" id="form" method="POST">
+    		<input type="hidden" name="systemId" value="${systemId}">
 			<div class="mode1">
 				<!--Email-->
 				<a class="sign"  style="margin-left:89px;">*</a><a>Email：</a>
@@ -352,7 +359,9 @@
 			</div>
 			<div class="mode1">
 				<!--提交按钮-->
-				<input type="button"  value="注册"  id="registered"><input type="button"  value="返回">
+				<input type="button"  value="注册"  id="registered">
+<!-- 				<a href="javascript:;" onclick="submitForm(this)">注册</a>
+ -->				<input type="button"  value="返回">
 			</div>
 		</form>
     </div>
