@@ -34,6 +34,9 @@ public class LoginController {
 	/**
 	 * 登录
 	 * ,method = RequestMethod.POST
+	 * 注册过来的时候,
+	 * Spring MVC我还不知道怎么模拟post方式重定向到另一个controller中
+	 * 暂时这样写!登录时前台页面必须校验密码是否已存在
 	 */
 	@RequestMapping(value="/toLogin")
 	public ModelAndView toLogin(@RequestParam("email") String email,String password, 
