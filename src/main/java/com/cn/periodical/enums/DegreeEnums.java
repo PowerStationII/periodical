@@ -3,15 +3,15 @@ package com.cn.periodical.enums;
  * 学历
  * */
 public enum DegreeEnums {
-	IDCARD("0", "小学"), 
-	BOOKLET("1", "初中"), 
-	PASSPORT("2", "高中"), 
-	OFFICERCARD("3", "中专"), 
-	SOLDIERCARD("4","高职"), 
-	HKANDMCARD("5", "专科"), 
+	JUNIOR_SCHOOL("0", "小学"), 
+	MIDDLE_SCHOOL("1", "初中"), 
+	SENIOR_SCHOOL("2", "高中"), 
+	POLYTECHNIC_SCHOOL("3", "中专"), 
+	VOCATIONAL_SCHOOL("4","高职"), 
+	JUNIOR_COLLEGE("5", "专科"), 
 	BACHELOR_DEGREE("6", "本科"), 
-	TEMPORARYID("7","硕士研究生"), 
-	ForeignerID("8", "博士研究生");
+	MASTER_DEGREE("7","硕士研究生"), 
+	DOCTORAL("8", "博士研究生");
 
 	private String code;
 	private String name;
@@ -45,7 +45,7 @@ public enum DegreeEnums {
 	}
 
 	public static DegreeEnums get(String str) {
-		for (DegreeEnums degreeEnum  : values()) {
+		for (DegreeEnums degreeEnum: values()) {
 
 			if (degreeEnum.toString().equals(str)) {
 				return degreeEnum;
