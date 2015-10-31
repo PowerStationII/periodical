@@ -30,22 +30,19 @@
 		</encoder>
 	</appender>
 
-    <logger name="com.cn.periodical" level="info" />
+    <logger name="com.cn.periodical" level="DEBUG" />
     
    <!--  <logger name="com.chanjetpay.gaterouter.schedule" level="INFO">
 		<appender-ref ref="taskLog" />
 	</logger> -->
 	
 	<logger name="org.mybatis.spring" level="INFO" />
-	<logger name="org.apache.ibatis" level="TRACE" />
-	<logger name="java.sql.PreparedStatement" level="INFO" />
-	<logger name="java.sql.Statement" level="INFO" />
-	<logger name="java.sql.Connection" level="INFO" />
-	<logger name="java.sql.ResultSet" level="INFO" />
-	<logger name="com.alibaba" level="INFO" />
-	<logger name="org.apache.zookeeper" level="INFO" />
+	<logger name="org.apache.ibatis" level="DEBUG" />
+	<logger name="java.sql.PreparedStatement" level="DEBUG" />
+	<logger name="java.sql.Statement" level="DEBUG" />
+	<logger name="java.sql.Connection" level="DEBUG" />
+	<logger name="java.sql.ResultSet" level="DEBUG" />
 	<logger name="org.springframework" level="INFO" />
-	<logger name="org.quartz" level="INFO" />
     
     <root level="DEBUG">
     	<appender-ref ref="Console" />

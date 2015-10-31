@@ -5,9 +5,17 @@ package com.cn.periodical.enums;
  */
 public enum CertificatesTypeEnums {
 
-	IDCARD("0", "身份证"), BOOKLET("1", "户口簿"), PASSPORT("2", "护照"), OFFICERCARD("3", "军官证"), SOLDIERCARD("4",
-			"士兵证"), HKANDMCARD("5", "港澳居民来往内地通行证"), TAIWANCARD("6", "台湾同胞来往内地通行证"), TEMPORARYID("7",
-					"临时身份证"), ForeignerID("8", "外国人居留证"), PoliceID("9", "警官证"), OtherCard("X", "其他证件");
+	IDCARD("0", "身份证"), 
+	BOOKLET("1", "户口簿"), 
+	PASSPORT("2", "护照"), 
+	OFFICERCARD("3", "军官证"), 
+	SOLDIERCARD("4","士兵证"), 
+	HKANDMCARD("5", "港澳居民来往内地通行证"), 
+	TAIWANCARD("6", "台湾同胞来往内地通行证"), 
+	TEMPORARYID("7","临时身份证"), 
+	ForeignerID("8", "外国人居留证"), 
+	PoliceID("9", "警官证"), 
+	OtherCard("X", "其他证件");
 
 	private String code;
 	private String name;

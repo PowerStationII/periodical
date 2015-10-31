@@ -225,7 +225,7 @@
 			<div class="mode1">
 				<!--Email-->
 				<a class="sign"  style="margin-left:89px;">*</a><a>Email：</a>
-				<input id="email"  name="email11"   class="easyui-validatebox" 
+				<input id="email"  name="email"   class="easyui-validatebox" 
 							data-options="required:true,validType:'email',
 													missingMessage:'不允许为空',
 													invalidMessage:'请输入正确的Email格式'" />
@@ -234,7 +234,7 @@
 				
 				<!--密码--> 
 				<a class="sign"  style="margin-left:95px;">*</a><a>密码：</a>
-				<input id="pwd" name="pwd" type="password" class="easyui-validatebox" 
+				<input id="pwd" name="password" type="password" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'"   validType="minLength[6]" />
 				<a class="wrong"  id="pwdW">x</a><a class="right"  id="pwdR">√</a><br>
 				<a class="tip"  style="margin-left:154px;">密码至少6个字符，请不要和登录名相同。</a><br><br>
@@ -315,10 +315,11 @@
 				</select><br><br>
 				<!--学位-->
 				<a class="sign"   style="margin-left:95px;">*</a><a>学位：</a>
-				<select id="academicDegree" class="easyui-combobox" name="dept" style="width:100px;"> 
-				    <option value="aa">学士</option> 
-				    <option>硕士</option>   
-				    <option>博士</option>     
+				<select id="academicDegree" class="easyui-combobox" name="academicDegree" style="width:100px;"> 
+				    <option value="BACHELOR">学士</option> 
+				    <option value="MASTER">硕士</option>   
+				    <option value="DOCTOR">博士</option>     
+				    <option value="POST">博士后</option>     
 				</select><br><br>
 			</div>
 			<div class="mode1">

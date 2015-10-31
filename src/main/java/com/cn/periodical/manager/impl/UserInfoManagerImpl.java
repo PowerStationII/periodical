@@ -20,7 +20,7 @@ public class UserInfoManagerImpl implements UserInfoManager {
 	@Qualifier("userInfoDao")
 	private UserInfoDao userInfoDao;
 	
-	@Override
+	
 	public void saveUserInfo(UserInfo userInfo) {
 		if (userInfo.getId() == null) {
 			userInfoDao.insertSelective(userInfo);
@@ -29,27 +29,27 @@ public class UserInfoManagerImpl implements UserInfoManager {
 		}
 	}
 	
-	@Override
+	
 	public UserInfo findUserInfoById(Long id) {
 		return userInfoDao.selectByPrimaryKey(id);
 	}
 	
-	@Override
+	
 	public List<UserInfo> queryList(UserInfoQuery query) {
 		return userInfoDao.selectByExample(query);
 	}
 	
-	@Override
+	
 	public void deleteUserInfoById(Long id) {
 		userInfoDao.deleteByPrimaryKey(id);
 	}
 	
-	@Override
+	
 	public void deleteUserInfo(UserInfoQuery query) {
 		userInfoDao.deleteByExample(query);
 	}
 	
-	@Override
+	
 	public UserInfoPage queryPageList(UserInfoQuery query) {
 		UserInfoPage userInfoPage = new UserInfoPage();
 		Integer itemCount = userInfoDao.countByExample(query);

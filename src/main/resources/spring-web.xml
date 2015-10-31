@@ -48,12 +48,13 @@
 	<mvc:resources location="/js/" mapping="/js/**" />
 	<mvc:default-servlet-handler />
 	
-	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-    <property name="converters">
-      <set>
-        <bean class="com.cn.periodical.enums.CertificatesTypeEnumsConverter" />
-        
-      </set>
-    </property>
-  </bean>
+<!-- 	<bean id="conversionService"
+	class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	<property name="converters">
+		<set>
+			<bean class="com.cn.periodical.enums.CertificatesTypeEnumsConverter" />
+
+		</set>
+	</property>
+	</bean> -->
 </beans>           

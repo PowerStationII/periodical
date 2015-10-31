@@ -3,20 +3,27 @@ package com.cn.periodical.controller;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.enums.SystemIdEnums;
 import com.cn.periodical.request.RegisteRequestDto;
+import com.cn.periodical.service.RegisterService;
 
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
 
 	private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
+	@Autowired
+	RegisterService registerService;
+	
 	/**
 	 * 跳转到注册页面
 	 */
@@ -36,8 +43,12 @@ public class RegisterController {
 			HttpServletRequest request) {
 		logger.info("email["+registeRequestDto.getEmail()+"]");
 		logger.info("证件类型：["+registeRequestDto.getCertifiType()+"]");
+		logger.info("++++++++++++++++++++");
+		logger.info(JSON.toJSONString(registeRequestDto));
+		logger.info("++++++++++++++++++++");
 		ModelAndView mav =null;
 		String systemId = request.getParameter("systemId");
+		registerService.add(registeRequestDto);
 //		if(SystemIdEnums.EDIT_SYS.getCode().equals(systemId)){
 //			//编辑
 //			String roleId="1007";
