@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="css/easyui.css" type="text/css" rel="stylesheet"/>
+    <link href="css/icon.css" type="text/css" rel="stylesheet"/>
+ 	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
+  </head>
+  <script type="text/javascript">
+  		$(function(){
+  			$('#step1').show();
+  			$('#step2').hide();
+  			$('#step3').hide();
+  			$('#step4').hide();
+  			$('#next1').click(function(){
+  				$('#step1').hide();
+  				$('#step2').show();
+  				$('#step3').hide();
+  				$('#step4').hide();
+  			});
+  			$('#disagree').click(function(){
+  				$('#step1').show();
+  				$('#step2').hide();
+  				$('#step3').hide();
+  				$('#step4').hide();
+  			});
+  			$('#agree').click(function(){
+  				$('#step1').hide();
+  				$('#step2').hide();
+  				$('#step3').show();
+  				$('#step4').hide();
+  			});
+  			$('#back').click(function(){
+  				$('#step1').hide();
+  				$('#step2').show();
+  				$('#step3').hide();
+  				$('#step4').hide();
+  			});
+  			$('#next2').click(function(){
+  				$('#step1').hide();
+  				$('#step2').hide();
+  				$('#step3').hide();
+  				$('#step4').show();
+  			});
+  			$('#back1').click(function(){
+  				$('#step1').hide();
+  				$('#step2').hide();
+  				$('#step3').show();
+  				$('#step4').hide();
+  			});
+  			$('#more').click(function(){
+  				$('#author1').append($('.copytab').clone());
+  			});
+  		});
+  </script>
+  <style>
+ 	   #step1,#step2,#step3,#step4{overflow:hidden;}
+  </style>
+  <body>
+  	<div id="step1">
+  		<div style="margin-top:20px;">
+			<a style="margin-left:400px;font-size:20px;">投稿须知</a><br>
+			<a style="font-size:12px;">
+					一、稿件要求<br>
+					投给的文章必须未在其他任何地方、以任何形式发表过,并具备以下条件:<br>
+					1．是农业科学基础理论或应用研究的最新成果；<br>
+					2．有重要科学意义,属国内外研究热点或前沿领域；<br>
+					3．有创新(新思路、新方法、新认识、新发现等);<br>
+					4．对本学科领域或(和)相关学科领域的研究有较大的促进作用;<br>
+					5．对大同行或非同行科学家都有可读性和启发性。<br>
+					（一）选录标准<br>
+					视创新性及其价值大小，并综合下述方面决定：<br>
+					1．立题的科学意义/学术价值；<br>
+					2．对本学科、本领域科学研究进展的了解和引用；<br>
+					3．方法或其应用的创新性；<br>
+					4．方法的科学性；<br>
+					5．论证的逻辑性；<br>
+					6．结果及其分析的合理性；<br>
+					7．结论的科学性及可参考性/推广应用前景；<br>
+					8．信息量与写作质量。<br>
+					（二）规范要求<br>
+					1.来稿应含中英文题目、中英文摘要（说明研究目的、方法、成果和最终结论等，重点是方法创新和成果结论）、关键词（5～8个）。详见论文写作要求。<br>
+					2.量和单位：应符合国家规定。外文字符要分清大小写、正斜体，上下角字符的位置高低应区别明显。<br>
+					3.图、表：应提供中英文图题、表题；图应带有数据源，表要采用三线表。<br>
+					4.参考文献：应遵循“最新、关键、必要和亲自阅读过”的原则；在正文中顺次引述；研究性论文稿件引用参考文献的数量不应低于20篇，综述性论文稿件应不低于40篇。未公开发表的资料一般不宜引用。国外文献应不低于10%。<br>
+		    </a><br>
+			<input type="button"  id="next1"  value="下一步">
+		</div>		
+  	</div>
+  	<div id="step2">
+ 			<div style="margin-top:20px;">
+  			<a style="margin-left:400px;font-size:20px;">论文著作权转让协议</a><br><br>
+  			<a style="font-size:12px;">	 
+				 根据《中华人民共和国著作权法》，自本协议签署之日起，全体著作权人一致同意：论文如能在《农药科学与管理》发表，愿意将该文所享有（各种语言版本）的复制权、发行权、网络传播权、翻译权、汇编权（世界范围内）免费转让给《农药科学与管理》出版单位《农药科学与管理》期刊社。全体著作权人授权《农药科学与管理》期刊社根据实际需要，独家代理申请论文各种语言版本（包含各种介质）的版权登记事项。<br>
+				一、著作权人可自由行使下列权利<br>
+				（一）享有除著作权以外的其他产权。<br>
+				（二）享有非专有权： <br>
+				在汇编个人文集或以其他方式(含作者个人网页、博客中)出版个人作品时，不经修订地全部或部分使用该文上述版式，无须获得《农药科学与管理》期刊社许可，但须说明该文发表于《农药科学与管理》某卷某期某页<br>
+				 （三）在研究、总结、讲演或教学中全部或部分复制该文。<br>
+				（四）职务论文的法人或组织在其业务范围内复制该文用于内部使用。 <br>
+				著作权人承诺在行使上述权利，制作该文复制品时，将声明该文已在《农药科学与管理》上发表。<br>
+				二、著作权人保证<br>
+				（一）上述论文是著作权人独立取得的原创性研究成果，内容不涉及国家机密。<br>
+				（二）该文未曾以任何形式，用任何文种在国内外公开发表过。 <br>
+				（三）该文内容不侵犯他人著作权和其他权利，愿意承担论文侵权产生的全部责任，并赔偿由此给《农药科学与管理》期刊社造成的全部损失。 <br>
+				（四）该文内容、作者署名及署名顺序已经经过全部作者审核同意。 <br>
+				（五）全体著作权人同意《农药科学与管理》的审稿费、发表费和稿酬标准，并愿意配合执行。<br>
+				三、著作权人承诺<br>
+				（一）以后不考虑以任何形式，中文之外的任何语种，在其他地方发表该论文。<br>
+				（二）因特殊原因未能亲自签署字的著作权人，已授权签字的著作权人代其签署本协议。签字的著作权人保证本人具有签署此协议并做出各项承诺之权利。此协议对全体著作权人均有约束力。<br>
+				论文题名：<br>
+				稿件编号：<br>
+				作者签名（请按论文作者排名顺序填写）<br>             
+				签名日期：<br>
+			</a><br>
+			<input type="button"  id="disagree"  value="不同意"><input type="button"  id="agree"  value="同意">
+		</div>
+  	</div>
+  	<div id="step3">
+  		<div style="margin-top:20px;">
+	  		<a style="margin-left:400px;font-size:20px;">文件上传</a><br>
+	  		<a style="font-size:16px;color:#0000CC;">一、上传稿件word文档前</a><br><br>
+	  		<a style="font-size:12px;">
+			  		按编辑部网站主页上的“论文要求” 对稿件word进行逐项检查，补充遗漏，规范表述。<br>
+				1.须检查：<br>
+				（1）稿件要素：word文档中文题、作者、单位、邮编、中文摘要、中文关键词、英文摘要、英文关键词、参考文献、基金项目、第一作者简介、通讯作者简介、中图分类号、文献标志码等（稿件要素）是否齐全？不全或有缺漏者请先补充；<br>
+				（2）英文摘要：为适应国际学术交流的需要，编辑部要求来稿的英文摘要不少于500字，800-1000字最好，并“拥有与论文同等量的主要信息”；<br>
+				（3）参考文献：研究性论文稿件的参考文献要求不少于20条，综述性论文稿件的参考文献要求不少于40条。<br>
+					不符合或达不到要求的论文稿件很难通过形式审查，进入责编专家审稿流程。请完善后再往下进行！<br>
+				2.须规范：按期刊主页“论文要求/规范”“格式模板”上的要求，对论文稿件（文题、作者、单位、摘要……各部分）字体、字号进行规范。<br>
+				   消除word文档中稿件系统无法正确（识别）提取稿件信息的元素：请将双栏版式改为单栏版式；将以脚注方式出现的“基金项目、第一作者简介、通讯作者简介” （剪切后）粘帖到文题前；去掉文题前端（隐含的）角（尾）注符（号）和文题中间（人为加上）的（回车）换行符；（多位）作者间的分隔符“、”或“空格”改成“，”；“摘要：（Abstract:）”二字不单独成段，与内容相连，去掉“摘  要”“Key  Words:”中间的空格；参考文献不以尾注方式出现……。以便系统能从word文档中准确提取文题、作者等信息；<br>
+				   去掉word文档中的批注、修订。<br>
+				3.须确认：您是不是本稿件的联系作者？如不是请退出，让联系作者来投；或您投稿后将您（本次登录系统）的用户名（Email）、密码告诉联系作者，请他据此负责稿件的编审、联系编辑部。<br>
+				   投稿作者的用户名（Email）、密码是稿件在系统上唯一的操作账户。非投稿作者的用户名、密码登录系统后，（目前尚）不能查询、处理稿件，但用投稿作者的用户名（Email）、密码登录可查看、处理稿件；<br>
+			   	4.须列好：论文所有作者手机、Email（须是经常检查使用的邮箱）、邮编、通讯地址并确保无误；将稿件中通过数据、作图软件生成的图的作图数据汇集到一张excel表上，注明作图软件名称、版本后保存；（300字左右）论文创新点、研究视频、照片等有助于责编、审稿专家、作者更好理解论文、传播论文的附件，也请一并准备好，备用；<br>
+				5.须备好：所有作者签名的“论文著作权转让声明书与学术诚信承诺书”电子文件<br>
+				（1）下载并打印：uploadfile/file论文著作权转让协议与学术诚信承诺书.zip（为确保证作者签署、上传的“论文著作权转让声明书与学术诚信承诺书”与系统版本一致，请勿对下载的文档作任何修改！）；<br>
+				（2）请全体作者阅读打印好的“论文著作权转让协议”、“论文学术诚信承诺书”并在上面亲笔签名（盖章）；<br>
+				（3）将全体作者亲笔签名后的“论文著作权转让协议”、“论文学术诚信承诺书”并排放在一起（□□□），用手机照相（或扫描仪扫描）照张（聚焦清晰）照片。<br>
+				6.须转换：将docx格式的稿件word文档双击打开，另存为.doc后缀格式的文档。保存前须检查文中“图表、公式、上下标、正斜体……”是否无误。</a><br><br>
+	  		<a style="font-size:16px;color:#0000CC;">二、上传稿件word文档</a><br><br>
+	  		<a style="font-size:12px;">（需是.doc格式文档，pdf、docx、txt等格式稿件文档系统无法提取稿件信息，请先将稿件另存成doc格式文档后再上传）</a><br>
+	  		<a style="font-size:12px;">请上传稿件的全文</a><input type="file"  id="upload"><a style="font-size:12px;color:red;">(*)</a><br><br>
+	  		<a style="font-size:16px;color:#0000CC;">三、上传论文“论文著作权转让协议与论文学术诚信承诺书”等投稿附件</a><br><br>
+	  		<a style="font-size:12px;">（*为必须上传的附件（或必填项），其余根据需要选择上传（或填写）即可）</a><br>
+	  		<table style="border:1px solid;border-collapse:collapse;"  rules="all">
+	  			<tr>
+	  				<td>附件名</td>
+	  				<td>附件文件名</td>
+	  			</tr>
+	  			<tr>
+	  				<td>论文著作权转让协议与论文学术诚信承诺书</td>
+	  				<td><input type="file"  id="sub_upload"><a>【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
+	  			</tr>
+	  			<tr>
+	  				<td>论文著作权转让协议与论文学术诚信承诺书</td>
+	  				<td><input type="file"  id="sub_upload"><a>【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
+	  			</tr>
+	  			<tr>
+	  				<td>论文著作权转让协议与论文学术诚信承诺书</td>
+	  				<td><input type="file"  id="sub_upload"><a>【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
+	  			</tr>
+	  			<tr>
+	  				<td>论文著作权转让协议与论文学术诚信承诺书</td>
+	  				<td><input type="file"  id="sub_upload"><a>【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
+	  			</tr>
+	  		</table><br>
+	  		<input type="button"  id="back"  value="上一步"><input type="button"  id="next2"  value="下一步">
+  		</div>
+  	</div>
+  	<div id="step4">
+  			<div  id="articleInfo">
+  				<a style="margin-left:400px;font-size:20px;">填写稿件信息</a><br>
+  				<a style="font-size:20px;color:#0000CC;">稿件基本信息</a><br>
+  				<table style="border:1px solid;" rules="all">
+  					<tr>
+  						<td>稿件类型</td>
+  						<td>
+  							<select id="articleType" class="easyui-combobox" name="articleType" style="width:80px;"> 
+							    <option  value="IDCARD">新稿</option> 
+							    <option  value="PASSPORT">返修重投</option>     
+							</select><br>
+							<a>【在系统中投稿后（自行）撤稿或被退稿的稿件，补充、修改、完善后重新再投，需选择“退后重投”】</a>
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>中文标题</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" /><br>
+							【是论文内容的高度概括，是连接论文和读者的桥梁，亦是论文的“眼”，应明确、简炼、新颖、醒目，外延和内涵恰如其分】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>中文摘要</td>
+  						<td>
+  							<textarea name="mytextarea" style="height:40px;width:200px"></textarea><br>
+  							【四要素：研究目的、方法、结果（核心部分）、结论必须完备】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>中文关键词</td>
+  						<td>
+	  						<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" /><br>
+								【代表论文主题内容信息条目的词组或术语，3-8个为宜】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>英文标题</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" /><br>
+								【英文标题最多只能输入250个英文字母，空格按一个英文字母计算】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>英文摘要</td>
+  						<td>
+  							<textarea name="mytextarea" style="height:40px;width:200px"></textarea><br>
+  							【为适应国际学术交流需要，编辑部要求论文英文摘要需500字以上，800-1000字最好，并“拥有与论文同等量的主要信息”，与中文摘要无须一一对应】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>英文关键词</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" /><br>
+								【英文标题最多只能输入250个英文字母，空格按一个英文字母计算】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>基金项目中文名称</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" /><br>
+								【如系统未从稿件文档中提取到论文的基金项目，请直接在上面文本框中输入，或点击框左边的“浏览”选择基金项目。非基金资助类论文请输入“无基金”或“非基金”】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>拟投栏目</td>
+  						<td>
+  							<select id="articleType" class="easyui-combobox" name="articleType" style="width:80px;"> 
+							    <option  value="IDCARD">农学、农业基础科学</option> 
+							    <option  value="PASSPORT">林学、园艺</option> 
+							    <option  value="">水产、渔业</option>    
+							</select><br>
+							【从下拉列表框中选择最适合或最接近您论文的栏目】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>页数</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" /><br>
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>图（片）数</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" /><br>
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>表格数</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" /><br>
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>加急程度</td>
+  						<td>
+  							<select id="articleType" class="easyui-combobox" name="articleType" style="width:80px;"> 
+							    <option  value="IDCARD">正常流程</option> 
+							    <option  value="PASSPORT">加急审稿刊出</option> 
+							    <option  value="">加急审稿录用</option>    
+							</select><br>
+							【选择此加急流程，审稿费200元/篇，加急费800元/篇。稿件将通过加急流程进行评审，一般4-5周确定稿件能否录用。加急费在稿件通过评审后与版面费一并缴纳】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>论文用途及期刊要求备注</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" /><br>
+								【请准确填写，以便编辑部了解您的需求：毕业（保研、评奖学金）/评职称/项目结题（验收）/学术交流……，需在**年**月前见刊（逾越加急程度的刊期要求编辑部无法满足）】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>论文查新点、学术（产业或生态）价值（300字以内）</td>
+  						<td>
+  							<textarea name="mytextarea" style="height:40px;width:200px"></textarea><br>
+  							【审稿时的重要参考！！请认真填写】
+  						</td>
+  					</tr>
+  				</table>
+  			</div><br><br>
+  			<div   id="author1">
+  				<a style="font-size:20px;color:#0000CC;">作者信息</a><br>
+  				<table   class="copytab"   style="border:1px solid black;" rules="all">
+  					<tr>
+  						<td>稿件类型</td>
+  						<td>第1作者</td>
+  					</tr>
+  					<tr>
+  						<td>是通讯作者？</td>
+  						<td>
+  							<input type="radio" value="male" checked="checked" name="sex"/>男 
+							<input type="radio" value="female" name="sex"/>女   提示:若第一作者不是通讯作者请选择其他作者为通讯作者或点击"添加更多作者".
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>真实姓名</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" />
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>性别</td>
+  						<td>
+  							<select id="articleType" class="easyui-combobox" name="articleType" style="width:80px;"> 
+							    <option  value="IDCARD">男</option> 
+							    <option  value="PASSPORT">女</option>   
+							</select><br>
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>出生年月日</td>
+  						<td>
+  							<input id="birthday" type="text" class="easyui-datebox" required="required"  value="1"></input>
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>单位</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" /><br>
+								【如“城市、邮编”被系统从文档中提取出来并跟在单位后面，请将其去掉。几个单位任（兼）职或在职学习者，请填写稿件编审期间正常收取信函的单位；大学须具体到院系、教研室】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>邮编</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" />
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>通信地址</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" /><br>
+								系统将调用此地址给您邮寄发票、期刊，请完整填写单位所在的省（市）区（县）街道和门牌号，并确保准确无误】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>职称</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" />
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>职务</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" />
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>手机</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" /><br>
+								【非常重要！！审稿、费用通知、发票样刊邮寄、联系作者时系统均会短信提示，防止邮件收不到或查看不及时。请确保准确无误】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>Email</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" /><br>
+								【非常重要！！稿件审理、费用通知、发票样刊邮寄等均通过Email通知提醒。推荐填写经常check、并与手机关联的qq邮箱确，以便在第一时间收到编辑部稿件处理等相关信息并作出回应。请确保准确无误！！】
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>身份证号</td>
+  						<td>
+  							<input id="chTitle" class="easyui-validatebox" 
+								data-options="required:true,missingMessage:'不允许为空'" /><br>
+								【发放、领取论文稿酬时需要，请确保准确无误；无需稿酬者可不用填写】
+  						</td>
+  					</tr>
+  				</table>
+  			</div><br>
+  			<input type="button"   id="more"  value="添加更多作者。。。"><br><br>
+  			<div   id="text">
+  				<a style="font-size:20px;color:#0000CC;">参考信息</a><br>
+  				<textarea name="mytextarea" style="height:40px;width:200px"></textarea><br>
+  				<a style="font-size:12px;">
+	  				手工从word中拷贝并黏贴到上面“参考文献”框中。黏贴后检查：
+					1.每条参考文献前是否用数字标注顺序，并用[]括起来
+					[5]陈先茂,彭春瑞,关贤交,等.红壤旱地不同轮作模式的效益及其对土壤质量的影响[J].江西农业学报,2009,21(6):75-77.
+					[6]魏守辉,强胜,马波,等.不同作物轮作制度对土壤杂草种子库特征的影响[J].生态学杂志,2005,24(4):385-389.
+					2.或用<br>分隔开每条参考文献
+					张玉先,王孟雪.麦-玉-豆轮作制度下施肥措施对土壤养分的影响[J].中国油料作物学报,2009,31(3):339-343. 
+					刘冬碧,余延丰,范先鹏,等.湖北潮土区不同轮作制度下土壤养分平衡状况与评价[J].土壤,2009,41(6):912-916. 
+				</a>
+  			</div><br>
+  			<div>
+  				<input type="button"   id="back1"  value="上一步">
+  				<input type="button"   id="submit"  value="提交">
+  			</div>
+  	</div>
+  </body>
+</html>

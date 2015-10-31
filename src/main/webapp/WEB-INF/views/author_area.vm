@@ -1,211 +1,78 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>作者工作区</title>
+    <title>工作区首页</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <link href="css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
-    <link href="css/data_styles.css" type="text/css" rel="stylesheet"/>
-    <link href="css/author_area_styles.css" type="text/css" rel="stylesheet"/>
+    <link href="css/easyui.css" type="text/css" rel="stylesheet"/>
+    <link href="css/icon.css" type="text/css" rel="stylesheet"/>
+ 	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
   </head>
-  <body>
-    <div id="base" class="">
-      <div id="u0" class="ax_shape">
-        <img id="u0_img" class="img " src="img/author_area/u0.png"/>
-        <div id="u1" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <div id="u2" class="ax_shape">
-        <img id="u2_img" class="img " src="img/author_area/u2.png"/>
-        <div id="u3" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-      <!-- Unnamed (Text Area) -->
-      <div id="u4" class="ax_text_area">
-        <textarea id="u4_input">
-1. 上传全文稿件时用Word 97-2003格式存储，不要用Word 2007及以上版本、PDF、LaTeX等，务必删除所有中英文姓名、单位名及作者简介后上传。
- 
-
-2. 作者信息栏中务必将所有作者依次录入，其中有博士生导师的需注明,如第一作者不是通信作者的请在该项复选框中选择。
- 
-
-3.&nbsp; 本刊审稿流程较长，需经过两位专家评审，都通过后交作者修改，然后由编委复审，通过后由主编终审，通过后会发送给您录用通知，等待刊登。从投稿到录用大约需要3—6个月时间，从投稿到刊登大约需要12—16个月时间，请您在投稿时慎重考虑。
-
-4. 本刊以学术质量作为稿件唯一录用标准，杜绝人情稿、抄袭稿、多投稿，抵制学术不端行为，接受作者和读者监督。</textarea>
-      </div>
-
-      <div id="u5" class="ax_paragraph">
-        <img id="u5_img" class="img " src="img/portal/transparent.gif"/>
-        <div id="u6" class="text">
-          <p><span>作者工作区</span></p>
-        </div>
-      </div>
-
-      <div id="u7" class="ax_shape">
-        <img id="u7_img" class="img " src="img/author_area/u7.png"/>
-        <div id="u8" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <div id="u9" class="ax_shape">
-        <img id="u9_img" class="img " src="img/author_area/u9.png"/>
-        <div id="u10" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <div id="u11" class="ax_shape">
-        <img id="u11_img" class="img " src="img/author_area/u11.png"/>
-        <div id="u12" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <div id="u13" class="ax_shape">
-        <img id="u13_img" class="img " src="img/author_area/u9.png"/>
-        <div id="u14" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <div id="u15" class="ax_shape">
-        <img id="u15_img" class="img " src="img/author_area/u15.png"/>
-        <div id="u16" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <div id="u17" class="ax_paragraph">
-        <img id="u17_img" class="img " src="img/portal/transparent.gif"/>
-        <div id="u18" class="text">
-          <p><span>稿件管理</span></p>
-        </div>
-      </div>
-
-      <div id="u19" class="ax_paragraph">
-        <img id="u19_img" class="img " src="img/portal/transparent.gif"/>
-        <div id="u20" class="text">
-          <p><span>投稿</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u21" class="ax_horizontal_line">
-        <img id="u21_start" class="img " src="img/portal/transparent.gif" alt="u21_start"/>
-        <img id="u21_end" class="img " src="img/portal/transparent.gif" alt="u21_end"/>
-        <img id="u21_line" class="img " src="img/author_area/u21_line.png" alt="u21_line"/>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u22" class="ax_horizontal_line">
-        <img id="u22_start" class="img " src="img/portal/transparent.gif" alt="u22_start"/>
-        <img id="u22_end" class="img " src="img/portal/transparent.gif" alt="u22_end"/>
-        <img id="u22_line" class="img " src="img/author_area/u21_line.png" alt="u22_line"/>
-      </div>
-
-      <div id="u23" class="ax_paragraph">
-        <img id="u23_img" class="img " src="img/portal/transparent.gif"/>
-        <div id="u24" class="text">
-          <p><span>稿件查询</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u25" class="ax_horizontal_line">
-        <img id="u25_start" class="img " src="img/portal/transparent.gif" alt="u25_start"/>
-        <img id="u25_end" class="img " src="img/portal/transparent.gif" alt="u25_end"/>
-        <img id="u25_line" class="img " src="img/author_area/u21_line.png" alt="u25_line"/>
-      </div>
-
-      <div id="u26" class="ax_paragraph">
-        <img id="u26_img" class="img " src="img/portal/transparent.gif"/>
-        <div id="u27" class="text">
-          <p><span>稿费查询</span></p>
-        </div>
-      </div>
-
-      <div id="u28" class="ax_shape">
-        <img id="u28_img" class="img " src="img/author_area/u28.png"/>
-        <div id="u29" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <div id="u30" class="ax_shape">
-        <img id="u30_img" class="img " src="img/author_area/u30.png"/>
-        <div id="u31" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <div id="u32" class="ax_paragraph">
-        <img id="u32_img" class="img " src="img/portal/transparent.gif"/>
-        <div id="u33" class="text">
-          <p><span>修改个人信息</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u34" class="ax_horizontal_line">
-        <img id="u34_start" class="img " src="img/portal/transparent.gif" alt="u34_start"/>
-        <img id="u34_end" class="img " src="img/portal/transparent.gif" alt="u34_end"/>
-        <img id="u34_line" class="img " src="img/author_area/u21_line.png" alt="u34_line"/>
-      </div>
-
-      <div id="u35" class="ax_paragraph">
-        <img id="u35_img" class="img " src="img/portal/transparent.gif"/>
-        <div id="u36" class="text">
-          <p><span>修改密码</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u37" class="ax_horizontal_line">
-        <img id="u37_start" class="img " src="img/portal/transparent.gif" alt="u37_start"/>
-        <img id="u37_end" class="img " src="img/portal/transparent.gif" alt="u37_end"/>
-        <img id="u37_line" class="img " src="img/author_area/u21_line.png" alt="u37_line"/>
-      </div>
-
-      <div id="u38" class="ax_paragraph">
-        <img id="u38_img" class="img " src="img/portal/transparent.gif"/>
-        <div id="u39" class="text">
-          <p><span>个人信息设置</span></p>
-        </div>
-      </div>
-
-      <div id="u40" class="ax_paragraph">
-        <img id="u40_img" class="img " src="img/portal/transparent.gif"/>
-        <div id="u41" class="text">
-          <p><span>作者工作区</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u42" class="ax_image">
-        <img id="u42_img" class="img " src="img/portal/u2.jpg"/>
-        <div id="u43" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <div id="u44" class="ax_paragraph">
-        <img id="u44_img" class="img " src="img/portal/transparent.gif"/>
-        <div id="u45" class="text">
-          <p><span>欢迎访问《</span><span>&nbsp;</span><span>农药科学与管理</span><span>&nbsp; </span><span>》网站！</span></p>
-        </div>
-      </div>
-
-      <div id="u46" class="ax_paragraph">
-        <img id="u46_img" class="img " src="img/portal/transparent.gif"/>
-        <div id="u47" class="text">
-          <p><span>退出系统</span></p>
-        </div>
-      </div>
+  <script type="text/javascript">
+  		$(function(){
+  			$('.area_name').click(function(){
+  				$('#other').hide();
+  				$('#area').show();
+  			});
+  			$('#tougao').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "sub_author_area.html"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			$('#other').hide();
+  		});
+  </script>
+  <style>
+  		.top{height:80px;background-image:url("img/portal/u2.jpg");line-height:80px;padding-left:30px;}
+  		.left{width:200px;height:530px;float:left;}
+  		.right{width:1070px;height:530px;float:left;}
+  		.buttom{height:540px;margin-top:1px;}
+		.work_area{height:30px;background:#4DA20B;}
+		.area_name{height:30px;margin-left:45px;margin-top:8px;cursor:pointer;}
+		.mode_name{height:30px;background:#4DA20B;line-height:30px;text-align:center;color:#ffffff;border-radius:5px;}
+  		.cLeft{height:200px;width:180px;margin-left:auto;margin-right:auto;margin-top:10px;border-radius:5px;}
+		.leftUp{height:60px;width:180px;margin-left:auto;margin-right:auto;border:1px solid #349000;border-radius:5px;}
+		.li1,.li2,.li3{height:30px;line-height:30px;width:160px;margin-left:auto;margin-right:auto;text-align:center;cursor:pointer;}
+		.li1{border-top:1px solid #349000;border-left:1px solid #349000;border-right:1px solid #349000;margin-top:10px;}
+		.li2{border-top:1px solid #349000;border-left:1px solid #349000;border-right:1px solid #349000;}
+		.li3{border:1px solid #349000;}
+		a{text-decoration:none;color:#000000}
+  </style>
+  <body style="margin:0px;">
+    <div class="top">
+       	<a>欢迎访问《 农药科学与管理  》网站！</a>
+		<a>退出系统</a>
+    </div>
+    <div class="buttom">
+	    <div class="left">
+	       <div class="leftUp">
+	       		<div  class="work_area"></div>
+	       		<div  class="area_name">工作区首页</div>
+	       </div>
+	       <div class="cLeft">
+	       		<div  class="mode_name">稿件管理</div>
+       			<div  class="li1"  id="tougao">投稿</div>
+		        <div  class="li2"><a  href="#">稿件查询</a></div>
+		        <div  class="li3"><a  href="#">稿费查询</a></div>
+		        <div  class="mode_name"  style="margin-top:10px;">个人信息设置</div>
+	       		<div  class="li2"  style="margin-top:10px;"><a  href="#">修改个人信息</a></div>
+			    <div  class="li3"><a  href="#">修改密码</a></div>
+	       	</div>
+	   </div>
+	    <div class="right">
+			<div id="area"  style="margin-top:20px;">
+					<a style="margin-left:400px;font-size:20px;">作者工作区提示</a><br><br>
+					<a style="font-size:12px;">
+							1. 上传全文稿件时用Word 97-2003格式存储，不要用Word 2007及以上版本、PDF、LaTeX等，务必删除所有中英文姓名、单位名及作者简介后上传。<br>		
+							2. 作者信息栏中务必将所有作者依次录入，其中有博士生导师的需注明,如第一作者不是通信作者的请在该项复选框中选择。<br>						
+							3.本刊审稿流程较长，需经过两位专家评审，都通过后交作者修改，然后由编委复审，通过后由主编终审，通过后会发送给您录用通知，等待刊登。<br>  
+							从投稿到录用大约需要3—6个月时间，从投稿到刊登大约需要12—16个月时间，请您在投稿时慎重考虑。<br>
+							4. 本刊以学术质量作为稿件唯一录用标准，杜绝人情稿、抄袭稿、多投稿，抵制学术不端行为，接受作者和读者监督。<br>
+					 </a>		
+			</div>
+	    </div>
     </div>
   </body>
 </html>
