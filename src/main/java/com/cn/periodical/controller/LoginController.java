@@ -81,7 +81,7 @@ public class LoginController {
 		}else if(SystemIdEnums.AUTHOR_SYS.getCode().equals(systemId)){
 			//作者
 			mav = new ModelAndView("author_area");
-//			mav.addObject("userId", attributeValue);
+			mav.addObject("userId", "test");
 			return mav;
 		}else if(SystemIdEnums.READER_SYS.getCode().equals(systemId)){
 			//读者
