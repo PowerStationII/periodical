@@ -19,7 +19,7 @@
   			$('#tougao').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "sub_author_area.html"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "author/toContributePage?userId=2222"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#other').hide();
   		});

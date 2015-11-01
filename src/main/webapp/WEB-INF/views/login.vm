@@ -102,7 +102,7 @@
 <form action="toLogin" method="POST" id="sub" name="sub">
       <!-- Unnamed (Shape) -->
       <div id="u18" class="ax_paragraph">
-        <img id="u18_img" class="img " src="img/portal/transparent.gif"/>
+        <img id="u18_img" class="img" src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u19" class="text">
           <p><span>邮箱</span><span>：</span></p>
