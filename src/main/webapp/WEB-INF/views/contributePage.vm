@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
   </head>
   <script type="text/javascript">
+  		var count = 0;
   		$(function(){
   			$('#step1').show();
   			$('#step2').hide();
@@ -54,9 +55,35 @@
   				$('#step4').hide();
   			});
   			$('#more').click(function(){
-  				$('#author1').append($('.copytab').clone());
+  				var author = $('#author1');
+  				author.append($('#author1 table:first').clone());
+  				author.append('<br>');
+  				var authorTab = $('#author1 table');
+  				for (var i=0;i<authorTab.length;i++) {
+  					authorTab.children().eq(i).children().eq(0).children().eq(1).text('其他作者');
+  				}
+  				$('#author1 table:first tr:first td').eq(1).text('第一作者');
+  				count = count + 1;
+  				if (count>=1) {
+  					$('#del').remove();
+  					$('#author1').append('<input type="button" value="删除作者" id="del" onclick="delAuthor()">');
+  				}
   			});
   		});
+
+  		function delAuthor () {
+  			if (count >=1) {
+  				var author = $('#author1 table');
+  				author.eq(count).next().remove();
+  				author.eq(count).remove();
+  	  			count = count -1;
+  			}
+  			if(count == 0) {
+  				$('#del').remove();
+  			}
+  		}
+				
+
   </script>
   <style>
  	   #step1,#step2,#step3,#step4{overflow:hidden;}
@@ -304,7 +331,7 @@
   			</div><br><br>
   			<div   id="author1">
   				<a style="font-size:20px;color:#0000CC;">作者信息</a><br>
-  				<table   class="copytab"   style="border:1px solid black;" rules="all">
+  				<table  style="border:1px solid black;" rules="all">
   					<tr>
   						<td>稿件类型</td>
   						<td>第1作者</td>
@@ -399,7 +426,7 @@
 								【发放、领取论文稿酬时需要，请确保准确无误；无需稿酬者可不用填写】
   						</td>
   					</tr>
-  				</table>
+  				</table><br>
   			</div><br>
   			<input type="button"   id="more"  value="添加更多作者。。。"><br><br>
   			<div   id="text">
