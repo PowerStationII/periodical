@@ -22,7 +22,6 @@ import com.cn.periodical.request.RegisteRequestDto;
 import com.cn.periodical.service.RegisterService;
 
 @Controller
-@RequestMapping("/register")
 public class RegisterController {
 
 	private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
@@ -86,11 +85,16 @@ public class RegisterController {
 			 * */
 			registerService.add(registeRequestDto);
 			
+			
+			/**
+			 * 是不是可以使用模拟登录来解决post提交参数的方式
+			 * */
+			
 //			mav = new ModelAndView("redirect:/toLogin?email=" + registeRequestDto.getEmail() + "&password="
 //					+ registeRequestDto.getPassword());
-			mav = new ModelAndView("redirect:/toLogin");
+			mav = new ModelAndView("forward:/toLogin");
 			mav.addObject("email",registeRequestDto.getEmail());
-//			mav.addObject("password",registeRequestDto.getPassword());
+			mav.addObject("password",registeRequestDto.getPassword());
 			mav.addObject("systemId", systemId);
 			return mav;
 		}else if(SystemIdEnums.READER_SYS.getCode().equals(systemId)){

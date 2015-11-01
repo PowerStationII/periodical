@@ -39,7 +39,7 @@ public class LoginController {
 	 * 暂时这样写!登录时前台页面必须校验密码是否已存在
 	 */
 	@RequestMapping(value="/toLogin")
-	public ModelAndView toLogin(@RequestParam("email") String email,String password, 
+	public ModelAndView toLogin(@RequestParam("email") String email,@RequestParam("password") String password, 
 			HttpServletRequest request) {
 		logger.info("登录名["+email+"]&&登录密码["+password+"]");
 		ModelAndView mav =null;
