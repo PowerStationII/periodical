@@ -1,3 +1,8 @@
+/*
+ * Powered By code-generator
+ * Since 2015 - 2015
+ */
+
 package com.cn.periodical.pojo;
 
 import java.io.Serializable;

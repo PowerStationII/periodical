@@ -8,5 +8,8 @@ public interface RegisterService {
 	/**
 	 * 注册
 	 * */
-	public int add(RegisteRequestDto registeRequestDto);
+	public int addAuthor(RegisteRequestDto registeRequestDto);
+	public int addEditor(RegisteRequestDto registeRequestDto);
+	public int addExpert(RegisteRequestDto registeRequestDto);
+	public int addReader(RegisteRequestDto registeRequestDto);
 }

@@ -1,3 +1,8 @@
+/*
+ * Powered By code-generator
+ * Since 2015 - 2015
+ */
+
 package com.cn.periodical.manager.impl;
 
 import java.util.List;
@@ -13,7 +18,6 @@ import com.cn.periodical.pojo.AuthorInfoPage;
 import com.cn.periodical.pojo.AuthorInfoQuery;
 import com.cn.periodical.utils.Pagenation;
 
-
 @Component("authorInfoManager")
 public class AuthorInfoManagerImpl implements AuthorInfoManager {
 	
@@ -21,6 +25,7 @@ public class AuthorInfoManagerImpl implements AuthorInfoManager {
 	@Qualifier("authorInfoDao")
 	private AuthorInfoDao authorInfoDao;
 	
+
 	public void saveAuthorInfo(AuthorInfo authorInfo) {
 		if (authorInfo.getId() == null) {
 			authorInfoDao.insertSelective(authorInfo);
@@ -29,22 +34,27 @@ public class AuthorInfoManagerImpl implements AuthorInfoManager {
 		}
 	}
 	
+	@Override
 	public AuthorInfo findAuthorInfoById(Long id) {
 		return authorInfoDao.selectByPrimaryKey(id);
 	}
 	
+	@Override
 	public List<AuthorInfo> queryList(AuthorInfoQuery query) {
 		return authorInfoDao.selectByExample(query);
 	}
 	
+	@Override
 	public void deleteAuthorInfoById(Long id) {
 		authorInfoDao.deleteByPrimaryKey(id);
 	}
 	
+	@Override
 	public void deleteAuthorInfo(AuthorInfoQuery query) {
 		authorInfoDao.deleteByExample(query);
 	}
 	
+	@Override
 	public AuthorInfoPage queryPageList(AuthorInfoQuery query) {
 		AuthorInfoPage authorInfoPage = new AuthorInfoPage();
 		Integer itemCount = authorInfoDao.countByExample(query);

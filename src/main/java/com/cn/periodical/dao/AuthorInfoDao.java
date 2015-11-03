@@ -1,7 +1,6 @@
 /*
- * Powered By chanjetpay-code-generator
- * Web Site: http://www.chanjetpay.com
- * Since 2014 - 2015
+ * Powered By code-generator
+ * Since 2015 - 2015
  */
 
 package com.cn.periodical.dao;
@@ -10,7 +9,6 @@ import java.util.List;
 
 import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.pojo.AuthorInfoQuery;
-
 
 public interface AuthorInfoDao {
 	int countByExample(AuthorInfoQuery example);

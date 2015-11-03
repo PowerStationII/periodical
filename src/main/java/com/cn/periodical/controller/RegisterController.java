@@ -83,7 +83,7 @@ public class RegisterController {
 			/**
 			 * 保存注册信息
 			 * */
-			registerService.add(registeRequestDto);
+			registerService.addAuthor(registeRequestDto);
 			
 			
 			/**
