@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ArticleAttachmentInfoMapper">
+	<resultMap id="BaseResultMap" type="ArticleAttachmentInfo">
+	  <id column="ID" jdbcType="DECIMAL" property="id" />
+	  <result column="article_id" jdbcType="VARCHAR" property="articleId" />
+	  <result column="attachment_name" jdbcType="VARCHAR" property="attachmentName" />
+	  <result column="attachment_path" jdbcType="VARCHAR" property="attachmentPath" />
+	  <result column="cxcns_attachment_name" jdbcType="VARCHAR" property="cxcnsAttachmentName" />
+	  <result column="cxcns_attachment_path" jdbcType="VARCHAR" property="cxcnsAttachmentPath" />
+	  <result column="sjtztsj_attachment_name" jdbcType="VARCHAR" property="sjtztsjAttachmentName" />
+	  <result column="sjtztsj_attachment_path" jdbcType="VARCHAR" property="sjtztsjAttachmentPath" />
+	  <result column="yjspzp_attachment_name" jdbcType="VARCHAR" property="yjspzpAttachmentName" />
+	  <result column="yjspzp_attachment_path" jdbcType="VARCHAR" property="yjspzpAttachmentPath" />
+	  <result column="bdjcbg_attachment_name" jdbcType="VARCHAR" property="bdjcbgAttachmentName" />
+	  <result column="bdjcbg_attachment_path" jdbcType="VARCHAR" property="bdjcbgAttachmentPath" />
+	  <result column="status" jdbcType="VARCHAR" property="status" />
+	  <result column="type" jdbcType="VARCHAR" property="type" />
+	  <result column="edit_times" jdbcType="INTEGER" property="editTimes" />
+	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
+	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
+	  <result column="extend_3" jdbcType="VARCHAR" property="extend3" />
+	  <result column="extend_4" jdbcType="VARCHAR" property="extend4" />
+	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Page_Query_Begin">
+    select * from(select t.*,rownum rn from(
+  </sql>
+  <sql id="Page_Query_End">
+  	) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="articleId != null" >
+	      and article_id = #{articleId,jdbcType=VARCHAR}
+	    </if>
+      <if test="attachmentName != null" >
+	      and attachment_name = #{attachmentName,jdbcType=VARCHAR}
+	    </if>
+      <if test="attachmentPath != null" >
+	      and attachment_path = #{attachmentPath,jdbcType=VARCHAR}
+	    </if>
+      <if test="cxcnsAttachmentName != null" >
+	      and cxcns_attachment_name = #{cxcnsAttachmentName,jdbcType=VARCHAR}
+	    </if>
+      <if test="cxcnsAttachmentPath != null" >
+	      and cxcns_attachment_path = #{cxcnsAttachmentPath,jdbcType=VARCHAR}
+	    </if>
+      <if test="sjtztsjAttachmentName != null" >
+	      and sjtztsj_attachment_name = #{sjtztsjAttachmentName,jdbcType=VARCHAR}
+	    </if>
+      <if test="sjtztsjAttachmentPath != null" >
+	      and sjtztsj_attachment_path = #{sjtztsjAttachmentPath,jdbcType=VARCHAR}
+	    </if>
+      <if test="yjspzpAttachmentName != null" >
+	      and yjspzp_attachment_name = #{yjspzpAttachmentName,jdbcType=VARCHAR}
+	    </if>
+      <if test="yjspzpAttachmentPath != null" >
+	      and yjspzp_attachment_path = #{yjspzpAttachmentPath,jdbcType=VARCHAR}
+	    </if>
+      <if test="bdjcbgAttachmentName != null" >
+	      and bdjcbg_attachment_name = #{bdjcbgAttachmentName,jdbcType=VARCHAR}
+	    </if>
+      <if test="bdjcbgAttachmentPath != null" >
+	      and bdjcbg_attachment_path = #{bdjcbgAttachmentPath,jdbcType=VARCHAR}
+	    </if>
+      <if test="status != null" >
+	      and status = #{status,jdbcType=VARCHAR}
+	    </if>
+      <if test="type != null" >
+	      and type = #{type,jdbcType=VARCHAR}
+	    </if>
+      <if test="editTimes != null" >
+	      and edit_times = #{editTimes,jdbcType=INTEGER}
+	    </if>
+      <if test="extend1 != null" >
+	      and extend_1 = #{extend1,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend2 != null" >
+	      and extend_2 = #{extend2,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend3 != null" >
+	      and extend_3 = #{extend3,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend4 != null" >
+	      and extend_4 = #{extend4,jdbcType=VARCHAR}
+	    </if>
+      <if test="createTime != null" >
+	      and create_time = #{createTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updateTime != null" >
+	      and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="articleId != null">
+        article_id = #{articleId,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentName != null">
+        attachment_name = #{attachmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentPath != null">
+        attachment_path = #{attachmentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="cxcnsAttachmentName != null">
+        cxcns_attachment_name = #{cxcnsAttachmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="cxcnsAttachmentPath != null">
+        cxcns_attachment_path = #{cxcnsAttachmentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="sjtztsjAttachmentName != null">
+        sjtztsj_attachment_name = #{sjtztsjAttachmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="sjtztsjAttachmentPath != null">
+        sjtztsj_attachment_path = #{sjtztsjAttachmentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="yjspzpAttachmentName != null">
+        yjspzp_attachment_name = #{yjspzpAttachmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="yjspzpAttachmentPath != null">
+        yjspzp_attachment_path = #{yjspzpAttachmentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="bdjcbgAttachmentName != null">
+        bdjcbg_attachment_name = #{bdjcbgAttachmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="bdjcbgAttachmentPath != null">
+        bdjcbg_attachment_path = #{bdjcbgAttachmentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="editTimes != null">
+        edit_times = #{editTimes,jdbcType=INTEGER},
+      </if>
+      <if test="extend1 != null">
+        extend_1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        extend_2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null">
+        extend_3 = #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null">
+        extend_4 = #{extend4,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    id,
+    article_id,
+    attachment_name,
+    attachment_path,
+    cxcns_attachment_name,
+    cxcns_attachment_path,
+    sjtztsj_attachment_name,
+    sjtztsj_attachment_path,
+    yjspzp_attachment_name,
+    yjspzp_attachment_path,
+    bdjcbg_attachment_name,
+    bdjcbg_attachment_path,
+    status,
+    type,
+    edit_times,
+    extend_1,
+    extend_2,
+    extend_3,
+    extend_4,
+    create_time,
+    update_time,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        article_id = #{articleId,jdbcType=VARCHAR},
+        attachment_name = #{attachmentName,jdbcType=VARCHAR},
+        attachment_path = #{attachmentPath,jdbcType=VARCHAR},
+        cxcns_attachment_name = #{cxcnsAttachmentName,jdbcType=VARCHAR},
+        cxcns_attachment_path = #{cxcnsAttachmentPath,jdbcType=VARCHAR},
+        sjtztsj_attachment_name = #{sjtztsjAttachmentName,jdbcType=VARCHAR},
+        sjtztsj_attachment_path = #{sjtztsjAttachmentPath,jdbcType=VARCHAR},
+        yjspzp_attachment_name = #{yjspzpAttachmentName,jdbcType=VARCHAR},
+        yjspzp_attachment_path = #{yjspzpAttachmentPath,jdbcType=VARCHAR},
+        bdjcbg_attachment_name = #{bdjcbgAttachmentName,jdbcType=VARCHAR},
+        bdjcbg_attachment_path = #{bdjcbgAttachmentPath,jdbcType=VARCHAR},
+        status = #{status,jdbcType=VARCHAR},
+        type = #{type,jdbcType=VARCHAR},
+        edit_times = #{editTimes,jdbcType=INTEGER},
+        extend_1 = #{extend1,jdbcType=VARCHAR},
+        extend_2 = #{extend2,jdbcType=VARCHAR},
+        extend_3 = #{extend3,jdbcType=VARCHAR},
+        extend_4 = #{extend4,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    ID,
+    <if test="articleId != null">
+      article_id,
+    </if>
+    <if test="attachmentName != null">
+      attachment_name,
+    </if>
+    <if test="attachmentPath != null">
+      attachment_path,
+    </if>
+    <if test="cxcnsAttachmentName != null">
+      cxcns_attachment_name,
+    </if>
+    <if test="cxcnsAttachmentPath != null">
+      cxcns_attachment_path,
+    </if>
+    <if test="sjtztsjAttachmentName != null">
+      sjtztsj_attachment_name,
+    </if>
+    <if test="sjtztsjAttachmentPath != null">
+      sjtztsj_attachment_path,
+    </if>
+    <if test="yjspzpAttachmentName != null">
+      yjspzp_attachment_name,
+    </if>
+    <if test="yjspzpAttachmentPath != null">
+      yjspzp_attachment_path,
+    </if>
+    <if test="bdjcbgAttachmentName != null">
+      bdjcbg_attachment_name,
+    </if>
+    <if test="bdjcbgAttachmentPath != null">
+      bdjcbg_attachment_path,
+    </if>
+    <if test="status != null">
+      status,
+    </if>
+    <if test="type != null">
+      type,
+    </if>
+    <if test="editTimes != null">
+      edit_times,
+    </if>
+    <if test="extend1 != null">
+      extend_1,
+    </if>
+    <if test="extend2 != null">
+      extend_2,
+    </if>
+    <if test="extend3 != null">
+      extend_3,
+    </if>
+    <if test="extend4 != null">
+      extend_4,
+    </if>
+    <if test="createTime != null">
+      create_time,
+    </if>
+    <if test="updateTime != null">
+      update_time,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{id,jdbcType=BIGINT},
+    #{articleId,jdbcType=VARCHAR},
+    #{attachmentName,jdbcType=VARCHAR},
+    #{attachmentPath,jdbcType=VARCHAR},
+    #{cxcnsAttachmentName,jdbcType=VARCHAR},
+    #{cxcnsAttachmentPath,jdbcType=VARCHAR},
+    #{sjtztsjAttachmentName,jdbcType=VARCHAR},
+    #{sjtztsjAttachmentPath,jdbcType=VARCHAR},
+    #{yjspzpAttachmentName,jdbcType=VARCHAR},
+    #{yjspzpAttachmentPath,jdbcType=VARCHAR},
+    #{bdjcbgAttachmentName,jdbcType=VARCHAR},
+    #{bdjcbgAttachmentPath,jdbcType=VARCHAR},
+    #{status,jdbcType=VARCHAR},
+    #{type,jdbcType=VARCHAR},
+    #{editTimes,jdbcType=INTEGER},
+    #{extend1,jdbcType=VARCHAR},
+    #{extend2,jdbcType=VARCHAR},
+    #{extend3,jdbcType=VARCHAR},
+    #{extend4,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP},
+    #{updateTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    SEQ_article_attachment_info.nextval,
+    <if test="articleId != null">
+      #{articleId,jdbcType=VARCHAR},
+    </if>
+    <if test="attachmentName != null">
+      #{attachmentName,jdbcType=VARCHAR},
+    </if>
+    <if test="attachmentPath != null">
+      #{attachmentPath,jdbcType=VARCHAR},
+    </if>
+    <if test="cxcnsAttachmentName != null">
+      #{cxcnsAttachmentName,jdbcType=VARCHAR},
+    </if>
+    <if test="cxcnsAttachmentPath != null">
+      #{cxcnsAttachmentPath,jdbcType=VARCHAR},
+    </if>
+    <if test="sjtztsjAttachmentName != null">
+      #{sjtztsjAttachmentName,jdbcType=VARCHAR},
+    </if>
+    <if test="sjtztsjAttachmentPath != null">
+      #{sjtztsjAttachmentPath,jdbcType=VARCHAR},
+    </if>
+    <if test="yjspzpAttachmentName != null">
+      #{yjspzpAttachmentName,jdbcType=VARCHAR},
+    </if>
+    <if test="yjspzpAttachmentPath != null">
+      #{yjspzpAttachmentPath,jdbcType=VARCHAR},
+    </if>
+    <if test="bdjcbgAttachmentName != null">
+      #{bdjcbgAttachmentName,jdbcType=VARCHAR},
+    </if>
+    <if test="bdjcbgAttachmentPath != null">
+      #{bdjcbgAttachmentPath,jdbcType=VARCHAR},
+    </if>
+    <if test="status != null">
+      #{status,jdbcType=VARCHAR},
+    </if>
+    <if test="type != null">
+      #{type,jdbcType=VARCHAR},
+    </if>
+    <if test="editTimes != null">
+      #{editTimes,jdbcType=INTEGER},
+    </if>
+    <if test="extend1 != null">
+      #{extend1,jdbcType=VARCHAR},
+    </if>
+    <if test="extend2 != null">
+      #{extend2,jdbcType=VARCHAR},
+    </if>
+    <if test="extend3 != null">
+      #{extend3,jdbcType=VARCHAR},
+    </if>
+    <if test="extend4 != null">
+      #{extend4,jdbcType=VARCHAR},
+    </if>
+    <if test="createTime != null">
+      #{createTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updateTime != null">
+      #{updateTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="ArticleAttachmentInfoQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from article_attachment_info
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from article_attachment_info
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from article_attachment_info
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="ArticleAttachmentInfoQuery">
+    delete from article_attachment_info
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="ArticleAttachmentInfo">
+    insert into article_attachment_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="ArticleAttachmentInfo">
+    insert into article_attachment_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="ArticleAttachmentInfoQuery" resultType="java.lang.Integer">
+    select count(*) from article_attachment_info
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="ArticleAttachmentInfo">
+    update article_attachment_info
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ArticleAttachmentInfo">
+    update article_attachment_info
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectPageByExample" parameterType="ArticleAttachmentInfoQuery" resultMap="BaseResultMap">
+  	<include refid="Page_Query_Begin" />
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from article_attachment_info
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+    <include refid="Page_Query_End" />
+  </select>
+</mapper>

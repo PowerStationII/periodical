@@ -47,19 +47,19 @@ public class RegisterServiceImpl implements RegisterService {
 		return 0;
 	}
 
-	@Override
+	
 	public int addEditor(RegisteRequestDto registeRequestDto) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public int addExpert(RegisteRequestDto registeRequestDto) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public int addReader(RegisteRequestDto registeRequestDto) {
 		// TODO Auto-generated method stub
 		return 0;

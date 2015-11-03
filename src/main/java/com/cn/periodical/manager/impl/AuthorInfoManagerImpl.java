@@ -34,27 +34,27 @@ public class AuthorInfoManagerImpl implements AuthorInfoManager {
 		}
 	}
 	
-	@Override
+
 	public AuthorInfo findAuthorInfoById(Long id) {
 		return authorInfoDao.selectByPrimaryKey(id);
 	}
 	
-	@Override
+
 	public List<AuthorInfo> queryList(AuthorInfoQuery query) {
 		return authorInfoDao.selectByExample(query);
 	}
 	
-	@Override
+
 	public void deleteAuthorInfoById(Long id) {
 		authorInfoDao.deleteByPrimaryKey(id);
 	}
 	
-	@Override
+
 	public void deleteAuthorInfo(AuthorInfoQuery query) {
 		authorInfoDao.deleteByExample(query);
 	}
 	
-	@Override
+
 	public AuthorInfoPage queryPageList(AuthorInfoQuery query) {
 		AuthorInfoPage authorInfoPage = new AuthorInfoPage();
 		Integer itemCount = authorInfoDao.countByExample(query);

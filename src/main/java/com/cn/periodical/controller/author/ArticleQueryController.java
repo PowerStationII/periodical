@@ -25,7 +25,7 @@ public class ArticleQueryController extends AuthorController{
 	public ModelAndView toArticleQueryPage(@RequestParam("userId") String userId,
 			HttpServletRequest request) {
 		logger.info("稿件查询Page:["+userId+"]");
-		ModelAndView mav = new ModelAndView("contributePage");
+		ModelAndView mav = new ModelAndView("articleQueryPage");
 		mav.addObject("userId", userId);
 		
 		

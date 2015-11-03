@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class AuthorInfo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private java.lang.Long id;
+	private String id;
 	private java.lang.String articleId;
 	private java.lang.String authorId;
 	private java.lang.String authorName;
@@ -39,19 +39,14 @@ public class AuthorInfo implements Serializable{
 	private java.util.Date createTime;
 	private java.util.Date updateTime;
 
-	/**
-	 * @param id
-	 */
-	public void setId(Long id) {
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
 		this.id = id;
 	}
-	
-	/**
-	 * @return
-	 */
-	public Long getId() {
-		return this.id;
-	}
+
 	/**
 	 * 
 	 * @param articleId

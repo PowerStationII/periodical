@@ -148,6 +148,8 @@
 			<input type="button"  id="disagree"  value="不同意"><input type="button"  id="agree"  value="同意">
 		</div>
   	</div>
+
+<form action="../author/toContribute" method="POST" ><!-- enctype="multipart/form-data" -->
   	<div id="step3">
   		<div style="margin-top:20px;">
 	  		<a style="margin-left:400px;font-size:20px;">文件上传</a><br>
@@ -172,7 +174,8 @@
 				6.须转换：将docx格式的稿件word文档双击打开，另存为.doc后缀格式的文档。保存前须检查文中“图表、公式、上下标、正斜体……”是否无误。</a><br><br>
 	  		<a style="font-size:16px;color:#0000CC;">二、上传稿件word文档</a><br><br>
 	  		<a style="font-size:12px;">（需是.doc格式文档，pdf、docx、txt等格式稿件文档系统无法提取稿件信息，请先将稿件另存成doc格式文档后再上传）</a><br>
-	  		<a style="font-size:12px;">请上传稿件的全文</a><input type="file"  id="upload"><a style="font-size:12px;color:red;">(*)</a><br><br>
+	  		<a style="font-size:12px;">请上传稿件的全文</a>
+	  		<input type="file"  id="upload" ><a style="font-size:12px;color:red;">(*)</a><br><br>
 	  		<a style="font-size:16px;color:#0000CC;">三、上传论文“论文著作权转让协议与论文学术诚信承诺书”等投稿附件</a><br><br>
 	  		<a style="font-size:12px;">（*为必须上传的附件（或必填项），其余根据需要选择上传（或填写）即可）</a><br>
 	  		<table style="border:1px solid;border-collapse:collapse;"  rules="all">
@@ -182,11 +185,11 @@
 	  			</tr>
 	  			<tr>
 	  				<td>论文著作权转让协议与论文学术诚信承诺书</td>
-	  				<td><input type="file"  id="sub_upload"><a>【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
+	  				<td><input type="file"  id="sub_upload" ><a>【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
 	  			</tr>
 	  			<tr>
 	  				<td>论文著作权转让协议与论文学术诚信承诺书</td>
-	  				<td><input type="file"  id="sub_upload"><a>【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
+	  				<td><input type="file"  id="sub_upload" ><a>【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
 	  			</tr>
 	  			<tr>
 	  				<td>论文著作权转让协议与论文学术诚信承诺书</td>
@@ -241,7 +244,7 @@
   					<tr>
   						<td>英文标题</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox" 
+  							<input id="chTitle" name="articleEnTile" class="easyui-validatebox" 
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
 								【英文标题最多只能输入250个英文字母，空格按一个英文字母计算】
   						</td>
@@ -346,7 +349,7 @@
   					<tr>
   						<td>真实姓名</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox" 
+  							<input id="chTitle" name="authorList[0].authorName" class="easyui-validatebox" 
 								data-options="required:true,missingMessage:'不允许为空'" />
   						</td>
   					</tr>
@@ -444,8 +447,9 @@
   			</div><br>
   			<div>
   				<input type="button"   id="back1"  value="上一步">
-  				<input type="button"   id="submit"  value="提交">
+  				<input type="submit"   value="提交"><!-- id="submit" -->
   			</div>
   	</div>
+   </form>
   </body>
 </html>

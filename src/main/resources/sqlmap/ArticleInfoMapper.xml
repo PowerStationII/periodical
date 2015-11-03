@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ArticleInfoMapper">
+	<resultMap id="BaseResultMap" type="ArticleInfo">
+	  <id column="ID" jdbcType="DECIMAL" property="id" />
+	  <result column="user_id" jdbcType="VARCHAR" property="userId" />
+	  <result column="article_name" jdbcType="VARCHAR" property="articleName" />
+	  <result column="article_id" jdbcType="VARCHAR" property="articleId" />
+	  <result column="article_type" jdbcType="VARCHAR" property="articleType" />
+	  <result column="article_cn_title" jdbcType="VARCHAR" property="articleCnTitle" />
+	  <result column="article_en_tile" jdbcType="VARCHAR" property="articleEnTile" />
+	  <result column="article_cn_summary" jdbcType="VARCHAR" property="articleCnSummary" />
+	  <result column="article_en_summary" jdbcType="VARCHAR" property="articleEnSummary" />
+	  <result column="artilce" jdbcType="LONGVARBINARY" property="artilce" />
+	  <result column="article_cn_keywords" jdbcType="VARCHAR" property="articleCnKeywords" />
+	  <result column="article_en_keywords" jdbcType="VARCHAR" property="articleEnKeywords" />
+	  <result column="isfund" jdbcType="VARCHAR" property="isfund" />
+	  <result column="invest_section" jdbcType="VARCHAR" property="investSection" />
+	  <result column="classification_nums" jdbcType="VARCHAR" property="classificationNums" />
+	  <result column="document_code" jdbcType="VARCHAR" property="documentCode" />
+	  <result column="remark" jdbcType="VARCHAR" property="remark" />
+	  <result column="reference_doc" jdbcType="VARCHAR" property="referenceDoc" />
+	  <result column="receive_article_time" jdbcType="TIMESTAMP" property="receiveArticleTime" />
+	  <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+	  <result column="state" jdbcType="VARCHAR" property="state" />
+	  <result column="extends_1" jdbcType="VARCHAR" property="extends1" />
+	  <result column="extends_2" jdbcType="VARCHAR" property="extends2" />
+	  <result column="extends_3" jdbcType="VARCHAR" property="extends3" />
+	  <result column="extends_4" jdbcType="VARCHAR" property="extends4" />
+	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Page_Query_Begin">
+    select * from(select t.*,rownum rn from(
+  </sql>
+  <sql id="Page_Query_End">
+  	) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="userId != null" >
+	      and user_id = #{userId,jdbcType=VARCHAR}
+	    </if>
+      <if test="articleName != null" >
+	      and article_name = #{articleName,jdbcType=VARCHAR}
+	    </if>
+      <if test="articleId != null" >
+	      and article_id = #{articleId,jdbcType=VARCHAR}
+	    </if>
+      <if test="articleType != null" >
+	      and article_type = #{articleType,jdbcType=VARCHAR}
+	    </if>
+      <if test="articleCnTitle != null" >
+	      and article_cn_title = #{articleCnTitle,jdbcType=VARCHAR}
+	    </if>
+      <if test="articleEnTile != null" >
+	      and article_en_tile = #{articleEnTile,jdbcType=VARCHAR}
+	    </if>
+      <if test="articleCnSummary != null" >
+	      and article_cn_summary = #{articleCnSummary,jdbcType=VARCHAR}
+	    </if>
+      <if test="articleEnSummary != null" >
+	      and article_en_summary = #{articleEnSummary,jdbcType=VARCHAR}
+	    </if>
+      <if test="artilce != null" >
+	      and artilce = #{artilce,jdbcType=LONGVARBINARY}
+	    </if>
+      <if test="articleCnKeywords != null" >
+	      and article_cn_keywords = #{articleCnKeywords,jdbcType=VARCHAR}
+	    </if>
+      <if test="articleEnKeywords != null" >
+	      and article_en_keywords = #{articleEnKeywords,jdbcType=VARCHAR}
+	    </if>
+      <if test="isfund != null" >
+	      and isfund = #{isfund,jdbcType=VARCHAR}
+	    </if>
+      <if test="investSection != null" >
+	      and invest_section = #{investSection,jdbcType=VARCHAR}
+	    </if>
+      <if test="classificationNums != null" >
+	      and classification_nums = #{classificationNums,jdbcType=VARCHAR}
+	    </if>
+      <if test="documentCode != null" >
+	      and document_code = #{documentCode,jdbcType=VARCHAR}
+	    </if>
+      <if test="remark != null" >
+	      and remark = #{remark,jdbcType=VARCHAR}
+	    </if>
+      <if test="referenceDoc != null" >
+	      and reference_doc = #{referenceDoc,jdbcType=VARCHAR}
+	    </if>
+      <if test="receiveArticleTime != null" >
+	      and receive_article_time = #{receiveArticleTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="publishTime != null" >
+	      and publish_time = #{publishTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="state != null" >
+	      and state = #{state,jdbcType=VARCHAR}
+	    </if>
+      <if test="extends1 != null" >
+	      and extends_1 = #{extends1,jdbcType=VARCHAR}
+	    </if>
+      <if test="extends2 != null" >
+	      and extends_2 = #{extends2,jdbcType=VARCHAR}
+	    </if>
+      <if test="extends3 != null" >
+	      and extends_3 = #{extends3,jdbcType=VARCHAR}
+	    </if>
+      <if test="extends4 != null" >
+	      and extends_4 = #{extends4,jdbcType=VARCHAR}
+	    </if>
+      <if test="createTime != null" >
+	      and create_time = #{createTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updateTime != null" >
+	      and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="articleName != null">
+        article_name = #{articleName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleId != null">
+        article_id = #{articleId,jdbcType=VARCHAR},
+      </if>
+      <if test="articleType != null">
+        article_type = #{articleType,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCnTitle != null">
+        article_cn_title = #{articleCnTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleEnTile != null">
+        article_en_tile = #{articleEnTile,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCnSummary != null">
+        article_cn_summary = #{articleCnSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="articleEnSummary != null">
+        article_en_summary = #{articleEnSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="artilce != null">
+        artilce = #{artilce,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="articleCnKeywords != null">
+        article_cn_keywords = #{articleCnKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="articleEnKeywords != null">
+        article_en_keywords = #{articleEnKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="isfund != null">
+        isfund = #{isfund,jdbcType=VARCHAR},
+      </if>
+      <if test="investSection != null">
+        invest_section = #{investSection,jdbcType=VARCHAR},
+      </if>
+      <if test="classificationNums != null">
+        classification_nums = #{classificationNums,jdbcType=VARCHAR},
+      </if>
+      <if test="documentCode != null">
+        document_code = #{documentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceDoc != null">
+        reference_doc = #{referenceDoc,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveArticleTime != null">
+        receive_article_time = #{receiveArticleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishTime != null">
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="extends1 != null">
+        extends_1 = #{extends1,jdbcType=VARCHAR},
+      </if>
+      <if test="extends2 != null">
+        extends_2 = #{extends2,jdbcType=VARCHAR},
+      </if>
+      <if test="extends3 != null">
+        extends_3 = #{extends3,jdbcType=VARCHAR},
+      </if>
+      <if test="extends4 != null">
+        extends_4 = #{extends4,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    id,
+    user_id,
+    article_name,
+    article_id,
+    article_type,
+    article_cn_title,
+    article_en_tile,
+    article_cn_summary,
+    article_en_summary,
+    artilce,
+    article_cn_keywords,
+    article_en_keywords,
+    isfund,
+    invest_section,
+    classification_nums,
+    document_code,
+    remark,
+    reference_doc,
+    receive_article_time,
+    publish_time,
+    state,
+    extends_1,
+    extends_2,
+    extends_3,
+    extends_4,
+    create_time,
+    update_time,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        user_id = #{userId,jdbcType=VARCHAR},
+        article_name = #{articleName,jdbcType=VARCHAR},
+        article_id = #{articleId,jdbcType=VARCHAR},
+        article_type = #{articleType,jdbcType=VARCHAR},
+        article_cn_title = #{articleCnTitle,jdbcType=VARCHAR},
+        article_en_tile = #{articleEnTile,jdbcType=VARCHAR},
+        article_cn_summary = #{articleCnSummary,jdbcType=VARCHAR},
+        article_en_summary = #{articleEnSummary,jdbcType=VARCHAR},
+        artilce = #{artilce,jdbcType=LONGVARBINARY},
+        article_cn_keywords = #{articleCnKeywords,jdbcType=VARCHAR},
+        article_en_keywords = #{articleEnKeywords,jdbcType=VARCHAR},
+        isfund = #{isfund,jdbcType=VARCHAR},
+        invest_section = #{investSection,jdbcType=VARCHAR},
+        classification_nums = #{classificationNums,jdbcType=VARCHAR},
+        document_code = #{documentCode,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        reference_doc = #{referenceDoc,jdbcType=VARCHAR},
+        receive_article_time = #{receiveArticleTime,jdbcType=TIMESTAMP},
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+        state = #{state,jdbcType=VARCHAR},
+        extends_1 = #{extends1,jdbcType=VARCHAR},
+        extends_2 = #{extends2,jdbcType=VARCHAR},
+        extends_3 = #{extends3,jdbcType=VARCHAR},
+        extends_4 = #{extends4,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    ID,
+    <if test="userId != null">
+      user_id,
+    </if>
+    <if test="articleName != null">
+      article_name,
+    </if>
+    <if test="articleId != null">
+      article_id,
+    </if>
+    <if test="articleType != null">
+      article_type,
+    </if>
+    <if test="articleCnTitle != null">
+      article_cn_title,
+    </if>
+    <if test="articleEnTile != null">
+      article_en_tile,
+    </if>
+    <if test="articleCnSummary != null">
+      article_cn_summary,
+    </if>
+    <if test="articleEnSummary != null">
+      article_en_summary,
+    </if>
+    <if test="artilce != null">
+      artilce,
+    </if>
+    <if test="articleCnKeywords != null">
+      article_cn_keywords,
+    </if>
+    <if test="articleEnKeywords != null">
+      article_en_keywords,
+    </if>
+    <if test="isfund != null">
+      isfund,
+    </if>
+    <if test="investSection != null">
+      invest_section,
+    </if>
+    <if test="classificationNums != null">
+      classification_nums,
+    </if>
+    <if test="documentCode != null">
+      document_code,
+    </if>
+    <if test="remark != null">
+      remark,
+    </if>
+    <if test="referenceDoc != null">
+      reference_doc,
+    </if>
+    <if test="receiveArticleTime != null">
+      receive_article_time,
+    </if>
+    <if test="publishTime != null">
+      publish_time,
+    </if>
+    <if test="state != null">
+      state,
+    </if>
+    <if test="extends1 != null">
+      extends_1,
+    </if>
+    <if test="extends2 != null">
+      extends_2,
+    </if>
+    <if test="extends3 != null">
+      extends_3,
+    </if>
+    <if test="extends4 != null">
+      extends_4,
+    </if>
+    <if test="createTime != null">
+      create_time,
+    </if>
+    <if test="updateTime != null">
+      update_time,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{id,jdbcType=BIGINT},
+    #{userId,jdbcType=VARCHAR},
+    #{articleName,jdbcType=VARCHAR},
+    #{articleId,jdbcType=VARCHAR},
+    #{articleType,jdbcType=VARCHAR},
+    #{articleCnTitle,jdbcType=VARCHAR},
+    #{articleEnTile,jdbcType=VARCHAR},
+    #{articleCnSummary,jdbcType=VARCHAR},
+    #{articleEnSummary,jdbcType=VARCHAR},
+    #{artilce,jdbcType=LONGVARBINARY},
+    #{articleCnKeywords,jdbcType=VARCHAR},
+    #{articleEnKeywords,jdbcType=VARCHAR},
+    #{isfund,jdbcType=VARCHAR},
+    #{investSection,jdbcType=VARCHAR},
+    #{classificationNums,jdbcType=VARCHAR},
+    #{documentCode,jdbcType=VARCHAR},
+    #{remark,jdbcType=VARCHAR},
+    #{referenceDoc,jdbcType=VARCHAR},
+    #{receiveArticleTime,jdbcType=TIMESTAMP},
+    #{publishTime,jdbcType=TIMESTAMP},
+    #{state,jdbcType=VARCHAR},
+    #{extends1,jdbcType=VARCHAR},
+    #{extends2,jdbcType=VARCHAR},
+    #{extends3,jdbcType=VARCHAR},
+    #{extends4,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP},
+    #{updateTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    SEQ_article_info.nextval,
+    <if test="userId != null">
+      #{userId,jdbcType=VARCHAR},
+    </if>
+    <if test="articleName != null">
+      #{articleName,jdbcType=VARCHAR},
+    </if>
+    <if test="articleId != null">
+      #{articleId,jdbcType=VARCHAR},
+    </if>
+    <if test="articleType != null">
+      #{articleType,jdbcType=VARCHAR},
+    </if>
+    <if test="articleCnTitle != null">
+      #{articleCnTitle,jdbcType=VARCHAR},
+    </if>
+    <if test="articleEnTile != null">
+      #{articleEnTile,jdbcType=VARCHAR},
+    </if>
+    <if test="articleCnSummary != null">
+      #{articleCnSummary,jdbcType=VARCHAR},
+    </if>
+    <if test="articleEnSummary != null">
+      #{articleEnSummary,jdbcType=VARCHAR},
+    </if>
+    <if test="artilce != null">
+      #{artilce,jdbcType=LONGVARBINARY},
+    </if>
+    <if test="articleCnKeywords != null">
+      #{articleCnKeywords,jdbcType=VARCHAR},
+    </if>
+    <if test="articleEnKeywords != null">
+      #{articleEnKeywords,jdbcType=VARCHAR},
+    </if>
+    <if test="isfund != null">
+      #{isfund,jdbcType=VARCHAR},
+    </if>
+    <if test="investSection != null">
+      #{investSection,jdbcType=VARCHAR},
+    </if>
+    <if test="classificationNums != null">
+      #{classificationNums,jdbcType=VARCHAR},
+    </if>
+    <if test="documentCode != null">
+      #{documentCode,jdbcType=VARCHAR},
+    </if>
+    <if test="remark != null">
+      #{remark,jdbcType=VARCHAR},
+    </if>
+    <if test="referenceDoc != null">
+      #{referenceDoc,jdbcType=VARCHAR},
+    </if>
+    <if test="receiveArticleTime != null">
+      #{receiveArticleTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="publishTime != null">
+      #{publishTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="state != null">
+      #{state,jdbcType=VARCHAR},
+    </if>
+    <if test="extends1 != null">
+      #{extends1,jdbcType=VARCHAR},
+    </if>
+    <if test="extends2 != null">
+      #{extends2,jdbcType=VARCHAR},
+    </if>
+    <if test="extends3 != null">
+      #{extends3,jdbcType=VARCHAR},
+    </if>
+    <if test="extends4 != null">
+      #{extends4,jdbcType=VARCHAR},
+    </if>
+    <if test="createTime != null">
+      #{createTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updateTime != null">
+      #{updateTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="ArticleInfoQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from article_info
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from article_info
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from article_info
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="ArticleInfoQuery">
+    delete from article_info
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="ArticleInfo">
+    insert into article_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="ArticleInfo">
+    insert into article_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="ArticleInfoQuery" resultType="java.lang.Integer">
+    select count(*) from article_info
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="ArticleInfo">
+    update article_info
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ArticleInfo">
+    update article_info
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectPageByExample" parameterType="ArticleInfoQuery" resultMap="BaseResultMap">
+  	<include refid="Page_Query_Begin" />
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from article_info
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+    <include refid="Page_Query_End" />
+  </select>
+</mapper>
