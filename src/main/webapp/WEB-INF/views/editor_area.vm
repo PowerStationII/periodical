@@ -12,8 +12,100 @@
   </head>
   <script type="text/javascript">
   		$(function(){
-  			var kk = ${roleId};
-  			alert(kk);
+  			$('.area_name').click(function(){
+  				$('#other').hide();
+  				$('#area').show();
+  			});
+  			$('#xingao').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toNewArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			$('#yidengji').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toEnlistedArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			$('#fanxiu').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toRepairArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			$('#tuigao').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toReturnedArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			$('#daikan').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toPublishArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			$('#paikanzugao').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toArticleGroupPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			$('#chaxungaojian').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toQueryArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			//<!--广告编辑 start-->
+  			$('#huiyuanguanli').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toCouncilManagerPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			$('#adguanli').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toAdManagerPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			//<!--广告编辑 end-->
+  			//<!-- 发行编辑 start-->
+  			$('#gaojiantongji').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toArtilceStatisticsPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			$('#faxingtongji').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubscribeStatisticsPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			$('#caiwutongji').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toFinanceStatisticsPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			$('#lishihuiad').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toAdStatisticsPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			$('#dingdanguanli').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubscribeOrderManagePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			$('#qikanyouji').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubscribePostPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			//<!-- 发行编辑 end-->
+  			//<!-- 签发人 start-->
+  			$('#qianfa').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toIssueManagerPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
+  			//<!-- 签发人 end-->
+  			
+  			
+  			
+  			$('#other').hide();
   		});
   </script>
   <style>
@@ -26,7 +118,7 @@
 		.mode_name{height:30px;background:#4DA20B;line-height:30px;text-align:center;color:#ffffff}
   		.cLeft{height:200px;width:180px;margin-left:auto;margin-right:auto;margin-top:10px;border-radius:5px;}
 		.leftUp{height:60px;width:180px;margin-left:auto;margin-right:auto;border:1px solid #349000;border-radius:5px;}
-		.li1,.li2,.li3{height:30px;line-height:30px;width:160px;margin-left:auto;margin-right:auto;text-align:center;}
+		.li1,.li2,.li3,.li4,.li5{height:30px;line-height:30px;width:160px;margin-left:auto;margin-right:auto;text-align:center;}
 		.li1{border-top:1px solid #349000;border-left:1px solid #349000;border-right:1px solid #349000;}
 		.li2{border-top:1px solid #349000;border-left:1px solid #349000;border-right:1px solid #349000;}
 		.li3{border:1px solid #349000;}
@@ -49,51 +141,79 @@
 	       		<div>
 	       			<div class="easyui-accordion" style="width:180px;height:200px;">
 	       				<div title="稿件处理" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
-					        <div  class="li1"><a  href="#">111</a></div>
-					        <div  class="li2"><a  href="#">222</a></div>
-					        <div  class="li3"><a  href="#">333</a></div>
+					        <div  class="li1" id="xingao">新稿</div>
+					        <div  class="li2" id="yidengji">已登记</div>
+					        <div  class="li3" id="fanxiu">返修</div>
+					        <div  class="li4" id="tuigao">退稿</div>
+					        <div  class="li5" id="daikan">待刊</div>
 					    </div>   
 					    <div title="编辑加工" data-options="iconCls:'icon-reload'" style="padding:10px;">   
-					         <div  class="li1"><a  href="#">111</a></div>
-					         <div  class="li2"><a  href="#">222</a></div>
-					         <div  class="li3"><a  href="#">333</a></div>
+					         <div  class="li1" id="paikanzugao">排刊组稿</div>
 					    </div>   
 					    <div title="稿件查询"  data-options="iconCls:'icon-reload'" style="padding:10px;">   
-					          <div  class="li1"><a  href="#">111</a></div>
-					          <div  class="li2"><a  href="#">222</a></div>
-					          <div  class="li3"><a  href="#">333</a></div>
+					          <div  class="li1" id="chaxungaojian">稿件查询</div>
 					    </div> 
 	       			</div>
 	       		</div>
 	       </div>
 	       #elseif(${roleId}=='1007')
-	       <div id="1006"  class="cLeft">
-	       		<div  class="mode_name">稿件22</div>
+	       <div id="1007"  class="cLeft">
+	       		<div  class="mode_name">理事会管理</div>
 	       		<div>
 	       			<div class="easyui-accordion" style="width:180px;height:200px;">
-	       				<div title="稿件处理" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
-					        <div  class="li1"><a  href="#">444</a></div>
-					        <div  class="li2"><a  href="#">55</a></div>
-					        <div  class="li3"><a  href="#">666</a></div>
+	       				<div title="会员管理" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
+					        <div  class="li1" id="huiyuanguanli">会员管理</div>
 					    </div>   
-					    <div title="编辑加工" data-options="iconCls:'icon-reload'" style="padding:10px;">   
-					         <div  class="li1"><a  href="#">44</a></div>
-					         <div  class="li2"><a  href="#">33</a></div>
-					         <div  class="li3"><a  href="#">222</a></div>
+					    <div title="广告管理" data-options="iconCls:'icon-reload'" style="padding:10px;">   
+					         <div  class="li1" id="adguanli">广告管理</div>
 					    </div>   
-					    <div title="稿件查询"  data-options="iconCls:'icon-reload'" style="padding:10px;">   
-					          <div  class="li1"><a  href="#">111</a></div>
-					          <div  class="li2"><a  href="#">222222</a></div>
-					          <div  class="li3"><a  href="#">3333333</a></div>
-					    </div> 
+	       			</div>
+	       		</div>
+	       </div>
+	       #elseif(${roleId}=='1008')
+	       <div id="1008"  class="cLeft">
+	       		<div  class="mode_name">期刊管理</div>
+	       		<div>
+	       			<div class="easyui-accordion" style="width:180px;height:200px;">
+	       				<div title="业务统计" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
+					        <div  class="li1" id="gaojiantongji">稿件统计</div>
+					        <div  class="li2" id="faxingtongji">发行统计</div>
+					        <div  class="li3" id="caiwutongji">财务统计</div>
+					        <div  class="li4" id="lishihuiad">理事会与广告</div>
+					    </div>   
+					    <div title="期刊征订" data-options="iconCls:'icon-reload'" style="padding:10px;">   
+					         <div  class="li1" id="dingdanguanli">订单管理</div>
+					         <div  class="li2" id="qikanyouji">期刊邮寄</div>
+					    </div>   
+	       			</div>
+	       		</div>
+	       </div>
+	       #elseif(${roleId}=='1009')
+	       <div id="1009"  class="cLeft">
+	       		<div  class="mode_name">发行管理</div>
+	       		<div>
+	       			<div class="easyui-accordion" style="width:180px;height:200px;">
+	       				<div title="发行管理" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
+					        <div  class="li1" id="qianfa">签发</div>
+					    </div>   
 	       			</div>
 	       		</div>
 	       </div>
 	       #end
 	    </div>
 	    <div class="right">
-	       <div><iframe   width ="100%"   height = "540"  src= "editor_area - 副本.html" frameborder="no" marginwidth="0"
-				marginheight="0" scrolling="no" allowtransparency="yes" ></iframe></div>
+			<div id="area"  style="margin-top:20px;">
+					<a style="margin-left:400px;font-size:20px;">编辑工作区提示</a><br><br>
+					<table style="border: 1px solid black;" rules="all">
+						<tr>
+							<td>关键词检索</td>
+							<td>稿件标题</td>
+							<td>投稿时间</td>
+							<td>稿件状态</td>
+							<td>备注信息</td>
+						</tr>
+					</table>
+			</div>
 	    </div>
     </div>
   </body>

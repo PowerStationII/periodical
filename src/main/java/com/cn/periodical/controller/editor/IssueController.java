@@ -16,5 +16,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class IssueController extends EditorController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(IssueController.class);
-
+	/**
+	 * toIssueManagerPage
+	 * 签发管理
+	 */
+	@RequestMapping(value="/toIssueManagerPage",method = RequestMethod.GET)
+	public ModelAndView toIssueManagerPage(@RequestParam("userId") String userId,
+			HttpServletRequest request) {
+		logger.info("签发管理Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("editor_issueManagerPage");
+		mav.addObject("userId", userId);
+		
+		
+		return mav;
+	}
 }

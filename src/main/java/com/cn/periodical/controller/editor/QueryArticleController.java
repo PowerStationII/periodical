@@ -16,18 +16,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class QueryArticleController extends EditorController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(QueryArticleController.class);
-//	/**
-//	 * toNewArticlePage
-//	 * 新稿
-//	 */
-//	@RequestMapping(value="/toQueryArticle",method = RequestMethod.GET)
-//	public ModelAndView toNewArticlePage(@RequestParam("userId") String userId,
-//			HttpServletRequest request) {
-//		logger.info("审稿费Page:["+userId+"]");
-//		ModelAndView mav = new ModelAndView("contributePage");
-//		mav.addObject("userId", userId);
-//		
-//		
-//		return mav;
-//	}
+	/**
+	 * toQueryArticlePage
+	 * 编辑稿件查询
+	 */
+	@RequestMapping(value="/toQueryArticlePage",method = RequestMethod.GET)
+	public ModelAndView toQueryArticlePage(@RequestParam("userId") String userId,
+			HttpServletRequest request) {
+		logger.info("稿件查询Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("editor_queryArticlePage");
+		mav.addObject("userId", userId);
+		
+		
+		return mav;
+	}
 }

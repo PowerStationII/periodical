@@ -16,5 +16,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class SubscribePostController extends EditorController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(SubscribePostController.class);
-
+	/**
+	 * toSubscribePostPage
+	 * 邮寄管理
+	 */
+	@RequestMapping(value="/toSubscribePostPage",method = RequestMethod.GET)
+	public ModelAndView toSubscribePostPage(@RequestParam("userId") String userId,
+			HttpServletRequest request) {
+		logger.info("发行编辑-邮寄管理Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("editor_subscribePostPage");
+		mav.addObject("userId", userId);
+		
+		
+		return mav;
+	}
 }

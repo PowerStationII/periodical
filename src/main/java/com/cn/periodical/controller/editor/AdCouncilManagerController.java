@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 /**
- * 稿件编辑-组刊Controller
+ * 广告编辑-广告管理Controller
  * */
 @Controller
-public class ArticleGroupController extends EditorController{
+public class AdCouncilManagerController extends EditorController{
 	
-	private static final Logger logger = LoggerFactory.getLogger(ArticleGroupController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdCouncilManagerController.class);
 	/**
-	 * toArticleGroupPage
-	 * 新稿
+	 * toCouncilManagerPage
+	 * 会员管理
 	 */
-	@RequestMapping(value="/toArticleGroupPage",method = RequestMethod.GET)
-	public ModelAndView toArticleGroupPage(@RequestParam("userId") String userId,
+	@RequestMapping(value="/toCouncilManagerPage",method = RequestMethod.GET)
+	public ModelAndView toCouncilManagerPage(@RequestParam("userId") String userId,
 			HttpServletRequest request) {
-		logger.info("排刊组稿Page:["+userId+"]");
-		ModelAndView mav = new ModelAndView("editor_articleGroupPage");
+		logger.info("会员管理Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("editor_councilManagerPage");
 		mav.addObject("userId", userId);
 		
 		

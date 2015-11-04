@@ -10,11 +10,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 /**
- * 广告编辑-广告管理Controller
+ * 广告编辑-会员管理Controller
  * */
 @Controller
 public class AdManageController extends EditorController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdManageController.class);
-
+	/**
+	 * toAdManagerPage
+	 * 广告管理
+	 */
+	@RequestMapping(value="/toAdManagerPage",method = RequestMethod.GET)
+	public ModelAndView toAdManagerPage(@RequestParam("userId") String userId,
+			HttpServletRequest request) {
+		logger.info("广告管理Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("editor_adManagerPage");
+		mav.addObject("userId", userId);
+		
+		
+		return mav;
+	}
 }

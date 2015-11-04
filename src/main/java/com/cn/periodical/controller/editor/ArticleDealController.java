@@ -23,8 +23,69 @@ public class ArticleDealController extends EditorController{
 	@RequestMapping(value="/toNewArticlePage",method = RequestMethod.GET)
 	public ModelAndView toNewArticlePage(@RequestParam("userId") String userId,
 			HttpServletRequest request) {
-		logger.info("审稿费Page:["+userId+"]");
-		ModelAndView mav = new ModelAndView("contributePage");
+		logger.info("新稿Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("editor_newArticlePage");
+		mav.addObject("userId", userId);
+		
+		
+		return mav;
+	}
+	
+	/**
+	 * toNewArticlePage
+	 * 已登记
+	 */
+	@RequestMapping(value="/toEnlistedArticlePage",method = RequestMethod.GET)
+	public ModelAndView toEnlistedArticlePage(@RequestParam("userId") String userId,
+			HttpServletRequest request) {
+		logger.info("已登记Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("editor_enlistedArticlePage");
+		mav.addObject("userId", userId);
+		
+		
+		return mav;
+	}
+	
+	
+	/**
+	 * toRepairArticlePage
+	 * 返修
+	 */
+	@RequestMapping(value="/toRepairArticlePage",method = RequestMethod.GET)
+	public ModelAndView toRepairArticlePage(@RequestParam("userId") String userId,
+			HttpServletRequest request) {
+		logger.info("返修Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("editor_repairArticlePage");
+		mav.addObject("userId", userId);
+		
+		
+		return mav;
+	}
+	
+	/**
+	 * toReturnedArticlePage
+	 * 退稿
+	 */
+	@RequestMapping(value="/toReturnedArticlePage",method = RequestMethod.GET)
+	public ModelAndView toReturnedArticlePage(@RequestParam("userId") String userId,
+			HttpServletRequest request) {
+		logger.info("退稿Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("editor_returnedArticlePage");
+		mav.addObject("userId", userId);
+		
+		
+		return mav;
+	}
+	
+	/**
+	 * toPublishArticlePage
+	 * 待刊
+	 */
+	@RequestMapping(value="/toPublishArticlePage",method = RequestMethod.GET)
+	public ModelAndView toPublishArticlePage(@RequestParam("userId") String userId,
+			HttpServletRequest request) {
+		logger.info("待刊Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("editor_publishArticlePage");
 		mav.addObject("userId", userId);
 		
 		
