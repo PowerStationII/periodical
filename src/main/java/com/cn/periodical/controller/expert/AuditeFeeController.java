@@ -21,8 +21,8 @@ public class AuditeFeeController extends ExpertController{
 	@RequestMapping(value="/toAuditeFeePage",method = RequestMethod.GET)
 	public ModelAndView toAuditeFeePage(@RequestParam("userId") String userId,
 			HttpServletRequest request) {
-		logger.info("审稿费Page:["+userId+"]");
-		ModelAndView mav = new ModelAndView("contributePage");
+		logger.info("稿费查询Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("expert_auditeFeePage");
 		mav.addObject("userId", userId);
 		
 		

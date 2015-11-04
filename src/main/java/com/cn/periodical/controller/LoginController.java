@@ -74,9 +74,11 @@ public class LoginController {
 			}
 		}else if(SystemIdEnums.EXPERT_SYS.getCode().equals(systemId)){
 			//专家
+			
 			String role_id="1004";
 			if(RoleIdEnums.EN_EXPERT.getCode().equals(role_id)){
-				mav = new ModelAndView("expert_en_area");
+				mav = new ModelAndView("expert_area");
+				mav.addObject("userId", "test");
 				return mav;
 			}else if(RoleIdEnums.CN_EXPERT.getCode().equals(role_id)){
 				mav = new ModelAndView("expert_cn_area");

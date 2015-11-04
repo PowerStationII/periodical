@@ -19,11 +19,13 @@ public class ArticleAuditeController extends ExpertController{
 	 * 去审稿页面
 	 */
 	@RequestMapping(value="/toArticleAuditePage",method = RequestMethod.GET)
-	public ModelAndView toArticleAuditePage(@RequestParam("userId") String userId,
-			HttpServletRequest request) {
+	public ModelAndView toArticleAuditePage(@RequestParam("userId") String userId) {
 		logger.info("审稿Page:["+userId+"]");
-		ModelAndView mav = new ModelAndView("contributePage");
+		ModelAndView mav = new ModelAndView("expert_articleAuditPage");
 		mav.addObject("userId", userId);
+		
+		
+		
 		
 		
 		return mav;
