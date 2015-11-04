@@ -16,5 +16,20 @@ import org.springframework.web.servlet.ModelAndView;
 public class KeyWordsSearchController extends ReaderController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(KeyWordsSearchController.class);
-
+	/**
+	 * toKeyWordsSearchPage
+	 * 去关键词检索页面
+	 */
+	@RequestMapping(value="/toKeyWordsSearchPage",method = RequestMethod.GET)
+	public ModelAndView toKeyWordsSearchPage(@RequestParam("userId") String userId) {
+		logger.info("关键词检索Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("reader_keyWordsSearchPage");
+		mav.addObject("userId", userId);
+		
+		
+		
+		
+		
+		return mav;
+	}
 }

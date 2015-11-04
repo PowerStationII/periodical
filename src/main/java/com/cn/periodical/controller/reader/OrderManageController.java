@@ -16,5 +16,37 @@ import org.springframework.web.servlet.ModelAndView;
 public class OrderManageController extends ReaderController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(OrderManageController.class);
-
+	/**
+	 * toOrderManagePage
+	 * 订单管理页面
+	 */
+	@RequestMapping(value="/toOrderManagePage",method = RequestMethod.GET)
+	public ModelAndView toKeyWordsSearchPage(@RequestParam("userId") String userId) {
+		logger.info("订单管理Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("reader_orderManagePage");
+		mav.addObject("userId", userId);
+		
+		
+		
+		
+		
+		return mav;
+	}
+	
+	/**
+	 * toCreatOrderPage
+	 * 新建订单页面
+	 */
+	@RequestMapping(value="/toCreatOrderPage",method = RequestMethod.GET)
+	public ModelAndView toCreatOrderPage(@RequestParam("userId") String userId) {
+		logger.info("新建订单Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("reader_creatOrderPage");
+		mav.addObject("userId", userId);
+		
+		
+		
+		
+		
+		return mav;
+	}
 }

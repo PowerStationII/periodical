@@ -109,7 +109,7 @@ public class LoginController {
 			 * */
 			String role_id="1002";
 			if(RoleIdEnums.READER_P.getCode().equals(role_id)){
-				mav = new ModelAndView("reader_p_area");
+				mav = new ModelAndView("reader_area");
 				return mav;
 			}else if(RoleIdEnums.READER_E.getCode().equals(role_id)){
 				mav = new ModelAndView("author_area");

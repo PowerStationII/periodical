@@ -16,5 +16,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class OrderPayController extends ReaderController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(OrderPayController.class);
-
+	/**
+	 * toOrderPayPage
+	 * 征订费登记
+	 */
+	@RequestMapping(value="/toOrderPayPage",method = RequestMethod.GET)
+	public ModelAndView toCreatOrderPage(@RequestParam("userId") String userId) {
+		logger.info("征订费登记Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("reader_orderPayPage");
+		mav.addObject("userId", userId);
+		
+		
+		return mav;
+	}
 }
