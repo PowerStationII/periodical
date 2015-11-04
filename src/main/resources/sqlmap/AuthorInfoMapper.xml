@@ -8,6 +8,7 @@
 	  <result column="author_name" jdbcType="VARCHAR" property="authorName" />
 	  <result column="email" jdbcType="VARCHAR" property="email" />
 	  <result column="author_name_spell" jdbcType="VARCHAR" property="authorNameSpell" />
+	  <result column="certificate_no" jdbcType="VARCHAR" property="certificateNo" />
 	  <result column="certificate_type" jdbcType="VARCHAR" property="certificateType" />
 	  <result column="sex" jdbcType="VARCHAR" property="sex" />
 	  <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
@@ -49,6 +50,9 @@
 	    </if>
       <if test="authorNameSpell != null" >
 	      and author_name_spell = #{authorNameSpell,jdbcType=VARCHAR}
+	    </if>
+      <if test="certificateNo != null" >
+	      and certificate_no = #{certificateNo,jdbcType=VARCHAR}
 	    </if>
       <if test="certificateType != null" >
 	      and certificate_type = #{certificateType,jdbcType=VARCHAR}
@@ -122,6 +126,9 @@
       <if test="authorNameSpell != null">
         author_name_spell = #{authorNameSpell,jdbcType=VARCHAR},
       </if>
+      <if test="certificateNo != null">
+        certificate_no = #{certificateNo,jdbcType=VARCHAR},
+      </if>
       <if test="certificateType != null">
         certificate_type = #{certificateType,jdbcType=VARCHAR},
       </if>
@@ -183,6 +190,7 @@
     author_name,
     email,
     author_name_spell,
+    certificate_no,
     certificate_type,
     sex,
     birthday,
@@ -209,6 +217,7 @@
         author_name = #{authorName,jdbcType=VARCHAR},
         email = #{email,jdbcType=VARCHAR},
         author_name_spell = #{authorNameSpell,jdbcType=VARCHAR},
+        certificate_no = #{certificateNo,jdbcType=VARCHAR},
         certificate_type = #{certificateType,jdbcType=VARCHAR},
         sex = #{sex,jdbcType=VARCHAR},
         birthday = #{birthday,jdbcType=TIMESTAMP},
@@ -230,7 +239,6 @@
     </set>
   </sql>
   <sql id="Selective_Column_List">
-    ID,
     <if test="articleId != null">
       article_id,
     </if>
@@ -245,6 +253,9 @@
     </if>
     <if test="authorNameSpell != null">
       author_name_spell,
+    </if>
+    <if test="certificateNo != null">
+      certificate_no,
     </if>
     <if test="certificateType != null">
       certificate_type,
@@ -305,6 +316,7 @@
     #{authorName,jdbcType=VARCHAR},
     #{email,jdbcType=VARCHAR},
     #{authorNameSpell,jdbcType=VARCHAR},
+    #{certificateNo,jdbcType=VARCHAR},
     #{certificateType,jdbcType=VARCHAR},
     #{sex,jdbcType=VARCHAR},
     #{birthday,jdbcType=TIMESTAMP},
@@ -324,7 +336,7 @@
     #{updateTime,jdbcType=TIMESTAMP},
 	</sql>
   <sql id="Selective_Value_List">
-    SEQ_author_info.nextval,
+
     <if test="articleId != null">
       #{articleId,jdbcType=VARCHAR},
     </if>
@@ -339,6 +351,9 @@
     </if>
     <if test="authorNameSpell != null">
       #{authorNameSpell,jdbcType=VARCHAR},
+    </if>
+    <if test="certificateNo != null">
+      #{certificateNo,jdbcType=VARCHAR},
     </if>
     <if test="certificateType != null">
       #{certificateType,jdbcType=VARCHAR},

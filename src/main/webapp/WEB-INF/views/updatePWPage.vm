@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>修改密码</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+	<form action="../author/toArticleQuery" method="POST">
+		<div id="articleInfos">
+			<a style="font-size: 20px; color: #0000CC;">作者信息</a><br>
+				修改密码..........				
+			<br>
+		</div>
+	</form>
+</body>
+</html>

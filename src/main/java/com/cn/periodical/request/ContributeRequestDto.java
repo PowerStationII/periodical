@@ -3,6 +3,7 @@ package com.cn.periodical.request;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cn.periodical.enums.ArticleTypeEnums;
 import com.cn.periodical.pojo.AuthorInfo;
 
 /**
@@ -22,12 +23,11 @@ public class ContributeRequestDto extends RequestDto {
 	private java.lang.String userId;
 	private java.lang.String articleName;
 	private java.lang.String articleId;
-	private java.lang.String articleType;
+	private ArticleTypeEnums articleType;
 	private java.lang.String articleCnTitle;
 	private java.lang.String articleEnTile;
 	private java.lang.String articleCnSummary;
 	private java.lang.String articleEnSummary;
-	private byte[] artilce;
 	private java.lang.String articleCnKeywords;
 	private java.lang.String articleEnKeywords;
 	private java.lang.String isfund;
@@ -77,11 +77,11 @@ public class ContributeRequestDto extends RequestDto {
 		this.articleId = articleId;
 	}
 
-	public java.lang.String getArticleType() {
+	public ArticleTypeEnums getArticleType() {
 		return articleType;
 	}
 
-	public void setArticleType(java.lang.String articleType) {
+	public void setArticleType(ArticleTypeEnums articleType) {
 		this.articleType = articleType;
 	}
 
@@ -115,14 +115,6 @@ public class ContributeRequestDto extends RequestDto {
 
 	public void setArticleEnSummary(java.lang.String articleEnSummary) {
 		this.articleEnSummary = articleEnSummary;
-	}
-
-	public byte[] getArtilce() {
-		return artilce;
-	}
-
-	public void setArtilce(byte[] artilce) {
-		this.artilce = artilce;
 	}
 
 	public java.lang.String getArticleCnKeywords() {

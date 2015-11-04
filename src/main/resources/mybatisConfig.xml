@@ -37,5 +37,8 @@
 	<mappers>
 		<mapper resource="sqlmap/AuthorInfoMapper.xml" />
 		<mapper resource="sqlmap/UserInfoMapper.xml"/>
+		<mapper resource="sqlmap/AddressInfoMapper.xml"/>
+		<mapper resource="sqlmap/ArticleInfoMapper.xml"/>
+		<mapper resource="sqlmap/ArticleAttachmentInfoMapper.xml"/>
 	</mappers>
 </configuration>

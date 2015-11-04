@@ -23,8 +23,8 @@ public class ArticleFeeController extends AuthorController{
 	@RequestMapping(value="/toArticleFeePage",method = RequestMethod.GET)
 	public ModelAndView toArticleFeePage(@RequestParam("userId") String userId,
 			HttpServletRequest request) {
-		logger.info("稿件查询Page:["+userId+"]");
-		ModelAndView mav = new ModelAndView("contributePage");
+		logger.info("稿费查询Page:["+userId+"]");
+		ModelAndView mav = new ModelAndView("articleFeePage");
 		mav.addObject("userId", userId);
 		
 		

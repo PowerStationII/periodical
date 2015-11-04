@@ -46,7 +46,7 @@ public class RegisteRequestDto extends RequestDto {
 	/**
 	 * 出生日期
 	 * */
-	private Date birthDay;
+	private String birthDay;
 	/**
 	 * 联系电话
 	 * */
@@ -88,14 +88,6 @@ public class RegisteRequestDto extends RequestDto {
 	 * */
 	private String isreviewer;
 	
-	private String systemId;
-	
-	public String getSystemId() {
-		return systemId;
-	}
-	public void setSystemId(String systemId) {
-		this.systemId = systemId;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -138,10 +130,10 @@ public class RegisteRequestDto extends RequestDto {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public Date getBirthDay() {
+	public String getBirthDay() {
 		return birthDay;
 	}
-	public void setBirthDay(Date birthDay) {
+	public void setBirthDay(String birthDay) {
 		this.birthDay = birthDay;
 	}
 	public String getContactPhone() {

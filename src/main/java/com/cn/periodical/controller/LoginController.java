@@ -1,33 +1,38 @@
 package com.cn.periodical.controller;
 
-import java.util.Random;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.enums.SystemIdEnums;
-
+import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.service.LoginService;
+/**
+ * 登录Controller
+ * */
 @Controller
 public class LoginController {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
-
+	
+	@Autowired
+	LoginService loginService;
+	
 	/**
 	 * 跳转到登录页面
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(@RequestParam("systemId") String systemId, HttpServletRequest request) {
+	public ModelAndView login(@RequestParam("systemId") String systemId, @RequestParam("roleId") String roleId,HttpServletRequest request) {
 		logger.info("登录系统systemId:[" + systemId + "]");
 		ModelAndView mav = new ModelAndView("login");
 		mav.addObject("systemId", systemId);
+		mav.addObject("roleId", roleId);
 		return mav;
 	}
 
@@ -48,8 +53,7 @@ public class LoginController {
 		 * 1,验证用户名是否存在[USER_INFO]
 		 * 2,验证用户密码是否正确
 		 * 3,判断传入systemId与用户的systemId是否相等
-		 * 4,根据role_id跳转不同的vm页面
-		 * ps:待优化,页面左侧功能列表先写死.会多写等同于角色数量的vm页面!
+		 * 4,根据role_id跳转不同的4个vm页面
 		 * */
 		if(SystemIdEnums.EDIT_SYS.getCode().equals(systemId)){
 			//编辑
@@ -80,9 +84,22 @@ public class LoginController {
 			}
 		}else if(SystemIdEnums.AUTHOR_SYS.getCode().equals(systemId)){
 			//作者
-			mav = new ModelAndView("author_area");
-			mav.addObject("userId", "test");
-			return mav;
+			try {
+				mav = new ModelAndView("author_area");
+				UserInfo userInfo=null;
+				userInfo =loginService.queryUserInfo(email, password, "", "");	
+				if(userInfo==null){
+					mav=new ModelAndView("error");
+					return mav;
+				}
+				mav.addObject("userId", userInfo.getUserId());
+				return mav;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				mav=new ModelAndView("error");
+				return mav;
+			}
 		}else if(SystemIdEnums.READER_SYS.getCode().equals(systemId)){
 			//读者
 			/**

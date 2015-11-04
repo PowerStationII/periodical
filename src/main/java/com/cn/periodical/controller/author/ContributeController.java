@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.request.ContributeRequestDto;
 import com.cn.periodical.service.ContributeService;
+import com.cn.periodical.service.LoginService;
 /**
  * 作者工作区-投稿
  * */
@@ -27,7 +28,6 @@ public class ContributeController extends AuthorController{
 	
 	@Autowired
 	ContributeService contributeService;
-	
 	
 	/**
 	 * toContributePage
@@ -47,11 +47,31 @@ public class ContributeController extends AuthorController{
         // 判断文件是否为空  
         if (!file.isEmpty()) {  
             try {  
-                // 文件保存路径  
-                String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/"  
-                        + file.getOriginalFilename();  
-                // 转存文件  
-                file.transferTo(new File(filePath));  
+            	
+//            	String fileName = request.getRealPath("upload")+File.separator+System.currentTimeMillis()+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));  
+            	String fileName = "E://temp"+File.separator+file.getOriginalFilename();
+            	File uploadFile = new File(fileName); 
+                logger.info("222222222222222222");
+                
+                logger.info(uploadFile.getAbsolutePath());
+//                try {  
+//                    //上传  
+//                    FileCopyUtils.copy(file.getBytes(), uploadFile);  
+//                } catch (IOException e) {  
+//                    e.printStackTrace();  
+//                }
+            	
+            	
+//                // 文件保存路径  
+//                String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/"  
+//                        + file.getOriginalFilename();  
+//                
+//                File targetFile =new File(filePath);
+//                logger.info("00000000000000000000000000");
+//                logger.info(targetFile.getAbsolutePath());
+//                logger.info("00000000000000000000000000");
+//                // 转存文件  
+                file.transferTo(uploadFile);  
                 return true;  
             } catch (Exception e) {  
                 e.printStackTrace();  
@@ -59,6 +79,30 @@ public class ContributeController extends AuthorController{
         }  
         return false;  
     }  
+	
+	
+	@RequestMapping(value="/toUpload",method = RequestMethod.POST)
+	public ModelAndView toUpload(HttpServletRequest request,@RequestParam(value="files", required=true) MultipartFile[] files){
+		
+		//判断file数组不能为空并且长度大于0  
+        if(files!=null&&files.length>0){  
+            //循环获取file数组中得文件  
+            for(int i = 0;i<files.length;i++){  
+                MultipartFile file = files[i];  
+                logger.info(file.getOriginalFilename());
+//                file.getInputStream().
+                //保存文件  
+                saveFile(file,request);  
+            }  
+        }  
+		
+		
+		
+		
+		
+        ModelAndView mav=new ModelAndView("portal");
+        return mav;
+	}
 	
 	
 	/**

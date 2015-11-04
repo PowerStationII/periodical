@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="UserInfoMapper">
-	<resultMap id="BaseResultMap" type="UserInfo">
+<mapper namespace="AddressInfoMapper">
+	<resultMap id="BaseResultMap" type="AddressInfo">
 	  <id column="ID" jdbcType="DECIMAL" property="id" />
-	  <result column="user_id" jdbcType="VARCHAR" property="userId" />
-	  <result column="logon_name" jdbcType="VARCHAR" property="logonName" />
-	  <result column="logon_pwd" jdbcType="VARCHAR" property="logonPwd" />
 	  <result column="ref_id" jdbcType="VARCHAR" property="refId" />
-	  <result column="role_id" jdbcType="VARCHAR" property="roleId" />
-	  <result column="system_id" jdbcType="VARCHAR" property="systemId" />
-	  <result column="retry_times" jdbcType="INTEGER" property="retryTimes" />
+	  <result column="ref_role_id" jdbcType="VARCHAR" property="refRoleId" />
+	  <result column="address_id" jdbcType="VARCHAR" property="addressId" />
+	  <result column="contacter_name" jdbcType="VARCHAR" property="contacterName" />
+	  <result column="contacter_telephone" jdbcType="VARCHAR" property="contacterTelephone" />
+	  <result column="contacter_mobile" jdbcType="VARCHAR" property="contacterMobile" />
+	  <result column="receive_address" jdbcType="VARCHAR" property="receiveAddress" />
+	  <result column="receive_postcode" jdbcType="VARCHAR" property="receivePostcode" />
+	  <result column="receive_contacter" jdbcType="VARCHAR" property="receiveContacter" />
 	  <result column="status" jdbcType="VARCHAR" property="status" />
 	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
 	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
 	  <result column="extend_3" jdbcType="VARCHAR" property="extend3" />
-	  <result column="extend_4" jdbcType="VARCHAR" property="extend4" />
 	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -27,26 +28,32 @@
   <sql id="Example_Where_Clause">
     <where>
       <trim prefix="(" prefixOverrides="and" suffix=")">
-      <if test="userId != null" >
-	      and user_id = #{userId,jdbcType=VARCHAR}
-	    </if>
-      <if test="logonName != null" >
-	      and logon_name = #{logonName,jdbcType=VARCHAR}
-	    </if>
-      <if test="logonPwd != null" >
-	      and logon_pwd = #{logonPwd,jdbcType=VARCHAR}
-	    </if>
       <if test="refId != null" >
 	      and ref_id = #{refId,jdbcType=VARCHAR}
 	    </if>
-      <if test="roleId != null" >
-	      and role_id = #{roleId,jdbcType=VARCHAR}
+      <if test="refRoleId != null" >
+	      and ref_role_id = #{refRoleId,jdbcType=VARCHAR}
 	    </if>
-      <if test="systemId != null" >
-	      and system_id = #{systemId,jdbcType=VARCHAR}
+      <if test="addressId != null" >
+	      and address_id = #{addressId,jdbcType=VARCHAR}
 	    </if>
-      <if test="retryTimes != null" >
-	      and retry_times = #{retryTimes,jdbcType=INTEGER}
+      <if test="contacterName != null" >
+	      and contacter_name = #{contacterName,jdbcType=VARCHAR}
+	    </if>
+      <if test="contacterTelephone != null" >
+	      and contacter_telephone = #{contacterTelephone,jdbcType=VARCHAR}
+	    </if>
+      <if test="contacterMobile != null" >
+	      and contacter_mobile = #{contacterMobile,jdbcType=VARCHAR}
+	    </if>
+      <if test="receiveAddress != null" >
+	      and receive_address = #{receiveAddress,jdbcType=VARCHAR}
+	    </if>
+      <if test="receivePostcode != null" >
+	      and receive_postcode = #{receivePostcode,jdbcType=VARCHAR}
+	    </if>
+      <if test="receiveContacter != null" >
+	      and receive_contacter = #{receiveContacter,jdbcType=VARCHAR}
 	    </if>
       <if test="status != null" >
 	      and status = #{status,jdbcType=VARCHAR}
@@ -60,9 +67,6 @@
       <if test="extend3 != null" >
 	      and extend_3 = #{extend3,jdbcType=VARCHAR}
 	    </if>
-      <if test="extend4 != null" >
-	      and extend_4 = #{extend4,jdbcType=VARCHAR}
-	    </if>
       <if test="createTime != null" >
 	      and create_time = #{createTime,jdbcType=TIMESTAMP}
 	    </if>
@@ -75,26 +79,32 @@
   <sql id="Example_Set_Clause">
     <set>
       <trim suffixOverrides=",">
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="logonName != null">
-        logon_name = #{logonName,jdbcType=VARCHAR},
-      </if>
-      <if test="logonPwd != null">
-        logon_pwd = #{logonPwd,jdbcType=VARCHAR},
-      </if>
       <if test="refId != null">
         ref_id = #{refId,jdbcType=VARCHAR},
       </if>
-      <if test="roleId != null">
-        role_id = #{roleId,jdbcType=VARCHAR},
+      <if test="refRoleId != null">
+        ref_role_id = #{refRoleId,jdbcType=VARCHAR},
       </if>
-      <if test="systemId != null">
-        system_id = #{systemId,jdbcType=VARCHAR},
+      <if test="addressId != null">
+        address_id = #{addressId,jdbcType=VARCHAR},
       </if>
-      <if test="retryTimes != null">
-        retry_times = #{retryTimes,jdbcType=INTEGER},
+      <if test="contacterName != null">
+        contacter_name = #{contacterName,jdbcType=VARCHAR},
+      </if>
+      <if test="contacterTelephone != null">
+        contacter_telephone = #{contacterTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="contacterMobile != null">
+        contacter_mobile = #{contacterMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveAddress != null">
+        receive_address = #{receiveAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receivePostcode != null">
+        receive_postcode = #{receivePostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveContacter != null">
+        receive_contacter = #{receiveContacter,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
@@ -108,9 +118,6 @@
       <if test="extend3 != null">
         extend_3 = #{extend3,jdbcType=VARCHAR},
       </if>
-      <if test="extend4 != null">
-        extend_4 = #{extend4,jdbcType=VARCHAR},
-      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -122,63 +129,70 @@
   </sql>
   <sql id="Base_Column_List">
     id,
-    user_id,
-    logon_name,
-    logon_pwd,
     ref_id,
-    role_id,
-    system_id,
-    retry_times,
+    ref_role_id,
+    address_id,
+    contacter_name,
+    contacter_telephone,
+    contacter_mobile,
+    receive_address,
+    receive_postcode,
+    receive_contacter,
     status,
     extend_1,
     extend_2,
     extend_3,
-    extend_4,
     create_time,
     update_time,
   </sql>
   <sql id="Base_Set_Clause">
     <set>
       <trim suffixOverrides=",">
-        user_id = #{userId,jdbcType=VARCHAR},
-        logon_name = #{logonName,jdbcType=VARCHAR},
-        logon_pwd = #{logonPwd,jdbcType=VARCHAR},
         ref_id = #{refId,jdbcType=VARCHAR},
-        role_id = #{roleId,jdbcType=VARCHAR},
-        system_id = #{systemId,jdbcType=VARCHAR},
-        retry_times = #{retryTimes,jdbcType=INTEGER},
+        ref_role_id = #{refRoleId,jdbcType=VARCHAR},
+        address_id = #{addressId,jdbcType=VARCHAR},
+        contacter_name = #{contacterName,jdbcType=VARCHAR},
+        contacter_telephone = #{contacterTelephone,jdbcType=VARCHAR},
+        contacter_mobile = #{contacterMobile,jdbcType=VARCHAR},
+        receive_address = #{receiveAddress,jdbcType=VARCHAR},
+        receive_postcode = #{receivePostcode,jdbcType=VARCHAR},
+        receive_contacter = #{receiveContacter,jdbcType=VARCHAR},
         status = #{status,jdbcType=VARCHAR},
         extend_1 = #{extend1,jdbcType=VARCHAR},
         extend_2 = #{extend2,jdbcType=VARCHAR},
         extend_3 = #{extend3,jdbcType=VARCHAR},
-        extend_4 = #{extend4,jdbcType=VARCHAR},
         create_time = #{createTime,jdbcType=TIMESTAMP},
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </trim>
     </set>
   </sql>
   <sql id="Selective_Column_List">
-    <!-- ID, -->
-    <if test="userId != null">
-      user_id,
-    </if>
-    <if test="logonName != null">
-      logon_name,
-    </if>
-    <if test="logonPwd != null">
-      logon_pwd,
-    </if>
     <if test="refId != null">
       ref_id,
     </if>
-    <if test="roleId != null">
-      role_id,
+    <if test="refRoleId != null">
+      ref_role_id,
     </if>
-    <if test="systemId != null">
-      system_id,
+    <if test="addressId != null">
+      address_id,
     </if>
-    <if test="retryTimes != null">
-      retry_times,
+    <if test="contacterName != null">
+      contacter_name,
+    </if>
+    <if test="contacterTelephone != null">
+      contacter_telephone,
+    </if>
+    <if test="contacterMobile != null">
+      contacter_mobile,
+    </if>
+    <if test="receiveAddress != null">
+      receive_address,
+    </if>
+    <if test="receivePostcode != null">
+      receive_postcode,
+    </if>
+    <if test="receiveContacter != null">
+      receive_contacter,
     </if>
     <if test="status != null">
       status,
@@ -192,9 +206,6 @@
     <if test="extend3 != null">
       extend_3,
     </if>
-    <if test="extend4 != null">
-      extend_4,
-    </if>
     <if test="createTime != null">
       create_time,
     </if>
@@ -204,43 +215,49 @@
   </sql>
 	<sql id="Base_Value_List">
     #{id,jdbcType=BIGINT},
-    #{userId,jdbcType=VARCHAR},
-    #{logonName,jdbcType=VARCHAR},
-    #{logonPwd,jdbcType=VARCHAR},
     #{refId,jdbcType=VARCHAR},
-    #{roleId,jdbcType=VARCHAR},
-    #{systemId,jdbcType=VARCHAR},
-    #{retryTimes,jdbcType=INTEGER},
+    #{refRoleId,jdbcType=VARCHAR},
+    #{addressId,jdbcType=VARCHAR},
+    #{contacterName,jdbcType=VARCHAR},
+    #{contacterTelephone,jdbcType=VARCHAR},
+    #{contacterMobile,jdbcType=VARCHAR},
+    #{receiveAddress,jdbcType=VARCHAR},
+    #{receivePostcode,jdbcType=VARCHAR},
+    #{receiveContacter,jdbcType=VARCHAR},
     #{status,jdbcType=VARCHAR},
     #{extend1,jdbcType=VARCHAR},
     #{extend2,jdbcType=VARCHAR},
     #{extend3,jdbcType=VARCHAR},
-    #{extend4,jdbcType=VARCHAR},
     #{createTime,jdbcType=TIMESTAMP},
     #{updateTime,jdbcType=TIMESTAMP},
 	</sql>
   <sql id="Selective_Value_List">
-    <!-- SEQ_user_info.nextval, -->
-    <if test="userId != null">
-      #{userId,jdbcType=VARCHAR},
-    </if>
-    <if test="logonName != null">
-      #{logonName,jdbcType=VARCHAR},
-    </if>
-    <if test="logonPwd != null">
-      #{logonPwd,jdbcType=VARCHAR},
-    </if>
     <if test="refId != null">
       #{refId,jdbcType=VARCHAR},
     </if>
-    <if test="roleId != null">
-      #{roleId,jdbcType=VARCHAR},
+    <if test="refRoleId != null">
+      #{refRoleId,jdbcType=VARCHAR},
     </if>
-    <if test="systemId != null">
-      #{systemId,jdbcType=VARCHAR},
+    <if test="addressId != null">
+      #{addressId,jdbcType=VARCHAR},
     </if>
-    <if test="retryTimes != null">
-      #{retryTimes,jdbcType=INTEGER},
+    <if test="contacterName != null">
+      #{contacterName,jdbcType=VARCHAR},
+    </if>
+    <if test="contacterTelephone != null">
+      #{contacterTelephone,jdbcType=VARCHAR},
+    </if>
+    <if test="contacterMobile != null">
+      #{contacterMobile,jdbcType=VARCHAR},
+    </if>
+    <if test="receiveAddress != null">
+      #{receiveAddress,jdbcType=VARCHAR},
+    </if>
+    <if test="receivePostcode != null">
+      #{receivePostcode,jdbcType=VARCHAR},
+    </if>
+    <if test="receiveContacter != null">
+      #{receiveContacter,jdbcType=VARCHAR},
     </if>
     <if test="status != null">
       #{status,jdbcType=VARCHAR},
@@ -254,9 +271,6 @@
     <if test="extend3 != null">
       #{extend3,jdbcType=VARCHAR},
     </if>
-    <if test="extend4 != null">
-      #{extend4,jdbcType=VARCHAR},
-    </if>
     <if test="createTime != null">
       #{createTime,jdbcType=TIMESTAMP},
     </if>
@@ -265,12 +279,12 @@
     </if>
   </sql>
   
-  <select id="selectByExample" parameterType="UserInfoQuery" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="AddressInfoQuery" resultMap="BaseResultMap">
     select
     <trim suffixOverrides=",">
       <include refid="Base_Column_List" />
     </trim>
-    from user_info
+    from address_info
     <include refid="Example_Where_Clause" />
     <!-- order by CREATE_DATE -->
   </select>
@@ -279,19 +293,19 @@
     <trim suffixOverrides=",">
       <include refid="Base_Column_List" />
     </trim>
-    from user_info
+    from address_info
     where ID = #{id,jdbcType=DECIMAL}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from user_info
+    delete from address_info
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
-  <delete id="deleteByExample" parameterType="UserInfoQuery">
-    delete from user_info
+  <delete id="deleteByExample" parameterType="AddressInfoQuery">
+    delete from address_info
     <include refid="Example_Where_Clause" />
   </delete>
-  <insert id="insert" parameterType="UserInfo">
-    insert into user_info
+  <insert id="insert" parameterType="AddressInfo">
+    insert into address_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <include refid="Base_Column_List"/>
     </trim>
@@ -299,8 +313,8 @@
       <include refid="Base_Value_List"/>
     </trim>
   </insert>
-  <insert id="insertSelective" parameterType="UserInfo">
-    insert into user_info
+  <insert id="insertSelective" parameterType="AddressInfo">
+    insert into address_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <include refid="Selective_Column_List"/>
     </trim>
@@ -308,28 +322,28 @@
       <include refid="Selective_Value_List"/>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="UserInfoQuery" resultType="java.lang.Integer">
-    select count(*) from user_info
+  <select id="countByExample" parameterType="AddressInfoQuery" resultType="java.lang.Integer">
+    select count(*) from address_info
     <include refid="Example_Where_Clause" />
   </select>
-  <update id="updateByPrimaryKeySelective" parameterType="UserInfo">
-    update user_info
+  <update id="updateByPrimaryKeySelective" parameterType="AddressInfo">
+    update address_info
     <include refid="Example_Set_Clause"/>
     where ID = #{id,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="UserInfo">
-    update user_info
+  <update id="updateByPrimaryKey" parameterType="AddressInfo">
+    update address_info
     <include refid="Base_Set_Clause"/>
     where ID = #{id,jdbcType=DECIMAL}
   </update>
   
-  <select id="selectPageByExample" parameterType="UserInfoQuery" resultMap="BaseResultMap">
+  <select id="selectPageByExample" parameterType="AddressInfoQuery" resultMap="BaseResultMap">
   	<include refid="Page_Query_Begin" />
     select
     <trim suffixOverrides=",">
       <include refid="Base_Column_List" />
     </trim>
-    from user_info
+    from address_info
     <include refid="Example_Where_Clause" />
     <!-- order by CREATE_DATE -->
     <include refid="Page_Query_End" />

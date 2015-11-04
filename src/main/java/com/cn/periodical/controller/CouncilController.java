@@ -15,7 +15,7 @@ public class CouncilController {
 	 * 理事图片
 	 */
 	@RequestMapping(value="/toCouncilPic",method = RequestMethod.GET)
-	public String toUserInfoAdd() {
+	public String toCouncilPic() {
 		/**
 		 * 查询理事会信息
 		 * 制作理事会信息图片
@@ -24,23 +24,18 @@ public class CouncilController {
 		
 		return "login";
 	}
+	
 	/**
-	 * 登录
+	 * 理事会形象展示
 	 */
-	@RequestMapping(value="/toLogin",method = RequestMethod.POST)
-	public String toLogin() {
+	@RequestMapping(value="/toCouncilShow",method = RequestMethod.GET)
+	public String toCouncilShow() {
 		/**
-		 * 根据用户名和密码查询用户角色
-		 * 根据角色不同,跳转到不同工作区页面
+		 * 查询理事会信息
+		 * 理事会形象展示
 		 * */
-		
-		
-		
-		
-		
 		
 		
 		return "login";
 	}
-	
 }

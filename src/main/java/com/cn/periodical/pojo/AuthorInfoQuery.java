@@ -28,6 +28,7 @@ public class AuthorInfoQuery extends PagingQuery {
 	private java.lang.String authorName;
 	private java.lang.String email;
 	private java.lang.String authorNameSpell;
+	private java.lang.String certificateNo;
 	private java.lang.String certificateType;
 	private java.lang.String sex;
 	private java.util.Date birthday;
@@ -120,6 +121,21 @@ public class AuthorInfoQuery extends PagingQuery {
 	 */
 	public java.lang.String getAuthorNameSpell() {
 		return this.authorNameSpell;
+	}
+	/**
+	 * 
+	 * @param certificateNo
+	 */
+	public void setCertificateNo(java.lang.String certificateNo) {
+		this.certificateNo = certificateNo;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.String getCertificateNo() {
+		return this.certificateNo;
 	}
 	/**
 	 * 

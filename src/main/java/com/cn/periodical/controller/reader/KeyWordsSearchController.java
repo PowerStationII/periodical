@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 /**
- * 读者工作区-期刊征订-订单管理Controller
+ * 读者工作区-关键词检索Controller
  * */
 @Controller
-public class OrderManageController extends ReaderController{
+public class KeyWordsSearchController extends ReaderController{
 	
-	private static final Logger logger = LoggerFactory.getLogger(OrderManageController.class);
+	private static final Logger logger = LoggerFactory.getLogger(KeyWordsSearchController.class);
 
 }

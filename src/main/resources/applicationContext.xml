@@ -16,6 +16,20 @@
 		<property name="dataSource" ref="periodicalDataSource" />
 		<property name="configLocation" value="classpath:mybatisConfig.xml" />
 	</bean>
+	
+	<!-- 配置事务管理 -->
+	<bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="periodicalDataSource"/>
+    </bean>
+    
+    <bean id="transactionTemplate"
+		class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager">
+			<ref local="transactionManager" />
+		</property>
+	</bean>
+	
 	<bean class="com.cn.periodical.dao.BaseDao">
 		<property name="batchSqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>

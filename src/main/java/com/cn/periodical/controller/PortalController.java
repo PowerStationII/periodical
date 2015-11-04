@@ -15,7 +15,8 @@ public class PortalController {
 	 * 跳转到添加页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String toUserInfoAdd() {
+	public String toPortalPage() {
+		
 		return "portal";
 	}
 }

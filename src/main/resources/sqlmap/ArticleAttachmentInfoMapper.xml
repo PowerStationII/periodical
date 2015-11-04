@@ -212,7 +212,6 @@
     </set>
   </sql>
   <sql id="Selective_Column_List">
-    ID,
     <if test="articleId != null">
       article_id,
     </if>
@@ -298,7 +297,6 @@
     #{updateTime,jdbcType=TIMESTAMP},
 	</sql>
   <sql id="Selective_Value_List">
-    SEQ_article_attachment_info.nextval,
     <if test="articleId != null">
       #{articleId,jdbcType=VARCHAR},
     </if>

@@ -149,7 +149,8 @@
 		</div>
   	</div>
 
-<form action="../author/toContribute" method="POST" ><!-- enctype="multipart/form-data" -->
+<!-- <form enctype="multipart/form-data" action="../author/toUpload" method="POST"> --><!--  enctype="multipart/form-data"-->
+
   	<div id="step3">
   		<div style="margin-top:20px;">
 	  		<a style="margin-left:400px;font-size:20px;">文件上传</a><br>
@@ -175,7 +176,7 @@
 	  		<a style="font-size:16px;color:#0000CC;">二、上传稿件word文档</a><br><br>
 	  		<a style="font-size:12px;">（需是.doc格式文档，pdf、docx、txt等格式稿件文档系统无法提取稿件信息，请先将稿件另存成doc格式文档后再上传）</a><br>
 	  		<a style="font-size:12px;">请上传稿件的全文</a>
-	  		<input type="file"  id="upload" ><a style="font-size:12px;color:red;">(*)</a><br><br>
+	  		<input type="file"  id="upload" name="files"><a style="font-size:12px;color:red;">(*)</a><br><br>
 	  		<a style="font-size:16px;color:#0000CC;">三、上传论文“论文著作权转让协议与论文学术诚信承诺书”等投稿附件</a><br><br>
 	  		<a style="font-size:12px;">（*为必须上传的附件（或必填项），其余根据需要选择上传（或填写）即可）</a><br>
 	  		<table style="border:1px solid;border-collapse:collapse;"  rules="all">
@@ -185,11 +186,11 @@
 	  			</tr>
 	  			<tr>
 	  				<td>论文著作权转让协议与论文学术诚信承诺书</td>
-	  				<td><input type="file"  id="sub_upload" ><a>【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
+	  				<td><input type="file"  id="uploadi" name="files"><div id="fileQueue"></div><a>【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
 	  			</tr>
 	  			<tr>
 	  				<td>论文著作权转让协议与论文学术诚信承诺书</td>
-	  				<td><input type="file"  id="sub_upload" ><a>【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
+	  				<td><input type="file"  id="sub_upload" name="files"><a>【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
 	  			</tr>
 	  			<tr>
 	  				<td>论文著作权转让协议与论文学术诚信承诺书</td>
@@ -200,9 +201,12 @@
 	  				<td><input type="file"  id="sub_upload"><a>【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
 	  			</tr>
 	  		</table><br>
-	  		<input type="button"  id="back"  value="上一步"><input type="button"  id="next2"  value="下一步">
+	  		<input type="button"  id="back"  value="上一步"><input type="submit"  id="next2"  value="下一步"><!-- button -->
   		</div>
   	</div>
+<!-- </form> -->
+<form action="../author/toContribute" method="POST">
+<input type="hidden" name="userId" value=${userId}>
   	<div id="step4">
   			<div  id="articleInfo">
   				<a style="margin-left:400px;font-size:20px;">填写稿件信息</a><br>
@@ -212,8 +216,8 @@
   						<td>稿件类型</td>
   						<td>
   							<select id="articleType" class="easyui-combobox" name="articleType" style="width:80px;"> 
-							    <option  value="IDCARD">新稿</option> 
-							    <option  value="PASSPORT">返修重投</option>     
+							    <option  value="NEW_ARTICLE">新稿</option> 
+							    <option  value="REPAIR_ARTICLE">返修重投</option>     
 							</select><br>
 							<a>【在系统中投稿后（自行）撤稿或被退稿的稿件，补充、修改、完善后重新再投，需选择“退后重投”】</a>
   						</td>
@@ -221,7 +225,7 @@
   					<tr>
   						<td>中文标题</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox" 
+  							<input id="chTitle" name="articleCnTitle" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" /><br>
 							【是论文内容的高度概括，是连接论文和读者的桥梁，亦是论文的“眼”，应明确、简炼、新颖、醒目，外延和内涵恰如其分】
   						</td>
@@ -229,14 +233,14 @@
   					<tr>
   						<td>中文摘要</td>
   						<td>
-  							<textarea name="mytextarea" style="height:40px;width:200px"></textarea><br>
+  							<textarea name="mytextarea" name="articleCnSummary" style="height:40px;width:200px"></textarea><br>
   							【四要素：研究目的、方法、结果（核心部分）、结论必须完备】
   						</td>
   					</tr>
   					<tr>
   						<td>中文关键词</td>
   						<td>
-	  						<input id="chTitle" class="easyui-validatebox" 
+	  						<input id="chTitle" name="articleCnKeywords" class="easyui-validatebox" 
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
 								【代表论文主题内容信息条目的词组或术语，3-8个为宜】
   						</td>
@@ -252,14 +256,14 @@
   					<tr>
   						<td>英文摘要</td>
   						<td>
-  							<textarea name="mytextarea" style="height:40px;width:200px"></textarea><br>
+  							<textarea name="mytextarea" name="articleEnSummary" style="height:40px;width:200px"></textarea><br>
   							【为适应国际学术交流需要，编辑部要求论文英文摘要需500字以上，800-1000字最好，并“拥有与论文同等量的主要信息”，与中文摘要无须一一对应】
   						</td>
   					</tr>
   					<tr>
   						<td>英文关键词</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox" 
+  							<input id="chTitle" name="articleEnKeywords" class="easyui-validatebox" 
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
 								【英文标题最多只能输入250个英文字母，空格按一个英文字母计算】
   						</td>
@@ -267,7 +271,7 @@
   					<tr>
   						<td>基金项目中文名称</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox" 
+  							<input id="chTitle" name="" class="easyui-validatebox" 
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
 								【如系统未从稿件文档中提取到论文的基金项目，请直接在上面文本框中输入，或点击框左边的“浏览”选择基金项目。非基金资助类论文请输入“无基金”或“非基金”】
   						</td>
@@ -275,7 +279,7 @@
   					<tr>
   						<td>拟投栏目</td>
   						<td>
-  							<select id="articleType" class="easyui-combobox" name="articleType" style="width:80px;"> 
+  							<select id="articleType" class="easyui-combobox" name="investSection" style="width:80px;"> 
 							    <option  value="IDCARD">农学、农业基础科学</option> 
 							    <option  value="PASSPORT">林学、园艺</option> 
 							    <option  value="">水产、渔业</option>    

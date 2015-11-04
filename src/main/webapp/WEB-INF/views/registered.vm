@@ -281,6 +281,7 @@
     <div class="all">
     	<form action="register" id="form" method="POST">
     		<input type="hidden" name="systemId" value="${systemId}">
+    		<input type="hidden" name="roleId" value="${roleId}">
 			<div class="mode1">
 				<!--Email-->
 				<a class="sign"  style="margin-left:89px;">*</a><a>Email：</a>
@@ -307,13 +308,13 @@
 				
 				<!--姓名-->
 				<a class="sign" style="margin-left:94px;">*</a><a>姓名：</a>
-				<input id="name" class="easyui-validatebox" 
+				<input id="name" name="realName" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" />
 				<a class="wrong"  id="nameW">x</a><a class="right"  id="nameR">√</a><br><br>
 				
 				<!--汉语拼音-->
 				<a class="sign"  style="margin-left:64px;">*</a><a>汉语拼音：</a>
-				<input id="pinyin" class="easyui-validatebox" 
+				<input id="pinyin" name="nameSpell" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'"   validType="english[]" />
 				<a class="wrong"  id="pinyinW">x</a><a class="right"  id="pinyinR">√</a><br><br>
 				
@@ -324,7 +325,7 @@
 				    <option  value="PASSPORT">护照</option>   
 				    <option  value="OFFICERCARD">军警证</option>     
 				</select>
-				<input id="certificate" class="easyui-validatebox" 
+				<input id="certificate" name="certifiNo" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" /><!-- style="margin-left:154px;" -->
 				<a class="wrong"  id="certificateW">x</a><a class="right"   id="certificateR">√</a><br><br>  
 				
@@ -335,41 +336,46 @@
 				
 				<!--出生日期-->
 				<a class="sign"  style="margin-left:64px;">*</a><a>出生日期：</a>
-				<input id="birthday" type="text" class="easyui-datebox" required="required"  value="1"></input>
-				<br><br> 
+				<input id="birthday" type="text"  name="birthDay" class="easyui-datebox" required="required"  value="1"></input>
+				<br><br>
 			</div>
 			<div class="mode1">
 				<!--联系电话-->
 				<a class="sign"  style="margin-left:64px;">*</a><a>联系电话：</a>
-				<input id="phone" class="easyui-validatebox" 
+				<input id="phone" name="contactPhone" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'"  validType="mobileAndTel[]" />
 				<a class="wrong"  id="phoneW">x</a><a class="right"  id="phoneR">√</a><br><br>
 				<!--邮寄地址-->
 				<a class="sign"  style="margin-left:64px;">*</a><a>邮寄地址：</a>
-				<input id="address" class="easyui-validatebox" 
+				<input id="address" name="postAddress" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" />
 				<a class="wrong"  id="addressW">x</a><a class="right"  id="addressR">√</a><br><br>
 				<!--邮政编码-->
 				<a class="sign"  style="margin-left:64px;">*</a><a>邮政编码：</a>
-				<input id="postNum" class="easyui-validatebox" 
+				<input id="postNum" name="postCode" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'"  validType="zip[]" />
 				<a class="wrong"  id="postNumW">x</a><a class="right"   id="postNumR">√</a><br><br>
 			</div>
 			<div class="mode1">
 				<!--研究领域-->
 				<a class="sign"   style="margin-left:64px;">*</a><a>研究领域：</a>
-				<input id="area" class="easyui-validatebox" 
+				<input id="area" name="researchArea" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" />
 				<a class="wrong"  id="areaW">x</a><a class="right"   id="areaR">√</a><br><br>
 			</div>
 			<div class="mode1">
 				<!--学历-->
 				<a class="sign"  style="margin-left:95px;">*</a><a>学历：</a>
-				<select id="education" class="easyui-combobox" name="dept" style="width:100px;"> 
-				    <option value="aa">本科</option> 
-				    <option>大专</option> 
-				    <option>高中</option>   
-				    <option>其他</option>    
+				<select id="education" name="degree" class="easyui-combobox" name="dept" style="width:100px;"> 
+				    <option value="JUNIOR_SCHOOL">小学</option> 
+				    <option value="MIDDLE_SCHOOL">初中</option> 
+				    <option value="SENIOR_SCHOOL">高中</option> 
+				    <option value="POLYTECHNIC_SCHOOL">中专</option> 
+				    <option value="VOCATIONAL_SCHOOL">高职</option> 
+				    <option value="JUNIOR_COLLEGE">专科</option> 
+				    <option value="BACHELOR_DEGREE">本科</option> 
+				    <option value="MASTER_DEGREE">硕士研究生</option> 
+				    <option value="DOCTORAL">博士研究生</option> 
 				</select><br><br>
 				<!--学位-->
 				<a class="sign"   style="margin-left:95px;">*</a><a>学位：</a>
@@ -383,20 +389,21 @@
 			<div class="mode1">
 				<!--单位名称-->
 				<a class="sign"   style="margin-left:64px;">*</a><a>单位名称：</a>
-				<input id="danwei" class="easyui-validatebox" 
+				<input id="danwei" name="companyName" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" />
 				<a class="wrong"  id="danweiW">x</a><a class="right"  id="danweiR">√</a><br><br>
 				<!--单位性质-->
 				<a class="sign"   style="margin-left:64px;">*</a><a>单位性质：</a>
-				<select id="nature" class="easyui-combobox" name="dept" style="width:100px;"> 
-				    <option value="aa">科研单位</option> 
-				    <option>大学</option>   
-				    <option>企业</option>     
-				    <option>其他</option>  
+				<select id="nature" class="easyui-combobox" name="companyType" style="width:100px;"> 
+				    <option value="ENTERPRISES">国企</option> 
+				    <option value="PRIVATE_ENTERPRISES">私企</option>   
+				    <option value="FOREIGN_COMPANY">外企</option>     
+				    <option value="RESEARCH_COMPANY">科研单位</option>     
+				    <option value="COMPANY_OTHERS">其他</option>  
 				</select><br><br>
 				<!--部门或院系-->
 				<a class="sign"  style="margin-left:45px;">*</a><a>部门或院系：</a>
-				<input id="department" class="easyui-validatebox" 
+				<input id="department" name="companyDepartment" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" />
 				<a class="wrong"  id="departmentW">x</a><a class="right"  id="departmentR">√</a><br><br>
 			</div>

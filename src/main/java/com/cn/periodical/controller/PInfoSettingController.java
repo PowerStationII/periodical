@@ -29,10 +29,14 @@ public class PInfoSettingController {
 	 * 跳转到修改个人信息页面
 	 */
 	@RequestMapping(value = "/toUpdateSettingPage", method = RequestMethod.GET)
-	public ModelAndView toUpdateSettingPage(@RequestParam("systemId") String systemId, HttpServletRequest request) {
-		logger.info("登录系统systemId:[" + systemId + "]");
-		ModelAndView mav = new ModelAndView("login");
-		mav.addObject("systemId", systemId);
+	public ModelAndView toUpdateSettingPage(@RequestParam("userId") String userId, HttpServletRequest request) {
+		logger.info("userId:[" + userId + "]修改个人信息");
+		ModelAndView mav = new ModelAndView("updateSettingPage");
+		mav.addObject("userId", userId);
+		
+		
+		
+		
 		return mav;
 	}
 	
@@ -42,10 +46,15 @@ public class PInfoSettingController {
 	 * 跳转到修改密码页面
 	 */
 	@RequestMapping(value = "/toUpdatePWPage", method = RequestMethod.GET)
-	public ModelAndView toUpdatePWPage(@RequestParam("systemId") String systemId, HttpServletRequest request) {
-		logger.info("登录系统systemId:[" + systemId + "]");
-		ModelAndView mav = new ModelAndView("login");
-		mav.addObject("systemId", systemId);
+	public ModelAndView toUpdatePWPage(@RequestParam("userId") String userId, HttpServletRequest request) {
+		logger.info("userId:[" + userId + "]要重置密码");
+		ModelAndView mav = new ModelAndView("updatePWPage");
+		mav.addObject("userId", userId);
+		
+		
+		
+		
+		
 		return mav;
 	}
 

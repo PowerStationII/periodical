@@ -1,11 +1,6 @@
 package com.cn.periodical.controller;
 
-import java.io.InputStream;
-import java.net.URL;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.httpclient.util.HttpURLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.SystemIdEnums;
 import com.cn.periodical.request.RegisteRequestDto;
 import com.cn.periodical.service.RegisterService;
-
+/**
+ * 系统注册Controller
+ * */
 @Controller
 public class RegisterController {
 
@@ -32,10 +27,12 @@ public class RegisterController {
 	 * 跳转到注册页面
 	 */
 	@RequestMapping(value = "/toRegister", method = RequestMethod.GET)
-	public ModelAndView toRegister(@RequestParam("systemId") String systemId, HttpServletRequest request) {
-		logger.info("跳转去注册页面systemId:[" + systemId + "]");
+	public ModelAndView toRegister(@RequestParam("systemId") String systemId, 
+			@RequestParam("roleId") String roleId ,HttpServletRequest request) {
+		logger.info("跳转去注册页面systemId:[" + systemId + "]&roleId["+roleId+"]");
 		ModelAndView mav = new ModelAndView("registered");
 		mav.addObject("systemId", systemId);
+		mav.addObject("roleId", roleId);
 		return mav;
 	}
 
@@ -43,14 +40,12 @@ public class RegisterController {
 	 * 注册
 	 */
 	@RequestMapping(value="/register",method = RequestMethod.POST)
-	public ModelAndView register(RegisteRequestDto registeRequestDto,
-			RedirectAttributes attr) {
-		logger.info("++++++++++++++++++++");
-		logger.info(JSON.toJSONString(registeRequestDto));
-		logger.info("++++++++++++++++++++");
+	public ModelAndView register(RegisteRequestDto registeRequestDto) {
+		logger.info("系统注册入参:["+JSON.toJSONString(registeRequestDto)+"]");
 		ModelAndView mav =null;
 		String systemId = registeRequestDto.getSystemId();
-		logger.info(systemId);
+		String roleId = registeRequestDto.getRoleId();
+		
 		
 		if(SystemIdEnums.EDIT_SYS.getCode().equals(systemId)){
 //			//编辑
@@ -83,19 +78,17 @@ public class RegisterController {
 			/**
 			 * 保存注册信息
 			 * */
-			registerService.addAuthor(registeRequestDto);
-			
-			
-			/**
-			 * 是不是可以使用模拟登录来解决post提交参数的方式
-			 * */
-			
-//			mav = new ModelAndView("redirect:/toLogin?email=" + registeRequestDto.getEmail() + "&password="
-//					+ registeRequestDto.getPassword());
+			int i = registerService.addAuthor(registeRequestDto);
+			logger.info(i+"");
+			if(i==0){
+				mav = new ModelAndView("error");
+				return mav;
+			}
 			mav = new ModelAndView("forward:/toLogin");
 			mav.addObject("email",registeRequestDto.getEmail());
 			mav.addObject("password",registeRequestDto.getPassword());
 			mav.addObject("systemId", systemId);
+			mav.addObject("roleId", roleId);
 			return mav;
 		}else if(SystemIdEnums.READER_SYS.getCode().equals(systemId)){
 //			//读者

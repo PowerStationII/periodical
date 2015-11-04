@@ -6,7 +6,8 @@ public enum CompanyTypeEnums {
 	ENTERPRISES("0", "国企"), 
 	PRIVATE_ENTERPRISES("1", "私企"), 
 	FOREIGN_COMPANY("2", "外企"), 
-	COMPANY_OTHERS("2", "其他");
+	RESEARCH_COMPANY("3", "科研单位"),
+	COMPANY_OTHERS("4", "其他");
 
 	private String code;
 	private String name;
