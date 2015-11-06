@@ -11,9 +11,9 @@ import com.cn.periodical.manager.ArticleInfoManager;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.ArticleInfoQuery;
 import com.cn.periodical.response.ArticleQueryRespDto;
-import com.cn.periodical.service.ArticleQueryService;
+import com.cn.periodical.service.AuthorArticleQueryService;
 @Service
-public class ArticleQueryServiceImpl implements ArticleQueryService {
+public class ArticleQueryServiceImpl implements AuthorArticleQueryService {
 
 	public ArticleQueryServiceImpl() {
 		// TODO Auto-generated constructor stub

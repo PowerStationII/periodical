@@ -14,9 +14,9 @@ import com.cn.periodical.manager.AuthorInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.request.ContributeRequestDto;
-import com.cn.periodical.service.ContributeService;
+import com.cn.periodical.service.AuthorContributeService;
 @Service
-public class ContributeServiceImpl implements ContributeService {
+public class ContributeServiceImpl implements AuthorContributeService {
 	private static final Logger logger = LoggerFactory.getLogger(ContributeServiceImpl.class);
 
 	@Autowired

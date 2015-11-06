@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.request.ContributeRequestDto;
-import com.cn.periodical.service.ContributeService;
+import com.cn.periodical.service.AuthorContributeService;
 import com.cn.periodical.service.LoginService;
 /**
  * 作者工作区-投稿
@@ -27,7 +27,7 @@ public class ContributeController extends AuthorController{
 	private static final Logger logger = LoggerFactory.getLogger(ContributeController.class);
 	
 	@Autowired
-	ContributeService contributeService;
+	AuthorContributeService contributeService;
 	
 	/**
 	 * toContributePage

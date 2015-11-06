@@ -4,6 +4,6 @@ import java.util.List;
 
 import com.cn.periodical.response.ArticleQueryRespDto;
 
-public interface ArticleQueryService {
+public interface AuthorArticleQueryService {
 	public List<ArticleQueryRespDto> queryArticleInfo(String userId);
 }

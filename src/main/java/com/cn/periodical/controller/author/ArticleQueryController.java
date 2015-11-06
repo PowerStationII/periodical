@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.response.ArticleQueryRespDto;
-import com.cn.periodical.service.ArticleQueryService;
+import com.cn.periodical.service.AuthorArticleQueryService;
 /**
  * 作者工作区-稿件查询 
  * */
@@ -24,7 +24,7 @@ public class ArticleQueryController extends AuthorController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(ArticleQueryController.class);
 	@Autowired
-	ArticleQueryService articleQueryService;
+	AuthorArticleQueryService articleQueryService;
 	
 	
 	/**
