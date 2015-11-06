@@ -10,6 +10,20 @@
     <link href="css/portal_styles.css" type="text/css" rel="stylesheet"/>
    	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
   </head>
+  <script type="text/javascript">
+  	$(function(){
+  		$('#u148').click(function(){
+  			$('.right').hide();
+  			$('#frame2').remove();
+  			$('#u150').after('<iframe  id="frame1" style="width:750px;height:760px;margin-left:400px;margin-top:175px;position:absolute;" src= "editor/toNewArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe>');
+  		});
+  		$('#u150').click(function(){
+  			$('.right').hide();
+  			$('#frame1').remove();
+  			$('#u150').after('<iframe   id="frame2" style="width:750px;height:760px;margin-left:400px;margin-top:175px;position:absolute;" src= "www.baidu.com"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe>');
+  		});
+  	})
+  </script>
   <body>
     <div id="base" class="">
       <!-- Unnamed (Image) -->
@@ -62,7 +76,7 @@
         <img id="u10_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u11" class="text">
-          <p><span>首页</span><span>|</span><span>期刊介绍</span><span>|</span></p>
+          <p><span>首页</span></p>
         </div>
       </div>
 
@@ -309,6 +323,7 @@
         </div>
       </div>
 
+	<div  class="right">
       <!-- Unnamed (Shape) -->
       <div id="u64" class="ax_shape">
         <img id="u64_img" class="img " src="img/portal/u64.png"/>
@@ -596,7 +611,7 @@
           <p><span>关于征订2015年《农药科学与</span></p>
         </div>
       </div>
-
+</div>
       <!-- Unnamed (Image) -->
       <div id="ucouncil_2015" class="ax_image">
         <img id="ucouncil_2015_img" class="img " src="img/portal/u40.png"/>
@@ -641,7 +656,7 @@
           <p><span>理事会</span></p>
         </div>
       </div>
-
+<div class="right">
       <!-- Unnamed (Image) -->
       <div id="u133" class="ax_image">
         <img id="u133_img" class="img " src="img/portal/u133.jpg"/>
@@ -702,9 +717,9 @@
         <img id="u145_end" class="img " src="img/portal/transparent.gif" alt="u145_end"/>
         <img id="u145_line" class="img " src="img/portal/u81_line.png" alt="u145_line"/>
       </div>
-
+</div>
       <!-- Unnamed (Shape) -->
-      <div id="u148" class="ax_shape">
+      <div id="u148" class="ax_shape"  style="cursor:pointer ;">
         <img id="u148_img" class="img " src="img/portal/u148.png"/>
         <!-- Unnamed () -->
         <div id="u149" class="text">
@@ -713,7 +728,7 @@
       </div>
 
       <!-- Unnamed (Shape) -->
-      <div id="u150" class="ax_shape">
+      <div id="u150" class="ax_shape" style="cursor:pointer ;">
         <img id="u150_img" class="img " src="img/portal/u148.png"/>
         <!-- Unnamed () -->
         <div id="u151" class="text">
@@ -726,7 +741,7 @@
         <img id="u152_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u153" class="text">
-          <p><span>编委会</span></p>
+          <p><span>&nbsp;&nbsp;&nbsp;编委会</span></p>
         </div>
       </div>
 
