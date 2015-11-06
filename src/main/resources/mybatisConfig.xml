@@ -40,5 +40,6 @@
 		<mapper resource="sqlmap/AddressInfoMapper.xml"/>
 		<mapper resource="sqlmap/ArticleInfoMapper.xml"/>
 		<mapper resource="sqlmap/ArticleAttachmentInfoMapper.xml"/>
+		<mapper resource="sqlmap/CouncilInfoMapper.xml"/>
 	</mappers>
 </configuration>

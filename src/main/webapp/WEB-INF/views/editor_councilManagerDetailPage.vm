@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+	<form action="../editor/toSaveCouncilInfo" method="POST">
+		<div class="con_article_title02 paddtb20">
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">理事会会员编号：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="councilId" name="councilId">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">理事会会员名称：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="councilName" name="councilName">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">会员类型：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="councilType" name="councilType">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">单位名称：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="councilCompany" name="councilCompany">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">注册时间：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="companySetupTime" name="companySetupTime">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">员工数：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="employeeNums" name="employeeNums">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">企业网站：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="website" name="website">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">业务范围：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="ranges" name="ranges">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">logo编号：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="logoId" name="logoId">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">logoUrl地址：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="logoUrl" name="logoUrl">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">法人真实姓名：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="legalName" name="legalName">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">法人职责：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="legalDuties" name="legalDuties">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">法人性别：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="legalSex" name="legalSex">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">国籍：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="legalNation" name="legalNation">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">联系电话：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="legalTelephone" name="legalTelephone">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">email地址：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="legalEmail" name="legalEmail">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">联系人姓名：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="contactName" name="contactName">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">联系人性别：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="contactSex" name="contactSex">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">联系人qq：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="contactQq" name="contactQq">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">联系人手机：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="contactMobileno" name="contactMobileno">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">联系人座机：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="contactTelephone" name="contactTelephone">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+			<div class="blank20"></div>
+			<div class="con_core_info_div02 rel_pos wid500 padding0">
+				<label class="label_txt wid135 txtright margt10 margr8"> <span
+					class="right">联系人Email：</span></label>
+				<div class="input_con_type_top wid343">
+					<input maxlength="30" class="wid333 ip_input_con lightgrey"
+						value="" id="contactEmail" name="contactEmail">
+				</div>
+				<div style="display: none; margin-left: 150px;" class="left wid360">
+					<span class="label_txt wid190 margt10 red01" error="councilInfo"></span>
+				</div>
+			</div>
+		</div>
+		<input type="submit" value="保存">
+	</form>
+</body>
+</html>

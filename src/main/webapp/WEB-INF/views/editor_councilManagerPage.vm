@@ -12,17 +12,56 @@
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-	<div id="articleInfos">
+	<div id="councileInfos">
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
-				<td>理事会管理</td>
-				<td>稿件标题</td>
-				<td>投稿时间</td>
-				<td>稿件状态</td>
-				<td>备注信息</td>
+				<td colspan="6">理事会会员</td>
+			</tr>
+			<tr>
+				<td>注册时间</td>
+				<td><input type="text" name="registeredTime" value=""></td>
+				<td>会员类型</td>
+				<td><input type="text" name="registeredTime" value=""></td>
+				<td>广告刊登</td>
+				<td><input type="text" name="registeredTime" value=""></td>
+			</tr>
+			<tr>
+				<td>会员编号</td>
+				<td><input type="text" name="registeredTime" value=""></td>
+				<td>企业名称</td>
+				<td><input type="text" name="registeredTime" value=""></td>
+				<td>发票号</td>
+				<td><input type="text" name="registeredTime" value=""></td>
+			</tr>
+			<tr>
+				<td colspan="3">查询</td>
+				<td colspan="3"><a href="toCouncilInfoAdd">新增</a></td>
 			</tr>
 		</table>
 		<br>
+		<br>
+		<table style="border: 1px solid black;" rules="all">
+			<tr>
+				<td>会员编号</td>
+				<td>企业名称</td>
+				<td>会员类型</td>
+				<td>合同日期</td>
+				<td>金额</td>
+				<td>发票号</td>
+				<td>广告刊登</td>
+				<td>操作</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>
