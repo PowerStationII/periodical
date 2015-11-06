@@ -47,7 +47,7 @@
   <style>
   		.top{height:80px;background-image:url("img/portal/u2.jpg");line-height:80px;padding-left:30px;}
   		.left{width:200px;height:530px;float:left;}
-  		.right{width:1070px;height:530px;float:left;}
+  		.right{width:1070px;height:530px;float:left;position:absolute;margin-left:220px;}
   		.buttom{height:540px;margin-top:1px;}
 		.work_area{height:30px;background:#4DA20B;}
 		.area_name{height:30px;margin-left:45px;margin-top:8px;cursor:pointer;}
