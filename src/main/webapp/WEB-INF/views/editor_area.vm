@@ -115,13 +115,12 @@
   		.buttom{height:540px;margin-top:1px;}
 		.work_area{height:30px;background:#4DA20B;}
 		.area_name{height:30px;margin-left:45px;margin-top:8px;}
-		.mode_name{height:30px;background:#4DA20B;line-height:30px;text-align:center;color:#ffffff}
+		.mode_name{height:30px;background:#4DA20B;line-height:30px;color:#ffffff}
   		.cLeft{height:200px;width:180px;margin-left:auto;margin-right:auto;margin-top:10px;border-radius:5px;}
 		.leftUp{height:60px;width:180px;margin-left:auto;margin-right:auto;border:1px solid #349000;border-radius:5px;}
-		.li1,.li2,.li3,.li4,.li5{height:30px;line-height:30px;width:160px;margin-left:auto;margin-right:auto;text-align:center;}
-		.li1{border-top:1px solid #349000;border-left:1px solid #349000;border-right:1px solid #349000;}
-		.li2{border-top:1px solid #349000;border-left:1px solid #349000;border-right:1px solid #349000;}
-		.li3{border:1px solid #349000;}
+		.li1,.li2,.li3,.li4,.li5,.li6,.li7,.li8,.li9,.li10,.li11,.li12,.li13,.li14,.li15,.li16{height:30px;line-height:30px;width:160px;margin-left:auto;margin-right:auto;text-align:center;}
+		.li1,.li2,.li3,.li4,.li10,.li11,.li12,.li14{border-top:1px solid #349000;border-left:1px solid #349000;border-right:1px solid #349000;}
+		.li5,.li6,.li7,.li8,.li9,.li13,.li15,.li16{border:1px solid #349000;}
 		a{text-decoration:none;color:#000000}
   </style>
   <body>
@@ -139,7 +138,7 @@
 	       <div id="1006"  class="cLeft">
 	       		<div  class="mode_name">稿件管理</div>
 	       		<div>
-	       			<div class="easyui-accordion" style="width:180px;height:200px;">
+	       			<div class="easyui-accordion" style="width:180px;height:260px;">
 	       				<div title="稿件处理" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
 					        <div  class="li1" id="xingao">新稿</div>
 					        <div  class="li2" id="yidengji">已登记</div>
@@ -148,10 +147,10 @@
 					        <div  class="li5" id="daikan">待刊</div>
 					    </div>   
 					    <div title="编辑加工" data-options="iconCls:'icon-reload'" style="padding:10px;">   
-					         <div  class="li1" id="paikanzugao">排刊组稿</div>
+					         <div  class="li6" id="paikanzugao">排刊组稿</div>
 					    </div>   
 					    <div title="稿件查询"  data-options="iconCls:'icon-reload'" style="padding:10px;">   
-					          <div  class="li1" id="chaxungaojian">稿件查询</div>
+					          <div  class="li7" id="chaxungaojian">稿件查询</div>
 					    </div> 
 	       			</div>
 	       		</div>
@@ -160,12 +159,12 @@
 	       <div id="1007"  class="cLeft">
 	       		<div  class="mode_name">理事会管理</div>
 	       		<div>
-	       			<div class="easyui-accordion" style="width:180px;height:200px;">
+	       			<div class="easyui-accordion" style="width:180px;height:110px;">
 	       				<div title="会员管理" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
-					        <div  class="li1" id="huiyuanguanli">会员管理</div>
+					        <div  class="li8" id="huiyuanguanli">会员管理</div>
 					    </div>   
 					    <div title="广告管理" data-options="iconCls:'icon-reload'" style="padding:10px;">   
-					         <div  class="li1" id="adguanli">广告管理</div>
+					         <div  class="li9" id="adguanli">广告管理</div>
 					    </div>   
 	       			</div>
 	       		</div>
@@ -176,14 +175,14 @@
 	       		<div>
 	       			<div class="easyui-accordion" style="width:180px;height:200px;">
 	       				<div title="业务统计" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
-					        <div  class="li1" id="gaojiantongji">稿件统计</div>
-					        <div  class="li2" id="faxingtongji">发行统计</div>
-					        <div  class="li3" id="caiwutongji">财务统计</div>
-					        <div  class="li4" id="lishihuiad">理事会与广告</div>
+					        <div  class="li10" id="gaojiantongji">稿件统计</div>
+					        <div  class="li11" id="faxingtongji">发行统计</div>
+					        <div  class="li12" id="caiwutongji">财务统计</div>
+					        <div  class="li13" id="lishihuiad">理事会与广告</div>
 					    </div>   
 					    <div title="期刊征订" data-options="iconCls:'icon-reload'" style="padding:10px;">   
-					         <div  class="li1" id="dingdanguanli">订单管理</div>
-					         <div  class="li2" id="qikanyouji">期刊邮寄</div>
+					         <div  class="li14" id="dingdanguanli">订单管理</div>
+					         <div  class="li15" id="qikanyouji">期刊邮寄</div>
 					    </div>   
 	       			</div>
 	       		</div>
@@ -192,9 +191,9 @@
 	       <div id="1009"  class="cLeft">
 	       		<div  class="mode_name">发行管理</div>
 	       		<div>
-	       			<div class="easyui-accordion" style="width:180px;height:200px;">
+	       			<div class="easyui-accordion" style="width:180px;height:80px;">
 	       				<div title="发行管理" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
-					        <div  class="li1" id="qianfa">签发</div>
+					        <div  class="li16" id="qianfa">签发</div>
 					    </div>   
 	       			</div>
 	       		</div>
