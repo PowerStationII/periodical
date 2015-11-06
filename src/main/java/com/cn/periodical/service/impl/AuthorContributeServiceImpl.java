@@ -16,8 +16,8 @@ import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.request.ContributeRequestDto;
 import com.cn.periodical.service.AuthorContributeService;
 @Service
-public class ContributeServiceImpl implements AuthorContributeService {
-	private static final Logger logger = LoggerFactory.getLogger(ContributeServiceImpl.class);
+public class AuthorContributeServiceImpl implements AuthorContributeService {
+	private static final Logger logger = LoggerFactory.getLogger(AuthorContributeServiceImpl.class);
 
 	@Autowired
 	AuthorInfoManager authorInfoManager;
@@ -34,7 +34,7 @@ public class ContributeServiceImpl implements AuthorContributeService {
 	@Autowired
 	TransactionTemplate transactionTemplate;
 	
-	public ContributeServiceImpl() {
+	public AuthorContributeServiceImpl() {
 		// TODO Auto-generated constructor stub
 	}
 
