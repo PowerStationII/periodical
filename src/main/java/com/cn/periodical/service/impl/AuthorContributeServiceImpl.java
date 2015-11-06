@@ -1,5 +1,7 @@
 package com.cn.periodical.service.impl;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -8,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.manager.ArticleAttachmentInfoManager;
 import com.cn.periodical.manager.ArticleInfoManager;
 import com.cn.periodical.manager.AuthorInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.ArticleInfo;
-import com.cn.periodical.request.ContributeRequestDto;
+import com.cn.periodical.pojo.AuthorInfo;
+import com.cn.periodical.request.AuthorContributeReqDto;
 import com.cn.periodical.service.AuthorContributeService;
 @Service
 public class AuthorContributeServiceImpl implements AuthorContributeService {
@@ -38,7 +42,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void saveArticle(ContributeRequestDto contributeRequestDto) throws Exception {
+	public void saveArticle(AuthorContributeReqDto contributeRequestDto) throws Exception {
 		// TODO Auto-generated method stub
 		String articleId= UUID.randomUUID().toString().replaceAll("-", "");
 		final ArticleInfo articleInfo =new ArticleInfo();
@@ -60,13 +64,23 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		articleInfo.setExtends4("");
 		articleInfo.setInvestSection(contributeRequestDto.getInvestSection());
 		articleInfo.setUserId(contributeRequestDto.getUserId());
-		articleInfo.setState("0");
+		articleInfo.setState(ArticleStateEnums.NEW_ARTICLE.getCode());
 		articleInfo.setRemark("");
 		articleInfo.setReferenceDoc("");
 		articleInfo.setReceiveArticleTime(null);
 		articleInfo.setPublishTime(null);
 		articleInfo.setIsfund("0");
-		articleInfoManager.saveArticleInfo(articleInfo);
 		
+		List<AuthorInfo> authorInfos = contributeRequestDto.getAuthorList();
+		Iterator<AuthorInfo> iters = authorInfos.iterator();
+		while(iters.hasNext()){
+			AuthorInfo authorInfo = iters.next();
+			authorInfo.setArticleId(articleId);
+			String authorId= UUID.randomUUID().toString().replaceAll("-", "");
+			authorInfo.setAuthorId(authorId);
+			authorInfoManager.saveAuthorInfo(authorInfo);
+		}
+		
+		articleInfoManager.saveArticleInfo(articleInfo);
 	}
 }

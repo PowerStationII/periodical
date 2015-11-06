@@ -9,9 +9,9 @@ import com.cn.periodical.pojo.AuthorInfo;
 /**
  * 投稿请求参数
  * */
-public class ContributeRequestDto extends RequestDto {
+public class AuthorContributeReqDto extends RequestDto {
 
-	public ContributeRequestDto() {
+	public AuthorContributeReqDto() {
 		// TODO Auto-generated constructor stub
 	}
 	/**

@@ -38,10 +38,7 @@ public class LoginController {
 
 	/**
 	 * 登录
-	 * ,method = RequestMethod.POST
-	 * 注册过来的时候,
-	 * Spring MVC我还不知道怎么模拟post方式重定向到另一个controller中
-	 * 暂时这样写!登录时前台页面必须校验密码是否已存在
+	 * method = RequestMethod.POST
 	 */
 	@RequestMapping(value="/toLogin")
 	public ModelAndView toLogin(@RequestParam("email") String email,@RequestParam("password") String password, 
@@ -57,11 +54,20 @@ public class LoginController {
 		 * */
 		if(SystemIdEnums.EDIT_SYS.getCode().equals(systemId)){
 			//编辑
-			String roleId="1009";
+			String roleId="1006";
 			if(RoleIdEnums.ARTICLE_EDITOR.getCode().equals(roleId)){
 				mav = new ModelAndView("editor_area");
 				mav.addObject("roleId",roleId);
 				mav.addObject("userId", "test");
+				/**
+				 * TODO:稿件编辑工作区需要展示稿件统计信息
+				 * */
+				
+				
+				
+				
+				
+				
 				return mav;
 			}else if(RoleIdEnums.SUBSCRIBE_EDITOR.getCode().equals(roleId)){
 				mav = new ModelAndView("editor_area");

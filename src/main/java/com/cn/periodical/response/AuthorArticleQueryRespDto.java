@@ -1,8 +1,8 @@
 package com.cn.periodical.response;
 
-public class ArticleQueryRespDto extends ResponseDto {
+public class AuthorArticleQueryRespDto extends ResponseDto {
 
-	public ArticleQueryRespDto() {
+	public AuthorArticleQueryRespDto() {
 		// TODO Auto-generated constructor stub
 	}
 	

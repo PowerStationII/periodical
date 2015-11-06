@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.cn.periodical.manager.ArticleInfoManager;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.ArticleInfoQuery;
-import com.cn.periodical.response.ArticleQueryRespDto;
+import com.cn.periodical.response.AuthorArticleQueryRespDto;
 import com.cn.periodical.service.AuthorArticleQueryService;
 @Service
 public class AuthorArticleQueryServiceImpl implements AuthorArticleQueryService {
@@ -23,15 +23,15 @@ public class AuthorArticleQueryServiceImpl implements AuthorArticleQueryService 
 	ArticleInfoManager articleInfoManager;
 	
 	
-	public List<ArticleQueryRespDto> queryArticleInfo(String userId) {
+	public List<AuthorArticleQueryRespDto> queryArticleInfo(String userId) {
 		// TODO Auto-generated method stub
 		ArticleInfoQuery articleInfoQuery = new ArticleInfoQuery();
 		articleInfoQuery.setUserId(userId);
 		List<ArticleInfo> ArticleInfoList = articleInfoManager.queryList(articleInfoQuery);
-		List<ArticleQueryRespDto> list = new ArrayList<ArticleQueryRespDto>();
+		List<AuthorArticleQueryRespDto> list = new ArrayList<AuthorArticleQueryRespDto>();
 		Iterator<ArticleInfo> artileInfos = ArticleInfoList.iterator();
 		while(artileInfos.hasNext()){
-			ArticleQueryRespDto articleQueryRespDto = new ArticleQueryRespDto();
+			AuthorArticleQueryRespDto articleQueryRespDto = new AuthorArticleQueryRespDto();
 			ArticleInfo articleInfo = artileInfos.next();
 			articleQueryRespDto.setArticleId(articleInfo.getArticleId());
 			articleQueryRespDto.setId(articleInfo.getId());
