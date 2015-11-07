@@ -50,6 +50,9 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 	public void saveArticle(AuthorContributeReqDto contributeRequestDto) throws Exception {
 		// TODO Auto-generated method stub
 		String articleId= UUID.randomUUID().toString().replaceAll("-", "");
+		String authorId= UUID.randomUUID().toString().replaceAll("-", "");
+		String addressId= UUID.randomUUID().toString().replaceAll("-", "");
+		
 		final ArticleInfo articleInfo =new ArticleInfo();
 		articleInfo.setArticleCnKeywords(contributeRequestDto.getArticleCnKeywords());
 		articleInfo.setArticleCnSummary(contributeRequestDto.getArticleCnSummary());
@@ -85,8 +88,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		for(int i=0;i<authorInfos.size()-1;i++){
 			AuthorInfo authorInfo = authorInfos.get(i);
 			AddressInfo addressInfo = addressInfos.get(i);
-			String authorId= UUID.randomUUID().toString().replaceAll("-", "");
-			String addressId= UUID.randomUUID().toString().replaceAll("-", "");
+			
 			
 			authorInfo.setArticleId(articleId);
 			authorInfo.setAuthorId(authorId);
