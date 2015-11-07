@@ -63,8 +63,12 @@
   					authorTab.children().eq(i).children().eq(0).children().eq(1).text('第'+(i+1)+'作者');
   				}
   				count = count + 1;
-  				var rep = $('#author1 table:last [name*="[0]"]').attr('name').replace("0",count.toString());
-  				$('#author1 table:last [name*="[0]"]').attr('name',rep);
+  				var td = $('#author1 table:last [name*="0"]');
+  				for (var i=0;i<td.length;i++) {
+  					td.eq(i).val('');
+  					var rep = td.eq(i).attr('name').replace("0",count.toString());
+  					td.eq(i).attr('name',rep);
+  				}
   				if (count>=1) {
   					$('#del').remove();
   					$('#author1').append('<input type="button" value="删除作者" id="del" onclick="delAuthor()">');
@@ -216,7 +220,7 @@
   					<tr>
   						<td>稿件类型</td>
   						<td>
-  							<select id="articleType" class="easyui-combobox" name="articleType" style="width:80px;"> 
+  							<select id="articleType" class="easyui-combobox" name="articleType" style="width:80px;" data-options="editable:false" > 
 							    <option  value="NEW_ARTICLE">新稿</option> 
 							    <option  value="REPAIR_ARTICLE">返修重投</option>     
 							</select><br>
@@ -280,7 +284,7 @@
   					<tr>
   						<td>拟投栏目</td>
   						<td>
-  							<select id="investSection" class="easyui-combobox" name="investSection" style="width:80px;"> 
+  							<select id="investSection" class="easyui-combobox" name="investSection" style="width:140px;" data-options="editable:false" > 
 							    <option  value="IDCARD">农学、农业基础科学</option> 
 							    <option  value="PASSPORT">林学、园艺</option> 
 							    <option  value="">水产、渔业</option>    
@@ -350,7 +354,7 @@
   					<tr>
   						<td>性别</td>
   						<td>
-  							<select id="articleType" class="easyui-combobox" name="authorList[0].sex" style="width:80px;"> 
+  							<select id="articleType" class="easyui-combobox" name="authorList[0].sex" style="width:50px;" data-options="editable:false" > 
 							    <option  value="male">男</option> 
 							    <option  value="female">女</option>   
 							</select><br>
