@@ -42,6 +42,10 @@ public class ArticleInfoQuery extends PagingQuery {
 	private java.lang.String referenceDoc;
 	private java.util.Date receiveArticleTime;
 	private java.util.Date publishTime;
+	private java.lang.Integer totalPics;
+	private java.lang.Integer totalTabs;
+	private java.lang.Integer totalPages;
+	private java.lang.String fundTitle;
 	private java.lang.String state;
 	private java.lang.String extends1;
 	private java.lang.String extends2;
@@ -231,7 +235,7 @@ public class ArticleInfoQuery extends PagingQuery {
 		return this.isfund;
 	}
 	/**
-	 * 
+	 * 拟投栏目
 	 * @param investSection
 	 */
 	public void setInvestSection(java.lang.String investSection) {
@@ -239,7 +243,7 @@ public class ArticleInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 拟投栏目
 	 * @return
 	 */
 	public java.lang.String getInvestSection() {
@@ -276,7 +280,7 @@ public class ArticleInfoQuery extends PagingQuery {
 		return this.documentCode;
 	}
 	/**
-	 * 
+	 * 论文用途及要求备注
 	 * @param remark
 	 */
 	public void setRemark(java.lang.String remark) {
@@ -284,14 +288,14 @@ public class ArticleInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 论文用途及要求备注
 	 * @return
 	 */
 	public java.lang.String getRemark() {
 		return this.remark;
 	}
 	/**
-	 * 参考文献
+	 * 论文创新点
 	 * @param referenceDoc
 	 */
 	public void setReferenceDoc(java.lang.String referenceDoc) {
@@ -299,7 +303,7 @@ public class ArticleInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 参考文献
+	 * 论文创新点
 	 * @return
 	 */
 	public java.lang.String getReferenceDoc() {
@@ -337,6 +341,66 @@ public class ArticleInfoQuery extends PagingQuery {
 	}
 	/**
 	 * 
+	 * @param totalPics
+	 */
+	public void setTotalPics(java.lang.Integer totalPics) {
+		this.totalPics = totalPics;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.Integer getTotalPics() {
+		return this.totalPics;
+	}
+	/**
+	 * 
+	 * @param totalTabs
+	 */
+	public void setTotalTabs(java.lang.Integer totalTabs) {
+		this.totalTabs = totalTabs;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.Integer getTotalTabs() {
+		return this.totalTabs;
+	}
+	/**
+	 * 
+	 * @param totalPages
+	 */
+	public void setTotalPages(java.lang.Integer totalPages) {
+		this.totalPages = totalPages;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.Integer getTotalPages() {
+		return this.totalPages;
+	}
+	/**
+	 * 
+	 * @param fundTitle
+	 */
+	public void setFundTitle(java.lang.String fundTitle) {
+		this.fundTitle = fundTitle;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.String getFundTitle() {
+		return this.fundTitle;
+	}
+	/**
+	 * 
 	 * @param state
 	 */
 	public void setState(java.lang.String state) {
@@ -351,7 +415,7 @@ public class ArticleInfoQuery extends PagingQuery {
 		return this.state;
 	}
 	/**
-	 * 
+	 * 稿件是否处于可编辑的状态:1不可编辑(作废)0可编辑
 	 * @param extends1
 	 */
 	public void setExtends1(java.lang.String extends1) {
@@ -359,7 +423,7 @@ public class ArticleInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 稿件是否处于可编辑的状态:1不可编辑(作废)0可编辑
 	 * @return
 	 */
 	public java.lang.String getExtends1() {
