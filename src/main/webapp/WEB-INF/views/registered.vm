@@ -366,7 +366,7 @@
 			<div class="mode1">
 				<!--学历-->
 				<a class="sign"  style="margin-left:95px;">*</a><a>学历：</a>
-				<select id="education" name="degree" class="easyui-combobox" name="dept" style="width:100px;"> 
+				<select id="education" name="degree" class="easyui-combobox" style="width:100px;"> 
 				    <option value="JUNIOR_SCHOOL">小学</option> 
 				    <option value="MIDDLE_SCHOOL">初中</option> 
 				    <option value="SENIOR_SCHOOL">高中</option> 
