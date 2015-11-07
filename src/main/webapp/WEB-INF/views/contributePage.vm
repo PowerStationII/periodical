@@ -288,7 +288,7 @@
 							【从下拉列表框中选择最适合或最接近您论文的栏目】
   						</td>
   					</tr>
-  					<tr>
+  					<!-- <tr>
   						<td>页数</td>
   						<td>
   							<input id="totalPages" class="easyui-validatebox" name="totalPages"
@@ -308,7 +308,7 @@
   							<input id="chTitle" class="easyui-validatebox" name="totalTabs"
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
   						</td>
-  					</tr>
+  					</tr> -->
   					<tr>
   						<td>论文用途及期刊要求备注</td>
   						<td>
