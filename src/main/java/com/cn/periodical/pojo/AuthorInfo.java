@@ -31,7 +31,10 @@ public class AuthorInfo implements Serializable{
 	private java.lang.String companyName;
 	private java.lang.String compayType;
 	private java.lang.String companyDepartment;
+	private java.lang.String duties;
+	private java.lang.String technicalTitle;
 	private java.lang.String isreviewer;
+	private java.lang.String isContacter;
 	private java.lang.String isfirstauthor;
 	private java.lang.String extend1;
 	private java.lang.String extend2;
@@ -279,6 +282,36 @@ public class AuthorInfo implements Serializable{
 		return this.companyDepartment;
 	}
 	/**
+	 * 职务
+	 * @param duties
+	 */
+	public void setDuties(java.lang.String duties) {
+		this.duties = duties;
+	}
+	
+	/**
+	 * 职务
+	 * @return
+	 */
+	public java.lang.String getDuties() {
+		return this.duties;
+	}
+	/**
+	 * 职称
+	 * @param technicalTitle
+	 */
+	public void setTechnicalTitle(java.lang.String technicalTitle) {
+		this.technicalTitle = technicalTitle;
+	}
+	
+	/**
+	 * 职称
+	 * @return
+	 */
+	public java.lang.String getTechnicalTitle() {
+		return this.technicalTitle;
+	}
+	/**
 	 * 
 	 * @param isreviewer
 	 */
@@ -292,6 +325,21 @@ public class AuthorInfo implements Serializable{
 	 */
 	public java.lang.String getIsreviewer() {
 		return this.isreviewer;
+	}
+	/**
+	 * 
+	 * @param isContacter
+	 */
+	public void setIsContacter(java.lang.String isContacter) {
+		this.isContacter = isContacter;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.String getIsContacter() {
+		return this.isContacter;
 	}
 	/**
 	 * 
