@@ -77,6 +77,7 @@ public class RegisterServiceImpl implements RegisterService {
 		authorInfo.setCompanyName(registeRequestDto.getCompanyName());
 		authorInfo.setCompayType(registeRequestDto.getCompanyType().getCode());
 		authorInfo.setDegree(registeRequestDto.getDegree().getCode());
+		authorInfo.setAcademicDegree(registeRequestDto.getAcademicDegree().getCode());
 		authorInfo.setEmail(registeRequestDto.getEmail());
 		authorInfo.setIsfirstauthor("");
 		authorInfo.setResearchArea(registeRequestDto.getResearchArea());
