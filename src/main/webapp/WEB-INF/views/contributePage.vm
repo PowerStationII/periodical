@@ -74,6 +74,10 @@
   					$('#author1').append('<input type="button" value="删除作者" id="del" onclick="delAuthor()">');
   				}
   			});
+  			
+  			$('#add').click(function(){
+  				$('#step3 table tr:nth-last-child(2)').after('<tr><td></td><td><input type="file"  id="sub_upload"></td></tr>');
+  			})
   		});
 
   		function delAuthor () {
@@ -184,7 +188,7 @@
 	  		<input type="file"  id="upload" name="files"><a style="font-size:12px;color:red;">(*)</a><br><br>
 	  		<a style="font-size:16px;color:#0000CC;">三、上传论文“论文著作权转让协议与论文学术诚信承诺书”等投稿附件</a><br><br>
 	  		<a style="font-size:12px;">（*为必须上传的附件（或必填项），其余根据需要选择上传（或填写）即可）</a><br>
-	  		<table style="border:1px solid;border-collapse:collapse;"  rules="all">
+	  		<table style="border:1px solid;border-collapse:collapse;"  rules="all" >
 	  			<tr>
 	  				<td>附件名</td>
 	  				<td>附件文件名</td>
