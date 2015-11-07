@@ -1,5 +1,6 @@
 package com.cn.periodical.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -73,9 +74,9 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		articleInfo.setInvestSection(contributeRequestDto.getInvestSection());
 		articleInfo.setUserId(contributeRequestDto.getUserId());
 		articleInfo.setState(ArticleStateEnums.NEW_ARTICLE.getCode());
-		articleInfo.setRemark("");
-		articleInfo.setReferenceDoc("");
-		articleInfo.setReceiveArticleTime(null);
+		articleInfo.setRemark(contributeRequestDto.getRemark());
+		articleInfo.setReferenceDoc(contributeRequestDto.getReferenceDoc());
+		articleInfo.setReceiveArticleTime(new Date());
 		articleInfo.setPublishTime(null);
 		articleInfo.setIsfund(contributeRequestDto.getIsfund());
 		
