@@ -6,12 +6,14 @@
 package com.cn.periodical.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import com.cn.periodical.dao.ArticleInfoDao;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.ArticleInfoQuery;
+import com.cn.periodical.pojo.EditorAreaInfos;
 import com.cn.periodical.dao.BaseDao;
 
 @Repository("articleInfoDao")
@@ -65,6 +67,12 @@ public class ArticleInfoDaoImpl extends BaseDao implements ArticleInfoDao {
 	
 	public int updateByPrimaryKey(ArticleInfo record) {
 		return super.getSqlSession().update("ArticleInfoMapper.updateByPrimaryKey", record);
+	}
+
+
+	public List<EditorAreaInfos> queryArticleTotalInfos(Map<String,String> map) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("ArticleInfoMapper.queryArticleTotalInfos", map);
 	}
 	
 }

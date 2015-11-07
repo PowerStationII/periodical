@@ -1,10 +1,10 @@
 package com.cn.periodical.service.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.AddressInfo;
 import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.pojo.UserInfoQuery;
 import com.cn.periodical.request.RegisteRequestDto;
 import com.cn.periodical.service.RegisterService;
 
@@ -140,6 +141,17 @@ public class RegisterServiceImpl implements RegisterService {
 	public int addReader(RegisteRequestDto registeRequestDto) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public boolean queryLoginName(String loginName) {
+		// TODO Auto-generated method stub
+		UserInfoQuery userInfoQuery =  new UserInfoQuery();
+		userInfoQuery.setLogonName(loginName);
+		List<UserInfo> userInfos = userInfoManager.queryList(userInfoQuery);
+		if(userInfos!=null && userInfos.size()==1){
+			return true;
+		}
+		return false;
 	}
 
 }

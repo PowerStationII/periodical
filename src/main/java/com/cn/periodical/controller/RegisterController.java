@@ -113,4 +113,14 @@ public class RegisterController {
 //		return new ModelAndView("error");
 		return null;
 	}
+	
+	
+	/**
+	 * 注册
+	 */
+	@RequestMapping(value="/toVerifyLoginName")
+	public boolean toVerifyLoginName(@RequestParam("loginName") String loginName) {
+		logger.info("校验用户名是否已存在:["+loginName+"]");
+		return registerService.queryLoginName(loginName);
+	}
 }

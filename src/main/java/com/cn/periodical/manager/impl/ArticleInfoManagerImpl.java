@@ -6,6 +6,7 @@
 package com.cn.periodical.manager.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +17,7 @@ import com.cn.periodical.manager.ArticleInfoManager;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.ArticleInfoPage;
 import com.cn.periodical.pojo.ArticleInfoQuery;
+import com.cn.periodical.pojo.EditorAreaInfos;
 import com.cn.periodical.utils.Pagenation;
 
 @Component("articleInfoManager")
@@ -68,6 +70,12 @@ public class ArticleInfoManagerImpl implements ArticleInfoManager {
 		
 		articleInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
 		return articleInfoPage;
+	}
+
+
+	public List<EditorAreaInfos> queryArticleTotalInfos(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return articleInfoDao.queryArticleTotalInfos(map);
 	}
 }
 

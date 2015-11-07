@@ -205,13 +205,18 @@
 					<a style="margin-left:400px;font-size:20px;">编辑工作区提示</a><br><br>
 					<table style="border: 1px solid black;" rules="all">
 						<tr>
-							<td>关键词检索</td>
-							<td>稿件标题</td>
-							<td>投稿时间</td>
-							<td>稿件状态</td>
-							<td>备注信息</td>
+							<td>稿件</td>
+							<td>总数</td>
+							<td>操作</td>
 						</tr>
-					</table>
+						#foreach($editorAreaInfos in ${list})   
+						<tr>
+							<td>${editorAreaInfos.status}</td>
+							<td>${editorAreaInfos.total}</td>
+							<td>9999</td>
+						</tr>
+						#end
+				</table>
 			</div>
 	    </div>
     </div>

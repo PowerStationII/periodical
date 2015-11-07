@@ -10,4 +10,6 @@ public interface RegisterService {
 	public int addEditor(RegisteRequestDto registeRequestDto);
 	public int addExpert(RegisteRequestDto registeRequestDto);
 	public int addReader(RegisteRequestDto registeRequestDto);
+	
+	public boolean queryLoginName(String loginName);
 }

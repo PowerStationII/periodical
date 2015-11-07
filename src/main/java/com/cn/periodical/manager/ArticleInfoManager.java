@@ -6,10 +6,12 @@
 package com.cn.periodical.manager;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.ArticleInfoPage;
 import com.cn.periodical.pojo.ArticleInfoQuery;
+import com.cn.periodical.pojo.EditorAreaInfos;
 
 public interface ArticleInfoManager {
 	void saveArticleInfo(ArticleInfo articleInfo);
@@ -23,4 +25,6 @@ public interface ArticleInfoManager {
 	void deleteArticleInfo(ArticleInfoQuery query);
 	
 	ArticleInfoPage queryPageList(ArticleInfoQuery query);
+	
+	List<EditorAreaInfos> queryArticleTotalInfos(Map<String,String> map);
 }

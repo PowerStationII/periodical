@@ -58,7 +58,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		articleInfo.setArtilce(null);
 		articleInfo.setClassificationNums(contributeRequestDto.getClassificationNums());
 		articleInfo.setDocumentCode(contributeRequestDto.getDocumentCode());
-		articleInfo.setExtends1("");
+		articleInfo.setExtends1("0");
 		articleInfo.setExtends2("");
 		articleInfo.setExtends3("");
 		articleInfo.setExtends4("");

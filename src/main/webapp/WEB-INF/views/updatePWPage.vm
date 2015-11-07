@@ -12,11 +12,30 @@
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-	<form action="../author/toArticleQuery" method="POST">
+	<form action="../setting/toUpdatePw" method="POST">
 		<div id="articleInfos">
-			<a style="font-size: 20px; color: #0000CC;">作者信息</a><br>
-				修改密码..........				
-			<br>
+			<input type="text" name="id" value="${userInfo.id}">
+			<input type="text" name="userId" value="${userInfo.userId}">
+			<input type="text" name="logonPW" value="${userInfo.logonPwd}">
+			
+			<table style="border: 1px solid black;" rules="all">
+				<tr>
+					<td>旧密码:</td>
+					<td><input type="password" name="orgPw" value=""></td>
+				</tr>
+				<tr>
+					<td>新密码:</td>
+					<td><input type="password" name="newPw" value=""></td>
+				</tr>
+				<tr>
+					<td>确认密码:</td>
+					<td><input type="password" name="confimNewPw" value=""></td>
+				</tr>
+				<tr>
+					<td>取消</td>
+					<td><input type="submit" value="确认修改"></td>
+				</tr>
+			</table>
 		</div>
 	</form>
 </body>

@@ -6,9 +6,11 @@
 package com.cn.periodical.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.ArticleInfoQuery;
+import com.cn.periodical.pojo.EditorAreaInfos;
 
 public interface ArticleInfoDao {
 	int countByExample(ArticleInfoQuery example);
@@ -30,4 +32,6 @@ public interface ArticleInfoDao {
 	int updateByPrimaryKeySelective(ArticleInfo record);
 	
 	int updateByPrimaryKey(ArticleInfo record);
+	
+	public List<EditorAreaInfos> queryArticleTotalInfos(Map<String,String> map);
 }

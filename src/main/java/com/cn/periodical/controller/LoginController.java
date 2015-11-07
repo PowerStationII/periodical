@@ -1,6 +1,9 @@
 package com.cn.periodical.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.enums.SystemIdEnums;
+import com.cn.periodical.pojo.EditorAreaInfos;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.service.LoginService;
 /**
@@ -41,7 +46,8 @@ public class LoginController {
 	 * method = RequestMethod.POST
 	 */
 	@RequestMapping(value="/toLogin")
-	public ModelAndView toLogin(@RequestParam("email") String email,@RequestParam("password") String password, 
+	public ModelAndView toLogin(@RequestParam(required = true, value="email") String email,
+			@RequestParam(required = true, value="password") String password, 
 			HttpServletRequest request) {
 		logger.info("登录名["+email+"]&&登录密码["+password+"]");
 		ModelAndView mav =null;
@@ -54,21 +60,31 @@ public class LoginController {
 		 * */
 		if(SystemIdEnums.EDIT_SYS.getCode().equals(systemId)){
 			//编辑
-			String roleId="1007";
+			String roleId="1006";
 			if(RoleIdEnums.ARTICLE_EDITOR.getCode().equals(roleId)){
 				mav = new ModelAndView("editor_area");
-				mav.addObject("roleId",roleId);
-				mav.addObject("userId", "test");
-				/**
-				 * TODO:稿件编辑工作区需要展示稿件统计信息
-				 * */
-				
-				
-				
-				
-				
-				
-				return mav;
+				UserInfo userInfo=null;
+				try{
+//					userInfo =loginService.queryUserInfo(email, password, "", "");	
+//					if(userInfo==null){
+//						mav=new ModelAndView("error");
+//						return mav;
+//					}
+//					mav.addObject("userId", userInfo.getUserId());
+					mav.addObject("roleId",roleId);
+					mav.addObject("userId","test");
+					/**
+					 * TODO:稿件编辑工作区需要展示稿件统计信息
+					 * */
+					List<EditorAreaInfos> list = loginService.queryArticleInfos("", "");
+					mav.addObject("list", list);
+					return mav;
+				}catch(Exception e){
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					mav=new ModelAndView("error");
+					return mav;
+				}
 			}else if(RoleIdEnums.SUBSCRIBE_EDITOR.getCode().equals(roleId)){
 				mav = new ModelAndView("editor_area");
 				mav.addObject("roleId",roleId);
@@ -112,6 +128,7 @@ public class LoginController {
 					return mav;
 				}
 				mav.addObject("userId", userInfo.getUserId());
+				mav.addObject("roleId", RoleIdEnums.AUTHOR.getCode());
 				return mav;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
