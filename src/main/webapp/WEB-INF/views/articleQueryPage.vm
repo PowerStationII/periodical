@@ -12,7 +12,7 @@
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-	<div id="articleInfos">
+	<div id="articleInfos"  style="margin-left:300px;margin-top:50px;">
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
 				<td>稿件编号</td>
