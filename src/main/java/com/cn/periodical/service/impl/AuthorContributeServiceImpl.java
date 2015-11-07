@@ -1,6 +1,5 @@
 package com.cn.periodical.service.impl;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,10 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.cn.periodical.enums.ArticleStateEnums;
+import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.manager.ArticleAttachmentInfoManager;
 import com.cn.periodical.manager.ArticleInfoManager;
 import com.cn.periodical.manager.AuthorInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
+import com.cn.periodical.pojo.AddressInfo;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.request.AuthorContributeReqDto;
@@ -34,6 +35,9 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 	
 	@Autowired
 	ArticleAttachmentInfoManager articleAttachmentInfoManager;
+	
+	@Autowired
+	AddressInfoManager addressInfoManager;
 	
 	@Autowired
 	TransactionTemplate transactionTemplate;
@@ -58,6 +62,10 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		articleInfo.setArtilce(null);
 		articleInfo.setClassificationNums(contributeRequestDto.getClassificationNums());
 		articleInfo.setDocumentCode(contributeRequestDto.getDocumentCode());
+		articleInfo.setTotalPages(contributeRequestDto.getTotalPages());
+		articleInfo.setTotalPics(contributeRequestDto.getTotalPics());
+		articleInfo.setTotalTabs(contributeRequestDto.getTotalTabs());
+		articleInfo.setFundTitle(contributeRequestDto.getFundTitle());
 		articleInfo.setExtends1("0");
 		articleInfo.setExtends2("");
 		articleInfo.setExtends3("");
@@ -69,18 +77,23 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		articleInfo.setReferenceDoc("");
 		articleInfo.setReceiveArticleTime(null);
 		articleInfo.setPublishTime(null);
-		articleInfo.setIsfund("0");
+		articleInfo.setIsfund(contributeRequestDto.getIsfund());
 		
 		List<AuthorInfo> authorInfos = contributeRequestDto.getAuthorList();
-		Iterator<AuthorInfo> iters = authorInfos.iterator();
-		while(iters.hasNext()){
-			AuthorInfo authorInfo = iters.next();
-			authorInfo.setArticleId(articleId);
+		List<AddressInfo> addressInfos = contributeRequestDto.getAddressInfos();
+		for(int i=0;i<authorInfos.size()-1;i++){
+			AuthorInfo authorInfo = authorInfos.get(i);
+			AddressInfo addressInfo = addressInfos.get(i);
 			String authorId= UUID.randomUUID().toString().replaceAll("-", "");
+			String addressId= UUID.randomUUID().toString().replaceAll("-", "");
+			
+			authorInfo.setArticleId(articleId);
 			authorInfo.setAuthorId(authorId);
+			addressInfo.setRefId(authorId);
+			addressInfo.setAddressId(addressId);
 			authorInfoManager.saveAuthorInfo(authorInfo);
+			addressInfoManager.saveAddressInfo(addressInfo);
 		}
-		
 		articleInfoManager.saveArticleInfo(articleInfo);
 	}
 }

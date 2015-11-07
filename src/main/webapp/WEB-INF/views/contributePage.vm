@@ -272,7 +272,7 @@
   					<tr>
   						<td>基金项目中文名称</td>
   						<td>
-  							<input id="chTitle" name="" class="easyui-validatebox" 
+  							<input id="chTitle" name="fundTile" class="easyui-validatebox" 
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
 								【如系统未从稿件文档中提取到论文的基金项目，请直接在上面文本框中输入，或点击框左边的“浏览”选择基金项目。非基金资助类论文请输入“无基金”或“非基金”】
   						</td>
@@ -280,7 +280,7 @@
   					<tr>
   						<td>拟投栏目</td>
   						<td>
-  							<select id="articleType" class="easyui-combobox" name="investSection" style="width:80px;"> 
+  							<select id="investSection" class="easyui-combobox" name="investSection" style="width:80px;"> 
 							    <option  value="IDCARD">农学、农业基础科学</option> 
 							    <option  value="PASSPORT">林学、园艺</option> 
 							    <option  value="">水产、渔业</option>    
@@ -291,39 +291,28 @@
   					<tr>
   						<td>页数</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox" 
+  							<input id="totalPages" class="easyui-validatebox" name="totalPages"
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
   						</td>
   					</tr>
   					<tr>
   						<td>图（片）数</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox" 
+  							<input id="totalPics" class="easyui-validatebox" name="totalPics"
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
   						</td>
   					</tr>
   					<tr>
   						<td>表格数</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox" 
+  							<input id="chTitle" class="easyui-validatebox" name="totalTabs"
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
-  						</td>
-  					</tr>
-  					<tr>
-  						<td>加急程度</td>
-  						<td>
-  							<select id="articleType" class="easyui-combobox" name="articleType" style="width:80px;"> 
-							    <option  value="IDCARD">正常流程</option> 
-							    <option  value="PASSPORT">加急审稿刊出</option> 
-							    <option  value="">加急审稿录用</option>    
-							</select><br>
-							【选择此加急流程，审稿费200元/篇，加急费800元/篇。稿件将通过加急流程进行评审，一般4-5周确定稿件能否录用。加急费在稿件通过评审后与版面费一并缴纳】
   						</td>
   					</tr>
   					<tr>
   						<td>论文用途及期刊要求备注</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox" 
+  							<input id="chTitle" class="easyui-validatebox" name="remark"
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
 								【请准确填写，以便编辑部了解您的需求：毕业（保研、评奖学金）/评职称/项目结题（验收）/学术交流……，需在**年**月前见刊（逾越加急程度的刊期要求编辑部无法满足）】
   						</td>
@@ -331,7 +320,7 @@
   					<tr>
   						<td>论文查新点、学术（产业或生态）价值（300字以内）</td>
   						<td>
-  							<textarea name="mytextarea" style="height:40px;width:200px"></textarea><br>
+  							<textarea name="mytextarea" style="height:40px;width:200px" name="referenceDoc"></textarea><br>
   							【审稿时的重要参考！！请认真填写】
   						</td>
   					</tr>
@@ -347,8 +336,8 @@
   					<tr>
   						<td>是通讯作者？</td>
   						<td>
-  							<input type="radio" value="male" checked="checked" name="authorList[0].extend1"/>是 
-							<input type="radio" value="female" name="authorList[0].extend1"/>否   提示:若第一作者不是通讯作者请选择其他作者为通讯作者或点击"添加更多作者".
+  							<input type="radio" value="0" checked="checked" name="authorList[0].isContacter"/>是 
+							<input type="radio" value="1" name="authorList[0].isContacter"/>否   提示:若第一作者不是通讯作者请选择其他作者为通讯作者或点击"添加更多作者".
   						</td>
   					</tr>
   					<tr>
@@ -362,15 +351,16 @@
   						<td>性别</td>
   						<td>
   							<select id="articleType" class="easyui-combobox" name="authorList[0].sex" style="width:80px;"> 
-							    <option  value="IDCARD">男</option> 
-							    <option  value="PASSPORT">女</option>   
+							    <option  value="male">男</option> 
+							    <option  value="female">女</option>   
 							</select><br>
   						</td>
   					</tr>
   					<tr>
   						<td>出生年月日</td>
   						<td>
-  							<input id="birthday" type="text" class="easyui-datebox" required="required"  value="1"   name="authorList[0].birthday"></input>
+  							<input id="birthday" type="text" class="easyui-datebox" required="required"  value="1"   
+  							name="authorList[0].birthday"></input>
   						</td>
   					</tr>
   					<tr>
@@ -384,14 +374,14 @@
   					<tr>
   						<td>邮编</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"  name="[0]"
+  							<input id="chTitle" class="easyui-validatebox"  name="addressInfos[0].receivePostcode"
 								data-options="required:true,missingMessage:'不允许为空'" />
   						</td>
   					</tr>
   					<tr>
   						<td>通信地址</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"  name="[0]"
+  							<input id="chTitle" class="easyui-validatebox"  name="addressInfos[0].receiveAddress"
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
 								系统将调用此地址给您邮寄发票、期刊，请完整填写单位所在的省（市）区（县）街道和门牌号，并确保准确无误】
   						</td>
@@ -399,21 +389,21 @@
   					<tr>
   						<td>职称</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"  name="[0]"
+  							<input id="chTitle" class="easyui-validatebox"  name="authorList[0].technicalTitle"
 								data-options="required:true,missingMessage:'不允许为空'" />
   						</td>
   					</tr>
   					<tr>
   						<td>职务</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"  name="[0]"
+  							<input id="chTitle" class="easyui-validatebox"  name="authorList[0].duties"
 								data-options="required:true,missingMessage:'不允许为空'" />
   						</td>
   					</tr>
   					<tr>
   						<td>手机</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"  name="[0]"
+  							<input id="chTitle" class="easyui-validatebox"  name="addressInfos[0].contacterMobile"
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
 								【非常重要！！审稿、费用通知、发票样刊邮寄、联系作者时系统均会短信提示，防止邮件收不到或查看不及时。请确保准确无误】
   						</td>
@@ -421,7 +411,7 @@
   					<tr>
   						<td>Email</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"  name="[0]"
+  							<input id="chTitle" class="easyui-validatebox"  name="authorList[0].email"
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
 								【非常重要！！稿件审理、费用通知、发票样刊邮寄等均通过Email通知提醒。推荐填写经常check、并与手机关联的qq邮箱确，以便在第一时间收到编辑部稿件处理等相关信息并作出回应。请确保准确无误！！】
   						</td>
@@ -429,7 +419,7 @@
   					<tr>
   						<td>身份证号</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"   name="[0]"
+  							<input id="chTitle" class="easyui-validatebox"   name="authorList[0].certificateNo"
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
 								【发放、领取论文稿酬时需要，请确保准确无误；无需稿酬者可不用填写】
   						</td>
@@ -452,7 +442,7 @@
   			</div><br>
   			<div>
   				<input type="button"   id="back1"  value="上一步">
-  				<input type="submit"   value="提交"><!-- id="submit" -->
+  				<input type="submit"   value="提交">
   			</div>
   	</div>
    </form>
