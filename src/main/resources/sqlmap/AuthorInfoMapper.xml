@@ -18,7 +18,10 @@
 	  <result column="company_name" jdbcType="VARCHAR" property="companyName" />
 	  <result column="compay_type" jdbcType="VARCHAR" property="compayType" />
 	  <result column="company_department" jdbcType="VARCHAR" property="companyDepartment" />
+	  <result column="duties" jdbcType="VARCHAR" property="duties" />
+	  <result column="technical_title" jdbcType="VARCHAR" property="technicalTitle" />
 	  <result column="isreviewer" jdbcType="VARCHAR" property="isreviewer" />
+	  <result column="isContacter" jdbcType="VARCHAR" property="isContacter" />
 	  <result column="isfirstauthor" jdbcType="VARCHAR" property="isfirstauthor" />
 	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
 	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
@@ -81,8 +84,17 @@
       <if test="companyDepartment != null" >
 	      and company_department = #{companyDepartment,jdbcType=VARCHAR}
 	    </if>
+      <if test="duties != null" >
+	      and duties = #{duties,jdbcType=VARCHAR}
+	    </if>
+      <if test="technicalTitle != null" >
+	      and technical_title = #{technicalTitle,jdbcType=VARCHAR}
+	    </if>
       <if test="isreviewer != null" >
 	      and isreviewer = #{isreviewer,jdbcType=VARCHAR}
+	    </if>
+      <if test="isContacter != null" >
+	      and isContacter = #{isContacter,jdbcType=VARCHAR}
 	    </if>
       <if test="isfirstauthor != null" >
 	      and isfirstauthor = #{isfirstauthor,jdbcType=VARCHAR}
@@ -156,8 +168,17 @@
       <if test="companyDepartment != null">
         company_department = #{companyDepartment,jdbcType=VARCHAR},
       </if>
+      <if test="duties != null">
+        duties = #{duties,jdbcType=VARCHAR},
+      </if>
+      <if test="technicalTitle != null">
+        technical_title = #{technicalTitle,jdbcType=VARCHAR},
+      </if>
       <if test="isreviewer != null">
         isreviewer = #{isreviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="isContacter != null">
+        isContacter = #{isContacter,jdbcType=VARCHAR},
       </if>
       <if test="isfirstauthor != null">
         isfirstauthor = #{isfirstauthor,jdbcType=VARCHAR},
@@ -200,7 +221,10 @@
     company_name,
     compay_type,
     company_department,
+    duties,
+    technical_title,
     isreviewer,
+    isContacter,
     isfirstauthor,
     extend_1,
     extend_2,
@@ -227,7 +251,10 @@
         company_name = #{companyName,jdbcType=VARCHAR},
         compay_type = #{compayType,jdbcType=VARCHAR},
         company_department = #{companyDepartment,jdbcType=VARCHAR},
+        duties = #{duties,jdbcType=VARCHAR},
+        technical_title = #{technicalTitle,jdbcType=VARCHAR},
         isreviewer = #{isreviewer,jdbcType=VARCHAR},
+        isContacter = #{isContacter,jdbcType=VARCHAR},
         isfirstauthor = #{isfirstauthor,jdbcType=VARCHAR},
         extend_1 = #{extend1,jdbcType=VARCHAR},
         extend_2 = #{extend2,jdbcType=VARCHAR},
@@ -285,8 +312,17 @@
     <if test="companyDepartment != null">
       company_department,
     </if>
+    <if test="duties != null">
+      duties,
+    </if>
+    <if test="technicalTitle != null">
+      technical_title,
+    </if>
     <if test="isreviewer != null">
       isreviewer,
+    </if>
+    <if test="isContacter != null">
+      isContacter,
     </if>
     <if test="isfirstauthor != null">
       isfirstauthor,
@@ -327,7 +363,10 @@
     #{companyName,jdbcType=VARCHAR},
     #{compayType,jdbcType=VARCHAR},
     #{companyDepartment,jdbcType=VARCHAR},
+    #{duties,jdbcType=VARCHAR},
+    #{technicalTitle,jdbcType=VARCHAR},
     #{isreviewer,jdbcType=VARCHAR},
+    #{isContacter,jdbcType=VARCHAR},
     #{isfirstauthor,jdbcType=VARCHAR},
     #{extend1,jdbcType=VARCHAR},
     #{extend2,jdbcType=VARCHAR},
@@ -383,8 +422,17 @@
     <if test="companyDepartment != null">
       #{companyDepartment,jdbcType=VARCHAR},
     </if>
+    <if test="duties != null">
+      #{duties,jdbcType=VARCHAR},
+    </if>
+    <if test="technicalTitle != null">
+      #{technicalTitle,jdbcType=VARCHAR},
+    </if>
     <if test="isreviewer != null">
       #{isreviewer,jdbcType=VARCHAR},
+    </if>
+    <if test="isContacter != null">
+      #{isContacter,jdbcType=VARCHAR},
     </if>
     <if test="isfirstauthor != null">
       #{isfirstauthor,jdbcType=VARCHAR},
