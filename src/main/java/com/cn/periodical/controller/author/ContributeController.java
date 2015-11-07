@@ -99,15 +99,6 @@ public class ContributeController extends AuthorController{
 //            }  
 //        }  
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		ModelAndView mav = new ModelAndView("author_area");//不能去这个页面
 		mav.addObject("userId", contributeRequestDto.getUserId());
 		/**

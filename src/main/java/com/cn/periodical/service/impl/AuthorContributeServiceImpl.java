@@ -85,6 +85,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		
 		List<AuthorInfo> authorInfos = contributeRequestDto.getAuthorList();
 		List<AddressInfo> addressInfos = contributeRequestDto.getAddressInfos();
+		logger.info(authorInfos.size()+"------------"+addressInfos.size());
 		for(int i=0;i<authorInfos.size()-1;i++){
 			AuthorInfo authorInfo = authorInfos.get(i);
 			AddressInfo addressInfo = addressInfos.get(i);
@@ -92,6 +93,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 			
 			authorInfo.setArticleId(articleId);
 			authorInfo.setAuthorId(authorId);
+			
 			addressInfo.setRefId(authorId);
 			addressInfo.setAddressId(addressId);
 			authorInfoManager.saveAuthorInfo(authorInfo);
