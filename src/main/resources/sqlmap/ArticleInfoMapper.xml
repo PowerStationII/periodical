@@ -22,6 +22,10 @@
 	  <result column="reference_doc" jdbcType="VARCHAR" property="referenceDoc" />
 	  <result column="receive_article_time" jdbcType="TIMESTAMP" property="receiveArticleTime" />
 	  <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+	  <result column="total_pics" jdbcType="INTEGER" property="totalPics" />
+	  <result column="total_tabs" jdbcType="INTEGER" property="totalTabs" />
+	  <result column="total_pages" jdbcType="INTEGER" property="totalPages" />
+	  <result column="fund_title" jdbcType="VARCHAR" property="fundTitle" />
 	  <result column="state" jdbcType="VARCHAR" property="state" />
 	  <result column="extends_1" jdbcType="VARCHAR" property="extends1" />
 	  <result column="extends_2" jdbcType="VARCHAR" property="extends2" />
@@ -30,11 +34,6 @@
 	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  
-  <resultMap id="EditorAreaResultMap" type="EditorAreaInfos">
-		<result column="STATUS" jdbcType="VARCHAR" property="status" />
-		<result column="TOTAL" jdbcType="INTEGER" property="total" />
-	</resultMap>
   <sql id="Page_Query_Begin">
     select * from(select t.*,rownum rn from(
   </sql>
@@ -100,6 +99,18 @@
 	    </if>
       <if test="publishTime != null" >
 	      and publish_time = #{publishTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="totalPics != null" >
+	      and total_pics = #{totalPics,jdbcType=INTEGER}
+	    </if>
+      <if test="totalTabs != null" >
+	      and total_tabs = #{totalTabs,jdbcType=INTEGER}
+	    </if>
+      <if test="totalPages != null" >
+	      and total_pages = #{totalPages,jdbcType=INTEGER}
+	    </if>
+      <if test="fundTitle != null" >
+	      and fund_title = #{fundTitle,jdbcType=VARCHAR}
 	    </if>
       <if test="state != null" >
 	      and state = #{state,jdbcType=VARCHAR}
@@ -185,6 +196,18 @@
       <if test="publishTime != null">
         publish_time = #{publishTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="totalPics != null">
+        total_pics = #{totalPics,jdbcType=INTEGER},
+      </if>
+      <if test="totalTabs != null">
+        total_tabs = #{totalTabs,jdbcType=INTEGER},
+      </if>
+      <if test="totalPages != null">
+        total_pages = #{totalPages,jdbcType=INTEGER},
+      </if>
+      <if test="fundTitle != null">
+        fund_title = #{fundTitle,jdbcType=VARCHAR},
+      </if>
       <if test="state != null">
         state = #{state,jdbcType=VARCHAR},
       </if>
@@ -230,6 +253,10 @@
     reference_doc,
     receive_article_time,
     publish_time,
+    total_pics,
+    total_tabs,
+    total_pages,
+    fund_title,
     state,
     extends_1,
     extends_2,
@@ -260,6 +287,10 @@
         reference_doc = #{referenceDoc,jdbcType=VARCHAR},
         receive_article_time = #{receiveArticleTime,jdbcType=TIMESTAMP},
         publish_time = #{publishTime,jdbcType=TIMESTAMP},
+        total_pics = #{totalPics,jdbcType=INTEGER},
+        total_tabs = #{totalTabs,jdbcType=INTEGER},
+        total_pages = #{totalPages,jdbcType=INTEGER},
+        fund_title = #{fundTitle,jdbcType=VARCHAR},
         state = #{state,jdbcType=VARCHAR},
         extends_1 = #{extends1,jdbcType=VARCHAR},
         extends_2 = #{extends2,jdbcType=VARCHAR},
@@ -271,6 +302,7 @@
     </set>
   </sql>
   <sql id="Selective_Column_List">
+    <!-- ID, -->
     <if test="userId != null">
       user_id,
     </if>
@@ -328,6 +360,18 @@
     <if test="publishTime != null">
       publish_time,
     </if>
+    <if test="totalPics != null">
+      total_pics,
+    </if>
+    <if test="totalTabs != null">
+      total_tabs,
+    </if>
+    <if test="totalPages != null">
+      total_pages,
+    </if>
+    <if test="fundTitle != null">
+      fund_title,
+    </if>
     <if test="state != null">
       state,
     </if>
@@ -371,6 +415,10 @@
     #{referenceDoc,jdbcType=VARCHAR},
     #{receiveArticleTime,jdbcType=TIMESTAMP},
     #{publishTime,jdbcType=TIMESTAMP},
+    #{totalPics,jdbcType=INTEGER},
+    #{totalTabs,jdbcType=INTEGER},
+    #{totalPages,jdbcType=INTEGER},
+    #{fundTitle,jdbcType=VARCHAR},
     #{state,jdbcType=VARCHAR},
     #{extends1,jdbcType=VARCHAR},
     #{extends2,jdbcType=VARCHAR},
@@ -380,6 +428,7 @@
     #{updateTime,jdbcType=TIMESTAMP},
 	</sql>
   <sql id="Selective_Value_List">
+    <!-- SEQ_article_info.nextval, -->
     <if test="userId != null">
       #{userId,jdbcType=VARCHAR},
     </if>
@@ -436,6 +485,18 @@
     </if>
     <if test="publishTime != null">
       #{publishTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="totalPics != null">
+      #{totalPics,jdbcType=INTEGER},
+    </if>
+    <if test="totalTabs != null">
+      #{totalTabs,jdbcType=INTEGER},
+    </if>
+    <if test="totalPages != null">
+      #{totalPages,jdbcType=INTEGER},
+    </if>
+    <if test="fundTitle != null">
+      #{fundTitle,jdbcType=VARCHAR},
     </if>
     <if test="state != null">
       #{state,jdbcType=VARCHAR},
@@ -529,8 +590,4 @@
     <!-- order by CREATE_DATE -->
     <include refid="Page_Query_End" />
   </select>
-  
-  <select id="queryArticleTotalInfos" parameterType="hashMap" resultMap="EditorAreaResultMap">
-	select state as status,count(1) as total from article_info where extends_1='0' group by status
-	</select>
 </mapper>

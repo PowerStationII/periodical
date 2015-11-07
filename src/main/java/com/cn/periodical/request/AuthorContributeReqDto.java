@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cn.periodical.enums.ArticleTypeEnums;
+import com.cn.periodical.pojo.AddressInfo;
 import com.cn.periodical.pojo.AuthorInfo;
 
 /**
@@ -17,13 +18,14 @@ public class AuthorContributeReqDto extends RequestDto {
 	/**
 	 * article_info ari
 	 * ari.articleId=aai.articleId
+	 * aui.authorId=adi.refId
 	 * 一篇文章(ari) 对应 多个附件(aai) 关联使用article_id
 	 * 一篇文章(ari) 对应 多个作者(aui) 关联使用article_id
+	 * 一个作者(aui) 对应 一个地址信息(adi) 关联使用author_id
 	 * */
 	private java.lang.String userId;
 	private java.lang.String articleName;
 	private java.lang.String articleId;
-	private ArticleTypeEnums articleType;
 	private java.lang.String articleCnTitle;
 	private java.lang.String articleEnTile;
 	private java.lang.String articleCnSummary;
@@ -34,6 +36,14 @@ public class AuthorContributeReqDto extends RequestDto {
 	private java.lang.String investSection;
 	private java.lang.String classificationNums;
 	private java.lang.String documentCode;
+	private java.lang.String remark;
+	private java.lang.String referenceDoc;
+	private java.lang.Integer totalPics;
+	private java.lang.Integer totalTabs;
+	private java.lang.Integer totalPages;
+	private java.lang.String fundTitle;
+	private ArticleTypeEnums articleType;
+
 	/**
 	 * article_attachment_info aai
 	 * */
@@ -52,6 +62,11 @@ public class AuthorContributeReqDto extends RequestDto {
 	 * author_info
 	 * */
 	List<AuthorInfo> authorList = new ArrayList<AuthorInfo>();
+	
+	/**
+	 * address_info
+	 * */
+	List<AddressInfo> addressInfos=new ArrayList<AddressInfo>();
 
 	public java.lang.String getUserId() {
 		return userId;
@@ -252,9 +267,60 @@ public class AuthorContributeReqDto extends RequestDto {
 	public void setAuthorList(List<AuthorInfo> authorList) {
 		this.authorList = authorList;
 	}
-	
-	
-	
-	
 
+	public List<AddressInfo> getAddressInfos() {
+		return addressInfos;
+	}
+
+	public void setAddressInfos(List<AddressInfo> addressInfos) {
+		this.addressInfos = addressInfos;
+	}
+
+	public java.lang.String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(java.lang.String remark) {
+		this.remark = remark;
+	}
+
+	public java.lang.String getReferenceDoc() {
+		return referenceDoc;
+	}
+
+	public void setReferenceDoc(java.lang.String referenceDoc) {
+		this.referenceDoc = referenceDoc;
+	}
+
+	public java.lang.Integer getTotalPics() {
+		return totalPics;
+	}
+
+	public void setTotalPics(java.lang.Integer totalPics) {
+		this.totalPics = totalPics;
+	}
+
+	public java.lang.Integer getTotalTabs() {
+		return totalTabs;
+	}
+
+	public void setTotalTabs(java.lang.Integer totalTabs) {
+		this.totalTabs = totalTabs;
+	}
+
+	public java.lang.Integer getTotalPages() {
+		return totalPages;
+	}
+
+	public void setTotalPages(java.lang.Integer totalPages) {
+		this.totalPages = totalPages;
+	}
+
+	public java.lang.String getFundTitle() {
+		return fundTitle;
+	}
+
+	public void setFundTitle(java.lang.String fundTitle) {
+		this.fundTitle = fundTitle;
+	}
 }
