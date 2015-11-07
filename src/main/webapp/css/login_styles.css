@@ -1,4 +1,4 @@
-﻿body {
+body {
   margin:0px;
   background-image:none;
   position:static;
@@ -355,7 +355,7 @@
 #u28 {
   position:absolute;
   left:862px;
-  top:384px;
+  top:354px;
   width:27px;
   height:16px;
 }
@@ -381,7 +381,7 @@
 #u30 {
   position:absolute;
   left:898px;
-  top:384px;
+  top:354px;
   width:4px;
   height:16px;
 }
@@ -402,7 +402,7 @@
 #u32 {
   position:absolute;
   left:912px;
-  top:384px;
+  top:354px;
   width:66px;
   height:16px;
 }

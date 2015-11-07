@@ -12,7 +12,13 @@
   </head>
   <script type="text/javascript"> 	
 	function submitForm(){  
-		$('#sub').submit();
+		if ($('#u34_input').val()=="" || $('#u35_input').val()=="") {
+			alert('请输入用户名和密码');
+			return;
+		}
+		else {
+			$('#sub').submit();
+		}
 	}  
   </script>
 
@@ -139,16 +145,7 @@
         </div>
       </div>
 </form>
-      <!-- Unnamed (Checkbox) -->
-      <div id="u26" class="ax_checkbox">
-        <label for="u26_input">
-          <!-- Unnamed () -->
-          <div id="u27" class="text">
-            <p><span>记录我的登录状态</span></p>
-          </div>
-        </label>
-        <input id="u26_input" type="checkbox" value="checkbox"/>
-      </div>
+      
 
       <!-- Unnamed (Shape) -->
       <div id="u28" class="ax_paragraph">
