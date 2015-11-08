@@ -41,5 +41,13 @@ public class AuthorArticleQueryServiceImpl implements AuthorArticleQueryService 
 		
 		return list;
 	}
-
+	
+	
+	public ArticleInfo queryArticleDetailInfo(String articleId) {
+		// TODO Auto-generated method stub
+		ArticleInfoQuery articleInfoQuery = new ArticleInfoQuery();
+		articleInfoQuery.setArticleId(articleId);
+		List<ArticleInfo> articleInfoList = articleInfoManager.queryList(articleInfoQuery);
+		return articleInfoList.get(0);
+	}
 }

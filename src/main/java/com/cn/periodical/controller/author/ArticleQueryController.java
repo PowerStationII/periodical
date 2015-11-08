@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.response.AuthorArticleQueryRespDto;
 import com.cn.periodical.service.AuthorArticleQueryService;
 /**
@@ -56,11 +57,9 @@ public class ArticleQueryController extends AuthorController{
 		logger.info("稿件明细Page:["+artilceId+"]");
 		ModelAndView mav = new ModelAndView("articleQueryDetailPage");
 		
-//		List<ArticleQueryRespDto> list = articleQueryService.queryArticleInfo(userId);
-//		
-//		logger.info("稿件明细出参:["+JSON.toJSONString(list)+"]");
-//		
-//		mav.addObject("list", list);
+		ArticleInfo articleInfo = articleQueryService.queryArticleDetailInfo(artilceId);
+		mav.addObject("articleInfo", articleInfo);
+		logger.info("稿件明细出参:["+JSON.toJSONString(articleInfo)+"]");
 		return mav;
 	}
 }
