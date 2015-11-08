@@ -46,41 +46,6 @@ public class ContributeController extends AuthorController{
 		return mav;
 	}
 	
-	private boolean saveFile(MultipartFile file,HttpServletRequest request) {  
-        // 判断文件是否为空  
-        if (!file.isEmpty()) {  
-            try {  
-            	String fileName = "E://temp"+File.separator+file.getOriginalFilename();
-            	File uploadFile = new File(fileName); 
-                logger.info(uploadFile.getAbsolutePath());
-                // 转存文件  
-                file.transferTo(uploadFile);  
-                return true;  
-            } catch (Exception e) {  
-                e.printStackTrace();  
-            }  
-        }  
-        return false;  
-    }  
-	
-	
-	@RequestMapping(value="/toUpload",method = RequestMethod.POST)
-	public ModelAndView toUpload(HttpServletRequest request,@RequestParam(value="files", required=true) MultipartFile[] files){
-		//判断file数组不能为空并且长度大于0  
-        if(files!=null&&files.length>0){  
-            //循环获取file数组中得文件  
-            for(int i = 0;i<files.length;i++){  
-                MultipartFile file = files[i];  
-                logger.info(file.getOriginalFilename());
-                //保存文件  
-                saveFile(file,request);  
-            }  
-        }  
-        ModelAndView mav=new ModelAndView("portal");
-        return mav;
-	}
-	
-	
 	/**
 	 * 投稿按钮
 	 * HttpServletRequest request
@@ -90,32 +55,24 @@ public class ContributeController extends AuthorController{
 	@RequestMapping(value="/toContribute",method = RequestMethod.POST)
 	public ModelAndView toContribute(@ModelAttribute(value="contributeRequestDto") AuthorContributeReqDto contributeRequestDto,
 			@RequestParam(value="files", required=true) MultipartFile[] files,HttpServletRequest request) {
-		logger.info("提交投稿信息入参:["+JSON.toJSONString(contributeRequestDto)+"]");
-		logger.info("提交投稿信息入参:["+JSON.toJSONString(files.length)+"]");
-		//判断file数组不能为空并且长度大于0  
-        if(files!=null&&files.length>0){  
-            //循环获取file数组中得文件  
-            for(int i = 0;i<files.length;i++){  
-                MultipartFile file = files[i];  
-                logger.info(file.getOriginalFilename());
-                //保存文件  
-                saveFile(file,request);  
-            }  
-        }  
-		ModelAndView mav = new ModelAndView("author_area");//不能去这个页面
-		mav.addObject("userId", contributeRequestDto.getUserId());
-		mav.addObject("roleId", contributeRequestDto.getRoleId());
-		/**
-		 * 	保存投稿信息 
-		 * */
-		logger.info("保存新稿信息.....Start");
-		try {
-			contributeService.saveArticle(contributeRequestDto);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		logger.info("提交投稿信息入参:["+JSON.toJSONString(contributeRequestDto)+"]&上传附件数量["+files.length+"]");
+		ModelAndView mav = null;
+		try{
+	        mav=new ModelAndView("author_area");//不能去这个页面
+			mav.addObject("userId", contributeRequestDto.getUserId());
+			mav.addObject("roleId", contributeRequestDto.getRoleId());
+			/**
+			 * 	保存投稿信息 
+			 * */
+			logger.info("保存新稿信息.....Start");
+			contributeService.saveArticle(contributeRequestDto,files,request);
+			logger.info("保存新稿信息.....end");
+			return mav;
+		}catch(Exception e){
+			logger.info("投稿功能异常!!!!!!",e);
+			mav=new ModelAndView("error");
+			return mav;
 		}
-		logger.info("保存新稿信息.....end");
-		return mav;
+		
 	}
 }
