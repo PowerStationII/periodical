@@ -227,8 +227,8 @@
 				<div class="con_core_info_div03 paddingl80">
 					<div class="attr_con">
 						<a class="chan_btn right wid93 margr40 margt10"
-							href="${rc.contextPath}/params/authorInfoIndex">返回</a> <a
-							class="chan_btn right wid93 margr40 margt10" onclick="submit()">保存</a>
+							href="${rc.contextPath}/params/authorInfoIndex">返回</a> 
+							<input type="submit" value="保存">
 					</div>
 				</div>
 			</div>

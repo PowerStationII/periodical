@@ -50,7 +50,7 @@ public class PInfoSettingController {
 	/**
 	 * 修改个人信息
 	 */
-	@RequestMapping(value = "/toUpdateSetting", method = RequestMethod.GET)
+	@RequestMapping(value = "/toUpdateSetting", method = RequestMethod.POST)
 	public ModelAndView toUpdateSettingPage(@RequestParam("userId") String userId, @ModelAttribute AuthorInfo authorInfo) {
 		logger.info("userId:[" + userId + "]修改个人信息");
 		ModelAndView mav = new ModelAndView("updateSettingPage");
