@@ -19,17 +19,17 @@
   			$('#tougao').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "author/toContributePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "author/toContributePage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#gaojianchaxun').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "author/toArticleQueryPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "author/toArticleQueryPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#gaofeichaxun').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "author/toArticleFeePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "author/toArticleFeePage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#xiugaixinxi').click(function(){
   				$('#area').hide();

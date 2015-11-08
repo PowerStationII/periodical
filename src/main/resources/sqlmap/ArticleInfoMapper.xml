@@ -19,6 +19,7 @@
 	  <result column="classification_nums" jdbcType="VARCHAR" property="classificationNums" />
 	  <result column="document_code" jdbcType="VARCHAR" property="documentCode" />
 	  <result column="remark" jdbcType="VARCHAR" property="remark" />
+	  <result column="inovation_point" jdbcType="VARCHAR" property="inovationPoint" />
 	  <result column="reference_doc" jdbcType="VARCHAR" property="referenceDoc" />
 	  <result column="receive_article_time" jdbcType="TIMESTAMP" property="receiveArticleTime" />
 	  <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
@@ -90,6 +91,9 @@
 	    </if>
       <if test="remark != null" >
 	      and remark = #{remark,jdbcType=VARCHAR}
+	    </if>
+      <if test="inovationPoint != null" >
+	      and inovation_point = #{inovationPoint,jdbcType=VARCHAR}
 	    </if>
       <if test="referenceDoc != null" >
 	      and reference_doc = #{referenceDoc,jdbcType=VARCHAR}
@@ -187,6 +191,9 @@
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="inovationPoint != null">
+        inovation_point = #{inovationPoint,jdbcType=VARCHAR},
+      </if>
       <if test="referenceDoc != null">
         reference_doc = #{referenceDoc,jdbcType=VARCHAR},
       </if>
@@ -250,6 +257,7 @@
     classification_nums,
     document_code,
     remark,
+    inovation_point,
     reference_doc,
     receive_article_time,
     publish_time,
@@ -284,6 +292,7 @@
         classification_nums = #{classificationNums,jdbcType=VARCHAR},
         document_code = #{documentCode,jdbcType=VARCHAR},
         remark = #{remark,jdbcType=VARCHAR},
+        inovation_point = #{inovationPoint,jdbcType=VARCHAR},
         reference_doc = #{referenceDoc,jdbcType=VARCHAR},
         receive_article_time = #{receiveArticleTime,jdbcType=TIMESTAMP},
         publish_time = #{publishTime,jdbcType=TIMESTAMP},
@@ -351,6 +360,9 @@
     <if test="remark != null">
       remark,
     </if>
+    <if test="inovationPoint != null">
+      inovation_point,
+    </if>
     <if test="referenceDoc != null">
       reference_doc,
     </if>
@@ -412,6 +424,7 @@
     #{classificationNums,jdbcType=VARCHAR},
     #{documentCode,jdbcType=VARCHAR},
     #{remark,jdbcType=VARCHAR},
+    #{inovationPoint,jdbcType=VARCHAR},
     #{referenceDoc,jdbcType=VARCHAR},
     #{receiveArticleTime,jdbcType=TIMESTAMP},
     #{publishTime,jdbcType=TIMESTAMP},
@@ -476,6 +489,9 @@
     </if>
     <if test="remark != null">
       #{remark,jdbcType=VARCHAR},
+    </if>
+    <if test="inovationPoint != null">
+      #{inovationPoint,jdbcType=VARCHAR},
     </if>
     <if test="referenceDoc != null">
       #{referenceDoc,jdbcType=VARCHAR},

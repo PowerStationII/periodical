@@ -50,8 +50,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 	public void saveArticle(AuthorContributeReqDto contributeRequestDto) throws Exception {
 		// TODO Auto-generated method stub
 		String articleId= UUID.randomUUID().toString().replaceAll("-", "");
-		String authorId= UUID.randomUUID().toString().replaceAll("-", "");
-		String addressId= UUID.randomUUID().toString().replaceAll("-", "");
+		
 		
 		final ArticleInfo articleInfo =new ArticleInfo();
 		articleInfo.setArticleCnKeywords(contributeRequestDto.getArticleCnKeywords());
@@ -81,21 +80,27 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		articleInfo.setReferenceDoc(contributeRequestDto.getReferenceDoc());
 		articleInfo.setReceiveArticleTime(new Date());
 		articleInfo.setPublishTime(null);
+		articleInfo.setInovationPoint(contributeRequestDto.getInovationPoint());
 		articleInfo.setIsfund(contributeRequestDto.getIsfund());
 		
 		List<AuthorInfo> authorInfos = contributeRequestDto.getAuthorList();
 		List<AddressInfo> addressInfos = contributeRequestDto.getAddressInfos();
 		logger.info(authorInfos.size()+"------------"+addressInfos.size());
-		for(int i=0;i<authorInfos.size()-1;i++){
+		
+		
+		for(int i=0;i<authorInfos.size();i++){
+			String authorId= UUID.randomUUID().toString().replaceAll("-", "");
+			String addressId= UUID.randomUUID().toString().replaceAll("-", "");
+			
 			AuthorInfo authorInfo = authorInfos.get(i);
 			AddressInfo addressInfo = addressInfos.get(i);
-			
 			
 			authorInfo.setArticleId(articleId);
 			authorInfo.setAuthorId(authorId);
 			
 			addressInfo.setRefId(authorId);
 			addressInfo.setAddressId(addressId);
+			addressInfo.setRefRoleId(contributeRequestDto.getRoleId());
 			authorInfoManager.saveAuthorInfo(authorInfo);
 			addressInfoManager.saveAddressInfo(addressInfo);
 		}

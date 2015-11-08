@@ -43,6 +43,8 @@ public class AuthorContributeReqDto extends RequestDto {
 	private java.lang.Integer totalPages;
 	private java.lang.String fundTitle;
 	private ArticleTypeEnums articleType;
+	private String inovationPoint;
+	private String roleId;
 
 	/**
 	 * article_attachment_info aai
@@ -323,4 +325,22 @@ public class AuthorContributeReqDto extends RequestDto {
 	public void setFundTitle(java.lang.String fundTitle) {
 		this.fundTitle = fundTitle;
 	}
+
+	public String getInovationPoint() {
+		return inovationPoint;
+	}
+
+	public void setInovationPoint(String inovationPoint) {
+		this.inovationPoint = inovationPoint;
+	}
+
+	public String getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
+	
+	
 }

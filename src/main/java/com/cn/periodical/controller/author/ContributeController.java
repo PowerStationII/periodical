@@ -36,10 +36,12 @@ public class ContributeController extends AuthorController{
 	 */
 	@RequestMapping(value="/toContributePage",method = RequestMethod.GET)
 	public ModelAndView toContributePage(@RequestParam("userId") String userId,
+			@RequestParam("roleId") String roleId,
 			HttpServletRequest request) {
 		logger.info("投稿Page:["+userId+"]");
 		ModelAndView mav = new ModelAndView("contributePage");
 		mav.addObject("userId", userId);
+		mav.addObject("roleId", roleId);
 		return mav;
 	}
 	
@@ -101,6 +103,7 @@ public class ContributeController extends AuthorController{
 		
 		ModelAndView mav = new ModelAndView("author_area");//不能去这个页面
 		mav.addObject("userId", contributeRequestDto.getUserId());
+		mav.addObject("roleId", contributeRequestDto.getRoleId());
 		/**
 		 * 	保存投稿信息 
 		 * */

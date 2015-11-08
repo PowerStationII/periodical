@@ -76,7 +76,17 @@
   			});
   			
   			$('#add').click(function(){
-  				$('#step3 table tr:nth-last-child(2)').after('<tr><td></td><td><input type="file"  id="sub_upload"></td></tr>');
+  				$('#step3 table tr:nth-last-child(2)').after('<tr><td></td><td><input type="file"  id="sub_upload" name="files"></td></tr>');
+  			});
+  			
+  			$('.isFund').change(function(){
+  				var $selectedvalue = $("input[name='isfund']:checked").val();
+  				// alert($selectedvalue);
+				if ($selectedvalue == 'Y') {
+					$('#fundTitle').show();
+				} else {
+					$('#fundTitle').hide();
+				}
   			})
   		});
 
@@ -203,11 +213,11 @@
 	  			</tr>
 	  			<tr>
 	  				<td>论文相关的研究视频、照片等</td>
-	  				<td><input type="file"  id="sub_upload"><a>【有助于责编、审稿专家、读者更好理解论文的研究视频、照片等附件，请（打包后）在此上传。】</a></td>
+	  				<td><input type="file"  id="sub_upload" name="files"><a>【有助于责编、审稿专家、读者更好理解论文的研究视频、照片等附件，请（打包后）在此上传。】</a></td>
 	  			</tr>
 	  			<tr>
 	  				<td>论文学术不端全文检测报告</td>
-	  				<td><input type="file"  id="sub_upload"><a>【论文的同方、万方等第三方（全文）学术不端检测报告，请（打包后）在此上传】</a></td>
+	  				<td><input type="file"  id="sub_upload" name="files"><a>【论文的同方、万方等第三方（全文）学术不端检测报告，请（打包后）在此上传】</a></td>
 	  			</tr>
 	  			<tr>
 	  				<td><input type="button"  id="add"  value="添加其他附件"></td>
@@ -220,6 +230,7 @@
 <!-- </form> -->
 <form action="../author/toContribute" method="POST">
 <input type="hidden" name="userId" value=${userId}>
+<input type="hidden" name="roleId" value=${roleId}>
   	<div id="step4">
   			<div  id="articleInfo">
   				<a style="margin-left:400px;font-size:20px;">填写稿件信息</a><br>
@@ -246,7 +257,7 @@
   					<tr>
   						<td>中文摘要</td>
   						<td>
-  							<textarea name="mytextarea" name="articleCnSummary" style="height:40px;width:200px"></textarea><br>
+  							<textarea name="articleCnSummary" style="height:40px;width:200px"></textarea><br>
   							【四要素：研究目的、方法、结果（核心部分）、结论必须完备】
   						</td>
   					</tr>
@@ -269,7 +280,7 @@
   					<tr>
   						<td>英文摘要</td>
   						<td>
-  							<textarea name="mytextarea" name="articleEnSummary" style="height:40px;width:200px"></textarea><br>
+  							<textarea name="articleEnSummary" style="height:40px;width:200px"></textarea><br>
   							【为适应国际学术交流需要，编辑部要求论文英文摘要需500字以上，800-1000字最好，并“拥有与论文同等量的主要信息”，与中文摘要无须一一对应】
   						</td>
   					</tr>
@@ -282,9 +293,16 @@
   						</td>
   					</tr>
   					<tr>
+  						<td>是否是基金项目</td>
+  						<td>
+  							<input class="isFund" type="radio" value="Y" name="isfund"/>是 
+							<input class="isFund" type="radio" checked="checked" value="N" name="isfund"/>否
+  						</td>
+  					</tr>
+  					<tr id="fundTitle"  style="display:none;">
   						<td>基金项目中文名称</td>
   						<td>
-  							<input id="chTitle" name="fundTile" class="easyui-validatebox" 
+  							<input name="fundTitle" class="easyui-validatebox"
 								data-options="required:true,missingMessage:'不允许为空'" /><br>
 								【如系统未从稿件文档中提取到论文的基金项目，请直接在上面文本框中输入，或点击框左边的“浏览”选择基金项目。非基金资助类论文请输入“无基金”或“非基金”】
   						</td>
@@ -293,9 +311,9 @@
   						<td>拟投栏目</td>
   						<td>
   							<select id="investSection" class="easyui-combobox" name="investSection" style="width:140px;" data-options="editable:false" > 
-							    <option  value="IDCARD">农学、农业基础科学</option> 
-							    <option  value="PASSPORT">林学、园艺</option> 
-							    <option  value="">水产、渔业</option>    
+							    <option  value="1">农学、农业基础科学</option> 
+							    <option  value="2">林学、园艺</option> 
+							    <option  value="3">水产、渔业</option>    
 							</select><br>
 							【从下拉列表框中选择最适合或最接近您论文的栏目】
   						</td>
@@ -332,7 +350,7 @@
   					<tr>
   						<td>论文查新点、学术（产业或生态）价值（300字以内）</td>
   						<td>
-  							<textarea name="mytextarea" style="height:40px;width:200px" name="referenceDoc"></textarea><br>
+  							<textarea style="height:40px;width:200px" name="inovationPoint"></textarea><br>
   							【审稿时的重要参考！！请认真填写】
   						</td>
   					</tr>
@@ -348,8 +366,8 @@
   					<tr>
   						<td>是通讯作者？</td>
   						<td>
-  							<input type="radio" value="0" checked="checked" name="authorList[0].isContacter"/>是 
-							<input type="radio" value="1" name="authorList[0].isContacter"/>否   提示:若第一作者不是通讯作者请选择其他作者为通讯作者或点击"添加更多作者".
+  							<input type="radio" value="Y" name="authorList[0].isContacter"/>是 
+							<input type="radio" value="N"  checked="checked" name="authorList[0].isContacter"/>否   提示:若第一作者不是通讯作者请选择其他作者为通讯作者或点击"添加更多作者".
   						</td>
   					</tr>
   					<tr>
@@ -441,7 +459,7 @@
   			<input type="button"   id="more"  value="添加更多作者。。。"><br><br>
   			<div   id="text">
   				<a style="font-size:20px;color:#0000CC;">参考信息</a><br>
-  				<textarea name="mytextarea" style="height:40px;width:200px"></textarea><br>
+  				<textarea name="referenceDoc" style="height:40px;width:200px"></textarea><br>
   				<a style="font-size:12px;">
 	  				手工从word中拷贝并黏贴到上面“参考文献”框中。黏贴后检查：
 					1.每条参考文献前是否用数字标注顺序，并用[]括起来

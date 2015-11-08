@@ -32,6 +32,7 @@ public class ArticleInfo implements Serializable{
 	private java.lang.String classificationNums;
 	private java.lang.String documentCode;
 	private java.lang.String remark;
+	private java.lang.String inovationPoint;
 	private java.lang.String referenceDoc;
 	private java.util.Date receiveArticleTime;
 	private java.util.Date publishTime;
@@ -301,7 +302,22 @@ public class ArticleInfo implements Serializable{
 		return this.remark;
 	}
 	/**
-	 * 论文创新点
+	 * 论文查新点、学术
+	 * @param inovationPoint
+	 */
+	public void setInovationPoint(java.lang.String inovationPoint) {
+		this.inovationPoint = inovationPoint;
+	}
+	
+	/**
+	 * 论文查新点、学术
+	 * @return
+	 */
+	public java.lang.String getInovationPoint() {
+		return this.inovationPoint;
+	}
+	/**
+	 * 参考信息
 	 * @param referenceDoc
 	 */
 	public void setReferenceDoc(java.lang.String referenceDoc) {
@@ -309,7 +325,7 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 论文创新点
+	 * 参考信息
 	 * @return
 	 */
 	public java.lang.String getReferenceDoc() {
