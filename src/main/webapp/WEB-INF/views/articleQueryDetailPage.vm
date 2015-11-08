@@ -22,15 +22,15 @@
 	<div>
 		<input type="hidden" value="$!{articleInfo.id}" id="id" name="id">
 		<table style="border:1px solid;width:800px;" rules="all">
-			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
-						<span class="right">用户名：</span>
+			<tr style="display:none;">
+				<td><label>
+						<span class="right">用户ID：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.userId}" id="userId" name="userId"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">稿件名称：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -38,7 +38,7 @@
 					name="articleName"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">稿件编号：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -46,7 +46,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">稿件类型：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -54,7 +54,7 @@
 					name="articleType"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">中文标题：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -62,7 +62,7 @@
 					name="articleCnTitle"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">英文标题：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -70,7 +70,7 @@
 					name="articleEnTile"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">中文摘要：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -78,7 +78,7 @@
 					name="articleCnSummary"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">英文摘要：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -86,7 +86,7 @@
 					name="articleEnSummary"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">中文关键词：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -94,7 +94,7 @@
 					name="articleCnKeywords"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">英文关键词：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -102,14 +102,14 @@
 					name="articleEnKeywords"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">是否是基金项目：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.isfund}" id="isfund" name="isfund"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">拟投栏目：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -117,7 +117,7 @@
 					name="investSection"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">中国分类号：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -125,7 +125,7 @@
 					name="classificationNums"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">文献标识码：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -133,14 +133,14 @@
 					name="documentCode"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">论文用途及要求备注：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.remark}" id="remark" name="remark"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">论文查新点、学术：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -148,7 +148,7 @@
 					name="inovationPoint"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">参考信息：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -156,7 +156,7 @@
 					name="referenceDoc"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">图（片）数：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -164,7 +164,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">表格数：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -172,7 +172,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">页数：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
@@ -180,7 +180,7 @@
 					name="totalPages"></td>
 			</tr>
 			<tr>
-				<td><label class="label_txt wid135 txtright margt10 margr8">
+				<td><label>
 						<span class="right">基金项目中文名称：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
