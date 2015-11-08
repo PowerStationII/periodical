@@ -118,8 +118,8 @@
 		.mode_name{height:30px;background:#4DA20B;line-height:30px;color:#ffffff}
   		.cLeft{height:200px;width:180px;margin-left:auto;margin-right:auto;margin-top:10px;border-radius:5px;}
 		.leftUp{height:60px;width:180px;margin-left:auto;margin-right:auto;border:1px solid #349000;border-radius:5px;}
-		.li1,.li2,.li3,.li4,.li5,.li6,.li7,.li8,.li9,.li10,.li11,.li12,.li13,.li14,.li15,.li16{height:30px;line-height:30px;width:160px;margin-left:auto;margin-right:auto;text-align:center;}
-		.li1,.li2,.li3,.li4,.li10,.li11,.li12,.li14{border-top:1px solid #349000;border-left:1px solid #349000;border-right:1px solid #349000;}
+		.li1,.li2,.li3,.li4,.li5,.li6,.li7,.li8,.li9,.li10,.li11,.li12,.li13,.li14,.li15,.li16,.li17{height:30px;line-height:30px;width:160px;margin-left:auto;margin-right:auto;text-align:center;}
+		.li1,.li2,.li3,.li4,.li10,.li11,.li12,.li14,.li18{border-top:1px solid #349000;border-left:1px solid #349000;border-right:1px solid #349000;}
 		.li5,.li6,.li7,.li8,.li9,.li13,.li15,.li16{border:1px solid #349000;}
 		a{text-decoration:none;color:#000000}
   </style>
@@ -194,6 +194,18 @@
 	       			<div class="easyui-accordion" style="width:180px;height:80px;">
 	       				<div title="发行管理" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
 					        <div  class="li16" id="qianfa">签发</div>
+					    </div>   
+	       			</div>
+	       		</div>
+	       </div>
+	       #elseif(${roleId}=='1005')
+	       <div id="1009"  class="cLeft">
+	       		<div  class="mode_name">编辑专家管理</div>
+	       		<div>
+	       			<div class="easyui-accordion" style="width:180px;height:80px;">
+	       				<div title="添加管理" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
+					        <div  class="li17" id="bianji">编辑</div>
+					        <div  class="li18" id="zhuangjia">专家</div>
 					    </div>   
 	       			</div>
 	       		</div>
