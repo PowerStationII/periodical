@@ -11,306 +11,186 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script>
+	$(function(){
+		$('#back').click(function(){
+			history.go(-1);
+		})
+	})
+</script>
 <body>
-	<div class="con_article_title02 paddtb20">
+	<div>
 		<input type="hidden" value="$!{articleInfo.id}" id="id" name="id">
-
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.userId}" id="userId" name="userId">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+		<table style="border:1px solid;width:800px;" rules="all">
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">用户名：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.userId}" id="userId" name="userId"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">稿件名称：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.articleName}" id="articleName"
-					name="articleName">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">稿件编号：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="articleName"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">稿件编号：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.articleId}" id="articleId" name="articleId">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">稿件类型：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+				</td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">稿件类型：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.articleType}" id="articleType"
-					name="articleType">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="articleType"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">中文标题：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.articleCnTitle}" id="articleCnTitle"
-					name="articleCnTitle">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="articleCnTitle"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">英文标题：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.articleEnTile}" id="articleEnTile"
-					name="articleEnTile">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="articleEnTile"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">中文摘要：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.articleCnSummary}" id="articleCnSummary"
-					name="articleCnSummary">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="articleCnSummary"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">英文摘要：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.articleEnSummary}" id="articleEnSummary"
-					name="articleEnSummary">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.artilce}" id="artilce" name="artilce">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="articleEnSummary"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">中文关键词：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.articleCnKeywords}" id="articleCnKeywords"
-					name="articleCnKeywords">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="articleCnKeywords"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">英文关键词：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.articleEnKeywords}" id="articleEnKeywords"
-					name="articleEnKeywords">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.isfund}" id="isfund" name="isfund">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">拟投栏目：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="articleEnKeywords"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">是否是基金项目：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.isfund}" id="isfund" name="isfund"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">拟投栏目：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.investSection}" id="investSection"
-					name="investSection">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">中国分类号：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="investSection"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">中国分类号：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.classificationNums}" id="classificationNums"
-					name="classificationNums">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">文献标识码：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="classificationNums"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">文献标识码：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.documentCode}" id="documentCode"
-					name="documentCode">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">论文用途及要求备注：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.remark}" id="remark" name="remark">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">论文查新点、学术：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="documentCode"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">论文用途及要求备注：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.remark}" id="remark" name="remark"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">论文查新点、学术：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.inovationPoint}" id="inovationPoint"
-					name="inovationPoint">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">参考信息：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="inovationPoint"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">参考信息：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.referenceDoc}" id="referenceDoc"
-					name="referenceDoc">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="referenceDoc"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">图（片）数：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.totalPics}" id="totalPics" name="totalPics">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+				</td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">表格数：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.totalTabs}" id="totalTabs" name="totalTabs">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+				</td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">页数：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.totalPages}" id="totalPages"
-					name="totalPages">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
+					name="totalPages"></td>
+			</tr>
+			<tr>
+				<td><label class="label_txt wid135 txtright margt10 margr8">
+						<span class="right">基金项目中文名称：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
 					value="$!{articleInfo.fundTitle}" id="fundTitle" name="fundTitle">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
-		<div class="blank20"></div>
-		<div class="con_core_info_div02 rel_pos wid500 padding0">
-			<label class="label_txt wid135 txtright margt10 margr8"> <span
-				class="right">：</span></label>
-			<div class="input_con_type_top wid343">
-				<input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.state}" id="state" name="state">
-			</div>
-			<div style="display: none; margin-left: 150px;" class="left wid360">
-				<span class="label_txt wid190 margt10 red01" error="articleInfo"></span>
-			</div>
-		</div>
+				</td>
+			</tr>
+		</table>
 	</div>
-	<div class="con_core_info_div03 paddingl80">
-		<div class="attr_con">
-			<a class="chan_btn right wid93 margr40 margt10"
-				href="${rc.contextPath}/params/articleInfoIndex">返回</a>
-		</div>
+	<div class="attr_con">
+		<input type="button"  value="返回"  id="back"/>
 	</div>
 </body>
 </html>
