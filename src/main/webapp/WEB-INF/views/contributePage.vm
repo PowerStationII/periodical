@@ -260,7 +260,7 @@
   					<tr>
   						<td>稿件类型</td>
   						<td>
-  							<select id="articleType" class="easyui-combobox" name="articleType" style="width:80px;" data-options="editable:false" > 
+  							<select id="articleType" class="easyui-combobox" name="articleType" style="width:80px;" data-options="editable:false,panelHeight:'auto'" > 
 							    <option  value="NEW_ARTICLE">新稿</option> 
 							    <option  value="REPAIR_ARTICLE">返修重投</option>     
 							</select><br>
@@ -331,7 +331,7 @@
   					<tr>
   						<td>拟投栏目</td>
   						<td>
-  							<select id="investSection" class="easyui-combobox" name="investSection" style="width:140px;" data-options="editable:false" > 
+  							<select id="investSection" class="easyui-combobox" name="investSection" style="width:140px;" data-options="editable:false,panelHeight:'auto'" > 
 							    <option  value="1">农学、农业基础科学</option> 
 							    <option  value="2">林学、园艺</option> 
 							    <option  value="3">水产、渔业</option>    
