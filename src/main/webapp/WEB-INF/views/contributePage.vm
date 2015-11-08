@@ -73,19 +73,18 @@
   			});
   			$('#more').click(function(){
   				var author = $('#author1');
-  				author.append($('#author1 table:first').clone());
+  				var ss = $('#authorTab1').clone();
+  				ss.attr('id','authorTab'+(count+2));
+  				var names = ss.find('[name*=0]');
+  				$.each(names,function(i){
+  					names.eq(i).attr('name',names.eq(i).attr('name').replace('0',(count+1).toString()));
+  				});
+  				ss.find('tr:first td:last').text('第'+(count+2)+'作者');
+  				ss.find('[type="text"]').val('');
+  				author.append(ss);
   				author.append('<br>');
-  				var authorTab = $('#author1 table');
-  				for (var i=1;i<authorTab.length;i++) {
-  					authorTab.children().eq(i).children().eq(0).children().eq(1).text('第'+(i+1)+'作者');
-  				}
+  				
   				count = count + 1;
-  				var td = $('#author1 table:last [name*="0"]');
-  				for (var i=0;i<td.length;i++) {
-  					td.eq(i).val('');
-  					var rep = td.eq(i).attr('name').replace("0",count.toString());
-  					td.eq(i).attr('name',rep);
-  				}
   				if (count>=1) {
   					$('#del').remove();
   					$('#author1').append('<input type="button" value="删除作者" id="del" onclick="delAuthor()">');
@@ -270,8 +269,7 @@
   					<tr>
   						<td>中文标题</td>
   						<td>
-  							<input id="chTitle" name="articleCnTitle" class="easyui-validatebox" 
-							data-options="required:true,missingMessage:'不允许为空'" /><br>
+  							<input  type="text"   name="articleCnTitle"/><br>
 							<a class="txtSize">【是论文内容的高度概括，是连接论文和读者的桥梁，亦是论文的“眼”，应明确、简炼、新颖、醒目，外延和内涵恰如其分】</a>
   						</td>
   					</tr>
@@ -285,17 +283,15 @@
   					<tr>
   						<td>中文关键词</td>
   						<td>
-	  						<input id="chTitle" name="articleCnKeywords" class="easyui-validatebox" 
-								data-options="required:true,missingMessage:'不允许为空'" /><br>
-								<a class="txtSize">【代表论文主题内容信息条目的词组或术语，3-8个为宜】</a>
+  							<input  type="text"   name="articleCnKeywords"/><br>
+							<a class="txtSize">【代表论文主题内容信息条目的词组或术语，3-8个为宜】</a>
   						</td>
   					</tr>
   					<tr>
   						<td>英文标题</td>
   						<td>
-  							<input id="chTitle" name="articleEnTile" class="easyui-validatebox" 
-								data-options="required:true,missingMessage:'不允许为空'" /><br>
-								<a class="txtSize">【英文标题最多只能输入250个英文字母，空格按一个英文字母计算】</a>
+  							<input  type="text"   name="articleEnTile"/><br>
+							<a class="txtSize">【英文标题最多只能输入250个英文字母，空格按一个英文字母计算】</a>
   						</td>
   					</tr>
   					<tr>
@@ -308,9 +304,8 @@
   					<tr>
   						<td>英文关键词</td>
   						<td>
-  							<input id="chTitle" name="articleEnKeywords" class="easyui-validatebox" 
-								data-options="required:true,missingMessage:'不允许为空'" /><br>
-								<a class="txtSize">【英文标题最多只能输入250个英文字母，空格按一个英文字母计算】</a>
+  							<input  type="text"   name="articleEnKeywords"/><br>
+							<a class="txtSize">【英文标题最多只能输入250个英文字母，空格按一个英文字母计算】</a>
   						</td>
   					</tr>
   					<tr>
@@ -323,9 +318,8 @@
   					<tr id="fundTitle"  style="display:none;">
   						<td>基金项目中文名称</td>
   						<td>
-  							<input name="fundTitle" class="easyui-validatebox"
-								data-options="required:true,missingMessage:'不允许为空'" /><br>
-								<a class="txtSize">【如系统未从稿件文档中提取到论文的基金项目，请直接在上面文本框中输入，或点击框左边的“浏览”选择基金项目。非基金资助类论文请输入“无基金”或“非基金”】</a>
+  							<input  type="text"   name="fundTitle"/><br>
+							<a class="txtSize">【如系统未从稿件文档中提取到论文的基金项目，请直接在上面文本框中输入，或点击框左边的“浏览”选择基金项目。非基金资助类论文请输入“无基金”或“非基金”】</a>
   						</td>
   					</tr>
   					<tr>
@@ -342,22 +336,19 @@
   					<tr>
   						<td>页数</td>
   						<td>
-  							<input id="totalPages" class="easyui-validatebox" name="totalPages"
-								data-options="required:true,missingMessage:'不允许为空'" /><br>
+  							<input  type="text"   name="totalPages"/><br>
   						</td>
   					</tr>
   					<tr>
   						<td>图（片）数</td>
   						<td>
-  							<input id="totalPics" class="easyui-validatebox" name="totalPics"
-								data-options="required:true,missingMessage:'不允许为空'" /><br>
+  							<input  type="text"   name="totalPics"/><br>
   						</td>
   					</tr>
   					<tr>
   						<td>表格数</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox" name="totalTabs"
-								data-options="required:true,missingMessage:'不允许为空'" /><br>
+  							<input  type="text"   name="totalTabs"/><br>
   						</td>
   					</tr>
   					<tr>
@@ -378,7 +369,7 @@
   			</div><br><br>
   			<div   id="author1">
   				<a style="font-size:20px;color:#0000CC;">作者信息</a><br>
-  				<table  style="border:1px solid black;" rules="all">
+  				<table  id="authorTab1" style="border:1px solid black;" rules="all">
   					<tr>
   						<td>稿件类型</td>
   						<td>第1作者</td>
@@ -393,14 +384,13 @@
   					<tr>
   						<td>真实姓名</td>
   						<td>
-  							<input id="chTitle" name="authorList[0].authorName" class="easyui-validatebox" 
-								data-options="required:true,missingMessage:'不允许为空'" />
+  							<input  type="text"   name="authorList[0].authorName"/>
   						</td>
   					</tr>
   					<tr>
   						<td>性别</td>
   						<td>
-  							<input  type="radio"   value="male" name="authorList[0].sex"/>男
+  							<input  type="radio"   checked="checked"  value="male" name="authorList[0].sex"/>男
 							<input  type="radio"  value="female" name="authorList[0].sex"/>女<br>
   						</td>
   					</tr>
@@ -414,62 +404,54 @@
   					<tr>
   						<td>单位</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"   name="authorList[0].companyName"
-								data-options="required:true,missingMessage:'不允许为空'" /><br>
-								<a class="txtSize">【如“城市、邮编”被系统从文档中提取出来并跟在单位后面，请将其去掉。几个单位任（兼）职或在职学习者，请填写稿件编审期间正常收取信函的单位；大学须具体到院系、教研室】</a>
+  							<input  type="text"   name="authorList[0].companyName"/><br>
+							<a class="txtSize">【如“城市、邮编”被系统从文档中提取出来并跟在单位后面，请将其去掉。几个单位任（兼）职或在职学习者，请填写稿件编审期间正常收取信函的单位；大学须具体到院系、教研室】</a>
   						</td>
   					</tr>
   					<tr>
   						<td>邮编</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"  name="addressInfos[0].receivePostcode"
-								data-options="required:true,missingMessage:'不允许为空'" />
+  							<input  type="text"   name="addressInfos[0].receivePostcode"/>
   						</td>
   					</tr>
   					<tr>
   						<td>通信地址</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"  name="addressInfos[0].receiveAddress"
-								data-options="required:true,missingMessage:'不允许为空'" /><br>
-								<a class="txtSize">【系统将调用此地址给您邮寄发票、期刊，请完整填写单位所在的省（市）区（县）街道和门牌号，并确保准确无误】</a>
+  							<input  type="text"   name="addressInfos[0].receiveAddress"/><br>
+							<a class="txtSize">【系统将调用此地址给您邮寄发票、期刊，请完整填写单位所在的省（市）区（县）街道和门牌号，并确保准确无误】</a>
   						</td>
   					</tr>
   					<tr>
   						<td>职称</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"  name="authorList[0].technicalTitle"
-								data-options="required:true,missingMessage:'不允许为空'" />
+  							<input  type="text"   name="authorList[0].technicalTitle"/>
   						</td>
   					</tr>
   					<tr>
   						<td>职务</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"  name="authorList[0].duties"
-								data-options="required:true,missingMessage:'不允许为空'" />
+  							<input  type="text"   name="authorList[0].duties"/>
   						</td>
   					</tr>
   					<tr>
   						<td>手机</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"  name="addressInfos[0].contacterMobile"
-								data-options="required:true,missingMessage:'不允许为空'" /><br>
-								<a class="txtSize">【非常重要！！审稿、费用通知、发票样刊邮寄、联系作者时系统均会短信提示，防止邮件收不到或查看不及时。请确保准确无误】</a>
+  							<input  type="text"   name="addressInfos[0].contacterMobile"/><br>
+							<a class="txtSize">【非常重要！！审稿、费用通知、发票样刊邮寄、联系作者时系统均会短信提示，防止邮件收不到或查看不及时。请确保准确无误】</a>
   						</td>
   					</tr>
   					<tr>
   						<td>Email</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"  name="authorList[0].email"
-								data-options="required:true,missingMessage:'不允许为空'" /><br>
-								<a class="txtSize">【非常重要！！稿件审理、费用通知、发票样刊邮寄等均通过Email通知提醒。推荐填写经常check、并与手机关联的qq邮箱确，以便在第一时间收到编辑部稿件处理等相关信息并作出回应。请确保准确无误！！】</a>
+  							<input  type="text"   name="authorList[0].email"/><br>
+							<a class="txtSize">【非常重要！！稿件审理、费用通知、发票样刊邮寄等均通过Email通知提醒。推荐填写经常check、并与手机关联的qq邮箱确，以便在第一时间收到编辑部稿件处理等相关信息并作出回应。请确保准确无误！！】</a>
   						</td>
   					</tr>
   					<tr>
   						<td>身份证号</td>
   						<td>
-  							<input id="chTitle" class="easyui-validatebox"   name="authorList[0].certificateNo"
-								data-options="required:true,missingMessage:'不允许为空'" /><br>
-								<a class="txtSize">【发放、领取论文稿酬时需要，请确保准确无误；无需稿酬者可不用填写】</a>
+  							<input  type="text"   name="authorList[0].certificateNo"/><br>
+							<a class="txtSize">【发放、领取论文稿酬时需要，请确保准确无误；无需稿酬者可不用填写】</a>
   						</td>
   					</tr>
   				</table><br>
