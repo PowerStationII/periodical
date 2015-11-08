@@ -46,10 +46,24 @@
   				$('#step4').hide();
   			});
   			$('#next2').click(function(){
-  				$('#step1').hide();
-  				$('#step2').hide();
-  				$('#step3').hide();
-  				$('#step4').show();
+  				var is = false;
+  				var obj = $('#step3 input');
+  				for (var i=0;i<obj.length;i++) {
+  					if(obj.eq(i).val()=="") {
+  	  					alert('请选择要上传的文件！');
+  	  				    is = false;
+  	  					return;
+  	  				}
+  					else {
+  						is = true;
+  					}
+  				}
+  				if(is == true) {
+  					$('#step1').hide();
+  	  				$('#step2').hide();
+  	  				$('#step3').hide();
+  	  				$('#step4').show();
+  				}
   			});
   			$('#back1').click(function(){
   				$('#step1').hide();
@@ -211,19 +225,19 @@
 	  			</tr>
 	  			<tr>
 	  				<td>论文著作权转让协议与论文学术诚信承诺书</td>
-	  				<td><input type="file"  id="uploadi" name="files"><br><a class="txtSize">【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
+	  				<td><input type="file"  id="uploadi" name="files"><a style="font-size:12px;color:red;">(*)</a><br><a class="txtSize">【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
 	  			</tr>
 	  			<tr>
 	  				<td>文中数据图的作图数据（表）</td>
-	  				<td><input type="file"  id="sub_upload" name="files"><br><a class="txtSize">【稿件中通过数据、软件生成的数据图，需上传这些数据图对应的（作图）数据表并在表上注明作图软件、版本号。图片图不需要单独上传】</a></td>
+	  				<td><input type="file"  id="sub_upload" name="files"><a style="font-size:12px;color:red;">(*)</a><br><a class="txtSize">【稿件中通过数据、软件生成的数据图，需上传这些数据图对应的（作图）数据表并在表上注明作图软件、版本号。图片图不需要单独上传】</a></td>
 	  			</tr>
 	  			<tr>
 	  				<td>论文相关的研究视频、照片等</td>
-	  				<td><input type="file"  id="sub_upload" name="files"><br><a class="txtSize">【有助于责编、审稿专家、读者更好理解论文的研究视频、照片等附件，请（打包后）在此上传。】</a></td>
+	  				<td><input type="file"  id="sub_upload" name="files"><a style="font-size:12px;color:red;">(*)</a><br><a class="txtSize">【有助于责编、审稿专家、读者更好理解论文的研究视频、照片等附件，请（打包后）在此上传。】</a></td>
 	  			</tr>
 	  			<tr>
 	  				<td>论文学术不端全文检测报告</td>
-	  				<td><input type="file"  id="sub_upload" name="files"><br><a class="txtSize">【论文的同方、万方等第三方（全文）学术不端检测报告，请（打包后）在此上传】</a></td>
+	  				<td><input type="file"  id="sub_upload" name="files"><a style="font-size:12px;color:red;">(*)</a><br><a class="txtSize">【论文的同方、万方等第三方（全文）学术不端检测报告，请（打包后）在此上传】</a></td>
 	  			</tr>
 	  			<tr  style="display:none;">
 	  				<td><input type="button"  id="add"  value="添加其他附件"></td>
