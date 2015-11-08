@@ -84,13 +84,17 @@
   			
   			$('.isFund').change(function(){
   				var $selectedvalue = $("input[name='isfund']:checked").val();
-  				// alert($selectedvalue);
 				if ($selectedvalue == 'Y') {
 					$('#fundTitle').show();
 				} else {
 					$('#fundTitle').hide();
 				}
-  			})
+  			});
+  			
+  			$('#ok').click(function(){
+  				$("form").submit(); 
+  			});
+
   		});
 
   		function delAuthor () {
@@ -105,7 +109,6 @@
   			}
   		}
 				
-
   </script>
   <style>
  	   #step1,#step2,#step3,#step4{overflow:hidden;}
@@ -171,7 +174,7 @@
 		</div>
   	</div>
 
-<form enctype="multipart/form-data" action="../author/toContribute" method="POST"><!--../author/toUpload  enctype="multipart/form-data"-->
+<form  enctype="multipart/form-data" action="../author/toContribute" method="POST"><!--../author/toUpload  enctype="multipart/form-data"-->
 
   	<div id="step3">
   		<div style="margin-top:20px;">
@@ -383,10 +386,8 @@
   					<tr>
   						<td>性别</td>
   						<td>
-  							<select id="articleType" class="easyui-combobox" name="authorList[0].sex" style="width:50px;" data-options="editable:false" > 
-							    <option  value="male">男</option> 
-							    <option  value="female">女</option>   
-							</select><br>
+  							<input  type="radio"   value="male" name="authorList[0].sex"/>男
+							<input  type="radio"  value="female" name="authorList[0].sex"/>女<br>
   						</td>
   					</tr>
   					<!-- <tr>
@@ -475,7 +476,7 @@
   			</div><br>
   			<div>
   				<input type="button"   id="back1"  value="上一步">
-  				<input type="submit"   value="提交">
+  				<input type="button"   value="提交"  id="ok">
   			</div>
   	</div>
    </form>
