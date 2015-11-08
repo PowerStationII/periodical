@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -87,20 +88,20 @@ public class ContributeController extends AuthorController{
 	 * ,HttpServletRequest request
 	 */
 	@RequestMapping(value="/toContribute",method = RequestMethod.POST)
-	public ModelAndView toContribute(AuthorContributeReqDto contributeRequestDto) {
+	public ModelAndView toContribute(@ModelAttribute(value="contributeRequestDto") AuthorContributeReqDto contributeRequestDto,
+			@RequestParam(value="files", required=true) MultipartFile[] files,HttpServletRequest request) {
 		logger.info("提交投稿信息入参:["+JSON.toJSONString(contributeRequestDto)+"]");
-//		logger.info("&files["+JSON.toJSONString(files)+"]");
-//		
-//		//判断file数组不能为空并且长度大于0  
-//        if(files!=null&&files.length>0){  
-//            //循环获取file数组中得文件  
-//            for(int i = 0;i<files.length;i++){  
-//                MultipartFile file = files[i];  
-//                //保存文件  
-//                saveFile(file,request);  
-//            }  
-//        }  
-		
+		logger.info("提交投稿信息入参:["+JSON.toJSONString(files.length)+"]");
+		//判断file数组不能为空并且长度大于0  
+        if(files!=null&&files.length>0){  
+            //循环获取file数组中得文件  
+            for(int i = 0;i<files.length;i++){  
+                MultipartFile file = files[i];  
+                logger.info(file.getOriginalFilename());
+                //保存文件  
+                saveFile(file,request);  
+            }  
+        }  
 		ModelAndView mav = new ModelAndView("author_area");//不能去这个页面
 		mav.addObject("userId", contributeRequestDto.getUserId());
 		mav.addObject("roleId", contributeRequestDto.getRoleId());
