@@ -21,20 +21,20 @@
 				<td>注册时间</td>
 				<td><input type="text" name="registeredTime" value=""></td>
 				<td>会员类型</td>
-				<td><input type="text" name="registeredTime" value=""></td>
+				<td><input type="text" name="councilType" value=""></td>
 				<td>广告刊登</td>
 				<td><input type="text" name="registeredTime" value=""></td>
 			</tr>
 			<tr>
 				<td>会员编号</td>
-				<td><input type="text" name="registeredTime" value=""></td>
+				<td><input type="text" name="councilId" value=""></td>
 				<td>企业名称</td>
-				<td><input type="text" name="registeredTime" value=""></td>
+				<td><input type="text" name="councilName" value=""></td>
 				<td>发票号</td>
 				<td><input type="text" name="registeredTime" value=""></td>
 			</tr>
 			<tr>
-				<td colspan="3">查询</td>
+				<td colspan="3"><a href="toCouncilManagerQry?userId=${userId}">查询</a></td>
 				<td colspan="3"><a href="toCouncilInfoAdd">新增</a></td>
 			</tr>
 		</table>
@@ -51,16 +51,19 @@
 				<td>广告刊登</td>
 				<td>操作</td>
 			</tr>
+			
+			#foreach($councilInfo in ${councilInfos})   
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td>${councilInfo.councilId}</td>
+				<td>${councilInfo.councilName}</td>
+				<td>${councilInfo.councilId}</td>
+				<td>${councilInfo.councilId}</td>
+				<td>${councilInfo.councilId}</td>
+				<td>${councilInfo.councilId}</td>
+				<td>${councilInfo.councilId}</td>
+				<td>${councilInfo.councilId}</td>
 			</tr>
+			#end
 		</table>
 	</div>
 </body>

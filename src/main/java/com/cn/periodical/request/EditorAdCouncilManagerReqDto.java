@@ -17,7 +17,7 @@ public class EditorAdCouncilManagerReqDto extends RequestDto {
 	private java.lang.String councilType;
 	private java.lang.String councilCompany;
 	private String companySetupTime;
-	private java.lang.Integer employeeNums;
+//	private java.lang.Integer employeeNums;
 	private java.lang.String website;
 	private java.lang.String ranges;
 	private java.lang.String logoId;
@@ -84,12 +84,12 @@ public class EditorAdCouncilManagerReqDto extends RequestDto {
 	public void setCompanySetupTime(String companySetupTime) {
 		this.companySetupTime = companySetupTime;
 	}
-	public java.lang.Integer getEmployeeNums() {
-		return employeeNums;
-	}
-	public void setEmployeeNums(java.lang.Integer employeeNums) {
-		this.employeeNums = employeeNums;
-	}
+//	public java.lang.Integer getEmployeeNums() {
+//		return employeeNums;
+//	}
+//	public void setEmployeeNums(java.lang.Integer employeeNums) {
+//		this.employeeNums = employeeNums;
+//	}
 	public java.lang.String getWebsite() {
 		return website;
 	}
