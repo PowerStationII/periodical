@@ -58,4 +58,37 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 		return list;
 	}
 
+	public ArticleInfo qryArticleInfo(String articleId) {
+		// TODO Auto-generated method stub
+		ArticleInfoQuery articleInfoQuery = new ArticleInfoQuery();
+		articleInfoQuery.setArticleId(articleId);
+		List<ArticleInfo> articleInfos = articleInfoManager.queryList(articleInfoQuery);
+		return articleInfos.get(0);
+	}
+
+	public int updateArticleInfo(String articleId,String articleState) {
+		// TODO Auto-generated method stub
+		ArticleInfoQuery articleInfoQuery = new ArticleInfoQuery();
+		articleInfoQuery.setArticleId(articleId);
+		List<ArticleInfo> articleInfos = articleInfoManager.queryList(articleInfoQuery);
+		ArticleInfo articleInfo = articleInfos.get(0);
+		articleInfo.setId(articleInfo.getId());
+		articleInfo.setState(articleState);
+		
+		articleInfoManager.saveArticleInfo(articleInfo);
+		return 0;
+	}
+
+	/**
+	 * 登记稿件处理流水
+	 * */
+	public int registeOperationFlows(Object obj) {
+		// TODO Auto-generated method stub
+		/**
+		 * 
+		 * */
+		
+		return 0;
+	}
+
 }

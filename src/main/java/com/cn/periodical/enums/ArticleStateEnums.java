@@ -8,19 +8,23 @@ public enum ArticleStateEnums {
 	/**
 	 * 已登记
 	 * */
-	ENLISTED_ARTICLE("0001","ENLISTED_ARTICLE"),
+	SUBMITED_ARTICLE("0001","SUBMITED_ARTICLE"),
+	/**
+	 * 已送审
+	 * */
+	ENLISTED_ARTICLE("0002","ENLISTED_ARTICLE"),
 	/**
 	 * 已返修
 	 * */
-	REPAIR_ARTICLE("0002","REPAIR_ARTICLE"),
+	REPAIR_ARTICLE("0003","REPAIR_ARTICLE"),
 	/**
 	 * 已退稿
 	 * */
-	RETURNED_ARTICLE("0003","RETURNED_ARTICLE"),
+	RETURNED_ARTICLE("0004","RETURNED_ARTICLE"),
 	/**
 	 * 待刊
 	 * */
-	PUBLISH_ARTICLE("0004","PUBLISH_ARTICLE");
+	PUBLISH_ARTICLE("0005","PUBLISH_ARTICLE");
 	
 	private String code;
 	private String name;

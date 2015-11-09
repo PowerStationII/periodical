@@ -13,6 +13,7 @@
 </head>
 <body>
 	<div id="articleInfos">
+		<input type="hidden" name="userId" value="${userId}">
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
 				<td>标题</td>

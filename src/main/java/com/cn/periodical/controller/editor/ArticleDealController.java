@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.ArticleStateEnums;
+import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.EditorArticleDealService;
 /**
@@ -46,6 +47,46 @@ public class ArticleDealController extends EditorController{
 	}
 	
 	/**
+	 * toNewArticleDetailPage
+	 * 新稿-详情页
+	 */
+	@RequestMapping(value="/toNewArticleDetailPage",method = RequestMethod.GET)
+	public ModelAndView toNewArticleDetailPage(@RequestParam("userId") String userId,
+			@RequestParam("artilceId") String artilceId,
+			HttpServletRequest request) {
+		logger.info("新稿详情页Page入参:["+userId+"]&artilceId:["+artilceId+"]");
+		ModelAndView mav = new ModelAndView("editor_newArticleDetailPage");
+		mav.addObject("userId", userId);
+		
+		ArticleInfo articleInfo =articleDealService.qryArticleInfo(artilceId);
+		mav.addObject("articleInfo", articleInfo);
+		
+		logger.info("新稿详情页Page出参:["+JSON.toJSONString(articleInfo)+"]");
+		return mav;
+	}
+	
+	/**
+	 * toUpdateArticleState
+	 * 登记
+	 * 稿件状态变更
+	 */
+	@RequestMapping(value="/toUpdateArticleState",method = RequestMethod.POST)
+	public ModelAndView toUpdateArticleState(@RequestParam("userId") String userId,
+			
+			@RequestParam("artilceId") String artilceId,
+			HttpServletRequest request) {
+		logger.info("修改稿件状态Page入参:["+userId+"]&artilceId:["+artilceId+"]");
+		ModelAndView mav = new ModelAndView("editor_newArticleDetailPage");
+		mav.addObject("userId", userId);
+		
+		int i =articleDealService.updateArticleInfo("", "");
+		
+		logger.info("修改稿件状态Page出参:[]");
+		return null;
+	}
+	
+	
+	/**
 	 * toEnlistedArticlePage
 	 * 已登记
 	 */
@@ -55,7 +96,8 @@ public class ArticleDealController extends EditorController{
 		logger.info("已登记Page:["+userId+"]");
 		ModelAndView mav = new ModelAndView("editor_enlistedArticlePage");
 		mav.addObject("userId", userId);
-		
+		List<EditorArticleDealRespDto> list =articleDealService.articleDeal(ArticleStateEnums.ENLISTED_ARTICLE.getCode());
+		mav.addObject("list", list);
 		
 		return mav;
 	}
@@ -71,7 +113,8 @@ public class ArticleDealController extends EditorController{
 		logger.info("返修Page:["+userId+"]");
 		ModelAndView mav = new ModelAndView("editor_repairArticlePage");
 		mav.addObject("userId", userId);
-		
+		List<EditorArticleDealRespDto> list =articleDealService.articleDeal(ArticleStateEnums.REPAIR_ARTICLE.getCode());
+		mav.addObject("list", list);
 		
 		return mav;
 	}
@@ -86,7 +129,8 @@ public class ArticleDealController extends EditorController{
 		logger.info("退稿Page:["+userId+"]");
 		ModelAndView mav = new ModelAndView("editor_returnedArticlePage");
 		mav.addObject("userId", userId);
-		
+		List<EditorArticleDealRespDto> list =articleDealService.articleDeal(ArticleStateEnums.RETURNED_ARTICLE.getCode());
+		mav.addObject("list", list);
 		
 		return mav;
 	}
@@ -101,7 +145,8 @@ public class ArticleDealController extends EditorController{
 		logger.info("待刊Page:["+userId+"]");
 		ModelAndView mav = new ModelAndView("editor_publishArticlePage");
 		mav.addObject("userId", userId);
-		
+		List<EditorArticleDealRespDto> list =articleDealService.articleDeal(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
+		mav.addObject("list", list);
 		
 		return mav;
 	}
