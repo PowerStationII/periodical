@@ -85,7 +85,8 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 	public int registeOperationFlows(Object obj) {
 		// TODO Auto-generated method stub
 		/**
-		 * 
+		 * article_info_extend 记录最新的article_flow id
+		 * article_flow 记录操作人对稿件所做的动作及建议并记录上次谁做了什么操作
 		 * */
 		
 		return 0;
