@@ -35,6 +35,11 @@
 	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  
+  <resultMap type="editorAreaInfos"  id="EditorAreaInfosResultMap">
+      <result column="state" jdbcType="VARCHAR" property="status" />
+  	  <result column="total" jdbcType="INTEGER" property="total" />
+  </resultMap>
   <sql id="Page_Query_Begin">
     select * from(select t.*,rownum rn from(
   </sql>
@@ -606,4 +611,9 @@
     <!-- order by CREATE_DATE -->
     <include refid="Page_Query_End" />
   </select>
+  
+  <select id="queryArticleTotalInfos" parameterType="hashmap"  resultMap="EditorAreaInfosResultMap">
+	select state as status,count(1) as total from article_info group by state
+  </select>
+  
 </mapper>
