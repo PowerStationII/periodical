@@ -68,9 +68,12 @@ public class ArticleFlowsDaoImpl extends BaseDao implements ArticleFlowsDao {
 	}
 
 
-	public long selectMaxId() {
+	public long selectMaxId(String articleId) {
 		// TODO Auto-generated method stub
-		return super.getSqlSession().selectOne("ArticleFlowsMapper.selectMaxId");
+		
+		Object id = super.getSqlSession().selectOne("ArticleFlowsMapper.selectMaxId",articleId);
+		
+		return (Long) (id==null?1L:id);
 	}
 	
 }

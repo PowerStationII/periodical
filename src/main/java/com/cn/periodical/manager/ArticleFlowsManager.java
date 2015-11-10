@@ -24,5 +24,5 @@ public interface ArticleFlowsManager {
 	
 	ArticleFlowsPage queryPageList(ArticleFlowsQuery query);
 	
-	long selectMaxId();
+	long selectMaxId(String articleId);
 }

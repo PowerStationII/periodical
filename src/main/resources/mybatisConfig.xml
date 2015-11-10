@@ -41,5 +41,8 @@
 		<mapper resource="sqlmap/ArticleInfoMapper.xml"/>
 		<mapper resource="sqlmap/ArticleAttachmentInfoMapper.xml"/>
 		<mapper resource="sqlmap/CouncilInfoMapper.xml"/>
+		<mapper resource="sqlmap/ArticleInfoExtendMapper.xml"/>
+		<mapper resource="sqlmap/ArticleFlowsMapper.xml"/>
+		<mapper resource="sqlmap/ArticleFlowsExtendMapper.xml"/>
 	</mappers>
 </configuration>

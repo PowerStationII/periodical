@@ -140,6 +140,7 @@
   <sql id="Base_Set_Clause">
     <set>
       <trim suffixOverrides=",">
+        id = #{id,jdbcType=BIGINT},
         pid = #{pid,jdbcType=BIGINT},
         user_id = #{userId,jdbcType=VARCHAR},
         ref_id = #{refId,jdbcType=VARCHAR},
@@ -159,6 +160,9 @@
   </sql>
   <sql id="Selective_Column_List">
     <!-- ID, -->
+    <if test="id != null">
+      id,
+    </if>
     <if test="pid != null">
       pid,
     </if>
@@ -221,6 +225,9 @@
 	</sql>
   <sql id="Selective_Value_List">
     <!-- SEQ_article_flows.nextval, -->
+    <if test="id != null">
+      #{id,jdbcType=BIGINT},
+    </if>
     <if test="pid != null">
       #{pid,jdbcType=BIGINT},
     </if>
@@ -335,7 +342,7 @@
     <include refid="Page_Query_End" />
   </select>
   
-  <select id="selectMaxId" parameterType="String" resultType="long">
-  	select max(id) from article_flows where article_id=#{articleId}
+  <select id="selectMaxId"  parameterType="String"  resultType="long">
+  	select max(id) from article_flows where article_id=#{articleId,jdbcType=VARCHAR}
   </select>
 </mapper>

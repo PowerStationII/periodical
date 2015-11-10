@@ -58,7 +58,7 @@ public class ContributeController extends AuthorController{
 		logger.info("提交投稿信息入参:["+JSON.toJSONString(contributeRequestDto)+"]&上传附件数量["+files.length+"]");
 		ModelAndView mav = null;
 		try{
-	        mav=new ModelAndView("author_area");//不能去这个页面
+	        mav=new ModelAndView("redirect:/author/toArticleQueryPage");
 			mav.addObject("userId", contributeRequestDto.getUserId());
 			mav.addObject("roleId", contributeRequestDto.getRoleId());
 			/**

@@ -31,5 +31,5 @@ public interface ArticleFlowsDao {
 	
 	int updateByPrimaryKey(ArticleFlows record);
 	
-	long selectMaxId();
+	long selectMaxId(String articleId);
 }

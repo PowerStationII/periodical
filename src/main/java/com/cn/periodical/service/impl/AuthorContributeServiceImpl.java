@@ -19,6 +19,7 @@ import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.manager.ArticleAttachmentInfoManager;
 import com.cn.periodical.manager.ArticleFlowsExtendManager;
 import com.cn.periodical.manager.ArticleFlowsManager;
+import com.cn.periodical.manager.ArticleInfoExtendManager;
 import com.cn.periodical.manager.ArticleInfoManager;
 import com.cn.periodical.manager.AuthorInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
@@ -27,6 +28,7 @@ import com.cn.periodical.pojo.ArticleAttachmentInfo;
 import com.cn.periodical.pojo.ArticleFlows;
 import com.cn.periodical.pojo.ArticleFlowsExtend;
 import com.cn.periodical.pojo.ArticleInfo;
+import com.cn.periodical.pojo.ArticleInfoExtend;
 import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.request.AuthorContributeReqDto;
 import com.cn.periodical.service.AuthorContributeService;
@@ -55,6 +57,9 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 	
 	@Autowired
 	ArticleFlowsExtendManager articleFlowsExtendManager;
+	
+	@Autowired
+	ArticleInfoExtendManager articleInfoExtendManager;
 	
 	@Autowired
 	TransactionTemplate transactionTemplate;
@@ -133,7 +138,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		
 		ArticleFlows articleFlows = new ArticleFlows();
 		
-		long maxId = articleFlowsManager.selectMaxId();
+		long maxId = articleFlowsManager.selectMaxId(articleId);
 		logger.info(maxId+"");
 		if(maxId==0L){
 			maxId=1;
@@ -144,11 +149,21 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		articleFlows.setUserId(contributeRequestDto.getUserId());
 		articleFlows.setCreateTime(new Date());
 		articleFlows.setRoleId(contributeRequestDto.getRoleId());
-//		articleFlows.setDealState();
+		articleFlows.setDealState(ArticleStateEnums.NEW_ARTICLE.getCode());
+		articleFlowsManager.saveArticleFlows(articleFlows);
 		
 		ArticleFlowsExtend articleFlowsExtend = new ArticleFlowsExtend();
 		articleFlowsExtend.setArticleId(articleId);
 		articleFlowsExtend.setLatelyFlowsId(maxId);
+		
+		articleFlowsExtendManager.saveArticleFlowsExtend(articleFlowsExtend);
+		
+		ArticleInfoExtend articleInfoExtend = new ArticleInfoExtend();
+		articleInfoExtend.setUserId(contributeRequestDto.getUserId());
+		articleInfoExtend.setArticleId(articleId);
+		articleInfoExtend.setRoleId(contributeRequestDto.getRoleId());
+		
+		articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);
 		
 		List<AuthorInfo> authorInfos = contributeRequestDto.getAuthorList();
 		List<AddressInfo> addressInfos = contributeRequestDto.getAddressInfos();

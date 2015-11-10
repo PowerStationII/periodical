@@ -27,11 +27,11 @@ public class ArticleFlowsManagerImpl implements ArticleFlowsManager {
 	
 	
 	public void saveArticleFlows(ArticleFlows articleFlows) {
-		if (articleFlows.getId() == null) {
+//		if (articleFlows.getId() == null) {
 			articleFlowsDao.insertSelective(articleFlows);
-		} else {
-			articleFlowsDao.updateByPrimaryKeySelective(articleFlows);
-		}
+//		} else {
+//			articleFlowsDao.updateByPrimaryKeySelective(articleFlows);
+//		}
 	}
 	
 	
@@ -71,9 +71,9 @@ public class ArticleFlowsManagerImpl implements ArticleFlowsManager {
 	}
 
 
-	public long selectMaxId() {
+	public long selectMaxId(String articleId) {
 		// TODO Auto-generated method stub
-		return articleFlowsDao.selectMaxId();
+		return articleFlowsDao.selectMaxId(articleId);
 	}
 }
 
