@@ -196,7 +196,7 @@
 		</table>
 	</div>
 	<div class="attr_con">
-		<input type="button"  value="登记"  id="back"/>
+		<a href="../editor/toEditorUpdateStatePage?articleId=${articleInfo.articleId}&userId=${userId}">登记</a>
 		<input type="button"  value="返修"  id="back"/>
 		<input type="button"  value="退稿"  id="back"/>
 	</div>

@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,24 +67,45 @@ public class ArticleDealController extends EditorController{
 	}
 	
 	/**
+	 * toEditorUpdateStatePage
+	 * 登记
+	 * 稿件状态变更
+	 */
+	@RequestMapping(value="/toEditorUpdateStatePage",method = RequestMethod.GET)
+	public ModelAndView toEditorUpdateStatePage(@RequestParam("userId") String userId,
+			@RequestParam("articleId") String articleId,
+			HttpServletRequest request) {
+		logger.info("修改稿件状态Page入参:["+userId+"]&artilceId:["+articleId+"]");
+		ModelAndView mav = new ModelAndView("editor_artilce_enlistedPage");
+		mav.addObject("userId", userId);
+		ArticleInfo articleInfo =articleDealService.qryArticleInfo(articleId);
+		mav.addObject("articleInfo", articleInfo);
+		logger.info("修改稿件状态Page出参:[]");
+		return mav;
+	}
+	
+	
+	/**
 	 * toUpdateArticleState
 	 * 登记
 	 * 稿件状态变更
 	 */
-	@RequestMapping(value="/toUpdateArticleState",method = RequestMethod.POST)
+	@RequestMapping(value="/toEditorUpdateState",method = RequestMethod.POST)
 	public ModelAndView toUpdateArticleState(@RequestParam("userId") String userId,
-			
-			@RequestParam("artilceId") String artilceId,
+			@ModelAttribute ArticleInfo articleInfo,
 			HttpServletRequest request) {
-		logger.info("修改稿件状态Page入参:["+userId+"]&artilceId:["+artilceId+"]");
-		ModelAndView mav = new ModelAndView("editor_newArticleDetailPage");
+		logger.info("修改稿件状态入参:["+userId+"]&artilceId:["+JSON.toJSONString(articleInfo)+"]");
+		ModelAndView mav = new ModelAndView("editor_artilce_enlistedPage");
 		mav.addObject("userId", userId);
-		
-		int i =articleDealService.updateArticleInfo("", "");
-		
-		logger.info("修改稿件状态Page出参:[]");
-		return null;
+		/**
+		 * 变更状态的时候要记录流水哦!
+		 * */
+		int i =articleDealService.updateArticleInfo(userId,articleInfo.getArticleId(), ArticleStateEnums.ENLISTED_ARTICLE.getCode());
+
+		logger.info("修改稿件状态出参:[]");
+		return mav;
 	}
+	
 	
 	
 	/**

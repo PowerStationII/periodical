@@ -1,7 +1,6 @@
 package com.cn.periodical.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,6 +17,7 @@ import com.cn.periodical.pojo.ArticleFlows;
 import com.cn.periodical.pojo.ArticleFlowsExtend;
 import com.cn.periodical.pojo.ArticleFlowsExtendQuery;
 import com.cn.periodical.pojo.ArticleInfo;
+import com.cn.periodical.pojo.ArticleInfoExtend;
 import com.cn.periodical.pojo.ArticleInfoQuery;
 import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.pojo.AuthorInfoQuery;
@@ -83,7 +83,7 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 		return articleInfos.get(0);
 	}
 
-	public int updateArticleInfo(String articleId,String articleState) {
+	public int updateArticleInfo(String userId,String articleId,String articleState) {
 		// TODO Auto-generated method stub
 		ArticleInfoQuery articleInfoQuery = new ArticleInfoQuery();
 		articleInfoQuery.setArticleId(articleId);
@@ -93,6 +93,16 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 		articleInfo.setState(articleState);
 		
 		articleInfoManager.saveArticleInfo(articleInfo);
+		
+		EditorArticleDealReqDto obj = new EditorArticleDealReqDto();
+		obj.setRoleId("");
+		obj.setUserId(userId);
+		obj.setDealState(articleState);
+		obj.setDealOpinion("同意不同意能咋地");
+		obj.setSystemId("");
+		
+		registeOperationFlows(obj);
+		
 		return 0;
 	}
 
@@ -118,7 +128,7 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 		ArticleFlowsExtend articleFlowsExtend= articleFlowsExtends.get(0);
 		
 		ArticleFlows articleFlows = new ArticleFlows();
-		
+		articleFlows.setId(articleFlowsExtend.getLatelyFlowsId()+1);
 		articleFlows.setPid(articleFlowsExtend.getLatelyFlowsId());
 		articleFlows.setArticleId(obj.getArticleId());
 		articleFlows.setDealState(obj.getDealState());
@@ -127,9 +137,13 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 		articleFlows.setRoleId(obj.getRoleId());
 		articleFlows.setRefId("");
 		
+		articleFlowsManager.saveArticleFlows(articleFlows);
 		
-		
-		
+		ArticleInfoExtend articleInfoExtend = new ArticleInfoExtend();
+		articleInfoExtend.setUserId(obj.getUserId());
+		articleInfoExtend.setArticleId(obj.getArticleId());
+		articleInfoExtend.setRoleId("");
+		articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);
 		
 		return 0;
 	}
