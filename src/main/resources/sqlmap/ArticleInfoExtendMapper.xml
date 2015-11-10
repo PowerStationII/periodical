@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ArticleInfoExtendMapper">
+	<resultMap id="BaseResultMap" type="ArticleInfoExtend">
+	  <id column="ID" jdbcType="DECIMAL" property="id" />
+	  <result column="user_id" jdbcType="VARCHAR" property="userId" />
+	  <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+	  <result column="article_id" jdbcType="VARCHAR" property="articleId" />
+  </resultMap>
+  <sql id="Page_Query_Begin">
+    select * from(select t.*,rownum rn from(
+  </sql>
+  <sql id="Page_Query_End">
+  	) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="userId != null" >
+	      and user_id = #{userId,jdbcType=VARCHAR}
+	    </if>
+      <if test="roleId != null" >
+	      and role_id = #{roleId,jdbcType=VARCHAR}
+	    </if>
+      <if test="articleId != null" >
+	      and article_id = #{articleId,jdbcType=VARCHAR}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="articleId != null">
+        article_id = #{articleId,jdbcType=VARCHAR},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    id,
+    user_id,
+    role_id,
+    article_id,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        user_id = #{userId,jdbcType=VARCHAR},
+        role_id = #{roleId,jdbcType=VARCHAR},
+        article_id = #{articleId,jdbcType=VARCHAR},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    <!-- ID, -->
+    <if test="userId != null">
+      user_id,
+    </if>
+    <if test="roleId != null">
+      role_id,
+    </if>
+    <if test="articleId != null">
+      article_id,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{id,jdbcType=BIGINT},
+    #{userId,jdbcType=VARCHAR},
+    #{roleId,jdbcType=VARCHAR},
+    #{articleId,jdbcType=VARCHAR},
+	</sql>
+  <sql id="Selective_Value_List">
+    <!-- SEQ_article_info_extend.nextval, -->
+    <if test="userId != null">
+      #{userId,jdbcType=VARCHAR},
+    </if>
+    <if test="roleId != null">
+      #{roleId,jdbcType=VARCHAR},
+    </if>
+    <if test="articleId != null">
+      #{articleId,jdbcType=VARCHAR},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="ArticleInfoExtendQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from article_info_extend
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from article_info_extend
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from article_info_extend
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="ArticleInfoExtendQuery">
+    delete from article_info_extend
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="ArticleInfoExtend">
+    insert into article_info_extend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="ArticleInfoExtend">
+    insert into article_info_extend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="ArticleInfoExtendQuery" resultType="java.lang.Integer">
+    select count(*) from article_info_extend
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="ArticleInfoExtend">
+    update article_info_extend
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ArticleInfoExtend">
+    update article_info_extend
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectPageByExample" parameterType="ArticleInfoExtendQuery" resultMap="BaseResultMap">
+  	<include refid="Page_Query_Begin" />
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from article_info_extend
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+    <include refid="Page_Query_End" />
+  </select>
+</mapper>

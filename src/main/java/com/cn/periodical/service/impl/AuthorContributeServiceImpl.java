@@ -17,11 +17,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.manager.ArticleAttachmentInfoManager;
+import com.cn.periodical.manager.ArticleFlowsExtendManager;
+import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.manager.ArticleInfoManager;
 import com.cn.periodical.manager.AuthorInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.AddressInfo;
 import com.cn.periodical.pojo.ArticleAttachmentInfo;
+import com.cn.periodical.pojo.ArticleFlows;
+import com.cn.periodical.pojo.ArticleFlowsExtend;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.request.AuthorContributeReqDto;
@@ -45,6 +49,12 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 	
 	@Autowired
 	AddressInfoManager addressInfoManager;
+	
+	@Autowired
+	ArticleFlowsManager articleFlowsManager;
+	
+	@Autowired
+	ArticleFlowsExtendManager articleFlowsExtendManager;
 	
 	@Autowired
 	TransactionTemplate transactionTemplate;
@@ -121,6 +131,25 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		articleInfo.setInovationPoint(contributeRequestDto.getInovationPoint());
 		articleInfo.setIsfund(contributeRequestDto.getIsfund());
 		
+		ArticleFlows articleFlows = new ArticleFlows();
+		
+		long maxId = articleFlowsManager.selectMaxId();
+		logger.info(maxId+"");
+		if(maxId==0L){
+			maxId=1;
+		}
+		
+		articleFlows.setId(maxId);
+		articleFlows.setPid(0L);
+		articleFlows.setUserId(contributeRequestDto.getUserId());
+		articleFlows.setCreateTime(new Date());
+		articleFlows.setRoleId(contributeRequestDto.getRoleId());
+//		articleFlows.setDealState();
+		
+		ArticleFlowsExtend articleFlowsExtend = new ArticleFlowsExtend();
+		articleFlowsExtend.setArticleId(articleId);
+		articleFlowsExtend.setLatelyFlowsId(maxId);
+		
 		List<AuthorInfo> authorInfos = contributeRequestDto.getAuthorList();
 		List<AddressInfo> addressInfos = contributeRequestDto.getAddressInfos();
 		logger.info(authorInfos.size()+"------------"+addressInfos.size());
@@ -142,8 +171,13 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 			authorInfoManager.saveAuthorInfo(authorInfo);
 			addressInfoManager.saveAddressInfo(addressInfo);
 		}
+		
+		
+		
+		
 		articleInfoManager.saveArticleInfo(articleInfo);
 		articleAttachmentInfoManager.saveArticleAttachmentInfo(articleAttachmentInfo);
+		
 	}
 	
 	
