@@ -14,6 +14,7 @@
 <body>
 	<form action="../editor/toEditorUpdateState" method="POST">
 	<input type="hidden" name="userId" value="${userId}">
+	<input type="hidden" name="id" value="${articleInfo.id}">
 		<div id="articleInfos">
 			<a style="font-size: 20px; color: #0000CC;">稿件登记</a><br>
 			<table style="border: 1px solid black;" rules="all">
@@ -21,8 +22,8 @@
 					<td colspan="6" rowspan="4">稿件信息</td>
 				</tr>
 				<tr>
-					<td colspan="4">稿件编号:${articleInfo.articleId}</td>
-					<td colspan="2">稿件状态:${articleInfo.state}</td>
+					<td colspan="4">稿件编号:${articleInfo.articleId}<input type="hidden" name="articleId" value=" ${articleInfo.articleId}"></td>
+					<td colspan="2">稿件状态:${articleInfo.state}<input type="hidden" name="state" value=" ${articleInfo.state}"></td>
 				</tr>
 				<tr>
 					<td colspan="2">标题:${articleInfo.articleCnTitle}</td>

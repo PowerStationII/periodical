@@ -25,6 +25,8 @@ import com.cn.periodical.request.EditorArticleDealReqDto;
 import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.EditorArticleDealService;
 
+import ch.qos.logback.classic.Logger;
+
 
 @Service
 public class EditorArticleDealServiceImpl implements EditorArticleDealService {
@@ -83,16 +85,12 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 		return articleInfos.get(0);
 	}
 
-	public int updateArticleInfo(String userId,String articleId,String articleState) {
+	public int updateArticleInfo(String expertUserId,String userId,ArticleInfo articleInfo,String articleState) {
 		// TODO Auto-generated method stub
-		ArticleInfoQuery articleInfoQuery = new ArticleInfoQuery();
-		articleInfoQuery.setArticleId(articleId);
-		List<ArticleInfo> articleInfos = articleInfoManager.queryList(articleInfoQuery);
-		ArticleInfo articleInfo = articleInfos.get(0);
-		articleInfo.setId(articleInfo.getId());
-		articleInfo.setState(articleState);
-		
-		articleInfoManager.saveArticleInfo(articleInfo);
+		ArticleInfo articleInfoQry =articleInfoManager.findArticleInfoById(articleInfo.getId());
+		articleInfoQry.setId(articleInfoQry.getId());
+		articleInfoQry.setState(articleState);		
+		articleInfoManager.saveArticleInfo(articleInfoQry);
 		
 		EditorArticleDealReqDto obj = new EditorArticleDealReqDto();
 		obj.setRoleId("");
@@ -100,8 +98,18 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 		obj.setDealState(articleState);
 		obj.setDealOpinion("同意不同意能咋地");
 		obj.setSystemId("");
+		obj.setArticleId(articleInfoQry.getArticleId());
 		
 		registeOperationFlows(obj);
+		
+		
+//		if(){
+			ArticleInfoExtend articleInfoExtend = new ArticleInfoExtend();
+			articleInfoExtend.setUserId(obj.getUserId());
+			articleInfoExtend.setArticleId(obj.getArticleId());
+			articleInfoExtend.setRoleId("");
+			articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);
+//		}
 		
 		return 0;
 	}
@@ -125,7 +133,15 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 		ArticleFlowsExtendQuery articleFlowsExtendQuery =  new ArticleFlowsExtendQuery();
 		articleFlowsExtendQuery.setArticleId(obj.getArticleId());
 		List<ArticleFlowsExtend> articleFlowsExtends = articleFlowsExtendManager.queryList(articleFlowsExtendQuery);
+		
+		
+		
+		
 		ArticleFlowsExtend articleFlowsExtend= articleFlowsExtends.get(0);
+		articleFlowsExtend.setArticleId(obj.getArticleId());
+		articleFlowsExtend.setId(articleFlowsExtends.get(0).getId());
+		articleFlowsExtend.setLatelyFlowsId(articleFlowsExtend.getLatelyFlowsId()+1);
+		articleFlowsExtendManager.saveArticleFlowsExtend(articleFlowsExtend);
 		
 		ArticleFlows articleFlows = new ArticleFlows();
 		articleFlows.setId(articleFlowsExtend.getLatelyFlowsId()+1);
@@ -138,12 +154,6 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 		articleFlows.setRefId("");
 		
 		articleFlowsManager.saveArticleFlows(articleFlows);
-		
-		ArticleInfoExtend articleInfoExtend = new ArticleInfoExtend();
-		articleInfoExtend.setUserId(obj.getUserId());
-		articleInfoExtend.setArticleId(obj.getArticleId());
-		articleInfoExtend.setRoleId("");
-		articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);
 		
 		return 0;
 	}

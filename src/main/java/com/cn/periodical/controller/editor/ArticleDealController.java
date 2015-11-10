@@ -87,7 +87,7 @@ public class ArticleDealController extends EditorController{
 	
 	/**
 	 * toUpdateArticleState
-	 * 登记
+	 * 
 	 * 稿件状态变更
 	 */
 	@RequestMapping(value="/toEditorUpdateState",method = RequestMethod.POST)
@@ -100,7 +100,7 @@ public class ArticleDealController extends EditorController{
 		/**
 		 * 变更状态的时候要记录流水哦!
 		 * */
-		int i =articleDealService.updateArticleInfo(userId,articleInfo.getArticleId(), ArticleStateEnums.ENLISTED_ARTICLE.getCode());
+		int i =articleDealService.updateArticleInfo("",userId,articleInfo, ArticleStateEnums.ENLISTED_ARTICLE.getCode());
 
 		logger.info("修改稿件状态出参:[]");
 		return mav;
@@ -124,6 +124,47 @@ public class ArticleDealController extends EditorController{
 		return mav;
 	}
 	
+	
+	/**
+	 * toSubmitPage
+	 * 登记
+	 * 稿件状态变更
+	 */
+	@RequestMapping(value="/toSubmitPage",method = RequestMethod.GET)
+	public ModelAndView toSubmitPage(@RequestParam("userId") String userId,
+			@RequestParam("articleId") String articleId,
+			HttpServletRequest request) {
+		logger.info("送审Page入参:["+userId+"]&artilceId:["+articleId+"]");
+		ModelAndView mav = new ModelAndView("editor_artilce_submitedPage");
+		mav.addObject("userId", userId);
+		ArticleInfo articleInfo =articleDealService.qryArticleInfo(articleId);
+		mav.addObject("articleInfo", articleInfo);
+		logger.info("送审Page出参:[]");
+		return mav;
+	}
+	
+	
+	/**
+	 * toSubmitState
+	 * 
+	 * 稿件状态变更
+	 */
+	@RequestMapping(value="/toSubmitState",method = RequestMethod.POST)
+	public ModelAndView toSubmitState(@RequestParam("userId") String userId,
+			@ModelAttribute ArticleInfo articleInfo,
+			HttpServletRequest request) {
+		logger.info("修改稿件送审入参:["+userId+"]&artilceId:["+JSON.toJSONString(articleInfo)+"]");
+		ModelAndView mav = new ModelAndView("editor_artilce_submitedPage");
+		mav.addObject("userId", userId);
+		/**
+		 * 变更状态的时候要记录流水哦!
+		 * 要记录给哪个专家了
+		 * */
+		int i =articleDealService.updateArticleInfo("",userId,articleInfo, ArticleStateEnums.SUBMITED_ARTICLE.getCode());
+
+		logger.info("修改稿件状态出参:[]");
+		return mav;
+	}
 	
 	/**
 	 * toRepairArticlePage

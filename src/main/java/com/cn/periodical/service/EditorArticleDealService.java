@@ -10,7 +10,7 @@ public interface EditorArticleDealService {
 	
 	public List<EditorArticleDealRespDto> articleDeal(String status);
 	public ArticleInfo qryArticleInfo(String articleId);
-	public int updateArticleInfo(String userId,String articleId,String artilceState);
+	public int updateArticleInfo(String expertUserId,String userId,ArticleInfo articleInfo,String artilceState);
 	public int registeOperationFlows(EditorArticleDealReqDto obj);
 	
 	
