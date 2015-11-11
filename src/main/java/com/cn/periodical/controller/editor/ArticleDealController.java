@@ -84,29 +84,26 @@ public class ArticleDealController extends EditorController{
 		return mav;
 	}
 	
-	
 	/**
 	 * toUpdateArticleState
 	 * 
-	 * 稿件状态变更
+	 * 稿件状态变更为已登记
 	 */
 	@RequestMapping(value="/toEditorUpdateState",method = RequestMethod.POST)
 	public ModelAndView toUpdateArticleState(@RequestParam("userId") String userId,
 			@ModelAttribute ArticleInfo articleInfo,
 			HttpServletRequest request) {
 		logger.info("修改稿件状态入参:["+userId+"]&artilceId:["+JSON.toJSONString(articleInfo)+"]");
-		ModelAndView mav = new ModelAndView("editor_artilce_enlistedPage");
+		ModelAndView mav = new ModelAndView("redirect:/editor/toEnlistedArticlePage");
 		mav.addObject("userId", userId);
 		/**
 		 * 变更状态的时候要记录流水哦!
 		 * */
-		int i =articleDealService.updateArticleInfo("",userId,articleInfo, ArticleStateEnums.ENLISTED_ARTICLE.getCode());
+		int i =articleDealService.updateArticleInfo("",userId,articleInfo, ArticleStateEnums.SUBMITED_ARTICLE.getCode());
 
 		logger.info("修改稿件状态出参:[]");
 		return mav;
 	}
-	
-	
 	
 	/**
 	 * toEnlistedArticlePage
@@ -118,12 +115,30 @@ public class ArticleDealController extends EditorController{
 		logger.info("已登记Page:["+userId+"]");
 		ModelAndView mav = new ModelAndView("editor_enlistedArticlePage");
 		mav.addObject("userId", userId);
-		List<EditorArticleDealRespDto> list =articleDealService.articleDeal(ArticleStateEnums.ENLISTED_ARTICLE.getCode());
+		List<EditorArticleDealRespDto> list =articleDealService.articleDeal(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
 		mav.addObject("list", list);
 		
 		return mav;
 	}
 	
+	/**
+	 * toEnlistedArticleDetailPage
+	 * 已登记-详情页
+	 */
+	@RequestMapping(value="/toEnlistedArticleDetailPage",method = RequestMethod.GET)
+	public ModelAndView toEnlistedArticleDetailPage(@RequestParam("userId") String userId,
+			@RequestParam("artilceId") String artilceId,
+			HttpServletRequest request) {
+		logger.info("已登记稿件详情页Page入参:["+userId+"]&artilceId:["+artilceId+"]");
+		ModelAndView mav = new ModelAndView("editor_enlistedArticleDetailPage");
+		mav.addObject("userId", userId);
+		
+		ArticleInfo articleInfo =articleDealService.qryArticleInfo(artilceId);
+		mav.addObject("articleInfo", articleInfo);
+		
+		logger.info("已登记稿件详情页Page出参:["+JSON.toJSONString(articleInfo)+"]");
+		return mav;
+	}
 	
 	/**
 	 * toSubmitPage
@@ -143,7 +158,6 @@ public class ArticleDealController extends EditorController{
 		return mav;
 	}
 	
-	
 	/**
 	 * toSubmitState
 	 * 
@@ -151,7 +165,7 @@ public class ArticleDealController extends EditorController{
 	 */
 	@RequestMapping(value="/toSubmitState",method = RequestMethod.POST)
 	public ModelAndView toSubmitState(@RequestParam("userId") String userId,
-			@ModelAttribute ArticleInfo articleInfo,
+			@ModelAttribute ArticleInfo articleInfo,String expertId,
 			HttpServletRequest request) {
 		logger.info("修改稿件送审入参:["+userId+"]&artilceId:["+JSON.toJSONString(articleInfo)+"]");
 		ModelAndView mav = new ModelAndView("editor_artilce_submitedPage");
@@ -160,7 +174,7 @@ public class ArticleDealController extends EditorController{
 		 * 变更状态的时候要记录流水哦!
 		 * 要记录给哪个专家了
 		 * */
-		int i =articleDealService.updateArticleInfo("",userId,articleInfo, ArticleStateEnums.SUBMITED_ARTICLE.getCode());
+		int i =articleDealService.updateArticleInfo(expertId,userId,articleInfo, ArticleStateEnums.ENLISTED_ARTICLE.getCode());
 
 		logger.info("修改稿件状态出参:[]");
 		return mav;

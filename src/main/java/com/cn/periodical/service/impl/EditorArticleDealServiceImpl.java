@@ -96,20 +96,20 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 		obj.setRoleId("");
 		obj.setUserId(userId);
 		obj.setDealState(articleState);
-		obj.setDealOpinion("同意不同意能咋地");
+		obj.setDealOpinion("同意");
 		obj.setSystemId("");
 		obj.setArticleId(articleInfoQry.getArticleId());
 		
 		registeOperationFlows(obj);
 		
 		
-//		if(){
+		if(!"".equals(expertUserId)){
 			ArticleInfoExtend articleInfoExtend = new ArticleInfoExtend();
-			articleInfoExtend.setUserId(obj.getUserId());
+			articleInfoExtend.setUserId(expertUserId);
 			articleInfoExtend.setArticleId(obj.getArticleId());
 			articleInfoExtend.setRoleId("");
 			articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);
-//		}
+		}
 		
 		return 0;
 	}

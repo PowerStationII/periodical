@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+</head>
+<script>
+	$(function(){
+		$('#back').click(function(){
+			history.go(-1);
+		})
+	})
+</script>
+<body>
+	<div>
+		<input type="hidden" value="$!{articleInfo.id}" id="id" name="id">
+		<table style="border:1px solid;width:800px;" rules="all">
+			<tr style="display:none;">
+				<td><label>
+						<span class="right">用户ID：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.userId}" id="userId" name="userId"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">稿件名称：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleName}" id="articleName"
+					name="articleName"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">稿件编号：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleId}" id="articleId" name="articleId">
+				</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">稿件类型：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleType}" id="articleType"
+					name="articleType"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">中文标题：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleCnTitle}" id="articleCnTitle"
+					name="articleCnTitle"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">英文标题：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleEnTile}" id="articleEnTile"
+					name="articleEnTile"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">中文摘要：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleCnSummary}" id="articleCnSummary"
+					name="articleCnSummary"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">英文摘要：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleEnSummary}" id="articleEnSummary"
+					name="articleEnSummary"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">中文关键词：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleCnKeywords}" id="articleCnKeywords"
+					name="articleCnKeywords"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">英文关键词：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleEnKeywords}" id="articleEnKeywords"
+					name="articleEnKeywords"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">是否是基金项目：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.isfund}" id="isfund" name="isfund"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">拟投栏目：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.investSection}" id="investSection"
+					name="investSection"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">中国分类号：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.classificationNums}" id="classificationNums"
+					name="classificationNums"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">文献标识码：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.documentCode}" id="documentCode"
+					name="documentCode"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">论文用途及要求备注：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.remark}" id="remark" name="remark"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">论文查新点、学术：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.inovationPoint}" id="inovationPoint"
+					name="inovationPoint"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">参考信息：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.referenceDoc}" id="referenceDoc"
+					name="referenceDoc"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">图（片）数：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.totalPics}" id="totalPics" name="totalPics">
+				</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">表格数：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.totalTabs}" id="totalTabs" name="totalTabs">
+				</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">页数：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.totalPages}" id="totalPages"
+					name="totalPages"></td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">基金项目中文名称：</span>
+				</label></td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.fundTitle}" id="fundTitle" name="fundTitle">
+				</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">下载原稿件：</span>
+				</label></td>
+				<td>下载下载下载啦</td>
+			</tr>
+		</table>
+	</div>
+	<div class="attr_con">
+		<a href="../editor/toSubmitPage?articleId=${articleInfo.articleId}&userId=${userId}">送审</a>
+	<!-- 	<input type="button"  value="返修"  id="back"/>
+		<input type="button"  value="退稿"  id="back"/> -->
+	</div>
+</body>
+</html>
