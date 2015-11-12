@@ -77,5 +77,11 @@ public class ArticleInfoManagerImpl implements ArticleInfoManager {
 		// TODO Auto-generated method stub
 		return articleInfoDao.queryArticleTotalInfos(map);
 	}
+
+
+	public List<ArticleInfo> queryListByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return articleInfoDao.qryListByUserId(userId);
+	}
 }
 

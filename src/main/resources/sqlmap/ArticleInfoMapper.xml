@@ -616,4 +616,8 @@
 	select state as status,count(1) as total from article_info group by state
   </select>
   
+  <select id="qryListByUserId" parameterType="string"  resultMap="BaseResultMap">
+	select state as status,count(1) as total from article_info left join  group by state
+  </select>
+  
 </mapper>

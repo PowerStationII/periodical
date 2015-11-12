@@ -34,4 +34,5 @@ public interface ArticleInfoDao {
 	int updateByPrimaryKey(ArticleInfo record);
 	
 	public List<EditorAreaInfos> queryArticleTotalInfos(Map<String,String> map);
+	public List<ArticleInfo> qryListByUserId(String userId);
 }

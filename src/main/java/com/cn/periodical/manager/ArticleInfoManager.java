@@ -27,4 +27,7 @@ public interface ArticleInfoManager {
 	ArticleInfoPage queryPageList(ArticleInfoQuery query);
 	
 	List<EditorAreaInfos> queryArticleTotalInfos(Map<String,String> map);
+	
+	List<ArticleInfo> queryListByUserId(String userId);
+
 }
