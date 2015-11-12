@@ -25,6 +25,7 @@
 	<typeAliases>
 		<package name="com.cn.periodical.pojo" />
 		<!-- <package name="com.chanjetpay.gateway.enumtype"/> -->
+		<!-- <typeAlias type=”com.someapp.model.User” alias="User"/> 试试这个,resultMap指定到此别名-->
 	</typeAliases>
 
 	<!-- 类型转换处理器 -->
