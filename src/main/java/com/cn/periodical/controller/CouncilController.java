@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/council")
 public class CouncilController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CouncilController.class);
@@ -20,9 +19,12 @@ public class CouncilController {
 		 * 查询理事会信息
 		 * 制作理事会信息图片
 		 * */
+		logger.info("lalalalalal");
 		
 		
-		return "login";
+		
+		
+		return "councilPic";
 	}
 	
 	/**
@@ -34,8 +36,11 @@ public class CouncilController {
 		 * 查询理事会信息
 		 * 理事会形象展示
 		 * */
+		logger.info("bababababa");
 		
 		
-		return "login";
+		
+		
+		return "councilShow";
 	}
 }

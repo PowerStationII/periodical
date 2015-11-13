@@ -7,15 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/portal")
+
 public class PortalController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PortalController.class);
 	/**
 	 * 跳转到添加页面
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/portal",method = RequestMethod.GET)
 	public String toPortalPage() {
+		
+		logger.info("rrrrrrrr");
 		
 		return "portal";
 	}

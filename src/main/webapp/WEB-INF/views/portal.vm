@@ -15,12 +15,12 @@
   		$('#u148').click(function(){
   			$('.right').hide();
   			$('#frame2').remove();
-  			$('#u150').after('<iframe  id="frame1" style="width:750px;height:760px;margin-left:400px;margin-top:175px;position:absolute;" src= "editor/toNewArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe>');
+  			$('#u150').after('<iframe  id="frame1" style="width:750px;height:760px;margin-left:400px;margin-top:175px;position:absolute;" src= "toCouncilPic"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe>');
   		});
   		$('#u150').click(function(){
   			$('.right').hide();
   			$('#frame1').remove();
-  			$('#u150').after('<iframe   id="frame2" style="width:750px;height:760px;margin-left:400px;margin-top:175px;position:absolute;" src= "www.baidu.com"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe>');
+  			$('#u150').after('<iframe   id="frame2" style="width:750px;height:760px;margin-left:400px;margin-top:175px;position:absolute;" src= "toCouncilShow"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe>');
   		});
   	})
   </script>
