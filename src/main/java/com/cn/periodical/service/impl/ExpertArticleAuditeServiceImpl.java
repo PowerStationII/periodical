@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cn.periodical.manager.ArticleAttachmentInfoManager;
 import com.cn.periodical.manager.ArticleInfoManager;
@@ -16,7 +17,7 @@ import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.pojo.AuthorInfoQuery;
 import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.ExpertArticleAuditeService;
-
+@Service
 public class ExpertArticleAuditeServiceImpl implements ExpertArticleAuditeService {
 
 	public ExpertArticleAuditeServiceImpl() {

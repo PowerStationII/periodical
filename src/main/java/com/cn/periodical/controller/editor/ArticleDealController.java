@@ -167,7 +167,7 @@ public class ArticleDealController extends EditorController{
 	public ModelAndView toSubmitState(@RequestParam("userId") String userId,
 			@ModelAttribute ArticleInfo articleInfo,String expertId,
 			HttpServletRequest request) {
-		logger.info("修改稿件送审入参:["+userId+"]&artilceId:["+JSON.toJSONString(articleInfo)+"]");
+		logger.info("修改稿件送审入参:["+userId+"]&artilceId:["+JSON.toJSONString(articleInfo)+"]&expertId:["+expertId+"]");
 		ModelAndView mav = new ModelAndView("editor_artilce_submitedPage");
 		mav.addObject("userId", userId);
 		/**

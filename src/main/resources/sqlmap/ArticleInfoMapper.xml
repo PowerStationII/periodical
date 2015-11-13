@@ -617,7 +617,7 @@
   </select>
   
   <select id="qryListByUserId" parameterType="string"  resultMap="BaseResultMap">
-	select state as status,count(1) as total from article_info left join  group by state
+	select ai.* from article_info ai,article_info_extend aie where ai.article_id=aie.article_id and aie.user_id=#{userId,jdbcType=VARCHAR}
   </select>
   
 </mapper>

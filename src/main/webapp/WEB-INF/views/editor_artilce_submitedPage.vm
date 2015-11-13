@@ -32,7 +32,7 @@
 				</tr>
 				<tr>
 					<td colspan="3">专家:</td>
-					<td><select name="expertName">
+					<td><select name="expertId">
 							<option value="zhangsan">张三</option>
 							<option value="lisi">李四</option>
 						</select></td>

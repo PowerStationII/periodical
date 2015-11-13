@@ -107,7 +107,7 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 			ArticleInfoExtend articleInfoExtend = new ArticleInfoExtend();
 			articleInfoExtend.setUserId(expertUserId);
 			articleInfoExtend.setArticleId(obj.getArticleId());
-			articleInfoExtend.setRoleId("");
+			articleInfoExtend.setRoleId("9999");
 			articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);
 		}
 		
