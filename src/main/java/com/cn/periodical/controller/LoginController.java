@@ -60,7 +60,7 @@ public class LoginController {
 		 * */
 		if(SystemIdEnums.EDIT_SYS.getCode().equals(systemId)){
 			//编辑
-			String roleId="1006";
+			String roleId="1007";
 			if(RoleIdEnums.ARTICLE_EDITOR.getCode().equals(roleId)){
 				mav = new ModelAndView("editor_area");
 				UserInfo userInfo=null;

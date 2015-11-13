@@ -32,16 +32,18 @@ public class AdCouncilManagerController extends EditorController{
 	 * toCouncilManagerPage
 	 * 会员管理
 	 */
-	@RequestMapping(value="/toCouncilManagerPage",method = RequestMethod.GET)
-	public ModelAndView toCouncilManagerPage(@RequestParam("userId") String userId,
-			HttpServletRequest request) {
-		logger.info("会员管理Page:["+userId+"]");
+	@RequestMapping(value="/toCouncilManagerPage")
+	public ModelAndView toCouncilManagerPage(@ModelAttribute EditorAdCouncilManagerReqDto reqDto) {
+		logger.info("会员管理Page:["+JSON.toJSONString(reqDto)+"]");
 		ModelAndView mav = new ModelAndView("editor_councilManagerPage");
-		mav.addObject("userId", userId);
+		mav.addObject("userId", reqDto.getUserId());
+		logger.info("++++++++++++");
+		logger.info(reqDto.getCouncilType());
+		logger.info("++++++++++++");
 		/**
 		 * TODO:调用该页面查询按钮所调用method执行查询,对页面列表数据进行填充
 		 * */
-		List<CouncilInfo> councilInfos = adCouncilManagerService.queryCouncilInfo(null);
+		List<CouncilInfo> councilInfos = adCouncilManagerService.queryCouncilInfo(reqDto);
 		mav.addObject("councilInfos", councilInfos);
 		
 		

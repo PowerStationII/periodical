@@ -9,6 +9,8 @@ public class EditorAdCouncilManagerReqDto extends RequestDto {
 	}
 	
 	private CouncilMemberTypeEnums type;
+	
+	private String userId;
 	private int adTimes;
 	private String invoiceNo;
 	
@@ -186,4 +188,13 @@ public class EditorAdCouncilManagerReqDto extends RequestDto {
 	public void setContactEmail(java.lang.String contactEmail) {
 		this.contactEmail = contactEmail;
 	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	
+	
 }

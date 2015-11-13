@@ -13,12 +13,13 @@ import com.cn.periodical.pojo.CouncilInfo;
 import com.cn.periodical.pojo.CouncilInfoQuery;
 import com.cn.periodical.request.EditorAdCouncilManagerReqDto;
 import com.cn.periodical.service.EditorAdCouncilManagerService;
+
 @Service
-public class EditorAdCouncilManagerServiceImpl implements EditorAdCouncilManagerService{
+public class EditorAdCouncilManagerServiceImpl implements EditorAdCouncilManagerService {
 
 	@Autowired
 	CouncilInfoManager councilInfoManager;
-	
+
 	public EditorAdCouncilManagerServiceImpl() {
 		// TODO Auto-generated constructor stub
 	}
@@ -38,7 +39,7 @@ public class EditorAdCouncilManagerServiceImpl implements EditorAdCouncilManager
 		councilInfo.setCouncilType(adCouncilManagerReqDto.getCouncilType());
 		councilInfo.setCouncilName(adCouncilManagerReqDto.getCouncilName());
 		councilInfo.setCreateTime(new Date());
-//		councilInfo.setEmployeeNums(adCouncilManagerReqDto.get);
+		// councilInfo.setEmployeeNums(adCouncilManagerReqDto.get);
 		councilInfo.setExtend1("");
 		councilInfo.setExtend2("");
 		councilInfo.setExtend3("");
@@ -58,25 +59,42 @@ public class EditorAdCouncilManagerServiceImpl implements EditorAdCouncilManager
 		councilInfo.setIscouncil("");
 		councilInfo.setIsad("");
 		councilInfoManager.saveCouncilInfo(councilInfo);
-		
+
 		return 0;
 	}
 
 	public List<CouncilInfo> queryCouncilInfo(EditorAdCouncilManagerReqDto adCouncilManagerReqDto) {
 		// TODO Auto-generated method stub
-		if(adCouncilManagerReqDto==null){
+		if (adCouncilManagerReqDto == null) {
 			CouncilInfoQuery councilInfoQuery = new CouncilInfoQuery();
-//			councilInfoQuery.set
-			 List<CouncilInfo> councilInfos = councilInfoManager.queryList(councilInfoQuery);
-			 return councilInfos;
-		}else{
+			// councilInfoQuery.set
+			List<CouncilInfo> councilInfos = councilInfoManager.queryList(councilInfoQuery);
+			return councilInfos;
+		} else {
 			CouncilInfoQuery councilInfoQuery = new CouncilInfoQuery();
-			councilInfoQuery.setContactName(adCouncilManagerReqDto.getCouncilName());
+			councilInfoQuery.setCouncilName(adCouncilManagerReqDto.getCouncilName());
 			councilInfoQuery.setCouncilId(adCouncilManagerReqDto.getCouncilId());
 			councilInfoQuery.setCouncilCompany(adCouncilManagerReqDto.getCouncilCompany());
 			List<CouncilInfo> councilInfos = councilInfoManager.queryList(councilInfoQuery);
 			return councilInfos;
 		}
 	}
+
+//	public List<CouncilInfo> queryCouncilInfo(AdCouncilManagerReqDto reqDto) {
+//		// TODO Auto-generated method stub
+//		if (reqDto == null) {
+//			CouncilInfoQuery councilInfoQuery = new CouncilInfoQuery();
+//			// councilInfoQuery.set
+//			List<CouncilInfo> councilInfos = councilInfoManager.queryList(councilInfoQuery);
+//			return councilInfos;
+//		} else {
+//			CouncilInfoQuery councilInfoQuery = new CouncilInfoQuery();
+//			councilInfoQuery.setContactName(reqDto.getCouncilName());
+//			councilInfoQuery.setCouncilId(reqDto.getCouncilId());
+//			councilInfoQuery.setCouncilCompany(reqDto.getCouncilName());
+//			List<CouncilInfo> councilInfos = councilInfoManager.queryList(councilInfoQuery);
+//			return councilInfos;
+//		}
+//	}
 
 }
