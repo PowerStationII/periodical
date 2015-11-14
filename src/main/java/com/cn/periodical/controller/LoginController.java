@@ -121,7 +121,7 @@ public class LoginController {
 					mav.addObject("roleId", userInfo.getRoleId());
 					return mav;
 				}else if(RoleIdEnums.CN_EXPERT.getCode().equals(role_id)){
-					mav = new ModelAndView("expert_cn_area");
+					mav = new ModelAndView("expert_area");
 					mav.addObject("userId", userInfo.getUserId());
 					mav.addObject("roleId", userInfo.getRoleId());
 					return mav;
@@ -165,7 +165,7 @@ public class LoginController {
 					mav = new ModelAndView("reader_area");
 					return mav;
 				}else if(RoleIdEnums.READER_E.getCode().equals(roleId)){
-					mav = new ModelAndView("author_area");
+					mav = new ModelAndView("reader_area");
 					return mav;
 				}
 			}catch(Exception e){
