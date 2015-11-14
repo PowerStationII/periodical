@@ -12,8 +12,7 @@ public class LogoutController {
 	 * 退出系统跳转到首页
 	 */
 	@RequestMapping(value="/logout",method = RequestMethod.GET)
-	public ModelAndView logout(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("portal");
-		return mav;
+	public String logout(HttpServletRequest request) {
+		return "portal";
 	}
 }
