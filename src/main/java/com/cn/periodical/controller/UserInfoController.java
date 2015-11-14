@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,12 +96,13 @@ public class UserInfoController {
 		ModelAndView mav = new ModelAndView("redirect:/userInfoIndex");
 		
 		try {
+			String userId = UUID.randomUUID().toString().replaceAll("-", "");
+			userInfo.setUserId(userId);
 			userInfoManager.saveUserInfo(userInfo);
 			redirectAttributes.addFlashAttribute("message", "保存成功!");
 		} catch (Exception e) {
 			//记录错误日志
 			logger.error("", e);
-			
 			if(userInfo.getId() == null){
 				mav.setViewName("UserInfoAdd");
 			}else{
