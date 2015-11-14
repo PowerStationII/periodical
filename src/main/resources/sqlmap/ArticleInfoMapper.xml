@@ -34,8 +34,26 @@
 	  <result column="extends_4" jdbcType="VARCHAR" property="extends4" />
 	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  
+   </resultMap>
+   <!-- 支持多个作者查询先放弃
+   	<resultMap id="EditorResultMap" type="EditorArticleInfo">
+	  <id column="ID" jdbcType="DECIMAL" property="id" />
+	  <result column="article_id" jdbcType="VARCHAR" property="articleId" />
+	  <result column="article_cn_title" jdbcType="VARCHAR" property="articleCnTitle" />
+	  <association proterty="articleInfoExtend" column="article_id" javaType="ArticleInfoExtend">
+	  	<id property="id" jdbcType="DECIMAL" column="id"/>
+	  	<result property="userId" column="user_id"/>
+	  	<result property="articleId" column="article_id"/>
+	  	<result property="roleId" column="role_id"/>
+	  </association>
+   </resultMap>
+   
+  <select id="qryListForEditor" parameterType="string"  resultMap="EditorResultMap">
+	select ai.* from article_info ai,article_info_extend aie 
+	where ai.article_id=aie.article_id and 
+	aie.user_id=#{userId,jdbcType=VARCHAR}
+  </select>
+   -->
   <resultMap type="editorAreaInfos"  id="EditorAreaInfosResultMap">
       <result column="state" jdbcType="VARCHAR" property="status" />
   	  <result column="total" jdbcType="INTEGER" property="total" />
@@ -616,8 +634,39 @@
 	select state as status,count(1) as total from article_info group by state
   </select>
   
-  <select id="qryListByUserId" parameterType="string"  resultMap="BaseResultMap">
-	select ai.* from article_info ai,article_info_extend aie where ai.article_id=aie.article_id and aie.user_id=#{userId,jdbcType=VARCHAR}
+<!-- 	select ai.* from article_info ai,article_info_extend aie where ai.article_id=aie.article_id and aie.user_id=#{userId,jdbcType=VARCHAR} -->
+  <select id="qryListByUserId" parameterType="hashmap"  resultMap="BaseResultMap">
+  select ai.id,ai.article_id,
+				ai.article_cn_title,
+				ai.invest_section,
+				ai.extends_1,
+				ai.state,
+				af.deal_state,
+				af.create_time
+				from article_info ai,article_info_extend aie,
+				article_flows af,article_attachment_info aai
+				where ai.article_id=aie.article_id 
+				and af.article_id=ai.article_id and af.deal_state='0002'
+				and ai.article_id=aai.article_id
+				and aie.user_id=#{userId,jdbcType=VARCHAR}
+				<if test="title != null and title !=''">
+			    	and ai.article_cn_title=#{title,jdbcType=VARCHAR}
+			    </if>
+				<!-- <if test="authorName != null">
+			    	and aui.author_name=#{authorName,jdbcType=VARCHAR},
+			    </if> -->
+			    <if test="submitTime != null  and submitTime !=''">
+			    	and af.create_time=#{submitTime,jdbcType=VARCHAR}
+			    </if>
+			    <if test="articleState != null  and articleState !=''">
+			    	and ai.state=#{articleState,jdbcType=VARCHAR}
+			    </if>
+			    <if test="articleId != null  and articleId !=''">
+			    	and ai.article_id=#{articleId,jdbcType=VARCHAR}
+			    </if>
+			    <if test="sectionName != null  and sectionName !=''">
+			    	and ai.invest_section=#{sectionName,jdbcType=VARCHAR}
+			    </if>
   </select>
   
 </mapper>

@@ -28,6 +28,6 @@ public interface ArticleInfoManager {
 	
 	List<EditorAreaInfos> queryArticleTotalInfos(Map<String,String> map);
 	
-	List<ArticleInfo> queryListByUserId(String userId);
+	List<ArticleInfo> queryListByUserId(Map reqMap);
 
 }
