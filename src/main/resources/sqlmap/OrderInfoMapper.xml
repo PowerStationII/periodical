@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderInfoMapper">
+	<resultMap id="BaseResultMap" type="OrderInfo">
+	  <id column="ID" jdbcType="DECIMAL" property="id" />
+	  <result column="user_id" jdbcType="VARCHAR" property="user_id" />
+	  <result column="order_no" jdbcType="VARCHAR" property="order_no" />
+	  <result column="periodical_year" jdbcType="VARCHAR" property="periodical_year" />
+	  <result column="amount" jdbcType="DECIMAL" property="amount" />
+	  <result column="pay_id" jdbcType="VARCHAR" property="pay_id" />
+	  <result column="subscribe_nums" jdbcType="INTEGER" property="subscribe_nums" />
+	  <result column="supplement_id1" jdbcType="VARCHAR" property="supplement_id1" />
+	  <result column="supplement_id2" jdbcType="VARCHAR" property="supplement_id2" />
+	  <result column="supplement_id3" jdbcType="VARCHAR" property="supplement_id3" />
+	  <result column="supplement_id4" jdbcType="VARCHAR" property="supplement_id4" />
+	  <result column="supplement_id5" jdbcType="VARCHAR" property="supplement_id5" />
+	  <result column="supplement_id6" jdbcType="VARCHAR" property="supplement_id6" />
+	  <result column="supplement_id7" jdbcType="VARCHAR" property="supplement_id7" />
+	  <result column="supplement_id1_nums" jdbcType="INTEGER" property="supplement_id1_nums" />
+	  <result column="supplement_id2_nums" jdbcType="INTEGER" property="supplement_id2_nums" />
+	  <result column="supplement_id3_nums" jdbcType="INTEGER" property="supplement_id3_nums" />
+	  <result column="supplement_id4_nums" jdbcType="INTEGER" property="supplement_id4_nums" />
+	  <result column="supplement_id5_nums" jdbcType="INTEGER" property="supplement_id5_nums" />
+	  <result column="supplement_id6_nums" jdbcType="INTEGER" property="supplement_id6_nums" />
+	  <result column="supplement_id7_nums" jdbcType="INTEGER" property="supplement_id7_nums" />
+	  <result column="order_status" jdbcType="VARCHAR" property="order_status" />
+	  <result column="extend_2" jdbcType="VARCHAR" property="extend_1" />
+	  <result column="extend_2" jdbcType="VARCHAR" property="extend_2" />
+	  <result column="extend_3" jdbcType="VARCHAR" property="extend_3" />
+	  <result column="extend_4" jdbcType="VARCHAR" property="extend_4" />
+	  <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+	  <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+	  <result column="audit_time" jdbcType="TIMESTAMP" property="audit_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id,
+    user_id,
+    order_no,
+    periodical_year,
+    amount,
+    pay_id,
+    subscribe_nums,
+    supplement_id1,
+    supplement_id2,
+    supplement_id3,
+    supplement_id4,
+    supplement_id5,
+    supplement_id6,
+    supplement_id7,
+    supplement_id1_nums,
+    supplement_id2_nums ,
+    supplement_id3_nums ,
+    supplement_id4_nums ,
+    supplement_id5_nums ,
+    supplement_id6_nums ,
+    supplement_id7_nums ,
+    order_status,
+    extend_1,
+    extend_2,
+    extend_3,
+    extend_4,
+    create_time,
+    update_time,
+    audit_time,
+  </sql>
+
+  <select id="selectByYear" parameterType="OrderInfoQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from order_info
+      <where>
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+              <if test="user_id != null" >
+                  and user_id = #{user_id,jdbcType=VARCHAR}
+              </if>
+              <if test="periodical_year != null" >
+                  and periodical_year = #{periodical_year,jdbcType=VARCHAR}
+              </if>
+          </trim>
+      </where>
+  </select>
+</mapper>

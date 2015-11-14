@@ -15,12 +15,27 @@
 	<div id="articleInfos">
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
-				<td>订单管理</td>
-				<td>稿件标题</td>
-				<td>投稿时间</td>
-				<td>稿件状态</td>
-				<td>备注信息</td>
+				<td>订单编号</td>
+				<td>订购年份</td>
+				<td>数量</td>
+				<td>金额</td>
+				<td>提交日期</td>
+                <td>审核日期</td>
+                <td>银行汇款凭证</td>
+                <td>操作</td>
 			</tr>
+            #foreach($orderInfo in ${list})
+                <tr>
+                    <td>${orderInfo.order_no}</td>
+                    <td>${orderInfo.periodical_year}</td>
+                    <td>${orderInfo.subscribe_nums}</td>
+                    <td>${orderInfo.subscribe_nums}</td>
+                    <td>${orderInfo.create_time}</td>
+                    <td>${orderInfo.audit_time}</td>
+                    <td>${orderInfo.id}</td>
+                    <td><a href="../author/toArticleQueryDetailPage?artilceId=${articleQueryRespDto.articleId}">${articleQueryRespDto.articleCnTitle}</a></td>
+                </tr>
+            #end
 		</table>
 		<br>
 	</div>
