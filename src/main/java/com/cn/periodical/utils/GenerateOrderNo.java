@@ -23,7 +23,7 @@ public class GenerateOrderNo {
 	}
 	
 	private static Map<String, String> map = new HashMap<String, String>();
-	private static String STATNUM = "000001";
+	private static String STATNUM = "01";
 
 	public String getLastSixNum(String s) {
 		String rs = s;
