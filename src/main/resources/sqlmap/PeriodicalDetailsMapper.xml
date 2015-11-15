@@ -4,6 +4,9 @@
 	<resultMap id="BaseResultMap" type="PeriodicalDetails">
 	  <id column="ID" jdbcType="DECIMAL" property="id" />
 	  <result column="user_id" jdbcType="VARCHAR" property="userId" />
+	  <result column="ref_id" jdbcType="VARCHAR" property="refId" />
+	  <result column="section_id" jdbcType="VARCHAR" property="sectionId" />
+	  <result column="type" jdbcType="VARCHAR" property="type" />
 	  <result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
 	  <result column="periodical_issue_no" jdbcType="VARCHAR" property="periodicalIssueNo" />
 	  <result column="article_id" jdbcType="VARCHAR" property="articleId" />
@@ -26,6 +29,15 @@
       <trim prefix="(" prefixOverrides="and" suffix=")">
       <if test="userId != null" >
 	      and user_id = #{userId,jdbcType=VARCHAR}
+	    </if>
+      <if test="refId != null" >
+	      and ref_id = #{refId,jdbcType=VARCHAR}
+	    </if>
+      <if test="sectionId != null" >
+	      and section_id = #{sectionId,jdbcType=VARCHAR}
+	    </if>
+      <if test="type != null" >
+	      and type = #{type,jdbcType=VARCHAR}
 	    </if>
       <if test="periodicalId != null" >
 	      and periodical_id = #{periodicalId,jdbcType=VARCHAR}
@@ -66,6 +78,15 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
+      <if test="refId != null">
+        ref_id = #{refId,jdbcType=VARCHAR},
+      </if>
+      <if test="sectionId != null">
+        section_id = #{sectionId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
       <if test="periodicalId != null">
         periodical_id = #{periodicalId,jdbcType=VARCHAR},
       </if>
@@ -102,6 +123,9 @@
   <sql id="Base_Column_List">
     id,
     user_id,
+    ref_id,
+    section_id,
+    type,
     periodical_id,
     periodical_issue_no,
     article_id,
@@ -117,6 +141,9 @@
     <set>
       <trim suffixOverrides=",">
         user_id = #{userId,jdbcType=VARCHAR},
+        ref_id = #{refId,jdbcType=VARCHAR},
+        section_id = #{sectionId,jdbcType=VARCHAR},
+        type = #{type,jdbcType=VARCHAR},
         periodical_id = #{periodicalId,jdbcType=VARCHAR},
         periodical_issue_no = #{periodicalIssueNo,jdbcType=VARCHAR},
         article_id = #{articleId,jdbcType=VARCHAR},
@@ -134,6 +161,15 @@
     <!-- ID, -->
     <if test="userId != null">
       user_id,
+    </if>
+    <if test="refId != null">
+      ref_id,
+    </if>
+    <if test="sectionId != null">
+      section_id,
+    </if>
+    <if test="type != null">
+      type,
     </if>
     <if test="periodicalId != null">
       periodical_id,
@@ -169,6 +205,9 @@
 	<sql id="Base_Value_List">
     #{id,jdbcType=BIGINT},
     #{userId,jdbcType=VARCHAR},
+    #{refId,jdbcType=VARCHAR},
+    #{sectionId,jdbcType=VARCHAR},
+    #{type,jdbcType=VARCHAR},
     #{periodicalId,jdbcType=VARCHAR},
     #{periodicalIssueNo,jdbcType=VARCHAR},
     #{articleId,jdbcType=VARCHAR},
@@ -184,6 +223,15 @@
     <!-- SEQ_periodical_details.nextval, -->
     <if test="userId != null">
       #{userId,jdbcType=VARCHAR},
+    </if>
+    <if test="refId != null">
+      #{refId,jdbcType=VARCHAR},
+    </if>
+    <if test="sectionId != null">
+      #{sectionId,jdbcType=VARCHAR},
+    </if>
+    <if test="type != null">
+      #{type,jdbcType=VARCHAR},
     </if>
     <if test="periodicalId != null">
       #{periodicalId,jdbcType=VARCHAR},

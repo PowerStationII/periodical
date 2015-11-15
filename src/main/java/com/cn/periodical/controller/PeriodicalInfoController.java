@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cn.periodical.manager.PayeeInfoManager;
 import com.cn.periodical.manager.PeriodicalInfoManager;
+import com.cn.periodical.pojo.PayeeInfo;
 import com.cn.periodical.pojo.PeriodicalInfo;
 import com.cn.periodical.pojo.PeriodicalInfoPage;
 import com.cn.periodical.pojo.PeriodicalInfoQuery;
@@ -35,6 +37,9 @@ import com.cn.periodical.pojo.PeriodicalInfoQuery;
 public class PeriodicalInfoController {
 	@Autowired
 	private PeriodicalInfoManager periodicalInfoManager;
+	
+	@Autowired
+	private PayeeInfoManager payeeInfoManager;
 	
 	private static final Logger logger = LoggerFactory.getLogger(PeriodicalInfoController.class);
 	/**
@@ -94,13 +99,20 @@ public class PeriodicalInfoController {
 	 * 保存数据
 	 */
 	@RequestMapping(value = "/savePeriodicalInfo", method = { RequestMethod.POST })
-	public ModelAndView savePeriodicalInfo(@ModelAttribute PeriodicalInfo periodicalInfo, RedirectAttributes redirectAttributes) {
+	public ModelAndView savePeriodicalInfo(@ModelAttribute PeriodicalInfo periodicalInfo, 
+			@ModelAttribute PayeeInfo payeeInfo,
+			RedirectAttributes redirectAttributes) {
 		ModelAndView mav = new ModelAndView("redirect:/params/periodicalInfoIndex");
 		
 		try {
-			periodicalInfo.setPeriodicalId(UUID.randomUUID().toString().replaceAll("-",""));
+			String periodicalId=UUID.randomUUID().toString().replaceAll("-","");
+			periodicalInfo.setPeriodicalId(periodicalId);
 			periodicalInfo.setCreateTime(new Date());
 			periodicalInfoManager.savePeriodicalInfo(periodicalInfo);
+			payeeInfo.setRefId(periodicalId);
+			payeeInfo.setType("000");
+			payeeInfoManager.savePayeeInfo(payeeInfo);
+			
 			redirectAttributes.addFlashAttribute("message", "保存成功!");
 		} catch (Exception e) {
 			//记录错误日志

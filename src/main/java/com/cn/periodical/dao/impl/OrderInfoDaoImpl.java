@@ -18,7 +18,6 @@ import java.util.List;
 @Repository("orderInfoDao")
 public class OrderInfoDaoImpl extends BaseDao implements OrderInfoDao {
 
-    @Override
     public List<OrderInfo> selectByYear(OrderInfoQuery orderInfoQuery) {
         return super.getSqlSession().selectList("OrderInfoMapper.selectByYear", orderInfoQuery);
     }

@@ -22,7 +22,6 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Autowired
     OrderInfoManager orderInfoManager ;
 
-    @Override
     public List<OrderInfo> selectByYear(OrderInfoQuery orderInfoQuery) {
         return orderInfoManager.selectByYear(orderInfoQuery);
     }

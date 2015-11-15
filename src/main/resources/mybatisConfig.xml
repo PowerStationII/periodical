@@ -49,5 +49,6 @@
 		<mapper resource="sqlmap/PeriodicalDetailsMapper.xml"/>
 		<mapper resource="sqlmap/PeriodicalInfoMapper.xml"/>
 		<mapper resource="sqlmap/PeriodicalMapper.xml"/>
+		<mapper resource="sqlmap/PayeeInfoMapper.xml"/>
 	</mappers>
 </configuration>
