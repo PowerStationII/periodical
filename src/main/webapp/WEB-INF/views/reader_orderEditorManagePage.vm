@@ -11,6 +11,14 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script type="text/javascript">
+    $(function(){
+        $('#editAddress_id').click(function(){
+            $("#form2").submit();
+        });
+    } );
+
+</script>
 <body>
 	<div id="articleInfos">
 		<div class="main_con">
@@ -321,7 +329,7 @@
                 <div class="con_core_info_div03 paddingl80">
                     <div class="attr_con">
                         <input type="button" value="编辑收货地址" id="editAddress_id" >
-                        <input  type="submit" value="修改订单">
+                        <input  type="button" value="修改订单">
                     </div>
                 </div>
             </form>
@@ -333,11 +341,4 @@
 	</div>
 </body>
 </html>
-<script type="text/javascript">
-    $(function(){
-        $('#editAddress_id').click(function(){
-            $("form").submit();
-        });
-    }
 
-</script>
