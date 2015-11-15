@@ -70,21 +70,14 @@ public class LoginController {
 				String roleId=userInfo.getRoleId();
 				if(RoleIdEnums.ARTICLE_EDITOR.getCode().equals(roleId)){
 					mav = new ModelAndView("editor_area");
-					try{
-						mav.addObject("roleId",roleId);
-						mav.addObject("userId",userInfo.getUserId());
-						/**
-						 * TODO:稿件编辑工作区需要展示稿件统计信息
-						 * */
-						List<EditorAreaInfos> list = loginService.queryArticleInfos("", "");
-						mav.addObject("list", list);
-						return mav;
-					}catch(Exception e){
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						mav=new ModelAndView("error");
-						return mav;
-					}
+					mav.addObject("roleId",roleId);
+					mav.addObject("userId",userInfo.getUserId());
+					/**
+					 * TODO:稿件编辑工作区需要展示稿件统计信息
+					 * */
+					List<EditorAreaInfos> list = loginService.queryArticleInfos("", "");
+					mav.addObject("list", list);
+					return mav;
 				}else if(RoleIdEnums.SUBSCRIBE_EDITOR.getCode().equals(roleId)){
 					mav = new ModelAndView("editor_area");
 					mav.addObject("roleId",roleId);
@@ -163,9 +156,13 @@ public class LoginController {
 				String roleId=userInfo.getRoleId();
 				if(RoleIdEnums.READER_P.getCode().equals(roleId)){
 					mav = new ModelAndView("reader_area");
+					mav.addObject("userId", userInfo.getUserId());
+					mav.addObject("roleId", roleId);
 					return mav;
 				}else if(RoleIdEnums.READER_E.getCode().equals(roleId)){
 					mav = new ModelAndView("reader_area");
+					mav.addObject("userId", userInfo.getUserId());
+					mav.addObject("roleId", roleId);
 					return mav;
 				}
 			}catch(Exception e){

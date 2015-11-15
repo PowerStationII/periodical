@@ -1,18 +1,27 @@
-package com.cn.periodical.manager;
+/*
+ * Powered By code-generator
+ * Since 2015 - 2015
+ */
 
-import com.cn.periodical.pojo.OrderInfo;
-import com.cn.periodical.pojo.OrderInfoQuery;
+package com.cn.periodical.manager;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: 1
- * Date: 15-11-15
- * Time: 上午12:50
- * To change this template use File | Settings | File Templates.
- */
-public interface OrderInfoManager {
+import com.cn.periodical.pojo.OrderInfo;
+import com.cn.periodical.pojo.OrderInfoPage;
+import com.cn.periodical.pojo.OrderInfoQuery;
 
-    public List<OrderInfo> selectByYear(OrderInfoQuery orderInfoQuery);
+public interface OrderInfoManager {
+	void saveOrderInfo(OrderInfo orderInfo);
+
+	OrderInfo findOrderInfoById(Long id);
+	
+	List<OrderInfo> queryList(OrderInfoQuery query);
+	
+	void deleteOrderInfoById(Long id);
+	
+	void deleteOrderInfo(OrderInfoQuery query);
+	
+	OrderInfoPage queryPageList(OrderInfoQuery query);
+	
 }

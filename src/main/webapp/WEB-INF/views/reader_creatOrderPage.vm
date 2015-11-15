@@ -12,6 +12,10 @@
 </head>
 <body>
 	<div id="articleInfos">
+	<form action="../reader/toCreatOrder" method="POST">
+		<input type="hidden" name="userId" value="${userId}">
+		<input type="hidden" name="periodicalId" value="${periodicalInfo.periodicalId}">
+		
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
 				<th>期刊信息</th>
@@ -20,46 +24,54 @@
                 <td>期刊名称：${periodicalInfo.periodicalCnName}</td>
             </tr>
             <tr>
-                <td>刊号：${cn_no}</td>
+                <td>刊号：${periodicalInfo.issnNo}</td>
             </tr>
             <tr>
                 <td>出版周期：${periodicalInfo.cycle}</td>
             </tr>
             <tr>
-                <td>全年定价：${periodicalInfo.cycle}</td>
+                <td>全年定价：算出来</td>
             </tr>
             <tr>
-                <td>收款单位：</td>
+                <td>收款单位：${payeeInfo.payeeAccountName}</td>
             </tr>
             <tr>
-                <td>开户银行及账户：</td>
+                <td>开户银行及账户：${payeeInfo.payeeAccountOpen}  ${payeeInfo.payeeAccountNo}</td>
             </tr>
             <tr>
-                <td>邮局汇款：</td>
+                <td>邮局汇款：${payeeInfo.payeeAccountPost}</td>
             </tr>
             <tr>
-                <td>订购指南：</td>
+                <td>地址：${payeeInfo.payeeAccountAddress}</td>
             </tr>
             <tr>
+                <td>邮编：${payeeInfo.payeeAccountPostCode}</td>
+            </tr>
+            <tr>
+                <td>订购指南：下载</td>
+            </tr>
+            
+          	<tr>
                 <th>订阅信息</th>
             </tr>
             <tr>
-                <td>订单号：</td>
+                <td>订阅期刊：<select name="periodicalYear">
+                	<option value="2015">2015</option>
+                	<option value="2016">2016</option>
+                </select></td>
             </tr>
             <tr>
-                <td>订阅期刊：</td>
+                <td>订阅数：<input type="text" name="orderNums" value=""></td>
             </tr>
             <tr>
-                <td>订阅数：</td>
+                <td>金额：js算出来</td>
             </tr>
             <tr>
-                <td>金额：</td>
-            </tr>
-            <tr>
-                <td>提交</td>
+                <td ><input type="submit" value="提交"></td>
             </tr>
 		</table>
 		<br>
+		</form>
 	</div>
 </body>
 </html>

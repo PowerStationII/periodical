@@ -23,6 +23,6 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     OrderInfoManager orderInfoManager ;
 
     public List<OrderInfo> selectByYear(OrderInfoQuery orderInfoQuery) {
-        return orderInfoManager.selectByYear(orderInfoQuery);
+        return orderInfoManager.queryList(orderInfoQuery);
     }
 }

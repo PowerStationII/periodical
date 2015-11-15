@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+	<div id="articleInfos">
+		<div class="main_con">
+			<form action="../reader/toEditorOrder" method="POST">
+			<div class="con_article_title02 paddtb20">
+				<input type="hidden" value="$!{orderInfo.id}" id="id" name="id">
+				<input type="hidden" value="${userId}" id="userId" name="userId">
+
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.userId}" id="userId" name="userId">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.orderNo}" id="orderNo" name="orderNo">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.periodicalId}" id="periodicalId"
+							name="periodicalId">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.periodicalYear}" id="periodicalYear"
+							name="periodicalYear">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.amount}" id="amount" name="amount">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">支付记录：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.payId}" id="payId" name="payId">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">订阅数量：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.subscribeNums}" id="subscribeNums"
+							name="subscribeNums">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId1}" id="supplementId1"
+							name="supplementId1">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId2}" id="supplementId2"
+							name="supplementId2">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId3}" id="supplementId3"
+							name="supplementId3">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId4}" id="supplementId4"
+							name="supplementId4">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId5}" id="supplementId5"
+							name="supplementId5">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId6}" id="supplementId6"
+							name="supplementId6">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId7}" id="supplementId7"
+							name="supplementId7">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId1Nums}" id="supplementId1Nums"
+							name="supplementId1Nums">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId2Nums}" id="supplementId2Nums"
+							name="supplementId2Nums">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId3Nums}" id="supplementId3Nums"
+							name="supplementId3Nums">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId4Nums}" id="supplementId4Nums"
+							name="supplementId4Nums">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId5Nums}" id="supplementId5Nums"
+							name="supplementId5Nums">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId6Nums}" id="supplementId6Nums"
+							name="supplementId6Nums">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.supplementId7Nums}" id="supplementId7Nums"
+							name="supplementId7Nums">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">订单状态：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.orderStatus}" id="orderStatus"
+							name="orderStatus">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="blank20"></div>
+				<div class="con_core_info_div02 rel_pos wid500 padding0">
+					<label class="label_txt wid135 txtright margt10 margr8"> <span
+						class="right">：</span></label>
+					<div class="input_con_type_top wid343">
+						<input maxlength="30" class="wid333 ip_input_con lightgrey"
+							value="$!{orderInfo.auditTime}" id="auditTime" name="auditTime">
+					</div>
+					<div style="display: none; margin-left: 150px;" class="left wid360">
+						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
+					</div>
+				</div>
+				<div class="con_core_info_div03 paddingl80">
+					<div class="attr_con">
+						<a class="chan_btn right wid93 margr40 margt10"
+							href="${rc.contextPath}/params/orderInfoIndex">编辑收货地址</a> <input
+							type="submit" value="修改订单">
+					</div>
+				</div>
+			</div>
+			<br>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

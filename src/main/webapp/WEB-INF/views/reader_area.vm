@@ -24,27 +24,27 @@
   			$('#dingdanguanli').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toOrderManagePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toOrderManagePage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#xinjiandingdan').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toCreatOrderPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toCreatOrderPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#gaofeidengji').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toOrderPayPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toOrderPayPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#xiugaixinxi').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdateSettingPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdateSettingPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#xiugaimima').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdatePWPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdatePWPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#other').hide();
   		});
