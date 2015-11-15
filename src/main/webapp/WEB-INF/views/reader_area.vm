@@ -1,103 +1,201 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>工作区首页</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <link href="css/easyui.css" type="text/css" rel="stylesheet"/>
-    <link href="css/icon.css" type="text/css" rel="stylesheet"/>
- 	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
-	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
-  </head>
-  <script type="text/javascript">
-  		$(function(){
-  			$('.area_name').click(function(){
-  				$('#other').hide();
-  				$('#area').show();
-  			});
-  			//$('#jiansuo').click(function(){
-  			//	$('#area').hide();
-  			//	$('#other').remove();
-  			//	$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toKeyWordsSearchPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
-  			//});
-  			$('#dingdanguanli').click(function(){
-  				$('#area').hide();
-  				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toOrderManagePage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
-  			});
-  			$('#xinjiandingdan').click(function(){
-  				$('#area').hide();
-  				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toCreatOrderPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
-  			});
-  			$('#gaofeidengji').click(function(){
-  				$('#area').hide();
-  				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toOrderPayPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
-  			});
-  			$('#xiugaixinxi').click(function(){
-  				$('#area').hide();
-  				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdateSettingPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
-  			});
-  			$('#xiugaimima').click(function(){
-  				$('#area').hide();
-  				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdatePWPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
-  			});
-  			$('#other').hide();
-  		});
-  </script>
-  <style>
-  		.top{height:80px;background-image:url("img/portal/u2.jpg");line-height:80px;padding-left:30px;}
-  		.left{width:200px;height:530px;float:left;}
-  		.right{width:1070px;height:530px;float:left;}
-  		.buttom{height:540px;margin-top:1px;}
-		.work_area{height:30px;background:#4DA20B;}
-		.area_name{height:30px;margin-left:45px;margin-top:8px;cursor:pointer;}
-		.mode_name{height:30px;background:#4DA20B;line-height:30px;text-align:center;color:#ffffff;border-radius:5px;}
-  		.cLeft{height:200px;width:180px;margin-left:auto;margin-right:auto;margin-top:10px;border-radius:5px;}
-		.leftUp{height:60px;width:180px;margin-left:auto;margin-right:auto;border:1px solid #349000;border-radius:5px;}
-		.li1,.li2,.li3{height:30px;line-height:30px;width:160px;margin-left:auto;margin-right:auto;text-align:center;cursor:pointer;}
-		.li1{border-top:1px solid #349000;border-left:1px solid #349000;border-right:1px solid #349000;margin-top:10px;}
-		.li2{border-top:1px solid #349000;border-left:1px solid #349000;border-right:1px solid #349000;}
-		.li3{border:1px solid #349000;}
-		a{text-decoration:none;color:#000000}
-  </style>
-  <body style="margin:0px;">
-    <div class="top">
-       	<a>欢迎访问《 农药科学与管理  》网站！</a>
-		<a href="logout" style='text-decoration:none;'>退出系统</a>
-    </div>
-    <div class="buttom">
-	    <div class="left">
-	       <div class="leftUp">
-	       		<div  class="work_area"></div>
-	       		<div  class="area_name">工作区首页</div>
-	       </div>
-	       <div class="cLeft">
-	       		<div  class="mode_name">期刊征订</div>
-       			<!-- <div  class="li1"  id="jiansuo">关键词检索</div> -->
-		        <div  class="li2" id="dingdanguanli">订单管理</div>
-		        <div  class="li2" id="xinjiandingdan">新建订单</div>
-		        <div  class="li3" id="gaofeidengji">订费登记</div>
-		        <div  class="mode_name"  style="margin-top:10px;">个人信息设置</div>
-	       		<div  class="li2"  style="margin-top:10px;" id="xiugaixinxi">修改个人信息</div>
-			    <div  class="li3" id="xiugaimima">修改密码</div>
-			    <!-- div  class="mode_name"  style="margin-top:10px;">消息管理</div>
+<head>
+<title>工作区首页</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+</head>
+<script type="text/javascript">
+	$(function() {
+		$('.area_name').click(function() {
+			$('#other').hide();
+			$('#area').show();
+		});
+		//$('#jiansuo').click(function(){
+		//	$('#area').hide();
+		//	$('#other').remove();
+		//	$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toKeyWordsSearchPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+		//});
+		$('#dingdanguanli')
+				.click(
+						function() {
+							$('#area').hide();
+							$('#other').remove();
+							$('.right')
+									.append(
+											'<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toOrderManagePage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+						});
+		$('#xinjiandingdan')
+				.click(
+						function() {
+							$('#area').hide();
+							$('#other').remove();
+							$('.right')
+									.append(
+											'<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toCreatOrderPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+						});
+		$('#gaofeidengji')
+				.click(
+						function() {
+							$('#area').hide();
+							$('#other').remove();
+							$('.right')
+									.append(
+											'<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toOrderPayPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+						});
+		$('#xiugaixinxi')
+				.click(
+						function() {
+							$('#area').hide();
+							$('#other').remove();
+							$('.right')
+									.append(
+											'<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdateSettingPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+						});
+		$('#xiugaimima')
+				.click(
+						function() {
+							$('#area').hide();
+							$('#other').remove();
+							$('.right')
+									.append(
+											'<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdatePWPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+						});
+		$('#other').hide();
+	});
+</script>
+<style>
+.top {
+	height: 80px;
+	background-image: url("img/portal/u2.jpg");
+	line-height: 80px;
+	padding-left: 30px;
+}
+
+.left {
+	width: 200px;
+	height: 530px;
+	float: left;
+}
+
+.right {
+	width: 1070px;
+	height: 530px;
+	float: left;
+}
+
+.buttom {
+	height: 540px;
+	margin-top: 1px;
+}
+
+.work_area {
+	height: 30px;
+	background: #4DA20B;
+}
+
+.area_name {
+	height: 30px;
+	margin-left: 45px;
+	margin-top: 8px;
+	cursor: pointer;
+}
+
+.mode_name {
+	height: 30px;
+	background: #4DA20B;
+	line-height: 30px;
+	text-align: center;
+	color: #ffffff;
+	border-radius: 5px;
+}
+
+.cLeft {
+	height: 200px;
+	width: 180px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	border-radius: 5px;
+}
+
+.leftUp {
+	height: 60px;
+	width: 180px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #349000;
+	border-radius: 5px;
+}
+
+.li1, .li2, .li3 {
+	height: 30px;
+	line-height: 30px;
+	width: 160px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	cursor: pointer;
+}
+
+.li1 {
+	border-top: 1px solid #349000;
+	border-left: 1px solid #349000;
+	border-right: 1px solid #349000;
+	margin-top: 10px;
+}
+
+.li2 {
+	border-top: 1px solid #349000;
+	border-left: 1px solid #349000;
+	border-right: 1px solid #349000;
+}
+
+.li3 {
+	border: 1px solid #349000;
+}
+
+a {
+	text-decoration: none;
+	color: #000000
+}
+</style>
+<body style="margin: 0px;">
+	<div class="top">
+		<a>欢迎访问《 农药科学与管理 》网站！</a> <a href="logout"
+			style='text-decoration: none;'>退出系统</a>
+	</div>
+	<div class="buttom">
+		<div class="left">
+			<div class="leftUp">
+				<div class="work_area"></div>
+				<div class="area_name">工作区首页</div>
+			</div>
+			<div class="cLeft">
+				<div class="mode_name">期刊征订</div>
+				<!-- <div  class="li1"  id="jiansuo">关键词检索</div> -->
+				<div class="li2" id="dingdanguanli">订单管理</div>
+				<div class="li2" id="xinjiandingdan">新建订单</div>
+				<div class="li3" id="gaofeidengji">订费登记</div>
+				<div class="mode_name" style="margin-top: 10px;">个人信息设置</div>
+				<div class="li2" style="margin-top: 10px;" id="xiugaixinxi">修改个人信息</div>
+				<div class="li3" id="xiugaimima">修改密码</div>
+				<!-- div  class="mode_name"  style="margin-top:10px;">消息管理</div>
 	       		<div  class="li2"  style="margin-top:10px;" id="xiugaixinxi">我的消息</div>
 			    <div  class="li3" id="xiugaimima">发送消息</div> -->
-	       	</div>
-	   </div>
-	    <div class="right">
-			<div id="area"  style="margin-top:20px;">
-					<a style="margin-left:400px;font-size:20px;">作者工作区提示</a><br><br>
-					<a style="font-size:12px;">
-					我是读者a.....
-					 </a>		
 			</div>
-	    </div>
-    </div>
-  </body>
+		</div>
+		<div class="right">
+			<div id="area" style="margin-top: 20px;">
+				<a style="margin-left: 400px; font-size: 20px;">作者工作区提示</a><br>
+				<br> <a style="font-size: 12px;"> 我是读者a..... </a>
+			</div>
+		</div>
+	</div>
+</body>
 </html>
