@@ -23,4 +23,6 @@ public interface AddressInfoManager {
 	void deleteAddressInfo(AddressInfoQuery query);
 	
 	AddressInfoPage queryPageList(AddressInfoQuery query);
+
+    public void saveAddressInfos(List<AddressInfo> list);
 }

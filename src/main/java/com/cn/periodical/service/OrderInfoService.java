@@ -2,6 +2,7 @@ package com.cn.periodical.service;
 
 import com.cn.periodical.pojo.OrderInfo;
 import com.cn.periodical.pojo.OrderInfoQuery;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ import java.util.List;
  */
 public interface OrderInfoService {
     public List<OrderInfo> selectByYear(OrderInfoQuery orderInfoQuery);
+
+    public void insertAddressInfo( MultipartFile[] files ,String orderNo , String refRole_id);
 }

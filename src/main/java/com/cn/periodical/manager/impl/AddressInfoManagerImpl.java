@@ -69,5 +69,11 @@ public class AddressInfoManagerImpl implements AddressInfoManager {
 		addressInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
 		return addressInfoPage;
 	}
+
+    public void saveAddressInfos(List<AddressInfo> list){
+          for(AddressInfo addressInfo : list){
+              addressInfoDao.insertSelective(addressInfo);
+          }
+    }
 }
 

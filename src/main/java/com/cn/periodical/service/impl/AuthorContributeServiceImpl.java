@@ -210,7 +210,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
     	File headPath = new File(filePath);//获取文件夹路径       
     	if(!headPath.exists()){
     	//判断文件夹是否创建，没有创建则创建新文件夹        	
-    		headPath.mkdirs();        
+    		headPath.mkdirs();
     	}
     	
     	String fileName = filePath+file.getOriginalFilename();

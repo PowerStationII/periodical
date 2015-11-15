@@ -14,7 +14,6 @@
 <body>
 	<div id="articleInfos">
 		<div class="main_con">
-			<form action="../reader/toEditorOrder" method="POST">
 			<div class="con_article_title02 paddtb20">
 				<input type="hidden" value="$!{orderInfo.id}" id="id" name="id">
 				<input type="hidden" value="${userId}" id="userId" name="userId">
@@ -313,17 +312,32 @@
 						<span class="label_txt wid190 margt10 red01" error="orderInfo"></span>
 					</div>
 				</div>
-				<div class="con_core_info_div03 paddingl80">
-					<div class="attr_con">
-						<a class="chan_btn right wid93 margr40 margt10"
-							href="${rc.contextPath}/params/orderInfoIndex">编辑收货地址</a> <input
-							type="submit" value="修改订单">
-					</div>
-				</div>
+            <form  enctype="multipart/form-data" action="../reader/readEditAddress" method="POST" id="form2">
+                <div class="con_core_info_div03 paddingl80">
+                    <div class="attr_con">
+                        <input type="file"  id="sub_upload" name="files">
+                    </div>
+                </div>
+                <div class="con_core_info_div03 paddingl80">
+                    <div class="attr_con">
+                        <input type="button" value="编辑收货地址" id="editAddress_id" >
+                        <input  type="submit" value="修改订单">
+                    </div>
+                </div>
+            </form>
+
 			</div>
 			<br>
-			</form>
+
 		</div>
 	</div>
 </body>
 </html>
+<script type="text/javascript">
+    $(function(){
+        $('#editAddress_id').click(function(){
+            $("form").submit();
+        });
+    }
+
+</script>
