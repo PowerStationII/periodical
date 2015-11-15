@@ -3,7 +3,6 @@
 <mapper namespace="ArticleInfoMapper">
 	<resultMap id="BaseResultMap" type="ArticleInfo">
 	  <id column="ID" jdbcType="DECIMAL" property="id" />
-	  <result column="user_id" jdbcType="VARCHAR" property="userId" />
 	  <result column="article_name" jdbcType="VARCHAR" property="articleName" />
 	  <result column="article_id" jdbcType="VARCHAR" property="articleId" />
 	  <result column="article_type" jdbcType="VARCHAR" property="articleType" />
@@ -27,36 +26,16 @@
 	  <result column="total_tabs" jdbcType="INTEGER" property="totalTabs" />
 	  <result column="total_pages" jdbcType="INTEGER" property="totalPages" />
 	  <result column="fund_title" jdbcType="VARCHAR" property="fundTitle" />
-	  <result column="state" jdbcType="VARCHAR" property="state" />
-	  <result column="extends_1" jdbcType="VARCHAR" property="extends1" />
+	  <result column="editor_state" jdbcType="VARCHAR" property="editorState" />
+	  <result column="expert_state" jdbcType="VARCHAR" property="expertState" />
+	  <result column="author_state" jdbcType="VARCHAR" property="authorState" />
+	  <result column="isAvaliable" jdbcType="VARCHAR" property="isAvaliable" />
+	  <result column="lately_flows_id" jdbcType="BIGINT" property="latelyFlowsId" />
 	  <result column="extends_2" jdbcType="VARCHAR" property="extends2" />
 	  <result column="extends_3" jdbcType="VARCHAR" property="extends3" />
 	  <result column="extends_4" jdbcType="VARCHAR" property="extends4" />
 	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-   </resultMap>
-   <!-- 支持多个作者查询先放弃
-   	<resultMap id="EditorResultMap" type="EditorArticleInfo">
-	  <id column="ID" jdbcType="DECIMAL" property="id" />
-	  <result column="article_id" jdbcType="VARCHAR" property="articleId" />
-	  <result column="article_cn_title" jdbcType="VARCHAR" property="articleCnTitle" />
-	  <association proterty="articleInfoExtend" column="article_id" javaType="ArticleInfoExtend">
-	  	<id property="id" jdbcType="DECIMAL" column="id"/>
-	  	<result property="userId" column="user_id"/>
-	  	<result property="articleId" column="article_id"/>
-	  	<result property="roleId" column="role_id"/>
-	  </association>
-   </resultMap>
-   
-  <select id="qryListForEditor" parameterType="string"  resultMap="EditorResultMap">
-	select ai.* from article_info ai,article_info_extend aie 
-	where ai.article_id=aie.article_id and 
-	aie.user_id=#{userId,jdbcType=VARCHAR}
-  </select>
-   -->
-  <resultMap type="editorAreaInfos"  id="EditorAreaInfosResultMap">
-      <result column="state" jdbcType="VARCHAR" property="status" />
-  	  <result column="total" jdbcType="INTEGER" property="total" />
   </resultMap>
   <sql id="Page_Query_Begin">
     select * from(select t.*,rownum rn from(
@@ -67,9 +46,6 @@
   <sql id="Example_Where_Clause">
     <where>
       <trim prefix="(" prefixOverrides="and" suffix=")">
-      <if test="userId != null" >
-	      and user_id = #{userId,jdbcType=VARCHAR}
-	    </if>
       <if test="articleName != null" >
 	      and article_name = #{articleName,jdbcType=VARCHAR}
 	    </if>
@@ -139,11 +115,20 @@
       <if test="fundTitle != null" >
 	      and fund_title = #{fundTitle,jdbcType=VARCHAR}
 	    </if>
-      <if test="state != null" >
-	      and state = #{state,jdbcType=VARCHAR}
+      <if test="editorState != null" >
+	      and editor_state = #{editorState,jdbcType=VARCHAR}
 	    </if>
-      <if test="extends1 != null" >
-	      and extends_1 = #{extends1,jdbcType=VARCHAR}
+      <if test="expertState != null" >
+	      and expert_state = #{expertState,jdbcType=VARCHAR}
+	    </if>
+      <if test="authorState != null" >
+	      and author_state = #{authorState,jdbcType=VARCHAR}
+	    </if>
+      <if test="isAvaliable != null" >
+	      and isAvaliable = #{isAvaliable,jdbcType=VARCHAR}
+	    </if>
+      <if test="latelyFlowsId != null" >
+	      and lately_flows_id = #{latelyFlowsId,jdbcType=BIGINT}
 	    </if>
       <if test="extends2 != null" >
 	      and extends_2 = #{extends2,jdbcType=VARCHAR}
@@ -166,9 +151,6 @@
   <sql id="Example_Set_Clause">
     <set>
       <trim suffixOverrides=",">
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
       <if test="articleName != null">
         article_name = #{articleName,jdbcType=VARCHAR},
       </if>
@@ -238,11 +220,20 @@
       <if test="fundTitle != null">
         fund_title = #{fundTitle,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        state = #{state,jdbcType=VARCHAR},
+      <if test="editorState != null">
+        editor_state = #{editorState,jdbcType=VARCHAR},
       </if>
-      <if test="extends1 != null">
-        extends_1 = #{extends1,jdbcType=VARCHAR},
+      <if test="expertState != null">
+        expert_state = #{expertState,jdbcType=VARCHAR},
+      </if>
+      <if test="authorState != null">
+        author_state = #{authorState,jdbcType=VARCHAR},
+      </if>
+      <if test="isAvaliable != null">
+        isAvaliable = #{isAvaliable,jdbcType=VARCHAR},
+      </if>
+      <if test="latelyFlowsId != null">
+        lately_flows_id = #{latelyFlowsId,jdbcType=BIGINT},
       </if>
       <if test="extends2 != null">
         extends_2 = #{extends2,jdbcType=VARCHAR},
@@ -264,7 +255,6 @@
   </sql>
   <sql id="Base_Column_List">
     id,
-    user_id,
     article_name,
     article_id,
     article_type,
@@ -288,8 +278,11 @@
     total_tabs,
     total_pages,
     fund_title,
-    state,
-    extends_1,
+    editor_state,
+    expert_state,
+    author_state,
+    isAvaliable,
+    lately_flows_id,
     extends_2,
     extends_3,
     extends_4,
@@ -299,7 +292,6 @@
   <sql id="Base_Set_Clause">
     <set>
       <trim suffixOverrides=",">
-        user_id = #{userId,jdbcType=VARCHAR},
         article_name = #{articleName,jdbcType=VARCHAR},
         article_id = #{articleId,jdbcType=VARCHAR},
         article_type = #{articleType,jdbcType=VARCHAR},
@@ -323,8 +315,11 @@
         total_tabs = #{totalTabs,jdbcType=INTEGER},
         total_pages = #{totalPages,jdbcType=INTEGER},
         fund_title = #{fundTitle,jdbcType=VARCHAR},
-        state = #{state,jdbcType=VARCHAR},
-        extends_1 = #{extends1,jdbcType=VARCHAR},
+        editor_state = #{editorState,jdbcType=VARCHAR},
+        expert_state = #{expertState,jdbcType=VARCHAR},
+        author_state = #{authorState,jdbcType=VARCHAR},
+        isAvaliable = #{isAvaliable,jdbcType=VARCHAR},
+        lately_flows_id = #{latelyFlowsId,jdbcType=BIGINT},
         extends_2 = #{extends2,jdbcType=VARCHAR},
         extends_3 = #{extends3,jdbcType=VARCHAR},
         extends_4 = #{extends4,jdbcType=VARCHAR},
@@ -335,9 +330,6 @@
   </sql>
   <sql id="Selective_Column_List">
     <!-- ID, -->
-    <if test="userId != null">
-      user_id,
-    </if>
     <if test="articleName != null">
       article_name,
     </if>
@@ -407,11 +399,20 @@
     <if test="fundTitle != null">
       fund_title,
     </if>
-    <if test="state != null">
-      state,
+    <if test="editorState != null">
+      editor_state,
     </if>
-    <if test="extends1 != null">
-      extends_1,
+    <if test="expertState != null">
+      expert_state,
+    </if>
+    <if test="authorState != null">
+      author_state,
+    </if>
+    <if test="isAvaliable != null">
+      isAvaliable,
+    </if>
+    <if test="latelyFlowsId != null">
+      lately_flows_id,
     </if>
     <if test="extends2 != null">
       extends_2,
@@ -431,7 +432,6 @@
   </sql>
 	<sql id="Base_Value_List">
     #{id,jdbcType=BIGINT},
-    #{userId,jdbcType=VARCHAR},
     #{articleName,jdbcType=VARCHAR},
     #{articleId,jdbcType=VARCHAR},
     #{articleType,jdbcType=VARCHAR},
@@ -455,8 +455,11 @@
     #{totalTabs,jdbcType=INTEGER},
     #{totalPages,jdbcType=INTEGER},
     #{fundTitle,jdbcType=VARCHAR},
-    #{state,jdbcType=VARCHAR},
-    #{extends1,jdbcType=VARCHAR},
+    #{editorState,jdbcType=VARCHAR},
+    #{expertState,jdbcType=VARCHAR},
+    #{authorState,jdbcType=VARCHAR},
+    #{isAvaliable,jdbcType=VARCHAR},
+    #{latelyFlowsId,jdbcType=BIGINT},
     #{extends2,jdbcType=VARCHAR},
     #{extends3,jdbcType=VARCHAR},
     #{extends4,jdbcType=VARCHAR},
@@ -465,9 +468,6 @@
 	</sql>
   <sql id="Selective_Value_List">
     <!-- SEQ_article_info.nextval, -->
-    <if test="userId != null">
-      #{userId,jdbcType=VARCHAR},
-    </if>
     <if test="articleName != null">
       #{articleName,jdbcType=VARCHAR},
     </if>
@@ -537,11 +537,20 @@
     <if test="fundTitle != null">
       #{fundTitle,jdbcType=VARCHAR},
     </if>
-    <if test="state != null">
-      #{state,jdbcType=VARCHAR},
+    <if test="editorState != null">
+      #{editorState,jdbcType=VARCHAR},
     </if>
-    <if test="extends1 != null">
-      #{extends1,jdbcType=VARCHAR},
+    <if test="expertState != null">
+      #{expertState,jdbcType=VARCHAR},
+    </if>
+    <if test="authorState != null">
+      #{authorState,jdbcType=VARCHAR},
+    </if>
+    <if test="isAvaliable != null">
+      #{isAvaliable,jdbcType=VARCHAR},
+    </if>
+    <if test="latelyFlowsId != null">
+      #{latelyFlowsId,jdbcType=BIGINT},
     </if>
     <if test="extends2 != null">
       #{extends2,jdbcType=VARCHAR},
@@ -630,43 +639,18 @@
     <include refid="Page_Query_End" />
   </select>
   
-  <select id="queryArticleTotalInfos" parameterType="hashmap"  resultMap="EditorAreaInfosResultMap">
-	select state as status,count(1) as total from article_info group by state
+  <select id="selectArticleByUserId" parameterType="hashMap" resultMap="BaseResultMap">
+  	select ai.* from article_info ai,article_info_extend aie where ai.article_id=aie.article_id 
+  	 <if test="userId != null and userId!=''" >
+      and aie.user_id = #{userId,jdbcType=VARCHAR}
+     </if>
+     <if test="authorState != null and userId!=''" >
+      and ai.author_state = #{authorState,jdbcType=VARCHAR}
+     </if>
   </select>
   
-<!-- 	select ai.* from article_info ai,article_info_extend aie where ai.article_id=aie.article_id and aie.user_id=#{userId,jdbcType=VARCHAR} -->
-  <select id="qryListByUserId" parameterType="hashmap"  resultMap="BaseResultMap">
-  select ai.id,ai.article_id,
-				ai.article_cn_title,
-				ai.invest_section,
-				ai.extends_1,
-				ai.state,
-				af.deal_state,
-				af.create_time
-				from article_info ai,article_info_extend aie,
-				article_flows af,article_attachment_info aai
-				where ai.article_id=aie.article_id 
-				and af.article_id=ai.article_id and af.deal_state='0002'
-				and ai.article_id=aai.article_id
-				and aie.user_id=#{userId,jdbcType=VARCHAR}
-				<if test="title != null and title !=''">
-			    	and ai.article_cn_title=#{title,jdbcType=VARCHAR}
-			    </if>
-				<!-- <if test="authorName != null">
-			    	and aui.author_name=#{authorName,jdbcType=VARCHAR},
-			    </if> -->
-			    <if test="submitTime != null  and submitTime !=''">
-			    	and af.create_time=#{submitTime,jdbcType=VARCHAR}
-			    </if>
-			    <if test="articleState != null  and articleState !=''">
-			    	and ai.state=#{articleState,jdbcType=VARCHAR}
-			    </if>
-			    <if test="articleId != null  and articleId !=''">
-			    	and ai.article_id=#{articleId,jdbcType=VARCHAR}
-			    </if>
-			    <if test="sectionName != null  and sectionName !=''">
-			    	and ai.invest_section=#{sectionName,jdbcType=VARCHAR}
-			    </if>
+    <select id="queryArticleTotalInfos" parameterType="hashMap" resultMap="BaseResultMap">
+  	select ai.editor_state as status,count(1) as total from article_info ai,article_info_extend aie where ai.article_id=aie.article_id
+  	group by ai.editor_state 
   </select>
-  
 </mapper>

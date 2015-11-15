@@ -12,89 +12,22 @@
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-	<form action="../author/toArticleQuery" method="POST">
-		<div id="articleInfos">
-			<a style="font-size: 20px; color: #0000CC;">作者信息</a><br>
-			<table style="border: 1px solid black;" rules="all">
-				<tr>
-					<td>稿费查询</td>
-					<td>第1作者</td>
-				</tr>
-				<tr>
-					<td>是通讯作者？</td>
-					<td><input type="radio" value="male" checked="checked"
-						name="sex" />男 <input type="radio" value="female" name="sex" />女
-						提示:若第一作者不是通讯作者请选择其他作者为通讯作者或点击"添加更多作者".</td>
-				</tr>
-				<tr>
-					<td>真实姓名</td>
-					<td><input id="chTitle" name="authorList[0].authorName"
-						class="easyui-validatebox"
-						data-options="required:true,missingMessage:'不允许为空'" /></td>
-				</tr>
-				<tr>
-					<td>性别</td>
-					<td><select id="articleType" class="easyui-combobox"
-						name="articleType" style="width: 80px;">
-							<option value="IDCARD">男</option>
-							<option value="PASSPORT">女</option>
-					</select><br></td>
-				</tr>
-				<tr>
-					<td>出生年月日</td>
-					<td><input id="birthday" type="text" class="easyui-datebox"
-						required="required" value="1"></input></td>
-				</tr>
-				<tr>
-					<td>单位</td>
-					<td><input id="chTitle" class="easyui-validatebox"
-						data-options="required:true,missingMessage:'不允许为空'" /><br>
-						【如“城市、邮编”被系统从文档中提取出来并跟在单位后面，请将其去掉。几个单位任（兼）职或在职学习者，请填写稿件编审期间正常收取信函的单位；大学须具体到院系、教研室】
-					</td>
-				</tr>
-				<tr>
-					<td>邮编</td>
-					<td><input id="chTitle" class="easyui-validatebox"
-						data-options="required:true,missingMessage:'不允许为空'" /></td>
-				</tr>
-				<tr>
-					<td>通信地址</td>
-					<td><input id="chTitle" class="easyui-validatebox"
-						data-options="required:true,missingMessage:'不允许为空'" /><br>
-						系统将调用此地址给您邮寄发票、期刊，请完整填写单位所在的省（市）区（县）街道和门牌号，并确保准确无误】</td>
-				</tr>
-				<tr>
-					<td>职称</td>
-					<td><input id="chTitle" class="easyui-validatebox"
-						data-options="required:true,missingMessage:'不允许为空'" /></td>
-				</tr>
-				<tr>
-					<td>职务</td>
-					<td><input id="chTitle" class="easyui-validatebox"
-						data-options="required:true,missingMessage:'不允许为空'" /></td>
-				</tr>
-				<tr>
-					<td>手机</td>
-					<td><input id="chTitle" class="easyui-validatebox"
-						data-options="required:true,missingMessage:'不允许为空'" /><br>
-						【非常重要！！审稿、费用通知、发票样刊邮寄、联系作者时系统均会短信提示，防止邮件收不到或查看不及时。请确保准确无误】</td>
-				</tr>
-				<tr>
-					<td>Email</td>
-					<td><input id="chTitle" class="easyui-validatebox"
-						data-options="required:true,missingMessage:'不允许为空'" /><br>
-						【非常重要！！稿件审理、费用通知、发票样刊邮寄等均通过Email通知提醒。推荐填写经常check、并与手机关联的qq邮箱确，以便在第一时间收到编辑部稿件处理等相关信息并作出回应。请确保准确无误！！】
-					</td>
-				</tr>
-				<tr>
-					<td>身份证号</td>
-					<td><input id="chTitle" class="easyui-validatebox"
-						data-options="required:true,missingMessage:'不允许为空'" /><br>
-						【发放、领取论文稿酬时需要，请确保准确无误；无需稿酬者可不用填写】</td>
-				</tr>
-			</table>
-			<br>
-		</div>
-	</form>
+	<div id="articleInfos">
+		<table style="border: 1px solid black; font-size: 14px;" rules="all">
+			<tr>
+				<td style="width: 20%; text-align: center;">稿件编号</td>
+				<td style="width: 20%; text-align: center;">稿件标题</td>
+				<td style="width: 20%; text-align: center;">稿费金额</td>
+			</tr>
+			#foreach($articleQueryRespDto in ${list})
+			<tr>
+				<td>${articleQueryRespDto.articleId}</td>
+				<td><a
+					href="../author/toArticleFeeDetailPage?articleId=${articleQueryRespDto.articleId}&userId=${userId}">${articleQueryRespDto.articleCnTitle}</a></td>
+				<td>${articleQueryRespDto.accountInfo.amount}</td>
+			</tr>
+			#end
+		</table>
+	</div>
 </body>
 </html>

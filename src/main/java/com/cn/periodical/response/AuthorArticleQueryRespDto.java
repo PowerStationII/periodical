@@ -1,5 +1,9 @@
 package com.cn.periodical.response;
 
+import java.util.Date;
+
+import com.cn.periodical.pojo.AccountInfo;
+
 public class AuthorArticleQueryRespDto extends ResponseDto {
 
 	public AuthorArticleQueryRespDto() {
@@ -21,6 +25,45 @@ public class AuthorArticleQueryRespDto extends ResponseDto {
 	private java.lang.String investSection;
 	private java.lang.String classificationNums;
 	private java.lang.String documentCode;
+	private String authorState;
+	private String editorState;
+	private String expertState;
+	private String createTime;
+	private String remark;
+	
+	private AccountInfo accountInfo;
+	
+	
+	public AccountInfo getAccountInfo() {
+		return accountInfo;
+	}
+	public void setAccountInfo(AccountInfo accountInfo) {
+		this.accountInfo = accountInfo;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getAuthorState() {
+		return authorState;
+	}
+	public void setAuthorState(String authorState) {
+		this.authorState = authorState;
+	}
+	public String getEditorState() {
+		return editorState;
+	}
+	public void setEditorState(String editorState) {
+		this.editorState = editorState;
+	}
+	public String getExpertState() {
+		return expertState;
+	}
+	public void setExpertState(String expertState) {
+		this.expertState = expertState;
+	}
 	public java.lang.Long getId() {
 		return id;
 	}
@@ -110,6 +153,12 @@ public class AuthorArticleQueryRespDto extends ResponseDto {
 	}
 	public void setDocumentCode(java.lang.String documentCode) {
 		this.documentCode = documentCode;
+	}
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 	
 	

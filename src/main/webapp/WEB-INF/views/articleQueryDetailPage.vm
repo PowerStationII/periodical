@@ -22,36 +22,13 @@
 	<div>
 		<input type="hidden" value="$!{articleInfo.id}" id="id" name="id">
 		<table style="border:1px solid;width:800px;" rules="all">
-			<tr style="display:none;">
-				<td><label>
-						<span class="right">用户ID：</span>
-				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.userId}" id="userId" name="userId"></td>
-			</tr>
 			<tr>
 				<td><label>
-						<span class="right">稿件名称：</span>
+						<span class="right">稿件状态：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.articleName}" id="articleName"
-					name="articleName"></td>
-			</tr>
-			<tr>
-				<td><label>
-						<span class="right">稿件编号：</span>
-				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.articleId}" id="articleId" name="articleId">
-				</td>
-			</tr>
-			<tr>
-				<td><label>
-						<span class="right">稿件类型：</span>
-				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.articleType}" id="articleType"
-					name="articleType"></td>
+					value="$!{articleInfo.authorState}" id="authorState"
+					name="authorState"></td>
 			</tr>
 			<tr>
 				<td><label>
@@ -71,19 +48,19 @@
 			</tr>
 			<tr>
 				<td><label>
-						<span class="right">中文摘要：</span>
+						<span class="right">中国分类号：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.articleCnSummary}" id="articleCnSummary"
-					name="articleCnSummary"></td>
+					value="$!{articleInfo.classificationNums}" id="classificationNums"
+					name="classificationNums"></td>
 			</tr>
 			<tr>
 				<td><label>
-						<span class="right">英文摘要：</span>
+						<span class="right">拟投栏目：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.articleEnSummary}" id="articleEnSummary"
-					name="articleEnSummary"></td>
+					value="$!{articleInfo.investSection}" id="investSection"
+					name="investSection"></td>
 			</tr>
 			<tr>
 				<td><label>
@@ -103,94 +80,38 @@
 			</tr>
 			<tr>
 				<td><label>
-						<span class="right">是否是基金项目：</span>
+						<span class="right">中文摘要：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.isfund}" id="isfund" name="isfund"></td>
+					value="$!{articleInfo.articleCnSummary}" id="articleCnSummary"
+					name="articleCnSummary"></td>
 			</tr>
 			<tr>
 				<td><label>
-						<span class="right">拟投栏目：</span>
+						<span class="right">英文摘要：</span>
 				</label></td>
 				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.investSection}" id="investSection"
-					name="investSection"></td>
+					value="$!{articleInfo.articleEnSummary}" id="articleEnSummary"
+					name="articleEnSummary"></td>
 			</tr>
 			<tr>
 				<td><label>
-						<span class="right">中国分类号：</span>
+						<span class="right">审批稿件下载：</span>
 				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.classificationNums}" id="classificationNums"
-					name="classificationNums"></td>
+				<td>下载</td>
 			</tr>
 			<tr>
 				<td><label>
-						<span class="right">文献标识码：</span>
+						<span class="right">专家审稿：</span>
 				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.documentCode}" id="documentCode"
-					name="documentCode"></td>
+				<td>审稿专家:XXXX 送审时间:yyyyMMdd <input type="button" value="查看审稿意见"></td>
 			</tr>
-			<tr>
-				<td><label>
-						<span class="right">论文用途及要求备注：</span>
-				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.remark}" id="remark" name="remark"></td>
-			</tr>
-			<tr>
-				<td><label>
-						<span class="right">论文查新点、学术：</span>
-				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.inovationPoint}" id="inovationPoint"
-					name="inovationPoint"></td>
-			</tr>
-			<tr>
-				<td><label>
-						<span class="right">参考信息：</span>
-				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.referenceDoc}" id="referenceDoc"
-					name="referenceDoc"></td>
-			</tr>
-			<tr>
-				<td><label>
-						<span class="right">图（片）数：</span>
-				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.totalPics}" id="totalPics" name="totalPics">
-				</td>
-			</tr>
-			<tr>
-				<td><label>
-						<span class="right">表格数：</span>
-				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.totalTabs}" id="totalTabs" name="totalTabs">
-				</td>
-			</tr>
-			<tr>
-				<td><label>
-						<span class="right">页数：</span>
-				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.totalPages}" id="totalPages"
-					name="totalPages"></td>
-			</tr>
-			<tr>
-				<td><label>
-						<span class="right">基金项目中文名称：</span>
-				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.fundTitle}" id="fundTitle" name="fundTitle">
-				</td>
-			</tr>
+			
 		</table>
 	</div>
 	<div class="attr_con">
 		<input type="button"  value="返回"  id="back"/>
+		<input type="button"  value="重投"  id="back"/><!-- 如果稿件状态是返修,此按钮需要显示 -->
 	</div>
 </body>
 </html>

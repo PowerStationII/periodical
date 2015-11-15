@@ -78,7 +78,7 @@ public class ArticleInfoDaoImpl extends BaseDao implements ArticleInfoDao {
 
 	public List<ArticleInfo> qryListByUserId(Map reqMap) {
 		// TODO Auto-generated method stub
-		return super.getSqlSession().selectList("ArticleInfoMapper.qryListByUserId",reqMap);
+		return super.getSqlSession().selectList("ArticleInfoMapper.selectArticleByUserId",reqMap);
 	}
 	
 }

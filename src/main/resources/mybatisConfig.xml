@@ -44,11 +44,11 @@
 		<mapper resource="sqlmap/CouncilInfoMapper.xml"/>
 		<mapper resource="sqlmap/ArticleInfoExtendMapper.xml"/>
 		<mapper resource="sqlmap/ArticleFlowsMapper.xml"/>
-		<mapper resource="sqlmap/ArticleFlowsExtendMapper.xml"/>
 		<mapper resource="sqlmap/OrderInfoMapper.xml"/>
 		<mapper resource="sqlmap/PeriodicalDetailsMapper.xml"/>
 		<mapper resource="sqlmap/PeriodicalInfoMapper.xml"/>
 		<mapper resource="sqlmap/PeriodicalMapper.xml"/>
 		<mapper resource="sqlmap/PayeeInfoMapper.xml"/>
+		<mapper resource="sqlmap/AccountInfoMapper.xml"/>
 	</mappers>
 </configuration>

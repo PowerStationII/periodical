@@ -16,7 +16,6 @@ public class ArticleInfo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private java.lang.Long id;
-	private java.lang.String userId;
 	private java.lang.String articleName;
 	private java.lang.String articleId;
 	private java.lang.String articleType;
@@ -40,8 +39,11 @@ public class ArticleInfo implements Serializable{
 	private java.lang.Integer totalTabs;
 	private java.lang.Integer totalPages;
 	private java.lang.String fundTitle;
-	private java.lang.String state;
-	private java.lang.String extends1;
+	private java.lang.String editorState;
+	private java.lang.String expertState;
+	private java.lang.String authorState;
+	private java.lang.String isAvaliable;
+	private java.lang.Long latelyFlowsId;
 	private java.lang.String extends2;
 	private java.lang.String extends3;
 	private java.lang.String extends4;
@@ -62,22 +64,7 @@ public class ArticleInfo implements Serializable{
 		return this.id;
 	}
 	/**
-	 * 
-	 * @param userId
-	 */
-	public void setUserId(java.lang.String userId) {
-		this.userId = userId;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public java.lang.String getUserId() {
-		return this.userId;
-	}
-	/**
-	 * 
+	 * 稿件名称
 	 * @param articleName
 	 */
 	public void setArticleName(java.lang.String articleName) {
@@ -85,7 +72,7 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 稿件名称
 	 * @return
 	 */
 	public java.lang.String getArticleName() {
@@ -122,7 +109,7 @@ public class ArticleInfo implements Serializable{
 		return this.articleType;
 	}
 	/**
-	 * 
+	 * 中文标题
 	 * @param articleCnTitle
 	 */
 	public void setArticleCnTitle(java.lang.String articleCnTitle) {
@@ -130,14 +117,14 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 中文标题
 	 * @return
 	 */
 	public java.lang.String getArticleCnTitle() {
 		return this.articleCnTitle;
 	}
 	/**
-	 * 
+	 * 英文标题
 	 * @param articleEnTile
 	 */
 	public void setArticleEnTile(java.lang.String articleEnTile) {
@@ -145,14 +132,14 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 英文标题
 	 * @return
 	 */
 	public java.lang.String getArticleEnTile() {
 		return this.articleEnTile;
 	}
 	/**
-	 * 
+	 * 中文摘要
 	 * @param articleCnSummary
 	 */
 	public void setArticleCnSummary(java.lang.String articleCnSummary) {
@@ -160,14 +147,14 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 中文摘要
 	 * @return
 	 */
 	public java.lang.String getArticleCnSummary() {
 		return this.articleCnSummary;
 	}
 	/**
-	 * 
+	 * 英文摘要
 	 * @param articleEnSummary
 	 */
 	public void setArticleEnSummary(java.lang.String articleEnSummary) {
@@ -175,14 +162,14 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 英文摘要
 	 * @return
 	 */
 	public java.lang.String getArticleEnSummary() {
 		return this.articleEnSummary;
 	}
 	/**
-	 * 
+	 * 稿件明细
 	 * @param artilce
 	 */
 	public void setArtilce(byte[] artilce) {
@@ -190,14 +177,14 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 稿件明细
 	 * @return
 	 */
 	public byte[] getArtilce() {
 		return this.artilce;
 	}
 	/**
-	 * 
+	 * 中文关键字
 	 * @param articleCnKeywords
 	 */
 	public void setArticleCnKeywords(java.lang.String articleCnKeywords) {
@@ -205,14 +192,14 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 中文关键字
 	 * @return
 	 */
 	public java.lang.String getArticleCnKeywords() {
 		return this.articleCnKeywords;
 	}
 	/**
-	 * 
+	 * 英文关键字
 	 * @param articleEnKeywords
 	 */
 	public void setArticleEnKeywords(java.lang.String articleEnKeywords) {
@@ -220,14 +207,14 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 英文关键字
 	 * @return
 	 */
 	public java.lang.String getArticleEnKeywords() {
 		return this.articleEnKeywords;
 	}
 	/**
-	 * 
+	 * 是否基金项目:N否Y是
 	 * @param isfund
 	 */
 	public void setIsfund(java.lang.String isfund) {
@@ -235,7 +222,7 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 是否基金项目:N否Y是
 	 * @return
 	 */
 	public java.lang.String getIsfund() {
@@ -362,7 +349,7 @@ public class ArticleInfo implements Serializable{
 		return this.publishTime;
 	}
 	/**
-	 * 
+	 * 图片总数
 	 * @param totalPics
 	 */
 	public void setTotalPics(java.lang.Integer totalPics) {
@@ -370,14 +357,14 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 图片总数
 	 * @return
 	 */
 	public java.lang.Integer getTotalPics() {
 		return this.totalPics;
 	}
 	/**
-	 * 
+	 * 表格总数
 	 * @param totalTabs
 	 */
 	public void setTotalTabs(java.lang.Integer totalTabs) {
@@ -385,14 +372,14 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 表格总数
 	 * @return
 	 */
 	public java.lang.Integer getTotalTabs() {
 		return this.totalTabs;
 	}
 	/**
-	 * 
+	 * 稿件总页数
 	 * @param totalPages
 	 */
 	public void setTotalPages(java.lang.Integer totalPages) {
@@ -400,14 +387,14 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 稿件总页数
 	 * @return
 	 */
 	public java.lang.Integer getTotalPages() {
 		return this.totalPages;
 	}
 	/**
-	 * 
+	 * 基金项目名称
 	 * @param fundTitle
 	 */
 	public void setFundTitle(java.lang.String fundTitle) {
@@ -415,41 +402,86 @@ public class ArticleInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 基金项目名称
 	 * @return
 	 */
 	public java.lang.String getFundTitle() {
 		return this.fundTitle;
 	}
 	/**
-	 * 
-	 * @param state
+	 * 0004:处理中;0000:新稿;0006:返修;0007:退稿;0001:已登记;0002:已送审;0003:已待刊
+	 * @param editorState
 	 */
-	public void setState(java.lang.String state) {
-		this.state = state;
+	public void setEditorState(java.lang.String editorState) {
+		this.editorState = editorState;
 	}
 	
 	/**
-	 * 
+	 * 0004:处理中;0000:新稿;0006:返修;0007:退稿;0001:已登记;0002:已送审;0003:已待刊
 	 * @return
 	 */
-	public java.lang.String getState() {
-		return this.state;
+	public java.lang.String getEditorState() {
+		return this.editorState;
+	}
+	/**
+	 * 0003:已待刊;0006:返修;0007:退稿;
+	 * @param expertState
+	 */
+	public void setExpertState(java.lang.String expertState) {
+		this.expertState = expertState;
+	}
+	
+	/**
+	 * 0003:已待刊;0006:返修;0007:退稿;
+	 * @return
+	 */
+	public java.lang.String getExpertState() {
+		return this.expertState;
+	}
+	/**
+	 * 0000:新稿;0006:返修;0007:退稿;0001:已登记;0002:已送审;0003:已待刊
+	 * @param authorState
+	 */
+	public void setAuthorState(java.lang.String authorState) {
+		this.authorState = authorState;
+	}
+	
+	/**
+	 * 0000:新稿;0006:返修;0007:退稿;0001:已登记;0002:已送审;0003:已待刊
+	 * @return
+	 */
+	public java.lang.String getAuthorState() {
+		return this.authorState;
 	}
 	/**
 	 * 稿件是否处于可编辑的状态:1不可编辑(作废)0可编辑
-	 * @param extends1
+	 * @param isAvaliable
 	 */
-	public void setExtends1(java.lang.String extends1) {
-		this.extends1 = extends1;
+	public void setIsAvaliable(java.lang.String isAvaliable) {
+		this.isAvaliable = isAvaliable;
 	}
 	
 	/**
 	 * 稿件是否处于可编辑的状态:1不可编辑(作废)0可编辑
 	 * @return
 	 */
-	public java.lang.String getExtends1() {
-		return this.extends1;
+	public java.lang.String getIsAvaliable() {
+		return this.isAvaliable;
+	}
+	/**
+	 * article_flow表中该稿件的最大id
+	 * @param latelyFlowsId
+	 */
+	public void setLatelyFlowsId(java.lang.Long latelyFlowsId) {
+		this.latelyFlowsId = latelyFlowsId;
+	}
+	
+	/**
+	 * article_flow表中该稿件的最大id
+	 * @return
+	 */
+	public java.lang.Long getLatelyFlowsId() {
+		return this.latelyFlowsId;
 	}
 	/**
 	 * 

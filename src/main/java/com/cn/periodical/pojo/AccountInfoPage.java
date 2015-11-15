@@ -8,11 +8,11 @@ package com.cn.periodical.pojo;
 import com.cn.periodical.result.PageListResult;
 
 /**
- * ArticleFlowsExtend
+ * AccountInfo
  * @author code-generator
  *
  */
-public class ArticleFlowsExtendPage  extends PageListResult<ArticleFlowsExtend> {
+public class AccountInfoPage  extends PageListResult<AccountInfo> {
 
 	private static final long serialVersionUID = 1L;
 	

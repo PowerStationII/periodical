@@ -9,14 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cn.periodical.manager.ArticleAttachmentInfoManager;
-import com.cn.periodical.manager.ArticleFlowsExtendManager;
 import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.manager.ArticleInfoExtendManager;
 import com.cn.periodical.manager.ArticleInfoManager;
 import com.cn.periodical.manager.AuthorInfoManager;
 import com.cn.periodical.pojo.ArticleFlows;
-import com.cn.periodical.pojo.ArticleFlowsExtend;
-import com.cn.periodical.pojo.ArticleFlowsExtendQuery;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.ArticleInfoExtend;
 import com.cn.periodical.pojo.ArticleInfoQuery;
@@ -42,8 +39,8 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 	@Autowired
 	ArticleFlowsManager articleFlowsManager;
 	
-	@Autowired
-	ArticleFlowsExtendManager articleFlowsExtendManager;
+//	@Autowired
+//	ArticleFlowsExtendManager articleFlowsExtendManager;
 	
 	@Autowired
 	ArticleInfoExtendManager articleInfoExtendManager;
@@ -55,25 +52,26 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 	}
 
 	public List<EditorArticleDealRespDto> articleDeal(String status) {
-		// TODO Auto-generated method stub
-		List<EditorArticleDealRespDto> list = new ArrayList<EditorArticleDealRespDto>();
-		
-		ArticleInfoQuery articleInfoQuery = new ArticleInfoQuery();
-		articleInfoQuery.setState(status);
-		List<ArticleInfo> articleInfos = articleInfoManager.queryList(articleInfoQuery);
-		Iterator<ArticleInfo> iters = articleInfos.iterator();
-		while(iters.hasNext()){
-			EditorArticleDealRespDto editorArticleDealRespDto = new EditorArticleDealRespDto();
-			ArticleInfo articleInfo = iters.next();
-			AuthorInfoQuery authorInfoQuery = new AuthorInfoQuery();
-			authorInfoQuery.setArticleId(articleInfo.getArticleId());
-			List<AuthorInfo> authorInfos = authorInfoManager.queryList(authorInfoQuery);
-			editorArticleDealRespDto.setArticleInfo(articleInfo);
-			editorArticleDealRespDto.setAuthorInfos(authorInfos);
-//			editorArticleDealRespDto.setArticleAttachmentInfo(articleAttachmentInfo);
-			list.add(editorArticleDealRespDto);
-		}
-		return list;
+//		// TODO Auto-generated method stub
+//		List<EditorArticleDealRespDto> list = new ArrayList<EditorArticleDealRespDto>();
+//		
+//		ArticleInfoQuery articleInfoQuery = new ArticleInfoQuery();
+//		articleInfoQuery.setState(status);
+//		List<ArticleInfo> articleInfos = articleInfoManager.queryList(articleInfoQuery);
+//		Iterator<ArticleInfo> iters = articleInfos.iterator();
+//		while(iters.hasNext()){
+//			EditorArticleDealRespDto editorArticleDealRespDto = new EditorArticleDealRespDto();
+//			ArticleInfo articleInfo = iters.next();
+//			AuthorInfoQuery authorInfoQuery = new AuthorInfoQuery();
+//			authorInfoQuery.setArticleId(articleInfo.getArticleId());
+//			List<AuthorInfo> authorInfos = authorInfoManager.queryList(authorInfoQuery);
+//			editorArticleDealRespDto.setArticleInfo(articleInfo);
+//			editorArticleDealRespDto.setAuthorInfos(authorInfos);
+////			editorArticleDealRespDto.setArticleAttachmentInfo(articleAttachmentInfo);
+//			list.add(editorArticleDealRespDto);
+//		}
+//		return list;
+		return null;
 	}
 
 	public ArticleInfo qryArticleInfo(String articleId) {
@@ -85,31 +83,31 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 	}
 
 	public int updateArticleInfo(String expertUserId,String userId,ArticleInfo articleInfo,String articleState) {
-		// TODO Auto-generated method stub
-		ArticleInfo articleInfoQry =articleInfoManager.findArticleInfoById(articleInfo.getId());
-		articleInfoQry.setId(articleInfoQry.getId());
-		articleInfoQry.setState(articleState);		
-		articleInfoManager.saveArticleInfo(articleInfoQry);
-		
-		EditorArticleDealReqDto obj = new EditorArticleDealReqDto();
-		obj.setRoleId("");
-		obj.setUserId(userId);
-		obj.setDealState(articleState);
-		obj.setDealOpinion("同意");
-		obj.setSystemId("");
-		obj.setArticleId(articleInfoQry.getArticleId());
-		
-		registeOperationFlows(obj);
-		
-		
-		if(!"".equals(expertUserId)){
-			ArticleInfoExtend articleInfoExtend = new ArticleInfoExtend();
-			articleInfoExtend.setUserId(expertUserId);
-			articleInfoExtend.setArticleId(obj.getArticleId());
-			articleInfoExtend.setRoleId("9999");
-			articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);
-		}
-		
+//		// TODO Auto-generated method stub
+//		ArticleInfo articleInfoQry =articleInfoManager.findArticleInfoById(articleInfo.getId());
+//		articleInfoQry.setId(articleInfoQry.getId());
+//		articleInfoQry.setState(articleState);		
+//		articleInfoManager.saveArticleInfo(articleInfoQry);
+//		
+//		EditorArticleDealReqDto obj = new EditorArticleDealReqDto();
+//		obj.setRoleId("");
+//		obj.setUserId(userId);
+//		obj.setDealState(articleState);
+//		obj.setDealOpinion("同意");
+//		obj.setSystemId("");
+//		obj.setArticleId(articleInfoQry.getArticleId());
+//		
+//		registeOperationFlows(obj);
+//		
+//		
+//		if(!"".equals(expertUserId)){
+//			ArticleInfoExtend articleInfoExtend = new ArticleInfoExtend();
+//			articleInfoExtend.setUserId(expertUserId);
+//			articleInfoExtend.setArticleId(obj.getArticleId());
+//			articleInfoExtend.setRoleId("9999");
+//			articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);
+//		}
+//		
 		return 0;
 	}
 
@@ -117,44 +115,44 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 	 * 稿件处理流程流水
 	 * */
 	public int registeOperationFlows(EditorArticleDealReqDto obj) {
-		/**
-		 * 1,article_info_extend role_id和userId是唯一索引,使用articleId关联articleInfo
-		 *  此表来控制articleInfo数据的访问权限.
-		 *  主编默认可以访问所有articleInfo数据.
-		 * 2,article_flows_extend 存储articleId一条最新的article_flows的id 
-		 * 	articleId是唯一,article_flows每变动一次更新此表的lately_flows_id一次.
-		 *  以最新的lately_flows_id做为article_flows表的pid
-		 * 3,article_flows表的id与pid是父子关系
-		 * */
-		
-		
-		
-		ArticleFlowsExtendQuery articleFlowsExtendQuery =  new ArticleFlowsExtendQuery();
-		articleFlowsExtendQuery.setArticleId(obj.getArticleId());
-		List<ArticleFlowsExtend> articleFlowsExtends = articleFlowsExtendManager.queryList(articleFlowsExtendQuery);
-		
-		
-		
-		
-		ArticleFlowsExtend articleFlowsExtend= articleFlowsExtends.get(0);
-		articleFlowsExtend.setArticleId(obj.getArticleId());
-		articleFlowsExtend.setId(articleFlowsExtends.get(0).getId());
-		articleFlowsExtend.setLatelyFlowsId(articleFlowsExtend.getLatelyFlowsId()+1);
-		articleFlowsExtendManager.saveArticleFlowsExtend(articleFlowsExtend);
-		
-		ArticleFlows articleFlows = new ArticleFlows();
-		articleFlows.setId(articleFlowsExtend.getLatelyFlowsId()+1);
-		articleFlows.setPid(articleFlowsExtend.getLatelyFlowsId());
-		articleFlows.setArticleId(obj.getArticleId());
-		articleFlows.setDealState(obj.getDealState());
-		articleFlows.setDealOpinion(obj.getDealOpinion());
-		articleFlows.setUserId(obj.getUserId());
-		articleFlows.setRoleId(obj.getRoleId());
-		articleFlows.setRefId("");
-		articleFlows.setCreateTime(new Date());
-		
-		articleFlowsManager.saveArticleFlows(articleFlows);
-		
+//		/**
+//		 * 1,article_info_extend role_id和userId是唯一索引,使用articleId关联articleInfo
+//		 *  此表来控制articleInfo数据的访问权限.
+//		 *  主编默认可以访问所有articleInfo数据.
+//		 * 2,article_flows_extend 存储articleId一条最新的article_flows的id 
+//		 * 	articleId是唯一,article_flows每变动一次更新此表的lately_flows_id一次.
+//		 *  以最新的lately_flows_id做为article_flows表的pid
+//		 * 3,article_flows表的id与pid是父子关系
+//		 * */
+//		
+//		
+//		
+//		ArticleFlowsExtendQuery articleFlowsExtendQuery =  new ArticleFlowsExtendQuery();
+//		articleFlowsExtendQuery.setArticleId(obj.getArticleId());
+//		List<ArticleFlowsExtend> articleFlowsExtends = articleFlowsExtendManager.queryList(articleFlowsExtendQuery);
+//		
+//		
+//		
+//		
+//		ArticleFlowsExtend articleFlowsExtend= articleFlowsExtends.get(0);
+//		articleFlowsExtend.setArticleId(obj.getArticleId());
+//		articleFlowsExtend.setId(articleFlowsExtends.get(0).getId());
+//		articleFlowsExtend.setLatelyFlowsId(articleFlowsExtend.getLatelyFlowsId()+1);
+//		articleFlowsExtendManager.saveArticleFlowsExtend(articleFlowsExtend);
+//		
+//		ArticleFlows articleFlows = new ArticleFlows();
+//		articleFlows.setId(articleFlowsExtend.getLatelyFlowsId()+1);
+//		articleFlows.setPid(articleFlowsExtend.getLatelyFlowsId());
+//		articleFlows.setArticleId(obj.getArticleId());
+//		articleFlows.setDealState(obj.getDealState());
+//		articleFlows.setDealOpinion(obj.getDealOpinion());
+//		articleFlows.setUserId(obj.getUserId());
+//		articleFlows.setRoleId(obj.getRoleId());
+//		articleFlows.setRefId("");
+//		articleFlows.setCreateTime(new Date());
+//		
+//		articleFlowsManager.saveArticleFlows(articleFlows);
+//		
 		return 0;
 	}
 
