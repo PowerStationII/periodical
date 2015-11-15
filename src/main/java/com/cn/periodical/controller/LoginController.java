@@ -1,5 +1,6 @@
 package com.cn.periodical.controller;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,27 +14,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cn.periodical.enums.ExceptionEnums;
 import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.enums.SystemIdEnums;
 import com.cn.periodical.pojo.EditorAreaInfos;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.service.LoginService;
+
 /**
  * 登录Controller
- * */
+ */
 @Controller
 public class LoginController {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
-	
+
 	@Autowired
 	LoginService loginService;
-	
+
 	/**
 	 * 跳转到登录页面
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(@RequestParam("systemId") String systemId, @RequestParam("roleId") String roleId,HttpServletRequest request) {
+	public ModelAndView login(@RequestParam("systemId") String systemId, @RequestParam("roleId") String roleId,
+			HttpServletRequest request) {
 		logger.info("登录系统systemId:[" + systemId + "]");
 		ModelAndView mav = new ModelAndView("portal");
 		mav.addObject("systemId", systemId);
@@ -44,134 +48,105 @@ public class LoginController {
 	/**
 	 * 登录
 	 */
-	@RequestMapping(value="/toLogin")
-	public ModelAndView toLogin(@RequestParam(required = true, value="email") String email,
-			@RequestParam(required = true, value="password") String password, 
-			HttpServletRequest request) {
-		logger.info("登录名["+email+"]&&登录密码["+password+"]");
-		ModelAndView mav =null;
+	@RequestMapping(value = "/toLogin")
+	public ModelAndView toLogin(@RequestParam(required = true, value = "email") String email,
+			@RequestParam(required = true, value = "password") String password, HttpServletRequest request) {
+		logger.info("登录名[" + email + "]&&登录密码[" + password + "]");
+		ModelAndView mav = null;
 		String systemId = request.getParameter("systemId");
-		/**
-		 * 1,验证用户名是否存在[USER_INFO]
-		 * 2,验证用户密码是否正确
-		 * 3,判断传入systemId与用户的systemId是否相等
-		 * 4,根据role_id跳转不同的4个vm页面
-		 * */
-		if(SystemIdEnums.EDIT_SYS.getCode().equals(systemId)){
-			//编辑
-			try{
-				UserInfo userInfo=null;
-				userInfo =loginService.queryUserInfo(email, password, "", "");	
-				if(userInfo==null){
-					mav=new ModelAndView("error");
-					return mav;
-				}
-				String roleId=userInfo.getRoleId();
-				if(RoleIdEnums.ARTICLE_EDITOR.getCode().equals(roleId)){
-					mav = new ModelAndView("editor_area");
-					mav.addObject("roleId",roleId);
-					mav.addObject("userId",userInfo.getUserId());
-					/**
-					 * TODO:稿件编辑工作区需要展示稿件统计信息
-					 * */
-					List<EditorAreaInfos> list = loginService.queryArticleInfos("", "");
-					mav.addObject("list", list);
-					return mav;
-				}else if(RoleIdEnums.SUBSCRIBE_EDITOR.getCode().equals(roleId)){
-					mav = new ModelAndView("editor_area");
-					mav.addObject("roleId",roleId);
-					mav.addObject("userId", userInfo.getUserId());
-					return mav;
-				}else if(RoleIdEnums.AD_EDITOR.getCode().equals(roleId)){
-					mav = new ModelAndView("editor_area");
-					mav.addObject("roleId",roleId);
-					mav.addObject("userId", userInfo.getUserId());
-					
-					return mav;
-				}else if(RoleIdEnums.ISSUER.getCode().equals(roleId)){
-					mav = new ModelAndView("editor_area");
-					mav.addObject("roleId",roleId);
-					mav.addObject("userId", userInfo.getUserId());
-					return mav;
-				}
-			}catch(Exception e){
-				e.printStackTrace();
+		//查询userInfo信息
+		UserInfo userInfo = null;
+		try {
+			userInfo = loginService.queryUserInfo(email, password, "", "");
+			if (userInfo == null) {
+				mav = new ModelAndView("error");
+				mav.addObject("message", ExceptionEnums.USER_NOT_EXSITS.getName());
+				return mav;
 			}
-		}else if(SystemIdEnums.EXPERT_SYS.getCode().equals(systemId)){
-			//专家
-			try{
-				UserInfo userInfo=null;
-				userInfo =loginService.queryUserInfo(email, password, "", "");	
-				if(userInfo==null){
-					mav=new ModelAndView("error");
-					return mav;
+			if(!systemId.equals(userInfo.getSystemId())){
+				mav = new ModelAndView("error");
+				int sysId = Integer.valueOf(systemId);
+				switch (sysId){
+					case 111:  
+						mav.addObject("message", MessageFormat.format(ExceptionEnums.USER_SYSTEM_NOT_MATCH.getName(),SystemIdEnums.EDIT_SYS.getName()));
+					case 222:
+						mav.addObject("message", MessageFormat.format(ExceptionEnums.USER_SYSTEM_NOT_MATCH.getName(),SystemIdEnums.EXPERT_SYS.getName()));
+					case 333:
+						mav.addObject("message", MessageFormat.format(ExceptionEnums.USER_SYSTEM_NOT_MATCH.getName(),SystemIdEnums.AUTHOR_SYS.getName()));
+					case 444:
+						mav.addObject("message", MessageFormat.format(ExceptionEnums.USER_SYSTEM_NOT_MATCH.getName(),SystemIdEnums.READER_SYS.getName()));
 				}
-				String role_id=userInfo.getRoleId();
-				if(RoleIdEnums.EN_EXPERT.getCode().equals(role_id)){
-					mav = new ModelAndView("expert_area");
-					mav.addObject("userId", userInfo.getUserId());
-					mav.addObject("roleId", userInfo.getRoleId());
-					return mav;
-				}else if(RoleIdEnums.CN_EXPERT.getCode().equals(role_id)){
-					mav = new ModelAndView("expert_area");
-					mav.addObject("userId", userInfo.getUserId());
-					mav.addObject("roleId", userInfo.getRoleId());
-					return mav;
-				}
-			}catch(Exception e){
-				e.printStackTrace();
+				return mav;
 			}
-		}else if(SystemIdEnums.AUTHOR_SYS.getCode().equals(systemId)){
-			//作者
-			try {
-				mav = new ModelAndView("author_area");
-				UserInfo userInfo=null;
-				userInfo =loginService.queryUserInfo(email, password, "", "");	
-				if(userInfo==null){
-					mav=new ModelAndView("error");
-					return mav;
-				}
+		} catch (Exception e) {
+			mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+			return mav;
+		}
+
+		if (SystemIdEnums.EDIT_SYS.getCode().equals(systemId)) {
+			// 编辑
+			String roleId = userInfo.getRoleId();
+			if (RoleIdEnums.ARTICLE_EDITOR.getCode().equals(roleId)) {
+				mav = new ModelAndView("editor_area");
+				mav.addObject("roleId", roleId);
 				mav.addObject("userId", userInfo.getUserId());
-				mav.addObject("roleId", RoleIdEnums.AUTHOR.getCode());
+				List<EditorAreaInfos> list = loginService.queryArticleInfos("", "");
+				mav.addObject("list", list);
 				return mav;
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				mav=new ModelAndView("error");
+			} else if (RoleIdEnums.SUBSCRIBE_EDITOR.getCode().equals(roleId)) {
+				mav = new ModelAndView("editor_area");
+				mav.addObject("roleId", roleId);
+				mav.addObject("userId", userInfo.getUserId());
+				return mav;
+			} else if (RoleIdEnums.AD_EDITOR.getCode().equals(roleId)) {
+				mav = new ModelAndView("editor_area");
+				mav.addObject("roleId", roleId);
+				mav.addObject("userId", userInfo.getUserId());
+				return mav;
+			} else if (RoleIdEnums.ISSUER.getCode().equals(roleId)) {
+				mav = new ModelAndView("editor_area");
+				mav.addObject("roleId", roleId);
+				mav.addObject("userId", userInfo.getUserId());
 				return mav;
 			}
-		}else if(SystemIdEnums.READER_SYS.getCode().equals(systemId)){
-			//读者
-			/**
-			 * 需区分省所/个人登录
-			 * */
-			try{
-				UserInfo userInfo=null;
-				userInfo =loginService.queryUserInfo(email, password, "", "");	
-				if(userInfo==null){
-					mav=new ModelAndView("error");
-					return mav;
-				}
-				String roleId=userInfo.getRoleId();
-				if(RoleIdEnums.READER_P.getCode().equals(roleId)){
-					mav = new ModelAndView("reader_area");
-					mav.addObject("userId", userInfo.getUserId());
-					mav.addObject("roleId", roleId);
-					return mav;
-				}else if(RoleIdEnums.READER_E.getCode().equals(roleId)){
-					mav = new ModelAndView("reader_area");
-					mav.addObject("userId", userInfo.getUserId());
-					mav.addObject("roleId", roleId);
-					return mav;
-				}
-			}catch(Exception e){
-				e.printStackTrace();
+		} else if (SystemIdEnums.EXPERT_SYS.getCode().equals(systemId)) {
+			// 专家
+			String role_id = userInfo.getRoleId();
+			if (RoleIdEnums.EN_EXPERT.getCode().equals(role_id)) {
+				mav = new ModelAndView("expert_area");
+				mav.addObject("userId", userInfo.getUserId());
+				mav.addObject("roleId", userInfo.getRoleId());
+				return mav;
+			} else if (RoleIdEnums.CN_EXPERT.getCode().equals(role_id)) {
+				mav = new ModelAndView("expert_area");
+				mav.addObject("userId", userInfo.getUserId());
+				mav.addObject("roleId", userInfo.getRoleId());
+				return mav;
 			}
-		}else{
-			/**
-			 * 跳转首页
-			 * */
-			mav = new ModelAndView("portal");
+		} else if (SystemIdEnums.AUTHOR_SYS.getCode().equals(systemId)) {
+			// 作者
+			mav = new ModelAndView("author_area");
+			mav.addObject("userId", userInfo.getUserId());
+			mav.addObject("roleId", RoleIdEnums.AUTHOR.getCode());
+			return mav;
+		} else if (SystemIdEnums.READER_SYS.getCode().equals(systemId)) {
+			// 读者:需区分省所/个人登录
+			String roleId = userInfo.getRoleId();
+			if (RoleIdEnums.READER_P.getCode().equals(roleId)) {
+				mav = new ModelAndView("reader_area");
+				mav.addObject("userId", userInfo.getUserId());
+				mav.addObject("roleId", roleId);
+				return mav;
+			} else if (RoleIdEnums.READER_E.getCode().equals(roleId)) {
+				mav = new ModelAndView("reader_area");
+				mav.addObject("userId", userInfo.getUserId());
+				mav.addObject("roleId", roleId);
+				return mav;
+			}
+		} else {
+			mav = new ModelAndView("error");
+			mav.addObject("message", ExceptionEnums.ENTER_NOT_EXSITS.getName());
 			return mav;
 		}
 		return mav;
