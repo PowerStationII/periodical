@@ -35,7 +35,7 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(@RequestParam("systemId") String systemId, @RequestParam("roleId") String roleId,HttpServletRequest request) {
 		logger.info("登录系统systemId:[" + systemId + "]");
-		ModelAndView mav = new ModelAndView("login");
+		ModelAndView mav = new ModelAndView("portal");
 		mav.addObject("systemId", systemId);
 		mav.addObject("roleId", roleId);
 		return mav;
@@ -43,7 +43,6 @@ public class LoginController {
 
 	/**
 	 * 登录
-	 * method = RequestMethod.POST
 	 */
 	@RequestMapping(value="/toLogin")
 	public ModelAndView toLogin(@RequestParam(required = true, value="email") String email,

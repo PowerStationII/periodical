@@ -10,10 +10,6 @@
  	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
-	
-	<link href="css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
-    <link href="css/data_styles.css" type="text/css" rel="stylesheet"/>
-     <link href="css/login_styles.css" type="text/css" rel="stylesheet"/>
   </head>
   <script type="text/javascript">
   		$(function(){
@@ -203,9 +199,9 @@
 			} 
   </script>
   <style>
- 	    .top{height:86px;background-image:url("img/portal/u0.png");line-height:86px;padding-left:30px;}
-  		.all{width:100%;height:100%;margin-top:80px;}
-  		.mode1{margin-left:400px;}
+ 	    .top{width:70%;height:86px;background-image:url("img/portal/u0.png");line-height:86px;margin-left:auto;margin-right:auto;}
+  		.all{width:90%;height:100%;}
+  		.mode1{margin-left:200px;background-color:#ffffff;width:935px;}
   		.sign{color:red;}
   		.wrong{color:red;}
   		.right{color:green;}
@@ -213,83 +209,20 @@
   		.titles{float:left;border:1px solid;width:100px;height:40px;line-height:40px;margin-top:25px;margin-left:10px;text-align:center;border-radius:5px;background:#ffffff;}
   		.wrong,.right{display:none;}
   </style>
-  <body>
-
-      <!-- Unnamed (Image) -->
-      <div id="u0" class="ax_image">
-        <img id="u0_img" class="img " src="img/portal/u0.png"/>
-        <!-- Unnamed () -->
-        <div id="u1" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u4" class="ax_shape">
-        <img id="u4_img" class="img " src="img/login/u4.png"/>
-        <!-- Unnamed () -->
-        <div id="u5" class="text">
-          <p><span>投稿须知</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u6" class="ax_shape">
-        <img id="u6_img" class="img " src="img/login/u4.png"/>
-        <!-- Unnamed () -->
-        <div id="u7" class="text">
-          <p><span>版权协议</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u8" class="ax_shape">
-        <img id="u8_img" class="img " src="img/login/u4.png"/>
-        <!-- Unnamed () -->
-        <div id="u9" class="text">
-          <p><span>论文模板</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u10" class="ax_shape">
-        <img id="u10_img" class="img " src="img/login/u4.png"/>
-        <!-- Unnamed () -->
-        <div id="u11" class="text">
-          <p><span>首页</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u12" class="ax_shape">
-        <img id="u12_img" class="img " src="img/login/u4.png"/>
-        <!-- Unnamed () -->
-        <div id="u13" class="text">
-          <p><span>联系方式</span></p>
-        </div>
-      </div>
-
-
-       <!-- Unnamed (Shape) -->
-      <div id="u36" class="ax_paragraph">
-        <img id="u36_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u37" class="text">
-          <p><span>农药科学与管理</span></p>
-        </div>
-      </div>
+  <body style="background-color:#EBEBEB;margin-top:0px;">
+	<div class="top"></div>
     <div class="all">
     	<form action="register" id="form" method="POST">
     		<input type="hidden" name="systemId" value="${systemId}">
     		<input type="hidden" name="roleId" value="${roleId}">
 			<div class="mode1">
 				<!--Email-->
-				<a class="sign"  style="margin-left:89px;">*</a><a>Email：</a>
+				<a class="sign"  style="margin-left:89px;margin-top:10px;">*</a><a  style="margin-top:10px;">Email：</a>
 				<input id="email"  name="email"   class="easyui-validatebox" 
 							data-options="required:true,validType:'email',
 													missingMessage:'不允许为空',
-													invalidMessage:'请输入正确的Email格式'" />
-				<a class="wrong"  id="emailW">x</a><a class="right"  id="emailR">√</a><br>
+													invalidMessage:'请输入正确的Email格式'"   style="margin-top:10px;"/>
+				<a class="wrong"  id="emailW"   style="margin-top:10px;">x</a><a class="right"  id="emailR" style="margin-top:10px;">√</a><br>
 				<a class="tip"  style="margin-left:154px;">邮箱地址只能包含字母、数字、句点 (.)、连字符 (-) 或下划线 (_)。</a><br><br>
 				
 				<!--密码--> 
