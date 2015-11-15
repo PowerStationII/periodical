@@ -24,7 +24,6 @@ public class OrderInfoManagerImpl implements OrderInfoManager {
     private OrderInfoDao orderInfoDao ;
 
 
-    @Override
     public List<OrderInfo> selectByYear(OrderInfoQuery orderInfoQuery) {
         return orderInfoDao.selectByYear(orderInfoQuery)  ;
     }

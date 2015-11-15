@@ -24,6 +24,9 @@ public class PeriodicalDetailsQuery extends PagingQuery {
 	}
 	
 	private java.lang.String userId;
+	private java.lang.String refId;
+	private java.lang.String sectionId;
+	private java.lang.String type;
 	private java.lang.String periodicalId;
 	private java.lang.String periodicalIssueNo;
 	private java.lang.String articleId;
@@ -49,6 +52,51 @@ public class PeriodicalDetailsQuery extends PagingQuery {
 	 */
 	public java.lang.String getUserId() {
 		return this.userId;
+	}
+	/**
+	 * 
+	 * @param refId
+	 */
+	public void setRefId(java.lang.String refId) {
+		this.refId = refId;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.String getRefId() {
+		return this.refId;
+	}
+	/**
+	 * 
+	 * @param sectionId
+	 */
+	public void setSectionId(java.lang.String sectionId) {
+		this.sectionId = sectionId;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.String getSectionId() {
+		return this.sectionId;
+	}
+	/**
+	 * 稿件:0000;广告:0001;
+	 * @param type
+	 */
+	public void setType(java.lang.String type) {
+		this.type = type;
+	}
+	
+	/**
+	 * 稿件:0000;广告:0001;
+	 * @return
+	 */
+	public java.lang.String getType() {
+		return this.type;
 	}
 	/**
 	 * 
