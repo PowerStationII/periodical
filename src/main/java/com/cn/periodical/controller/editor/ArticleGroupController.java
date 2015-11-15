@@ -67,7 +67,7 @@ public class ArticleGroupController extends EditorController{
 			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
 			@RequestParam("userId") String userId,
 			HttpServletRequest request) {
-		logger.info("组稿左右互博Page:["+userId+"]&["+periodicalIssueNo+"]");
+		logger.info("组稿左右Page:["+userId+"]&["+periodicalIssueNo+"]");
 		ModelAndView mav = new ModelAndView("editor_articleGroupDetailPage");
 		
 		List<EditorArticleDealRespDto> list =articleDealService.articleDeal(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
@@ -90,7 +90,7 @@ public class ArticleGroupController extends EditorController{
 			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
 			@RequestParam("userId") String userId,
 			HttpServletRequest request) {
-		logger.info("组稿左右互博提交进来的:["+userId+"]&["+periodicalIssueNo+"]");
+		logger.info("组稿左右提交进来的:["+userId+"]&["+periodicalIssueNo+"]");
 		logger.info("----------------");
 		ModelAndView mav = new ModelAndView("editor_articleGroupPage");
 		logger.info(request.getParameter("selectTest"));
