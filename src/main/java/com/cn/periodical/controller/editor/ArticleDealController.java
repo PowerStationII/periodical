@@ -227,4 +227,22 @@ public class ArticleDealController extends EditorController{
 		
 		return mav;
 	}
+	
+	
+	/**
+	 * toPublishArticleDetailPage
+	 * 待刊
+	 */
+	@RequestMapping(value="/toPublishArticleDetailPage",method = RequestMethod.GET)
+	public ModelAndView toPublishArticleDetailPage(@RequestParam("userId") String userId,
+			@RequestParam("articleId") String articleId,
+			HttpServletRequest request) {
+		logger.info("待刊详情Page入参:["+userId+"]");
+		ModelAndView mav = new ModelAndView("editor_publishArticleDetailPage");
+		mav.addObject("userId", userId);
+		ArticleInfo articleInfo =articleDealService.qryArticleInfo(articleId);
+		mav.addObject("articleInfo", articleInfo);
+		logger.info("待刊详情Page出参:["+JSON.toJSONString(articleInfo)+"]");
+		return mav;
+	}
 }

@@ -13,6 +13,32 @@
 </head>
 <body>
 	<div id="articleInfos">
+	<form action="../expert/toArticleAuditePage" method="POST">
+		<input type="hidden" name="userId" value="${userId}">
+		<table style="border: 1px solid black;" rules="all">
+			<tr>
+				<td>稿件标题</td>
+				<td><input type="text" name="title" value=""></td>
+				<td>作者</td>
+				<td><input type="text" name="authorName" value=""></td>
+				<td>稿件编号</td>
+				<td><input type="text" name="articleId" value=""></td>
+			</tr>
+			<tr>
+				<td>稿件状态</td>
+				<td><input type="text" name="articleState" value=""></td>
+				<td>栏目</td>
+				<td><input type="text" name="sectionName" value=""></td>
+				<td>送审时间</td>
+				<td><input type="text" name="submitTime" value=""></td>
+			</tr>
+			<tr>
+				<td colspan="6"><input type="submit" value="查询"></td>
+			</tr>
+			</table>
+		</form>	
+		
+		
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
 				<td>稿件编号</td>
@@ -27,7 +53,7 @@
 				<td>${articleDealRespDto.articleInfo.id}</td>
 				<td>${articleDealRespDto.articleInfo.articleId}</td>
 				<!-- 从这开始放弃 -->
-				<td><a href="../author/toArticleQueryDetailPage?artilceId=${articleDealRespDto.articleInfo.articleId}">${articleDealRespDto.articleInfo.articleCnTitle}</a></td>
+				<td><a href="../expert/toArticleAuditeDetailPage?artilceId=${articleDealRespDto.articleInfo.articleId}">${articleDealRespDto.articleInfo.articleCnTitle}</a></td>
 				<td>${articleDealRespDto.articleInfo.articleId}</td>
 				<td>${articleDealRespDto.articleInfo.articleId}</td>
 			</tr>

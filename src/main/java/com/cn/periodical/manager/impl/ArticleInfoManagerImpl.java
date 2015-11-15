@@ -79,9 +79,9 @@ public class ArticleInfoManagerImpl implements ArticleInfoManager {
 	}
 
 
-	public List<ArticleInfo> queryListByUserId(String userId) {
+	public List<ArticleInfo> queryListByUserId(Map reqMap) {
 		// TODO Auto-generated method stub
-		return articleInfoDao.qryListByUserId(userId);
+		return articleInfoDao.qryListByUserId(reqMap);
 	}
 }
 

@@ -33,8 +33,8 @@
 				<tr>
 					<td colspan="3">专家:</td>
 					<td><select name="expertId">
-							<option value="zhangsan">张三</option>
-							<option value="lisi">李四</option>
+							<option value="6afcfa2791784e6595560d916a667e39">张三</option>
+							<!-- <option value="lisi">李四</option> -->
 						</select></td>
 					<td colspan="2">送审日期:</td>
 				</tr>

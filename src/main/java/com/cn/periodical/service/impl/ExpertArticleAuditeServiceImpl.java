@@ -1,8 +1,10 @@
 package com.cn.periodical.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import com.cn.periodical.pojo.ArticleAttachmentInfoQuery;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.pojo.AuthorInfoQuery;
+import com.cn.periodical.request.ExpertArticleAuditeReqDto;
 import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.ExpertArticleAuditeService;
 @Service
@@ -33,9 +36,28 @@ public class ExpertArticleAuditeServiceImpl implements ExpertArticleAuditeServic
 	@Autowired
 	AuthorInfoManager authorInfoManager;
 
-	public List<EditorArticleDealRespDto> qryArticleInfo(String userId) {
+	public List<EditorArticleDealRespDto> qryArticleInfo(ExpertArticleAuditeReqDto reqDto) {
 		// TODO Auto-generated method stub
-		List<ArticleInfo> articleInfos = articleInfoManager.queryListByUserId(userId);
+		Map reqMap= new HashMap();
+		reqMap.put("userId", reqDto.getUserId());
+		if(reqDto.getArticleId()!=null){
+			reqMap.put("articleId", reqDto.getArticleId());
+		}
+		if(reqDto.getTitle()!=null){
+			reqMap.put("title", reqDto.getTitle());
+		}
+		/*if(reqDto.getAuthorName()!=null){
+			reqMap.put("authorName", reqDto.getAuthorName());
+		}*/
+		if(reqDto.getSectionName()!=null){
+			reqMap.put("sectionName", reqDto.getSectionName());
+		}
+		if(reqDto.getSubmitTime()!=null){
+			reqMap.put("submitTime", reqDto.getSubmitTime());
+		}
+		
+		List<ArticleInfo> articleInfos = articleInfoManager.queryListByUserId(reqMap);
+
 		Iterator<ArticleInfo> iter = articleInfos.iterator();
 		ArticleInfo articleInfo=null;
 		List<EditorArticleDealRespDto> list = new ArrayList<EditorArticleDealRespDto>();

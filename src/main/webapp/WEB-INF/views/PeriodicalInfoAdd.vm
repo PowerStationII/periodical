@@ -1,0 +1,265 @@
+
+<form method="post" action="../params/savePeriodicalInfo">
+	<div class="main">
+		<div class="wrap">
+			<div class="con">
+				<div class="con_title">
+					<h3 class="left fs14 marglr3020">新增PeriodicalInfo</h3>
+					<span class="grey"></span>
+				</div>
+				<div class="main_con">
+					<div class="con_article_title02 paddtb20">
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="中国农业管理" id="periodicalId" name="periodicalId">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">中文刊名：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="中国农业管理" id="periodicalCnName" name="periodicalCnName">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">英文刊名：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="periodicalTest" id="periodicalEnName" name="periodicalEnName">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">主管单位：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="不知道" id="periodicalType" name="periodicalType">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">主管单位：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="不知道" id="competentOrganization" name="competentOrganization">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">主办单位：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="不知道" id="hostOrganization" name="hostOrganization">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">周期：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="12" id="cycle" name="cycle">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">出版地：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="不知道" id="publishPlace" name="publishPlace">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">语种：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="cn" id="languages" name="languages">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">开本：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="16" id="format" name="format">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">编辑出版(出版社)：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="不知道" id="press" name="press">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">网址：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="www.test.com" id="website" name="website">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="" id="publishArea" name="publishArea">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">国际标准刊号：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="2222222" id="issnNo" name="issnNo">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">国内统一刊号：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="22222" id="cnNo" name="cnNo">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">邮发代号：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="222" id="mailNo" name="mailNo">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">国内单价：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="22" id="inUnitPrice" name="inUnitPrice">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">国内定价：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="22" id="inFixPrice" name="inFixPrice">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">国外定价：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="22" id="outFixPrice" name="outFixPrice">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">创刊时间：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="" id="openTime" name="openTime">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">曾用刊名：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="test" id="usedTitles" name="usedTitles">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+							<div class="blank20"></div>
+							<div class="con_core_info_div02 rel_pos wid500 padding0">
+								<label class="label_txt wid135 txtright margt10 margr8">
+									<span class="right">所获奖项：</span></label>
+								<div class="input_con_type_top wid343">
+									<input maxlength="30" class="wid333 ip_input_con lightgrey" value="222" id="awards" name="awards">
+								</div>
+								<div style="display: none;margin-left:150px;" class="left wid360">
+									<span class="label_txt wid190 margt10 red01" error="periodicalInfo"></span>
+								</div>
+							</div>
+					</div>
+					<div id="areaHid"></div>
+					<div class="con_core_info_div03 paddingl80">
+						<div class="attr_con">
+							<a class="chan_btn right wid93 margr40 margt10" href="${rc.contextPath}/params/periodicalInfoIndex">返回</a> 
+							<input type="submit" value="保存">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</form>

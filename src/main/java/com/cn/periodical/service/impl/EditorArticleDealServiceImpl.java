@@ -1,6 +1,7 @@
 package com.cn.periodical.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,8 +25,6 @@ import com.cn.periodical.pojo.AuthorInfoQuery;
 import com.cn.periodical.request.EditorArticleDealReqDto;
 import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.EditorArticleDealService;
-
-import ch.qos.logback.classic.Logger;
 
 
 @Service
@@ -152,6 +151,7 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 		articleFlows.setUserId(obj.getUserId());
 		articleFlows.setRoleId(obj.getRoleId());
 		articleFlows.setRefId("");
+		articleFlows.setCreateTime(new Date());
 		
 		articleFlowsManager.saveArticleFlows(articleFlows);
 		
