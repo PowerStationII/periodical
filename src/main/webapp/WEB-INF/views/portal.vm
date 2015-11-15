@@ -1,758 +1,93 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>门户网站</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <link href="css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
-    <link href="css/data_styles.css" type="text/css" rel="stylesheet"/>
-    <link href="css/portal_styles.css" type="text/css" rel="stylesheet"/>
-   	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
-  </head>
-  <script type="text/javascript">
-  	$(function(){
-  		$('#u148').click(function(){
-  			$('.right').hide();
-  			$('#frame2').remove();
-  			$('#u150').after('<iframe  id="frame1" style="width:750px;height:760px;margin-left:400px;margin-top:175px;position:absolute;" src= "toCouncilPic"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe>');
-  		});
-  		$('#u150').click(function(){
-  			$('.right').hide();
-  			$('#frame1').remove();
-  			$('#u150').after('<iframe   id="frame2" style="width:750px;height:760px;margin-left:400px;margin-top:175px;position:absolute;" src= "toCouncilShow"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe>');
-  		});
-  	})
-  </script>
-  <body>
-    <div id="base" class="">
-      <!-- Unnamed (Image) -->
-      <div id="u0" class="ax_image">
-        <img id="u0_img" class="img " src="img/portal/u0.png"/>
-        <!-- Unnamed () -->
-        <div id="u1" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u2" class="ax_image">
-        <img id="u2_img" class="img " src="img/portal/u2.jpg"/>
-        <!-- Unnamed () -->
-        <div id="u3" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u4" class="ax_shape">
-        <img id="u4_img" class="img " src="img/portal/u4.png"/>
-        <!-- Unnamed () -->
-        <div id="u5" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u6" class="ax_shape">
-        <img id="u6_img" class="img " src="img/portal/u6.png"/>
-        <!-- Unnamed () -->
-        <div id="u7" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u8" class="ax_shape">
-        <img id="u8_img" class="img " src="img/portal/u8.png"/>
-        <!-- Unnamed () -->
-        <div id="u9" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u10" class="ax_paragraph">
-        <img id="u10_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u11" class="text">
-          <p><span>首页</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u12" class="ax_paragraph">
-        <img id="u12_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u13" class="text">
-          <p><span>|</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u14" class="ax_paragraph">
-        <img id="u14_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u15" class="text">
-          <p><span>期刊介绍</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u16" class="ax_paragraph">
-        <img id="u16_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u17" class="text">
-          <p><span>|</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u18" class="ax_paragraph">
-        <img id="u18_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u19" class="text">
-          <p><span>投稿须知</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u20" class="ax_paragraph">
-        <img id="u20_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u21" class="text">
-          <p><span>|</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u22" class="ax_paragraph">
-        <img id="u22_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u23" class="text">
-          <p><span>论文要求/规范</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u24" class="ax_paragraph">
-        <img id="u24_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u25" class="text">
-          <p><span>|</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u26" class="ax_paragraph">
-        <img id="u26_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u27" class="text">
-          <p><span>广告业务</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u28" class="ax_paragraph">
-        <img id="u28_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u29" class="text">
-          <p><span>|</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u30" class="ax_paragraph">
-        <img id="u30_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u31" class="text">
-          <p><span>期刊征订</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u32" class="ax_paragraph">
-        <img id="u32_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u33" class="text">
-          <p><span>|</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u34" class="ax_paragraph">
-        <img id="u34_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u35" class="text">
-          <p><span>联系我们</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u36" class="ax_paragraph">
-        <img id="u36_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u37" class="text">
-          <p><span>|</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u38" class="ax_shape">
-        <img id="u38_img" class="img " src="img/portal/u38.png"/>
-        <!-- Unnamed () -->
-        <div id="u39" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u40" class="ax_image">
-        <img id="u40_img" class="img " src="img/portal/u40.png"/>
-        <!-- Unnamed () -->
-        <div id="u41" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u42" class="ax_image">
-        <img id="u42_img" class="img " src="img/portal/u42.png"/>
-        <!-- Unnamed () -->
-        <div id="u43" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u44" class="ax_image">
-        <img id="u44_img" class="img " src="img/portal/u44.png"/>
-        <!-- Unnamed () -->
-        <div id="u45" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u46" class="ax_shape">
-        <img id="u46_img" class="img " src="img/portal/u46.png"/>
-        <!-- Unnamed () -->
-        <div id="u47" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u48" class="ax_shape">
-        <img id="u48_img" class="img " src="img/portal/u48.png"/>
-        <!-- Unnamed () -->
-        <div id="u49" class="text">
-          <p><a href="login?systemId=111&roleId=0000" style='text-decoration:none;'><span>编辑办公系统</span></a></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u50" class="ax_shape">
-        <img id="u50_img" class="img " src="img/portal/u48.png"/>
-        <!-- Unnamed () -->
-        <div id="u51" class="text">
-          <p><a href="login?systemId=222&roleId=0000" style='text-decoration:none;'><span>专家审稿系统</span></a></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u52" class="ax_shape">
-        <img id="u52_img" class="img " src="img/portal/u48.png"/>
-        <!-- Unnamed () -->
-        <div id="u53" class="text">
-          <p><a href="login?systemId=333&roleId=1001" style='text-decoration:none;'><span>作者投稿系统</span></a></p>
-        </div>
-      </div>
-      
-      <!-- Unnamed (Shape) -->
-      <div id="u146" class="ax_shape">
-        <img id="u146_img" class="img " src="img/portal/u48.png"/>
-        <!-- Unnamed () -->
-        <div id="u147" class="text">
-          <p><a href="login?systemId=444&roleId=0000" style='text-decoration:none;'><span>读者订阅系统</span></a></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u54" class="ax_image">
-        <img id="u54_img" class="img " src="img/portal/u54.png"/>
-        <!-- Unnamed () -->
-        <div id="u55" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u56" class="ax_paragraph">
-        <img id="u56_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u57" class="text">
-          <p><span>在线办公系统</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u58" class="ax_shape">
-        <img id="u58_img" class="img " src="img/portal/u58.png"/>
-        <!-- Unnamed () -->
-        <div id="u59" class="text">
-          <p><span>《农药科学与管理》编辑部</span></p><p><span>主管单位：</span><span>由中华人民共和国农业部</span><span> 主办单位：</span><span>农业部农药检定所主办</span></p><p><span>北京市朝阳区麦子店街22号</span></p><p><span>技术支持：小满科技</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u60" class="ax_paragraph">
-        <img id="u60_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u61" class="text">
-          <p><span>农药科学与管理</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u62" class="ax_paragraph">
-        <img id="u62_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u63" class="text">
-          <p><span>PESTICIDE SCIENCE AND ADMINISTRATION</span></p>
-        </div>
-      </div>
-
-	<div  class="right">
-      <!-- Unnamed (Shape) -->
-      <div id="u64" class="ax_shape">
-        <img id="u64_img" class="img " src="img/portal/u64.png"/>
-        <!-- Unnamed () -->
-        <div id="u65" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u66" class="ax_shape">
-        <img id="u66_img" class="img " src="img/portal/u66.png"/>
-        <!-- Unnamed () -->
-        <div id="u67" class="text">
-          <p><span style="font-family:'Arial Normal', 'Arial';font-weight:400;color:#333333;">&nbsp; &nbsp;&nbsp; </span><span style="font-family:'Arial Negreta', 'Arial';font-weight:700;color:#0A51BD;">期刊</span><span style="font-family:'Arial Negreta', 'Arial';font-weight:700;color:#0A51BD;">封面及介绍</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u68" class="ax_image">
-        <img id="u68_img" class="img " src="img/portal/u68.png"/>
-        <!-- Unnamed () -->
-        <div id="u69" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u70" class="ax_shape">
-        <img id="u70_img" class="img " src="img/portal/u70.png"/>
-        <!-- Unnamed () -->
-        <div id="u71" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u72" class="ax_horizontal_line">
-        <img id="u72_start" class="img " src="img/portal/transparent.gif" alt="u72_start"/>
-        <img id="u72_end" class="img " src="img/portal/transparent.gif" alt="u72_end"/>
-        <img id="u72_line" class="img " src="img/portal/u72_line.png" alt="u72_line"/>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u73" class="ax_image">
-        <img id="u73_img" class="img " src="img/portal/u73.jpg"/>
-        <!-- Unnamed () -->
-        <div id="u74" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u75" class="ax_paragraph">
-        <img id="u75_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u76" class="text">
-          <p><span>主管单位：中华人民共和国</span><span>农业部</span></p><p><span>主　　编：</span><span>隋鹏飞 刘乐泉</span></p><p><span>地　　址：北京市</span><span>朝阳区麦子店街22号楼</span></p><p><span>邮政编码：</span><span>100125</span></p><p><span>电　　话：010-</span><span>65937010（编辑部）</span></p><p><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span>&nbsp; &nbsp;&nbsp; </span><span>010-</span><span>6593701</span><span>1</span><span>（</span><span>发行</span><span>部）</span></p><p><span>电子邮件：</span><span>icamaif</span><span>@agri.gov.cn</span></p><p><span>国际标准刊号：ISSN 100</span><span>2</span><span>-</span><span>5480</span></p><p><span>国内统一刊号：CN 11-</span><span>2678</span><span>/S</span></p><p><span>国内定</span><span>价：￥</span><span>10.00</span><span>元</span></p><p><span>国外定价</span><span>：</span><span>&nbsp;</span><span>$</span><span> 5.00</span><span>元</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u77" class="ax_shape">
-        <img id="u77_img" class="img " src="img/portal/u77.png"/>
-        <!-- Unnamed () -->
-        <div id="u78" class="text">
-          <p><span style="font-family:'Arial Normal', 'Arial';font-weight:400;color:#333333;">&nbsp; &nbsp; </span><span style="font-family:'Arial Negreta', 'Arial';font-weight:700;color:#0A51BD;">公告栏</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u79" class="ax_image">
-        <img id="u79_img" class="img " src="img/portal/u68.png"/>
-        <!-- Unnamed () -->
-        <div id="u80" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u81" class="ax_horizontal_line">
-        <img id="u81_start" class="img " src="img/portal/transparent.gif" alt="u81_start"/>
-        <img id="u81_end" class="img " src="img/portal/transparent.gif" alt="u81_end"/>
-        <img id="u81_line" class="img " src="img/portal/u81_line.png" alt="u81_line"/>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u82" class="ax_paragraph">
-        <img id="u82_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u83" class="text">
-          <p><span>开通portal及采编系统</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u84" class="ax_paragraph">
-        <img id="u84_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u85" class="text">
-          <p><span>《农药科学与管理》</span><span>编辑部声明</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u86" class="ax_shape">
-        <img id="u86_img" class="img " src="img/portal/u77.png"/>
-        <!-- Unnamed () -->
-        <div id="u87" class="text">
-          <p><span style="font-family:'Arial Normal', 'Arial';font-weight:400;color:#333333;">&nbsp; &nbsp; </span><span style="font-family:'Arial Negreta', 'Arial';font-weight:700;color:#0A51BD;">下载中心</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u88" class="ax_image">
-        <img id="u88_img" class="img " src="img/portal/u68.png"/>
-        <!-- Unnamed () -->
-        <div id="u89" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u90" class="ax_horizontal_line">
-        <img id="u90_start" class="img " src="img/portal/transparent.gif" alt="u90_start"/>
-        <img id="u90_end" class="img " src="img/portal/transparent.gif" alt="u90_end"/>
-        <img id="u90_line" class="img " src="img/portal/u81_line.png" alt="u90_line"/>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u91" class="ax_image">
-        <img id="u91_img" class="img " src="img/portal/u91.png"/>
-        <!-- Unnamed () -->
-        <div id="u92" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u93" class="ax_paragraph">
-        <img id="u93_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u94" class="text">
-          <p><span>《期刊出版形式规范》说明</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u95" class="ax_horizontal_line">
-        <img id="u95_start" class="img " src="img/portal/transparent.gif" alt="u95_start"/>
-        <img id="u95_end" class="img " src="img/portal/transparent.gif" alt="u95_end"/>
-        <img id="u95_line" class="img " src="img/portal/u95_line.png" alt="u95_line"/>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u96" class="ax_image">
-        <img id="u96_img" class="img " src="img/portal/u91.png"/>
-        <!-- Unnamed () -->
-        <div id="u97" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u98" class="ax_paragraph">
-        <img id="u98_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u99" class="text">
-          <p><span>期刊编辑规程</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u100" class="ax_horizontal_line">
-        <img id="u100_start" class="img " src="img/portal/transparent.gif" alt="u100_start"/>
-        <img id="u100_end" class="img " src="img/portal/transparent.gif" alt="u100_end"/>
-        <img id="u100_line" class="img " src="img/portal/u95_line.png" alt="u100_line"/>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u101" class="ax_image">
-        <img id="u101_img" class="img " src="img/portal/u91.png"/>
-        <!-- Unnamed () -->
-        <div id="u102" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u103" class="ax_paragraph">
-        <img id="u103_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u104" class="text">
-          <p><span>学术论文编辑规范</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u105" class="ax_horizontal_line">
-        <img id="u105_start" class="img " src="img/portal/transparent.gif" alt="u105_start"/>
-        <img id="u105_end" class="img " src="img/portal/transparent.gif" alt="u105_end"/>
-        <img id="u105_line" class="img " src="img/portal/u95_line.png" alt="u105_line"/>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u106" class="ax_image">
-        <img id="u106_img" class="img " src="img/portal/u91.png"/>
-        <!-- Unnamed () -->
-        <div id="u107" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u108" class="ax_paragraph">
-        <img id="u108_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u109" class="text">
-          <p><span>科学技术报告、学位论文和学术</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u110" class="ax_horizontal_line">
-        <img id="u110_start" class="img " src="img/portal/transparent.gif" alt="u110_start"/>
-        <img id="u110_end" class="img " src="img/portal/transparent.gif" alt="u110_end"/>
-        <img id="u110_line" class="img " src="img/portal/u95_line.png" alt="u110_line"/>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u111" class="ax_image">
-        <img id="u111_img" class="img " src="img/portal/u91.png"/>
-        <!-- Unnamed () -->
-        <div id="u112" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u113" class="ax_paragraph">
-        <img id="u113_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u114" class="text">
-          <p><span>出版物数字用法的规定</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u115" class="ax_horizontal_line">
-        <img id="u115_start" class="img " src="img/portal/transparent.gif" alt="u115_start"/>
-        <img id="u115_end" class="img " src="img/portal/transparent.gif" alt="u115_end"/>
-        <img id="u115_line" class="img " src="img/portal/u95_line.png" alt="u115_line"/>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u116" class="ax_image">
-        <img id="u116_img" class="img " src="img/portal/u91.png"/>
-        <!-- Unnamed () -->
-        <div id="u117" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u118" class="ax_paragraph">
-        <img id="u118_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u119" class="text">
-          <p><span>中文书刊名称汉语拼音拼写法</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u120" class="ax_horizontal_line">
-        <img id="u120_start" class="img " src="img/portal/transparent.gif" alt="u120_start"/>
-        <img id="u120_end" class="img " src="img/portal/transparent.gif" alt="u120_end"/>
-        <img id="u120_line" class="img " src="img/portal/u95_line.png" alt="u120_line"/>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u121" class="ax_paragraph" title="关于征订2015年《农药科学与管理》的通知">
-        <img id="u121_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u122" class="text">
-          <p><span>关于征订2015年《农药科学与</span></p>
-        </div>
-      </div>
-</div>
-      <!-- Unnamed (Image) -->
-      <div id="ucouncil_2015" class="ax_image">
-        <img id="ucouncil_2015_img" class="img " src="img/portal/u40.png"/>
-        <!-- Unnamed () -->
-        <div id="u124" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u125" class="ax_image">
-        <img id="u125_img" class="img " src="img/portal/u42.png"/>
-        <!-- Unnamed () -->
-        <div id="u126" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u127" class="ax_image">
-        <img id="u127_img" class="img " src="img/portal/u44.png"/>
-        <!-- Unnamed () -->
-        <div id="u128" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u129" class="ax_image">
-        <img id="u129_img" class="img " src="img/portal/u54.png"/>
-        <!-- Unnamed () -->
-        <div id="u130" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u131" class="ax_paragraph">
-        <img id="u131_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u132" class="text">
-          <p><span>理事会</span></p>
-        </div>
-      </div>
-<div class="right">
-      <!-- Unnamed (Image) -->
-      <div id="u133" class="ax_image">
-        <img id="u133_img" class="img " src="img/portal/u133.jpg"/>
-        <!-- Unnamed () -->
-        <div id="u134" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u135" class="ax_image">
-        <img id="u135_img" class="img " src="img/portal/u135.jpg"/>
-        <!-- Unnamed () -->
-        <div id="u136" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u137" class="ax_image">
-        <img id="u137_img" class="img " src="img/portal/u137.jpg"/>
-        <!-- Unnamed () -->
-        <div id="u138" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u139" class="ax_image">
-        <img id="u139_img" class="img " src="img/portal/u139.jpg"/>
-        <!-- Unnamed () -->
-        <div id="u140" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u141" class="ax_shape">
-        <img id="u141_img" class="img " src="img/portal/u77.png"/>
-        <!-- Unnamed () -->
-        <div id="u142" class="text">
-          <p><span style="font-family:'Arial Normal', 'Arial';font-weight:400;color:#333333;">&nbsp; &nbsp; </span><span style="font-family:'Arial Negreta', 'Arial';font-weight:700;color:#0A51BD;">友情链接</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="u143" class="ax_image">
-        <img id="u143_img" class="img " src="img/portal/u68.png"/>
-        <!-- Unnamed () -->
-        <div id="u144" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Horizontal Line) -->
-      <div id="u145" class="ax_horizontal_line">
-        <img id="u145_start" class="img " src="img/portal/transparent.gif" alt="u145_start"/>
-        <img id="u145_end" class="img " src="img/portal/transparent.gif" alt="u145_end"/>
-        <img id="u145_line" class="img " src="img/portal/u81_line.png" alt="u145_line"/>
-      </div>
-</div>
-      <!-- Unnamed (Shape) -->
-      <div id="u148" class="ax_shape"  style="cursor:pointer ;">
-        <img id="u148_img" class="img " src="img/portal/u148.png"/>
-        <!-- Unnamed () -->
-        <div id="u149" class="text">
-          <p><span>2015年《农药科学与管理》理事会</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u150" class="ax_shape" style="cursor:pointer ;">
-        <img id="u150_img" class="img " src="img/portal/u148.png"/>
-        <!-- Unnamed () -->
-        <div id="u151" class="text">
-          <p><span>理事会形象展示</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u152" class="ax_paragraph">
-        <img id="u152_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u153" class="text">
-          <p><span>&nbsp;&nbsp;&nbsp;编委会</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="u154" class="ax_paragraph">
-        <img id="u154_img" class="img " src="img/portal/transparent.gif"/>
-        <!-- Unnamed () -->
-        <div id="u155" class="text">
-          <p><span>|</span></p>
-        </div>
-      </div>
-    </div>
-  </body>
+<head>
+<title>门户网站</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="css/axure_rp_page.css" type="text/css" rel="stylesheet" />
+<link href="css/data_styles.css" type="text/css" rel="stylesheet" />
+<link href="css/portal_styles.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+</head>
+<body>
+	<div id="base" class="">
+		<div id="u38" class="ax_shape">
+			<img id="u38_img" class="img " src="img/portal/u38.png" />
+			<div id="u39" class="text">
+				<p>
+					<span></span>
+				</p>
+			</div>
+		</div>
+		<div id="u40" class="ax_image">
+			<img id="u40_img" class="img " src="img/portal/u40.png" />
+			<div id="u41" class="text">
+				<p>
+					<span></span>
+				</p>
+			</div>
+		</div>
+		<div id="u42" class="ax_image">
+			<img id="u42_img" class="img " src="img/portal/u42.png" />
+			<div id="u43" class="text">
+				<p>
+					<span></span>
+				</p>
+			</div>
+		</div>
+		<div id="u44" class="ax_image">
+			<img id="u44_img" class="img " src="img/portal/u44.png" />
+			<div id="u45" class="text">
+				<p>
+					<span></span>
+				</p>
+			</div>
+		</div>
+		<div id="u48" class="ax_shape">
+			<img id="u48_img" class="img " src="img/portal/u48.png" />
+			<div id="u49" class="text">
+				<p>
+					<a href="login?systemId=111&roleId=0000" style='text-decoration: none;'><span>编辑办公系统</span></a>
+				</p>
+			</div>
+		</div>
+		<div id="u50" class="ax_shape">
+			<img id="u50_img" class="img " src="img/portal/u48.png" />
+			<div id="u51" class="text">
+				<p>
+					<a href="login?systemId=222&roleId=0000"
+						style='text-decoration: none;'><span>专家审稿系统</span></a>
+				</p>
+			</div>
+		</div>
+		<div id="u52" class="ax_shape">
+			<img id="u52_img" class="img " src="img/portal/u48.png" />
+			<div id="u53" class="text">
+				<p>
+					<a href="login?systemId=333&roleId=1001"
+						style='text-decoration: none;'><span>作者投稿系统</span></a>
+				</p>
+			</div>
+		</div>
+		<div id="u146" class="ax_shape">
+			<img id="u146_img" class="img " src="img/portal/u48.png" />
+			<!-- Unnamed () -->
+			<div id="u147" class="text">
+				<p>
+					<a href="login?systemId=444&roleId=0000"
+						style='text-decoration: none;'><span>读者订阅系统</span></a>
+				</p>
+			</div>
+		</div>
+		<div id="u56" class="ax_paragraph">
+			<img id="u56_img" class="img " src="img/portal/transparent.gif" />
+			<div id="u57" class="text">
+				<p>
+					<span>在线办公系统</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
 </html>
