@@ -66,15 +66,15 @@ public class ArticleGroupController extends EditorController{
 	 * toArticleGroup
 	 * 组稿
 	 */
-	@RequestMapping(value="/toArticleGroup",method = RequestMethod.GET)
+	@RequestMapping(value="/toArticleGroup")
 	public ModelAndView toArticleGroup(@RequestParam("periodicalIssueNo") String periodicalIssueNo,
 			@RequestParam("userId") String userId,
 			HttpServletRequest request) {
 		logger.info("组稿左右互博提交进来的:["+userId+"]&["+periodicalIssueNo+"]");
 		logger.info("----------------");
-		logger.info(request.getParameter("select1"));
+		logger.info(request.getParameter("selectTest"));
 		logger.info("----------------");
-		logger.info(request.getParameter("select2"));
+		logger.info(request.getParameter("rightSelect"));
 		ModelAndView mav = new ModelAndView("editor_articleGroupPage");
 		mav.addObject("userId", userId);
 		

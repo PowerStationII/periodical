@@ -24,6 +24,8 @@
 
 <body>
 	<form action="toLogin" method="POST" id="sub" name="sub">
+		<input type="hidden" name="systemId" value=${systemId}>
+		<input type="hidden" name="roleId" value=${roleId}>
 		<!-- Unnamed (Shape) -->
 		<div id="u18" class="ax_paragraph">
 			<img id="u18_img" class="img" src="img/portal/transparent.gif" />

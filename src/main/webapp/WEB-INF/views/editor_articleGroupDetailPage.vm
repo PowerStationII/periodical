@@ -79,15 +79,18 @@
           alert("你没有选择任何选项！！！");
         }else{
           alert("你选中的值为：" + selectedValues);
+          $("#selectTest").val(selectedValues);
+          $('#sub2').submit();
         }
       }
     </script>
 
 </head>
  <body>  
-    <form action="../editor/toArticleGroup">  
+    <form id="sub2" action="../editor/toArticleGroup" method="POST">  
     <input type="hidden" name="userId" value="${userId}">
     <input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}">
+    <input type="text" id="selectTest" name="selectTest" value="">
     <center style="margin-top:12%"><font color="red" size="5"><b>select标签multiple属性的使用方法</b></font></center>
     <br/>
     <table border="1" cellspacing="0" align="center">
@@ -131,7 +134,9 @@
           <br/>
         </td>
         <td align="center" width="150px">
-          <select id="rightSelect" name="rightSelect" multiple="multiple" size="15" style="width:100%; height:100%;"></select>
+          <select id="rightSelect" name="rightSelect" multiple="multiple" size="15" style="width:100%; height:100%;">
+          
+          </select>
         </td>
       </tr>
     </table>
