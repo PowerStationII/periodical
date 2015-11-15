@@ -36,7 +36,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         return orderInfoManager.queryList(orderInfoQuery);
     }
 
-    @Override
+
     public void insertAddressInfo( MultipartFile[] files ,String orderNo , String refRole_id) {
         try {
             for(MultipartFile file :files ){
