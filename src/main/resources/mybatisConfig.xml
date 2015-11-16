@@ -52,6 +52,10 @@
 		<mapper resource="sqlmap/PeriodicalMapper.xml"/>
 		<mapper resource="sqlmap/PayeeInfoMapper.xml"/>
 		<mapper resource="sqlmap/AccountInfoMapper.xml"/>
+		<mapper resource="sqlmap/EditorInfoMapper.xml"/>
+		<mapper resource="sqlmap/ExpertInfoMapper.xml"/>
+		<!-- 业务 -->
 		<mapper resource="sqlmap/ArticleQueryMapper.xml"/>
+		<mapper resource="sqlmap/UserQueryMapper.xml"/>
 	</mappers>
 </configuration>

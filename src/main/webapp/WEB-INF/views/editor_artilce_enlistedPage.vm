@@ -12,9 +12,8 @@
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-	<form action="../editor/toEditorUpdateState" method="POST">
-	<input type="hidden" name="userId" value="${userId}">
-	<input type="hidden" name="id" value="${articleInfo.id}">
+	<form action="../editor/toEnlistedModify" method="POST">
+	<input type="hidden" name="articleId" value="${respDto.articleId}">
 		<div id="articleInfos">
 			<a style="font-size: 20px; color: #0000CC;">稿件登记</a><br>
 			<table style="border: 1px solid black;" rules="all">
@@ -22,17 +21,17 @@
 					<td colspan="6" rowspan="4">稿件信息</td>
 				</tr>
 				<tr>
-					<td colspan="4">稿件编号:${articleInfo.articleId}<input type="hidden" name="articleId" value=" ${articleInfo.articleId}"></td>
-					<td colspan="2">稿件状态:${articleInfo.state}<input type="hidden" name="state" value=" ${articleInfo.state}"></td>
+					<td colspan="4">稿件编号:$!{respDto.articleId}</td>
+					<td colspan="2">稿件状态:$!{respDto.editorState}</td>
 				</tr>
 				<tr>
-					<td colspan="2">标题:${articleInfo.articleCnTitle}</td>
-					<td colspan="2">下载原稿</td>
-					<td colspan="2">拟投栏目:</td>
+					<td colspan="2">标题:$!{respDto.title}</td>
+					<td colspan="2">$!{respDto.attachName} <a href="../editor/toDownLoadArticle?articleId=${respDto.articleId}">下载原稿</a> $!{respDto.attachPath} </td>
+					<td colspan="2">拟投栏目:$!{respDto.section}</td>
 				</tr>
 				<tr>
-					<td colspan="2">作者:</td>
-					<td colspan="2">提交日期:</td>
+					<td colspan="2">作者:$!{respDto.authorName}</td>
+					<td colspan="2">提交日期:$!{respDto.contriTime}</td>
 					<td colspan="2">登记日期:</td>
 				</tr>
 				<tr>

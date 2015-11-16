@@ -8,6 +8,7 @@ public class AritcleWorkFlowReqDto extends RequestDto {
 		// TODO Auto-generated constructor stub
 	}
 	private String userId;
+	private String refId;
 	private String articleId;
 	private String dealState;
 	private String dealOpinion;
@@ -49,4 +50,13 @@ public class AritcleWorkFlowReqDto extends RequestDto {
 	public void setDealEndTime(Date dealEndTime) {
 		this.dealEndTime = dealEndTime;
 	}
+	public String getRefId() {
+		return refId;
+	}
+	public void setRefId(String refId) {
+		this.refId = refId;
+	}
+	
+	
+	
 }

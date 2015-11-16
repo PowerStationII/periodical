@@ -22,7 +22,16 @@ public class ArticleFlowsQuery extends PagingQuery {
 	public  ArticleFlowsQuery(int pageNo, int pageSize){
 		super(pageNo, pageSize);
 	}
+	private long id;
 	
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 	private java.lang.Long pid;
 	private java.lang.String userId;
 	private java.lang.String refId;

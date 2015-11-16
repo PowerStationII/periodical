@@ -75,5 +75,11 @@ public class ArticleFlowsManagerImpl implements ArticleFlowsManager {
 		// TODO Auto-generated method stub
 		return articleFlowsDao.selectMaxId(articleId);
 	}
+
+
+	public ArticleFlows queryFlowsDetail(ArticleFlowsQuery query) {
+		// TODO Auto-generated method stub
+		return articleFlowsDao.queryFlowsDetail(query);
+	}
 }
 

@@ -75,5 +75,11 @@ public class ArticleFlowsDaoImpl extends BaseDao implements ArticleFlowsDao {
 		
 		return (Long) (id==null?1L:id);
 	}
+
+
+	public ArticleFlows queryFlowsDetail(ArticleFlowsQuery query) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectOne("ArticleFlowsMapper.queryFlowsDetail",query);
+	}
 	
 }

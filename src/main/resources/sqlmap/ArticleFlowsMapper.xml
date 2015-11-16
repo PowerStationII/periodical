@@ -345,4 +345,14 @@
   <select id="selectMaxId"  parameterType="String"  resultType="long">
   	select max(id) from article_flows where article_id=#{articleId,jdbcType=VARCHAR}
   </select>
+  
+   <select id="queryFlowsDetail"  parameterType="ArticleFlowsQuery"  resultMap="BaseResultMap">
+  	select * from article_flows where 
+  	article_id=#{articleId,jdbcType=VARCHAR} 
+  	and user_id=#{userId,jdbcType=VARCHAR}
+  	and role_id=#{roleId,jdbcType=VARCHAR}
+  	and id=#{id,jdbcType=VARCHAR}
+  </select>
+  
+  
 </mapper>

@@ -7,7 +7,7 @@
 		<result column="contriTime" jdbcType="VARCHAR" property="contriTime" />
 		<result column="authorName" jdbcType="VARCHAR" property="authorName" />
 	</resultMap>
-	
+
 	<select id="selectArticleInfosForEditor" parameterType="ArticleQueryReqDto"
 		resultMap="ArticleInfosForEditorResultMap">
 		select ai.article_id as articleId,ai.article_cn_title as
@@ -40,26 +40,43 @@
 		<result column="enSummary" jdbcType="VARCHAR" property="enSummary" />
 		<result column="attachName" jdbcType="VARCHAR" property="attachName" />
 		<result column="attachPath" jdbcType="VARCHAR" property="attachPath" />
+		<result column="authorName" jdbcType="VARCHAR" property="authorName" />
 	</resultMap>
 	<select id="selectArticleInfoDetail" parameterType="ArticleQueryReqDto"
 		resultMap="ArticleInfoDetailResultMap">
 		select ai.article_id as articleId,ai.article_cn_title as title,
 		ai.editor_state as editorState,
-		ai.article_en_tile as enTitle,ai.classification_nums as fNums,
-		ai.invest_section as section,ai.article_cn_keywords as cnKeywords,
-		ai.article_en_keywords as enKeywords,ai.article_cn_summary as
+		ai.article_en_tile as
+		enTitle,ai.classification_nums as fNums,
+		ai.invest_section as
+		section,ai.article_cn_keywords as cnKeywords,
+		ai.article_en_keywords as
+		enKeywords,ai.article_cn_summary as
 		cnSummary,
-		ai.article_en_summary as enSummary,aai.attachment_name as attachName,
-		aai.attachment_path as attachPath
-		from article_info ai,article_info_extend aie,article_attachment_info aai
-		where ai.article_id=aie.article_id and ai.article_id=aai.article_id
-		and aai.type=#{roleId,jdbcType=VARCHAR}
-		and ai.article_id=#{articleId,jdbcType=VARCHAR}
+		ai.article_en_summary as
+		enSummary,aai.attachment_name as attachName,
+		aai.attachment_path as
+		attachPath,group_concat(aui.author_name) as authorName
+		from
+		article_info ai,article_info_extend aie,article_attachment_info
+		aai,author_info aui
+		where ai.article_id=aie.article_id and
+		ai.article_id=aai.article_id and aui.article_id=ai.article_id
+		and
+		aai.type=#{roleId,jdbcType=VARCHAR}
+		and
+		ai.article_id=#{articleId,jdbcType=VARCHAR}
 		<if test="editorState != null">
 			and ai.editor_state = #{editorState,jdbcType=VARCHAR}
 		</if>
 		<if test="userId != null">
 			and aie.user_id = #{userId,jdbcType=VARCHAR}
 		</if>
+		group by ai.article_id ,ai.article_cn_title ,
+		ai.article_en_tile ,ai.classification_nums,
+		ai.invest_section ,ai.article_cn_keywords ,
+		ai.article_en_keywords ,ai.article_cn_summary ,
+		ai.article_en_summary ,aai.attachment_name,
+		aai.attachment_path
 	</select>
 </mapper>

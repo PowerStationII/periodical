@@ -8,11 +8,11 @@ public enum ArticleStateEnums {
 	/**
 	 * 已登记(代表稿件在编辑人员操作范围内.)
 	 * */
-	SUBMITED_ARTICLE("0001","SUBMITED_ARTICLE"),
+	ENLISTED_ARTICLE("0001","ENLISTED_ARTICLE"),
 	/**
 	 * 已送审(代表稿件在专家操作范围内.)
 	 * */
-	ENLISTED_ARTICLE("0002","ENLISTED_ARTICLE"),
+	SUBMITED_ARTICLE("0002","SUBMITED_ARTICLE"),
 	/**
 	 * 已待刊(代表稿件在编辑人员操作范围内.)
 	 * */

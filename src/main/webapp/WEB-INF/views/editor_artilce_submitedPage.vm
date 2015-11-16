@@ -13,8 +13,7 @@
 </head>
 <body>
 	<form action="../editor/toSubmitState" method="POST">
-		<input type="hidden"  name="userId" value="${userId}">
-		<input type="hidden"  name="id" value="${articleInfo.id}">
+		<input type="hidden" name="articleId" value="${respDto.articleId}">
 		<div id="articleInfos">
 			<a style="font-size: 20px; color: #0000CC;">稿件送审</a><br>
 			
@@ -23,17 +22,17 @@
 					<td colspan="6" rowspan="4">稿件信息</td>
 				</tr>
 				<tr>
-					<td colspan="4">稿件编号:${articleInfo.articleId}<input type="hidden" name="articleId" value=" ${articleInfo.articleId}"></td>
-					<td colspan="2">稿件状态:${articleInfo.state}<input type="hidden" name="state" value=" ${articleInfo.state}"></td>
+					<td colspan="4">稿件编号:${respDto.articleId}</td>
+					<td colspan="2">稿件状态:${respDto.editorState}</td>
 				</tr>
 				<tr>
-					<td colspan="4">标题:${articleInfo.articleCnTitle}</td>
-					<td colspan="2">拟投栏目:</td>
+					<td colspan="4">标题:${respDto.title}</td>
+					<td colspan="2">拟投栏目:${respDto.section}</td>
 				</tr>
 				<tr>
 					<td colspan="3">专家:</td>
 					<td><select name="expertId">
-							<option value="6afcfa2791784e6595560d916a667e39">张三</option>
+							<option value="6afcfa279178477595560d916a667e39">张三</option>
 							<!-- <option value="lisi">李四</option> -->
 						</select></td>
 					<td colspan="2">送审日期:</td>

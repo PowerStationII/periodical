@@ -653,6 +653,25 @@
      </if>
   </select>
   
+    <select id="selectInfoDetail" parameterType="hashMap" resultMap="BaseResultMap">
+  	select ai.* from article_info ai,article_info_extend aie 
+  	where ai.article_id=aie.article_id 
+  	 <if test="userId != null and userId!=''" >
+      and aie.user_id = #{userId,jdbcType=VARCHAR}
+     </if>
+     <if test="authorState != null and authorState!=''" >
+      and ai.author_state = #{authorState,jdbcType=VARCHAR}
+     </if>
+     <if test="articleId != null and articleId!=''" >
+      and ai.article_id = #{articleId,jdbcType=VARCHAR}
+     </if>
+     <if test="roleId != null and roleId!=''" >
+      and aie.role_id = #{roleId,jdbcType=VARCHAR}
+     </if>
+  </select>
+  
+  
+  
     <select id="queryArticleTotalInfos" parameterType="hashMap" resultMap="EditorResultMap">
   	select ai.editor_state as status,count(1) as total from article_info ai,article_info_extend aie where ai.article_id=aie.article_id
   	group by ai.editor_state 

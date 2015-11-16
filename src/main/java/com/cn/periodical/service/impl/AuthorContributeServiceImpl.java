@@ -19,12 +19,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.manager.ArticleAttachmentInfoManager;
+import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.manager.ArticleInfoExtendManager;
 import com.cn.periodical.manager.ArticleInfoManager;
 import com.cn.periodical.manager.AuthorInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.AddressInfo;
 import com.cn.periodical.pojo.ArticleAttachmentInfo;
+import com.cn.periodical.pojo.ArticleFlows;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.ArticleInfoExtend;
 import com.cn.periodical.pojo.AuthorInfo;
@@ -59,8 +61,10 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 	@Autowired
 	TransactionTemplate transactionTemplate;
 	
+	
 	@Autowired
-	ArticleWorkFlowService articleWorkFlowService;
+	ArticleFlowsManager articleFlowsManager;	
+	
 	
 	public AuthorContributeServiceImpl() {
 		// TODO Auto-generated constructor stub
@@ -194,15 +198,17 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 			/**
 			 * 登记稿件流水
 			 * */
-			AritcleWorkFlowReqDto reqDto=new AritcleWorkFlowReqDto();
-			reqDto.setArticleId(articleId);
-			reqDto.setUserId(contributeRequestDto.getUserId());
-			reqDto.setRoleId(contributeRequestDto.getRoleId());
-			reqDto.setDealState(ArticleStateEnums.NEW_ARTICLE.getCode());
-			reqDto.setDealStartTime(new Date());
-			reqDto.setDealEndTime(new Date());
-			reqDto.setDealOpinion("");
-			articleWorkFlowService.registArticleWorkFlow(reqDto);
+			ArticleFlows articleFlows = new ArticleFlows();
+			articleFlows.setId(1L);
+			articleFlows.setPid(0L);
+			articleFlows.setUserId(contributeRequestDto.getUserId());
+			articleFlows.setCreateTime(new Date());
+			articleFlows.setRoleId(contributeRequestDto.getRoleId());
+			articleFlows.setDealState(ArticleStateEnums.NEW_ARTICLE.getCode());
+			articleFlows.setArticleId(articleId);
+			articleFlows.setDealStartTime(new Date());
+			articleFlows.setDealEndTime(new Date());
+			articleFlowsManager.saveArticleFlows(articleFlows);
 		}
 	}
 	

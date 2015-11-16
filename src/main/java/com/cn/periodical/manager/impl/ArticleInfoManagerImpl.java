@@ -83,5 +83,13 @@ public class ArticleInfoManagerImpl implements ArticleInfoManager {
 		// TODO Auto-generated method stub
 		return articleInfoDao.qryListByUserId(reqMap);
 	}
+
+
+	public ArticleInfo qryInfoByArticleId(Map reqMap) {
+		// TODO Auto-generated method stub
+		
+		return articleInfoDao.qryInfoByArticleId(reqMap);
+	}
+
 }
 

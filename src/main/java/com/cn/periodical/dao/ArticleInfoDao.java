@@ -35,4 +35,5 @@ public interface ArticleInfoDao {
 	
 	public List<EditorAreaInfos> queryArticleTotalInfos(Map<String,String> map);
 	public List<ArticleInfo> qryListByUserId(Map reqMap);
+	ArticleInfo qryInfoByArticleId(Map reqMap);
 }

@@ -32,4 +32,5 @@ public interface ArticleFlowsDao {
 	int updateByPrimaryKey(ArticleFlows record);
 	
 	long selectMaxId(String articleId);
+	ArticleFlows queryFlowsDetail(ArticleFlowsQuery query);
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserQueryMapper">
+	<resultMap id="UserQueryResultMap" type="UserQueryReqDto">
+		<result column="articleId" jdbcType="VARCHAR" property="articleId" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="contriTime" jdbcType="VARCHAR" property="contriTime" />
+		<result column="authorName" jdbcType="VARCHAR" property="authorName" />
+	</resultMap>
+
+	<select id="selectUserQuery" parameterType="UserQueryReqDto"
+		resultMap="UserQueryResultMap">
+		
+		select user_id,role_id,system_id,logon_name,refId,refName from (
+		select ui.user_id,ui.role_id,ui.system_id,ui.logon_name,ai.author_id
+		as refId,ai.author_name as refName from user_info ui LEFT JOIN
+		author_info ai on ui.ref_id=ai.author_id
+		UNION
+		select ui.user_id,ui.role_id,ui.system_id,ui.logon_name,ei.expert_id as
+		refId,ei.expert_name as refName from user_info ui LEFT JOIN
+		expert_info ei on ui.ref_id=ei.expert_id
+		UNION
+		select ui.user_id,ui.role_id,ui.system_id,ui.logon_name,ri.reader_id as
+		refId,ri.reader_id as refName from user_info ui LEFT JOIN reader_info
+		ri on ui.ref_id=ri.reader_id
+		UNION
+		select ui.user_id,ui.role_id,ui.system_id,ui.logon_name,edi.editor_id as
+		refId,edi.editor_id as refName from user_info ui LEFT JOIN editor_info
+		edi on ui.ref_id=edi.editor_id) as lin
+		WHERE 1=1
+		<if test="userId != null">
+			and user_id = #{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="refId != null">
+			and refId = #{refId,jdbcType=VARCHAR}
+		</if>
+		<if test="roleId != null">
+			and role_id = #{roleId,jdbcType=VARCHAR}
+		</if>
+		<if test="systemId != null">
+			and system_id = #{systemId,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+</mapper>

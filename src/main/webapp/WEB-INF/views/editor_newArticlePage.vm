@@ -27,7 +27,7 @@
 				<td><a href="../editor/toNewArticleDetailPage?artilceId=${obj.articleId}">$!{obj.title}</a></td>
 				<td>$!{obj.authorName}</td>
 				<td>$!{obj.contriTime}</td>
-				<td><a href="../editor/toEnlistedPage?articleId=${obj.articleId}">审核</a></td>
+				<td><a href="../editor/toEnlistedPage?articleId=${obj.articleId}">登记</a></td>
 			</tr>
 			#end
 		</table>

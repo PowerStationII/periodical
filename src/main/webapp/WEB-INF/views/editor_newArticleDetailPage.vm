@@ -21,7 +21,6 @@
 <body>
 	<div>
 		<table style="border:1px solid;width:800px;" rules="all">
-			<input type="hidden" name="articleId" value="$!{respDto.articleId}"/>
 			<tr>
 				<td><label>
 						<span class="right">稿件状态:</span>
@@ -76,16 +75,16 @@
 				</label></td>
 				<td>$!{respDto.enSummary}</td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td><label>
 						<span class="right">下载原稿件:</span>
 				</label></td>
 				<td>$!{respDto.attachName} 下载  $!{respDto.attachPath}</td>
-			</tr>
+			</tr> -->
 		</table>
 	</div>
 	<div class="attr_con">
-		<a href="../editor/toEditorUpdateStatePage?articleId=${articleInfo.articleId}&userId=${userId}">登记</a>
+		<a href="../editor/toEnlistedPage?articleId=$!{respDto.articleId}">登记</a>
 		<input type="button"  value="返修"  id="back"/>
 		<input type="button"  value="退稿"  id="back"/>
 	</div>
