@@ -108,6 +108,8 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
         articleAttachmentInfo.setSjtztsjAttachmentPath(paths[3]);
         articleAttachmentInfo.setYjspzpAttachmentName(files[4].getOriginalFilename());
         articleAttachmentInfo.setYjspzpAttachmentPath(paths[4]);
+        articleAttachmentInfo.setType(contributeRequestDto.getRoleId());
+        articleAttachmentInfo.setStatus("Y");
         articleAttachmentInfo.setCreateTime(new Date());
         articleAttachmentInfo.setUpdateTime(new Date());
         
@@ -144,6 +146,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		articleInfo.setInovationPoint(contributeRequestDto.getInovationPoint());
 		articleInfo.setIsfund(contributeRequestDto.getIsfund());
 		articleInfo.setLatelyFlowsId(1L);
+		articleInfo.setCreateTime(new Date());
 		
 		final ArticleInfoExtend articleInfoExtend = new ArticleInfoExtend();
 		articleInfoExtend.setUserId(contributeRequestDto.getUserId());

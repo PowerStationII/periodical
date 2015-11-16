@@ -2,15 +2,19 @@ package com.cn.periodical.service;
 
 import java.util.List;
 
-import com.cn.periodical.pojo.ArticleInfo;
-import com.cn.periodical.response.AuthorArticleQueryRespDto;
+import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.request.ArticleQueryReqDto;
+import com.cn.periodical.response.ArticleQueryRespDto;
 
 /**
  * 稿件查询
  * */
 public interface ArticleQueryService {
-	public List<AuthorArticleQueryRespDto> queryArticleInfo(String userId);
-	public ArticleInfo queryArticleDetailInfo(String articleId) ;
-	public List<AuthorArticleQueryRespDto> queryArticleFee(String userId);
+	public List<ArticleQueryRespDto> queryArticleInfos(ArticleQueryReqDto reqDto);
+	
+	
+	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto);
+	
+	
 	
 }

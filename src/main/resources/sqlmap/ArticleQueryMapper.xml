@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ArticleQueryMapper">
+	<resultMap id="ArticleInfosForEditorResultMap" type="ArticleQueryRespDto">
+		<result column="articleId" jdbcType="VARCHAR" property="articleId" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="contriTime" jdbcType="VARCHAR" property="contriTime" />
+		<result column="authorName" jdbcType="VARCHAR" property="authorName" />
+	</resultMap>
+	
+	<select id="selectArticleInfosForEditor" parameterType="ArticleQueryReqDto"
+		resultMap="ArticleInfosForEditorResultMap">
+		select ai.article_id as articleId,ai.article_cn_title as
+		title,DATE_FORMAT(ai.create_time, 'yyyy-MM-dd') as
+		contriTime,group_concat(aui.author_name) as authorName
+		from
+		article_info ai,article_info_extend aie,author_info aui
+		where
+		ai.article_id=aie.article_id and ai.article_id=aui.article_id
+		<if test="userId != null">
+			and aie.user_id = #{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="editorState != null">
+			and ai.editor_state = #{editorState,jdbcType=VARCHAR}
+		</if>
+		group by
+		ai.article_id,ai.article_cn_title,DATE_FORMAT(ai.create_time,'yyyy-MM-dd')
+	</select>
+
+	<resultMap id="ArticleInfoDetailResultMap" type="ArticleQueryRespDto">
+		<result column="articleId" jdbcType="VARCHAR" property="articleId" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="editorState" jdbcType="VARCHAR" property="editorState" />
+		<result column="enTitle" jdbcType="VARCHAR" property="enTitle" />
+		<result column="fNums" jdbcType="VARCHAR" property="fNums" />
+		<result column="section" jdbcType="VARCHAR" property="section" />
+		<result column="cnKeywords" jdbcType="VARCHAR" property="cnKeywords" />
+		<result column="enKeywords" jdbcType="VARCHAR" property="enKeywords" />
+		<result column="cnSummary" jdbcType="VARCHAR" property="cnSummary" />
+		<result column="enSummary" jdbcType="VARCHAR" property="enSummary" />
+		<result column="attachName" jdbcType="VARCHAR" property="attachName" />
+		<result column="attachPath" jdbcType="VARCHAR" property="attachPath" />
+	</resultMap>
+	<select id="selectArticleInfoDetail" parameterType="ArticleQueryReqDto"
+		resultMap="ArticleInfoDetailResultMap">
+		select ai.article_id as articleId,ai.article_cn_title as title,
+		ai.editor_state as editorState,
+		ai.article_en_tile as enTitle,ai.classification_nums as fNums,
+		ai.invest_section as section,ai.article_cn_keywords as cnKeywords,
+		ai.article_en_keywords as enKeywords,ai.article_cn_summary as
+		cnSummary,
+		ai.article_en_summary as enSummary,aai.attachment_name as attachName,
+		aai.attachment_path as attachPath
+		from article_info ai,article_info_extend aie,article_attachment_info aai
+		where ai.article_id=aie.article_id and ai.article_id=aai.article_id
+		and aai.type=#{roleId,jdbcType=VARCHAR}
+		and ai.article_id=#{articleId,jdbcType=VARCHAR}
+		<if test="editorState != null">
+			and ai.editor_state = #{editorState,jdbcType=VARCHAR}
+		</if>
+		<if test="userId != null">
+			and aie.user_id = #{userId,jdbcType=VARCHAR}
+		</if>
+	</select>
+</mapper>

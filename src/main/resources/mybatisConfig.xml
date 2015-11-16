@@ -26,6 +26,8 @@
 		<package name="com.cn.periodical.pojo" />
 		<!-- <package name="com.chanjetpay.gateway.enumtype"/> -->
 		<!-- <typeAlias type=”com.someapp.model.User” alias="User"/> 试试这个,resultMap指定到此别名-->
+		<package name="com.cn.periodical.request"/>
+		<package name="com.cn.periodical.response"/>
 	</typeAliases>
 
 	<!-- 类型转换处理器 -->
@@ -50,5 +52,6 @@
 		<mapper resource="sqlmap/PeriodicalMapper.xml"/>
 		<mapper resource="sqlmap/PayeeInfoMapper.xml"/>
 		<mapper resource="sqlmap/AccountInfoMapper.xml"/>
+		<mapper resource="sqlmap/ArticleQueryMapper.xml"/>
 	</mappers>
 </configuration>

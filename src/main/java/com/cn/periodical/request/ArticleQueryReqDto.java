@@ -14,7 +14,7 @@ public class ArticleQueryReqDto extends RequestDto{
 	private String articleCnTitle;
 	private String creatTime;
 	private String authorState;
-	private String editroState;
+	private String editorState;
 	private String expertState;
 	private String roleId;
 	private String userId;
@@ -58,11 +58,12 @@ public class ArticleQueryReqDto extends RequestDto{
 	public void setAuthorState(String authorState) {
 		this.authorState = authorState;
 	}
-	public String getEditroState() {
-		return editroState;
+
+	public String getEditorState() {
+		return editorState;
 	}
-	public void setEditroState(String editroState) {
-		this.editroState = editroState;
+	public void setEditorState(String editorState) {
+		this.editorState = editorState;
 	}
 	public String getExpertState() {
 		return expertState;

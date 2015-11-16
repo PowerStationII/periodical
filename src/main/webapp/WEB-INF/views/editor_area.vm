@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
   </head>
   <script type="text/javascript">
+  	
   		$(function(){
   			$('.area_name').click(function(){
   				$('#other').hide();
@@ -19,87 +20,87 @@
   			$('#xingao').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toNewArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toNewArticlePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#yidengji').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toEnlistedArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toEnlistedArticlePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#fanxiu').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toRepairArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toRepairArticlePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#tuigao').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toReturnedArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toReturnedArticlePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#daikan').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toPublishArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toPublishArticlePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#paikanzugao').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toArticleGroupPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toArticleGroupPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#chaxungaojian').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toQueryArticlePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toQueryArticlePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			//<!--广告编辑 start-->
   			$('#huiyuanguanli').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toCouncilManagerPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toCouncilManagerPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#adguanli').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toAdManagerPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toAdManagerPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			//<!--广告编辑 end-->
   			//<!-- 发行编辑 start-->
   			$('#gaojiantongji').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toArtilceStatisticsPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toArtilceStatisticsPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#faxingtongji').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubscribeStatisticsPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubscribeStatisticsPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#caiwutongji').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toFinanceStatisticsPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toFinanceStatisticsPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#lishihuiad').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toAdStatisticsPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toAdStatisticsPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#dingdanguanli').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubscribeOrderManagePage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubscribeOrderManagePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			$('#qikanyouji').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubscribePostPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubscribePostPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			//<!-- 发行编辑 end-->
   			//<!-- 签发人 start-->
   			$('#qianfa').click(function(){
   				$('#area').hide();
   				$('#other').remove();
-  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toIssueManagerPage?userId=${userId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toIssueManagerPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
   			//<!-- 签发人 end-->
   			
@@ -134,7 +135,7 @@
 	       		<div  class="work_area"></div>
 	       		<div  class="area_name">工作区首页</div>
 	       </div>
-	       #if(${roleId}=='1006')
+	       #if(${userInfo.roleId}=='1006')
 	       <div id="1006"  class="cLeft">
 	       		<div  class="mode_name">稿件管理</div>
 	       		<div>
@@ -155,7 +156,7 @@
 	       			</div>
 	       		</div>
 	       </div>
-	       #elseif(${roleId}=='1007')
+	       #elseif(${userInfo.roleId}=='1007')
 	       <div id="1007"  class="cLeft">
 	       		<div  class="mode_name">理事会管理</div>
 	       		<div>
@@ -169,7 +170,7 @@
 	       			</div>
 	       		</div>
 	       </div>
-	       #elseif(${roleId}=='1008')
+	       #elseif(${userInfo.roleId}=='1008')
 	       <div id="1008"  class="cLeft">
 	       		<div  class="mode_name">期刊管理</div>
 	       		<div>
@@ -187,7 +188,7 @@
 	       			</div>
 	       		</div>
 	       </div>
-	       #elseif(${roleId}=='1009')
+	       #elseif(${userInfo.roleId}=='1009')
 	       <div id="1009"  class="cLeft">
 	       		<div  class="mode_name">发行管理</div>
 	       		<div>
@@ -198,7 +199,7 @@
 	       			</div>
 	       		</div>
 	       </div>
-	       #elseif(${roleId}=='1005')
+	       #elseif(${userInfo.roleId}=='1005')
 	       <div id="1009"  class="cLeft">
 	       		<div  class="mode_name">编辑专家管理</div>
 	       		<div>

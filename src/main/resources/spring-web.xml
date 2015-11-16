@@ -26,6 +26,11 @@
 		<property name="prefix" value="views/" />
 		<property name="requestContextAttribute" value="rc" /><!-- request属性引用名称 -->
 		<property name="cache" value="false" />
+		<property name="dateToolAttribute" value="date" /><!-- 日期函数名称 -->
+		<property name="numberToolAttribute" value="number" /><!-- 数字函数名称 -->
+		<property name="exposeSpringMacroHelpers" value="true" /><!-- 是否使用spring对宏定义的支持 -->
+		<property name="exposeRequestAttributes" value="true" /><!-- 是否开放request属性 -->
+		<property name="exposeSessionAttributes" value="true" /><!-- 是否开放request属性 -->
 	</bean>
 
 	<bean id="velocityConfigurer"

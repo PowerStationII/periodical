@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.ExceptionEnums;
 import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.enums.SystemIdEnums;
@@ -78,6 +79,8 @@ public class LoginController {
 				}
 				return mav;
 			}
+			logger.info(JSON.toJSONString(userInfo));
+			request.getSession().setAttribute("userInfo", userInfo);
 		} catch (Exception e) {
 			mav = new ModelAndView("error");
 			mav.addObject("message", e.getMessage());
@@ -88,9 +91,9 @@ public class LoginController {
 			// 编辑
 			String roleId = userInfo.getRoleId();
 			if (RoleIdEnums.ARTICLE_EDITOR.getCode().equals(roleId)) {
+				logger.info("编辑...");
 				mav = new ModelAndView("editor_area");
-				mav.addObject("roleId", roleId);
-				mav.addObject("userId", userInfo.getUserId());
+//				request.getSession().setAttribute("userInfo", userInfo);
 				List<EditorAreaInfos> list = loginService.queryArticleInfos("", "");
 				mav.addObject("list", list);
 				return mav;
@@ -127,7 +130,7 @@ public class LoginController {
 		} else if (SystemIdEnums.AUTHOR_SYS.getCode().equals(systemId)) {
 			// 作者
 			mav = new ModelAndView("author_area");
-			request.getSession().setAttribute("userInfo", userInfo);
+//			request.getSession().setAttribute("userInfo", userInfo);
 			mav.addObject("userInfo", userInfo);
 			return mav;
 		} else if (SystemIdEnums.READER_SYS.getCode().equals(systemId)) {

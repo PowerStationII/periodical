@@ -53,6 +53,10 @@ public class ContributeController extends AuthorController{
 	@RequestMapping(value="/toContribute",method = RequestMethod.POST)
 	public ModelAndView toContribute(@ModelAttribute(value="contributeRequestDto") AuthorContributeReqDto contributeRequestDto,
 			@RequestParam(value="files", required=true) MultipartFile[] files,HttpServletRequest request) {
+		logger.info("00000000000");
+		logger.info(JSON.toJSONString(request.getSession().getAttribute("userInfo")));
+		logger.info("00000000000");
+		
 		logger.info("提交投稿信息入参:["+JSON.toJSONString(contributeRequestDto)+"]&上传附件数量["+files.length+"]");
 		ModelAndView mav = null;
 		try{
