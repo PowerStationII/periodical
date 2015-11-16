@@ -17,13 +17,16 @@ public class AccountInfo implements Serializable{
 	
 	private java.lang.Long id;
 	private java.lang.String refId;
-	private java.lang.Long amount;
+	private java.lang.Long authorAmount;
 	private java.util.Date payTime;
 	private java.lang.String type;
 	private java.lang.String userId;
 	private java.lang.String articleId;
-	private java.lang.Long amountTax;
-	private java.lang.Long realAmount;
+	private java.lang.Long authorTaxAmount;
+	private java.lang.Long authorRealAmount;
+	private java.lang.Long expertTaxAmount;
+	private java.lang.Long expertRealAmount;
+	private java.lang.Long expertAmount;
 	private java.lang.String payeeId;
 	private java.lang.String extend1;
 	private java.lang.String extend2;
@@ -60,18 +63,18 @@ public class AccountInfo implements Serializable{
 	}
 	/**
 	 * 稿费
-	 * @param amount
+	 * @param authorAmount
 	 */
-	public void setAmount(java.lang.Long amount) {
-		this.amount = amount;
+	public void setAuthorAmount(java.lang.Long authorAmount) {
+		this.authorAmount = authorAmount;
 	}
 	
 	/**
 	 * 稿费
 	 * @return
 	 */
-	public java.lang.Long getAmount() {
-		return this.amount;
+	public java.lang.Long getAuthorAmount() {
+		return this.authorAmount;
 	}
 	/**
 	 * 
@@ -135,33 +138,78 @@ public class AccountInfo implements Serializable{
 	}
 	/**
 	 * 扣税
-	 * @param amountTax
+	 * @param authorTaxAmount
 	 */
-	public void setAmountTax(java.lang.Long amountTax) {
-		this.amountTax = amountTax;
+	public void setAuthorTaxAmount(java.lang.Long authorTaxAmount) {
+		this.authorTaxAmount = authorTaxAmount;
 	}
 	
 	/**
 	 * 扣税
 	 * @return
 	 */
-	public java.lang.Long getAmountTax() {
-		return this.amountTax;
+	public java.lang.Long getAuthorTaxAmount() {
+		return this.authorTaxAmount;
 	}
 	/**
 	 * 实发
-	 * @param realAmount
+	 * @param authorRealAmount
 	 */
-	public void setRealAmount(java.lang.Long realAmount) {
-		this.realAmount = realAmount;
+	public void setAuthorRealAmount(java.lang.Long authorRealAmount) {
+		this.authorRealAmount = authorRealAmount;
 	}
 	
 	/**
 	 * 实发
 	 * @return
 	 */
-	public java.lang.Long getRealAmount() {
-		return this.realAmount;
+	public java.lang.Long getAuthorRealAmount() {
+		return this.authorRealAmount;
+	}
+	/**
+	 * 
+	 * @param expertTaxAmount
+	 */
+	public void setExpertTaxAmount(java.lang.Long expertTaxAmount) {
+		this.expertTaxAmount = expertTaxAmount;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.Long getExpertTaxAmount() {
+		return this.expertTaxAmount;
+	}
+	/**
+	 * 专家实发
+	 * @param expertRealAmount
+	 */
+	public void setExpertRealAmount(java.lang.Long expertRealAmount) {
+		this.expertRealAmount = expertRealAmount;
+	}
+	
+	/**
+	 * 专家实发
+	 * @return
+	 */
+	public java.lang.Long getExpertRealAmount() {
+		return this.expertRealAmount;
+	}
+	/**
+	 * 
+	 * @param expertAmount
+	 */
+	public void setExpertAmount(java.lang.Long expertAmount) {
+		this.expertAmount = expertAmount;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.Long getExpertAmount() {
+		return this.expertAmount;
 	}
 	/**
 	 * 收款人信息

@@ -52,26 +52,25 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 	}
 
 	public List<EditorArticleDealRespDto> articleDeal(String status) {
-//		// TODO Auto-generated method stub
-//		List<EditorArticleDealRespDto> list = new ArrayList<EditorArticleDealRespDto>();
-//		
-//		ArticleInfoQuery articleInfoQuery = new ArticleInfoQuery();
-//		articleInfoQuery.setState(status);
-//		List<ArticleInfo> articleInfos = articleInfoManager.queryList(articleInfoQuery);
-//		Iterator<ArticleInfo> iters = articleInfos.iterator();
-//		while(iters.hasNext()){
-//			EditorArticleDealRespDto editorArticleDealRespDto = new EditorArticleDealRespDto();
-//			ArticleInfo articleInfo = iters.next();
-//			AuthorInfoQuery authorInfoQuery = new AuthorInfoQuery();
-//			authorInfoQuery.setArticleId(articleInfo.getArticleId());
-//			List<AuthorInfo> authorInfos = authorInfoManager.queryList(authorInfoQuery);
-//			editorArticleDealRespDto.setArticleInfo(articleInfo);
-//			editorArticleDealRespDto.setAuthorInfos(authorInfos);
-////			editorArticleDealRespDto.setArticleAttachmentInfo(articleAttachmentInfo);
-//			list.add(editorArticleDealRespDto);
-//		}
-//		return list;
-		return null;
+		// TODO Auto-generated method stub
+		List<EditorArticleDealRespDto> list = new ArrayList<EditorArticleDealRespDto>();
+		
+		ArticleInfoQuery articleInfoQuery = new ArticleInfoQuery();
+		articleInfoQuery.setEditorState(status);
+		List<ArticleInfo> articleInfos = articleInfoManager.queryList(articleInfoQuery);
+		Iterator<ArticleInfo> iters = articleInfos.iterator();
+		while(iters.hasNext()){
+			EditorArticleDealRespDto editorArticleDealRespDto = new EditorArticleDealRespDto();
+			ArticleInfo articleInfo = iters.next();
+			AuthorInfoQuery authorInfoQuery = new AuthorInfoQuery();
+			authorInfoQuery.setArticleId(articleInfo.getArticleId());
+			List<AuthorInfo> authorInfos = authorInfoManager.queryList(authorInfoQuery);
+			editorArticleDealRespDto.setArticleInfo(articleInfo);
+			editorArticleDealRespDto.setAuthorInfos(authorInfos);
+//			editorArticleDealRespDto.setArticleAttachmentInfo(articleAttachmentInfo);
+			list.add(editorArticleDealRespDto);
+		}
+		return list;
 	}
 
 	public ArticleInfo qryArticleInfo(String articleId) {
@@ -83,31 +82,31 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 	}
 
 	public int updateArticleInfo(String expertUserId,String userId,ArticleInfo articleInfo,String articleState) {
-//		// TODO Auto-generated method stub
-//		ArticleInfo articleInfoQry =articleInfoManager.findArticleInfoById(articleInfo.getId());
-//		articleInfoQry.setId(articleInfoQry.getId());
-//		articleInfoQry.setState(articleState);		
-//		articleInfoManager.saveArticleInfo(articleInfoQry);
-//		
-//		EditorArticleDealReqDto obj = new EditorArticleDealReqDto();
-//		obj.setRoleId("");
-//		obj.setUserId(userId);
-//		obj.setDealState(articleState);
-//		obj.setDealOpinion("同意");
-//		obj.setSystemId("");
-//		obj.setArticleId(articleInfoQry.getArticleId());
-//		
-//		registeOperationFlows(obj);
-//		
-//		
-//		if(!"".equals(expertUserId)){
-//			ArticleInfoExtend articleInfoExtend = new ArticleInfoExtend();
-//			articleInfoExtend.setUserId(expertUserId);
-//			articleInfoExtend.setArticleId(obj.getArticleId());
-//			articleInfoExtend.setRoleId("9999");
-//			articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);
-//		}
-//		
+		// TODO Auto-generated method stub
+		ArticleInfo articleInfoQry =articleInfoManager.findArticleInfoById(articleInfo.getId());
+		articleInfoQry.setId(articleInfoQry.getId());
+		articleInfoQry.setEditorState(articleState);		
+		articleInfoManager.saveArticleInfo(articleInfoQry);
+		
+		EditorArticleDealReqDto obj = new EditorArticleDealReqDto();
+		obj.setRoleId("");
+		obj.setUserId(userId);
+		obj.setDealState(articleState);
+		obj.setDealOpinion("同意");
+		obj.setSystemId("");
+		obj.setArticleId(articleInfoQry.getArticleId());
+		
+		registeOperationFlows(obj);
+		
+		
+		if(!"".equals(expertUserId)){
+			ArticleInfoExtend articleInfoExtend = new ArticleInfoExtend();
+			articleInfoExtend.setUserId(expertUserId);
+			articleInfoExtend.setArticleId(obj.getArticleId());
+			articleInfoExtend.setRoleId("9999");
+			articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);
+		}
+		
 		return 0;
 	}
 

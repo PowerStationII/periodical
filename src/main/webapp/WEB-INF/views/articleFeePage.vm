@@ -24,7 +24,7 @@
 				<td>${articleQueryRespDto.articleId}</td>
 				<td><a
 					href="../author/toArticleFeeDetailPage?articleId=${articleQueryRespDto.articleId}&userId=${userId}">${articleQueryRespDto.articleCnTitle}</a></td>
-				<td>${articleQueryRespDto.accountInfo.amount}</td>
+				<td>${articleQueryRespDto.accountInfo.authorAmount}</td>
 			</tr>
 			#end
 		</table>

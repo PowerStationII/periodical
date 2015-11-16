@@ -214,7 +214,7 @@
 	    </div>
 	    <div class="right">
 			<div id="area"  style="margin-top:20px;">
-					<a style="margin-left:400px;font-size:20px;">编辑工作区提示</a><br><br>
+					<a style="margin-left:400px;font-size:20px;">工作任务一览</a><br><br>
 					<table style="border: 1px solid black;" rules="all">
 						<tr>
 							<td>稿件</td>
@@ -225,7 +225,7 @@
 						<tr>
 							<td>${editorAreaInfos.status}</td>
 							<td>${editorAreaInfos.total}</td>
-							<td>9999</td>
+							<td>进行处理</td>
 						</tr>
 						#end
 				</table>

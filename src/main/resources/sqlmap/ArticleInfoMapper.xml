@@ -37,6 +37,10 @@
 	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <resultMap id="EditorResultMap" type="EditorAreaInfos">
+	  <result column="status" jdbcType="VARCHAR" property="status" />
+	  <result column="total" jdbcType="VARCHAR" property="total" />
+  </resultMap>
   <sql id="Page_Query_Begin">
     select * from(select t.*,rownum rn from(
   </sql>
@@ -649,7 +653,7 @@
      </if>
   </select>
   
-    <select id="queryArticleTotalInfos" parameterType="hashMap" resultMap="BaseResultMap">
+    <select id="queryArticleTotalInfos" parameterType="hashMap" resultMap="EditorResultMap">
   	select ai.editor_state as status,count(1) as total from article_info ai,article_info_extend aie where ai.article_id=aie.article_id
   	group by ai.editor_state 
   </select>

@@ -109,7 +109,7 @@
 				<td><label>
 						<span class="right">稿费</span>
 				</label></td>
-				<td>应发金额:${respDto.accountInfo.amount} 扣税:${respDto.accountInfo.amountTax} 实发金额:${respDto.accountInfo.realAmount} 汇款时间:yyyy-MM-dd</td>
+				<td>应发金额:${respDto.accountInfo.authorAmount} 扣税:${respDto.accountInfo.authorTaxAmount} 实发金额:${respDto.accountInfo.authorRealAmount} 汇款时间:yyyy-MM-dd</td>
 			</tr>
 			<tr>
 				<td><label>

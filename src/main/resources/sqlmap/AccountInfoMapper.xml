@@ -4,13 +4,16 @@
 	<resultMap id="BaseResultMap" type="AccountInfo">
 	  <id column="ID" jdbcType="DECIMAL" property="id" />
 	  <result column="ref_id" jdbcType="VARCHAR" property="refId" />
-	  <result column="amount" jdbcType="DECIMAL" property="amount" />
+	  <result column="author_amount" jdbcType="DECIMAL" property="authorAmount" />
 	  <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
 	  <result column="type" jdbcType="VARCHAR" property="type" />
 	  <result column="user_id" jdbcType="VARCHAR" property="userId" />
 	  <result column="article_id" jdbcType="VARCHAR" property="articleId" />
-	  <result column="amount_tax" jdbcType="DECIMAL" property="amountTax" />
-	  <result column="real_amount" jdbcType="DECIMAL" property="realAmount" />
+	  <result column="author_tax_amount" jdbcType="DECIMAL" property="authorTaxAmount" />
+	  <result column="author_real_amount" jdbcType="DECIMAL" property="authorRealAmount" />
+	  <result column="expert_tax_amount" jdbcType="DECIMAL" property="expertTaxAmount" />
+	  <result column="expert_real_amount" jdbcType="DECIMAL" property="expertRealAmount" />
+	  <result column="expert_amount" jdbcType="DECIMAL" property="expertAmount" />
 	  <result column="payee_id" jdbcType="VARCHAR" property="payeeId" />
 	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
 	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
@@ -29,8 +32,8 @@
       <if test="refId != null" >
 	      and ref_id = #{refId,jdbcType=VARCHAR}
 	    </if>
-      <if test="amount != null" >
-	      and amount = #{amount,jdbcType=DECIMAL}
+      <if test="authorAmount != null" >
+	      and author_amount = #{authorAmount,jdbcType=DECIMAL}
 	    </if>
       <if test="payTime != null" >
 	      and pay_time = #{payTime,jdbcType=TIMESTAMP}
@@ -44,11 +47,20 @@
       <if test="articleId != null" >
 	      and article_id = #{articleId,jdbcType=VARCHAR}
 	    </if>
-      <if test="amountTax != null" >
-	      and amount_tax = #{amountTax,jdbcType=DECIMAL}
+      <if test="authorTaxAmount != null" >
+	      and author_tax_amount = #{authorTaxAmount,jdbcType=DECIMAL}
 	    </if>
-      <if test="realAmount != null" >
-	      and real_amount = #{realAmount,jdbcType=DECIMAL}
+      <if test="authorRealAmount != null" >
+	      and author_real_amount = #{authorRealAmount,jdbcType=DECIMAL}
+	    </if>
+      <if test="expertTaxAmount != null" >
+	      and expert_tax_amount = #{expertTaxAmount,jdbcType=DECIMAL}
+	    </if>
+      <if test="expertRealAmount != null" >
+	      and expert_real_amount = #{expertRealAmount,jdbcType=DECIMAL}
+	    </if>
+      <if test="expertAmount != null" >
+	      and expert_amount = #{expertAmount,jdbcType=DECIMAL}
 	    </if>
       <if test="payeeId != null" >
 	      and payee_id = #{payeeId,jdbcType=VARCHAR}
@@ -74,8 +86,8 @@
       <if test="refId != null">
         ref_id = #{refId,jdbcType=VARCHAR},
       </if>
-      <if test="amount != null">
-        amount = #{amount,jdbcType=DECIMAL},
+      <if test="authorAmount != null">
+        author_amount = #{authorAmount,jdbcType=DECIMAL},
       </if>
       <if test="payTime != null">
         pay_time = #{payTime,jdbcType=TIMESTAMP},
@@ -89,11 +101,20 @@
       <if test="articleId != null">
         article_id = #{articleId,jdbcType=VARCHAR},
       </if>
-      <if test="amountTax != null">
-        amount_tax = #{amountTax,jdbcType=DECIMAL},
+      <if test="authorTaxAmount != null">
+        author_tax_amount = #{authorTaxAmount,jdbcType=DECIMAL},
       </if>
-      <if test="realAmount != null">
-        real_amount = #{realAmount,jdbcType=DECIMAL},
+      <if test="authorRealAmount != null">
+        author_real_amount = #{authorRealAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="expertTaxAmount != null">
+        expert_tax_amount = #{expertTaxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="expertRealAmount != null">
+        expert_real_amount = #{expertRealAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="expertAmount != null">
+        expert_amount = #{expertAmount,jdbcType=DECIMAL},
       </if>
       <if test="payeeId != null">
         payee_id = #{payeeId,jdbcType=VARCHAR},
@@ -116,13 +137,16 @@
   <sql id="Base_Column_List">
     id,
     ref_id,
-    amount,
+    author_amount,
     pay_time,
     type,
     user_id,
     article_id,
-    amount_tax,
-    real_amount,
+    author_tax_amount,
+    author_real_amount,
+    expert_tax_amount,
+    expert_real_amount,
+    expert_amount,
     payee_id,
     extend_1,
     extend_2,
@@ -133,13 +157,16 @@
     <set>
       <trim suffixOverrides=",">
         ref_id = #{refId,jdbcType=VARCHAR},
-        amount = #{amount,jdbcType=DECIMAL},
+        author_amount = #{authorAmount,jdbcType=DECIMAL},
         pay_time = #{payTime,jdbcType=TIMESTAMP},
         type = #{type,jdbcType=VARCHAR},
         user_id = #{userId,jdbcType=VARCHAR},
         article_id = #{articleId,jdbcType=VARCHAR},
-        amount_tax = #{amountTax,jdbcType=DECIMAL},
-        real_amount = #{realAmount,jdbcType=DECIMAL},
+        author_tax_amount = #{authorTaxAmount,jdbcType=DECIMAL},
+        author_real_amount = #{authorRealAmount,jdbcType=DECIMAL},
+        expert_tax_amount = #{expertTaxAmount,jdbcType=DECIMAL},
+        expert_real_amount = #{expertRealAmount,jdbcType=DECIMAL},
+        expert_amount = #{expertAmount,jdbcType=DECIMAL},
         payee_id = #{payeeId,jdbcType=VARCHAR},
         extend_1 = #{extend1,jdbcType=VARCHAR},
         extend_2 = #{extend2,jdbcType=VARCHAR},
@@ -153,8 +180,8 @@
     <if test="refId != null">
       ref_id,
     </if>
-    <if test="amount != null">
-      amount,
+    <if test="authorAmount != null">
+      author_amount,
     </if>
     <if test="payTime != null">
       pay_time,
@@ -168,11 +195,20 @@
     <if test="articleId != null">
       article_id,
     </if>
-    <if test="amountTax != null">
-      amount_tax,
+    <if test="authorTaxAmount != null">
+      author_tax_amount,
     </if>
-    <if test="realAmount != null">
-      real_amount,
+    <if test="authorRealAmount != null">
+      author_real_amount,
+    </if>
+    <if test="expertTaxAmount != null">
+      expert_tax_amount,
+    </if>
+    <if test="expertRealAmount != null">
+      expert_real_amount,
+    </if>
+    <if test="expertAmount != null">
+      expert_amount,
     </if>
     <if test="payeeId != null">
       payee_id,
@@ -193,13 +229,16 @@
 	<sql id="Base_Value_List">
     #{id,jdbcType=BIGINT},
     #{refId,jdbcType=VARCHAR},
-    #{amount,jdbcType=DECIMAL},
+    #{authorAmount,jdbcType=DECIMAL},
     #{payTime,jdbcType=TIMESTAMP},
     #{type,jdbcType=VARCHAR},
     #{userId,jdbcType=VARCHAR},
     #{articleId,jdbcType=VARCHAR},
-    #{amountTax,jdbcType=DECIMAL},
-    #{realAmount,jdbcType=DECIMAL},
+    #{authorTaxAmount,jdbcType=DECIMAL},
+    #{authorRealAmount,jdbcType=DECIMAL},
+    #{expertTaxAmount,jdbcType=DECIMAL},
+    #{expertRealAmount,jdbcType=DECIMAL},
+    #{expertAmount,jdbcType=DECIMAL},
     #{payeeId,jdbcType=VARCHAR},
     #{extend1,jdbcType=VARCHAR},
     #{extend2,jdbcType=VARCHAR},
@@ -211,8 +250,8 @@
     <if test="refId != null">
       #{refId,jdbcType=VARCHAR},
     </if>
-    <if test="amount != null">
-      #{amount,jdbcType=DECIMAL},
+    <if test="authorAmount != null">
+      #{authorAmount,jdbcType=DECIMAL},
     </if>
     <if test="payTime != null">
       #{payTime,jdbcType=TIMESTAMP},
@@ -226,11 +265,20 @@
     <if test="articleId != null">
       #{articleId,jdbcType=VARCHAR},
     </if>
-    <if test="amountTax != null">
-      #{amountTax,jdbcType=DECIMAL},
+    <if test="authorTaxAmount != null">
+      #{authorTaxAmount,jdbcType=DECIMAL},
     </if>
-    <if test="realAmount != null">
-      #{realAmount,jdbcType=DECIMAL},
+    <if test="authorRealAmount != null">
+      #{authorRealAmount,jdbcType=DECIMAL},
+    </if>
+    <if test="expertTaxAmount != null">
+      #{expertTaxAmount,jdbcType=DECIMAL},
+    </if>
+    <if test="expertRealAmount != null">
+      #{expertRealAmount,jdbcType=DECIMAL},
+    </if>
+    <if test="expertAmount != null">
+      #{expertAmount,jdbcType=DECIMAL},
     </if>
     <if test="payeeId != null">
       #{payeeId,jdbcType=VARCHAR},
