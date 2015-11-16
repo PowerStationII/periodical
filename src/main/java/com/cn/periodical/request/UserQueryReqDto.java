@@ -11,7 +11,14 @@ public class UserQueryReqDto extends RequestDto {
 	private String systemId;
 	private String refId;
 	private String refName;
+	private String logonName;
 	
+	public String getLogonName() {
+		return logonName;
+	}
+	public void setLogonName(String logonName) {
+		this.logonName = logonName;
+	}
 	public String getUserId() {
 		return userId;
 	}

@@ -131,7 +131,7 @@ public class LoginController {
 			// 作者
 			mav = new ModelAndView("author_area");
 //			request.getSession().setAttribute("userInfo", userInfo);
-			mav.addObject("userInfo", userInfo);
+//			mav.addObject("userInfo", userInfo);
 			return mav;
 		} else if (SystemIdEnums.READER_SYS.getCode().equals(systemId)) {
 			// 读者:需区分省所/个人登录
