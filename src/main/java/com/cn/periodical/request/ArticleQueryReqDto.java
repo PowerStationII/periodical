@@ -1,5 +1,7 @@
 package com.cn.periodical.request;
-
+/**
+ * 稿件查询接口入参
+ * */
 public class ArticleQueryReqDto extends RequestDto{
 
 	public ArticleQueryReqDto() {

@@ -127,8 +127,8 @@ public class LoginController {
 		} else if (SystemIdEnums.AUTHOR_SYS.getCode().equals(systemId)) {
 			// 作者
 			mav = new ModelAndView("author_area");
-			mav.addObject("userId", userInfo.getUserId());
-			mav.addObject("roleId", RoleIdEnums.AUTHOR.getCode());
+			request.getSession().setAttribute("userInfo", userInfo);
+			mav.addObject("userInfo", userInfo);
 			return mav;
 		} else if (SystemIdEnums.READER_SYS.getCode().equals(systemId)) {
 			// 读者:需区分省所/个人登录

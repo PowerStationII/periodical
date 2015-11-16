@@ -1,8 +1,7 @@
 package com.cn.periodical.controller.author;
 
-import java.io.File;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.AuthorContributeReqDto;
 import com.cn.periodical.service.AuthorContributeService;
-import com.cn.periodical.service.LoginService;
 /**
  * 作者工作区-投稿
  * */
@@ -35,14 +34,13 @@ public class ContributeController extends AuthorController{
 	 * author/toContributePage
 	 * 去投稿页面
 	 */
-	@RequestMapping(value="/toContributePage",method = RequestMethod.GET)
-	public ModelAndView toContributePage(@RequestParam("userId") String userId,
-			@RequestParam("roleId") String roleId,
-			HttpServletRequest request) {
-		logger.info("投稿Page:["+userId+"]");
+	@RequestMapping(value="/toContributePage")
+	public ModelAndView toContributePage(HttpServletRequest request,HttpServletResponse response) {
+		UserInfo userInfo = (UserInfo)request.getSession().getAttribute("userInfo");
+		logger.info("投稿Page:["+JSON.toJSONString(userInfo)+"]");
 		ModelAndView mav = new ModelAndView("contributePage");
-		mav.addObject("userId", userId);
-		mav.addObject("roleId", roleId);
+		mav.addObject("userId", userInfo.getUserId());
+		mav.addObject("roleId", userInfo.getRoleId());
 		return mav;
 	}
 	

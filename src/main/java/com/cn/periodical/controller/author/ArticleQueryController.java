@@ -3,6 +3,7 @@ package com.cn.periodical.controller.author;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.pojo.ArticleInfo;
+import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.response.AuthorArticleQueryRespDto;
 import com.cn.periodical.service.AuthorArticleQueryService;
 /**
@@ -33,14 +35,14 @@ public class ArticleQueryController extends AuthorController{
 	 * author/toArticleQueryPage
 	 * 去稿件查询页面
 	 */
-	@RequestMapping(value="/toArticleQueryPage",method = RequestMethod.GET)
-	public ModelAndView toArticleQueryPage(@RequestParam("userId") String userId,
-			HttpServletRequest request) {
-		logger.info("稿件查询Page:["+userId+"]");
+	@RequestMapping(value="/toArticleQueryPage")
+	public ModelAndView toArticleQueryPage(HttpServletRequest request,HttpServletResponse response) {
+		UserInfo userInfo = (UserInfo)request.getSession().getAttribute("userInfo");
+		logger.info("稿件查询Page:["+JSON.toJSONString(userInfo)+"]");
 		ModelAndView mav = new ModelAndView("articleQueryPage");
-		mav.addObject("userId", userId);
+		mav.addObject("userId", userInfo.getUserId());
 		
-		List<AuthorArticleQueryRespDto> list = articleQueryService.queryArticleInfo(userId);
+		List<AuthorArticleQueryRespDto> list = articleQueryService.queryArticleInfo(userInfo.getUserId());
 		
 		logger.info("稿件查询出参:["+JSON.toJSONString(list)+"]");
 		mav.addObject("list", list);

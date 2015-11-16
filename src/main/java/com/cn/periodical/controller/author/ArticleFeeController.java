@@ -3,6 +3,7 @@ package com.cn.periodical.controller.author;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.pojo.ArticleInfo;
+import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.response.AuthorArticleQueryRespDto;
 import com.cn.periodical.service.AuthorArticleQueryService;
 /**
@@ -30,13 +32,13 @@ public class ArticleFeeController extends AuthorController{
 	 * toArticleFeePage
 	 * 去稿费查询页面
 	 */
-	@RequestMapping(value="/toArticleFeePage",method = RequestMethod.GET)
-	public ModelAndView toArticleFeePage(@RequestParam("userId") String userId,
-			HttpServletRequest request) {
-		logger.info("稿费查询Page:["+userId+"]");
+	@RequestMapping(value="/toArticleFeePage")
+	public ModelAndView toArticleFeePage(HttpServletRequest request,HttpServletResponse response) {
+		UserInfo userInfo = (UserInfo)request.getSession().getAttribute("userInfo");
+		logger.info("稿费查询Page:["+JSON.toJSONString(userInfo)+"]");
 		ModelAndView mav = new ModelAndView("articleFeePage");
-		mav.addObject("userId", userId);
-		List<AuthorArticleQueryRespDto> list = articleQueryService.queryArticleFee(userId);
+		mav.addObject("userId", userInfo.getUserId());
+		List<AuthorArticleQueryRespDto> list = articleQueryService.queryArticleFee(userInfo.getUserId());
 		logger.info("稿费查询出参:["+JSON.toJSONString(list)+"]");
 		mav.addObject("list", list);
 		return mav;
