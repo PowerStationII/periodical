@@ -147,7 +147,7 @@ public class ArticleEnlistedDealController extends EditorController{
 		AritcleWorkFlowReqDto reqDto = new AritcleWorkFlowReqDto();
 		reqDto.setUserId(dtoResult.getUserId());
 		reqDto.setArticleId(articleId);
-		reqDto.setRoleId(dtoResult.getRoleId());
+		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());
 		reqDto.setDealStartTime(new Date());
 		reqDto.setRefId(getUserInfo(request).getUserId());
 		articleWorkFlowService.registArticleWorkFlow(reqDto);

@@ -19,7 +19,7 @@
 	})
 </script>
 <body>
-<form action="../expert/toExpertUpdateState" method="POST">
+<form action="../expert/toPublishStateModify" method="POST">
 <input type="hidden" name="articleId" value="$!{respDto.articleId}">
 	<div>
 		<table style="border:1px solid;width:800px;" rules="all">
@@ -77,13 +77,19 @@
 				</label></td>
 				<td>$!{respDto.enSummary}</td>
 			</tr>
+			<tr>
+				<td><label>
+						<span class="right">下载原稿件:</span>
+				</label></td>
+				<td>$!{respDto.attachName} 下载  $!{respDto.attachPath}</td>
+			</tr>
 		</table>
 	</div>
 	<div class="attr_con">
 		<input type="button"  value="返回"  id="back"/>
 		<input type="submit" value="待刊">
-		<input type="button" value="返修">
-		<input type="button" value="退稿">
+		<a href="../expert/toExpertRepairedPage?articleId=${respDto.articleId}">返修</a>
+		<a href="../expert/toExpertRefundPage?articleId=${respDto.articleId}">退稿</a>
 	</div>
 	</form>
 </body>

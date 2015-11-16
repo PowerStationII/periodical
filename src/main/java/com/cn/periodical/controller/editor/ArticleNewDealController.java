@@ -133,6 +133,7 @@ public class ArticleNewDealController extends EditorController{
 		query.setRoleId(getUserInfo(request).getRoleId());
 		query.setId(articleInfo.getLatelyFlowsId());
 		ArticleFlows articleFlows = articleFlowsManager.queryFlowsDetail(query);//(articleInfo.getLatelyFlowsId());
+		
 		articleInfo.setId(articleInfo.getId());
 		articleInfo.setAuthorState(ArticleStateEnums.ENLISTED_ARTICLE.getCode());
 		articleInfo.setEditorState(ArticleStateEnums.ENLISTED_ARTICLE.getCode());
