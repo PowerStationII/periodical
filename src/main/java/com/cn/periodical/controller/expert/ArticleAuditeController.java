@@ -16,13 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.ArticleStateEnums;
+import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
-import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.ArticleQueryService;
-import com.cn.periodical.service.AuthorArticleQueryService;
 import com.cn.periodical.service.EditorArticleDealService;
 import com.cn.periodical.service.ExpertArticleAuditeService;
 
@@ -45,33 +44,41 @@ public class ArticleAuditeController extends ExpertController{
 	 * 去审稿页面
 	 */
 	@RequestMapping(value="/toArticleAuditePage")
-	public ModelAndView toArticleAuditePage(HttpServletRequest request) {
+	public ModelAndView toArticleAuditePage(HttpServletRequest request,@ModelAttribute ArticleQueryReqDto reqDto) {
 		UserInfo userInfo = getUserInfo(request);
-		logger.info("审稿Page:["+JSON.toJSONString(userInfo)+"]");
+		logger.info("审稿Page:["+JSON.toJSONString(reqDto)+"]");
 		ModelAndView mav = new ModelAndView("expert_articleAuditPage");
-		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
 		reqDto.setUserId(userInfo.getUserId());
-		reqDto.setEditorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
 		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
 		mav.addObject("list", list);
 		return mav;
 	}
 	
 	/**
-	 * toArticleAuditeDetailPage
+	 * toAuditeDetailPage
 	 * 去审稿明细页面
 	 */
-	@RequestMapping(value="/toArticleAuditeDetailPage",method = RequestMethod.GET)
-	public ModelAndView toArticleAuditeDetailPage(@RequestParam("artilceId") String artilceId) {
-		logger.info("审稿明细Page:["+artilceId+"]");
-//		ModelAndView mav = new ModelAndView("expertArticleAuditeDetailPage");
-//		
-//		ArticleInfo articleInfo = articleQueryService.queryArticleDetailInfo(artilceId);
-//		mav.addObject("articleInfo", articleInfo);
-//		logger.info("审稿明细出参:["+JSON.toJSONString(articleInfo)+"]");
-//		return mav;
-		return null;
+	@RequestMapping(value="/toAuditeDetailPage")
+	public ModelAndView toArticleAuditeDetailPage(@RequestParam("articleId") String articleId) {
+		logger.info("审稿明细Page:["+articleId+"]");
+		ModelAndView mav = new ModelAndView("expertArticleAuditeDetailPage");
+		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
+		reqDto.setArticleId(articleId);
+		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**专家下载编辑的稿件*/
+		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
+		mav.addObject("respDto", articleQueryRespDto);
+		logger.info("审稿明细出参:["+JSON.toJSONString(articleQueryRespDto)+"]");
+		return mav;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	/**

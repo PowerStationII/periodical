@@ -10,7 +10,7 @@ public class ArticleQueryReqDto extends RequestDto{
 	
 	private String id;
 	private String articleId;
-	private String authroName;
+	private String authorName;
 	private String articleCnTitle;
 	private String creatTime;
 	private String authorState;
@@ -18,10 +18,19 @@ public class ArticleQueryReqDto extends RequestDto{
 	private String expertState;
 	private String roleId;
 	private String userId;
+	private String section;
 	
 	
 	
 	
+	
+	
+	public String getSection() {
+		return section;
+	}
+	public void setSection(String section) {
+		this.section = section;
+	}
 	public String getId() {
 		return id;
 	}
@@ -34,11 +43,12 @@ public class ArticleQueryReqDto extends RequestDto{
 	public void setArticleId(String articleId) {
 		this.articleId = articleId;
 	}
-	public String getAuthroName() {
-		return authroName;
+	
+	public String getAuthorName() {
+		return authorName;
 	}
-	public void setAuthroName(String authroName) {
-		this.authroName = authroName;
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
 	}
 	public String getArticleCnTitle() {
 		return articleCnTitle;

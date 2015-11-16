@@ -162,6 +162,7 @@ public class ArticleEnlistedDealController extends EditorController{
 		articleInfo.setId(articleInfo.getId());
 		articleInfo.setAuthorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
 		articleInfo.setEditorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
+		articleInfo.setExpertState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
 		articleInfoManager.saveArticleInfo(articleInfo);
 		
 		logger.info("修改稿件状态出参:[]");

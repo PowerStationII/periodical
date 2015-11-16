@@ -6,25 +6,47 @@
 		<result column="title" jdbcType="VARCHAR" property="title" />
 		<result column="contriTime" jdbcType="VARCHAR" property="contriTime" />
 		<result column="authorName" jdbcType="VARCHAR" property="authorName" />
+		<result column="editorState" jdbcType="VARCHAR" property="editorState" />
+		<result column="expertState" jdbcType="VARCHAR" property="expertState" />
+		<result column="section" jdbcType="VARCHAR" property="section" />
 	</resultMap>
 
 	<select id="selectArticleInfosForEditor" parameterType="ArticleQueryReqDto"
 		resultMap="ArticleInfosForEditorResultMap">
 		select ai.article_id as articleId,ai.article_cn_title as
-		title,DATE_FORMAT(ai.create_time, 'yyyy-MM-dd') as
-		contriTime,group_concat(aui.author_name) as authorName
+		title,DATE_FORMAT(ai.create_time, '%Y-%m-%d') as
+		contriTime,group_concat(aui.author_name) as authorName,
+		ai.editor_state as editorState,ai.expert_state as expertState,ai.invest_section as section
 		from
 		article_info ai,article_info_extend aie,author_info aui
 		where
 		ai.article_id=aie.article_id and ai.article_id=aui.article_id
-		<if test="userId != null">
+		<if test="userId != null and ''!=userId">
 			and aie.user_id = #{userId,jdbcType=VARCHAR}
 		</if>
-		<if test="editorState != null">
+		<if test="editorState != null and ''!=editorState">
 			and ai.editor_state = #{editorState,jdbcType=VARCHAR}
 		</if>
+		<if test="expertState != null and ''!=expertState">
+			and ai.expert_state = #{expertState,jdbcType=VARCHAR}
+		</if>
+		<if test="articleId != null and ''!=articleId">
+			and ai.article_id = #{articleId,jdbcType=VARCHAR}
+		</if>
+		<if test="articleCnTitle != null and ''!=articleCnTitle">
+			and ai.article_cn_title = #{articleCnTitle,jdbcType=VARCHAR}
+		</if>
+		<if test="section != null and ''!=section">
+			and ai.invest_section = #{section,jdbcType=VARCHAR}
+		</if>
+		<if test="creatTime != null and ''!=creatTime">
+			and DATE_FORMAT(ai.create_time, '%Y-%m-%d') = #{creatTime,jdbcType=VARCHAR}
+		</if>
+		<if test="authorName != null and ''!=authorName">
+			and #{authorName,jdbcType=VARCHAR} in (select group_concat(aui.author_name)) 
+		</if>
 		group by
-		ai.article_id,ai.article_cn_title,DATE_FORMAT(ai.create_time,'yyyy-MM-dd')
+		ai.article_id,ai.article_cn_title,DATE_FORMAT(ai.create_time,'%Y-%m-%d'),ai.editor_state,ai.expert_state,ai.invest_section
 	</select>
 
 	<resultMap id="ArticleInfoDetailResultMap" type="ArticleQueryRespDto">
