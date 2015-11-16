@@ -17,8 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.pojo.ArticleInfo;
-import com.cn.periodical.request.ExpertArticleAuditeReqDto;
+import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.request.ArticleQueryReqDto;
+import com.cn.periodical.response.ArticleQueryRespDto;
 import com.cn.periodical.response.EditorArticleDealRespDto;
+import com.cn.periodical.service.ArticleQueryService;
 import com.cn.periodical.service.AuthorArticleQueryService;
 import com.cn.periodical.service.EditorArticleDealService;
 import com.cn.periodical.service.ExpertArticleAuditeService;
@@ -32,7 +35,7 @@ public class ArticleAuditeController extends ExpertController{
 	ExpertArticleAuditeService articleAuditeService;
 	
 	@Autowired
-	AuthorArticleQueryService articleQueryService;
+	ArticleQueryService articleQueryService;
 	
 	@Autowired
 	EditorArticleDealService articleDealService;
@@ -42,19 +45,15 @@ public class ArticleAuditeController extends ExpertController{
 	 * 去审稿页面
 	 */
 	@RequestMapping(value="/toArticleAuditePage")
-	public ModelAndView toArticleAuditePage(@ModelAttribute ExpertArticleAuditeReqDto reqDto) {
-		logger.info("审稿Page:["+JSON.toJSONString(reqDto)+"]");
+	public ModelAndView toArticleAuditePage(HttpServletRequest request) {
+		UserInfo userInfo = getUserInfo(request);
+		logger.info("审稿Page:["+JSON.toJSONString(userInfo)+"]");
 		ModelAndView mav = new ModelAndView("expert_articleAuditPage");
-		mav.addObject("userId", reqDto.getUserId());
-		List<EditorArticleDealRespDto> articleDealRespDtos=articleAuditeService.qryArticleInfo(reqDto);
-		
-		logger.info("***************");
-		logger.info(JSON.toJSONString(articleDealRespDtos));
-		logger.info("***************");
-		
-		mav.addObject("list", articleDealRespDtos);
-		
-		
+		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
+		reqDto.setUserId(userInfo.getUserId());
+		reqDto.setEditorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
+		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
+		mav.addObject("list", list);
 		return mav;
 	}
 	
@@ -65,12 +64,13 @@ public class ArticleAuditeController extends ExpertController{
 	@RequestMapping(value="/toArticleAuditeDetailPage",method = RequestMethod.GET)
 	public ModelAndView toArticleAuditeDetailPage(@RequestParam("artilceId") String artilceId) {
 		logger.info("审稿明细Page:["+artilceId+"]");
-		ModelAndView mav = new ModelAndView("expertArticleAuditeDetailPage");
-		
-		ArticleInfo articleInfo = articleQueryService.queryArticleDetailInfo(artilceId);
-		mav.addObject("articleInfo", articleInfo);
-		logger.info("审稿明细出参:["+JSON.toJSONString(articleInfo)+"]");
-		return mav;
+//		ModelAndView mav = new ModelAndView("expertArticleAuditeDetailPage");
+//		
+//		ArticleInfo articleInfo = articleQueryService.queryArticleDetailInfo(artilceId);
+//		mav.addObject("articleInfo", articleInfo);
+//		logger.info("审稿明细出参:["+JSON.toJSONString(articleInfo)+"]");
+//		return mav;
+		return null;
 	}
 	
 	

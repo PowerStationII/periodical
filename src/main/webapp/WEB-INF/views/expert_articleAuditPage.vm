@@ -14,7 +14,6 @@
 <body>
 	<div id="articleInfos">
 	<form action="../expert/toArticleAuditePage" method="POST">
-		<input type="hidden" name="userId" value="${userId}">
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
 				<td>稿件标题</td>
@@ -48,14 +47,14 @@
 				<td>备注信息</td>
 			</tr>
 			
-			#foreach($articleDealRespDto in ${list})   
+			#foreach($respDto in ${list})   
 			<tr>
-				<td>${articleDealRespDto.articleInfo.id}</td>
-				<td>${articleDealRespDto.articleInfo.articleId}</td>
+				<td>${respDto.articleId}</td>
+				<td>${respDto.title}</td>
 				<!-- 从这开始放弃 -->
-				<td><a href="../expert/toArticleAuditeDetailPage?artilceId=${articleDealRespDto.articleInfo.articleId}">${articleDealRespDto.articleInfo.articleCnTitle}</a></td>
-				<td>${articleDealRespDto.articleInfo.articleId}</td>
-				<td>${articleDealRespDto.articleInfo.articleId}</td>
+				<td><a href="../expert/toArticleAuditeDetailPage?artilceId=${articleDealRespDto.articleInfo.articleId}">${respDto.articleInfo.articleCnTitle}</a></td>
+				<td>${respDto.articleInfo.articleId}</td>
+				<td>${respDto.articleInfo.articleId}</td>
 			</tr>
 			#end
 		</table>

@@ -118,13 +118,9 @@ public class LoginController {
 			String role_id = userInfo.getRoleId();
 			if (RoleIdEnums.EN_EXPERT.getCode().equals(role_id)) {
 				mav = new ModelAndView("expert_area");
-				mav.addObject("userId", userInfo.getUserId());
-				mav.addObject("roleId", userInfo.getRoleId());
 				return mav;
 			} else if (RoleIdEnums.CN_EXPERT.getCode().equals(role_id)) {
 				mav = new ModelAndView("expert_area");
-				mav.addObject("userId", userInfo.getUserId());
-				mav.addObject("roleId", userInfo.getRoleId());
 				return mav;
 			}
 		} else if (SystemIdEnums.AUTHOR_SYS.getCode().equals(systemId)) {
