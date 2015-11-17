@@ -11,6 +11,11 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script>
+	$(function(){
+		
+	});
+</script>
 <body>
 	<div id="articleInfos">
 	<form action="../expert/toArticleAuditePage" method="POST">
@@ -53,9 +58,15 @@
 				<td>$!{respDto.articleId}</td>
 				<td>$!{respDto.title}</td>
 				<td>$!{respDto.contriTime}</td>
-				<td>$!{respDto.editorState}</td>
+				<td>$!{respDto.expertState}</td>
 				<td>$!{respDto.authorName}</td>
-				<td><a href="../expert/toAuditeDetailPage?articleId=${respDto.articleId}">审核</a></td>
+				#if($!{respDto.expertState}=='0003' || $!{respDto.expertState}=='0006' || $!{respDto.expertState}=='0007')
+					<td><!-- 查看稿件信息 --></td>
+				#else
+				<td>
+					<a href="../expert/toAuditeDetailPage?articleId=${respDto.articleId}">审核</a>
+				</td>
+				#end
 			</tr>
 			#end
 		</table>

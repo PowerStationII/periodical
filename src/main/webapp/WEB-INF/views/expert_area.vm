@@ -49,8 +49,9 @@
 		.mode_name{height:30px;background:#4DA20B;line-height:30px;text-align:center;color:#ffffff;border-radius:5px;}
   		.cLeft{height:200px;width:180px;margin-left:auto;margin-right:auto;margin-top:10px;border-radius:5px;}
 		.leftUp{height:60px;width:180px;margin-left:auto;margin-right:auto;border:1px solid #349000;border-radius:5px;}
-		.li1,.li2,.li3{height:30px;line-height:30px;width:160px;margin-left:auto;margin-right:auto;text-align:center;cursor:pointer;}
-		.li1{border-top:1px solid #349000;border-left:1px solid #349000;border-right:1px solid #349000;margin-top:10px;}
+		.li1,.li11,.li2,.li3{height:30px;line-height:30px;width:160px;margin-left:auto;margin-right:auto;text-align:center;cursor:pointer;}
+		.li1{border:1px solid #349000;margin-top:10px;}
+		.li11{border-left:1px solid #349000;border-bottom:1px solid #349000;border-right:1px solid #349000;}
 		.li2{border-top:1px solid #349000;border-left:1px solid #349000;border-right:1px solid #349000;}
 		.li3{border:1px solid #349000;}
 		a{text-decoration:none;color:#000000}
@@ -62,14 +63,10 @@
     </div>
     <div class="buttom">
 	    <div class="left">
-	       <div class="leftUp">
-	       		<div  class="work_area"></div>
-	       		<div  class="area_name">工作区首页</div>
-	       </div>
 	       <div class="cLeft">
 	       		<div  class="mode_name">稿件管理</div>
        			<div  class="li1"  id="gaojianchaxun">稿件审核</div>
-       			<div  class="li1"  id="gaofeichaxun">稿费查询</div>
+       			<div  class="li11"  id="gaofeichaxun">稿费查询</div>
 		        <div  class="mode_name"  style="margin-top:10px;">个人信息设置</div>
 	       		<div  class="li2"  style="margin-top:10px;" id="xiugaixinxi">修改个人信息</div>
 			    <div  class="li3" id="xiugaimima">修改密码</div>
@@ -77,10 +74,7 @@
 	   </div>
 	    <div class="right">
 			<div id="area"  style="margin-top:20px;">
-					<a style="margin-left:400px;font-size:20px;">专家工作区提示</a><br><br>
-					<a style="font-size:12px;">
-							哎呦
-					 </a>		
+					
 			</div>
 	    </div>
     </div>
