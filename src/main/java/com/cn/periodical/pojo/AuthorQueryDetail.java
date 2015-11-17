@@ -37,7 +37,29 @@ public class AuthorQueryDetail implements Serializable {
 	private String aAmount;
 	private String aTaxAmount;
 	
+	private String eRealAmount;
+	private String eAmount;
+	private String eTaxAmount;
 	
+	
+	public String geteRealAmount() {
+		return eRealAmount;
+	}
+	public void seteRealAmount(String eRealAmount) {
+		this.eRealAmount = eRealAmount;
+	}
+	public String geteAmount() {
+		return eAmount;
+	}
+	public void seteAmount(String eAmount) {
+		this.eAmount = eAmount;
+	}
+	public String geteTaxAmount() {
+		return eTaxAmount;
+	}
+	public void seteTaxAmount(String eTaxAmount) {
+		this.eTaxAmount = eTaxAmount;
+	}
 	public String getaRealAmount() {
 		return aRealAmount;
 	}

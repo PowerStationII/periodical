@@ -173,7 +173,9 @@
 		articleEnKeywords,
 		ai.article_cn_summary as articleCnSummary,ai.invest_section as
 		section,ai.classification_nums as cNums,
-		ai.article_en_summary as articleEnSummary
+		ai.article_en_summary as articleEnSummary,aci.expert_real_amount as
+		eRealAmount,aci.expert_amount as eAmount,aci.expert_tax_amount as
+		eTaxAmount
 		from account_info aci,article_info ai,article_info_extend aie
 		where aci.article_id=ai.article_id and ai.article_id=aie.article_id
 		and aie.user_id=#{userId,jdbcType=VARCHAR}

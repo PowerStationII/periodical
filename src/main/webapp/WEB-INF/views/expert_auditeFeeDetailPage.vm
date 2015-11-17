@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+</head>
+<script>
+	$(function(){
+		$('#back').click(function(){
+			history.go(-1);
+		})
+	})
+</script>
+<body>
+	<div>
+		<table style="border:1px solid;width:800px;" rules="all">
+			<tr>
+				<td><label>
+						<span class="right">稿件状态：</span>
+				</label></td>
+				<td>$!{obj.authorState}</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">中文标题：</span>
+				</label></td>
+				<td>$!{obj.articleCnTitle}</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">英文标题：</span>
+				</label></td>
+				<td>$!{obj.articleEnTile}</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">中国分类号：</span>
+				</label></td>
+				<td>$!{obj.cNums}</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">拟投栏目：</span>
+				</label></td>
+				<td>$!{obj.section}</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">中文关键词：</span>
+				</label></td>
+				<td>$!{obj.articleCnKeywords}</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">英文关键词：</span>
+				</label></td>
+				<td>$!{obj.articleEnKeywords}</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">中文摘要：</span>
+				</label></td>
+				<td>$!{obj.articleCnSummary}</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">英文摘要：</span>
+				</label></td>
+				<td>$!{obj.articleEnSummary}</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">专家信息</span>
+				</label></td>
+				<td>姓名:***  身份证号:***</td>
+			</tr>
+			<tr>
+				<td><label>
+						<span class="right">稿费</span>
+				</label></td>
+				<td>应发金额:$!{obj.eAmount} 扣税:$!{obj.eTaxAmount} 实发金额:$!{obj.eRealAmount} 汇款时间:yyyy-MM-dd</td>
+			</tr>
+		</table>
+	</div>
+	<div class="attr_con">
+		<input type="button"  value="返回"  id="back"/>
+	</div>
+</body>
+</html>

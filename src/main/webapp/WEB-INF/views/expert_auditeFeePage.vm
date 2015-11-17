@@ -13,14 +13,20 @@
 </head>
 <body>
 	<div id="articleInfos">
-		<table style="border: 1px solid black;" rules="all">
+		<table style="border: 1px solid black; font-size: 14px;" rules="all">
 			<tr>
-				<td>稿费查询稿费查询</td>
-				<td>稿件标题</td>
-				<td>投稿时间</td>
-				<td>稿件状态</td>
-				<td>备注信息</td>
+				<td style="width: 20%; text-align: center;">稿件编号</td>
+				<td style="width: 20%; text-align: center;">稿件标题</td>
+				<td style="width: 20%; text-align: center;">稿费金额</td>
 			</tr>
+			#foreach($dtos in ${list})
+			<tr>
+				<td>${dtos.articleId}</td>
+				<td><a
+					href="../expert/toArticleFeeDetailPage?articleId=${dtos.articleId}">${dtos.articleCnTitle}</a></td>
+				<td>${dtos.eRealAmount}</td>
+			</tr>
+			#end
 		</table>
 		<br>
 	</div>
