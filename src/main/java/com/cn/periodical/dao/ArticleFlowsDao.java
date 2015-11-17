@@ -30,6 +30,8 @@ public interface ArticleFlowsDao {
 	int updateByPrimaryKeySelective(ArticleFlows record);
 	
 	int updateByPrimaryKey(ArticleFlows record);
+	int updateFlows(ArticleFlows record);
+	int updateExpertFlows(ArticleFlows record);
 	
 	long selectMaxId(String articleId);
 	ArticleFlows queryFlowsDetail(ArticleFlowsQuery query);

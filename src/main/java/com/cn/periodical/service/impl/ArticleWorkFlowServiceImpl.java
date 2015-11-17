@@ -51,11 +51,13 @@ public class ArticleWorkFlowServiceImpl implements ArticleWorkFlowService {
 		articleFlows.setUserId(reqDto.getUserId());
 		articleFlows.setCreateTime(new Date());
 		articleFlows.setRefId(reqDto.getRefId());
-		articleFlows.setRoleId(reqDto.getRoleId());
+		articleFlows.setRoleId(reqDto.getRoleId());/**当前流水是谁产生的*/
 		articleFlows.setDealState(reqDto.getDealState());
 		articleFlows.setArticleId(reqDto.getArticleId());
 		articleFlows.setDealStartTime(reqDto.getDealStartTime());
 		articleFlows.setDealEndTime(reqDto.getDealEndTime());
+		/**专家操作三个按钮时,需要将流水的userId和refId互换,所以设立此字段,记录专家的userId,更新流水时作为其中一个唯一条件*/
+		articleFlows.setExtend1(reqDto.getExtend());
 		articleFlowsManager.saveArticleFlows(articleFlows);
 		
 		ArticleInfoQuery articleInfoQuery=new ArticleInfoQuery();
@@ -67,16 +69,21 @@ public class ArticleWorkFlowServiceImpl implements ArticleWorkFlowService {
 		
 		articleInfoManager.saveArticleInfo(articleInfo);
 		
+		/**
+		 * 谁 能看 稿件
+		 * 通常是三个人 作者 编辑 专家
+		 * 只需要稿件正向流水即可完成记录
+		 * */
 		ArticleInfoExtendQuery query = new ArticleInfoExtendQuery();
 		query.setArticleId(reqDto.getArticleId());
-		query.setRoleId(reqDto.getRoleId());
+		query.setRoleId(reqDto.getToRoleId());
 		query.setUserId(reqDto.getUserId());
 		List<ArticleInfoExtend> articleInfoExtends =articleInfoExtendManager.queryList(query);
 		if(articleInfoExtends!=null && articleInfoExtends.size()==0){
 			ArticleInfoExtend articleInfoExtend = new ArticleInfoExtend();
 			articleInfoExtend.setArticleId(reqDto.getArticleId());
 			articleInfoExtend.setUserId(reqDto.getUserId());
-			articleInfoExtend.setRoleId(reqDto.getRoleId());
+			articleInfoExtend.setRoleId(reqDto.getToRoleId());
 			articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);
 		}
 		return 0;

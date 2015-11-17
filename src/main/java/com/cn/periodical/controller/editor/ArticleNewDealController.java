@@ -132,18 +132,26 @@ public class ArticleNewDealController extends EditorController{
 		query.setUserId(getUserInfo(request).getUserId());
 		query.setRoleId(getUserInfo(request).getRoleId());
 		query.setId(articleInfo.getLatelyFlowsId());
-		ArticleFlows articleFlows = articleFlowsManager.queryFlowsDetail(query);//(articleInfo.getLatelyFlowsId());
+		ArticleFlows articleFlows = articleFlowsManager.queryFlowsDetail(query);
 		
 		articleInfo.setId(articleInfo.getId());
 		articleInfo.setAuthorState(ArticleStateEnums.ENLISTED_ARTICLE.getCode());
 		articleInfo.setEditorState(ArticleStateEnums.ENLISTED_ARTICLE.getCode());
 		articleInfoManager.saveArticleInfo(articleInfo);
 		
+		/**
+		 * 修改已登记流水的状态
+		 * 共四个条件
+		 * */
 		articleFlows.setId(articleFlows.getId());
+		articleFlows.setArticleId(articleId);
+		articleFlows.setUserId(getUserInfo(request).getUserId());
+		articleFlows.setRoleId(getUserInfo(request).getRoleId());
+		
 		articleFlows.setDealState(ArticleStateEnums.ENLISTED_ARTICLE.getCode());
 		articleFlows.setDealOpinion("");
 		articleFlows.setDealEndTime(new Date());
-		articleFlowsManager.saveArticleFlows(articleFlows);
+		articleFlowsManager.updateFlows(articleFlows);
 		
 		logger.info("稿件登记Action出参:[]");
 		return mav;
@@ -169,6 +177,7 @@ public class ArticleNewDealController extends EditorController{
 		reqDto.setArticleId(articleId);
 		reqDto.setRoleId(userInfo.getRoleId());
 		reqDto.setDealStartTime(new Date());
+		reqDto.setToRoleId(userInfo.getRoleId());
 		articleWorkFlowService.registArticleWorkFlow(reqDto);
 		/**
 		 * TODO:稿件下载

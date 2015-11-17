@@ -88,7 +88,7 @@ public class ArticleAuditeController extends ExpertController{
 	@RequestMapping(value="/toAuditeDetailPage")
 	public ModelAndView toArticleAuditeDetailPage(@RequestParam("articleId") String articleId) {
 		logger.info("审稿明细Page:["+articleId+"]");
-		ModelAndView mav = new ModelAndView("expertArticleAuditeDetailPage");
+		ModelAndView mav = new ModelAndView("expert_ArticleAuditDetailPage");
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
 		reqDto.setArticleId(articleId);
 		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**专家下载编辑的稿件*/
@@ -100,7 +100,7 @@ public class ArticleAuditeController extends ExpertController{
 	
 	/**
 	 * toExpertUpdateState
-	 * 稿件状态变更为待刊
+	 * 专家变更稿件状态为待刊
 	 */
 	@RequestMapping(value="/toPublishStateModify")
 	public ModelAndView toPublishStateModify(@RequestParam("articleId") String articleId,
@@ -108,43 +108,61 @@ public class ArticleAuditeController extends ExpertController{
 		logger.info("待刊稿件状态入参:artilceId:["+articleId+"]");
 		ModelAndView mav = new ModelAndView("redirect:/expert/toArticleAuditePage");
 		
-		/**
-		 * 变更稿件状态
-		 * */
 		ArticleInfoQuery query= new ArticleInfoQuery();
 		query.setArticleId(articleId);
 		List<ArticleInfo> articleInfos = articleInfoManager.queryList(query);
 		ArticleInfo	articleInfo = articleInfos.get(0);
+		
+		/**
+		 * 获取本次处理流水
+		 * */
+		ArticleFlowsQuery queryNowFlows = new ArticleFlowsQuery();
+		queryNowFlows.setArticleId(articleId);
+		queryNowFlows.setUserId(getUserInfo(request).getUserId());
+		queryNowFlows.setRoleId(getUserInfo(request).getRoleId());
+		queryNowFlows.setId(articleInfo.getLatelyFlowsId());
+		ArticleFlows articleNowFlows = articleFlowsManager.queryFlowsDetail(queryNowFlows);
+		logger.info("稿件本次流水变更前:["+JSON.toJSONString(articleNowFlows)+"]");
+		
+		/**
+		 * 查询稿件的上次处理流水
+		 * 为获取编辑id,让稿件原路回去
+		 * */
+		ArticleFlowsQuery queryLastFlows = new ArticleFlowsQuery();
+		queryLastFlows.setArticleId(articleId);
+		queryLastFlows.setUserId(getUserInfo(request).getUserId());
+		queryLastFlows.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());
+		queryLastFlows.setId(articleNowFlows.getPid());
+		ArticleFlows articleLastFlows = articleFlowsManager.queryFlowsDetail(queryLastFlows);
+		logger.info("稿件上一次流水:["+JSON.toJSONString(articleLastFlows)+"]");
+		
+		/**
+		 * 变更本次稿件处理流水
+		 * refId谁把articleId稿件送给articleLastFlows.getRefId()审
+		 * */
+		articleNowFlows.setId(articleNowFlows.getId());
+		articleNowFlows.setArticleId(articleId);
+		articleNowFlows.setRoleId(getUserInfo(request).getRoleId());
+		articleNowFlows.setExtend1(getUserInfo(request).getUserId());
+		
+		articleNowFlows.setRefId(getUserInfo(request).getUserId());
+		articleNowFlows.setUserId(articleLastFlows.getRefId());
+		articleNowFlows.setDealState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
+		articleNowFlows.setDealOpinion("");
+		articleNowFlows.setDealEndTime(new Date());
+		articleFlowsManager.updateExpertFlows(articleNowFlows);
+		logger.info("稿件本次流水变更后:["+JSON.toJSONString(articleNowFlows)+"]");
+		
+		/**
+		 * 变更稿件状态
+		 * */
 		articleInfo.setId(articleInfo.getId());
 		articleInfo.setAuthorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
-		articleInfo.setEditorState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
+		articleInfo.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());/**编辑需要确认待刊,确认返修,确认退稿,所以增加此状态.代表专家已处理完成*/
 		articleInfo.setExpertState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
 		articleInfoManager.saveArticleInfo(articleInfo);
-		
-		/**
-		 * 查询稿件的当前流水
-		 * */
-		ArticleFlowsQuery queryFlows = new ArticleFlowsQuery();
-		queryFlows.setArticleId(articleId);
-		queryFlows.setUserId(getUserInfo(request).getUserId());
-		queryFlows.setRoleId(getUserInfo(request).getRoleId());
-		queryFlows.setId(articleInfo.getLatelyFlowsId());
-		ArticleFlows articleFlows = articleFlowsManager.queryFlowsDetail(queryFlows);
-		
-		/**
-		 * 记录稿件开始处理流水
-		 * refId谁把articleId稿件送给dtoResult.getUserId审
-		 * */
-		AritcleWorkFlowReqDto reqDto = new AritcleWorkFlowReqDto();
-		reqDto.setUserId(articleFlows.getRefId());
-		reqDto.setArticleId(articleId);
-		reqDto.setRefId(getUserInfo(request).getUserId());
-		reqDto.setRoleId(articleFlows.getRoleId());
-		reqDto.setDealStartTime(new Date());
-		reqDto.setRefId(getUserInfo(request).getUserId());
-		articleWorkFlowService.registArticleWorkFlow(reqDto);
-		
-		logger.info("待刊稿件状态出参:[]");
+
+		logger.info("待刊稿件状态出参:["+JSON.toJSONString(articleInfo)+"]");
 		return mav;
 	}
 	
@@ -175,35 +193,51 @@ public class ArticleAuditeController extends ExpertController{
 	 */
 	@RequestMapping(value="/toExpertRepairedModify")
 	public ModelAndView toExpertRepairedModify(@RequestParam("articleId") String articleId,
-			@ModelAttribute AritcleWorkFlowReqDto aritcleWorkFlowReqDto) {
+			@ModelAttribute AritcleWorkFlowReqDto aritcleWorkFlowReqDto,HttpServletRequest request) {
 		logger.info("专家返修Action:["+articleId+"]&aritcleWorkFlowReqDto:["+JSON.toJSONString(aritcleWorkFlowReqDto)+"]");
 		ModelAndView mav = new ModelAndView("redirect:/expert/toArticleAuditePage");
 		
 		/**
-		 * 记录稿件处理流水
+		 * 变更稿件状态
 		 * */
+		ArticleInfoQuery query= new ArticleInfoQuery();
+		query.setArticleId(articleId);
+		List<ArticleInfo> articleInfos = articleInfoManager.queryList(query);
+		ArticleInfo	articleInfo = articleInfos.get(0);
+		articleInfo.setId(articleInfo.getId());
+		articleInfo.setAuthorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
+		articleInfo.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());/**编辑需要确认待刊,确认返修,确认退稿,所以增加此状态.代表专家已处理完成*/
+		articleInfo.setExpertState(ArticleStateEnums.REPAIR_ARTICLE.getCode());
+		articleInfoManager.saveArticleInfo(articleInfo);
 		
+		/**
+		 * 查询稿件的当前流水
+		 * */
+		ArticleFlowsQuery queryFlows = new ArticleFlowsQuery();
+		queryFlows.setArticleId(articleId);
+		queryFlows.setUserId(getUserInfo(request).getUserId());
+		queryFlows.setRoleId(getUserInfo(request).getRoleId());
+		queryFlows.setId(articleInfo.getLatelyFlowsId());
+		ArticleFlows articleFlows = articleFlowsManager.queryFlowsDetail(queryFlows);
 		
-//		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
-//		reqDto.setArticleId(articleId);
-//		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());
-//		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
-//		mav.addObject("respDto", articleQueryRespDto);
+		/**
+		 * 记录稿件开始处理流水
+		 * refId谁把articleId稿件送给dtoResult.getUserId审
+		 * */
+		AritcleWorkFlowReqDto reqDto = new AritcleWorkFlowReqDto();
+		reqDto.setUserId(articleFlows.getRefId());
+		reqDto.setArticleId(articleId);
+		reqDto.setRefId(getUserInfo(request).getUserId());
+		reqDto.setRoleId(articleFlows.getRoleId());
+		reqDto.setDealState(ArticleStateEnums.REPAIR_ARTICLE.getCode());
+		reqDto.setDealStartTime(new Date());
+		reqDto.setRefId(getUserInfo(request).getUserId());
+		reqDto.setDealOpinion(aritcleWorkFlowReqDto.getDealOpinion());
+		articleWorkFlowService.registArticleWorkFlow(reqDto);
 		
-		
-		
-		
-		
-		
-//		logger.info("专家返修Action:["+JSON.toJSONString(articleQueryRespDto)+"]");
+		logger.info("专家返修Action:["+JSON.toJSONString(articleInfo)+"]");
 		return mav;
 	}
-	
-
-	
-	
-	
-	
 	
 	/**
 	 * toExpertRefundPage
@@ -212,7 +246,7 @@ public class ArticleAuditeController extends ExpertController{
 	@RequestMapping(value="/toExpertRefundPage")
 	public ModelAndView toExpertRefundPage(@RequestParam("articleId") String articleId,
 			@ModelAttribute AritcleWorkFlowReqDto aritcleWorkFlowReqDto) {
-		logger.info("专家返修Page:["+articleId+"]");
+		logger.info("专家退稿Page:["+articleId+"]");
 		ModelAndView mav = new ModelAndView("expert_artilce_repairedPage");
 		
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
@@ -220,9 +254,96 @@ public class ArticleAuditeController extends ExpertController{
 		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
 		mav.addObject("respDto", articleQueryRespDto);
-		logger.info("专家返修Page:["+JSON.toJSONString(articleQueryRespDto)+"]");
+		logger.info("专家退稿Page:["+JSON.toJSONString(articleQueryRespDto)+"]");
 		return mav;
 	}
+	
+	
+	/**
+	 * toExpertRefundModify
+	 * 专家退稿
+	 */
+	@RequestMapping(value="/toExpertRefundModify")
+	public ModelAndView toExpertRefundModify(@RequestParam("articleId") String articleId,
+			@ModelAttribute AritcleWorkFlowReqDto aritcleWorkFlowReqDto,HttpServletRequest request) {
+		logger.info("专家退稿Action:["+articleId+"]&aritcleWorkFlowReqDto:["+JSON.toJSONString(aritcleWorkFlowReqDto)+"]");
+		ModelAndView mav = new ModelAndView("redirect:/expert/toArticleAuditePage");
+		
+		/**
+		 * 变更稿件状态
+		 * */
+		ArticleInfoQuery query= new ArticleInfoQuery();
+		query.setArticleId(articleId);
+		List<ArticleInfo> articleInfos = articleInfoManager.queryList(query);
+		ArticleInfo	articleInfo = articleInfos.get(0);
+		articleInfo.setId(articleInfo.getId());
+		articleInfo.setAuthorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
+		articleInfo.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());/**编辑需要确认待刊,确认返修,确认退稿,所以增加此状态.代表专家已处理完成*/
+		articleInfo.setExpertState(ArticleStateEnums.RETURNED_ARTICLE.getCode());
+		articleInfoManager.saveArticleInfo(articleInfo);
+		
+		/**
+		 * 查询稿件的当前流水
+		 * */
+		ArticleFlowsQuery queryFlows = new ArticleFlowsQuery();
+		queryFlows.setArticleId(articleId);
+		queryFlows.setUserId(getUserInfo(request).getUserId());
+		queryFlows.setRoleId(getUserInfo(request).getRoleId());
+		queryFlows.setId(articleInfo.getLatelyFlowsId());
+		ArticleFlows articleFlows = articleFlowsManager.queryFlowsDetail(queryFlows);
+		
+		/**
+		 * 记录稿件开始处理流水
+		 * refId谁把articleId稿件送给dtoResult.getUserId审
+		 * */
+		AritcleWorkFlowReqDto reqDto = new AritcleWorkFlowReqDto();
+		reqDto.setUserId(articleFlows.getRefId());
+		reqDto.setArticleId(articleId);
+		reqDto.setRefId(getUserInfo(request).getUserId());
+		reqDto.setRoleId(articleFlows.getRoleId());
+		reqDto.setDealState(ArticleStateEnums.RETURNED_ARTICLE.getCode());
+		reqDto.setDealStartTime(new Date());
+		reqDto.setRefId(getUserInfo(request).getUserId());
+		reqDto.setDealOpinion(aritcleWorkFlowReqDto.getDealOpinion());
+		articleWorkFlowService.registArticleWorkFlow(reqDto);
+		
+		logger.info("专家退稿Action:["+JSON.toJSONString(articleInfo)+"]");
+		return mav;
+	}
+	
+	/**
+	 * toDownLoadArticle
+	 * 下载触发记录稿件流水 
+	 * 停留在审核操作页面 End
+	 */
+	@RequestMapping(value="/toDownLoadArticle")
+	public ModelAndView toDownLoadArticle(@RequestParam("articleId") String articleId,
+			HttpServletRequest request) {
+		logger.info("专家审核页-下载稿件Action入参:artilceId:["+articleId+"]");
+		ModelAndView mav = new ModelAndView("redirect:/expert/toAuditeDetailPage");
+		mav.addObject("articleId", articleId);
+		/**
+		 * 记录稿件开始处理流水
+		 * */
+		AritcleWorkFlowReqDto reqDto = new AritcleWorkFlowReqDto();
+		UserInfo userInfo = getUserInfo(request);
+		reqDto.setUserId(userInfo.getUserId());
+		reqDto.setArticleId(articleId);
+		reqDto.setRoleId(userInfo.getRoleId());
+		reqDto.setDealStartTime(new Date());
+		reqDto.setExtend(userInfo.getUserId());
+		articleWorkFlowService.registArticleWorkFlow(reqDto);
+		/**
+		 * TODO:稿件下载
+		 * */
+		
+		
+		
+		
+		logger.info("专家审核页-下载稿件Action出参:[]");
+		return mav;
+	}
+	
 	
 	
 }

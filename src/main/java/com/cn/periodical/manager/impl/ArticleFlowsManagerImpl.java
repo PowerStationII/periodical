@@ -81,5 +81,15 @@ public class ArticleFlowsManagerImpl implements ArticleFlowsManager {
 		// TODO Auto-generated method stub
 		return articleFlowsDao.queryFlowsDetail(query);
 	}
+
+
+	public int updateFlows(ArticleFlows record) {
+		// TODO Auto-generated method stub
+		return articleFlowsDao.updateFlows(record);
+	}
+	public int updateExpertFlows(ArticleFlows record) {
+		// TODO Auto-generated method stub
+		return articleFlowsDao.updateExpertFlows(record);
+	}
 }
 

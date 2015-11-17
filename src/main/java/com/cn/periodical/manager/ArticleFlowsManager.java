@@ -26,4 +26,6 @@ public interface ArticleFlowsManager {
 	
 	long selectMaxId(String articleId);
 	ArticleFlows queryFlowsDetail(ArticleFlowsQuery query);
+	int updateFlows(ArticleFlows record);
+	int updateExpertFlows(ArticleFlows record);
 }

@@ -14,6 +14,22 @@ public class AritcleWorkFlowReqDto extends RequestDto {
 	private String dealOpinion;
 	private Date dealStartTime;
 	private Date dealEndTime;
+	private String toRoleId;
+	private String extend;
+	
+	
+	public String getExtend() {
+		return extend;
+	}
+	public void setExtend(String extend) {
+		this.extend = extend;
+	}
+	public String getToRoleId() {
+		return toRoleId;
+	}
+	public void setToRoleId(String toRoleId) {
+		this.toRoleId = toRoleId;
+	}
 	public String getUserId() {
 		return userId;
 	}

@@ -81,5 +81,17 @@ public class ArticleFlowsDaoImpl extends BaseDao implements ArticleFlowsDao {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectOne("ArticleFlowsMapper.queryFlowsDetail",query);
 	}
+
+
+	public int updateFlows(ArticleFlows record) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().update("ArticleFlowsMapper.updateFlows",record);
+	}
+
+
+	public int updateExpertFlows(ArticleFlows record) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().update("ArticleFlowsMapper.updateExpertFlows",record);
+	}
 	
 }

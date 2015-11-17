@@ -22,6 +22,10 @@ public enum ArticleStateEnums {
 	 * */
 	DEALING_ARTICLE("0004","DEALING_ARTICLE"),
 	/**
+	 * 处理完成
+	 * */
+	END_ARTICLE("0008","END_ARTICLE"),
+	/**
 	 * 作废(无论专家或者编辑操作退稿.稿件状态将变为作废!)
 	 * */
 	DELETE_ARTICLE("0005","DELETE_ARTICLE"),
