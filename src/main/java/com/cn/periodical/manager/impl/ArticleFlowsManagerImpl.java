@@ -16,6 +16,7 @@ import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.pojo.ArticleFlows;
 import com.cn.periodical.pojo.ArticleFlowsPage;
 import com.cn.periodical.pojo.ArticleFlowsQuery;
+import com.cn.periodical.pojo.Opinion;
 import com.cn.periodical.utils.Pagenation;
 
 @Component("articleFlowsManager")
@@ -90,6 +91,12 @@ public class ArticleFlowsManagerImpl implements ArticleFlowsManager {
 	public int updateExpertFlows(ArticleFlows record) {
 		// TODO Auto-generated method stub
 		return articleFlowsDao.updateExpertFlows(record);
+	}
+
+
+	public Opinion queryOpinion(String articleId) {
+		// TODO Auto-generated method stub
+		return articleFlowsDao.queryOpinion(articleId);
 	}
 }
 

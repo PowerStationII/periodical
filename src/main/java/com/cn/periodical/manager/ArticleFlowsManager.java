@@ -10,6 +10,7 @@ import java.util.List;
 import com.cn.periodical.pojo.ArticleFlows;
 import com.cn.periodical.pojo.ArticleFlowsPage;
 import com.cn.periodical.pojo.ArticleFlowsQuery;
+import com.cn.periodical.pojo.Opinion;
 
 public interface ArticleFlowsManager {
 	void saveArticleFlows(ArticleFlows articleFlows);
@@ -28,4 +29,6 @@ public interface ArticleFlowsManager {
 	ArticleFlows queryFlowsDetail(ArticleFlowsQuery query);
 	int updateFlows(ArticleFlows record);
 	int updateExpertFlows(ArticleFlows record);
+	
+	public Opinion queryOpinion(String articleId);
 }

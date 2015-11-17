@@ -27,7 +27,7 @@
 				<td><a href="../author/toArticleQueryDetailPage?artilceId=${articleQueryRespDto.articleId}">${articleQueryRespDto.articleCnTitle}</a></td>
 				<td>${articleQueryRespDto.createTime}</td>
 				<td>${articleQueryRespDto.authorState}</td>
-				<td><input type="button" value="查看审稿意见"></td>
+				<td><a href="../author/toOpinionQueryPage?articleId=${articleQueryRespDto.articleId}">查看审稿意见</a></td>
 			</tr>
 			#end
 		</table>

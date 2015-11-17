@@ -46,7 +46,8 @@
 					and deal_state = #{dealState,jdbcType=VARCHAR}
 				</if>
 				<if test="dealStartTime != null">
-					and deal_start_time = #{dealStartTime,jdbcType=TIMESTAMP}
+					and deal_start_time =
+					#{dealStartTime,jdbcType=TIMESTAMP}
 				</if>
 				<if test="dealEndTime != null">
 					and deal_end_time = #{dealEndTime,jdbcType=TIMESTAMP}
@@ -141,20 +142,29 @@
 		<set>
 			<trim suffixOverrides=",">
 				id = #{id,jdbcType=BIGINT},
-				pid = #{pid,jdbcType=BIGINT},
+				pid =
+				#{pid,jdbcType=BIGINT},
 				user_id = #{userId,jdbcType=VARCHAR},
-				ref_id = #{refId,jdbcType=VARCHAR},
-				article_id = #{articleId,jdbcType=VARCHAR},
+				ref_id =
+				#{refId,jdbcType=VARCHAR},
+				article_id =
+				#{articleId,jdbcType=VARCHAR},
 				role_id = #{roleId,jdbcType=VARCHAR},
 				deal_state = #{dealState,jdbcType=VARCHAR},
-				deal_start_time = #{dealStartTime,jdbcType=TIMESTAMP},
-				deal_end_time = #{dealEndTime,jdbcType=TIMESTAMP},
-				deal_opinion = #{dealOpinion,jdbcType=VARCHAR},
-				extend_1 = #{extend1,jdbcType=VARCHAR},
+				deal_start_time =
+				#{dealStartTime,jdbcType=TIMESTAMP},
+				deal_end_time =
+				#{dealEndTime,jdbcType=TIMESTAMP},
+				deal_opinion =
+				#{dealOpinion,jdbcType=VARCHAR},
+				extend_1 =
+				#{extend1,jdbcType=VARCHAR},
 				extend_2 = #{extend2,jdbcType=VARCHAR},
 				extend_3 = #{extend3,jdbcType=VARCHAR},
-				extend_4 = #{extend4,jdbcType=VARCHAR},
-				create_time = #{createTime,jdbcType=TIMESTAMP},
+				extend_4 =
+				#{extend4,jdbcType=VARCHAR},
+				create_time =
+				#{createTime,jdbcType=TIMESTAMP},
 			</trim>
 		</set>
 	</sql>
@@ -292,7 +302,8 @@
 		where ID = #{id,jdbcType=DECIMAL}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from article_flows
+		delete from
+		article_flows
 		where ID = #{id,jdbcType=DECIMAL}
 	</delete>
 	<delete id="deleteByExample" parameterType="ArticleFlowsQuery">
@@ -370,18 +381,32 @@
 		update article_flows
 		<include refid="Base_Set_Clause" />
 		where ID = #{id,jdbcType=DECIMAL}
-		and user_id=#{userId,jdbcType=VARCHAR}
-		and article_id=#{articleId,jdbcType=VARCHAR}
-		and role_id=#{roleId,jdbcType=VARCHAR}
+		and
+		user_id=#{userId,jdbcType=VARCHAR}
+		and
+		article_id=#{articleId,jdbcType=VARCHAR}
+		and
+		role_id=#{roleId,jdbcType=VARCHAR}
 	</update>
-	
+
 	<update id="updateExpertFlows" parameterType="ArticleFlows">
 		update article_flows
 		<include refid="Base_Set_Clause" />
 		where ID = #{id,jdbcType=DECIMAL}
 		and ref_id is NULL
-		and extend_1 = #{refId,jdbcType=VARCHAR}
+		and extend_1 =
+		#{refId,jdbcType=VARCHAR}
 		and article_id=#{articleId,jdbcType=VARCHAR}
 		and role_id=#{roleId,jdbcType=VARCHAR}
 	</update>
+
+	<resultMap id="OpinionMap" type="Opinion">
+		<result column="article_id" jdbcType="VARCHAR" property="articleId" />
+		<result column="opinion" jdbcType="VARCHAR" property="opinion" />
+	</resultMap>
+	<select id="selectOpinion" parameterType="String" resultMap="OpinionMap">
+		select article_id,extend_2,group_concat(deal_opinion) as opinion from
+		article_flows where article_id=#{articleId,jdbcType=VARCHAR} and extend_2='Y'
+		group by article_id,extend_2;
+	</select>
 </mapper>

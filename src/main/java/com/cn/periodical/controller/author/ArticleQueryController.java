@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.pojo.ArticleInfo;
+import com.cn.periodical.pojo.Opinion;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.response.AuthorArticleQueryRespDto;
 import com.cn.periodical.service.AuthorArticleQueryService;
@@ -29,6 +31,8 @@ public class ArticleQueryController extends AuthorController{
 	@Autowired
 	AuthorArticleQueryService articleQueryService;
 	
+	@Autowired
+	ArticleFlowsManager articleFlowsManager;
 	
 	/**
 	 * toArticleQueryPage
@@ -62,6 +66,22 @@ public class ArticleQueryController extends AuthorController{
 		ArticleInfo articleInfo = articleQueryService.queryArticleDetailInfo(artilceId);
 		mav.addObject("articleInfo", articleInfo);
 		logger.info("稿件明细出参:["+JSON.toJSONString(articleInfo)+"]");
+		return mav;
+	}
+	
+	
+	/**
+	 * toOpinionQueryPage
+	 * 查询审核意见
+	 */
+	@RequestMapping(value="/toOpinionQueryPage")
+	public ModelAndView toOpinionQueryPage(@RequestParam("articleId") String articleId,HttpServletRequest request,
+			HttpServletResponse response) {
+		UserInfo userInfo = getUserInfo(request);
+		logger.info("查询审稿意见Page in:["+JSON.toJSONString(userInfo)+"]");
+		ModelAndView mav = new ModelAndView("redirect:../author/toArticleQueryPage");
+		Opinion opinion = articleFlowsManager.queryOpinion(articleId);
+		logger.info("查询审稿意见Page out:["+JSON.toJSONString(opinion)+"]");
 		return mav;
 	}
 }

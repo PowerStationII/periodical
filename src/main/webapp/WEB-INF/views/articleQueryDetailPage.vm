@@ -104,7 +104,7 @@
 				<td><label>
 						<span class="right">专家审稿：</span>
 				</label></td>
-				<td>审稿专家:XXXX 送审时间:yyyyMMdd <input type="button" value="查看审稿意见"></td>
+				<td>审稿专家:XXXX 送审时间:yyyyMMdd <a href="../author/toOpinionQueryPage?articleId=${articleInfo.articleId}">查看审稿意见</a></td>
 			</tr>
 			
 		</table>

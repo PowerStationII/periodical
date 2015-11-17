@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.cn.periodical.dao.ArticleFlowsDao;
 import com.cn.periodical.pojo.ArticleFlows;
 import com.cn.periodical.pojo.ArticleFlowsQuery;
+import com.cn.periodical.pojo.Opinion;
 import com.cn.periodical.dao.BaseDao;
 
 @Repository("articleFlowsDao")
@@ -92,6 +93,12 @@ public class ArticleFlowsDaoImpl extends BaseDao implements ArticleFlowsDao {
 	public int updateExpertFlows(ArticleFlows record) {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().update("ArticleFlowsMapper.updateExpertFlows",record);
+	}
+
+
+	public Opinion queryOpinion(String articleId) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectOne("ArticleFlowsMapper.selectOpinion", articleId);
 	}
 	
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.cn.periodical.pojo.ArticleFlows;
 import com.cn.periodical.pojo.ArticleFlowsQuery;
+import com.cn.periodical.pojo.Opinion;
 
 public interface ArticleFlowsDao {
 	int countByExample(ArticleFlowsQuery example);
@@ -35,4 +36,7 @@ public interface ArticleFlowsDao {
 	
 	long selectMaxId(String articleId);
 	ArticleFlows queryFlowsDetail(ArticleFlowsQuery query);
+	Opinion queryOpinion(String articleId);
+	
+	
 }
