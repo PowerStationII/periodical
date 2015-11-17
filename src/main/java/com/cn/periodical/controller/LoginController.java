@@ -93,7 +93,6 @@ public class LoginController {
 			if (RoleIdEnums.ARTICLE_EDITOR.getCode().equals(roleId)) {
 				logger.info("编辑...");
 				mav = new ModelAndView("editor_area");
-//				request.getSession().setAttribute("userInfo", userInfo);
 				List<EditorAreaInfos> list = loginService.queryArticleInfos("", "");
 				mav.addObject("list", list);
 				return mav;

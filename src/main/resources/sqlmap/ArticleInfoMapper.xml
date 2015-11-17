@@ -2,678 +2,696 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ArticleInfoMapper">
 	<resultMap id="BaseResultMap" type="ArticleInfo">
-	  <id column="ID" jdbcType="DECIMAL" property="id" />
-	  <result column="article_name" jdbcType="VARCHAR" property="articleName" />
-	  <result column="article_id" jdbcType="VARCHAR" property="articleId" />
-	  <result column="article_type" jdbcType="VARCHAR" property="articleType" />
-	  <result column="article_cn_title" jdbcType="VARCHAR" property="articleCnTitle" />
-	  <result column="article_en_tile" jdbcType="VARCHAR" property="articleEnTile" />
-	  <result column="article_cn_summary" jdbcType="VARCHAR" property="articleCnSummary" />
-	  <result column="article_en_summary" jdbcType="VARCHAR" property="articleEnSummary" />
-	  <result column="artilce" jdbcType="LONGVARBINARY" property="artilce" />
-	  <result column="article_cn_keywords" jdbcType="VARCHAR" property="articleCnKeywords" />
-	  <result column="article_en_keywords" jdbcType="VARCHAR" property="articleEnKeywords" />
-	  <result column="isfund" jdbcType="VARCHAR" property="isfund" />
-	  <result column="invest_section" jdbcType="VARCHAR" property="investSection" />
-	  <result column="classification_nums" jdbcType="VARCHAR" property="classificationNums" />
-	  <result column="document_code" jdbcType="VARCHAR" property="documentCode" />
-	  <result column="remark" jdbcType="VARCHAR" property="remark" />
-	  <result column="inovation_point" jdbcType="VARCHAR" property="inovationPoint" />
-	  <result column="reference_doc" jdbcType="VARCHAR" property="referenceDoc" />
-	  <result column="receive_article_time" jdbcType="TIMESTAMP" property="receiveArticleTime" />
-	  <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
-	  <result column="total_pics" jdbcType="INTEGER" property="totalPics" />
-	  <result column="total_tabs" jdbcType="INTEGER" property="totalTabs" />
-	  <result column="total_pages" jdbcType="INTEGER" property="totalPages" />
-	  <result column="fund_title" jdbcType="VARCHAR" property="fundTitle" />
-	  <result column="editor_state" jdbcType="VARCHAR" property="editorState" />
-	  <result column="expert_state" jdbcType="VARCHAR" property="expertState" />
-	  <result column="author_state" jdbcType="VARCHAR" property="authorState" />
-	  <result column="isAvaliable" jdbcType="VARCHAR" property="isAvaliable" />
-	  <result column="lately_flows_id" jdbcType="BIGINT" property="latelyFlowsId" />
-	  <result column="extends_2" jdbcType="VARCHAR" property="extends2" />
-	  <result column="extends_3" jdbcType="VARCHAR" property="extends3" />
-	  <result column="extends_4" jdbcType="VARCHAR" property="extends4" />
-	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  <resultMap id="EditorResultMap" type="EditorAreaInfos">
-	  <result column="status" jdbcType="VARCHAR" property="status" />
-	  <result column="total" jdbcType="VARCHAR" property="total" />
-  </resultMap>
-  <sql id="Page_Query_Begin">
-    select * from(select t.*,rownum rn from(
-  </sql>
-  <sql id="Page_Query_End">
-  	) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
-  </sql>
-  <sql id="Example_Where_Clause">
-    <where>
-      <trim prefix="(" prefixOverrides="and" suffix=")">
-      <if test="articleName != null" >
-	      and article_name = #{articleName,jdbcType=VARCHAR}
-	    </if>
-      <if test="articleId != null" >
-	      and article_id = #{articleId,jdbcType=VARCHAR}
-	    </if>
-      <if test="articleType != null" >
-	      and article_type = #{articleType,jdbcType=VARCHAR}
-	    </if>
-      <if test="articleCnTitle != null" >
-	      and article_cn_title = #{articleCnTitle,jdbcType=VARCHAR}
-	    </if>
-      <if test="articleEnTile != null" >
-	      and article_en_tile = #{articleEnTile,jdbcType=VARCHAR}
-	    </if>
-      <if test="articleCnSummary != null" >
-	      and article_cn_summary = #{articleCnSummary,jdbcType=VARCHAR}
-	    </if>
-      <if test="articleEnSummary != null" >
-	      and article_en_summary = #{articleEnSummary,jdbcType=VARCHAR}
-	    </if>
-      <if test="artilce != null" >
-	      and artilce = #{artilce,jdbcType=LONGVARBINARY}
-	    </if>
-      <if test="articleCnKeywords != null" >
-	      and article_cn_keywords = #{articleCnKeywords,jdbcType=VARCHAR}
-	    </if>
-      <if test="articleEnKeywords != null" >
-	      and article_en_keywords = #{articleEnKeywords,jdbcType=VARCHAR}
-	    </if>
-      <if test="isfund != null" >
-	      and isfund = #{isfund,jdbcType=VARCHAR}
-	    </if>
-      <if test="investSection != null" >
-	      and invest_section = #{investSection,jdbcType=VARCHAR}
-	    </if>
-      <if test="classificationNums != null" >
-	      and classification_nums = #{classificationNums,jdbcType=VARCHAR}
-	    </if>
-      <if test="documentCode != null" >
-	      and document_code = #{documentCode,jdbcType=VARCHAR}
-	    </if>
-      <if test="remark != null" >
-	      and remark = #{remark,jdbcType=VARCHAR}
-	    </if>
-      <if test="inovationPoint != null" >
-	      and inovation_point = #{inovationPoint,jdbcType=VARCHAR}
-	    </if>
-      <if test="referenceDoc != null" >
-	      and reference_doc = #{referenceDoc,jdbcType=VARCHAR}
-	    </if>
-      <if test="receiveArticleTime != null" >
-	      and receive_article_time = #{receiveArticleTime,jdbcType=TIMESTAMP}
-	    </if>
-      <if test="publishTime != null" >
-	      and publish_time = #{publishTime,jdbcType=TIMESTAMP}
-	    </if>
-      <if test="totalPics != null" >
-	      and total_pics = #{totalPics,jdbcType=INTEGER}
-	    </if>
-      <if test="totalTabs != null" >
-	      and total_tabs = #{totalTabs,jdbcType=INTEGER}
-	    </if>
-      <if test="totalPages != null" >
-	      and total_pages = #{totalPages,jdbcType=INTEGER}
-	    </if>
-      <if test="fundTitle != null" >
-	      and fund_title = #{fundTitle,jdbcType=VARCHAR}
-	    </if>
-      <if test="editorState != null" >
-	      and editor_state = #{editorState,jdbcType=VARCHAR}
-	    </if>
-      <if test="expertState != null" >
-	      and expert_state = #{expertState,jdbcType=VARCHAR}
-	    </if>
-      <if test="authorState != null" >
-	      and author_state = #{authorState,jdbcType=VARCHAR}
-	    </if>
-      <if test="isAvaliable != null" >
-	      and isAvaliable = #{isAvaliable,jdbcType=VARCHAR}
-	    </if>
-      <if test="latelyFlowsId != null" >
-	      and lately_flows_id = #{latelyFlowsId,jdbcType=BIGINT}
-	    </if>
-      <if test="extends2 != null" >
-	      and extends_2 = #{extends2,jdbcType=VARCHAR}
-	    </if>
-      <if test="extends3 != null" >
-	      and extends_3 = #{extends3,jdbcType=VARCHAR}
-	    </if>
-      <if test="extends4 != null" >
-	      and extends_4 = #{extends4,jdbcType=VARCHAR}
-	    </if>
-      <if test="createTime != null" >
-	      and create_time = #{createTime,jdbcType=TIMESTAMP}
-	    </if>
-      <if test="updateTime != null" >
-	      and update_time = #{updateTime,jdbcType=TIMESTAMP}
-	    </if>
-	  </trim>
-    </where>
-  </sql>
-  <sql id="Example_Set_Clause">
-    <set>
-      <trim suffixOverrides=",">
-      <if test="articleName != null">
-        article_name = #{articleName,jdbcType=VARCHAR},
-      </if>
-      <if test="articleId != null">
-        article_id = #{articleId,jdbcType=VARCHAR},
-      </if>
-      <if test="articleType != null">
-        article_type = #{articleType,jdbcType=VARCHAR},
-      </if>
-      <if test="articleCnTitle != null">
-        article_cn_title = #{articleCnTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="articleEnTile != null">
-        article_en_tile = #{articleEnTile,jdbcType=VARCHAR},
-      </if>
-      <if test="articleCnSummary != null">
-        article_cn_summary = #{articleCnSummary,jdbcType=VARCHAR},
-      </if>
-      <if test="articleEnSummary != null">
-        article_en_summary = #{articleEnSummary,jdbcType=VARCHAR},
-      </if>
-      <if test="artilce != null">
-        artilce = #{artilce,jdbcType=LONGVARBINARY},
-      </if>
-      <if test="articleCnKeywords != null">
-        article_cn_keywords = #{articleCnKeywords,jdbcType=VARCHAR},
-      </if>
-      <if test="articleEnKeywords != null">
-        article_en_keywords = #{articleEnKeywords,jdbcType=VARCHAR},
-      </if>
-      <if test="isfund != null">
-        isfund = #{isfund,jdbcType=VARCHAR},
-      </if>
-      <if test="investSection != null">
-        invest_section = #{investSection,jdbcType=VARCHAR},
-      </if>
-      <if test="classificationNums != null">
-        classification_nums = #{classificationNums,jdbcType=VARCHAR},
-      </if>
-      <if test="documentCode != null">
-        document_code = #{documentCode,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="inovationPoint != null">
-        inovation_point = #{inovationPoint,jdbcType=VARCHAR},
-      </if>
-      <if test="referenceDoc != null">
-        reference_doc = #{referenceDoc,jdbcType=VARCHAR},
-      </if>
-      <if test="receiveArticleTime != null">
-        receive_article_time = #{receiveArticleTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="publishTime != null">
-        publish_time = #{publishTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="totalPics != null">
-        total_pics = #{totalPics,jdbcType=INTEGER},
-      </if>
-      <if test="totalTabs != null">
-        total_tabs = #{totalTabs,jdbcType=INTEGER},
-      </if>
-      <if test="totalPages != null">
-        total_pages = #{totalPages,jdbcType=INTEGER},
-      </if>
-      <if test="fundTitle != null">
-        fund_title = #{fundTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="editorState != null">
-        editor_state = #{editorState,jdbcType=VARCHAR},
-      </if>
-      <if test="expertState != null">
-        expert_state = #{expertState,jdbcType=VARCHAR},
-      </if>
-      <if test="authorState != null">
-        author_state = #{authorState,jdbcType=VARCHAR},
-      </if>
-      <if test="isAvaliable != null">
-        isAvaliable = #{isAvaliable,jdbcType=VARCHAR},
-      </if>
-      <if test="latelyFlowsId != null">
-        lately_flows_id = #{latelyFlowsId,jdbcType=BIGINT},
-      </if>
-      <if test="extends2 != null">
-        extends_2 = #{extends2,jdbcType=VARCHAR},
-      </if>
-      <if test="extends3 != null">
-        extends_3 = #{extends3,jdbcType=VARCHAR},
-      </if>
-      <if test="extends4 != null">
-        extends_4 = #{extends4,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      </trim>
-    </set>
-  </sql>
-  <sql id="Base_Column_List">
-    id,
-    article_name,
-    article_id,
-    article_type,
-    article_cn_title,
-    article_en_tile,
-    article_cn_summary,
-    article_en_summary,
-    artilce,
-    article_cn_keywords,
-    article_en_keywords,
-    isfund,
-    invest_section,
-    classification_nums,
-    document_code,
-    remark,
-    inovation_point,
-    reference_doc,
-    receive_article_time,
-    publish_time,
-    total_pics,
-    total_tabs,
-    total_pages,
-    fund_title,
-    editor_state,
-    expert_state,
-    author_state,
-    isAvaliable,
-    lately_flows_id,
-    extends_2,
-    extends_3,
-    extends_4,
-    create_time,
-    update_time,
-  </sql>
-  <sql id="Base_Set_Clause">
-    <set>
-      <trim suffixOverrides=",">
-        article_name = #{articleName,jdbcType=VARCHAR},
-        article_id = #{articleId,jdbcType=VARCHAR},
-        article_type = #{articleType,jdbcType=VARCHAR},
-        article_cn_title = #{articleCnTitle,jdbcType=VARCHAR},
-        article_en_tile = #{articleEnTile,jdbcType=VARCHAR},
-        article_cn_summary = #{articleCnSummary,jdbcType=VARCHAR},
-        article_en_summary = #{articleEnSummary,jdbcType=VARCHAR},
-        artilce = #{artilce,jdbcType=LONGVARBINARY},
-        article_cn_keywords = #{articleCnKeywords,jdbcType=VARCHAR},
-        article_en_keywords = #{articleEnKeywords,jdbcType=VARCHAR},
-        isfund = #{isfund,jdbcType=VARCHAR},
-        invest_section = #{investSection,jdbcType=VARCHAR},
-        classification_nums = #{classificationNums,jdbcType=VARCHAR},
-        document_code = #{documentCode,jdbcType=VARCHAR},
-        remark = #{remark,jdbcType=VARCHAR},
-        inovation_point = #{inovationPoint,jdbcType=VARCHAR},
-        reference_doc = #{referenceDoc,jdbcType=VARCHAR},
-        receive_article_time = #{receiveArticleTime,jdbcType=TIMESTAMP},
-        publish_time = #{publishTime,jdbcType=TIMESTAMP},
-        total_pics = #{totalPics,jdbcType=INTEGER},
-        total_tabs = #{totalTabs,jdbcType=INTEGER},
-        total_pages = #{totalPages,jdbcType=INTEGER},
-        fund_title = #{fundTitle,jdbcType=VARCHAR},
-        editor_state = #{editorState,jdbcType=VARCHAR},
-        expert_state = #{expertState,jdbcType=VARCHAR},
-        author_state = #{authorState,jdbcType=VARCHAR},
-        isAvaliable = #{isAvaliable,jdbcType=VARCHAR},
-        lately_flows_id = #{latelyFlowsId,jdbcType=BIGINT},
-        extends_2 = #{extends2,jdbcType=VARCHAR},
-        extends_3 = #{extends3,jdbcType=VARCHAR},
-        extends_4 = #{extends4,jdbcType=VARCHAR},
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </trim>
-    </set>
-  </sql>
-  <sql id="Selective_Column_List">
-    <!-- ID, -->
-    <if test="articleName != null">
-      article_name,
-    </if>
-    <if test="articleId != null">
-      article_id,
-    </if>
-    <if test="articleType != null">
-      article_type,
-    </if>
-    <if test="articleCnTitle != null">
-      article_cn_title,
-    </if>
-    <if test="articleEnTile != null">
-      article_en_tile,
-    </if>
-    <if test="articleCnSummary != null">
-      article_cn_summary,
-    </if>
-    <if test="articleEnSummary != null">
-      article_en_summary,
-    </if>
-    <if test="artilce != null">
-      artilce,
-    </if>
-    <if test="articleCnKeywords != null">
-      article_cn_keywords,
-    </if>
-    <if test="articleEnKeywords != null">
-      article_en_keywords,
-    </if>
-    <if test="isfund != null">
-      isfund,
-    </if>
-    <if test="investSection != null">
-      invest_section,
-    </if>
-    <if test="classificationNums != null">
-      classification_nums,
-    </if>
-    <if test="documentCode != null">
-      document_code,
-    </if>
-    <if test="remark != null">
-      remark,
-    </if>
-    <if test="inovationPoint != null">
-      inovation_point,
-    </if>
-    <if test="referenceDoc != null">
-      reference_doc,
-    </if>
-    <if test="receiveArticleTime != null">
-      receive_article_time,
-    </if>
-    <if test="publishTime != null">
-      publish_time,
-    </if>
-    <if test="totalPics != null">
-      total_pics,
-    </if>
-    <if test="totalTabs != null">
-      total_tabs,
-    </if>
-    <if test="totalPages != null">
-      total_pages,
-    </if>
-    <if test="fundTitle != null">
-      fund_title,
-    </if>
-    <if test="editorState != null">
-      editor_state,
-    </if>
-    <if test="expertState != null">
-      expert_state,
-    </if>
-    <if test="authorState != null">
-      author_state,
-    </if>
-    <if test="isAvaliable != null">
-      isAvaliable,
-    </if>
-    <if test="latelyFlowsId != null">
-      lately_flows_id,
-    </if>
-    <if test="extends2 != null">
-      extends_2,
-    </if>
-    <if test="extends3 != null">
-      extends_3,
-    </if>
-    <if test="extends4 != null">
-      extends_4,
-    </if>
-    <if test="createTime != null">
-      create_time,
-    </if>
-    <if test="updateTime != null">
-      update_time,
-    </if>
-  </sql>
-	<sql id="Base_Value_List">
-    #{id,jdbcType=BIGINT},
-    #{articleName,jdbcType=VARCHAR},
-    #{articleId,jdbcType=VARCHAR},
-    #{articleType,jdbcType=VARCHAR},
-    #{articleCnTitle,jdbcType=VARCHAR},
-    #{articleEnTile,jdbcType=VARCHAR},
-    #{articleCnSummary,jdbcType=VARCHAR},
-    #{articleEnSummary,jdbcType=VARCHAR},
-    #{artilce,jdbcType=LONGVARBINARY},
-    #{articleCnKeywords,jdbcType=VARCHAR},
-    #{articleEnKeywords,jdbcType=VARCHAR},
-    #{isfund,jdbcType=VARCHAR},
-    #{investSection,jdbcType=VARCHAR},
-    #{classificationNums,jdbcType=VARCHAR},
-    #{documentCode,jdbcType=VARCHAR},
-    #{remark,jdbcType=VARCHAR},
-    #{inovationPoint,jdbcType=VARCHAR},
-    #{referenceDoc,jdbcType=VARCHAR},
-    #{receiveArticleTime,jdbcType=TIMESTAMP},
-    #{publishTime,jdbcType=TIMESTAMP},
-    #{totalPics,jdbcType=INTEGER},
-    #{totalTabs,jdbcType=INTEGER},
-    #{totalPages,jdbcType=INTEGER},
-    #{fundTitle,jdbcType=VARCHAR},
-    #{editorState,jdbcType=VARCHAR},
-    #{expertState,jdbcType=VARCHAR},
-    #{authorState,jdbcType=VARCHAR},
-    #{isAvaliable,jdbcType=VARCHAR},
-    #{latelyFlowsId,jdbcType=BIGINT},
-    #{extends2,jdbcType=VARCHAR},
-    #{extends3,jdbcType=VARCHAR},
-    #{extends4,jdbcType=VARCHAR},
-    #{createTime,jdbcType=TIMESTAMP},
-    #{updateTime,jdbcType=TIMESTAMP},
+		<id column="ID" jdbcType="DECIMAL" property="id" />
+		<result column="article_name" jdbcType="VARCHAR" property="articleName" />
+		<result column="article_id" jdbcType="VARCHAR" property="articleId" />
+		<result column="article_type" jdbcType="VARCHAR" property="articleType" />
+		<result column="article_cn_title" jdbcType="VARCHAR" property="articleCnTitle" />
+		<result column="article_en_tile" jdbcType="VARCHAR" property="articleEnTile" />
+		<result column="article_cn_summary" jdbcType="VARCHAR"
+			property="articleCnSummary" />
+		<result column="article_en_summary" jdbcType="VARCHAR"
+			property="articleEnSummary" />
+		<result column="artilce" jdbcType="LONGVARBINARY" property="artilce" />
+		<result column="article_cn_keywords" jdbcType="VARCHAR"
+			property="articleCnKeywords" />
+		<result column="article_en_keywords" jdbcType="VARCHAR"
+			property="articleEnKeywords" />
+		<result column="isfund" jdbcType="VARCHAR" property="isfund" />
+		<result column="invest_section" jdbcType="VARCHAR" property="investSection" />
+		<result column="classification_nums" jdbcType="VARCHAR"
+			property="classificationNums" />
+		<result column="document_code" jdbcType="VARCHAR" property="documentCode" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="inovation_point" jdbcType="VARCHAR" property="inovationPoint" />
+		<result column="reference_doc" jdbcType="VARCHAR" property="referenceDoc" />
+		<result column="receive_article_time" jdbcType="TIMESTAMP"
+			property="receiveArticleTime" />
+		<result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+		<result column="total_pics" jdbcType="INTEGER" property="totalPics" />
+		<result column="total_tabs" jdbcType="INTEGER" property="totalTabs" />
+		<result column="total_pages" jdbcType="INTEGER" property="totalPages" />
+		<result column="fund_title" jdbcType="VARCHAR" property="fundTitle" />
+		<result column="editor_state" jdbcType="VARCHAR" property="editorState" />
+		<result column="expert_state" jdbcType="VARCHAR" property="expertState" />
+		<result column="author_state" jdbcType="VARCHAR" property="authorState" />
+		<result column="isAvaliable" jdbcType="VARCHAR" property="isAvaliable" />
+		<result column="lately_flows_id" jdbcType="BIGINT" property="latelyFlowsId" />
+		<result column="extends_2" jdbcType="VARCHAR" property="extends2" />
+		<result column="extends_3" jdbcType="VARCHAR" property="extends3" />
+		<result column="extends_4" jdbcType="VARCHAR" property="extends4" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+	<sql id="Page_Query_Begin">
+		select * from(select t.*,rownum rn from(
 	</sql>
-  <sql id="Selective_Value_List">
-    <!-- SEQ_article_info.nextval, -->
-    <if test="articleName != null">
-      #{articleName,jdbcType=VARCHAR},
-    </if>
-    <if test="articleId != null">
-      #{articleId,jdbcType=VARCHAR},
-    </if>
-    <if test="articleType != null">
-      #{articleType,jdbcType=VARCHAR},
-    </if>
-    <if test="articleCnTitle != null">
-      #{articleCnTitle,jdbcType=VARCHAR},
-    </if>
-    <if test="articleEnTile != null">
-      #{articleEnTile,jdbcType=VARCHAR},
-    </if>
-    <if test="articleCnSummary != null">
-      #{articleCnSummary,jdbcType=VARCHAR},
-    </if>
-    <if test="articleEnSummary != null">
-      #{articleEnSummary,jdbcType=VARCHAR},
-    </if>
-    <if test="artilce != null">
-      #{artilce,jdbcType=LONGVARBINARY},
-    </if>
-    <if test="articleCnKeywords != null">
-      #{articleCnKeywords,jdbcType=VARCHAR},
-    </if>
-    <if test="articleEnKeywords != null">
-      #{articleEnKeywords,jdbcType=VARCHAR},
-    </if>
-    <if test="isfund != null">
-      #{isfund,jdbcType=VARCHAR},
-    </if>
-    <if test="investSection != null">
-      #{investSection,jdbcType=VARCHAR},
-    </if>
-    <if test="classificationNums != null">
-      #{classificationNums,jdbcType=VARCHAR},
-    </if>
-    <if test="documentCode != null">
-      #{documentCode,jdbcType=VARCHAR},
-    </if>
-    <if test="remark != null">
-      #{remark,jdbcType=VARCHAR},
-    </if>
-    <if test="inovationPoint != null">
-      #{inovationPoint,jdbcType=VARCHAR},
-    </if>
-    <if test="referenceDoc != null">
-      #{referenceDoc,jdbcType=VARCHAR},
-    </if>
-    <if test="receiveArticleTime != null">
-      #{receiveArticleTime,jdbcType=TIMESTAMP},
-    </if>
-    <if test="publishTime != null">
-      #{publishTime,jdbcType=TIMESTAMP},
-    </if>
-    <if test="totalPics != null">
-      #{totalPics,jdbcType=INTEGER},
-    </if>
-    <if test="totalTabs != null">
-      #{totalTabs,jdbcType=INTEGER},
-    </if>
-    <if test="totalPages != null">
-      #{totalPages,jdbcType=INTEGER},
-    </if>
-    <if test="fundTitle != null">
-      #{fundTitle,jdbcType=VARCHAR},
-    </if>
-    <if test="editorState != null">
-      #{editorState,jdbcType=VARCHAR},
-    </if>
-    <if test="expertState != null">
-      #{expertState,jdbcType=VARCHAR},
-    </if>
-    <if test="authorState != null">
-      #{authorState,jdbcType=VARCHAR},
-    </if>
-    <if test="isAvaliable != null">
-      #{isAvaliable,jdbcType=VARCHAR},
-    </if>
-    <if test="latelyFlowsId != null">
-      #{latelyFlowsId,jdbcType=BIGINT},
-    </if>
-    <if test="extends2 != null">
-      #{extends2,jdbcType=VARCHAR},
-    </if>
-    <if test="extends3 != null">
-      #{extends3,jdbcType=VARCHAR},
-    </if>
-    <if test="extends4 != null">
-      #{extends4,jdbcType=VARCHAR},
-    </if>
-    <if test="createTime != null">
-      #{createTime,jdbcType=TIMESTAMP},
-    </if>
-    <if test="updateTime != null">
-      #{updateTime,jdbcType=TIMESTAMP},
-    </if>
-  </sql>
-  
-  <select id="selectByExample" parameterType="ArticleInfoQuery" resultMap="BaseResultMap">
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from article_info
-    <include refid="Example_Where_Clause" />
-    <!-- order by CREATE_DATE -->
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from article_info
-    where ID = #{id,jdbcType=DECIMAL}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from article_info
-    where ID = #{id,jdbcType=DECIMAL}
-  </delete>
-  <delete id="deleteByExample" parameterType="ArticleInfoQuery">
-    delete from article_info
-    <include refid="Example_Where_Clause" />
-  </delete>
-  <insert id="insert" parameterType="ArticleInfo">
-    insert into article_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <include refid="Base_Column_List"/>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <include refid="Base_Value_List"/>
-    </trim>
-  </insert>
-  <insert id="insertSelective" parameterType="ArticleInfo">
-    insert into article_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <include refid="Selective_Column_List"/>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <include refid="Selective_Value_List"/>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="ArticleInfoQuery" resultType="java.lang.Integer">
-    select count(*) from article_info
-    <include refid="Example_Where_Clause" />
-  </select>
-  <update id="updateByPrimaryKeySelective" parameterType="ArticleInfo">
-    update article_info
-    <include refid="Example_Set_Clause"/>
-    where ID = #{id,jdbcType=DECIMAL}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="ArticleInfo">
-    update article_info
-    <include refid="Base_Set_Clause"/>
-    where ID = #{id,jdbcType=DECIMAL}
-  </update>
-  
-  <select id="selectPageByExample" parameterType="ArticleInfoQuery" resultMap="BaseResultMap">
-  	<include refid="Page_Query_Begin" />
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from article_info
-    <include refid="Example_Where_Clause" />
-    <!-- order by CREATE_DATE -->
-    <include refid="Page_Query_End" />
-  </select>
-  
-  <select id="selectArticleByUserId" parameterType="hashMap" resultMap="BaseResultMap">
-  	select ai.* from article_info ai,article_info_extend aie where ai.article_id=aie.article_id 
-  	 <if test="userId != null and userId!=''" >
-      and aie.user_id = #{userId,jdbcType=VARCHAR}
-     </if>
-     <if test="authorState != null and userId!=''" >
-      and ai.author_state = #{authorState,jdbcType=VARCHAR}
-     </if>
-  </select>
-  
-    <select id="selectInfoDetail" parameterType="hashMap" resultMap="BaseResultMap">
-  	select ai.* from article_info ai,article_info_extend aie 
-  	where ai.article_id=aie.article_id 
-  	 <if test="userId != null and userId!=''" >
-      and aie.user_id = #{userId,jdbcType=VARCHAR}
-     </if>
-     <if test="authorState != null and authorState!=''" >
-      and ai.author_state = #{authorState,jdbcType=VARCHAR}
-     </if>
-     <if test="articleId != null and articleId!=''" >
-      and ai.article_id = #{articleId,jdbcType=VARCHAR}
-     </if>
-     <if test="roleId != null and roleId!=''" >
-      and aie.role_id = #{roleId,jdbcType=VARCHAR}
-     </if>
-  </select>
-  
-  
-  
-    <select id="queryArticleTotalInfos" parameterType="hashMap" resultMap="EditorResultMap">
-  	select ai.editor_state as status,count(1) as total from article_info ai,article_info_extend aie where ai.article_id=aie.article_id
-  	group by ai.editor_state 
-  </select>
+	<sql id="Page_Query_End">
+		) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+			<trim prefix="(" prefixOverrides="and" suffix=")">
+				<if test="articleName != null">
+					and article_name = #{articleName,jdbcType=VARCHAR}
+				</if>
+				<if test="articleId != null">
+					and article_id = #{articleId,jdbcType=VARCHAR}
+				</if>
+				<if test="articleType != null">
+					and article_type = #{articleType,jdbcType=VARCHAR}
+				</if>
+				<if test="articleCnTitle != null">
+					and article_cn_title = #{articleCnTitle,jdbcType=VARCHAR}
+				</if>
+				<if test="articleEnTile != null">
+					and article_en_tile = #{articleEnTile,jdbcType=VARCHAR}
+				</if>
+				<if test="articleCnSummary != null">
+					and article_cn_summary = #{articleCnSummary,jdbcType=VARCHAR}
+				</if>
+				<if test="articleEnSummary != null">
+					and article_en_summary = #{articleEnSummary,jdbcType=VARCHAR}
+				</if>
+				<if test="artilce != null">
+					and artilce = #{artilce,jdbcType=LONGVARBINARY}
+				</if>
+				<if test="articleCnKeywords != null">
+					and article_cn_keywords = #{articleCnKeywords,jdbcType=VARCHAR}
+				</if>
+				<if test="articleEnKeywords != null">
+					and article_en_keywords = #{articleEnKeywords,jdbcType=VARCHAR}
+				</if>
+				<if test="isfund != null">
+					and isfund = #{isfund,jdbcType=VARCHAR}
+				</if>
+				<if test="investSection != null">
+					and invest_section = #{investSection,jdbcType=VARCHAR}
+				</if>
+				<if test="classificationNums != null">
+					and classification_nums = #{classificationNums,jdbcType=VARCHAR}
+				</if>
+				<if test="documentCode != null">
+					and document_code = #{documentCode,jdbcType=VARCHAR}
+				</if>
+				<if test="remark != null">
+					and remark = #{remark,jdbcType=VARCHAR}
+				</if>
+				<if test="inovationPoint != null">
+					and inovation_point = #{inovationPoint,jdbcType=VARCHAR}
+				</if>
+				<if test="referenceDoc != null">
+					and reference_doc = #{referenceDoc,jdbcType=VARCHAR}
+				</if>
+				<if test="receiveArticleTime != null">
+					and receive_article_time = #{receiveArticleTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="publishTime != null">
+					and publish_time = #{publishTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="totalPics != null">
+					and total_pics = #{totalPics,jdbcType=INTEGER}
+				</if>
+				<if test="totalTabs != null">
+					and total_tabs = #{totalTabs,jdbcType=INTEGER}
+				</if>
+				<if test="totalPages != null">
+					and total_pages = #{totalPages,jdbcType=INTEGER}
+				</if>
+				<if test="fundTitle != null">
+					and fund_title = #{fundTitle,jdbcType=VARCHAR}
+				</if>
+				<if test="editorState != null">
+					and editor_state = #{editorState,jdbcType=VARCHAR}
+				</if>
+				<if test="expertState != null">
+					and expert_state = #{expertState,jdbcType=VARCHAR}
+				</if>
+				<if test="authorState != null">
+					and author_state = #{authorState,jdbcType=VARCHAR}
+				</if>
+				<if test="isAvaliable != null">
+					and isAvaliable = #{isAvaliable,jdbcType=VARCHAR}
+				</if>
+				<if test="latelyFlowsId != null">
+					and lately_flows_id = #{latelyFlowsId,jdbcType=BIGINT}
+				</if>
+				<if test="extends2 != null">
+					and extends_2 = #{extends2,jdbcType=VARCHAR}
+				</if>
+				<if test="extends3 != null">
+					and extends_3 = #{extends3,jdbcType=VARCHAR}
+				</if>
+				<if test="extends4 != null">
+					and extends_4 = #{extends4,jdbcType=VARCHAR}
+				</if>
+				<if test="createTime != null">
+					and create_time = #{createTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="updateTime != null">
+					and update_time = #{updateTime,jdbcType=TIMESTAMP}
+				</if>
+			</trim>
+		</where>
+	</sql>
+	<sql id="Example_Set_Clause">
+		<set>
+			<trim suffixOverrides=",">
+				<if test="articleName != null">
+					article_name = #{articleName,jdbcType=VARCHAR},
+				</if>
+				<if test="articleId != null">
+					article_id = #{articleId,jdbcType=VARCHAR},
+				</if>
+				<if test="articleType != null">
+					article_type = #{articleType,jdbcType=VARCHAR},
+				</if>
+				<if test="articleCnTitle != null">
+					article_cn_title = #{articleCnTitle,jdbcType=VARCHAR},
+				</if>
+				<if test="articleEnTile != null">
+					article_en_tile = #{articleEnTile,jdbcType=VARCHAR},
+				</if>
+				<if test="articleCnSummary != null">
+					article_cn_summary = #{articleCnSummary,jdbcType=VARCHAR},
+				</if>
+				<if test="articleEnSummary != null">
+					article_en_summary = #{articleEnSummary,jdbcType=VARCHAR},
+				</if>
+				<if test="artilce != null">
+					artilce = #{artilce,jdbcType=LONGVARBINARY},
+				</if>
+				<if test="articleCnKeywords != null">
+					article_cn_keywords = #{articleCnKeywords,jdbcType=VARCHAR},
+				</if>
+				<if test="articleEnKeywords != null">
+					article_en_keywords = #{articleEnKeywords,jdbcType=VARCHAR},
+				</if>
+				<if test="isfund != null">
+					isfund = #{isfund,jdbcType=VARCHAR},
+				</if>
+				<if test="investSection != null">
+					invest_section = #{investSection,jdbcType=VARCHAR},
+				</if>
+				<if test="classificationNums != null">
+					classification_nums = #{classificationNums,jdbcType=VARCHAR},
+				</if>
+				<if test="documentCode != null">
+					document_code = #{documentCode,jdbcType=VARCHAR},
+				</if>
+				<if test="remark != null">
+					remark = #{remark,jdbcType=VARCHAR},
+				</if>
+				<if test="inovationPoint != null">
+					inovation_point = #{inovationPoint,jdbcType=VARCHAR},
+				</if>
+				<if test="referenceDoc != null">
+					reference_doc = #{referenceDoc,jdbcType=VARCHAR},
+				</if>
+				<if test="receiveArticleTime != null">
+					receive_article_time = #{receiveArticleTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="publishTime != null">
+					publish_time = #{publishTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="totalPics != null">
+					total_pics = #{totalPics,jdbcType=INTEGER},
+				</if>
+				<if test="totalTabs != null">
+					total_tabs = #{totalTabs,jdbcType=INTEGER},
+				</if>
+				<if test="totalPages != null">
+					total_pages = #{totalPages,jdbcType=INTEGER},
+				</if>
+				<if test="fundTitle != null">
+					fund_title = #{fundTitle,jdbcType=VARCHAR},
+				</if>
+				<if test="editorState != null">
+					editor_state = #{editorState,jdbcType=VARCHAR},
+				</if>
+				<if test="expertState != null">
+					expert_state = #{expertState,jdbcType=VARCHAR},
+				</if>
+				<if test="authorState != null">
+					author_state = #{authorState,jdbcType=VARCHAR},
+				</if>
+				<if test="isAvaliable != null">
+					isAvaliable = #{isAvaliable,jdbcType=VARCHAR},
+				</if>
+				<if test="latelyFlowsId != null">
+					lately_flows_id = #{latelyFlowsId,jdbcType=BIGINT},
+				</if>
+				<if test="extends2 != null">
+					extends_2 = #{extends2,jdbcType=VARCHAR},
+				</if>
+				<if test="extends3 != null">
+					extends_3 = #{extends3,jdbcType=VARCHAR},
+				</if>
+				<if test="extends4 != null">
+					extends_4 = #{extends4,jdbcType=VARCHAR},
+				</if>
+				<if test="createTime != null">
+					create_time = #{createTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="updateTime != null">
+					update_time = #{updateTime,jdbcType=TIMESTAMP},
+				</if>
+			</trim>
+		</set>
+	</sql>
+	<sql id="Base_Column_List">
+		id,
+		article_name,
+		article_id,
+		article_type,
+		article_cn_title,
+		article_en_tile,
+		article_cn_summary,
+		article_en_summary,
+		artilce,
+		article_cn_keywords,
+		article_en_keywords,
+		isfund,
+		invest_section,
+		classification_nums,
+		document_code,
+		remark,
+		inovation_point,
+		reference_doc,
+		receive_article_time,
+		publish_time,
+		total_pics,
+		total_tabs,
+		total_pages,
+		fund_title,
+		editor_state,
+		expert_state,
+		author_state,
+		isAvaliable,
+		lately_flows_id,
+		extends_2,
+		extends_3,
+		extends_4,
+		create_time,
+		update_time,
+	</sql>
+	<sql id="Base_Set_Clause">
+		<set>
+			<trim suffixOverrides=",">
+				article_name = #{articleName,jdbcType=VARCHAR},
+				article_id = #{articleId,jdbcType=VARCHAR},
+				article_type = #{articleType,jdbcType=VARCHAR},
+				article_cn_title = #{articleCnTitle,jdbcType=VARCHAR},
+				article_en_tile = #{articleEnTile,jdbcType=VARCHAR},
+				article_cn_summary = #{articleCnSummary,jdbcType=VARCHAR},
+				article_en_summary = #{articleEnSummary,jdbcType=VARCHAR},
+				artilce = #{artilce,jdbcType=LONGVARBINARY},
+				article_cn_keywords = #{articleCnKeywords,jdbcType=VARCHAR},
+				article_en_keywords = #{articleEnKeywords,jdbcType=VARCHAR},
+				isfund = #{isfund,jdbcType=VARCHAR},
+				invest_section = #{investSection,jdbcType=VARCHAR},
+				classification_nums = #{classificationNums,jdbcType=VARCHAR},
+				document_code = #{documentCode,jdbcType=VARCHAR},
+				remark = #{remark,jdbcType=VARCHAR},
+				inovation_point = #{inovationPoint,jdbcType=VARCHAR},
+				reference_doc = #{referenceDoc,jdbcType=VARCHAR},
+				receive_article_time = #{receiveArticleTime,jdbcType=TIMESTAMP},
+				publish_time = #{publishTime,jdbcType=TIMESTAMP},
+				total_pics = #{totalPics,jdbcType=INTEGER},
+				total_tabs = #{totalTabs,jdbcType=INTEGER},
+				total_pages = #{totalPages,jdbcType=INTEGER},
+				fund_title = #{fundTitle,jdbcType=VARCHAR},
+				editor_state = #{editorState,jdbcType=VARCHAR},
+				expert_state = #{expertState,jdbcType=VARCHAR},
+				author_state = #{authorState,jdbcType=VARCHAR},
+				isAvaliable = #{isAvaliable,jdbcType=VARCHAR},
+				lately_flows_id = #{latelyFlowsId,jdbcType=BIGINT},
+				extends_2 = #{extends2,jdbcType=VARCHAR},
+				extends_3 = #{extends3,jdbcType=VARCHAR},
+				extends_4 = #{extends4,jdbcType=VARCHAR},
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</trim>
+		</set>
+	</sql>
+	<sql id="Selective_Column_List">
+		<!-- ID, -->
+		<if test="articleName != null">
+			article_name,
+		</if>
+		<if test="articleId != null">
+			article_id,
+		</if>
+		<if test="articleType != null">
+			article_type,
+		</if>
+		<if test="articleCnTitle != null">
+			article_cn_title,
+		</if>
+		<if test="articleEnTile != null">
+			article_en_tile,
+		</if>
+		<if test="articleCnSummary != null">
+			article_cn_summary,
+		</if>
+		<if test="articleEnSummary != null">
+			article_en_summary,
+		</if>
+		<if test="artilce != null">
+			artilce,
+		</if>
+		<if test="articleCnKeywords != null">
+			article_cn_keywords,
+		</if>
+		<if test="articleEnKeywords != null">
+			article_en_keywords,
+		</if>
+		<if test="isfund != null">
+			isfund,
+		</if>
+		<if test="investSection != null">
+			invest_section,
+		</if>
+		<if test="classificationNums != null">
+			classification_nums,
+		</if>
+		<if test="documentCode != null">
+			document_code,
+		</if>
+		<if test="remark != null">
+			remark,
+		</if>
+		<if test="inovationPoint != null">
+			inovation_point,
+		</if>
+		<if test="referenceDoc != null">
+			reference_doc,
+		</if>
+		<if test="receiveArticleTime != null">
+			receive_article_time,
+		</if>
+		<if test="publishTime != null">
+			publish_time,
+		</if>
+		<if test="totalPics != null">
+			total_pics,
+		</if>
+		<if test="totalTabs != null">
+			total_tabs,
+		</if>
+		<if test="totalPages != null">
+			total_pages,
+		</if>
+		<if test="fundTitle != null">
+			fund_title,
+		</if>
+		<if test="editorState != null">
+			editor_state,
+		</if>
+		<if test="expertState != null">
+			expert_state,
+		</if>
+		<if test="authorState != null">
+			author_state,
+		</if>
+		<if test="isAvaliable != null">
+			isAvaliable,
+		</if>
+		<if test="latelyFlowsId != null">
+			lately_flows_id,
+		</if>
+		<if test="extends2 != null">
+			extends_2,
+		</if>
+		<if test="extends3 != null">
+			extends_3,
+		</if>
+		<if test="extends4 != null">
+			extends_4,
+		</if>
+		<if test="createTime != null">
+			create_time,
+		</if>
+		<if test="updateTime != null">
+			update_time,
+		</if>
+	</sql>
+	<sql id="Base_Value_List">
+		#{id,jdbcType=BIGINT},
+		#{articleName,jdbcType=VARCHAR},
+		#{articleId,jdbcType=VARCHAR},
+		#{articleType,jdbcType=VARCHAR},
+		#{articleCnTitle,jdbcType=VARCHAR},
+		#{articleEnTile,jdbcType=VARCHAR},
+		#{articleCnSummary,jdbcType=VARCHAR},
+		#{articleEnSummary,jdbcType=VARCHAR},
+		#{artilce,jdbcType=LONGVARBINARY},
+		#{articleCnKeywords,jdbcType=VARCHAR},
+		#{articleEnKeywords,jdbcType=VARCHAR},
+		#{isfund,jdbcType=VARCHAR},
+		#{investSection,jdbcType=VARCHAR},
+		#{classificationNums,jdbcType=VARCHAR},
+		#{documentCode,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{inovationPoint,jdbcType=VARCHAR},
+		#{referenceDoc,jdbcType=VARCHAR},
+		#{receiveArticleTime,jdbcType=TIMESTAMP},
+		#{publishTime,jdbcType=TIMESTAMP},
+		#{totalPics,jdbcType=INTEGER},
+		#{totalTabs,jdbcType=INTEGER},
+		#{totalPages,jdbcType=INTEGER},
+		#{fundTitle,jdbcType=VARCHAR},
+		#{editorState,jdbcType=VARCHAR},
+		#{expertState,jdbcType=VARCHAR},
+		#{authorState,jdbcType=VARCHAR},
+		#{isAvaliable,jdbcType=VARCHAR},
+		#{latelyFlowsId,jdbcType=BIGINT},
+		#{extends2,jdbcType=VARCHAR},
+		#{extends3,jdbcType=VARCHAR},
+		#{extends4,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP},
+	</sql>
+	<sql id="Selective_Value_List">
+		<!-- SEQ_article_info.nextval, -->
+		<if test="articleName != null">
+			#{articleName,jdbcType=VARCHAR},
+		</if>
+		<if test="articleId != null">
+			#{articleId,jdbcType=VARCHAR},
+		</if>
+		<if test="articleType != null">
+			#{articleType,jdbcType=VARCHAR},
+		</if>
+		<if test="articleCnTitle != null">
+			#{articleCnTitle,jdbcType=VARCHAR},
+		</if>
+		<if test="articleEnTile != null">
+			#{articleEnTile,jdbcType=VARCHAR},
+		</if>
+		<if test="articleCnSummary != null">
+			#{articleCnSummary,jdbcType=VARCHAR},
+		</if>
+		<if test="articleEnSummary != null">
+			#{articleEnSummary,jdbcType=VARCHAR},
+		</if>
+		<if test="artilce != null">
+			#{artilce,jdbcType=LONGVARBINARY},
+		</if>
+		<if test="articleCnKeywords != null">
+			#{articleCnKeywords,jdbcType=VARCHAR},
+		</if>
+		<if test="articleEnKeywords != null">
+			#{articleEnKeywords,jdbcType=VARCHAR},
+		</if>
+		<if test="isfund != null">
+			#{isfund,jdbcType=VARCHAR},
+		</if>
+		<if test="investSection != null">
+			#{investSection,jdbcType=VARCHAR},
+		</if>
+		<if test="classificationNums != null">
+			#{classificationNums,jdbcType=VARCHAR},
+		</if>
+		<if test="documentCode != null">
+			#{documentCode,jdbcType=VARCHAR},
+		</if>
+		<if test="remark != null">
+			#{remark,jdbcType=VARCHAR},
+		</if>
+		<if test="inovationPoint != null">
+			#{inovationPoint,jdbcType=VARCHAR},
+		</if>
+		<if test="referenceDoc != null">
+			#{referenceDoc,jdbcType=VARCHAR},
+		</if>
+		<if test="receiveArticleTime != null">
+			#{receiveArticleTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="publishTime != null">
+			#{publishTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="totalPics != null">
+			#{totalPics,jdbcType=INTEGER},
+		</if>
+		<if test="totalTabs != null">
+			#{totalTabs,jdbcType=INTEGER},
+		</if>
+		<if test="totalPages != null">
+			#{totalPages,jdbcType=INTEGER},
+		</if>
+		<if test="fundTitle != null">
+			#{fundTitle,jdbcType=VARCHAR},
+		</if>
+		<if test="editorState != null">
+			#{editorState,jdbcType=VARCHAR},
+		</if>
+		<if test="expertState != null">
+			#{expertState,jdbcType=VARCHAR},
+		</if>
+		<if test="authorState != null">
+			#{authorState,jdbcType=VARCHAR},
+		</if>
+		<if test="isAvaliable != null">
+			#{isAvaliable,jdbcType=VARCHAR},
+		</if>
+		<if test="latelyFlowsId != null">
+			#{latelyFlowsId,jdbcType=BIGINT},
+		</if>
+		<if test="extends2 != null">
+			#{extends2,jdbcType=VARCHAR},
+		</if>
+		<if test="extends3 != null">
+			#{extends3,jdbcType=VARCHAR},
+		</if>
+		<if test="extends4 != null">
+			#{extends4,jdbcType=VARCHAR},
+		</if>
+		<if test="createTime != null">
+			#{createTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateTime != null">
+			#{updateTime,jdbcType=TIMESTAMP},
+		</if>
+	</sql>
+
+	<select id="selectByExample" parameterType="ArticleInfoQuery"
+		resultMap="BaseResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from article_info
+		<include refid="Example_Where_Clause" />
+		<!-- order by CREATE_DATE -->
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from article_info
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from article_info
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<delete id="deleteByExample" parameterType="ArticleInfoQuery">
+		delete from article_info
+		<include refid="Example_Where_Clause" />
+	</delete>
+	<insert id="insert" parameterType="ArticleInfo">
+		insert into article_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Base_Value_List" />
+		</trim>
+	</insert>
+	<insert id="insertSelective" parameterType="ArticleInfo">
+		insert into article_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Selective_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Selective_Value_List" />
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="ArticleInfoQuery"
+		resultType="java.lang.Integer">
+		select count(*) from article_info
+		<include refid="Example_Where_Clause" />
+	</select>
+	<update id="updateByPrimaryKeySelective" parameterType="ArticleInfo">
+		update article_info
+		<include refid="Example_Set_Clause" />
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="ArticleInfo">
+		update article_info
+		<include refid="Base_Set_Clause" />
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<select id="selectPageByExample" parameterType="ArticleInfoQuery"
+		resultMap="BaseResultMap">
+		<include refid="Page_Query_Begin" />
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from article_info
+		<include refid="Example_Where_Clause" />
+		<!-- order by CREATE_DATE -->
+		<include refid="Page_Query_End" />
+	</select>
+
+	<select id="selectArticleByUserId" parameterType="hashMap"
+		resultMap="BaseResultMap">
+		select ai.* from article_info ai,article_info_extend aie where
+		ai.article_id=aie.article_id
+		<if test="userId != null and userId!=''">
+			and aie.user_id = #{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="authorState != null and userId!=''">
+			and ai.author_state = #{authorState,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="selectInfoDetail" parameterType="hashMap" resultMap="BaseResultMap">
+		select ai.* from article_info ai,article_info_extend aie
+		where ai.article_id=aie.article_id
+		<if test="userId != null and userId!=''">
+			and aie.user_id = #{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="authorState != null and authorState!=''">
+			and ai.author_state = #{authorState,jdbcType=VARCHAR}
+		</if>
+		<if test="articleId != null and articleId!=''">
+			and ai.article_id = #{articleId,jdbcType=VARCHAR}
+		</if>
+		<if test="roleId != null and roleId!=''">
+			and aie.role_id = #{roleId,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<resultMap id="EditorResultMap" type="EditorAreaInfos">
+		<result column="status" jdbcType="VARCHAR" property="status" />
+		<result column="total" jdbcType="VARCHAR" property="total" />
+	</resultMap>
+
+	<select id="queryArticleTotalInfos" parameterType="hashMap"
+		resultMap="EditorResultMap">
+		select status ,count(1) as total from (
+		select (case when ai.editor_state='0008' then ai.expert_state ELSE
+		ai.editor_state END)as status,ai.article_id
+		from article_info ai,article_info_extend aie
+		where ai.article_id=aie.article_id and ai.editor_state in
+		('0000','0008','0001')
+		group by ai.article_id ) as lin
+		group by status
+	</select>
 </mapper>
