@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.pojo.ArticleInfo;
+import com.cn.periodical.pojo.AuthorQueryDetail;
 import com.cn.periodical.pojo.Opinion;
 import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.request.ArticleQueryReqDto;
+import com.cn.periodical.response.ArticleQueryRespDto;
 import com.cn.periodical.response.AuthorArticleQueryRespDto;
-import com.cn.periodical.service.AuthorArticleQueryService;
+import com.cn.periodical.service.ArticleQueryService;
 /**
  * 作者工作区-稿件查询 
  * */
@@ -29,7 +33,7 @@ public class ArticleQueryController extends AuthorController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(ArticleQueryController.class);
 	@Autowired
-	AuthorArticleQueryService articleQueryService;
+	ArticleQueryService articleQueryService;
 	
 	@Autowired
 	ArticleFlowsManager articleFlowsManager;
@@ -41,15 +45,13 @@ public class ArticleQueryController extends AuthorController{
 	 */
 	@RequestMapping(value="/toArticleQueryPage")
 	public ModelAndView toArticleQueryPage(HttpServletRequest request,HttpServletResponse response) {
-		UserInfo userInfo = (UserInfo)request.getSession().getAttribute("userInfo");
-		logger.info("稿件查询Page:["+JSON.toJSONString(userInfo)+"]");
-		ModelAndView mav = new ModelAndView("articleQueryPage");
-		mav.addObject("userId", userInfo.getUserId());
-		
-		List<AuthorArticleQueryRespDto> list = articleQueryService.queryArticleInfo(userInfo.getUserId());
-		
-		logger.info("稿件查询出参:["+JSON.toJSONString(list)+"]");
+		logger.info("稿件查询Page:[]");
+		ModelAndView mav = new ModelAndView("articleQueryPage");		
+		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
+		reqDto.setUserId(getUserInfo(request).getUserId());
+		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
 		mav.addObject("list", list);
+		logger.info("稿件查询出参:["+JSON.toJSONString(list)+"]");
 		return mav;
 	}
 	
@@ -59,13 +61,12 @@ public class ArticleQueryController extends AuthorController{
 	 * 去稿件明细页面
 	 */
 	@RequestMapping(value="/toArticleQueryDetailPage",method = RequestMethod.GET)
-	public ModelAndView toArticleQueryDetailPage(@RequestParam("artilceId") String artilceId) {
-		logger.info("稿件明细Page:["+artilceId+"]");
+	public ModelAndView toArticleQueryDetailPage(@RequestParam("articleId") String articleId) {
+		logger.info("稿件明细Page:["+articleId+"]");
 		ModelAndView mav = new ModelAndView("articleQueryDetailPage");
-		
-		ArticleInfo articleInfo = articleQueryService.queryArticleDetailInfo(artilceId);
-		mav.addObject("articleInfo", articleInfo);
-		logger.info("稿件明细出参:["+JSON.toJSONString(articleInfo)+"]");
+		AuthorQueryDetail detail = articleQueryService.queryAuthorQueryDetail(articleId);
+		mav.addObject("detail", detail);
+		logger.info("稿件明细出参:["+JSON.toJSONString(detail)+"]");
 		return mav;
 	}
 	

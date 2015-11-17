@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cn.periodical.manager.ArticleQueryManager;
+import com.cn.periodical.pojo.AuthorQueryDetail;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
@@ -30,6 +31,11 @@ public class ArticleQueryServiceImpl implements ArticleQueryService {
 	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto) {
 		// TODO Auto-generated method stub
 		return articleQueryManager.queryArticleInfoDetail(reqDto);
+	}
+
+	public AuthorQueryDetail queryAuthorQueryDetail(String articleId) {
+		// TODO Auto-generated method stub
+		return articleQueryManager.queryAuthorQueryDetail(articleId);
 	}
 
 }

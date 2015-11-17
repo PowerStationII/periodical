@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>稿件重投编辑页面</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -20,72 +20,91 @@
 </script>
 <body>
 	<div>
+		<input type="hidden" value="$!{articleInfo.id}" id="id" name="id">
 		<table style="border:1px solid;width:800px;" rules="all">
 			<tr>
 				<td><label>
 						<span class="right">稿件状态：</span>
 				</label></td>
-				<td>$!{detail.articleId}</td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.authorState}" id="authorState"
+					name="authorState"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">中文标题：</span>
 				</label></td>
-				<td>$!{detail.articleCnTitle}</td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleCnTitle}" id="articleCnTitle"
+					name="articleCnTitle"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">英文标题：</span>
 				</label></td>
-				<td>$!{detail.articleEnTile}</td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleEnTile}" id="articleEnTile"
+					name="articleEnTile"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">中国分类号：</span>
 				</label></td>
-				<td>$!{detail.cNums}</td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.classificationNums}" id="classificationNums"
+					name="classificationNums"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">拟投栏目：</span>
 				</label></td>
-				<td>$!{detail.section}</td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.investSection}" id="investSection"
+					name="investSection"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">中文关键词：</span>
 				</label></td>
-				<td>$!{detail.articleCnKeywords}</td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleCnKeywords}" id="articleCnKeywords"
+					name="articleCnKeywords"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">英文关键词：</span>
 				</label></td>
-				<td>$!{detail.articleEnKeywords}</td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleEnKeywords}" id="articleEnKeywords"
+					name="articleEnKeywords"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">中文摘要：</span>
 				</label></td>
-				<td>$!{detail.articleCnSummary}</td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleCnSummary}" id="articleCnSummary"
+					name="articleCnSummary"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">英文摘要：</span>
 				</label></td>
-				<td>$!{detail.articleEnSummary}</td>
+				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+					value="$!{articleInfo.articleEnSummary}" id="articleEnSummary"
+					name="articleEnSummary"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">审批稿件下载：</span>
 				</label></td>
-				<td>$!{detail.attachmentName}下载$!{detail.attachmentPath}</td>
+				<td>下载</td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">专家审稿：</span>
 				</label></td>
-				<td>审稿专家:$!{detail.expertName} 送审时间:$!{detail.dealStartTime} <a href="../author/toOpinionQueryPage?articleId=${detail.articleId}">查看审稿意见</a></td>
+				<td>审稿专家:XXXX 送审时间:yyyyMMdd <a href="../author/toOpinionQueryPage?articleId=${articleInfo.articleId}">查看审稿意见</a></td>
 			</tr>
 			
 		</table>

@@ -21,13 +21,13 @@
 				<td style="width:20%;text-align:center;">稿件状态</td>
 				<td style="width:20%;text-align:center;">备注信息</td>
 			</tr>
-			#foreach($articleQueryRespDto in ${list})   
+			#foreach($dtos in ${list})   
 			<tr>
-				<td>${articleQueryRespDto.articleId}</td>
-				<td><a href="../author/toArticleQueryDetailPage?artilceId=${articleQueryRespDto.articleId}">${articleQueryRespDto.articleCnTitle}</a></td>
-				<td>${articleQueryRespDto.createTime}</td>
-				<td>${articleQueryRespDto.authorState}</td>
-				<td><a href="../author/toOpinionQueryPage?articleId=${articleQueryRespDto.articleId}">查看审稿意见</a></td>
+				<td>$!{dtos.articleId}</td>
+				<td><a href="../author/toArticleQueryDetailPage?articleId=${dtos.articleId}">$!{dtos.title}</a></td>
+				<td>$!{dtos.contriTime}</td>
+				<td>$!{dtos.authorState}</td>
+				<td><a href="../author/toOpinionQueryPage?articleId=${dtos.articleId}">查看审稿意见</a></td>
 			</tr>
 			#end
 		</table>
