@@ -21,7 +21,6 @@
 </script>
 <body>
 	<form action="../setting/toUpdateSetting" method="POST">
-		<input type="hidden" name="userId" value="${userId}">
 		<div id="articleInfos">
 			<input type="hidden" value="$!{authorInfo.id}" id="id" name="id">
 			<table style="border: 1px solid; width: 800px;" rules="all">

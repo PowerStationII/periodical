@@ -37,4 +37,9 @@ public class ArticleQueryManagerImpl implements ArticleQueryManager {
 		return articleQueryDao.queryAuthorQueryDetail(articleId);
 	}
 
+	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail) {
+		// TODO Auto-generated method stub
+		return articleQueryDao.queryArticleFee(authorQueryDetail);
+	}
+
 }

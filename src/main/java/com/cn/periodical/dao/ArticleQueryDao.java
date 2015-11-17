@@ -15,4 +15,5 @@ public interface ArticleQueryDao {
 	public List<ArticleQueryRespDto> queryArticleInfos(ArticleQueryReqDto reqDto);
 	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto);
 	public AuthorQueryDetail queryAuthorQueryDetail(String articleId);
+	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail);
 }

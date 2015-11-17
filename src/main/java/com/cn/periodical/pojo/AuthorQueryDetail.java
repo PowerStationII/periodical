@@ -8,6 +8,15 @@ public class AuthorQueryDetail implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+	private String userId;
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	private String articleId;
 	private String authorState;
 	private String articleCnTitle;
@@ -24,9 +33,29 @@ public class AuthorQueryDetail implements Serializable {
 	private String cNums;
 	private String section;
 	
+	private String aRealAmount;
+	private String aAmount;
+	private String aTaxAmount;
 	
 	
-	
+	public String getaRealAmount() {
+		return aRealAmount;
+	}
+	public void setaRealAmount(String aRealAmount) {
+		this.aRealAmount = aRealAmount;
+	}
+	public String getaAmount() {
+		return aAmount;
+	}
+	public void setaAmount(String aAmount) {
+		this.aAmount = aAmount;
+	}
+	public String getaTaxAmount() {
+		return aTaxAmount;
+	}
+	public void setaTaxAmount(String aTaxAmount) {
+		this.aTaxAmount = aTaxAmount;
+	}
 	public String getcNums() {
 		return cNums;
 	}

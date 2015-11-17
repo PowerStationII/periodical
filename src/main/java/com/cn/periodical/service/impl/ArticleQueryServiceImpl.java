@@ -38,4 +38,9 @@ public class ArticleQueryServiceImpl implements ArticleQueryService {
 		return articleQueryManager.queryAuthorQueryDetail(articleId);
 	}
 
+	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail) {
+		// TODO Auto-generated method stub
+		return articleQueryManager.queryArticleFee(authorQueryDetail);
+	}
+
 }

@@ -22,11 +22,8 @@
 <body>
 	<form action="../setting/toUpdatePw" method="POST">
 		<div id="articleInfos"  style="margin-left:300px;margin-top:50px;">
-			<input type="text" name="id" value="${userInfo.id}">
-			<input type="text" name="userId" value="${userInfo.userId}">
-			<input type="text" name="logonPW" value="${userInfo.logonPwd}">
-			
 			<table style="border: 1px solid black;" rules="all">
+				<input type="text" name="password" value="$!{userInfo.logonPwd}">
 				<tr>
 					<td>旧密码:</td>
 					<td><input type="password" name="orgPw" value=""></td>

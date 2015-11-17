@@ -17,5 +17,6 @@ public interface ArticleQueryService {
 	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto);
 	
 	public AuthorQueryDetail queryAuthorQueryDetail(String articleId);
+	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail);
 	
 }

@@ -19,12 +19,12 @@
 				<td style="width: 20%; text-align: center;">稿件标题</td>
 				<td style="width: 20%; text-align: center;">稿费金额</td>
 			</tr>
-			#foreach($articleQueryRespDto in ${list})
+			#foreach($dtos in ${list})
 			<tr>
-				<td>${articleQueryRespDto.articleId}</td>
+				<td>${dtos.articleId}</td>
 				<td><a
-					href="../author/toArticleFeeDetailPage?articleId=${articleQueryRespDto.articleId}&userId=${userId}">${articleQueryRespDto.articleCnTitle}</a></td>
-				<td>${articleQueryRespDto.accountInfo.authorAmount}</td>
+					href="../author/toArticleFeeDetailPage?articleId=${dtos.articleId}">${dtos.articleCnTitle}</a></td>
+				<td>${dtos.aRealAmount}</td>
 			</tr>
 			#end
 		</table>

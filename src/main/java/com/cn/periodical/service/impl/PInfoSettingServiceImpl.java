@@ -2,20 +2,29 @@ package com.cn.periodical.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cn.periodical.controller.PInfoSettingController;
 import com.cn.periodical.enums.RoleIdEnums;
+import com.cn.periodical.enums.SystemIdEnums;
 import com.cn.periodical.manager.AuthorInfoManager;
+import com.cn.periodical.manager.EditorInfoManager;
+import com.cn.periodical.manager.ExpertInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.pojo.AuthorInfoQuery;
+import com.cn.periodical.pojo.EditorInfo;
+import com.cn.periodical.pojo.ExpertInfo;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.pojo.UserInfoQuery;
 import com.cn.periodical.service.PInfoSettingService;
 
 @Service
 public class PInfoSettingServiceImpl implements PInfoSettingService {
+	private static final Logger logger = LoggerFactory.getLogger(PInfoSettingController.class);
 
 	@Autowired
 	UserInfoManager userInfoManager;
@@ -23,22 +32,38 @@ public class PInfoSettingServiceImpl implements PInfoSettingService {
 	@Autowired 
 	AuthorInfoManager authorInfoManager;
 	
+	@Autowired
+	ExpertInfoManager expertInfoManager;
 	
+	@Autowired
+	EditorInfoManager editorInfoManager;
 	
 	public PInfoSettingServiceImpl() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int updateSetting(String userId,String roleId, Object obj) {
+	public int updateSetting(UserInfo userInfo, Object obj) {
 		// TODO Auto-generated method stub
-		AuthorInfo authorInfo = (AuthorInfo)obj;
-		authorInfoManager.saveAuthorInfo(authorInfo);
+		if (SystemIdEnums.AUTHOR_SYS.getCode().equals(userInfo.getSystemId())) {
+			AuthorInfo authorInfo = (AuthorInfo)obj;
+			authorInfoManager.saveAuthorInfo(authorInfo);
+		} else if (SystemIdEnums.EXPERT_SYS.getCode().equals(userInfo.getSystemId())) {
+			ExpertInfo expertInfo = (ExpertInfo)obj;
+			expertInfoManager.saveExpertInfo(expertInfo);
+		} else if (SystemIdEnums.READER_SYS.getCode().equals(userInfo.getSystemId())) {
+			EditorInfo editorInfo = (EditorInfo)obj;
+			editorInfoManager.saveEditorInfo(editorInfo);
+		} else if (SystemIdEnums.EDIT_SYS.getCode().equals(userInfo.getSystemId())) {
+//			AuthorInfo authorInfo = (AuthorInfo)obj;
+//			authorInfoManager.saveAuthorInfo(authorInfo);
+		} else {
+			logger.info("系统不存在,你修改啥");
+		}
 		return 0;
 	}
 
-	public int updatePw(String id,String password) {
+	public int updatePw(UserInfo userInfo,String password) {
 		// TODO Auto-generated method stub
-		UserInfo userInfo = userInfoManager.findUserInfoById(Long.valueOf(id));
 		userInfo.setId(userInfo.getId());
 		userInfo.setLogonPwd(password);
 		userInfoManager.saveUserInfo(userInfo);

@@ -11,6 +11,13 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script>
+	$(function(){
+		$('#back').click(function(){
+			history.go(-1);
+		})
+	})
+</script>
 <body>
 	<div>
 		<input type="hidden" value="$!{articleInfo.id}" id="id" name="id">
@@ -19,97 +26,67 @@
 				<td><label>
 						<span class="right">稿件状态：</span>
 				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.authorState}" id="authorState"
-					name="authorState"></td>
+				<td>$!{obj.authorState}</td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">中文标题：</span>
 				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.articleCnTitle}" id="articleCnTitle"
-					name="articleCnTitle"></td>
+				<td>$!{obj.articleCnTitle}</td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">英文标题：</span>
 				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.articleEnTile}" id="articleEnTile"
-					name="articleEnTile"></td>
+				<td>$!{obj.articleEnTile}</td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">中国分类号：</span>
 				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.classificationNums}" id="classificationNums"
-					name="classificationNums"></td>
+				<td>$!{obj.cNums}</td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">拟投栏目：</span>
 				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.investSection}" id="investSection"
-					name="investSection"></td>
+				<td>$!{obj.section}</td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">中文关键词：</span>
 				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.articleCnKeywords}" id="articleCnKeywords"
-					name="articleCnKeywords"></td>
+				<td>$!{obj.articleCnKeywords}</td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">英文关键词：</span>
 				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.articleEnKeywords}" id="articleEnKeywords"
-					name="articleEnKeywords"></td>
+				<td>$!{obj.articleEnKeywords}</td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">中文摘要：</span>
 				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.articleCnSummary}" id="articleCnSummary"
-					name="articleCnSummary"></td>
+				<td>$!{obj.articleCnSummary}</td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">英文摘要：</span>
 				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.articleEnSummary}" id="articleEnSummary"
-					name="articleEnSummary"></td>
-			</tr>
-			<tr>
-				<td><label>
-						<span class="right">审批稿件下载：</span>
-				</label></td>
-				<td>下载</td>
-			</tr>
-			<tr>
-				<td><label>
-						<span class="right">专家审稿：</span>
-				</label></td>
-				<td>审稿专家:XXXX 送审时间:yyyyMMdd <input type="button" value="查看审稿意见"></td>
+				<td>$!{obj.articleEnSummary}</td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">作者信息</span>
 				</label></td>
-				<td>姓名:***  身份证号:</td>
+				<td>姓名:***  身份证号:***</td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">稿费</span>
 				</label></td>
-				<td>应发金额:${respDto.accountInfo.authorAmount} 扣税:${respDto.accountInfo.authorTaxAmount} 实发金额:${respDto.accountInfo.authorRealAmount} 汇款时间:yyyy-MM-dd</td>
+				<td>应发金额:$!{obj.aAmount} 扣税:$!{obj.aTaxAmount} 实发金额:$!{obj.aRealAmount} 汇款时间:yyyy-MM-dd</td>
 			</tr>
 			<tr>
 				<td><label>

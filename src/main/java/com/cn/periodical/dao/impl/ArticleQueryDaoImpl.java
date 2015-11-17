@@ -32,4 +32,9 @@ public class ArticleQueryDaoImpl extends BaseDao implements ArticleQueryDao {
 		return super.getSqlSession().selectOne("ArticleQueryMapper.authorQueryDetail", articleId);
 	}
 
+	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("ArticleQueryMapper.articleFeeQuery", authorQueryDetail);
+	}
+
 }
