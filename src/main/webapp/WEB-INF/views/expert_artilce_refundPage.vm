@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>专家返修</title>
+<title>专家退稿</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -19,10 +19,10 @@
 	})
 </script>
 <body>
-	<form action="../expert/toExpertRepairedModify" method="POST">
+	<form action="../expert/toExpertRefundModify" method="POST">
 		<input type="hidden" name="articleId" value=${respDto.articleId}>
 		<div id="articleInfos">
-			<a style="font-size: 20px; color: #0000CC;">稿件返修</a><br>
+			<a style="font-size: 20px; color: #0000CC;">稿件退回</a><br>
 
 			<TABLE style="border: 1px solid black;" rules="all">
 				<tr>
@@ -45,19 +45,13 @@
 					<td colspan="2">返修时间:</td>
 				</tr>
 				<tr>
-					<td rowspan="2">返修意见</td>
+					<td rowspan="2">退稿意见</td>
 				</tr>
 				<tr>
 					<td colspan="8"><TEXTAREA NAME="dealOpinion" ROWS="" COLS=""></TEXTAREA></td>
 				</tr>
-				<tr>
-					<td rowspan="2">返修记录</td>
-				</tr>
-				<tr>
-					<td colspan="8">第一次返修：</td>
-				</tr>
 			</table>
-			<input type="submit" value="确认返修">
+			<input type="submit" value="确认退稿">
 			<input type="button"  value="返回"  id="back"/>
 			<br>
 		</div>
