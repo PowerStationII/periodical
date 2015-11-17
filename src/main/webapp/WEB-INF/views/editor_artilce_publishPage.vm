@@ -11,8 +11,16 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script>
+	$(function(){
+		$('#back').click(function(){
+			history.go(-1);
+		})
+	})
+</script>
 <body>
-	<form action="../author/toArticleQuery" method="POST">
+	<form action="../editor/toPublishModify" method="POST">
+	<input type="hidden" name="articleId" value="${respDto.articleId}"/>
 		<div id="articleInfos">
 			<a style="font-size: 20px; color: #0000CC;">稿件待刊</a><br>
 
@@ -21,18 +29,18 @@
 					<td rowspan="4">稿件信息</td>
 				</tr>
 				<tr>
-					<td colspan="4">稿件编号:</td>
-					<td colspan="4">稿件状态:</td>
+					<td colspan="4">稿件编号:$!{respDto.articleId}</td>
+					<td colspan="4">稿件状态:$!{respDto.expertState}</td>
 				</tr>
 				<tr>
-					<td colspan="2">标题:</td>
+					<td colspan="2">标题:$!{respDto.title}</td>
 					<td colspan="2">原稿</td>
 					<td colspan="2">审核稿</td>
-					<td colspan="2">拟投栏目:</td>
+					<td colspan="2">拟投栏目:$!{respDto.section}</td>
 				</tr>
 				<tr>
-					<td colspan="2">作者:</td>
-					<td colspan="2">提交日期:</td>
+					<td colspan="2">作者:$!{respDto.authorName}</td>
+					<td colspan="2">提交日期:$!{respDto.contriTime}</td>
 					<td colspan="2">登记日期:</td>
 					<td colspan="2">返修时间:</td>
 				</tr>
@@ -41,22 +49,15 @@
 				</tr>
 				<tr>
 					<td colspan="4">审稿专家:</td>
-					<td colspan="4">审稿意见:</td>
+					<td colspan="4">审稿意见:专家的巴拉巴拉的</td>
 				</tr>
 				<tr>
-					<td rowspan="2">返修意见</td>
-				</tr>
-				<tr>
-					<td colspan="8"><TEXTAREA NAME="" ROWS="" COLS=""></TEXTAREA></td>
-				</tr>
-				<tr>
-					<td rowspan="2">返修记录</td>
-				</tr>
-				<tr>
-					<td colspan="8">第一次返修：</td>
+					<td colspan="8">编辑意见:<textarea name="dealOpinion" rows="" cols=""></textarea></td>
 				</tr>
 			</table>
 			<br>
+			<input type="submit" value="确认待刊">
+			<input type="button"  value="返回"  id="back"/>
 		</div>
 	</form>
 </body>

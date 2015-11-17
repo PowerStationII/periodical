@@ -68,7 +68,7 @@ public class ArticleEnlistedDealController extends EditorController{
 	
 	/**
 	 * toEnlistedArticlePage
-	 * 已登记
+	 * 已登记 End
 	 */
 	@RequestMapping(value="/toEnlistedArticlePage",method = RequestMethod.GET)
 	public ModelAndView toEnlistedArticlePage(HttpServletRequest request) {
@@ -86,7 +86,7 @@ public class ArticleEnlistedDealController extends EditorController{
 	
 	/**
 	 * toEnlistedArticleDetailPage
-	 * 已登记-详情页
+	 * 已登记-详情页 End
 	 */
 	@RequestMapping(value="/toEnlistedArticleDetailPage")
 	public ModelAndView toEnlistedArticleDetailPage(@RequestParam("artilceId") String artilceId,
@@ -105,7 +105,7 @@ public class ArticleEnlistedDealController extends EditorController{
 	/**
 	 * toSubmitPage
 	 * 登记
-	 * 稿件状态变更
+	 * 稿件状态变更 End
 	 */
 	@RequestMapping(value="/toSubmitPage",method = RequestMethod.GET)
 	public ModelAndView toSubmitPage(@RequestParam("articleId") String articleId,
@@ -123,8 +123,8 @@ public class ArticleEnlistedDealController extends EditorController{
 	
 	/**
 	 * toSubmitState
-	 * 
-	 * 稿件状态变更
+	 *  
+	 * 稿件状态变更 End
 	 */
 	@RequestMapping(value="/toSubmitState",method = RequestMethod.POST)
 	public ModelAndView toSubmitState(@RequestParam("articleId") String articleId,String expertId,
@@ -168,90 +168,6 @@ public class ArticleEnlistedDealController extends EditorController{
 		articleInfoManager.saveArticleInfo(articleInfo);
 		
 		logger.info("修改稿件状态出参:[]");
-		return mav;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/**
-	 * toRepairArticlePage
-	 * 返修
-	 */
-	@RequestMapping(value="/toRepairArticlePage",method = RequestMethod.GET)
-	public ModelAndView toRepairArticlePage(@RequestParam("userId") String userId,
-			HttpServletRequest request) {
-		logger.info("返修Page:["+userId+"]");
-		ModelAndView mav = new ModelAndView("editor_repairArticlePage");
-		mav.addObject("userId", userId);
-		List<EditorArticleDealRespDto> list =articleDealService.articleDeal(ArticleStateEnums.REPAIR_ARTICLE.getCode());
-		mav.addObject("list", list);
-		
-		return mav;
-	}
-	
-	/**
-	 * toReturnedArticlePage
-	 * 退稿
-	 */
-	@RequestMapping(value="/toReturnedArticlePage",method = RequestMethod.GET)
-	public ModelAndView toReturnedArticlePage(@RequestParam("userId") String userId,
-			HttpServletRequest request) {
-		logger.info("退稿Page:["+userId+"]");
-		ModelAndView mav = new ModelAndView("editor_returnedArticlePage");
-		mav.addObject("userId", userId);
-		List<EditorArticleDealRespDto> list =articleDealService.articleDeal(ArticleStateEnums.RETURNED_ARTICLE.getCode());
-		mav.addObject("list", list);
-		
-		return mav;
-	}
-	
-	/**
-	 * toPublishArticlePage
-	 * 待刊
-	 */
-	@RequestMapping(value="/toPublishArticlePage",method = RequestMethod.GET)
-	public ModelAndView toPublishArticlePage(@RequestParam("userId") String userId,
-			HttpServletRequest request) {
-		logger.info("待刊Page:["+userId+"]");
-		ModelAndView mav = new ModelAndView("editor_publishArticlePage");
-		mav.addObject("userId", userId);
-		List<EditorArticleDealRespDto> list =articleDealService.articleDeal(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
-		mav.addObject("list", list);
-		
-		return mav;
-	}
-	
-	
-	/**
-	 * toPublishArticleDetailPage
-	 * 待刊
-	 */
-	@RequestMapping(value="/toPublishArticleDetailPage",method = RequestMethod.GET)
-	public ModelAndView toPublishArticleDetailPage(@RequestParam("userId") String userId,
-			@RequestParam("articleId") String articleId,
-			HttpServletRequest request) {
-		logger.info("待刊详情Page入参:["+userId+"]");
-		ModelAndView mav = new ModelAndView("editor_publishArticleDetailPage");
-		mav.addObject("userId", userId);
-		ArticleInfo articleInfo =articleDealService.qryArticleInfo(articleId);
-		mav.addObject("articleInfo", articleInfo);
-		logger.info("待刊详情Page出参:["+JSON.toJSONString(articleInfo)+"]");
 		return mav;
 	}
 }

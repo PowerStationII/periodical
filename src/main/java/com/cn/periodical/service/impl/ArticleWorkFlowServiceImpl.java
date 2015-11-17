@@ -56,6 +56,7 @@ public class ArticleWorkFlowServiceImpl implements ArticleWorkFlowService {
 		articleFlows.setArticleId(reqDto.getArticleId());
 		articleFlows.setDealStartTime(reqDto.getDealStartTime());
 		articleFlows.setDealEndTime(reqDto.getDealEndTime());
+		articleFlows.setDealOpinion(reqDto.getDealOpinion());
 		/**专家操作三个按钮时,需要将流水的userId和refId互换,所以设立此字段,记录专家的userId,更新流水时作为其中一个唯一条件*/
 		articleFlows.setExtend1(reqDto.getExtend());
 		articleFlowsManager.saveArticleFlows(articleFlows);

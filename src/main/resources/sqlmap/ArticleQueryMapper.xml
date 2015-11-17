@@ -53,6 +53,8 @@
 		<result column="articleId" jdbcType="VARCHAR" property="articleId" />
 		<result column="title" jdbcType="VARCHAR" property="title" />
 		<result column="editorState" jdbcType="VARCHAR" property="editorState" />
+		<result column="expertState" jdbcType="VARCHAR" property="expertState" />
+		<result column="authorState" jdbcType="VARCHAR" property="authorState" />
 		<result column="enTitle" jdbcType="VARCHAR" property="enTitle" />
 		<result column="fNums" jdbcType="VARCHAR" property="fNums" />
 		<result column="section" jdbcType="VARCHAR" property="section" />
@@ -67,7 +69,7 @@
 	<select id="selectArticleInfoDetail" parameterType="ArticleQueryReqDto"
 		resultMap="ArticleInfoDetailResultMap">
 		select ai.article_id as articleId,ai.article_cn_title as title,
-		ai.editor_state as editorState,
+		ai.editor_state as editorState,ai.expert_state as expertState,ai.author_state as authorState,
 		ai.article_en_tile as
 		enTitle,ai.classification_nums as fNums,
 		ai.invest_section as
@@ -91,6 +93,12 @@
 		<if test="editorState != null">
 			and ai.editor_state = #{editorState,jdbcType=VARCHAR}
 		</if>
+		<if test="expertState != null">
+			and ai.expert_state = #{expertState,jdbcType=VARCHAR}
+		</if>
+		<if test="authorState != null">
+			and ai.author_state = #{authorState,jdbcType=VARCHAR}
+		</if>
 		<if test="userId != null">
 			and aie.user_id = #{userId,jdbcType=VARCHAR}
 		</if>
@@ -99,6 +107,6 @@
 		ai.invest_section ,ai.article_cn_keywords ,
 		ai.article_en_keywords ,ai.article_cn_summary ,
 		ai.article_en_summary ,aai.attachment_name,
-		aai.attachment_path
+		aai.attachment_path,ai.expert_state,ai.editor_state,ai.author_state
 	</select>
 </mapper>
