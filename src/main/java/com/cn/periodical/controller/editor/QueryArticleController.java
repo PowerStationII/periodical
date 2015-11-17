@@ -7,8 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.cn.periodical.pojo.UserInfo;
 /**
  * 稿件编辑-稿件查询Controller for editor
  * */
@@ -21,11 +22,13 @@ public class QueryArticleController extends EditorController{
 	 * 编辑稿件查询
 	 */
 	@RequestMapping(value="/toQueryArticlePage",method = RequestMethod.GET)
-	public ModelAndView toQueryArticlePage(@RequestParam("userId") String userId,
-			HttpServletRequest request) {
-		logger.info("稿件查询Page:["+userId+"]");
+	public ModelAndView toQueryArticlePage(HttpServletRequest request) {
+		UserInfo userInfo = getUserInfo(request);
+		logger.info("稿件查询Page:["+userInfo.getUserId()+"]");
 		ModelAndView mav = new ModelAndView("editor_queryArticlePage");
-		mav.addObject("userId", userId);
+
+		
+		
 		
 		
 		return mav;
