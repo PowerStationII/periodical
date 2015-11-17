@@ -208,6 +208,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 			articleFlows.setArticleId(articleId);
 			articleFlows.setDealStartTime(new Date());
 			articleFlows.setDealEndTime(new Date());
+			articleFlows.setExtend2("N");/**为了审批意见是否作者可见而改*/
 			articleFlowsManager.saveArticleFlows(articleFlows);
 		}
 	}
