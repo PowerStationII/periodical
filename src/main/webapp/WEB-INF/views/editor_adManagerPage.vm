@@ -13,13 +13,62 @@
 </head>
 <body>
 	<div id="articleInfos">
+		<form action="../editor/toAdManagerPage" method="POST">
+			<table style="border: 1px solid black;" rules="all">
+				<tr>
+					<td>广告名称</td>
+					<td><input type="text" name="adName" value=""></td>
+					<td>理事会名称</td>
+					<td><input type="text" name="concilName" value=""></td>
+					<td>理事会类型</td>
+					<td><select name="concilType">
+						<option value="" selected>全部</option>
+						<option value="">理事长</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>广告类型</td>
+					<td><select name="adType">
+						<option value="" selected>全部</option>
+						<option value="">形象类</option>
+					</select></td>
+					<td>广审号</td>
+					<td><input type="text" name="trialNo" value=""></td>
+					<td>注册时间</td>
+					<td><input type="text" name="registTime" value=""></td>
+				</tr>
+				<tr>
+					<td>合同开始时间</td>
+					<td colspan="2"><input type="text" name="contractStartTime" value=""></td>
+					<td>合同结束时间</td>
+					<td colspan="2"><input type="text" name="contractEndTime" value=""></td>
+				</tr>
+				<tr>
+					<td colspan="3"><input type="submit" value="查询"></td>
+					<td colspan="3"><a href="../editor/toAdInfoAdd">新增</a></td>
+				</tr>
+			</table>
+		</form>
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
-				<td>广告管理</td>
-				<td>稿件标题</td>
-				<td>投稿时间</td>
-				<td>稿件状态</td>
-				<td>备注信息</td>
+				<td>理事会名称</td>
+				<td>广告名称</td>
+				<td>广审号</td>
+				<td>广告类型</td>
+				<td>注册时间</td>
+				<td>合同开始时间</td>
+				<td>合同结束时间</td>
+				<td>操作</td>
+			</tr>
+			<tr>
+				<td>理事会名称</td>
+				<td>广告名称</td>
+				<td>广审号</td>
+				<td>广告类型</td>
+				<td>注册时间</td>
+				<td>合同开始时间</td>
+				<td>合同结束时间</td>
+				<td><a href="../editor/toQrySingleAdInfo?adId=111">编辑</a></td>
 			</tr>
 		</table>
 		<br>

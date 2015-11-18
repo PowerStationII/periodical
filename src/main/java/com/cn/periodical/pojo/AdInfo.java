@@ -20,8 +20,17 @@ public class AdInfo implements Serializable{
 	private java.lang.String councilId;
 	private java.lang.String adName;
 	private java.lang.String adType;
-	private java.lang.String adPosition;
+	private java.lang.String adInvestPosition;
 	private java.lang.String trialNo;
+	private java.util.Date adSubmitTime;
+	private java.util.Date adAuditTime;
+	private java.lang.String adAuditOpinion;
+	private java.lang.String adAttachmentName;
+	private java.lang.String adAttachmentPath;
+	private java.util.Date adRecordTime;
+	private java.lang.String adContactName;
+	private java.lang.String adContactPhone;
+	private java.lang.Long adFee;
 	private java.lang.String extend1;
 	private java.lang.String extend2;
 	private java.lang.String extend3;
@@ -43,7 +52,7 @@ public class AdInfo implements Serializable{
 		return this.id;
 	}
 	/**
-	 * 
+	 * 广告id
 	 * @param adId
 	 */
 	public void setAdId(java.lang.String adId) {
@@ -51,14 +60,14 @@ public class AdInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 广告id
 	 * @return
 	 */
 	public java.lang.String getAdId() {
 		return this.adId;
 	}
 	/**
-	 * 
+	 * council_info.council_id
 	 * @param councilId
 	 */
 	public void setCouncilId(java.lang.String councilId) {
@@ -66,14 +75,14 @@ public class AdInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * council_info.council_id
 	 * @return
 	 */
 	public java.lang.String getCouncilId() {
 		return this.councilId;
 	}
 	/**
-	 * 
+	 * 广告名称
 	 * @param adName
 	 */
 	public void setAdName(java.lang.String adName) {
@@ -81,14 +90,14 @@ public class AdInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 广告名称
 	 * @return
 	 */
 	public java.lang.String getAdName() {
 		return this.adName;
 	}
 	/**
-	 * 
+	 * 广告类型
 	 * @param adType
 	 */
 	public void setAdType(java.lang.String adType) {
@@ -96,7 +105,7 @@ public class AdInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 广告类型
 	 * @return
 	 */
 	public java.lang.String getAdType() {
@@ -104,18 +113,18 @@ public class AdInfo implements Serializable{
 	}
 	/**
 	 * 刊登位置
-	 * @param adPosition
+	 * @param adInvestPosition
 	 */
-	public void setAdPosition(java.lang.String adPosition) {
-		this.adPosition = adPosition;
+	public void setAdInvestPosition(java.lang.String adInvestPosition) {
+		this.adInvestPosition = adInvestPosition;
 	}
 	
 	/**
 	 * 刊登位置
 	 * @return
 	 */
-	public java.lang.String getAdPosition() {
-		return this.adPosition;
+	public java.lang.String getAdInvestPosition() {
+		return this.adInvestPosition;
 	}
 	/**
 	 * 广审号
@@ -131,6 +140,141 @@ public class AdInfo implements Serializable{
 	 */
 	public java.lang.String getTrialNo() {
 		return this.trialNo;
+	}
+	/**
+	 * 提交日期
+	 * @param adSubmitTime
+	 */
+	public void setAdSubmitTime(java.util.Date adSubmitTime) {
+		this.adSubmitTime = adSubmitTime;
+	}
+	
+	/**
+	 * 提交日期
+	 * @return
+	 */
+	public java.util.Date getAdSubmitTime() {
+		return this.adSubmitTime;
+	}
+	/**
+	 * 审核日期
+	 * @param adAuditTime
+	 */
+	public void setAdAuditTime(java.util.Date adAuditTime) {
+		this.adAuditTime = adAuditTime;
+	}
+	
+	/**
+	 * 审核日期
+	 * @return
+	 */
+	public java.util.Date getAdAuditTime() {
+		return this.adAuditTime;
+	}
+	/**
+	 * 审核意见
+	 * @param adAuditOpinion
+	 */
+	public void setAdAuditOpinion(java.lang.String adAuditOpinion) {
+		this.adAuditOpinion = adAuditOpinion;
+	}
+	
+	/**
+	 * 审核意见
+	 * @return
+	 */
+	public java.lang.String getAdAuditOpinion() {
+		return this.adAuditOpinion;
+	}
+	/**
+	 * 广告附件名称
+	 * @param adAttachmentName
+	 */
+	public void setAdAttachmentName(java.lang.String adAttachmentName) {
+		this.adAttachmentName = adAttachmentName;
+	}
+	
+	/**
+	 * 广告附件名称
+	 * @return
+	 */
+	public java.lang.String getAdAttachmentName() {
+		return this.adAttachmentName;
+	}
+	/**
+	 * 广告附件路径
+	 * @param adAttachmentPath
+	 */
+	public void setAdAttachmentPath(java.lang.String adAttachmentPath) {
+		this.adAttachmentPath = adAttachmentPath;
+	}
+	
+	/**
+	 * 广告附件路径
+	 * @return
+	 */
+	public java.lang.String getAdAttachmentPath() {
+		return this.adAttachmentPath;
+	}
+	/**
+	 * 报批日期
+	 * @param adRecordTime
+	 */
+	public void setAdRecordTime(java.util.Date adRecordTime) {
+		this.adRecordTime = adRecordTime;
+	}
+	
+	/**
+	 * 报批日期
+	 * @return
+	 */
+	public java.util.Date getAdRecordTime() {
+		return this.adRecordTime;
+	}
+	/**
+	 * 联系人姓名
+	 * @param adContactName
+	 */
+	public void setAdContactName(java.lang.String adContactName) {
+		this.adContactName = adContactName;
+	}
+	
+	/**
+	 * 联系人姓名
+	 * @return
+	 */
+	public java.lang.String getAdContactName() {
+		return this.adContactName;
+	}
+	/**
+	 * 联系人电话
+	 * @param adContactPhone
+	 */
+	public void setAdContactPhone(java.lang.String adContactPhone) {
+		this.adContactPhone = adContactPhone;
+	}
+	
+	/**
+	 * 联系人电话
+	 * @return
+	 */
+	public java.lang.String getAdContactPhone() {
+		return this.adContactPhone;
+	}
+	/**
+	 * 刊登费
+	 * @param adFee
+	 */
+	public void setAdFee(java.lang.Long adFee) {
+		this.adFee = adFee;
+	}
+	
+	/**
+	 * 刊登费
+	 * @return
+	 */
+	public java.lang.Long getAdFee() {
+		return this.adFee;
 	}
 	/**
 	 * 

@@ -7,8 +7,17 @@
 	  <result column="council_id" jdbcType="VARCHAR" property="councilId" />
 	  <result column="ad_name" jdbcType="VARCHAR" property="adName" />
 	  <result column="ad_type" jdbcType="VARCHAR" property="adType" />
-	  <result column="ad_position" jdbcType="VARCHAR" property="adPosition" />
+	  <result column="ad_invest_position" jdbcType="VARCHAR" property="adInvestPosition" />
 	  <result column="trial_no" jdbcType="VARCHAR" property="trialNo" />
+	  <result column="ad_submit_time" jdbcType="TIMESTAMP" property="adSubmitTime" />
+	  <result column="ad_audit_time" jdbcType="TIMESTAMP" property="adAuditTime" />
+	  <result column="ad_audit_opinion" jdbcType="VARCHAR" property="adAuditOpinion" />
+	  <result column="ad_attachment_name" jdbcType="VARCHAR" property="adAttachmentName" />
+	  <result column="ad_attachment_path" jdbcType="VARCHAR" property="adAttachmentPath" />
+	  <result column="ad_record_time" jdbcType="TIMESTAMP" property="adRecordTime" />
+	  <result column="ad_contact_name" jdbcType="VARCHAR" property="adContactName" />
+	  <result column="ad_contact_phone" jdbcType="VARCHAR" property="adContactPhone" />
+	  <result column="ad_fee" jdbcType="DECIMAL" property="adFee" />
 	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
 	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
 	  <result column="extend_3" jdbcType="VARCHAR" property="extend3" />
@@ -37,11 +46,38 @@
       <if test="adType != null" >
 	      and ad_type = #{adType,jdbcType=VARCHAR}
 	    </if>
-      <if test="adPosition != null" >
-	      and ad_position = #{adPosition,jdbcType=VARCHAR}
+      <if test="adInvestPosition != null" >
+	      and ad_invest_position = #{adInvestPosition,jdbcType=VARCHAR}
 	    </if>
       <if test="trialNo != null" >
 	      and trial_no = #{trialNo,jdbcType=VARCHAR}
+	    </if>
+      <if test="adSubmitTime != null" >
+	      and ad_submit_time = #{adSubmitTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="adAuditTime != null" >
+	      and ad_audit_time = #{adAuditTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="adAuditOpinion != null" >
+	      and ad_audit_opinion = #{adAuditOpinion,jdbcType=VARCHAR}
+	    </if>
+      <if test="adAttachmentName != null" >
+	      and ad_attachment_name = #{adAttachmentName,jdbcType=VARCHAR}
+	    </if>
+      <if test="adAttachmentPath != null" >
+	      and ad_attachment_path = #{adAttachmentPath,jdbcType=VARCHAR}
+	    </if>
+      <if test="adRecordTime != null" >
+	      and ad_record_time = #{adRecordTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="adContactName != null" >
+	      and ad_contact_name = #{adContactName,jdbcType=VARCHAR}
+	    </if>
+      <if test="adContactPhone != null" >
+	      and ad_contact_phone = #{adContactPhone,jdbcType=VARCHAR}
+	    </if>
+      <if test="adFee != null" >
+	      and ad_fee = #{adFee,jdbcType=DECIMAL}
 	    </if>
       <if test="extend1 != null" >
 	      and extend_1 = #{extend1,jdbcType=VARCHAR}
@@ -79,11 +115,38 @@
       <if test="adType != null">
         ad_type = #{adType,jdbcType=VARCHAR},
       </if>
-      <if test="adPosition != null">
-        ad_position = #{adPosition,jdbcType=VARCHAR},
+      <if test="adInvestPosition != null">
+        ad_invest_position = #{adInvestPosition,jdbcType=VARCHAR},
       </if>
       <if test="trialNo != null">
         trial_no = #{trialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="adSubmitTime != null">
+        ad_submit_time = #{adSubmitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adAuditTime != null">
+        ad_audit_time = #{adAuditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adAuditOpinion != null">
+        ad_audit_opinion = #{adAuditOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="adAttachmentName != null">
+        ad_attachment_name = #{adAttachmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="adAttachmentPath != null">
+        ad_attachment_path = #{adAttachmentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="adRecordTime != null">
+        ad_record_time = #{adRecordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adContactName != null">
+        ad_contact_name = #{adContactName,jdbcType=VARCHAR},
+      </if>
+      <if test="adContactPhone != null">
+        ad_contact_phone = #{adContactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="adFee != null">
+        ad_fee = #{adFee,jdbcType=DECIMAL},
       </if>
       <if test="extend1 != null">
         extend_1 = #{extend1,jdbcType=VARCHAR},
@@ -112,8 +175,17 @@
     council_id,
     ad_name,
     ad_type,
-    ad_position,
+    ad_invest_position,
     trial_no,
+    ad_submit_time,
+    ad_audit_time,
+    ad_audit_opinion,
+    ad_attachment_name,
+    ad_attachment_path,
+    ad_record_time,
+    ad_contact_name,
+    ad_contact_phone,
+    ad_fee,
     extend_1,
     extend_2,
     extend_3,
@@ -128,8 +200,17 @@
         council_id = #{councilId,jdbcType=VARCHAR},
         ad_name = #{adName,jdbcType=VARCHAR},
         ad_type = #{adType,jdbcType=VARCHAR},
-        ad_position = #{adPosition,jdbcType=VARCHAR},
+        ad_invest_position = #{adInvestPosition,jdbcType=VARCHAR},
         trial_no = #{trialNo,jdbcType=VARCHAR},
+        ad_submit_time = #{adSubmitTime,jdbcType=TIMESTAMP},
+        ad_audit_time = #{adAuditTime,jdbcType=TIMESTAMP},
+        ad_audit_opinion = #{adAuditOpinion,jdbcType=VARCHAR},
+        ad_attachment_name = #{adAttachmentName,jdbcType=VARCHAR},
+        ad_attachment_path = #{adAttachmentPath,jdbcType=VARCHAR},
+        ad_record_time = #{adRecordTime,jdbcType=TIMESTAMP},
+        ad_contact_name = #{adContactName,jdbcType=VARCHAR},
+        ad_contact_phone = #{adContactPhone,jdbcType=VARCHAR},
+        ad_fee = #{adFee,jdbcType=DECIMAL},
         extend_1 = #{extend1,jdbcType=VARCHAR},
         extend_2 = #{extend2,jdbcType=VARCHAR},
         extend_3 = #{extend3,jdbcType=VARCHAR},
@@ -153,11 +234,38 @@
     <if test="adType != null">
       ad_type,
     </if>
-    <if test="adPosition != null">
-      ad_position,
+    <if test="adInvestPosition != null">
+      ad_invest_position,
     </if>
     <if test="trialNo != null">
       trial_no,
+    </if>
+    <if test="adSubmitTime != null">
+      ad_submit_time,
+    </if>
+    <if test="adAuditTime != null">
+      ad_audit_time,
+    </if>
+    <if test="adAuditOpinion != null">
+      ad_audit_opinion,
+    </if>
+    <if test="adAttachmentName != null">
+      ad_attachment_name,
+    </if>
+    <if test="adAttachmentPath != null">
+      ad_attachment_path,
+    </if>
+    <if test="adRecordTime != null">
+      ad_record_time,
+    </if>
+    <if test="adContactName != null">
+      ad_contact_name,
+    </if>
+    <if test="adContactPhone != null">
+      ad_contact_phone,
+    </if>
+    <if test="adFee != null">
+      ad_fee,
     </if>
     <if test="extend1 != null">
       extend_1,
@@ -184,8 +292,17 @@
     #{councilId,jdbcType=VARCHAR},
     #{adName,jdbcType=VARCHAR},
     #{adType,jdbcType=VARCHAR},
-    #{adPosition,jdbcType=VARCHAR},
+    #{adInvestPosition,jdbcType=VARCHAR},
     #{trialNo,jdbcType=VARCHAR},
+    #{adSubmitTime,jdbcType=TIMESTAMP},
+    #{adAuditTime,jdbcType=TIMESTAMP},
+    #{adAuditOpinion,jdbcType=VARCHAR},
+    #{adAttachmentName,jdbcType=VARCHAR},
+    #{adAttachmentPath,jdbcType=VARCHAR},
+    #{adRecordTime,jdbcType=TIMESTAMP},
+    #{adContactName,jdbcType=VARCHAR},
+    #{adContactPhone,jdbcType=VARCHAR},
+    #{adFee,jdbcType=DECIMAL},
     #{extend1,jdbcType=VARCHAR},
     #{extend2,jdbcType=VARCHAR},
     #{extend3,jdbcType=VARCHAR},
@@ -207,11 +324,38 @@
     <if test="adType != null">
       #{adType,jdbcType=VARCHAR},
     </if>
-    <if test="adPosition != null">
-      #{adPosition,jdbcType=VARCHAR},
+    <if test="adInvestPosition != null">
+      #{adInvestPosition,jdbcType=VARCHAR},
     </if>
     <if test="trialNo != null">
       #{trialNo,jdbcType=VARCHAR},
+    </if>
+    <if test="adSubmitTime != null">
+      #{adSubmitTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="adAuditTime != null">
+      #{adAuditTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="adAuditOpinion != null">
+      #{adAuditOpinion,jdbcType=VARCHAR},
+    </if>
+    <if test="adAttachmentName != null">
+      #{adAttachmentName,jdbcType=VARCHAR},
+    </if>
+    <if test="adAttachmentPath != null">
+      #{adAttachmentPath,jdbcType=VARCHAR},
+    </if>
+    <if test="adRecordTime != null">
+      #{adRecordTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="adContactName != null">
+      #{adContactName,jdbcType=VARCHAR},
+    </if>
+    <if test="adContactPhone != null">
+      #{adContactPhone,jdbcType=VARCHAR},
+    </if>
+    <if test="adFee != null">
+      #{adFee,jdbcType=DECIMAL},
     </if>
     <if test="extend1 != null">
       #{extend1,jdbcType=VARCHAR},

@@ -10,8 +10,12 @@
 	  <result column="company_setup_time" jdbcType="TIMESTAMP" property="companySetupTime" />
 	  <result column="employee_nums" jdbcType="INTEGER" property="employeeNums" />
 	  <result column="website" jdbcType="VARCHAR" property="website" />
+	  <result column="area_pro" jdbcType="VARCHAR" property="areaPro" />
+	  <result column="area_city" jdbcType="VARCHAR" property="areaCity" />
+	  <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
+	  <result column="post_code" jdbcType="VARCHAR" property="postCode" />
 	  <result column="ranges" jdbcType="VARCHAR" property="ranges" />
-	  <result column="logo_id" jdbcType="VARCHAR" property="logoId" />
+	  <result column="logo_name" jdbcType="VARCHAR" property="logoName" />
 	  <result column="logo_url" jdbcType="VARCHAR" property="logoUrl" />
 	  <result column="legal_name" jdbcType="VARCHAR" property="legalName" />
 	  <result column="legal_duties" jdbcType="VARCHAR" property="legalDuties" />
@@ -28,6 +32,7 @@
 	  <result column="iscouncil" jdbcType="VARCHAR" property="iscouncil" />
 	  <result column="isad" jdbcType="VARCHAR" property="isad" />
 	  <result column="ispayfees" jdbcType="VARCHAR" property="ispayfees" />
+	  <result column="state" jdbcType="VARCHAR" property="state" />
 	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
 	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
 	  <result column="extend_3" jdbcType="VARCHAR" property="extend3" />
@@ -65,11 +70,23 @@
       <if test="website != null" >
 	      and website = #{website,jdbcType=VARCHAR}
 	    </if>
+      <if test="areaPro != null" >
+	      and area_pro = #{areaPro,jdbcType=VARCHAR}
+	    </if>
+      <if test="areaCity != null" >
+	      and area_city = #{areaCity,jdbcType=VARCHAR}
+	    </if>
+      <if test="addressDetail != null" >
+	      and address_detail = #{addressDetail,jdbcType=VARCHAR}
+	    </if>
+      <if test="postCode != null" >
+	      and post_code = #{postCode,jdbcType=VARCHAR}
+	    </if>
       <if test="ranges != null" >
 	      and ranges = #{ranges,jdbcType=VARCHAR}
 	    </if>
-      <if test="logoId != null" >
-	      and logo_id = #{logoId,jdbcType=VARCHAR}
+      <if test="logoName != null" >
+	      and logo_name = #{logoName,jdbcType=VARCHAR}
 	    </if>
       <if test="logoUrl != null" >
 	      and logo_url = #{logoUrl,jdbcType=VARCHAR}
@@ -119,6 +136,9 @@
       <if test="ispayfees != null" >
 	      and ispayfees = #{ispayfees,jdbcType=VARCHAR}
 	    </if>
+      <if test="state != null" >
+	      and state = #{state,jdbcType=VARCHAR}
+	    </if>
       <if test="extend1 != null" >
 	      and extend_1 = #{extend1,jdbcType=VARCHAR}
 	    </if>
@@ -164,11 +184,23 @@
       <if test="website != null">
         website = #{website,jdbcType=VARCHAR},
       </if>
+      <if test="areaPro != null">
+        area_pro = #{areaPro,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCity != null">
+        area_city = #{areaCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null">
+        post_code = #{postCode,jdbcType=VARCHAR},
+      </if>
       <if test="ranges != null">
         ranges = #{ranges,jdbcType=VARCHAR},
       </if>
-      <if test="logoId != null">
-        logo_id = #{logoId,jdbcType=VARCHAR},
+      <if test="logoName != null">
+        logo_name = #{logoName,jdbcType=VARCHAR},
       </if>
       <if test="logoUrl != null">
         logo_url = #{logoUrl,jdbcType=VARCHAR},
@@ -218,6 +250,9 @@
       <if test="ispayfees != null">
         ispayfees = #{ispayfees,jdbcType=VARCHAR},
       </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
       <if test="extend1 != null">
         extend_1 = #{extend1,jdbcType=VARCHAR},
       </if>
@@ -248,8 +283,12 @@
     company_setup_time,
     employee_nums,
     website,
+    area_pro,
+    area_city,
+    address_detail,
+    post_code,
     ranges,
-    logo_id,
+    logo_name,
     logo_url,
     legal_name,
     legal_duties,
@@ -266,6 +305,7 @@
     iscouncil,
     isad,
     ispayfees,
+    state,
     extend_1,
     extend_2,
     extend_3,
@@ -283,8 +323,12 @@
         company_setup_time = #{companySetupTime,jdbcType=TIMESTAMP},
         employee_nums = #{employeeNums,jdbcType=INTEGER},
         website = #{website,jdbcType=VARCHAR},
+        area_pro = #{areaPro,jdbcType=VARCHAR},
+        area_city = #{areaCity,jdbcType=VARCHAR},
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+        post_code = #{postCode,jdbcType=VARCHAR},
         ranges = #{ranges,jdbcType=VARCHAR},
-        logo_id = #{logoId,jdbcType=VARCHAR},
+        logo_name = #{logoName,jdbcType=VARCHAR},
         logo_url = #{logoUrl,jdbcType=VARCHAR},
         legal_name = #{legalName,jdbcType=VARCHAR},
         legal_duties = #{legalDuties,jdbcType=VARCHAR},
@@ -301,6 +345,7 @@
         iscouncil = #{iscouncil,jdbcType=VARCHAR},
         isad = #{isad,jdbcType=VARCHAR},
         ispayfees = #{ispayfees,jdbcType=VARCHAR},
+        state = #{state,jdbcType=VARCHAR},
         extend_1 = #{extend1,jdbcType=VARCHAR},
         extend_2 = #{extend2,jdbcType=VARCHAR},
         extend_3 = #{extend3,jdbcType=VARCHAR},
@@ -333,11 +378,23 @@
     <if test="website != null">
       website,
     </if>
+    <if test="areaPro != null">
+      area_pro,
+    </if>
+    <if test="areaCity != null">
+      area_city,
+    </if>
+    <if test="addressDetail != null">
+      address_detail,
+    </if>
+    <if test="postCode != null">
+      post_code,
+    </if>
     <if test="ranges != null">
       ranges,
     </if>
-    <if test="logoId != null">
-      logo_id,
+    <if test="logoName != null">
+      logo_name,
     </if>
     <if test="logoUrl != null">
       logo_url,
@@ -387,6 +444,9 @@
     <if test="ispayfees != null">
       ispayfees,
     </if>
+    <if test="state != null">
+      state,
+    </if>
     <if test="extend1 != null">
       extend_1,
     </if>
@@ -415,8 +475,12 @@
     #{companySetupTime,jdbcType=TIMESTAMP},
     #{employeeNums,jdbcType=INTEGER},
     #{website,jdbcType=VARCHAR},
+    #{areaPro,jdbcType=VARCHAR},
+    #{areaCity,jdbcType=VARCHAR},
+    #{addressDetail,jdbcType=VARCHAR},
+    #{postCode,jdbcType=VARCHAR},
     #{ranges,jdbcType=VARCHAR},
-    #{logoId,jdbcType=VARCHAR},
+    #{logoName,jdbcType=VARCHAR},
     #{logoUrl,jdbcType=VARCHAR},
     #{legalName,jdbcType=VARCHAR},
     #{legalDuties,jdbcType=VARCHAR},
@@ -433,6 +497,7 @@
     #{iscouncil,jdbcType=VARCHAR},
     #{isad,jdbcType=VARCHAR},
     #{ispayfees,jdbcType=VARCHAR},
+    #{state,jdbcType=VARCHAR},
     #{extend1,jdbcType=VARCHAR},
     #{extend2,jdbcType=VARCHAR},
     #{extend3,jdbcType=VARCHAR},
@@ -463,11 +528,23 @@
     <if test="website != null">
       #{website,jdbcType=VARCHAR},
     </if>
+    <if test="areaPro != null">
+      #{areaPro,jdbcType=VARCHAR},
+    </if>
+    <if test="areaCity != null">
+      #{areaCity,jdbcType=VARCHAR},
+    </if>
+    <if test="addressDetail != null">
+      #{addressDetail,jdbcType=VARCHAR},
+    </if>
+    <if test="postCode != null">
+      #{postCode,jdbcType=VARCHAR},
+    </if>
     <if test="ranges != null">
       #{ranges,jdbcType=VARCHAR},
     </if>
-    <if test="logoId != null">
-      #{logoId,jdbcType=VARCHAR},
+    <if test="logoName != null">
+      #{logoName,jdbcType=VARCHAR},
     </if>
     <if test="logoUrl != null">
       #{logoUrl,jdbcType=VARCHAR},
@@ -516,6 +593,9 @@
     </if>
     <if test="ispayfees != null">
       #{ispayfees,jdbcType=VARCHAR},
+    </if>
+    <if test="state != null">
+      #{state,jdbcType=VARCHAR},
     </if>
     <if test="extend1 != null">
       #{extend1,jdbcType=VARCHAR},

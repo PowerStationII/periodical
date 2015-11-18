@@ -30,8 +30,12 @@ public class CouncilInfoQuery extends PagingQuery {
 	private java.util.Date companySetupTime;
 	private java.lang.Integer employeeNums;
 	private java.lang.String website;
+	private java.lang.String areaPro;
+	private java.lang.String areaCity;
+	private java.lang.String addressDetail;
+	private java.lang.String postCode;
 	private java.lang.String ranges;
-	private java.lang.String logoId;
+	private java.lang.String logoName;
 	private java.lang.String logoUrl;
 	private java.lang.String legalName;
 	private java.lang.String legalDuties;
@@ -48,6 +52,7 @@ public class CouncilInfoQuery extends PagingQuery {
 	private java.lang.String iscouncil;
 	private java.lang.String isad;
 	private java.lang.String ispayfees;
+	private java.lang.String state;
 	private java.lang.String extend1;
 	private java.lang.String extend2;
 	private java.lang.String extend3;
@@ -56,7 +61,7 @@ public class CouncilInfoQuery extends PagingQuery {
 	private java.util.Date updateTime;
 
 	/**
-	 * 
+	 * 会员编号
 	 * @param councilId
 	 */
 	public void setCouncilId(java.lang.String councilId) {
@@ -64,14 +69,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 会员编号
 	 * @return
 	 */
 	public java.lang.String getCouncilId() {
 		return this.councilId;
 	}
 	/**
-	 * 
+	 * 没什么用好像
 	 * @param councilName
 	 */
 	public void setCouncilName(java.lang.String councilName) {
@@ -79,7 +84,7 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 没什么用好像
 	 * @return
 	 */
 	public java.lang.String getCouncilName() {
@@ -116,7 +121,7 @@ public class CouncilInfoQuery extends PagingQuery {
 		return this.councilCompany;
 	}
 	/**
-	 * 
+	 * 创立时间
 	 * @param companySetupTime
 	 */
 	public void setCompanySetupTime(java.util.Date companySetupTime) {
@@ -124,14 +129,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 创立时间
 	 * @return
 	 */
 	public java.util.Date getCompanySetupTime() {
 		return this.companySetupTime;
 	}
 	/**
-	 * 
+	 * 员工数
 	 * @param employeeNums
 	 */
 	public void setEmployeeNums(java.lang.Integer employeeNums) {
@@ -139,14 +144,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 员工数
 	 * @return
 	 */
 	public java.lang.Integer getEmployeeNums() {
 		return this.employeeNums;
 	}
 	/**
-	 * 
+	 * 企业网址
 	 * @param website
 	 */
 	public void setWebsite(java.lang.String website) {
@@ -154,11 +159,71 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 企业网址
 	 * @return
 	 */
 	public java.lang.String getWebsite() {
 		return this.website;
+	}
+	/**
+	 * 所在省
+	 * @param areaPro
+	 */
+	public void setAreaPro(java.lang.String areaPro) {
+		this.areaPro = areaPro;
+	}
+	
+	/**
+	 * 所在省
+	 * @return
+	 */
+	public java.lang.String getAreaPro() {
+		return this.areaPro;
+	}
+	/**
+	 * 所在市
+	 * @param areaCity
+	 */
+	public void setAreaCity(java.lang.String areaCity) {
+		this.areaCity = areaCity;
+	}
+	
+	/**
+	 * 所在市
+	 * @return
+	 */
+	public java.lang.String getAreaCity() {
+		return this.areaCity;
+	}
+	/**
+	 * 详细地址
+	 * @param addressDetail
+	 */
+	public void setAddressDetail(java.lang.String addressDetail) {
+		this.addressDetail = addressDetail;
+	}
+	
+	/**
+	 * 详细地址
+	 * @return
+	 */
+	public java.lang.String getAddressDetail() {
+		return this.addressDetail;
+	}
+	/**
+	 * 邮政编码
+	 * @param postCode
+	 */
+	public void setPostCode(java.lang.String postCode) {
+		this.postCode = postCode;
+	}
+	
+	/**
+	 * 邮政编码
+	 * @return
+	 */
+	public java.lang.String getPostCode() {
+		return this.postCode;
 	}
 	/**
 	 * 业务范围
@@ -176,22 +241,22 @@ public class CouncilInfoQuery extends PagingQuery {
 		return this.ranges;
 	}
 	/**
-	 * 
-	 * @param logoId
+	 * logo名称
+	 * @param logoName
 	 */
-	public void setLogoId(java.lang.String logoId) {
-		this.logoId = logoId;
+	public void setLogoName(java.lang.String logoName) {
+		this.logoName = logoName;
 	}
 	
 	/**
-	 * 
+	 * logo名称
 	 * @return
 	 */
-	public java.lang.String getLogoId() {
-		return this.logoId;
+	public java.lang.String getLogoName() {
+		return this.logoName;
 	}
 	/**
-	 * 
+	 * logo地址
 	 * @param logoUrl
 	 */
 	public void setLogoUrl(java.lang.String logoUrl) {
@@ -199,14 +264,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * logo地址
 	 * @return
 	 */
 	public java.lang.String getLogoUrl() {
 		return this.logoUrl;
 	}
 	/**
-	 * 
+	 * 法人代表
 	 * @param legalName
 	 */
 	public void setLegalName(java.lang.String legalName) {
@@ -214,14 +279,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 法人代表
 	 * @return
 	 */
 	public java.lang.String getLegalName() {
 		return this.legalName;
 	}
 	/**
-	 * 
+	 * 法人职务
 	 * @param legalDuties
 	 */
 	public void setLegalDuties(java.lang.String legalDuties) {
@@ -229,14 +294,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 法人职务
 	 * @return
 	 */
 	public java.lang.String getLegalDuties() {
 		return this.legalDuties;
 	}
 	/**
-	 * 
+	 * 法人性别
 	 * @param legalSex
 	 */
 	public void setLegalSex(java.lang.String legalSex) {
@@ -244,14 +309,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 法人性别
 	 * @return
 	 */
 	public java.lang.String getLegalSex() {
 		return this.legalSex;
 	}
 	/**
-	 * 
+	 * 法人民族
 	 * @param legalNation
 	 */
 	public void setLegalNation(java.lang.String legalNation) {
@@ -259,14 +324,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 法人民族
 	 * @return
 	 */
 	public java.lang.String getLegalNation() {
 		return this.legalNation;
 	}
 	/**
-	 * 
+	 * 联系电话
 	 * @param legalTelephone
 	 */
 	public void setLegalTelephone(java.lang.String legalTelephone) {
@@ -274,14 +339,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 联系电话
 	 * @return
 	 */
 	public java.lang.String getLegalTelephone() {
 		return this.legalTelephone;
 	}
 	/**
-	 * 
+	 * email地址
 	 * @param legalEmail
 	 */
 	public void setLegalEmail(java.lang.String legalEmail) {
@@ -289,14 +354,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * email地址
 	 * @return
 	 */
 	public java.lang.String getLegalEmail() {
 		return this.legalEmail;
 	}
 	/**
-	 * 
+	 * 联系人姓名
 	 * @param contactName
 	 */
 	public void setContactName(java.lang.String contactName) {
@@ -304,14 +369,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 联系人姓名
 	 * @return
 	 */
 	public java.lang.String getContactName() {
 		return this.contactName;
 	}
 	/**
-	 * 
+	 * 联系人性别
 	 * @param contactSex
 	 */
 	public void setContactSex(java.lang.String contactSex) {
@@ -319,14 +384,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 联系人性别
 	 * @return
 	 */
 	public java.lang.String getContactSex() {
 		return this.contactSex;
 	}
 	/**
-	 * 
+	 * 联系人qq
 	 * @param contactQq
 	 */
 	public void setContactQq(java.lang.String contactQq) {
@@ -334,14 +399,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 联系人qq
 	 * @return
 	 */
 	public java.lang.String getContactQq() {
 		return this.contactQq;
 	}
 	/**
-	 * 
+	 * 联系人手机号
 	 * @param contactMobileno
 	 */
 	public void setContactMobileno(java.lang.String contactMobileno) {
@@ -349,14 +414,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 联系人手机号
 	 * @return
 	 */
 	public java.lang.String getContactMobileno() {
 		return this.contactMobileno;
 	}
 	/**
-	 * 
+	 * 联系人座机
 	 * @param contactTelephone
 	 */
 	public void setContactTelephone(java.lang.String contactTelephone) {
@@ -364,14 +429,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 联系人座机
 	 * @return
 	 */
 	public java.lang.String getContactTelephone() {
 		return this.contactTelephone;
 	}
 	/**
-	 * 
+	 * 联系人email
 	 * @param contactEmail
 	 */
 	public void setContactEmail(java.lang.String contactEmail) {
@@ -379,14 +444,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 联系人email
 	 * @return
 	 */
 	public java.lang.String getContactEmail() {
 		return this.contactEmail;
 	}
 	/**
-	 * 
+	 * 成员类型;理事长,副理事长,理事
 	 * @param iscouncil
 	 */
 	public void setIscouncil(java.lang.String iscouncil) {
@@ -394,14 +459,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 成员类型;理事长,副理事长,理事
 	 * @return
 	 */
 	public java.lang.String getIscouncil() {
 		return this.iscouncil;
 	}
 	/**
-	 * 
+	 * 广告相关,想不起来是啥意思了
 	 * @param isad
 	 */
 	public void setIsad(java.lang.String isad) {
@@ -409,14 +474,14 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 广告相关,想不起来是啥意思了
 	 * @return
 	 */
 	public java.lang.String getIsad() {
 		return this.isad;
 	}
 	/**
-	 * 
+	 * 是否付费
 	 * @param ispayfees
 	 */
 	public void setIspayfees(java.lang.String ispayfees) {
@@ -424,11 +489,26 @@ public class CouncilInfoQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 是否付费
 	 * @return
 	 */
 	public java.lang.String getIspayfees() {
 		return this.ispayfees;
+	}
+	/**
+	 * Y:可用N:不可用
+	 * @param state
+	 */
+	public void setState(java.lang.String state) {
+		this.state = state;
+	}
+	
+	/**
+	 * Y:可用N:不可用
+	 * @return
+	 */
+	public java.lang.String getState() {
+		return this.state;
 	}
 	/**
 	 * 

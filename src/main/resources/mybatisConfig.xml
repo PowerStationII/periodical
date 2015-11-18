@@ -38,23 +38,25 @@
 
 	<!-- 映射文件 -->
 	<mappers>
-		<mapper resource="sqlmap/AuthorInfoMapper.xml" />
-		<mapper resource="sqlmap/UserInfoMapper.xml"/>
-		<mapper resource="sqlmap/AddressInfoMapper.xml"/>
-		<mapper resource="sqlmap/ArticleInfoMapper.xml"/>
-		<mapper resource="sqlmap/ArticleAttachmentInfoMapper.xml"/>
-		<mapper resource="sqlmap/CouncilInfoMapper.xml"/>
-		<mapper resource="sqlmap/ArticleInfoExtendMapper.xml"/>
-		<mapper resource="sqlmap/ArticleFlowsMapper.xml"/>
-		<mapper resource="sqlmap/OrderInfoMapper.xml"/>
-		<mapper resource="sqlmap/PeriodicalDetailsMapper.xml"/>
-		<mapper resource="sqlmap/PeriodicalInfoMapper.xml"/>
-		<mapper resource="sqlmap/PeriodicalMapper.xml"/>
-		<mapper resource="sqlmap/PayeeInfoMapper.xml"/>
-		<mapper resource="sqlmap/AccountInfoMapper.xml"/>
-		<mapper resource="sqlmap/EditorInfoMapper.xml"/>
-		<mapper resource="sqlmap/ExpertInfoMapper.xml"/>
-		<mapper resource="sqlmap/ReaderInfoMapper.xml"/>
+		<mapper resource="sqlmap/AuthorInfoMapper.xml" /><!-- 作者mapper -->
+		<mapper resource="sqlmap/UserInfoMapper.xml"/><!-- 用户mapper -->
+		<mapper resource="sqlmap/AddressInfoMapper.xml"/><!-- 各种地址mapper -->
+		<mapper resource="sqlmap/ArticleInfoMapper.xml"/><!-- 稿件mapper -->
+		<mapper resource="sqlmap/ArticleAttachmentInfoMapper.xml"/><!-- 稿件附件mapper -->
+		<mapper resource="sqlmap/ArticleInfoExtendMapper.xml"/><!-- 稿件扩展mapper,都谁能看这个稿件 -->
+		<mapper resource="sqlmap/ArticleFlowsMapper.xml"/><!-- 稿件流水mapper -->
+		<mapper resource="sqlmap/OrderInfoMapper.xml"/><!-- 订单mapper -->
+		<mapper resource="sqlmap/PeriodicalDetailsMapper.xml"/><!-- 期刊内容mapper,包括广告+稿件 -->
+		<mapper resource="sqlmap/PeriodicalInfoMapper.xml"/><!-- 一种期刊信息mapper -->
+		<mapper resource="sqlmap/PeriodicalMapper.xml"/><!-- 期刊期数信息mapper:一本农业期刊一年12期,此处将创建12本该期刊,后续组刊时用此表-->
+		<mapper resource="sqlmap/PayeeInfoMapper.xml"/><!-- 收款人信息 -->
+		<mapper resource="sqlmap/AccountInfoMapper.xml"/><!-- 账户信息 -->
+		<mapper resource="sqlmap/EditorInfoMapper.xml"/><!-- 编辑信息 -->
+		<mapper resource="sqlmap/ExpertInfoMapper.xml"/><!-- 专家信息 -->
+		<mapper resource="sqlmap/ReaderInfoMapper.xml"/><!-- 读者信息 -->
+		<mapper resource="sqlmap/AdInfoMapper.xml"/><!-- 广告信息 -->
+		<mapper resource="sqlmap/CouncilContractFlowsMapper.xml"/><!-- 理事会付款流水 -->
+		<mapper resource="sqlmap/CouncilInfoMapper.xml"/><!-- 理事会信息:一个理事会机构对应多条广告信息(不止一条广告)和付款流水(续签)-->
 		<!-- 业务 -->
 		<mapper resource="sqlmap/ArticleQueryMapper.xml"/>
 		<mapper resource="sqlmap/UserQueryMapper.xml"/>

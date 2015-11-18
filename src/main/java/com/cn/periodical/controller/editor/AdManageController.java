@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.pojo.Ad;
+import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.EditorAdCouncilManagerReqDto;
 /**
  * 广告编辑-广告管理Controller
@@ -25,13 +27,23 @@ public class AdManageController extends EditorController{
 	 * 广告管理
 	 */
 	@RequestMapping(value="/toAdManagerPage",method = RequestMethod.GET)
-	public ModelAndView toAdManagerPage(@RequestParam("userId") String userId,
-			HttpServletRequest request) {
-		logger.info("广告管理Page:["+userId+"]");
+	public ModelAndView toAdManagerPage(HttpServletRequest request,@ModelAttribute Ad ad) {
+		UserInfo userInfo = getUserInfo(request);
+		logger.info("广告管理首页Page in:[]");
 		ModelAndView mav = new ModelAndView("editor_adManagerPage");
-		mav.addObject("userId", userId);
+		/**
+		 * 广告首页查询
+		 * 查询条件:
+		 * adName=广告名称;concilName=理事会名称;concilType=理事会类型
+		 * registTime=注册时间;adType=广告类型;trialNo=广审号
+		 * contractStartTime=合同开始日期;contractEndTime=合同结束日期
+		 * 
+		 * 查询一个list列表,页面展示用
+		 * */
 		
 		
+		
+		logger.info("广告管理首页Page out:[]");
 		return mav;
 	}
 	
@@ -44,7 +56,7 @@ public class AdManageController extends EditorController{
 	}
 	
 	/**
-	 * 保存数据
+	 * 保存广告信息
 	 */
 	@RequestMapping(value = "/toSaveAdInfo", method = { RequestMethod.POST })
 	public ModelAndView saveAdInfo(@ModelAttribute EditorAdCouncilManagerReqDto councilInfo) {
@@ -59,6 +71,37 @@ public class AdManageController extends EditorController{
 			logger.error("保存广告信息异常!", e);
 			return new ModelAndView("error");
 		}
+	}
+	
+	
+	/**
+	 * 广告单条记录查询
+	 * */
+	@RequestMapping(value = "/toQrySingleAdInfo")
+	public ModelAndView toQrySingleAdInfo(@RequestParam("adId") String adId) {
+		ModelAndView mav = new ModelAndView("redirect:../editor/toAdInfoEdit");
+
 		
+		return mav;
+	}
+	
+	/**
+	 * 广告编辑页面
+	 * */
+	@RequestMapping(value = "/toAdInfoEdit")
+	public ModelAndView toAdInfoEdit() {
+		ModelAndView mav = new ModelAndView("editor_adManagerEditPage");
+
+		return mav;
+	}
+	
+	/**
+	 * 广告编辑保存Action
+	 * */
+	@RequestMapping(value = "/toSaveAdInfoEdit")
+	public ModelAndView toSaveAdInfoEdit() {
+		ModelAndView mav = new ModelAndView("redirect:../editor/toAdManagerPage");
+
+		return mav;
 	}
 }
