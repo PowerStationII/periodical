@@ -85,7 +85,7 @@ public class ArticleNewDealController extends EditorController{
 		ModelAndView mav = new ModelAndView("editor_newArticleDetailPage");
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
 		reqDto.setArticleId(artilceId);
-		reqDto.setRoleId(RoleIdEnums.AUTHOR.getCode());/**编辑下载作者的稿件*/
+		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**编辑下载编辑目录的稿件*/
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
 		mav.addObject("respDto", articleQueryRespDto);
 		logger.info("新稿详情页Page出参:["+JSON.toJSONString(articleQueryRespDto)+"]");

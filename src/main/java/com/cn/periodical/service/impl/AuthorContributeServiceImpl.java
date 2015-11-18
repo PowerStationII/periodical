@@ -34,6 +34,7 @@ import com.cn.periodical.request.AritcleWorkFlowReqDto;
 import com.cn.periodical.request.AuthorContributeReqDto;
 import com.cn.periodical.service.ArticleWorkFlowService;
 import com.cn.periodical.service.AuthorContributeService;
+import com.cn.periodical.utils.FileCopyUtils;
 import com.cn.periodical.utils.PropertiesInitManager;
 
 @Service
@@ -210,6 +211,44 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 			articleFlows.setDealEndTime(new Date());
 			articleFlows.setExtend2("N");/**为了审批意见是否作者可见而改*/
 			articleFlowsManager.saveArticleFlows(articleFlows);
+		}
+		
+		/**
+		 * 复制一份稿件信息到编辑目录
+		 * */
+		String path = (String)PropertiesInitManager.PROPERTIES.get("editorPath");
+		String oldPath = articleAttachmentInfo.getAttachmentPath();
+		String oldName = articleAttachmentInfo.getAttachmentName();
+		StringBuffer newPath= new StringBuffer();
+		newPath.append(path);
+		newPath.append(File.separator);
+		newPath.append(articleInfo.getArticleId());
+		newPath.append(File.separator);
+		
+		try{
+			FileCopyUtils.copyFile(oldPath, "", newPath.toString(), oldName);
+			
+			ArticleAttachmentInfo copyFile = new ArticleAttachmentInfo();
+			copyFile.setArticleId(articleId);
+			copyFile.setAttachmentName(oldName);
+			copyFile.setAttachmentPath(newPath.toString()+oldName);
+			copyFile.setBdjcbgAttachmentName("");
+			copyFile.setBdjcbgAttachmentPath("");
+			copyFile.setCxcnsAttachmentName("");
+			copyFile.setCxcnsAttachmentPath("");
+			copyFile.setEditTimes(0);
+			copyFile.setSjtztsjAttachmentName("");
+			copyFile.setSjtztsjAttachmentPath("");
+			copyFile.setYjspzpAttachmentName("");
+			copyFile.setYjspzpAttachmentPath("");
+			copyFile.setType("1006");
+			copyFile.setStatus("Y");
+			copyFile.setCreateTime(new Date());
+			copyFile.setUpdateTime(new Date());
+			
+			articleAttachmentInfoManager.saveArticleAttachmentInfo(copyFile);
+		}catch(Exception e){
+			logger.info("稿件复制异常!!!怎么通知系统呢?");
 		}
 	}
 	

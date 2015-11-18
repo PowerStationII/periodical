@@ -8,25 +8,25 @@ package com.cn.periodical.pojo;
 import com.cn.periodical.utils.PagingQuery;
 
 /**
- * ExpertInfoQuery
+ * ReaderInfoQuery
  * @author code-generator
  *
  */
-public class ExpertInfoQuery extends PagingQuery {
+public class ReaderInfoQuery extends PagingQuery {
 	private static final long serialVersionUID = 1L;
 	
-	public  ExpertInfoQuery(){
+	public  ReaderInfoQuery(){
 		super(1, 10);
 	}
 	
-	public  ExpertInfoQuery(int pageNo, int pageSize){
+	public  ReaderInfoQuery(int pageNo, int pageSize){
 		super(pageNo, pageSize);
 	}
 	
-	private java.lang.String expertId;
-	private java.lang.String expertName;
+	private java.lang.String readerId;
+	private java.lang.String readerName;
 	private java.lang.String email;
-	private java.lang.String expertNameSpell;
+	private java.lang.String readerNameSpell;
 	private java.lang.String certificateNo;
 	private java.lang.String certificateType;
 	private java.lang.String sex;
@@ -38,7 +38,6 @@ public class ExpertInfoQuery extends PagingQuery {
 	private java.lang.String compayType;
 	private java.lang.String companyDepartment;
 	private java.lang.String duties;
-	private java.lang.String state;
 	private java.lang.String technicalTitle;
 	private java.lang.String extend1;
 	private java.lang.String extend2;
@@ -49,33 +48,33 @@ public class ExpertInfoQuery extends PagingQuery {
 
 	/**
 	 * 
-	 * @param expertId
+	 * @param readerId
 	 */
-	public void setExpertId(java.lang.String expertId) {
-		this.expertId = expertId;
+	public void setReaderId(java.lang.String readerId) {
+		this.readerId = readerId;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public java.lang.String getExpertId() {
-		return this.expertId;
+	public java.lang.String getReaderId() {
+		return this.readerId;
 	}
 	/**
 	 * 
-	 * @param expertName
+	 * @param readerName
 	 */
-	public void setExpertName(java.lang.String expertName) {
-		this.expertName = expertName;
+	public void setReaderName(java.lang.String readerName) {
+		this.readerName = readerName;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public java.lang.String getExpertName() {
-		return this.expertName;
+	public java.lang.String getReaderName() {
+		return this.readerName;
 	}
 	/**
 	 * 
@@ -94,18 +93,18 @@ public class ExpertInfoQuery extends PagingQuery {
 	}
 	/**
 	 * 
-	 * @param expertNameSpell
+	 * @param readerNameSpell
 	 */
-	public void setExpertNameSpell(java.lang.String expertNameSpell) {
-		this.expertNameSpell = expertNameSpell;
+	public void setReaderNameSpell(java.lang.String readerNameSpell) {
+		this.readerNameSpell = readerNameSpell;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public java.lang.String getExpertNameSpell() {
-		return this.expertNameSpell;
+	public java.lang.String getReaderNameSpell() {
+		return this.readerNameSpell;
 	}
 	/**
 	 * 
@@ -271,21 +270,6 @@ public class ExpertInfoQuery extends PagingQuery {
 	 */
 	public java.lang.String getDuties() {
 		return this.duties;
-	}
-	/**
-	 * 是有可用Y可用N不可用
-	 * @param state
-	 */
-	public void setState(java.lang.String state) {
-		this.state = state;
-	}
-	
-	/**
-	 * 是有可用Y可用N不可用
-	 * @return
-	 */
-	public java.lang.String getState() {
-		return this.state;
 	}
 	/**
 	 * 职称

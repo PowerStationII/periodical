@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="EditorInfoMapper">
-	<resultMap id="BaseResultMap" type="EditorInfo">
+<mapper namespace="ReaderInfoMapper">
+	<resultMap id="BaseResultMap" type="ReaderInfo">
 	  <id column="ID" jdbcType="DECIMAL" property="id" />
-	  <result column="editor_id" jdbcType="VARCHAR" property="editorId" />
-	  <result column="editor_name" jdbcType="VARCHAR" property="editorName" />
-	  <result column="state" jdbcType="VARCHAR" property="state" />
+	  <result column="reader_id" jdbcType="VARCHAR" property="readerId" />
+	  <result column="reader_name" jdbcType="VARCHAR" property="readerName" />
 	  <result column="email" jdbcType="VARCHAR" property="email" />
-	  <result column="editor_name_spell" jdbcType="VARCHAR" property="editorNameSpell" />
+	  <result column="reader_name_spell" jdbcType="VARCHAR" property="readerNameSpell" />
 	  <result column="certificate_no" jdbcType="VARCHAR" property="certificateNo" />
 	  <result column="certificate_type" jdbcType="VARCHAR" property="certificateType" />
 	  <result column="sex" jdbcType="VARCHAR" property="sex" />
@@ -36,20 +35,17 @@
   <sql id="Example_Where_Clause">
     <where>
       <trim prefix="(" prefixOverrides="and" suffix=")">
-      <if test="editorId != null" >
-	      and editor_id = #{editorId,jdbcType=VARCHAR}
+      <if test="readerId != null" >
+	      and reader_id = #{readerId,jdbcType=VARCHAR}
 	    </if>
-      <if test="editorName != null" >
-	      and editor_name = #{editorName,jdbcType=VARCHAR}
-	    </if>
-      <if test="state != null" >
-	      and state = #{state,jdbcType=VARCHAR}
+      <if test="readerName != null" >
+	      and reader_name = #{readerName,jdbcType=VARCHAR}
 	    </if>
       <if test="email != null" >
 	      and email = #{email,jdbcType=VARCHAR}
 	    </if>
-      <if test="editorNameSpell != null" >
-	      and editor_name_spell = #{editorNameSpell,jdbcType=VARCHAR}
+      <if test="readerNameSpell != null" >
+	      and reader_name_spell = #{readerNameSpell,jdbcType=VARCHAR}
 	    </if>
       <if test="certificateNo != null" >
 	      and certificate_no = #{certificateNo,jdbcType=VARCHAR}
@@ -111,20 +107,17 @@
   <sql id="Example_Set_Clause">
     <set>
       <trim suffixOverrides=",">
-      <if test="editorId != null">
-        editor_id = #{editorId,jdbcType=VARCHAR},
+      <if test="readerId != null">
+        reader_id = #{readerId,jdbcType=VARCHAR},
       </if>
-      <if test="editorName != null">
-        editor_name = #{editorName,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        state = #{state,jdbcType=VARCHAR},
+      <if test="readerName != null">
+        reader_name = #{readerName,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="editorNameSpell != null">
-        editor_name_spell = #{editorNameSpell,jdbcType=VARCHAR},
+      <if test="readerNameSpell != null">
+        reader_name_spell = #{readerNameSpell,jdbcType=VARCHAR},
       </if>
       <if test="certificateNo != null">
         certificate_no = #{certificateNo,jdbcType=VARCHAR},
@@ -185,11 +178,10 @@
   </sql>
   <sql id="Base_Column_List">
     id,
-    editor_id,
-    editor_name,
-    state,
+    reader_id,
+    reader_name,
     email,
-    editor_name_spell,
+    reader_name_spell,
     certificate_no,
     certificate_type,
     sex,
@@ -212,11 +204,10 @@
   <sql id="Base_Set_Clause">
     <set>
       <trim suffixOverrides=",">
-        editor_id = #{editorId,jdbcType=VARCHAR},
-        editor_name = #{editorName,jdbcType=VARCHAR},
-        state = #{state,jdbcType=VARCHAR},
+        reader_id = #{readerId,jdbcType=VARCHAR},
+        reader_name = #{readerName,jdbcType=VARCHAR},
         email = #{email,jdbcType=VARCHAR},
-        editor_name_spell = #{editorNameSpell,jdbcType=VARCHAR},
+        reader_name_spell = #{readerNameSpell,jdbcType=VARCHAR},
         certificate_no = #{certificateNo,jdbcType=VARCHAR},
         certificate_type = #{certificateType,jdbcType=VARCHAR},
         sex = #{sex,jdbcType=VARCHAR},
@@ -240,20 +231,17 @@
   </sql>
   <sql id="Selective_Column_List">
     <!-- ID, -->
-    <if test="editorId != null">
-      editor_id,
+    <if test="readerId != null">
+      reader_id,
     </if>
-    <if test="editorName != null">
-      editor_name,
-    </if>
-    <if test="state != null">
-      state,
+    <if test="readerName != null">
+      reader_name,
     </if>
     <if test="email != null">
       email,
     </if>
-    <if test="editorNameSpell != null">
-      editor_name_spell,
+    <if test="readerNameSpell != null">
+      reader_name_spell,
     </if>
     <if test="certificateNo != null">
       certificate_no,
@@ -312,11 +300,10 @@
   </sql>
 	<sql id="Base_Value_List">
     #{id,jdbcType=BIGINT},
-    #{editorId,jdbcType=VARCHAR},
-    #{editorName,jdbcType=VARCHAR},
-    #{state,jdbcType=VARCHAR},
+    #{readerId,jdbcType=VARCHAR},
+    #{readerName,jdbcType=VARCHAR},
     #{email,jdbcType=VARCHAR},
-    #{editorNameSpell,jdbcType=VARCHAR},
+    #{readerNameSpell,jdbcType=VARCHAR},
     #{certificateNo,jdbcType=VARCHAR},
     #{certificateType,jdbcType=VARCHAR},
     #{sex,jdbcType=VARCHAR},
@@ -337,21 +324,18 @@
     #{updateTime,jdbcType=TIMESTAMP},
 	</sql>
   <sql id="Selective_Value_List">
-    <!-- SEQ_editor_info.nextval, -->
-    <if test="editorId != null">
-      #{editorId,jdbcType=VARCHAR},
+    <!-- SEQ_reader_info.nextval, -->
+    <if test="readerId != null">
+      #{readerId,jdbcType=VARCHAR},
     </if>
-    <if test="editorName != null">
-      #{editorName,jdbcType=VARCHAR},
-    </if>
-    <if test="state != null">
-      #{state,jdbcType=VARCHAR},
+    <if test="readerName != null">
+      #{readerName,jdbcType=VARCHAR},
     </if>
     <if test="email != null">
       #{email,jdbcType=VARCHAR},
     </if>
-    <if test="editorNameSpell != null">
-      #{editorNameSpell,jdbcType=VARCHAR},
+    <if test="readerNameSpell != null">
+      #{readerNameSpell,jdbcType=VARCHAR},
     </if>
     <if test="certificateNo != null">
       #{certificateNo,jdbcType=VARCHAR},
@@ -409,12 +393,12 @@
     </if>
   </sql>
   
-  <select id="selectByExample" parameterType="EditorInfoQuery" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="ReaderInfoQuery" resultMap="BaseResultMap">
     select
     <trim suffixOverrides=",">
       <include refid="Base_Column_List" />
     </trim>
-    from editor_info
+    from reader_info
     <include refid="Example_Where_Clause" />
     <!-- order by CREATE_DATE -->
   </select>
@@ -423,19 +407,19 @@
     <trim suffixOverrides=",">
       <include refid="Base_Column_List" />
     </trim>
-    from editor_info
+    from reader_info
     where ID = #{id,jdbcType=DECIMAL}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from editor_info
+    delete from reader_info
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
-  <delete id="deleteByExample" parameterType="EditorInfoQuery">
-    delete from editor_info
+  <delete id="deleteByExample" parameterType="ReaderInfoQuery">
+    delete from reader_info
     <include refid="Example_Where_Clause" />
   </delete>
-  <insert id="insert" parameterType="EditorInfo">
-    insert into editor_info
+  <insert id="insert" parameterType="ReaderInfo">
+    insert into reader_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <include refid="Base_Column_List"/>
     </trim>
@@ -443,8 +427,8 @@
       <include refid="Base_Value_List"/>
     </trim>
   </insert>
-  <insert id="insertSelective" parameterType="EditorInfo">
-    insert into editor_info
+  <insert id="insertSelective" parameterType="ReaderInfo">
+    insert into reader_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <include refid="Selective_Column_List"/>
     </trim>
@@ -452,28 +436,28 @@
       <include refid="Selective_Value_List"/>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="EditorInfoQuery" resultType="java.lang.Integer">
-    select count(*) from editor_info
+  <select id="countByExample" parameterType="ReaderInfoQuery" resultType="java.lang.Integer">
+    select count(*) from reader_info
     <include refid="Example_Where_Clause" />
   </select>
-  <update id="updateByPrimaryKeySelective" parameterType="EditorInfo">
-    update editor_info
+  <update id="updateByPrimaryKeySelective" parameterType="ReaderInfo">
+    update reader_info
     <include refid="Example_Set_Clause"/>
     where ID = #{id,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="EditorInfo">
-    update editor_info
+  <update id="updateByPrimaryKey" parameterType="ReaderInfo">
+    update reader_info
     <include refid="Base_Set_Clause"/>
     where ID = #{id,jdbcType=DECIMAL}
   </update>
   
-  <select id="selectPageByExample" parameterType="EditorInfoQuery" resultMap="BaseResultMap">
+  <select id="selectPageByExample" parameterType="ReaderInfoQuery" resultMap="BaseResultMap">
   	<include refid="Page_Query_Begin" />
     select
     <trim suffixOverrides=",">
       <include refid="Base_Column_List" />
     </trim>
-    from editor_info
+    from reader_info
     <include refid="Example_Where_Clause" />
     <!-- order by CREATE_DATE -->
     <include refid="Page_Query_End" />

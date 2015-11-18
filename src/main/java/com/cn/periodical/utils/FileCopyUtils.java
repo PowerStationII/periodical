@@ -36,7 +36,9 @@ public class FileCopyUtils {
 			int byteread = 0;
 			StringBuffer oldFileAbslute=new StringBuffer();
 			oldFileAbslute.append(oldPath);
-			oldFileAbslute.append(oldName);
+			if(!"".equals(oldName)){
+				oldFileAbslute.append(oldName);
+			}
 			File oldfile = new File(oldFileAbslute.toString());
 			
 			File newfile = new File(newPath);
