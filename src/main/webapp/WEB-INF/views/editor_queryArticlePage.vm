@@ -13,14 +13,69 @@
 </head>
 <body>
 	<div id="articleInfos">
+		<form action="../editor/toQueryArticlePage">
+			<table>
+				<tr>
+					<td>稿件标题</td>
+					<td><input type="text" name="cnTitle" value=""></td>
+					<td>作者</td>
+					<td><input type="text" name="authorNames" value=""></td>
+					<td>稿件编号</td>
+					<td><input type="text" name="articleId" value=""></td>
+					<td>审稿专家</td>
+					<td><input type="text" name="expertNames" value=""></td>
+				</tr>
+				<tr>
+					<td>稿件状态</td>
+					<td><select name="state">
+							<option value="" selected>全部</option>
+							<option value="0000">0000</option>
+							<option value="0001">0001</option>
+							<option value="0002">0002</option>
+							<option value="0003">0003</option>
+							<option value="0006">0006</option>
+							<option value="0007">0007</option>
+							<option value="0008">0008</option>
+						</select></td>
+					<td>稿件栏目</td>
+					<td><select name="section">
+							<option value="" selected>全部</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select></td>
+					<td>中文关键字</td>
+					<td><input type="text" name="cnKeywords" value=""></td>
+					<td>投稿时间</td>
+					<td><input type="text" name="createTime" value=""></td>
+				</tr>			
+				<tr>
+					<td colspan="8"><input type="submit" value="查询"></td>
+				</tr>
+			</table>		
+		</form>
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
-				<td>稿件查询</td>
-				<td>稿件标题</td>
+				<td>稿件编号</td>
+				<td>标题</td>
+				<td>投稿作者</td>
 				<td>投稿时间</td>
+				<td>审稿专家</td>
 				<td>稿件状态</td>
-				<td>备注信息</td>
+				<td>操作</td>
 			</tr>
+			#foreach($dtos in ${list})   
+			<tr>
+				<td>${dtos.articleId}</td>
+				<td>${dtos.cnTitle}</td>
+				<td>${dtos.authorNames}</td>
+				<td>${dtos.createTime}</td>
+				<td>${dtos.expertNames}</td>
+				<td>${dtos.state}</td>
+				<td>妹的</td>
+			</tr>
+			#end
+			
 		</table>
 		<br>
 	</div>

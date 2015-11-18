@@ -175,12 +175,6 @@
 	       		<div  class="mode_name">期刊管理</div>
 	       		<div>
 	       			<div class="easyui-accordion" style="width:180px;height:200px;">
-	       				<div title="业务统计" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
-					        <div  class="li10" id="gaojiantongji">稿件统计</div>
-					        <div  class="li11" id="faxingtongji">发行统计</div>
-					        <div  class="li12" id="caiwutongji">财务统计</div>
-					        <div  class="li13" id="lishihuiad">理事会与广告</div>
-					    </div>   
 					    <div title="期刊征订" data-options="iconCls:'icon-reload'" style="padding:10px;">   
 					         <div  class="li14" id="dingdanguanli">订单管理</div>
 					         <div  class="li15" id="qikanyouji">期刊邮寄</div>
@@ -201,12 +195,19 @@
 	       </div>
 	       #elseif(${userInfo.roleId}=='1005')
 	       <div id="1009"  class="cLeft">
-	       		<div  class="mode_name">编辑专家管理</div>
+	       		<div  class="mode_name">主编管理</div>
 	       		<div>
 	       			<div class="easyui-accordion" style="width:180px;height:80px;">
+	       				<div title="业务统计" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
+					        <div  class="li10" id="gaojiantongji">稿件统计</div>
+					        <div  class="li11" id="faxingtongji">发行统计</div>
+					        <div  class="li12" id="caiwutongji">财务统计</div>
+					        <div  class="li13" id="lishihuiad">理事会与广告</div>
+					    </div>  
+	       				
 	       				<div title="添加管理" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
-					        <div  class="li17" id="bianji">编辑</div>
-					        <div  class="li18" id="zhuangjia">专家</div>
+					        <div  class="li17" id="bianji">管理编辑信息</div>
+					        <div  class="li18" id="zhuangjia">管理专家信息</div>
 					    </div>   
 	       			</div>
 	       		</div>

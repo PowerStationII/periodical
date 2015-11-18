@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.cn.periodical.dao.ArticleQueryDao;
 import com.cn.periodical.manager.ArticleQueryManager;
 import com.cn.periodical.pojo.AuthorQueryDetail;
+import com.cn.periodical.pojo.EditorQueryArtilces;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
 @Component("articleQueryManager")
@@ -40,6 +41,11 @@ public class ArticleQueryManagerImpl implements ArticleQueryManager {
 	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail) {
 		// TODO Auto-generated method stub
 		return articleQueryDao.queryArticleFee(authorQueryDetail);
+	}
+
+	public List<EditorQueryArtilces> editorQueryArticles(EditorQueryArtilces reqDto) {
+		// TODO Auto-generated method stub
+		return articleQueryDao.editorQueryArticles(reqDto);
 	}
 
 }

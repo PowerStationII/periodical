@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.cn.periodical.dao.ArticleQueryDao;
 import com.cn.periodical.dao.BaseDao;
 import com.cn.periodical.pojo.AuthorQueryDetail;
+import com.cn.periodical.pojo.EditorQueryArtilces;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
 
@@ -35,6 +36,11 @@ public class ArticleQueryDaoImpl extends BaseDao implements ArticleQueryDao {
 	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail) {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectList("ArticleQueryMapper.articleFeeQuery", authorQueryDetail);
+	}
+
+	public List<EditorQueryArtilces> editorQueryArticles(EditorQueryArtilces reqDto) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("ArticleQueryMapper.editorQueryArticles", reqDto);
 	}
 
 }

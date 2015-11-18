@@ -174,7 +174,7 @@ a {
 		<div class="left">
 			<div class="leftUp">
 				<div class="work_area"></div>
-				<div class="area_name">工作区首页</div>
+				<div class="area_name">读者首页</div>
 			</div>
 			<div class="cLeft">
 				<div class="mode_name">期刊征订</div>
@@ -192,8 +192,7 @@ a {
 		</div>
 		<div class="right">
 			<div id="area" style="margin-top: 20px;">
-				<a style="margin-left: 400px; font-size: 20px;">作者工作区提示</a><br>
-				<br> <a style="font-size: 12px;"> 我是读者a..... </a>
+				<br> <a style="font-size: 12px;"> 可预订期刊列表 </a>
 			</div>
 		</div>
 	</div>

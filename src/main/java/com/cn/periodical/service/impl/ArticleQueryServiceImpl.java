@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cn.periodical.manager.ArticleQueryManager;
 import com.cn.periodical.pojo.AuthorQueryDetail;
+import com.cn.periodical.pojo.EditorQueryArtilces;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
@@ -41,6 +42,11 @@ public class ArticleQueryServiceImpl implements ArticleQueryService {
 	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail) {
 		// TODO Auto-generated method stub
 		return articleQueryManager.queryArticleFee(authorQueryDetail);
+	}
+
+	public List<EditorQueryArtilces> editorQueryArticles(EditorQueryArtilces reqDto) {
+		// TODO Auto-generated method stub
+		return articleQueryManager.editorQueryArticles(reqDto);
 	}
 
 }

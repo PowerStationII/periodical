@@ -8,6 +8,7 @@ package com.cn.periodical.dao;
 import java.util.List;
 
 import com.cn.periodical.pojo.AuthorQueryDetail;
+import com.cn.periodical.pojo.EditorQueryArtilces;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
 
@@ -16,4 +17,10 @@ public interface ArticleQueryDao {
 	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto);
 	public AuthorQueryDetail queryAuthorQueryDetail(String articleId);
 	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail);
+	/**
+	 * 稿件编辑-稿件查询
+	 * */
+	public List<EditorQueryArtilces> editorQueryArticles(EditorQueryArtilces reqDto);
+	
+	
 }
