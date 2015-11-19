@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>编辑人员增加</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+</head>
+<script>
+	$(function(){
+		$('#back').click(function(){
+			history.go(-1);
+		})
+	})
+</script>
+<body>
+	<div id="articleInfos">
+	<form action="../editor/toSaveEditorInfo" method="POST">
+		<table>
+			<tr>
+				<td>编辑姓名</td>
+				<td><input type="text" name="editorName" value=""></td>
+				<td>email</td>
+				<td><input type="text" name="email" value=""></td>
+				<td>编辑类型</td>
+				<td><select name="type">
+					<option value="" selected>全部</option>
+					<option value="">稿件编</option>
+					<option value="">广告编</option>
+					<option value="">发行编</option>
+					<option value="">签发编</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><input type="button"  value="返回"  id="back"/></td>
+				<td colspan="3"><input type="submit" value="增加"/></td>
+			</tr>
+		</table>
+	</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+	<div id="articleInfos">
+	<form>
+		<table>
+			<tr>
+				<td>专家姓名</td>
+				<td><input type="text" name="editorName" value=""></td>
+				<td>登录名</td>
+				<td><input type="text" name="LogonName" value=""></td>
+				<td>专家类型</td>
+				<td><select name="type">
+					<option value="" selected>全部</option>
+					<option value="">英文专家</option>
+					<option value="">中文专家</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td colspan="3"><input type="submit" value="查询"/></td>
+				<td colspan="3"><a href="../editor/toEditorInfoAdd" >新增</a></td>
+			</tr>
+		</table>
+	</form>
+	
+		<table style="border: 1px solid black;" rules="all">
+			<tr>
+				<td>稿件编号</td>
+				<td>稿件标题</td>
+				<td>稿件作者</td>
+				<td>投稿时间</td>
+				<td>操作</td>
+			</tr>
+			
+		</table>
+		<br>
+	</div>
+</body>
+</html>
