@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
-import com.cn.periodical.pojo.Ad;
+import com.cn.periodical.pojo.BizAd;
 import com.cn.periodical.pojo.UserInfo;
-import com.cn.periodical.request.EditorAdCouncilManagerReqDto;
 /**
  * 广告编辑-广告管理Controller
  * */
@@ -27,7 +26,7 @@ public class AdManageController extends EditorController{
 	 * 广告管理
 	 */
 	@RequestMapping(value="/toAdManagerPage",method = RequestMethod.GET)
-	public ModelAndView toAdManagerPage(HttpServletRequest request,@ModelAttribute Ad ad) {
+	public ModelAndView toAdManagerPage(HttpServletRequest request,@ModelAttribute BizAd ad) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("广告管理首页Page in:[]");
 		ModelAndView mav = new ModelAndView("editor_adManagerPage");
@@ -59,18 +58,19 @@ public class AdManageController extends EditorController{
 	 * 保存广告信息
 	 */
 	@RequestMapping(value = "/toSaveAdInfo", method = { RequestMethod.POST })
-	public ModelAndView saveAdInfo(@ModelAttribute EditorAdCouncilManagerReqDto councilInfo) {
-		ModelAndView mav = new ModelAndView("redirect:../editor/toAdManagerPage");
-		mav.addObject("userId", "ad");
-		logger.info("保存广告信息入参:["+JSON.toJSONString(councilInfo)+"]");
-		try {
-//			adCouncilManagerService.saveCouncilInfo(councilInfo);
-			return mav;
-		} catch (Exception e) {
-			//记录错误日志
-			logger.error("保存广告信息异常!", e);
-			return new ModelAndView("error");
-		}
+	public ModelAndView saveAdInfo() {
+//		ModelAndView mav = new ModelAndView("redirect:../editor/toAdManagerPage");
+//		mav.addObject("userId", "ad");
+//		logger.info("保存广告信息入参:["+JSON.toJSONString(councilInfo)+"]");
+//		try {
+////			adCouncilManagerService.saveCouncilInfo(councilInfo);
+//			return mav;
+//		} catch (Exception e) {
+//			//记录错误日志
+//			logger.error("保存广告信息异常!", e);
+//			return new ModelAndView("error");
+//		}
+		return null;
 	}
 	
 	

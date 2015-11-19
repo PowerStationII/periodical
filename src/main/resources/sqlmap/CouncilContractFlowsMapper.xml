@@ -9,7 +9,10 @@
 	  <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
 	  <result column="pay_state" jdbcType="VARCHAR" property="payState" />
 	  <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+	  <result column="isLatelyRecord" jdbcType="VARCHAR" property="isLatelyRecord" />
 	  <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+	  <result column="contract_contacter_phone" jdbcType="VARCHAR" property="contractContacterPhone" />
+	  <result column="contract_contacter" jdbcType="VARCHAR" property="contractContacter" />
 	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
 	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
 	  <result column="extend_3" jdbcType="VARCHAR" property="extend3" />
@@ -44,8 +47,17 @@
       <if test="startTime != null" >
 	      and start_time = #{startTime,jdbcType=TIMESTAMP}
 	    </if>
+      <if test="isLatelyRecord != null" >
+	      and isLatelyRecord = #{isLatelyRecord,jdbcType=VARCHAR}
+	    </if>
       <if test="endTime != null" >
 	      and end_time = #{endTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="contractContacterPhone != null" >
+	      and contract_contacter_phone = #{contractContacterPhone,jdbcType=VARCHAR}
+	    </if>
+      <if test="contractContacter != null" >
+	      and contract_contacter = #{contractContacter,jdbcType=VARCHAR}
 	    </if>
       <if test="extend1 != null" >
 	      and extend_1 = #{extend1,jdbcType=VARCHAR}
@@ -89,8 +101,17 @@
       <if test="startTime != null">
         start_time = #{startTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="isLatelyRecord != null">
+        isLatelyRecord = #{isLatelyRecord,jdbcType=VARCHAR},
+      </if>
       <if test="endTime != null">
         end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractContacterPhone != null">
+        contract_contacter_phone = #{contractContacterPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contractContacter != null">
+        contract_contacter = #{contractContacter,jdbcType=VARCHAR},
       </if>
       <if test="extend1 != null">
         extend_1 = #{extend1,jdbcType=VARCHAR},
@@ -121,7 +142,10 @@
     pay_time,
     pay_state,
     start_time,
+    isLatelyRecord,
     end_time,
+    contract_contacter_phone,
+    contract_contacter,
     extend_1,
     extend_2,
     extend_3,
@@ -138,7 +162,10 @@
         pay_time = #{payTime,jdbcType=TIMESTAMP},
         pay_state = #{payState,jdbcType=VARCHAR},
         start_time = #{startTime,jdbcType=TIMESTAMP},
+        isLatelyRecord = #{isLatelyRecord,jdbcType=VARCHAR},
         end_time = #{endTime,jdbcType=TIMESTAMP},
+        contract_contacter_phone = #{contractContacterPhone,jdbcType=VARCHAR},
+        contract_contacter = #{contractContacter,jdbcType=VARCHAR},
         extend_1 = #{extend1,jdbcType=VARCHAR},
         extend_2 = #{extend2,jdbcType=VARCHAR},
         extend_3 = #{extend3,jdbcType=VARCHAR},
@@ -168,8 +195,17 @@
     <if test="startTime != null">
       start_time,
     </if>
+    <if test="isLatelyRecord != null">
+      isLatelyRecord,
+    </if>
     <if test="endTime != null">
       end_time,
+    </if>
+    <if test="contractContacterPhone != null">
+      contract_contacter_phone,
+    </if>
+    <if test="contractContacter != null">
+      contract_contacter,
     </if>
     <if test="extend1 != null">
       extend_1,
@@ -198,7 +234,10 @@
     #{payTime,jdbcType=TIMESTAMP},
     #{payState,jdbcType=VARCHAR},
     #{startTime,jdbcType=TIMESTAMP},
+    #{isLatelyRecord,jdbcType=VARCHAR},
     #{endTime,jdbcType=TIMESTAMP},
+    #{contractContacterPhone,jdbcType=VARCHAR},
+    #{contractContacter,jdbcType=VARCHAR},
     #{extend1,jdbcType=VARCHAR},
     #{extend2,jdbcType=VARCHAR},
     #{extend3,jdbcType=VARCHAR},
@@ -226,8 +265,17 @@
     <if test="startTime != null">
       #{startTime,jdbcType=TIMESTAMP},
     </if>
+    <if test="isLatelyRecord != null">
+      #{isLatelyRecord,jdbcType=VARCHAR},
+    </if>
     <if test="endTime != null">
       #{endTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="contractContacterPhone != null">
+      #{contractContacterPhone,jdbcType=VARCHAR},
+    </if>
+    <if test="contractContacter != null">
+      #{contractContacter,jdbcType=VARCHAR},
     </if>
     <if test="extend1 != null">
       #{extend1,jdbcType=VARCHAR},

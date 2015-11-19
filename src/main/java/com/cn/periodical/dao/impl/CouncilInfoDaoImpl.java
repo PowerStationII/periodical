@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.cn.periodical.dao.CouncilInfoDao;
+import com.cn.periodical.pojo.BizCouncil;
 import com.cn.periodical.pojo.CouncilInfo;
 import com.cn.periodical.pojo.CouncilInfoQuery;
 import com.cn.periodical.dao.BaseDao;
@@ -65,6 +66,12 @@ public class CouncilInfoDaoImpl extends BaseDao implements CouncilInfoDao {
 	
 	public int updateByPrimaryKey(CouncilInfo record) {
 		return super.getSqlSession().update("CouncilInfoMapper.updateByPrimaryKey", record);
+	}
+
+
+	public List<BizCouncil> queryBizCouncil(BizCouncil reqDto) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("CouncilInfoMapper.qryBizCouncil", reqDto);
 	}
 	
 }

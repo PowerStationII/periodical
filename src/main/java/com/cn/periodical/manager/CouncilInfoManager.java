@@ -7,6 +7,7 @@ package com.cn.periodical.manager;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.BizCouncil;
 import com.cn.periodical.pojo.CouncilInfo;
 import com.cn.periodical.pojo.CouncilInfoPage;
 import com.cn.periodical.pojo.CouncilInfoQuery;
@@ -23,4 +24,7 @@ public interface CouncilInfoManager {
 	void deleteCouncilInfo(CouncilInfoQuery query);
 	
 	CouncilInfoPage queryPageList(CouncilInfoQuery query);
+	
+	public List<BizCouncil> queryBizCouncil(BizCouncil reqDto);
+	
 }

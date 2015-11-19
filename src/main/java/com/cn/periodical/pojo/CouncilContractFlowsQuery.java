@@ -29,7 +29,10 @@ public class CouncilContractFlowsQuery extends PagingQuery {
 	private java.util.Date payTime;
 	private java.lang.String payState;
 	private java.util.Date startTime;
+	private java.lang.String isLatelyRecord;
 	private java.util.Date endTime;
+	private java.lang.String contractContacterPhone;
+	private java.lang.String contractContacter;
 	private java.lang.String extend1;
 	private java.lang.String extend2;
 	private java.lang.String extend3;
@@ -128,6 +131,21 @@ public class CouncilContractFlowsQuery extends PagingQuery {
 		return this.startTime;
 	}
 	/**
+	 * 是否是最新记录.Y是,N不是.
+	 * @param isLatelyRecord
+	 */
+	public void setIsLatelyRecord(java.lang.String isLatelyRecord) {
+		this.isLatelyRecord = isLatelyRecord;
+	}
+	
+	/**
+	 * 是否是最新记录.Y是,N不是.
+	 * @return
+	 */
+	public java.lang.String getIsLatelyRecord() {
+		return this.isLatelyRecord;
+	}
+	/**
 	 * 合同结束时间
 	 * @param endTime
 	 */
@@ -143,7 +161,37 @@ public class CouncilContractFlowsQuery extends PagingQuery {
 		return this.endTime;
 	}
 	/**
-	 * 
+	 * 合同联系电话
+	 * @param contractContacterPhone
+	 */
+	public void setContractContacterPhone(java.lang.String contractContacterPhone) {
+		this.contractContacterPhone = contractContacterPhone;
+	}
+	
+	/**
+	 * 合同联系电话
+	 * @return
+	 */
+	public java.lang.String getContractContacterPhone() {
+		return this.contractContacterPhone;
+	}
+	/**
+	 * 合同联系人
+	 * @param contractContacter
+	 */
+	public void setContractContacter(java.lang.String contractContacter) {
+		this.contractContacter = contractContacter;
+	}
+	
+	/**
+	 * 合同联系人
+	 * @return
+	 */
+	public java.lang.String getContractContacter() {
+		return this.contractContacter;
+	}
+	/**
+	 * 合同联系人
 	 * @param extend1
 	 */
 	public void setExtend1(java.lang.String extend1) {
@@ -151,7 +199,7 @@ public class CouncilContractFlowsQuery extends PagingQuery {
 	}
 	
 	/**
-	 * 
+	 * 合同联系人
 	 * @return
 	 */
 	public java.lang.String getExtend1() {

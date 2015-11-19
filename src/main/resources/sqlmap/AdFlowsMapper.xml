@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdFlowsMapper">
+	<resultMap id="BaseResultMap" type="AdFlows">
+	  <id column="ID" jdbcType="DECIMAL" property="id" />
+	  <result column="council_id" jdbcType="VARCHAR" property="councilId" />
+	  <result column="ad_id" jdbcType="VARCHAR" property="adId" />
+	  <result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
+	  <result column="periodical_issue_no" jdbcType="VARCHAR" property="periodicalIssueNo" />
+	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
+	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
+	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Page_Query_Begin">
+    select * from(select t.*,rownum rn from(
+  </sql>
+  <sql id="Page_Query_End">
+  	) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="councilId != null" >
+	      and council_id = #{councilId,jdbcType=VARCHAR}
+	    </if>
+      <if test="adId != null" >
+	      and ad_id = #{adId,jdbcType=VARCHAR}
+	    </if>
+      <if test="periodicalId != null" >
+	      and periodical_id = #{periodicalId,jdbcType=VARCHAR}
+	    </if>
+      <if test="periodicalIssueNo != null" >
+	      and periodical_issue_no = #{periodicalIssueNo,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend1 != null" >
+	      and extend_1 = #{extend1,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend2 != null" >
+	      and extend_2 = #{extend2,jdbcType=VARCHAR}
+	    </if>
+      <if test="createTime != null" >
+	      and create_time = #{createTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updateTime != null" >
+	      and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="councilId != null">
+        council_id = #{councilId,jdbcType=VARCHAR},
+      </if>
+      <if test="adId != null">
+        ad_id = #{adId,jdbcType=VARCHAR},
+      </if>
+      <if test="periodicalId != null">
+        periodical_id = #{periodicalId,jdbcType=VARCHAR},
+      </if>
+      <if test="periodicalIssueNo != null">
+        periodical_issue_no = #{periodicalIssueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="extend1 != null">
+        extend_1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        extend_2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    id,
+    council_id,
+    ad_id,
+    periodical_id,
+    periodical_issue_no,
+    extend_1,
+    extend_2,
+    create_time,
+    update_time,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        council_id = #{councilId,jdbcType=VARCHAR},
+        ad_id = #{adId,jdbcType=VARCHAR},
+        periodical_id = #{periodicalId,jdbcType=VARCHAR},
+        periodical_issue_no = #{periodicalIssueNo,jdbcType=VARCHAR},
+        extend_1 = #{extend1,jdbcType=VARCHAR},
+        extend_2 = #{extend2,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    <!-- ID, -->
+    <if test="councilId != null">
+      council_id,
+    </if>
+    <if test="adId != null">
+      ad_id,
+    </if>
+    <if test="periodicalId != null">
+      periodical_id,
+    </if>
+    <if test="periodicalIssueNo != null">
+      periodical_issue_no,
+    </if>
+    <if test="extend1 != null">
+      extend_1,
+    </if>
+    <if test="extend2 != null">
+      extend_2,
+    </if>
+    <if test="createTime != null">
+      create_time,
+    </if>
+    <if test="updateTime != null">
+      update_time,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{id,jdbcType=BIGINT},
+    #{councilId,jdbcType=VARCHAR},
+    #{adId,jdbcType=VARCHAR},
+    #{periodicalId,jdbcType=VARCHAR},
+    #{periodicalIssueNo,jdbcType=VARCHAR},
+    #{extend1,jdbcType=VARCHAR},
+    #{extend2,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP},
+    #{updateTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    <!-- SEQ_ad_flows.nextval, -->
+    <if test="councilId != null">
+      #{councilId,jdbcType=VARCHAR},
+    </if>
+    <if test="adId != null">
+      #{adId,jdbcType=VARCHAR},
+    </if>
+    <if test="periodicalId != null">
+      #{periodicalId,jdbcType=VARCHAR},
+    </if>
+    <if test="periodicalIssueNo != null">
+      #{periodicalIssueNo,jdbcType=VARCHAR},
+    </if>
+    <if test="extend1 != null">
+      #{extend1,jdbcType=VARCHAR},
+    </if>
+    <if test="extend2 != null">
+      #{extend2,jdbcType=VARCHAR},
+    </if>
+    <if test="createTime != null">
+      #{createTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updateTime != null">
+      #{updateTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="AdFlowsQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from ad_flows
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from ad_flows
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ad_flows
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="AdFlowsQuery">
+    delete from ad_flows
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="AdFlows">
+    insert into ad_flows
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="AdFlows">
+    insert into ad_flows
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="AdFlowsQuery" resultType="java.lang.Integer">
+    select count(*) from ad_flows
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="AdFlows">
+    update ad_flows
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="AdFlows">
+    update ad_flows
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectPageByExample" parameterType="AdFlowsQuery" resultMap="BaseResultMap">
+  	<include refid="Page_Query_Begin" />
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from ad_flows
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+    <include refid="Page_Query_End" />
+  </select>
+</mapper>

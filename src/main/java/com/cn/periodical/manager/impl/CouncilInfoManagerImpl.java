@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.cn.periodical.dao.CouncilInfoDao;
 import com.cn.periodical.manager.CouncilInfoManager;
+import com.cn.periodical.pojo.BizCouncil;
 import com.cn.periodical.pojo.CouncilInfo;
 import com.cn.periodical.pojo.CouncilInfoPage;
 import com.cn.periodical.pojo.CouncilInfoQuery;
@@ -68,6 +69,12 @@ public class CouncilInfoManagerImpl implements CouncilInfoManager {
 		
 		councilInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
 		return councilInfoPage;
+	}
+
+
+	public List<BizCouncil> queryBizCouncil(BizCouncil reqDto) {
+		// TODO Auto-generated method stub
+		return councilInfoDao.queryBizCouncil(reqDto);
 	}
 }
 

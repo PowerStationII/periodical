@@ -15,30 +15,29 @@
 	<div id="councileInfos">
 		
 		<form action="../editor/toCouncilManagerPage" method="POST">
-			<input type="hidden" name="reqDto.userId" value=${userId}>
 			<table style="border: 1px solid black;" rules="all">
 				<tr>
-					<td colspan="6">理事会会员</td>
-				</tr>
-				<tr>
 					<td>注册时间</td>
-					<td><input type="text" name="reqDto.registeredTime" value=""></td>
+					<td><input type="text" name="registerTime" value=""></td>
 					<td>会员类型</td>
-					<td><input type="text" name="reqDto.councilType" value=""></td>
+					<td><select name="type">
+						<option value="" selected>全部</option>
+						<option value="D">理事</option>
+					</select></td>
 					<td>广告刊登</td>
-					<td><input type="text" name="reqDto.adTimes" value=""></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>会员编号</td>
-					<td><input type="text" name="reqDto.councilId" value=""></td>
+					<td><input type="text" name="councilId" value=""></td>
 					<td>企业名称</td>
-					<td><input type="text" name="councilName" value=""></td>
+					<td><input type="text" name="councilCompanyName" value=""></td>
 					<td>发票号</td>
-					<td><input type="text" name="reqDto.invoiceNo" value=""></td>
+					<td><input type="text" name="invoiceNo" value=""></td>
 				</tr>
 				<tr>
 					<td colspan="3"><input type="submit" value="查询"></td>
-					<td colspan="3"><a href="toCouncilInfoAdd">新增</a></td>
+					<td colspan="3"><a href="../editor/toCouncilInfoAdd">新增</a></td>
 				</tr>
 			</table>
 		</form>
@@ -57,16 +56,16 @@
 				<td>操作</td>
 			</tr>
 			
-			#foreach($councilInfo in ${councilInfos})   
+			#foreach($dtos in ${list})   
 			<tr>
-				<td>${councilInfo.councilId}</td>
-				<td>${councilInfo.councilName}</td>
-				<td>${councilInfo.councilId}</td>
-				<td>${councilInfo.councilId}</td>
-				<td>${councilInfo.councilId}</td>
-				<td>${councilInfo.councilId}</td>
-				<td>${councilInfo.councilId}</td>
-				<td>${councilInfo.councilId}</td>
+				<td>${dtos.councilId}</td>
+				<td>${dtos.councilCompanyName}</td>
+				<td>${dtos.type}</td>
+				<td>${dtos.contractEndTime}</td>
+				<td>${dtos.amount}</td>
+				<td>${dtos.invoiceNo}</td>
+				<td>此处未做</td>
+				<td><a href="../editor/toQrySingleCouncilInfo?councilId=${dtos.councilId}">编辑</a></td>
 			</tr>
 			#end
 		</table>

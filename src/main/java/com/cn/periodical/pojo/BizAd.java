@@ -2,9 +2,9 @@ package com.cn.periodical.pojo;
 
 import java.io.Serializable;
 
-public class Ad implements Serializable {
+public class BizAd implements Serializable {
 
-	public Ad() {
+	public BizAd() {
 		// TODO Auto-generated constructor stub
 	}
 	private String adName;

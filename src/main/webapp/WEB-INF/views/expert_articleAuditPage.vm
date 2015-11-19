@@ -19,7 +19,7 @@
 <body>
 	<div id="articleInfos">
 	<form action="../expert/toArticleAuditePage" method="POST">
-		<table style="border: 1px solid black;" rules="all">
+		<table style="border: 1px solid black;" rules="all" >
 			<tr>
 				<td>稿件标题</td>
 				<td><input type="text" name="articleCnTitle" value=""></td>
@@ -43,7 +43,7 @@
 		</form>	
 		
 		
-		<table style="border: 1px solid black;" rules="all">
+		<table style="border: 1px solid black;" rules="all"  >
 			<tr>
 				<td>稿件编号</td>
 				<td>稿件标题</td>
