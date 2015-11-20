@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.cn.periodical.dao.EditorInfoDao;
 import com.cn.periodical.manager.EditorInfoManager;
+import com.cn.periodical.pojo.BizEditor;
 import com.cn.periodical.pojo.EditorInfo;
 import com.cn.periodical.pojo.EditorInfoPage;
 import com.cn.periodical.pojo.EditorInfoQuery;
@@ -24,7 +25,7 @@ public class EditorInfoManagerImpl implements EditorInfoManager {
 	@Autowired
 	@Qualifier("editorInfoDao")
 	private EditorInfoDao editorInfoDao;
-	
+
 	
 	public void saveEditorInfo(EditorInfo editorInfo) {
 		if (editorInfo.getId() == null) {
@@ -34,6 +35,9 @@ public class EditorInfoManagerImpl implements EditorInfoManager {
 		}
 	}
 	
+	public List<BizEditor>  queryEditors(BizEditor bizEditor) {
+		return editorInfoDao.queryEditors(bizEditor);
+	}
 	
 	public EditorInfo findEditorInfoById(Long id) {
 		return editorInfoDao.selectByPrimaryKey(id);

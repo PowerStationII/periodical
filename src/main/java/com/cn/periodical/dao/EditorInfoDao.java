@@ -7,6 +7,7 @@ package com.cn.periodical.dao;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.BizEditor;
 import com.cn.periodical.pojo.EditorInfo;
 import com.cn.periodical.pojo.EditorInfoQuery;
 
@@ -26,6 +27,8 @@ public interface EditorInfoDao {
 	List<EditorInfo> selectPageByExample(EditorInfoQuery example);
 	
 	EditorInfo selectByPrimaryKey(Long id);
+	
+	List<BizEditor>  queryEditors (BizEditor bizEditor);
 	
 	int updateByPrimaryKeySelective(EditorInfo record);
 	

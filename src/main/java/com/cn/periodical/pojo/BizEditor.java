@@ -13,8 +13,22 @@ public class BizEditor implements Serializable {
 	private String expertName;
 	private String periodicalName;
 	private String sectionName;
+	private String email;
+	private String refId;
 	
 	
+	public String getRefId() {
+		return refId;
+	}
+	public void setRefId(String refId) {
+		this.refId = refId;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getSectionName() {
 		return sectionName;
 	}

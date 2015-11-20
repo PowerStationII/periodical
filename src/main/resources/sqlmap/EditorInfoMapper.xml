@@ -27,6 +27,17 @@
 	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <resultMap id="EditorsResultMap" type="BizEditor">
+  	<result column="editorName" jdbcType="VARCHAR" property="editorName" />
+  		<result column="refId" jdbcType="VARCHAR" property="refId" />
+	  <result column="logonName" jdbcType="VARCHAR" property="logonName" />
+	  <result column="roleId" jdbcType="VARCHAR" property="roleId" />
+	  <result column="email" jdbcType="VARCHAR" property="email" />
+  </resultMap>
+  <select  id="queryEditors"  parameterType="BizEditor" resultMap="EditorsResultMap">
+  		SELECT A.editor_id AS refId,B.role_id AS roleId,A.editor_name AS editorName,A.email AS email,B.logon_name AS logonName 
+		FROM editor_info A,user_info B  WHERE B.ref_id=A.editor_id
+  </select>
   <sql id="Page_Query_Begin">
     select * from(select t.*,rownum rn from(
   </sql>

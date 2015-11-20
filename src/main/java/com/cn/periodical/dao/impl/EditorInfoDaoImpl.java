@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.cn.periodical.dao.EditorInfoDao;
+import com.cn.periodical.pojo.BizEditor;
 import com.cn.periodical.pojo.EditorInfo;
 import com.cn.periodical.pojo.EditorInfoQuery;
 import com.cn.periodical.dao.BaseDao;
@@ -65,6 +66,12 @@ public class EditorInfoDaoImpl extends BaseDao implements EditorInfoDao {
 	
 	public int updateByPrimaryKey(EditorInfo record) {
 		return super.getSqlSession().update("EditorInfoMapper.updateByPrimaryKey", record);
+	}
+
+
+	public List<BizEditor> queryEditors(BizEditor bizEditor) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("EditorInfoMapper.queryEditors",bizEditor);
 	}
 	
 }

@@ -1,9 +1,12 @@
 package com.cn.periodical.controller.editor;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.manager.EditorInfoManager;
 import com.cn.periodical.pojo.BizEditor;
 import com.cn.periodical.pojo.EditorInfo;
+import com.cn.periodical.pojo.EditorInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.response.ArticleQueryRespDto;
 
 /**
  * 主编-编辑管理
@@ -24,6 +30,8 @@ public class EditorManagerController extends EditorController {
 
 	private static final Logger logger = LoggerFactory.getLogger(EditorManagerController.class);
 	
+	@Autowired
+	EditorInfoManager editorInfoManager;
 	public EditorManagerController() {
 		// TODO Auto-generated constructor stub
 	}
@@ -44,10 +52,9 @@ public class EditorManagerController extends EditorController {
 		 * 
 		 * 查询一个list列表,页面展示用
 		 * */
-		
-		
-		
-		logger.info("编辑人员管理首页Page out:[]");
+		List<BizEditor> list =editorInfoManager.queryEditors(be);
+		mav.addObject("list",list);
+		logger.info("编辑人员管理首页Page out:[]" + list.size());
 		return mav;
 	}
 	

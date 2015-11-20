@@ -44,7 +44,15 @@
 				<td>投稿时间</td>
 				<td>操作</td>
 			</tr>
-			
+			#foreach($list in ${list})   
+			<tr>
+				<td>$!{list.refId}</td>
+				<td><a href="../author/toArticleQueryDetailPage?articleId=${dtos.articleId}">$!{list.editorName}</a></td>
+				<td>$!{list.logonName}</td>
+				<td>$!{list.email}</td>
+				<td><a href="../author/toOpinionQueryPage?articleId=${dtos.articleId}"></a></td>
+			</tr>
+			#end
 		</table>
 		<br>
 	</div>
