@@ -15,9 +15,11 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.manager.AuthorInfoManager;
+import com.cn.periodical.manager.ReaderInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.AddressInfo;
 import com.cn.periodical.pojo.AuthorInfo;
+import com.cn.periodical.pojo.ReaderInfo;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.pojo.UserInfoQuery;
 import com.cn.periodical.request.RegisteRequestDto;
@@ -32,6 +34,8 @@ public class RegisterServiceImpl implements RegisterService {
 	UserInfoManager userInfoManager;
 	@Autowired 
 	AuthorInfoManager authorInfoManager;
+	@Autowired 
+	ReaderInfoManager readerInfoManager;
 	
 	@Autowired
 	AddressInfoManager addressInfoManager;
@@ -135,13 +139,62 @@ public class RegisterServiceImpl implements RegisterService {
 	
 	public int addExpert(RegisteRequestDto registeRequestDto) {
 		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	
 	public int addReader(RegisteRequestDto registeRequestDto) {
 		// TODO Auto-generated method stub
-		return 0;
+		String userId=UUID.randomUUID().toString().replace("-", "");
+		String readerId=UUID.randomUUID().toString().replace("-", "");
+		final ReaderInfo readerInfo = new ReaderInfo();
+		readerInfo.setReaderId(readerId);
+		readerInfo.setBirthday(new DateTime(registeRequestDto.getBirthDay()).toDate());
+		readerInfo.setCertificateType(registeRequestDto.getCertifiType().getCode());
+		readerInfo.setCertificateNo(registeRequestDto.getCertifiNo());
+		readerInfo.setEmail(registeRequestDto.getEmail());
+		readerInfo.setSex(registeRequestDto.getSex());
+		readerInfo.setExtend1("");
+		readerInfo.setExtend2("");
+		readerInfo.setExtend3("");
+		readerInfo.setExtend4("");
+		readerInfo.setCreateTime(new Date());
+		readerInfo.setUpdateTime(new Date());
+		
+		
+		final UserInfo userInfo = new UserInfo();
+		userInfo.setLogonName(registeRequestDto.getEmail());
+		userInfo.setLogonPwd(registeRequestDto.getPassword());
+		userInfo.setRetryTimes(0);
+		userInfo.setRoleId(registeRequestDto.getRoleId());
+		userInfo.setStatus("0");
+		userInfo.setSystemId(registeRequestDto.getSystemId());
+		userInfo.setUserId(userId);
+		userInfo.setRefId(readerId);
+		userInfo.setExtend1("");
+		userInfo.setExtend2("");
+		userInfo.setExtend3("");
+		userInfo.setExtend4("");
+		userInfo.setCreateTime(new Date());
+		userInfo.setUpdateTime(new Date());
+		
+		
+		int k =(Integer) transactionTemplate.execute(new TransactionCallback<Object> (){
+			public Object doInTransaction(TransactionStatus status) {
+				// TODO Auto-generated method stub
+				try {
+					readerInfoManager.saveReaderInfo(readerInfo);
+					userInfoManager.saveUserInfo(userInfo);
+				} catch (Exception e) {
+					logger.error("保存读者信息注册数据异常:"+e);
+					status.setRollbackOnly();
+					return 0;
+				}
+				return 1;
+			}
+		});
+		return k;
 	}
 
 	public boolean queryLoginName(String loginName) {

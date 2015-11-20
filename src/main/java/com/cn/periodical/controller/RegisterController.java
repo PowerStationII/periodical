@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.enums.SystemIdEnums;
 import com.cn.periodical.request.RegisteRequestDto;
 import com.cn.periodical.service.RegisterService;
@@ -31,6 +32,16 @@ public class RegisterController {
 			@RequestParam("roleId") String roleId ,HttpServletRequest request) {
 		logger.info("跳转去注册页面systemId:[" + systemId + "]&roleId["+roleId+"]");
 		ModelAndView mav = new ModelAndView("registered");
+		mav.addObject("systemId", systemId);
+		mav.addObject("roleId", roleId);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/toReaderRegister", method = RequestMethod.GET)
+	public ModelAndView toReaderRegister(@RequestParam("systemId") String systemId, 
+			@RequestParam("roleId") String roleId ,HttpServletRequest request) {
+		logger.info("跳转去读者注册页面systemId:[" + systemId + "]&roleId["+roleId+"]");
+		ModelAndView mav = new ModelAndView("readerRegistered");
 		mav.addObject("systemId", systemId);
 		mav.addObject("roleId", roleId);
 		return mav;
@@ -91,18 +102,32 @@ public class RegisterController {
 			mav.addObject("roleId", roleId);
 			return mav;
 		}else if(SystemIdEnums.READER_SYS.getCode().equals(systemId)){
-//			//读者
-//			/**
-//			 * 需区分省所/个人登录
-//			 * */
-//			String role_id="1002";
-//			if(RoleIdEnums.READER_P.getCode().equals(role_id)){
-//				mav = new ModelAndView("reader_p_area");
-////				return mav;
-//			}else if(RoleIdEnums.READER_E.getCode().equals(role_id)){
-//				mav = new ModelAndView("author_area");
-////				return mav;
-//			}
+			/**
+			 * 需区分省所/个人登录
+			 * */
+			if(RoleIdEnums.READER_P.getCode().equals(roleId)){
+				int i = registerService.addAuthor(registeRequestDto);
+				logger.info(i+"");
+				if(i==0){
+					mav = new ModelAndView("error");
+					return mav;
+				}
+				mav = new ModelAndView("forward:/toLogin");
+				mav.addObject("email",registeRequestDto.getEmail());
+				mav.addObject("password",registeRequestDto.getPassword());
+				return mav;
+			}else if(RoleIdEnums.READER_E.getCode().equals(roleId)){
+				int i = registerService.addAuthor(registeRequestDto);
+				logger.info(i+"");
+				if(i==0){
+					mav = new ModelAndView("error");
+					return mav;
+				}
+				mav = new ModelAndView("forward:/toLogin");
+				mav.addObject("email",registeRequestDto.getEmail());
+				mav.addObject("password",registeRequestDto.getPassword());
+				return mav;
+			}
 		}else{
 //			/**
 //			 * 跳转首页
