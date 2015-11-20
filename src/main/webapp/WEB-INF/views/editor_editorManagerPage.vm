@@ -19,7 +19,7 @@
 				<td>编辑姓名</td>
 				<td><input type="text" name="editorName" value=""></td>
 				<td>登录名</td>
-				<td><input type="text" name="LogonName" value=""></td>
+				<td><input type="text" name="logonName" value=""></td>
 				<td>编辑类型</td>
 				<td><select name="type">
 					<option value="" selected>全部</option>
