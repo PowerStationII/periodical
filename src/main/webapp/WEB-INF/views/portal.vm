@@ -12,15 +12,53 @@
   </head>
   <script type="text/javascript">
   	$(function(){
+  		var frame = '<iframe  style="width:750px;height:760px;margin-left:400px;margin-top:175px;position:absolute;" src= "totototo"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe>';
   		$('#u148').click(function(){
   			$('.right').hide();
-  			$('#frame2').remove();
-  			$('#u150').after('<iframe  id="frame1" style="width:750px;height:760px;margin-left:400px;margin-top:175px;position:absolute;" src= "toCouncilPic"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe>');
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toCouncilPic'));
   		});
   		$('#u150').click(function(){
   			$('.right').hide();
-  			$('#frame1').remove();
-  			$('#u150').after('<iframe   id="frame2" style="width:750px;height:760px;margin-left:400px;margin-top:175px;position:absolute;" src= "toCouncilShow"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe>');
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toCouncilShow'));
+  		});
+  		
+  		//
+  		$('#u27').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toGuangGao'));
+  		});
+  		$('#u15').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toJieShao'));
+  		});
+  		$('#u19').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toTouGao'));
+  		});
+  		$('#u23').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toGuiFan'));
+  		});
+  		$('#u31').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toZhengDing'));
+  		});
+  		$('#u35').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toLianXi'));
+  		});
+  		$('#u148').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toCouncilPic'));
   		});
   	})
   </script>
