@@ -55,10 +55,13 @@
   			$('iframe').remove();
   			$('#u150').after(frame.replace('totototo','toLianXi'));
   		});
-  		$('#u148').click(function(){
+  		$('#u11').click(function(){
+  			window.location.href='portal';
+  		}); 
+  		$('#u153').click(function(){
   			$('.right').hide();
   			$('iframe').remove();
-  			$('#u150').after(frame.replace('totototo','toCouncilPic'));
+  			$('#u150').after(frame.replace('totototo','toLianXi'));
   		});
   	})
   </script>
