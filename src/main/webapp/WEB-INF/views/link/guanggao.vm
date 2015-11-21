@@ -14,14 +14,14 @@
    	</style>
   </head>
   <body>
-    <div class=""  style="margin:30px;">
+    <div class=""  style="margin-left:30px;margin-right:30px;">
       <!-- Unnamed (Shape) -->
       <div id="u46" class="ax_shape"  style="float:left;">
         <img id="u46_img" class="img " src="img/portal/u68.png"/>
         <!-- Unnamed () -->
       </div>
        <div>
-          <p><span>&nbsp; &nbsp;&nbsp; </span><span>广告合作</span></p>
+          <p><span>&nbsp; &nbsp;</span><span>广告合作</span></p>
         </div>
       <!-- Unnamed (Shape) -->
       <div>
