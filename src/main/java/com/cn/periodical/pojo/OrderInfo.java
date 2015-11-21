@@ -21,7 +21,8 @@ public class OrderInfo implements Serializable{
 	private java.lang.String periodicalId;
 	private java.lang.String periodicalYear;
 	private java.lang.Long amount;
-	private java.lang.String payId;
+	private java.lang.Long alreadyPayAmount;
+	private java.lang.String payerId;
 	private java.lang.Integer subscribeNums;
 	private java.lang.String supplementId1;
 	private java.lang.String supplementId2;
@@ -75,7 +76,7 @@ public class OrderInfo implements Serializable{
 		return this.userId;
 	}
 	/**
-	 * 
+	 * 订单编号
 	 * @param orderNo
 	 */
 	public void setOrderNo(java.lang.String orderNo) {
@@ -83,7 +84,7 @@ public class OrderInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 订单编号
 	 * @return
 	 */
 	public java.lang.String getOrderNo() {
@@ -105,7 +106,7 @@ public class OrderInfo implements Serializable{
 		return this.periodicalId;
 	}
 	/**
-	 * 
+	 * 订购年份
 	 * @param periodicalYear
 	 */
 	public void setPeriodicalYear(java.lang.String periodicalYear) {
@@ -113,14 +114,14 @@ public class OrderInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 订购年份
 	 * @return
 	 */
 	public java.lang.String getPeriodicalYear() {
 		return this.periodicalYear;
 	}
 	/**
-	 * 
+	 * 总金额
 	 * @param amount
 	 */
 	public void setAmount(java.lang.Long amount) {
@@ -128,26 +129,41 @@ public class OrderInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 总金额
 	 * @return
 	 */
 	public java.lang.Long getAmount() {
 		return this.amount;
 	}
 	/**
-	 * 支付记录
-	 * @param payId
+	 * 已付总额
+	 * @param alreadyPayAmount
 	 */
-	public void setPayId(java.lang.String payId) {
-		this.payId = payId;
+	public void setAlreadyPayAmount(java.lang.Long alreadyPayAmount) {
+		this.alreadyPayAmount = alreadyPayAmount;
+	}
+	
+	/**
+	 * 已付总额
+	 * @return
+	 */
+	public java.lang.Long getAlreadyPayAmount() {
+		return this.alreadyPayAmount;
+	}
+	/**
+	 * 支付记录
+	 * @param payerId
+	 */
+	public void setPayerId(java.lang.String payerId) {
+		this.payerId = payerId;
 	}
 	
 	/**
 	 * 支付记录
 	 * @return
 	 */
-	public java.lang.String getPayId() {
-		return this.payId;
+	public java.lang.String getPayerId() {
+		return this.payerId;
 	}
 	/**
 	 * 订阅数量
@@ -390,7 +406,7 @@ public class OrderInfo implements Serializable{
 		return this.orderStatus;
 	}
 	/**
-	 * 
+	 * 审核时间
 	 * @param auditTime
 	 */
 	public void setAuditTime(java.util.Date auditTime) {
@@ -398,7 +414,7 @@ public class OrderInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 审核时间
 	 * @return
 	 */
 	public java.util.Date getAuditTime() {
@@ -465,7 +481,7 @@ public class OrderInfo implements Serializable{
 		return this.extend4;
 	}
 	/**
-	 * 
+	 * 订单提交日期
 	 * @param createTime
 	 */
 	public void setCreateTime(java.util.Date createTime) {
@@ -473,7 +489,7 @@ public class OrderInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 订单提交日期
 	 * @return
 	 */
 	public java.util.Date getCreateTime() {

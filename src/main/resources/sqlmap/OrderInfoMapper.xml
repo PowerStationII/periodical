@@ -8,7 +8,8 @@
 	  <result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
 	  <result column="periodical_year" jdbcType="VARCHAR" property="periodicalYear" />
 	  <result column="amount" jdbcType="DECIMAL" property="amount" />
-	  <result column="pay_id" jdbcType="VARCHAR" property="payId" />
+	  <result column="already_pay_amount" jdbcType="DECIMAL" property="alreadyPayAmount" />
+	  <result column="payer_id" jdbcType="VARCHAR" property="payerId" />
 	  <result column="subscribe_nums" jdbcType="INTEGER" property="subscribeNums" />
 	  <result column="supplement_id1" jdbcType="VARCHAR" property="supplementId1" />
 	  <result column="supplement_id2" jdbcType="VARCHAR" property="supplementId2" />
@@ -34,13 +35,59 @@
 	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   
+  <select id="queryOrderAndPayList" parameterType="BizOrder"
+		resultType="BizOrder">
+		select oInfo.order_no as orderNo,oInfo.user_id as
+		userId,pInfo.periodical_cn_name as
+		pCnName,oInfo.already_pay_amount as aPayAmount,oInfo.periodical_year as
+		pYear,oInfo.audit_time as auditTime,
+		oInfo.subscribe_nums as
+		subNums,oInfo.order_status as
+		oStatus,oInfo.amount as
+		oAmount,payerInfo.draft_name as piName,
+		payerInfo.draft_url as piUrl,
+		payerInfo.pay_no as
+		payNo,payerInfo.pay_amount as
+		payAmount,payeeInfo.payee_account_no as
+		eAccountNo,
+		payeeInfo.payee_account_name as eAccountName,payerInfo.payer_account
+		as erAccount,payerInfo.payer_name as erName
+		from order_info
+		oInfo,periodical_info pInfo,payer_info payerInfo,payee_info payeeInfo
+		where oInfo.periodical_id=pInfo.periodical_id
+		and
+		oInfo.order_no=payerInfo.order_no and
+		pInfo.payee_id=payeeInfo.payee_id
+		and oInfo.user_id =
+		#{userId,jdbcType=VARCHAR}
+		<if test="orderNo != null and ''!=orderNo">
+			and oInfo.order_no = #{orderNo,jdbcType=VARCHAR}
+		</if>
+	</select>
 
-  <select id="queryOrderList" parameterType="BizOrder" resultType="BizOrder">
-  	select oi.order_no as orderNo,oi.periodical_year as pYear,
-  	oi.subscribe_nums as subNums,oi.amount as amount,
-  	DATE_FORMAT(oi.create_time, '%Y-%m-%d') as submitTime,DATE_FORMAT(oi.audit_time, '%Y-%m-%d')  as auditTime
-  	from order_info oi
-  </select>
+
+
+	<select id="queryOrderList" parameterType="BizOrder" resultType="BizOrder">
+		select oi.order_no as orderNo,oi.periodical_year as pYear,
+		oi.subscribe_nums as subNums,oi.amount as amount,
+		DATE_FORMAT(oi.create_time, '%Y-%m-%d') as
+		submitTime,DATE_FORMAT(oi.audit_time, '%Y-%m-%d') as auditTime
+		from
+		order_info oi
+	</select>
+
+	<select id="queryOrderDetail" parameterType="BizOrder"
+		resultType="BizOrder">
+		select oInfo.order_no as orderNo,oInfo.order_status as
+		oStatus, pInfo.periodical_cn_name as pCnName ,oInfo.already_pay_amount as aPayAmount,
+		oInfo.amount as oAmount from order_info oInfo,periodical_info pInfo
+		where oInfo.periodical_id=pInfo.periodical_id
+		and oInfo.user_id = #{userId,jdbcType=VARCHAR}
+		<if test="orderNo != null and ''!=orderNo">
+			and oInfo.order_no = #{orderNo,jdbcType=VARCHAR}
+		</if>
+	</select>
+  
   
   
   
@@ -68,8 +115,11 @@
       <if test="amount != null" >
 	      and amount = #{amount,jdbcType=DECIMAL}
 	    </if>
-      <if test="payId != null" >
-	      and pay_id = #{payId,jdbcType=VARCHAR}
+      <if test="alreadyPayAmount != null" >
+	      and already_pay_amount = #{alreadyPayAmount,jdbcType=DECIMAL}
+	    </if>
+      <if test="payerId != null" >
+	      and payer_id = #{payerId,jdbcType=VARCHAR}
 	    </if>
       <if test="subscribeNums != null" >
 	      and subscribe_nums = #{subscribeNums,jdbcType=INTEGER}
@@ -161,8 +211,11 @@
       <if test="amount != null">
         amount = #{amount,jdbcType=DECIMAL},
       </if>
-      <if test="payId != null">
-        pay_id = #{payId,jdbcType=VARCHAR},
+      <if test="alreadyPayAmount != null">
+        already_pay_amount = #{alreadyPayAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="payerId != null">
+        payer_id = #{payerId,jdbcType=VARCHAR},
       </if>
       <if test="subscribeNums != null">
         subscribe_nums = #{subscribeNums,jdbcType=INTEGER},
@@ -243,7 +296,8 @@
     periodical_id,
     periodical_year,
     amount,
-    pay_id,
+    already_pay_amount,
+    payer_id,
     subscribe_nums,
     supplement_id1,
     supplement_id2,
@@ -276,7 +330,8 @@
         periodical_id = #{periodicalId,jdbcType=VARCHAR},
         periodical_year = #{periodicalYear,jdbcType=VARCHAR},
         amount = #{amount,jdbcType=DECIMAL},
-        pay_id = #{payId,jdbcType=VARCHAR},
+        already_pay_amount = #{alreadyPayAmount,jdbcType=DECIMAL},
+        payer_id = #{payerId,jdbcType=VARCHAR},
         subscribe_nums = #{subscribeNums,jdbcType=INTEGER},
         supplement_id1 = #{supplementId1,jdbcType=VARCHAR},
         supplement_id2 = #{supplementId2,jdbcType=VARCHAR},
@@ -320,8 +375,11 @@
     <if test="amount != null">
       amount,
     </if>
-    <if test="payId != null">
-      pay_id,
+    <if test="alreadyPayAmount != null">
+      already_pay_amount,
+    </if>
+    <if test="payerId != null">
+      payer_id,
     </if>
     <if test="subscribeNums != null">
       subscribe_nums,
@@ -400,7 +458,8 @@
     #{periodicalId,jdbcType=VARCHAR},
     #{periodicalYear,jdbcType=VARCHAR},
     #{amount,jdbcType=DECIMAL},
-    #{payId,jdbcType=VARCHAR},
+    #{alreadyPayAmount,jdbcType=DECIMAL},
+    #{payerId,jdbcType=VARCHAR},
     #{subscribeNums,jdbcType=INTEGER},
     #{supplementId1,jdbcType=VARCHAR},
     #{supplementId2,jdbcType=VARCHAR},
@@ -442,8 +501,11 @@
     <if test="amount != null">
       #{amount,jdbcType=DECIMAL},
     </if>
-    <if test="payId != null">
-      #{payId,jdbcType=VARCHAR},
+    <if test="alreadyPayAmount != null">
+      #{alreadyPayAmount,jdbcType=DECIMAL},
+    </if>
+    <if test="payerId != null">
+      #{payerId,jdbcType=VARCHAR},
     </if>
     <if test="subscribeNums != null">
       #{subscribeNums,jdbcType=INTEGER},

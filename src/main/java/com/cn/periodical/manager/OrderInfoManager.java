@@ -27,4 +27,8 @@ public interface OrderInfoManager {
 	
 	List<BizOrder> queryOrderList(BizOrder bizOrder);
 	
+	
+	List<BizOrder> queryPayInfoLists(BizOrder bizOrder);
+	BizOrder queryOrderInfoDetail(BizOrder bizOrder);
+	
 }

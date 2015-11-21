@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.enums.OrderStatusEnums;
 import com.cn.periodical.manager.OrderInfoManager;
 import com.cn.periodical.manager.PayeeInfoManager;
 import com.cn.periodical.manager.PeriodicalInfoManager;
@@ -116,7 +117,7 @@ public class OrderManageController extends ReaderController{
 		orderInfo.setOrderNo(GenerateOrderNo.generateOrderNo());
 		orderInfo.setPeriodicalYear(periodicalYear);
 		orderInfo.setSubscribeNums(orderNums);
-		orderInfo.setOrderStatus("000");/**订单状态:000原始订单*/
+		orderInfo.setOrderStatus(OrderStatusEnums.NONE.getCode());/**订单状态:N未付款订单*/
 		orderInfo.setPeriodicalId(periodicalId);
 		orderInfo.setAmount(Long.valueOf(orderNums*Integer.valueOf(singlPrice)));
 		orderInfo.setCreateTime(new Date());
