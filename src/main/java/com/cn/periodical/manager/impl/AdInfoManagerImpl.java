@@ -23,7 +23,7 @@ public class AdInfoManagerImpl implements AdInfoManager {
 	
 	@Autowired
 	@Qualifier("adInfoDao")
-	private AdInfoDao adInfoDao;
+	public AdInfoDao adInfoDao;
 	
 	
 	public void saveAdInfo(AdInfo adInfo) {

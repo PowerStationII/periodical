@@ -5,7 +5,7 @@
 	  <id column="ID" jdbcType="DECIMAL" property="id" />
 	  <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
 	  <result column="user_id" jdbcType="VARCHAR" property="userId" />
-	  <result column="payer_id" jdbcType="VARBINARY" property="payerId" />
+	  <result column="payer_id" jdbcType="VARCHAR" property="payerId" />
 	  <result column="payee_id" jdbcType="VARCHAR" property="payeeId" />
 	  <result column="draft_name" jdbcType="VARCHAR" property="draftName" />
 	  <result column="draft_url" jdbcType="VARCHAR" property="draftUrl" />
@@ -48,7 +48,7 @@
 	      and user_id = #{userId,jdbcType=VARCHAR}
 	    </if>
       <if test="payerId != null" >
-	      and payer_id = #{payerId,jdbcType=VARBINARY}
+	      and payer_id = #{payerId,jdbcType=VARCHAR}
 	    </if>
       <if test="payeeId != null" >
 	      and payee_id = #{payeeId,jdbcType=VARCHAR}
@@ -138,7 +138,7 @@
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="payerId != null">
-        payer_id = #{payerId,jdbcType=VARBINARY},
+        payer_id = #{payerId,jdbcType=VARCHAR},
       </if>
       <if test="payeeId != null">
         payee_id = #{payeeId,jdbcType=VARCHAR},
@@ -254,7 +254,7 @@
       <trim suffixOverrides=",">
         order_no = #{orderNo,jdbcType=VARCHAR},
         user_id = #{userId,jdbcType=VARCHAR},
-        payer_id = #{payerId,jdbcType=VARBINARY},
+        payer_id = #{payerId,jdbcType=VARCHAR},
         payee_id = #{payeeId,jdbcType=VARCHAR},
         draft_name = #{draftName,jdbcType=VARCHAR},
         draft_url = #{draftUrl,jdbcType=VARCHAR},
@@ -374,7 +374,7 @@
     #{id,jdbcType=BIGINT},
     #{orderNo,jdbcType=VARCHAR},
     #{userId,jdbcType=VARCHAR},
-    #{payerId,jdbcType=VARBINARY},
+    #{payerId,jdbcType=VARCHAR},
     #{payeeId,jdbcType=VARCHAR},
     #{draftName,jdbcType=VARCHAR},
     #{draftUrl,jdbcType=VARCHAR},
@@ -410,7 +410,7 @@
       #{userId,jdbcType=VARCHAR},
     </if>
     <if test="payerId != null">
-      #{payerId,jdbcType=VARBINARY},
+      #{payerId,jdbcType=VARCHAR},
     </if>
     <if test="payeeId != null">
       #{payeeId,jdbcType=VARCHAR},

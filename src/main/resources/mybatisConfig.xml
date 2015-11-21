@@ -50,6 +50,7 @@
 		<mapper resource="sqlmap/PeriodicalInfoMapper.xml"/><!-- 一种期刊信息mapper -->
 		<mapper resource="sqlmap/PeriodicalMapper.xml"/><!-- 期刊期数信息mapper:一本农业期刊一年12期,此处将创建12本该期刊,后续组刊时用此表-->
 		<mapper resource="sqlmap/PayeeInfoMapper.xml"/><!-- 收款人信息 -->
+		<mapper resource="sqlmap/PayerInfoMapper.xml"/><!-- fu款人信息 -->
 		<mapper resource="sqlmap/AccountInfoMapper.xml"/><!-- 账户信息 -->
 		<mapper resource="sqlmap/EditorInfoMapper.xml"/><!-- 编辑信息 -->
 		<mapper resource="sqlmap/ExpertInfoMapper.xml"/><!-- 专家信息 -->

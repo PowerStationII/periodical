@@ -18,7 +18,7 @@ public class PayerInfo implements Serializable{
 	private java.lang.Long id;
 	private java.lang.String orderNo;
 	private java.lang.String userId;
-	private byte[] payerId;
+	private java.lang.String payerId;
 	private java.lang.String payeeId;
 	private java.lang.String draftName;
 	private java.lang.String draftUrl;
@@ -74,7 +74,7 @@ public class PayerInfo implements Serializable{
 		return this.orderNo;
 	}
 	/**
-	 * 
+	 * 用户id
 	 * @param userId
 	 */
 	public void setUserId(java.lang.String userId) {
@@ -82,7 +82,7 @@ public class PayerInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 用户id
 	 * @return
 	 */
 	public java.lang.String getUserId() {
@@ -92,7 +92,7 @@ public class PayerInfo implements Serializable{
 	 * 付款人id
 	 * @param payerId
 	 */
-	public void setPayerId(byte[] payerId) {
+	public void setPayerId(java.lang.String payerId) {
 		this.payerId = payerId;
 	}
 	
@@ -100,7 +100,7 @@ public class PayerInfo implements Serializable{
 	 * 付款人id
 	 * @return
 	 */
-	public byte[] getPayerId() {
+	public java.lang.String getPayerId() {
 		return this.payerId;
 	}
 	/**

@@ -34,7 +34,7 @@
                     <td>$!{dtos.submitTime}</td>
                     <td>$!{dtos.auditTime}</td>
                     <td>上传</td>
-                    <td><a href="#">订费登记</a>  <a href="#">查看审核信息</a></td>
+                    <td><a href="../reader/toOrderPayPage?orderNo=$!{dtos.orderNo}">订费登记</a>  <a href="#">查看审核信息</a></td>
                 </tr>
             #end
 		</table>
