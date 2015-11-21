@@ -14,7 +14,7 @@
 <body>
 	<div id="articleInfos">
 	<form action="../editor/toSectionInfoAdd" method="GET">
-		<input type="hidden" name="periodicalId" value="${periodicalId}">
+		<input type="hidden" name="periodicalId" value="${periodical.periodicalId}">
 		<input type="submit" value="新增栏目">
 	</form>
 	
@@ -25,13 +25,14 @@
 				<td>栏目简介</td>
 				<td>操作</td>
 			</tr>
+			#foreach($dtos in ${list})   
 			<tr>
-				<td>期刊名称</td>
-				<td>栏目名称</td>
-				<td>栏目简介</td>
-				<td><a href="../editor/toDeleteSectionInfo?sectionId=33333">删除</a></td>
+				<td>$!{periodical.periodicalCnName}</td>
+				<td>$!{dtos.sectionName}</td>
+				<td>$!{dtos.sectionSummary}</td>
+				<td><a href="../editor/toDeleteSectionInfo?sectionId=$!{dtos.sectionId}&periodicalId=${periodical.periodicalId}">删除</a></td>
 			</tr>
-			
+			#end
 		</table>
 		<br>
 	</div>

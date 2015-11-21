@@ -7,6 +7,7 @@ package com.cn.periodical.dao;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.BizEditor;
 import com.cn.periodical.pojo.ExpertInfo;
 import com.cn.periodical.pojo.ExpertInfoQuery;
 
@@ -30,4 +31,5 @@ public interface ExpertInfoDao {
 	int updateByPrimaryKeySelective(ExpertInfo record);
 	
 	int updateByPrimaryKey(ExpertInfo record);
+	List<BizEditor> queryExperts(BizEditor be);
 }

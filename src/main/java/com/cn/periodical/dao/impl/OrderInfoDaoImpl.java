@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.cn.periodical.dao.OrderInfoDao;
+import com.cn.periodical.pojo.BizOrder;
 import com.cn.periodical.pojo.OrderInfo;
 import com.cn.periodical.pojo.OrderInfoQuery;
 import com.cn.periodical.dao.BaseDao;
@@ -65,6 +66,12 @@ public class OrderInfoDaoImpl extends BaseDao implements OrderInfoDao {
 	
 	public int updateByPrimaryKey(OrderInfo record) {
 		return super.getSqlSession().update("OrderInfoMapper.updateByPrimaryKey", record);
+	}
+
+
+	public List<BizOrder> queryOrderList(BizOrder bizOrder) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("OrderInfoMapper.queryOrderList", bizOrder);
 	}
 	
 }

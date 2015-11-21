@@ -88,7 +88,6 @@
 </head>
  <body>  
     <form id="sub2" action="../editor/toArticleGroup" method="POST">  
-    <input type="hidden" name="userId" value="${userId}">
     <input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}">
     <input type="hidden" name="periodicalId" value="${periodicalId}">
     <input type="text" id="sectionA" name="sectionA" value="">

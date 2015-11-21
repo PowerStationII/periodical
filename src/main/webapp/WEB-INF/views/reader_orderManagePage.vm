@@ -13,24 +13,32 @@
 </head>
 <body>
 	<div id="articleInfos">
+		<div><span style="font-size:20">订单管理</span></div>
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
-				<td>期刊名称</td>
-				<td>刊号</td>
-				<td>出版周期</td>
-				<td>全年定价</td>
+				<td>订单编号</td>
+				<td>订购年份</td>
+				<td>数量</td>
+				<td>金额</td>
+				<td>提交日期</td>
+				<td>审核日期</td>
+				<td>银行汇票凭证</td>
                 <td>操作</td>
 			</tr>
-            #foreach($periodicalInfo in ${list})
+            #foreach($dtos in ${list})
                 <tr>
-                    <td>${periodicalInfo.periodicalCnName}</td>
-                    <td>${periodicalInfo.issnNo}</td>
-                    <td>${periodicalInfo.cycle}</td>
-                    <td>${periodicalInfo.periodicalId}</td>
-                    <td><a href="../reader/toCreatOrderPage?userId=${userId}&periodicalId=${periodicalInfo.periodicalId}">创建订单</a></td>
+                    <td>$!{dtos.orderNo}</td>
+                    <td>$!{dtos.pYear}</td>
+                    <td>$!{dtos.subNums}</td>
+                    <td>$!{dtos.amount}</td>
+                    <td>$!{dtos.submitTime}</td>
+                    <td>$!{dtos.auditTime}</td>
+                    <td>上传</td>
+                    <td><a href="#">查看审核信息</a></td>
                 </tr>
             #end
 		</table>
+		<a href="../reader/toCreatOrderPage">新建订单</a>
 		<br>
 	</div>
 </body>

@@ -21,12 +21,12 @@
 				<td>登录名</td>
 				<td><input type="text" name="logonName" value=""></td>
 				<td>编辑类型</td>
-				<td><select name="type">
+				<td><select name="roleId">
 					<option value="" selected>全部</option>
-					<option value="">稿件编</option>
-					<option value="">广告编</option>
-					<option value="">发行编</option>
-					<option value="">签发编</option>
+					<option value="1006">稿件编</option>
+					<option value="1007">广告编</option>
+					<option value="1008">发行编</option>
+					<option value="1009">签发编</option>
 				</select></td>
 			</tr>
 			<tr>
@@ -38,19 +38,20 @@
 	
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
-				<td>稿件编号</td>
-				<td>稿件标题</td>
-				<td>稿件作者</td>
-				<td>投稿时间</td>
-				<td>操作</td>
+				<td>编辑姓名</td>
+				<td>登录名</td>
+				<td>emial</td>
+				<td>角色</td>
+				<!-- <td>操作</td> -->
 			</tr>
 			#foreach($list in ${list})   
 			<tr>
-				<td>$!{list.refId}</td>
-				<td><a href="../author/toArticleQueryDetailPage?articleId=${dtos.articleId}">$!{list.editorName}</a></td>
+				<!-- <td>$!{list.refId}</td> -->
+				<td>$!{list.editorName}</td>
 				<td>$!{list.logonName}</td>
 				<td>$!{list.email}</td>
-				<td><a href="../author/toOpinionQueryPage?articleId=${dtos.articleId}"></a></td>
+				<td>$!{list.roleId}</td>
+				<!-- <td>编辑</td> -->
 			</tr>
 			#end
 		</table>

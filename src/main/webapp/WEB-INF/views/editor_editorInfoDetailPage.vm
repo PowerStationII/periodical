@@ -25,15 +25,18 @@
 			<tr>
 				<td>编辑姓名</td>
 				<td><input type="text" name="editorName" value=""></td>
+			</tr>
+			<tr>
 				<td>email</td>
 				<td><input type="text" name="email" value=""></td>
+			</tr>
+			<tr>
 				<td>编辑类型</td>
-				<td><select name="type">
-					<option value="" selected>全部</option>
-					<option value="">稿件编</option>
-					<option value="">广告编</option>
-					<option value="">发行编</option>
-					<option value="">签发编</option>
+				<td><select name="roleId">
+					<option value="1006" selected>稿件编</option>
+					<option value="1007">广告编</option>
+					<option value="1008">发行编</option>
+					<option value="1009">签发编</option>
 				</select></td>
 			</tr>
 			<tr>

@@ -7,6 +7,7 @@ package com.cn.periodical.manager;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.BizEditor;
 import com.cn.periodical.pojo.ExpertInfo;
 import com.cn.periodical.pojo.ExpertInfoPage;
 import com.cn.periodical.pojo.ExpertInfoQuery;
@@ -23,4 +24,6 @@ public interface ExpertInfoManager {
 	void deleteExpertInfo(ExpertInfoQuery query);
 	
 	ExpertInfoPage queryPageList(ExpertInfoQuery query);
+	
+	List<BizEditor> queryExperts(BizEditor be);
 }

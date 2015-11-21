@@ -27,6 +27,20 @@
 	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <select id="queryExperts" parameterType="BizEditor" resultType="BizEditor">
+		SELECT A.expert_id AS refId,B.role_id AS roleId,A.expert_name AS
+		expertName,A.email AS email,B.logon_name AS logonName
+		FROM expert_info A,user_info B WHERE B.ref_id=A.expert_id
+		<if test="expertId != null and ''!=expertId">
+			and A.expert_id = #{expertId,jdbcType=VARCHAR}
+		</if>
+		<if test="logonName != null and ''!=logonName">
+			and B.logon_name = #{logonName,jdbcType=VARCHAR}
+		</if>
+		<if test="roleId != null and ''!=roleId">
+			and B.role_id = #{roleId,jdbcType=VARCHAR}
+		</if>
+	</select>
   <sql id="Page_Query_Begin">
     select * from(select t.*,rownum rn from(
   </sql>

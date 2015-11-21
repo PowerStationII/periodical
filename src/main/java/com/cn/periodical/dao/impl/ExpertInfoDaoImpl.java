@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.cn.periodical.dao.ExpertInfoDao;
+import com.cn.periodical.pojo.BizEditor;
 import com.cn.periodical.pojo.ExpertInfo;
 import com.cn.periodical.pojo.ExpertInfoQuery;
 import com.cn.periodical.dao.BaseDao;
@@ -65,6 +66,12 @@ public class ExpertInfoDaoImpl extends BaseDao implements ExpertInfoDao {
 	
 	public int updateByPrimaryKey(ExpertInfo record) {
 		return super.getSqlSession().update("ExpertInfoMapper.updateByPrimaryKey", record);
+	}
+
+
+	public List<BizEditor> queryExperts(BizEditor be) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("ExpertInfoMapper.queryExperts", be);
 	}
 	
 }

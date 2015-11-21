@@ -7,6 +7,7 @@ package com.cn.periodical.manager;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.BizOrder;
 import com.cn.periodical.pojo.OrderInfo;
 import com.cn.periodical.pojo.OrderInfoPage;
 import com.cn.periodical.pojo.OrderInfoQuery;
@@ -23,5 +24,7 @@ public interface OrderInfoManager {
 	void deleteOrderInfo(OrderInfoQuery query);
 	
 	OrderInfoPage queryPageList(OrderInfoQuery query);
+	
+	List<BizOrder> queryOrderList(BizOrder bizOrder);
 	
 }

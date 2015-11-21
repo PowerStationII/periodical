@@ -7,6 +7,7 @@ package com.cn.periodical.dao;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.BizOrder;
 import com.cn.periodical.pojo.OrderInfo;
 import com.cn.periodical.pojo.OrderInfoQuery;
 
@@ -24,6 +25,7 @@ public interface OrderInfoDao {
 	List<OrderInfo> selectByExample(OrderInfoQuery example);
 	
 	List<OrderInfo> selectPageByExample(OrderInfoQuery example);
+	List<BizOrder> queryOrderList(BizOrder bizOrder);
 	
 	OrderInfo selectByPrimaryKey(Long id);
 	

@@ -12,34 +12,37 @@
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
 <script>
-	$(function(){
-		$('#back').click(function(){
+	$(function() {
+		$('#back').click(function() {
 			history.go(-1);
 		})
 	})
 </script>
 <body>
 	<div id="articleInfos">
-	<form action="../editor/toSaveExpertInfo" method="POST">
-		<table>
-			<tr>
-				<td>专家姓名</td>
-				<td><input type="text" name="expertName" value=""></td>
-				<td>email</td>
-				<td><input type="text" name="email" value=""></td>
-				<td>专家类型</td>
-				<td><select name="type">
-					<option value="" selected>全部</option>
-					<option value="">中文专家</option>
-					<option value="">英文专家</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td><input type="button"  value="返回"  id="back"/></td>
-				<td colspan="3"><input type="submit" value="增加"/></td>
-			</tr>
-		</table>
-	</form>
+		<form action="../editor/toSaveExpertInfo" method="POST">
+			<table>
+				<tr>
+					<td>专家姓名</td>
+					<td><input type="text" name="expertName" value=""></td>
+				</tr>
+				<tr>
+					<td>email</td>
+					<td><input type="text" name="email" value=""></td>
+				</tr>
+				<tr>
+					<td>专家类型</td>
+					<td><select name="roleId">
+							<option value="1003">中文专家</option>
+							<option value="1004">英文专家</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="返回" id="back" /></td>
+					<td colspan="3"><input type="submit" value="增加" /></td>
+				</tr>
+			</table>
+		</form>
 	</div>
 </body>
 </html>

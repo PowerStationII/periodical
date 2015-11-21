@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.cn.periodical.dao.ExpertInfoDao;
 import com.cn.periodical.manager.ExpertInfoManager;
+import com.cn.periodical.pojo.BizEditor;
 import com.cn.periodical.pojo.ExpertInfo;
 import com.cn.periodical.pojo.ExpertInfoPage;
 import com.cn.periodical.pojo.ExpertInfoQuery;
@@ -68,6 +69,12 @@ public class ExpertInfoManagerImpl implements ExpertInfoManager {
 		
 		expertInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
 		return expertInfoPage;
+	}
+
+
+	public List<BizEditor> queryExperts(BizEditor be) {
+		// TODO Auto-generated method stub
+		return expertInfoDao.queryExperts(be);
 	}
 }
 

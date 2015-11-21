@@ -1,6 +1,7 @@
 package com.cn.periodical.controller.editor;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.enums.SystemIdEnums;
 import com.cn.periodical.manager.EditorInfoManager;
+import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.BizEditor;
 import com.cn.periodical.pojo.EditorInfo;
-import com.cn.periodical.pojo.EditorInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
-import com.cn.periodical.response.ArticleQueryRespDto;
 
 /**
  * 主编-编辑管理
@@ -32,6 +33,9 @@ public class EditorManagerController extends EditorController {
 	
 	@Autowired
 	EditorInfoManager editorInfoManager;
+	@Autowired
+	UserInfoManager userInfoManager;
+	
 	public EditorManagerController() {
 		// TODO Auto-generated constructor stub
 	}
@@ -73,16 +77,25 @@ public class EditorManagerController extends EditorController {
 		ModelAndView mav = new ModelAndView("redirect:../editor/toEditorManagerPage");
 		logger.info("新增编辑信息 in:["+JSON.toJSONString(editorInfo)+"]");
 		try {
+			String userId = UUID.randomUUID().toString().replaceAll("-", "");
+			String editorId = UUID.randomUUID().toString().replaceAll("-", "");
 			/**
 			 * 1,email做用户名,默认密码111111.向userInfo中添加记录
 			 * ref_id=editor_info中的editor_id
 			 * */
-			
-			
+			UserInfo addUserInfo= new UserInfo();
+			addUserInfo.setLogonName(editorInfo.getEmail());
+			addUserInfo.setLogonPwd("1");
+			addUserInfo.setUserId(userId);
+			addUserInfo.setRefId(editorId);
+			addUserInfo.setRoleId(roleId);
+			addUserInfo.setSystemId(SystemIdEnums.EDIT_SYS.getCode());
+			userInfoManager.saveUserInfo(addUserInfo);
 			/**
 			 * 2,保存editorInfo到Editor_info表
 			 * */
-			
+			editorInfo.setEditorId(editorId);
+			editorInfoManager.saveEditorInfo(editorInfo);
 			
 		} catch (Exception e) {
 			//记录错误日志

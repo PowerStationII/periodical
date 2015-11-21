@@ -28,7 +28,7 @@
 				<td>${periodical.cycleNums}</td>
 				<td>${periodical.cycleNums}</td>
 				<td>${periodical.periodicalState}</td>
-				<td><a href="../editor/toArticleGroupDetailPage?periodicalIssueNo=${periodical.periodicalIssueNo}&userId=${userId}&periodicalId=${periodical.periodicalId}">组稿</a></td>
+				<td><a href="../editor/toArticleGroupDetailPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">组稿</a></td>
 			</tr>
 			#end
 		</table>

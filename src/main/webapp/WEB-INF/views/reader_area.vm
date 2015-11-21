@@ -198,7 +198,7 @@ a {
 		</div>
 		<div class="right">
 			<div id="area" style="margin-top: 20px;">
-				<br> <a style="font-size: 12px;"> 可预订期刊列表 </a>
+				<!-- <br> <a style="font-size: 12px;"> 可预订期刊列表 </a> -->
 			</div>
 		</div>
 	</div>

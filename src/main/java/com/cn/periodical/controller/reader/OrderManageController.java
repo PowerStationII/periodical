@@ -2,7 +2,8 @@ package com.cn.periodical.controller.reader;
 
 import java.util.List;
 
-import com.cn.periodical.request.AuthorContributeReqDto;
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.alibaba.fastjson.JSON;
 import com.cn.periodical.manager.OrderInfoManager;
 import com.cn.periodical.manager.PayeeInfoManager;
 import com.cn.periodical.manager.PeriodicalInfoManager;
+import com.cn.periodical.pojo.BizOrder;
 import com.cn.periodical.pojo.OrderInfo;
 import com.cn.periodical.pojo.OrderInfoQuery;
 import com.cn.periodical.pojo.PayeeInfo;
@@ -26,8 +28,6 @@ import com.cn.periodical.pojo.PeriodicalInfo;
 import com.cn.periodical.pojo.PeriodicalInfoQuery;
 import com.cn.periodical.service.OrderInfoService;
 import com.cn.periodical.utils.GenerateOrderNo;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 读者工作区-期刊征订-订单管理Controller
@@ -39,6 +39,7 @@ public class OrderManageController extends ReaderController{
 
     @Autowired
     OrderInfoService orderInfoService ;
+    
     @Autowired
     PeriodicalInfoManager periodicalInfoManager;
     
@@ -52,56 +53,58 @@ public class OrderManageController extends ReaderController{
 	 * 订单管理页面
 	 */
 	@RequestMapping(value="/toOrderManagePage",method =  { RequestMethod.POST ,RequestMethod.GET})
-	public ModelAndView toKeyWordsSearchPage(@RequestParam("userId") String userId,@RequestParam("roleId") String roleId) {
-		logger.info("订单管理Page:["+userId+"]&roleId["+roleId+"]");
+	public ModelAndView toOrderManagePage(HttpServletRequest request,@ModelAttribute BizOrder bizOrder) {
+		logger.info("订单管理Page:[ ]");
+		List<BizOrder> list = orderInfoManager.queryOrderList(bizOrder);
+		ModelAndView mav = new ModelAndView("reader_orderManagePage");
+		mav.addObject("list", list);
+		return mav;
+	}
+	
+//	/**
+//	 * 创建完订单跳转至此页面
+//	 * */
+//	@RequestMapping(value="/toOrderListManagePage",method =  { RequestMethod.POST ,RequestMethod.GET})
+//	public ModelAndView toOrderListManagePage(@RequestParam("userId") String userId) {
+//		logger.info("订单管理Page:["+userId+"]");
 //		OrderInfoQuery orderInfoQuery = new OrderInfoQuery();
 //		orderInfoQuery.setUserId(userId);
-		List<PeriodicalInfo> periodicalInfos = periodicalInfoManager.queryList(null);
-		
 //		List<OrderInfo> orderInfos = orderInfoManager.queryList(orderInfoQuery);
-		ModelAndView mav = new ModelAndView("reader_orderManagePage");
-		mav.addObject("userId", userId);
-		mav.addObject("roleId", roleId);
-		mav.addObject("list", periodicalInfos);
-		return mav;
-	}
-	
-	/**
-	 * 创建完订单跳转至此页面
-	 * */
-	@RequestMapping(value="/toOrderListManagePage",method =  { RequestMethod.POST ,RequestMethod.GET})
-	public ModelAndView toOrderListManagePage(@RequestParam("userId") String userId) {
-		logger.info("订单管理Page:["+userId+"]");
-		OrderInfoQuery orderInfoQuery = new OrderInfoQuery();
-		orderInfoQuery.setUserId(userId);
-		List<OrderInfo> orderInfos = orderInfoManager.queryList(orderInfoQuery);
-		ModelAndView mav = new ModelAndView("reader_orderListManagePage");
-		mav.addObject("userId", userId);
-		mav.addObject("list", orderInfos);
-		return mav;
-	}
+//		ModelAndView mav = new ModelAndView("reader_orderListManagePage");
+//		mav.addObject("userId", userId);
+//		mav.addObject("list", orderInfos);
+//		return mav;
+//	}
 	
 	
-	/**
-	 * toCreatOrderPage
-	 * 新建订单页面
-	 */
-	@RequestMapping(value="/toCreatOrderPage",method ={ RequestMethod.POST ,RequestMethod.GET})
-	public ModelAndView toCreatOrderPage(String userId ,String periodicalId) {
-		logger.info("新建读者订单Page:["+userId+"]&["+periodicalId+"]");
+//	/**
+//	 * toCreatOrderPage
+//	 * 新建订单页面
+//	 */
+//	@RequestMapping(value="/toCreatOrderPage",method ={ RequestMethod.POST ,RequestMethod.GET})
+//	public ModelAndView toCreatOrderPage(String userId ,String periodicalId) {
+//		logger.info("新建读者订单Page:["+userId+"]&["+periodicalId+"]");
+//		ModelAndView mav = new ModelAndView("reader_creatOrderPage");
+//		PeriodicalInfoQuery periodicalInfoQuery = new PeriodicalInfoQuery();
+//		periodicalInfoQuery.setPeriodicalId(periodicalId);
+//		List<PeriodicalInfo> periodicalInfos = periodicalInfoManager.queryList(periodicalInfoQuery);
+//		PeriodicalInfo periodicalInfo = periodicalInfos.get(0);
+//		PayeeInfoQuery payeeInfoQuery = new PayeeInfoQuery();
+//		payeeInfoQuery.setRefId(periodicalId);
+//		payeeInfoQuery.setType("000");
+//		List<PayeeInfo> payeeInfos = payeeInfoManager.queryList(payeeInfoQuery);
+//		PayeeInfo payeeInfo = payeeInfos.get(0);
+//		mav.addObject("periodicalInfo", periodicalInfo);
+//		mav.addObject("payeeInfo", payeeInfo);
+//		mav.addObject("userId", userId);
+//		return mav;
+//	}
+	
+	
+	@RequestMapping(value = "/toCreatOrderPage", method = RequestMethod.GET)
+	public ModelAndView toCreatOrderPage() {
 		ModelAndView mav = new ModelAndView("reader_creatOrderPage");
-		PeriodicalInfoQuery periodicalInfoQuery = new PeriodicalInfoQuery();
-		periodicalInfoQuery.setPeriodicalId(periodicalId);
-		List<PeriodicalInfo> periodicalInfos = periodicalInfoManager.queryList(periodicalInfoQuery);
-		PeriodicalInfo periodicalInfo = periodicalInfos.get(0);
-		PayeeInfoQuery payeeInfoQuery = new PayeeInfoQuery();
-		payeeInfoQuery.setRefId(periodicalId);
-		payeeInfoQuery.setType("000");
-		List<PayeeInfo> payeeInfos = payeeInfoManager.queryList(payeeInfoQuery);
-		PayeeInfo payeeInfo = payeeInfos.get(0);
-		mav.addObject("periodicalInfo", periodicalInfo);
-		mav.addObject("payeeInfo", payeeInfo);
-		mav.addObject("userId", userId);
+
 		return mav;
 	}
 	

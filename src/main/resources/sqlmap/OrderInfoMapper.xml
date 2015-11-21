@@ -33,6 +33,17 @@
 	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  
+
+  <select id="queryOrderList" parameterType="BizOrder" resultType="BizOrder">
+  	select oi.order_no as orderNo,oi.periodical_year as pYear,
+  	oi.subscribe_nums as subNums,oi.amount as amount,
+  	DATE_FORMAT(oi.create_time, '%Y-%m-%d') as submitTime,DATE_FORMAT(oi.audit_time, '%Y-%m-%d')  as auditTime
+  	from order_info oi
+  </select>
+  
+  
+  
   <sql id="Page_Query_Begin">
     select * from(select t.*,rownum rn from(
   </sql>

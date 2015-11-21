@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.cn.periodical.dao.OrderInfoDao;
 import com.cn.periodical.manager.OrderInfoManager;
+import com.cn.periodical.pojo.BizOrder;
 import com.cn.periodical.pojo.OrderInfo;
 import com.cn.periodical.pojo.OrderInfoPage;
 import com.cn.periodical.pojo.OrderInfoQuery;
@@ -68,6 +69,12 @@ public class OrderInfoManagerImpl implements OrderInfoManager {
 		
 		orderInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
 		return orderInfoPage;
+	}
+
+
+	public List<BizOrder> queryOrderList(BizOrder bizOrder) {
+		// TODO Auto-generated method stub
+		return orderInfoDao.queryOrderList(bizOrder);
 	}
 }
 

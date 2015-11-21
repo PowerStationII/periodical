@@ -15,8 +15,23 @@ public class BizEditor implements Serializable {
 	private String sectionName;
 	private String email;
 	private String refId;
+	private String editorId;
+	private String expertId;
 	
 	
+	
+	public String getEditorId() {
+		return editorId;
+	}
+	public void setEditorId(String editorId) {
+		this.editorId = editorId;
+	}
+	public String getExpertId() {
+		return expertId;
+	}
+	public void setExpertId(String expertId) {
+		this.expertId = expertId;
+	}
 	public String getRefId() {
 		return refId;
 	}

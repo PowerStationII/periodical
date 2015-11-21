@@ -46,11 +46,9 @@ public class ArticleGroupController extends EditorController{
 	 * 组稿
 	 */
 	@RequestMapping(value="/toArticleGroupPage",method = RequestMethod.GET)
-	public ModelAndView toArticleGroupPage(@RequestParam("userId") String userId,
-			HttpServletRequest request) {
-		logger.info("排刊组稿Page:["+userId+"]");
+	public ModelAndView toArticleGroupPage(HttpServletRequest request) {
+		logger.info("排刊组稿Page:[ ]");
 		ModelAndView mav = new ModelAndView("editor_articleGroupPage");
-		mav.addObject("userId", userId);
 		List<Periodical> periodicals = periodicalManager.queryList(null);
 		mav.addObject("list", periodicals);
 		return mav;
@@ -65,15 +63,13 @@ public class ArticleGroupController extends EditorController{
 	public ModelAndView toArticleGroupDetailPage(
 			@RequestParam("periodicalId") String periodicalId,
 			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
-			@RequestParam("userId") String userId,
 			HttpServletRequest request) {
-		logger.info("组稿左右Page:["+userId+"]&["+periodicalIssueNo+"]");
+		logger.info("组稿左右Page:[ ]&["+periodicalIssueNo+"]");
 		ModelAndView mav = new ModelAndView("editor_articleGroupDetailPage");
 		
 		List<EditorArticleDealRespDto> list =articleDealService.articleDeal(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
 		mav.addObject("list", list);
 		
-		mav.addObject("userId", userId);
 		mav.addObject("periodicalIssueNo", periodicalIssueNo);
 		mav.addObject("periodicalId", periodicalId);
 		return mav;
@@ -88,9 +84,8 @@ public class ArticleGroupController extends EditorController{
 	public ModelAndView toArticleGroup(
 			@RequestParam("periodicalId") String periodicalId,
 			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
-			@RequestParam("userId") String userId,
 			HttpServletRequest request) {
-		logger.info("组稿左右提交进来的:["+userId+"]&["+periodicalIssueNo+"]");
+		logger.info("组稿左右提交进来的:[]&["+periodicalIssueNo+"]");
 		logger.info("----------------");
 		ModelAndView mav = new ModelAndView("editor_articleGroupPage");
 		logger.info(request.getParameter("selectTest"));
@@ -103,11 +98,10 @@ public class ArticleGroupController extends EditorController{
 			periodicalDetails.setType("0000");
 			periodicalDetails.setCreateTime(new Date());
 			periodicalDetails.setPeriodicalIssueNo(periodicalIssueNo);
-			periodicalDetails.setUserId(userId);
+//			periodicalDetails.setUserId(userId);
 			periodicalDetails.setSectionId("sectionA");
 			periodicalDetailsManager.savePeriodicalDetails(periodicalDetails);
 		}
-		mav.addObject("userId", userId);
 		
 		return mav;
 	}
