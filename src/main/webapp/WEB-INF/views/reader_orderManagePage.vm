@@ -34,11 +34,12 @@
                     <td>$!{dtos.submitTime}</td>
                     <td>$!{dtos.auditTime}</td>
                     <td>上传</td>
-                    <td><a href="#">查看审核信息</a></td>
+                    <td><a href="#">订费登记</a>  <a href="#">查看审核信息</a></td>
                 </tr>
             #end
 		</table>
 		<a href="../reader/toCreatOrderPage">新建订单</a>
+		<a href="#">下载订购指南</a>
 		<br>
 	</div>
 </body>

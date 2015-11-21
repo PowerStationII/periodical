@@ -32,6 +32,7 @@
 				<td>期刊名称</td>
 				<td>主办单位</td>
 				<td>编辑社</td>
+				<td>单价</td>
 				<td>操作</td>
 			</tr>
 			#foreach($dtos in ${list})   
@@ -40,6 +41,7 @@
 				<td>$!{dtos.periodicalCnName}</td>
 				<td>$!{dtos.hostOrganization}</td>
 				<td>$!{dtos.press}</td>
+				<td>$!{dtos.inFixPrice}</td>
 				<td><a href="../editor/toSectionManagerPage?periodicalId=${dtos.periodicalId}">编辑栏目信息</a></td>
 			</tr>
 			#end

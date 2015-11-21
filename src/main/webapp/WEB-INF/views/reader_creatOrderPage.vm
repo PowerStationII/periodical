@@ -10,11 +10,19 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script>
+	$(function(){
+		$('#back').click(function(){
+			history.go(-1);
+		})
+	})
+</script>
 <body>
 	<div id="articleInfos">
 	<form action="../reader/toCreatOrder" method="POST">
-		<input type="hidden" name="userId" value="${userId}">
 		<input type="hidden" name="periodicalId" value="${periodicalInfo.periodicalId}">
+		<input type="hidden" name="singlPrice" value="${periodicalInfo.inFixPrice}">
+		<input type="hidden" name="payeeId" value="${periodicalInfo.payeeId}">
 		
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
@@ -67,7 +75,7 @@
                 <td>金额：js算出来</td>
             </tr>
             <tr>
-                <td ><input type="submit" value="提交"></td>
+                <td ><input type="submit" value="提交"> <input type="button"  value="返回"  id="back"/></td>
             </tr>
 		</table>
 		<br>

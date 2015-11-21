@@ -19,6 +19,7 @@ import com.cn.periodical.enums.ExceptionEnums;
 import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.enums.SystemIdEnums;
 import com.cn.periodical.pojo.EditorAreaInfos;
+import com.cn.periodical.pojo.PeriodicalInfo;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.service.LoginService;
 
@@ -128,6 +129,8 @@ public class LoginController {
 			String roleId = userInfo.getRoleId();
 			if (RoleIdEnums.READER_P.getCode().equals(roleId)) {
 				mav = new ModelAndView("reader_area");
+				List<PeriodicalInfo> infos = loginService.queryPeriodicalInfos();
+				mav.addObject("list", infos);
 				return mav;
 			} else if (RoleIdEnums.READER_E.getCode().equals(roleId)) {
 				mav = new ModelAndView("reader_area");

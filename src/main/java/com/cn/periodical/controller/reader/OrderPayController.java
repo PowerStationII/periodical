@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.cn.periodical.pojo.UserInfo;
 /**
  * 读者工作区-订费登记Controller
  * */
@@ -21,10 +23,10 @@ public class OrderPayController extends ReaderController{
 	 * 征订费登记
 	 */
 	@RequestMapping(value="/toOrderPayPage",method = RequestMethod.GET)
-	public ModelAndView toCreatOrderPage(@RequestParam("userId") String userId) {
-		logger.info("征订费登记Page:["+userId+"]");
+	public ModelAndView toCreatOrderPage(HttpServletRequest request,@RequestParam("orderNo") String orderNo) {
+		UserInfo userInfo = getUserInfo(request);
+		logger.info("征订费登记Page:["+userInfo.getUserId()+"]");
 		ModelAndView mav = new ModelAndView("reader_orderPayPage");
-		mav.addObject("userId", userId);
 		
 		
 		return mav;

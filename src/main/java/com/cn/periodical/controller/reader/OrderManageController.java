@@ -1,5 +1,6 @@
 package com.cn.periodical.controller.reader;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ import com.cn.periodical.pojo.PayeeInfo;
 import com.cn.periodical.pojo.PayeeInfoQuery;
 import com.cn.periodical.pojo.PeriodicalInfo;
 import com.cn.periodical.pojo.PeriodicalInfoQuery;
+import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.service.OrderInfoService;
 import com.cn.periodical.utils.GenerateOrderNo;
 
@@ -77,57 +79,48 @@ public class OrderManageController extends ReaderController{
 //	}
 	
 	
-//	/**
-//	 * toCreatOrderPage
-//	 * 新建订单页面
-//	 */
-//	@RequestMapping(value="/toCreatOrderPage",method ={ RequestMethod.POST ,RequestMethod.GET})
-//	public ModelAndView toCreatOrderPage(String userId ,String periodicalId) {
-//		logger.info("新建读者订单Page:["+userId+"]&["+periodicalId+"]");
-//		ModelAndView mav = new ModelAndView("reader_creatOrderPage");
-//		PeriodicalInfoQuery periodicalInfoQuery = new PeriodicalInfoQuery();
-//		periodicalInfoQuery.setPeriodicalId(periodicalId);
-//		List<PeriodicalInfo> periodicalInfos = periodicalInfoManager.queryList(periodicalInfoQuery);
-//		PeriodicalInfo periodicalInfo = periodicalInfos.get(0);
-//		PayeeInfoQuery payeeInfoQuery = new PayeeInfoQuery();
-//		payeeInfoQuery.setRefId(periodicalId);
-//		payeeInfoQuery.setType("000");
-//		List<PayeeInfo> payeeInfos = payeeInfoManager.queryList(payeeInfoQuery);
-//		PayeeInfo payeeInfo = payeeInfos.get(0);
-//		mav.addObject("periodicalInfo", periodicalInfo);
-//		mav.addObject("payeeInfo", payeeInfo);
-//		mav.addObject("userId", userId);
-//		return mav;
-//	}
-	
-	
-	@RequestMapping(value = "/toCreatOrderPage", method = RequestMethod.GET)
-	public ModelAndView toCreatOrderPage() {
+	/**
+	 * toCreatOrderPage
+	 * 新建订单页面
+	 */
+	@RequestMapping(value="/toCreatOrderPage")
+	public ModelAndView toCreatOrderPage(HttpServletRequest request,String periodicalId,String payeeId) {
+		UserInfo userInfo = getUserInfo(request);
+		logger.info("新建读者订单Page:["+userInfo.getUserId()+"]&["+periodicalId+"]");
 		ModelAndView mav = new ModelAndView("reader_creatOrderPage");
-
+		PeriodicalInfoQuery periodicalInfoQuery = new PeriodicalInfoQuery();
+		periodicalInfoQuery.setPeriodicalId(periodicalId);
+		List<PeriodicalInfo> periodicalInfos = periodicalInfoManager.queryList(periodicalInfoQuery);
+		PeriodicalInfo periodicalInfo = periodicalInfos.get(0);
+		PayeeInfoQuery payeeInfoQuery = new PayeeInfoQuery();
+		payeeInfoQuery.setPayeeId(payeeId);
+//		payeeInfoQuery.setType("000");
+		List<PayeeInfo> payeeInfos = payeeInfoManager.queryList(payeeInfoQuery);
+		PayeeInfo payeeInfo = payeeInfos.get(0);
+		mav.addObject("periodicalInfo", periodicalInfo);
+		mav.addObject("payeeInfo", payeeInfo);
 		return mav;
 	}
-	
 	
 	/**
 	 * toCreatOrder
 	 * 订阅
 	 */
 	@RequestMapping(value="/toCreatOrder",method ={ RequestMethod.POST ,RequestMethod.GET})
-	public ModelAndView toCreatOrder(String userId ,String periodicalId,String periodicalYear,int orderNums) {
-		logger.info("新建读者订单Page:["+userId+"]&["+periodicalId+"]");
-		ModelAndView mav = new ModelAndView("redirect:../reader/toOrderListManagePage");
+	public ModelAndView toCreatOrder(HttpServletRequest request,String periodicalId,String singlPrice,String periodicalYear,int orderNums) {
+		UserInfo userInfo = getUserInfo(request);
+		logger.info("新建读者订单Page:["+userInfo.getUserId()+"]&["+periodicalId+"]");
+		ModelAndView mav = new ModelAndView("redirect:../reader/toOrderManagePage");
 		OrderInfo orderInfo = new OrderInfo();
-		orderInfo.setUserId(userId);
+		orderInfo.setUserId(userInfo.getUserId());
 		orderInfo.setOrderNo(GenerateOrderNo.generateOrderNo());
 		orderInfo.setPeriodicalYear(periodicalYear);
 		orderInfo.setSubscribeNums(orderNums);
 		orderInfo.setOrderStatus("000");/**订单状态:000原始订单*/
 		orderInfo.setPeriodicalId(periodicalId);
-//		orderInfo.setAmount(Long.orderNums*22);
+		orderInfo.setAmount(Long.valueOf(orderNums*Integer.valueOf(singlPrice)));
+		orderInfo.setCreateTime(new Date());
 		orderInfoManager.saveOrderInfo(orderInfo);
-		
-		mav.addObject("userId", userId);
 		return mav;
 	}
 	/**

@@ -11,11 +11,19 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script>
+	$(function(){
+		$('#back').click(function(){
+			history.go(-1);
+		})
+	})
+</script>
 <body>
 	<div id="articleInfos">
 	<form action="../editor/toSectionInfoAdd" method="GET">
 		<input type="hidden" name="periodicalId" value="${periodical.periodicalId}">
 		<input type="submit" value="新增栏目">
+		<input type="button" value="返回" id="back">
 	</form>
 	
 		<table style="border: 1px solid black;" rules="all">

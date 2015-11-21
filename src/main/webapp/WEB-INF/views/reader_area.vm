@@ -28,16 +28,7 @@
 							$('#other').remove();
 							$('.right')
 									.append(
-											'<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toOrderManagePage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
-						});
-		$('#gaofeidengji')
-				.click(
-						function() {
-							$('#area').hide();
-							$('#other').remove();
-							$('.right')
-									.append(
-											'<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toOrderPayPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+											'<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toOrderManagePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
 						});
 		$('#xiugaixinxi')
 				.click(
@@ -46,7 +37,7 @@
 							$('#other').remove();
 							$('.right')
 									.append(
-											'<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdateSettingPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+											'<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdateSettingPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
 						});
 		$('#xiugaimima')
 				.click(
@@ -55,7 +46,7 @@
 							$('#other').remove();
 							$('.right')
 									.append(
-											'<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdatePWPage?userId=${userId}&roleId=${roleId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+											'<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdatePWPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
 						});
 		$('#other').hide();
 	});
@@ -163,24 +154,23 @@ a {
 	</div>
 	<div class="buttom">
 		<div class="left">
-		#if(${userInfo.roleId}=='1002')
+			#if(${userInfo.roleId}=='1002')
 			<div class="leftUp">
 				<div class="work_area"></div>
-				<div class="area_name">个人读者</div>
+				<div class="area_name">读者</div>
 			</div>
 			<div class="cLeft">
 				<div class="mode_name">期刊征订</div>
 				<!-- <div  class="li1"  id="jiansuo">关键词检索</div> -->
-				<div class="li2" id="dingdanguanli">订单管理</div>
-				<div class="li3" id="gaofeidengji">订费登记</div>
-				<div class="mode_name" style="margin-top: 10px;">个人信息设置</div>
+				<div class="li3" id="dingdanguanli">订单管理</div>
+、				<div class="mode_name" style="margin-top: 10px;">个人信息设置</div>
 				<div class="li2" style="margin-top: 10px;" id="xiugaixinxi">修改个人信息</div>
 				<div class="li3" id="xiugaimima">修改密码</div>
 				<!-- div  class="mode_name"  style="margin-top:10px;">消息管理</div>
 	       		<div  class="li2"  style="margin-top:10px;" id="xiugaixinxi">我的消息</div>
 			    <div  class="li3" id="xiugaimima">发送消息</div> -->
 			</div>
-		#elseif(${userInfo.roleId}=='1011')
+			#elseif(${userInfo.roleId}=='1011')
 			<div class="leftUp">
 				<div class="work_area"></div>
 				<div class="area_name">省所读者</div>
@@ -194,11 +184,34 @@ a {
 				<div class="li2" style="margin-top: 10px;" id="xiugaixinxi">修改个人信息</div>
 				<div class="li3" id="xiugaimima">修改密码</div>
 			</div>
-		#end
+			#end
 		</div>
 		<div class="right">
 			<div id="area" style="margin-top: 20px;">
-				<!-- <br> <a style="font-size: 12px;"> 可预订期刊列表 </a> -->
+				<br> <a style="font-size: 12px;"> 可预订期刊列表 </a>
+				<table style="border: 1px solid black; font-size: 14px;" rules="all">
+					<tr>
+						<td style="width: 20%; text-align: center;">期刊中文名称</td>
+						<td style="width: 20%; text-align: center;">期刊号</td>
+						<td style="width: 20%; text-align: center;">出版社</td>
+						<td style="width: 20%; text-align: center;">主管单位</td>
+						<td style="width: 20%; text-align: center;">国内定价</td>
+						<td style="width: 20%; text-align: center;">国际定价</td>
+						<td style="width: 20%; text-align: center;">操作</td>
+						
+					</tr>
+					#foreach($dtos in ${list})
+					<tr>
+						<td>$!{dtos.periodicalCnName}</td>
+						<td>$!{dtos.issnNo}</td>
+						<td>$!{dtos.press}</td>
+						<td>$!{dtos.hostOrganization}</td>
+						<td>$!{dtos.inFixPrice}</td>
+						<td>$!{dtos.outFixPrice}</td>
+						<td><a href="reader/toCreatOrderPage?periodicalId=${dtos.periodicalId}">预定</a></td>
+					</tr>
+					#end
+				</table>
 			</div>
 		</div>
 	</div>

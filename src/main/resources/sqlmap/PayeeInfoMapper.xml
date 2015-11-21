@@ -4,6 +4,7 @@
 	<resultMap id="BaseResultMap" type="PayeeInfo">
 	  <id column="ID" jdbcType="DECIMAL" property="id" />
 	  <result column="ref_id" jdbcType="VARCHAR" property="refId" />
+	  <result column="payee_id" jdbcType="VARCHAR" property="payeeId" />
 	  <result column="type" jdbcType="VARCHAR" property="type" />
 	  <result column="payee_account_no" jdbcType="VARCHAR" property="payeeAccountNo" />
 	  <result column="payee_account_name" jdbcType="VARCHAR" property="payeeAccountName" />
@@ -27,6 +28,9 @@
       <trim prefix="(" prefixOverrides="and" suffix=")">
       <if test="refId != null" >
 	      and ref_id = #{refId,jdbcType=VARCHAR}
+	    </if>
+      <if test="payeeId != null" >
+	      and payee_id = #{payeeId,jdbcType=VARCHAR}
 	    </if>
       <if test="type != null" >
 	      and type = #{type,jdbcType=VARCHAR}
@@ -70,6 +74,9 @@
       <if test="refId != null">
         ref_id = #{refId,jdbcType=VARCHAR},
       </if>
+      <if test="payeeId != null">
+        payee_id = #{payeeId,jdbcType=VARCHAR},
+      </if>
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
       </if>
@@ -109,6 +116,7 @@
   <sql id="Base_Column_List">
     id,
     ref_id,
+    payee_id,
     type,
     payee_account_no,
     payee_account_name,
@@ -125,6 +133,7 @@
     <set>
       <trim suffixOverrides=",">
         ref_id = #{refId,jdbcType=VARCHAR},
+        payee_id = #{payeeId,jdbcType=VARCHAR},
         type = #{type,jdbcType=VARCHAR},
         payee_account_no = #{payeeAccountNo,jdbcType=VARCHAR},
         payee_account_name = #{payeeAccountName,jdbcType=VARCHAR},
@@ -143,6 +152,9 @@
     <!-- ID, -->
     <if test="refId != null">
       ref_id,
+    </if>
+    <if test="payeeId != null">
+      payee_id,
     </if>
     <if test="type != null">
       type,
@@ -181,6 +193,7 @@
 	<sql id="Base_Value_List">
     #{id,jdbcType=BIGINT},
     #{refId,jdbcType=VARCHAR},
+    #{payeeId,jdbcType=VARCHAR},
     #{type,jdbcType=VARCHAR},
     #{payeeAccountNo,jdbcType=VARCHAR},
     #{payeeAccountName,jdbcType=VARCHAR},
@@ -197,6 +210,9 @@
     <!-- SEQ_payee_info.nextval, -->
     <if test="refId != null">
       #{refId,jdbcType=VARCHAR},
+    </if>
+    <if test="payeeId != null">
+      #{payeeId,jdbcType=VARCHAR},
     </if>
     <if test="type != null">
       #{type,jdbcType=VARCHAR},

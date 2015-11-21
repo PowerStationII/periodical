@@ -1,10 +1,12 @@
 package com.cn.periodical.controller.editor;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.enums.PeriodicalStateEnums;
+import com.cn.periodical.manager.PayeeInfoManager;
 import com.cn.periodical.manager.PeriodicalInfoManager;
+import com.cn.periodical.manager.PeriodicalManager;
+import com.cn.periodical.pojo.PayeeInfo;
+import com.cn.periodical.pojo.Periodical;
 import com.cn.periodical.pojo.PeriodicalInfo;
 import com.cn.periodical.pojo.PeriodicalInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.utils.GenerateOrderNo;
 
 /**
  * 主编-期刊管理
@@ -32,6 +40,10 @@ public class PeriodicalManagerController extends EditorController {
 	
 	@Autowired
 	PeriodicalInfoManager periodicalInfoManager;
+	@Autowired
+	PeriodicalManager periodicalManager;
+	@Autowired
+	PayeeInfoManager PayeeInfoManager;
 	private static final Logger logger = LoggerFactory.getLogger(PeriodicalManagerController.class);
 	/**
 	 * toPeriodicalManagerPage
@@ -66,7 +78,7 @@ public class PeriodicalManagerController extends EditorController {
 	 * 保存编辑信息
 	 */
 	@RequestMapping(value = "/toSavePeriodicalInfo", method = { RequestMethod.POST })
-	public ModelAndView toSavePeriodicalInfo(@ModelAttribute PeriodicalInfo periodicalInfo) {
+	public ModelAndView toSavePeriodicalInfo(@ModelAttribute PeriodicalInfo periodicalInfo,@ModelAttribute PayeeInfo payeeInfo) {
 		ModelAndView mav = new ModelAndView("redirect:../editor/toPeriodicalManagerPage");
 		logger.info("新增期刊信息 in:["+JSON.toJSONString(periodicalInfo)+"]");
 		try {
@@ -74,7 +86,24 @@ public class PeriodicalManagerController extends EditorController {
 			 * 1,保存PeriodicalInfo到Periodical_info表
 			 * */
 			String periodicalId = UUID.randomUUID().toString().replaceAll("-", "");
+			String payeeId = UUID.randomUUID().toString().replaceAll("-", "");
 			periodicalInfo.setPeriodicalId(periodicalId);
+			periodicalInfo.setPayeeId(payeeId);
+			periodicalInfo.setCreateTime(new Date());
+			payeeInfo.setPayeeId(payeeId);
+			
+			for(int i=1;i<=periodicalInfo.getCycle();i++){
+				Periodical periodical = new Periodical();
+				periodical.setPeriodicalId(periodicalInfo.getPeriodicalId());
+				periodical.setPeriodicalIssueNo(GenerateOrderNo.generateOrderNo());
+				periodical.setPeriodicalState(PeriodicalStateEnums.NEW_PERIODICAL.getCode());
+				periodical.setCycleNums(i);
+				periodical.setPeriodicalYear(periodicalInfo.getPeriodicalYear()==null?new DateTime().toString("YYYY"):periodicalInfo.getPeriodicalYear());
+//				periodical.setPublishNums(periodicalInfo.getPublishNums()==null?10000:periodicalInfo.get);
+				periodical.setCreateTime(new Date());
+				periodicalManager.savePeriodical(periodical);
+			}
+			PayeeInfoManager.savePayeeInfo(payeeInfo);
 			periodicalInfoManager.savePeriodicalInfo(periodicalInfo);
 		} catch (Exception e) {
 			//记录错误日志

@@ -24,6 +24,7 @@ public class PayeeInfoQuery extends PagingQuery {
 	}
 	
 	private java.lang.String refId;
+	private java.lang.String payeeId;
 	private java.lang.String type;
 	private java.lang.String payeeAccountNo;
 	private java.lang.String payeeAccountName;
@@ -50,6 +51,21 @@ public class PayeeInfoQuery extends PagingQuery {
 	 */
 	public java.lang.String getRefId() {
 		return this.refId;
+	}
+	/**
+	 * 收款信息id
+	 * @param payeeId
+	 */
+	public void setPayeeId(java.lang.String payeeId) {
+		this.payeeId = payeeId;
+	}
+	
+	/**
+	 * 收款信息id
+	 * @return
+	 */
+	public java.lang.String getPayeeId() {
+		return this.payeeId;
 	}
 	/**
 	 * 期刊:000(periodical_info.periodical_id);作者:001(author_info.author_id);专家:002(expert_info.expert_id)

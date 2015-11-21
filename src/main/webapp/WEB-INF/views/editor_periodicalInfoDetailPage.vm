@@ -35,6 +35,46 @@
 				<td colspan="3"><input type="text" name="press" value=""/></td>
 			</tr>
 			<tr>
+				<td>单价</td>
+				<td colspan="3"><input type="text" name="inFixPrice" value=""/></td>
+			</tr>
+			<tr>
+				<td>期刊号</td>
+				<td colspan="3"><input type="text" name="issnNo" value=""/></td>
+			</tr>
+			<tr>
+				<td>周期</td>
+				<td colspan="3"><input type="text" name="cycle" value=""/></td>
+			</tr>
+			<tr>
+				<td>收款账户</td>
+				<td colspan="3"><input type="text" name="payeeAccountNo" value=""/></td>
+			</tr>
+			<tr>
+				<td>收款姓名</td>
+				<td colspan="3"><input type="text" name="payeeAccountName" value=""/></td>
+			</tr>
+			<tr>
+				<td>开户行</td>
+				<td colspan="3"><input type="text" name="payeeAccountOpen" value=""/></td>
+			</tr>
+			<tr>
+				<td>邮局汇款收款单位地址</td>
+				<td colspan="3"><input type="text" name="payeeAccountAddress" value=""/></td>
+			</tr>
+			<tr>
+				<td>邮局汇款收款单位</td>
+				<td colspan="3"><input type="text" name="payeeAccountPost" value=""/></td>
+			</tr>
+			<tr>
+				<td>汇款邮编</td>
+				<td colspan="3"><input type="text" name="payeeAccountPostCode" value=""/></td>
+			</tr>
+			<tr>
+				<td>收款人卡号</td>
+				<td colspan="3"><input type="text" name="payeeIdcardNo" value=""/></td>
+			</tr>
+			<tr>
 				<td><input type="button"  value="返回"  id="back"/></td>
 				<td colspan="3"><input type="submit" value="增加"/></td>
 			</tr>

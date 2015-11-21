@@ -3,7 +3,8 @@
 <mapper namespace="PeriodicalInfoMapper">
 	<resultMap id="BaseResultMap" type="PeriodicalInfo">
 	  <id column="ID" jdbcType="DECIMAL" property="id" />
-	  <result column="user_id" jdbcType="VARCHAR" property="userId" />
+	  <result column="payee_id" jdbcType="VARCHAR" property="payeeId" />
+	  <result column="periodical_year" jdbcType="VARCHAR" property="periodicalYear" />
 	  <result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
 	  <result column="periodical_cn_name" jdbcType="VARCHAR" property="periodicalCnName" />
 	  <result column="periodical_en_name" jdbcType="VARCHAR" property="periodicalEnName" />
@@ -42,8 +43,11 @@
   <sql id="Example_Where_Clause">
     <where>
       <trim prefix="(" prefixOverrides="and" suffix=")">
-      <if test="userId != null" >
-	      and user_id = #{userId,jdbcType=VARCHAR}
+      <if test="payeeId != null" >
+	      and payee_id = #{payeeId,jdbcType=VARCHAR}
+	    </if>
+      <if test="periodicalYear != null" >
+	      and periodical_year = #{periodicalYear,jdbcType=VARCHAR}
 	    </if>
       <if test="periodicalId != null" >
 	      and periodical_id = #{periodicalId,jdbcType=VARCHAR}
@@ -135,8 +139,11 @@
   <sql id="Example_Set_Clause">
     <set>
       <trim suffixOverrides=",">
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
+      <if test="payeeId != null">
+        payee_id = #{payeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="periodicalYear != null">
+        periodical_year = #{periodicalYear,jdbcType=VARCHAR},
       </if>
       <if test="periodicalId != null">
         periodical_id = #{periodicalId,jdbcType=VARCHAR},
@@ -227,7 +234,8 @@
   </sql>
   <sql id="Base_Column_List">
     id,
-    user_id,
+    payee_id,
+    periodical_year,
     periodical_id,
     periodical_cn_name,
     periodical_en_name,
@@ -260,7 +268,8 @@
   <sql id="Base_Set_Clause">
     <set>
       <trim suffixOverrides=",">
-        user_id = #{userId,jdbcType=VARCHAR},
+        payee_id = #{payeeId,jdbcType=VARCHAR},
+        periodical_year = #{periodicalYear,jdbcType=VARCHAR},
         periodical_id = #{periodicalId,jdbcType=VARCHAR},
         periodical_cn_name = #{periodicalCnName,jdbcType=VARCHAR},
         periodical_en_name = #{periodicalEnName,jdbcType=VARCHAR},
@@ -294,8 +303,11 @@
   </sql>
   <sql id="Selective_Column_List">
     <!-- ID, -->
-    <if test="userId != null">
-      user_id,
+    <if test="payeeId != null">
+      payee_id,
+    </if>
+    <if test="periodicalYear != null">
+      periodical_year,
     </if>
     <if test="periodicalId != null">
       periodical_id,
@@ -384,7 +396,8 @@
   </sql>
 	<sql id="Base_Value_List">
     #{id,jdbcType=BIGINT},
-    #{userId,jdbcType=VARCHAR},
+    #{payeeId,jdbcType=VARCHAR},
+    #{periodicalYear,jdbcType=VARCHAR},
     #{periodicalId,jdbcType=VARCHAR},
     #{periodicalCnName,jdbcType=VARCHAR},
     #{periodicalEnName,jdbcType=VARCHAR},
@@ -416,8 +429,11 @@
 	</sql>
   <sql id="Selective_Value_List">
     <!-- SEQ_periodical_info.nextval, -->
-    <if test="userId != null">
-      #{userId,jdbcType=VARCHAR},
+    <if test="payeeId != null">
+      #{payeeId,jdbcType=VARCHAR},
+    </if>
+    <if test="periodicalYear != null">
+      #{periodicalYear,jdbcType=VARCHAR},
     </if>
     <if test="periodicalId != null">
       #{periodicalId,jdbcType=VARCHAR},

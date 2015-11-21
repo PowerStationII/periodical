@@ -16,7 +16,8 @@ public class PeriodicalInfo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private java.lang.Long id;
-	private java.lang.String userId;
+	private java.lang.String payeeId;
+	private java.lang.String periodicalYear;
 	private java.lang.String periodicalId;
 	private java.lang.String periodicalCnName;
 	private java.lang.String periodicalEnName;
@@ -60,19 +61,34 @@ public class PeriodicalInfo implements Serializable{
 		return this.id;
 	}
 	/**
-	 * 
-	 * @param userId
+	 * 收款人信息id
+	 * @param payeeId
 	 */
-	public void setUserId(java.lang.String userId) {
-		this.userId = userId;
+	public void setPayeeId(java.lang.String payeeId) {
+		this.payeeId = payeeId;
 	}
 	
 	/**
-	 * 
+	 * 收款人信息id
 	 * @return
 	 */
-	public java.lang.String getUserId() {
-		return this.userId;
+	public java.lang.String getPayeeId() {
+		return this.payeeId;
+	}
+	/**
+	 * 年份
+	 * @param periodicalYear
+	 */
+	public void setPeriodicalYear(java.lang.String periodicalYear) {
+		this.periodicalYear = periodicalYear;
+	}
+	
+	/**
+	 * 年份
+	 * @return
+	 */
+	public java.lang.String getPeriodicalYear() {
+		return this.periodicalYear;
 	}
 	/**
 	 * 
