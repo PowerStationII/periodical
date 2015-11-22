@@ -120,7 +120,7 @@
 					$('#certificateW').show();
 					$('#certificateR').hide();
 				}
-  			
+  				if($roleId=='1001'){
   				//联系电话
   				if($('#phone').validatebox('isValid')==true){
 					$('#phoneR').show();
@@ -180,13 +180,14 @@
 					$('#departmentW').show();
 					$('#departmentR').hide();
 				}
-  			
+  				}
   				if ($('.wrong').is(':visible')) {
   					alert("请正确添加注册相关信息!");
   				}
   				else {
   					submitForm();
-  				}		
+  				}	
+  				
   			});
   			
   			$('#back').click(function(){
@@ -195,6 +196,7 @@
   		});
   		
   		function submitForm(){  
+  			    alert(111);
 				$('#form').submit();
 			} 
   </script>
@@ -215,6 +217,7 @@
     	<form action="register" id="form" method="POST">
     		<input type="hidden" name="systemId" value="${systemId}">
     		<input type="hidden" name="roleId" value="${roleId}">
+    		 #if($roleId=='1001')
 			<div class="mode1">
 				<!--Email-->
 				<a class="sign"  style="margin-left:89px;margin-top:10px;">*</a><a  style="margin-top:10px;">Email：</a>
@@ -354,6 +357,72 @@
 <!-- 				<a href="javascript:;" onclick="submitForm(this)">注册</a>
  -->				<input type="button"  value="返回"   id="back"  style="font-size:18px;width:70px;height:30px;">
 			</div>
+			#elseif($roleId=='1002')
+			<div class="mode1">
+				<!--Email-->
+				<a class="sign"  style="margin-left:89px;margin-top:10px;">*</a><a  style="margin-top:10px;">Email：</a>
+				<input id="email"  name="email"   class="easyui-validatebox" 
+							data-options="required:true,validType:'email',
+													missingMessage:'不允许为空',
+													invalidMessage:'请输入正确的Email格式'"   style="margin-top:10px;"/>
+				<a class="wrong"  id="emailW"   style="margin-top:10px;">x</a><a class="right"  id="emailR" style="margin-top:10px;">√</a><br>
+				<a class="tip"  style="margin-left:154px;">邮箱地址只能包含字母、数字、句点 (.)、连字符 (-) 或下划线 (_)。</a><br><br>
+				
+				<!--密码--> 
+				<a class="sign"  style="margin-left:95px;">*</a><a>密码：</a>
+				<input id="pwd" name="password" type="password" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'"   validType="minLength[6]" />
+				<a class="wrong"  id="pwdW">x</a><a class="right"  id="pwdR">√</a><br>
+				<a class="tip"  style="margin-left:154px;">密码至少6个字符，请不要和登录名相同。</a><br><br>
+				
+				<!--确认密码-->
+				<a class="sign"  style="margin-left:64px;">*</a><a>确认密码：</a>
+				<input id="rpwd" name="rpwd" type="password" class="easyui-validatebox"  
+							data-options="missingMessage:'不允许为空',"    
+				    		required="required"  validType="equals['#pwd']" />
+				<a class="wrong"  id="rpwdW">x</a><a class="right"  id="rpwdW">√</a><br><br>
+				
+				<!--姓名-->
+				<a class="sign" style="margin-left:94px;">*</a><a>姓名：</a>
+				<input id="name" name="realName" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" />
+				<a class="wrong"  id="nameW">x</a><a class="right"  id="nameR">√</a><br><br>
+				
+				<!--汉语拼音-->
+				<a class="sign"  style="margin-left:64px;">*</a><a>汉语拼音：</a>
+				<input id="pinyin" name="nameSpell" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'"   validType="english[]" />
+				<a class="wrong"  id="pinyinW">x</a><a class="right"  id="pinyinR">√</a><br><br>
+				
+				<!--证件-->
+				<a class="sign"   style="margin-left:94px;">*</a><a>证件：</a>
+				<select id="certificates" class="easyui-combobox" name="certifiType" style="width:80px;"> 
+				    <option  value="IDCARD">身份证</option> 
+				    <option  value="PASSPORT">护照</option>   
+				    <option  value="OFFICERCARD">军警证</option>     
+				</select>
+				<input id="certificate" name="certifiNo" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" /><!-- style="margin-left:154px;" -->
+				<a class="wrong"  id="certificateW">x</a><a class="right"   id="certificateR">√</a><br><br>  
+				
+				<!--性别-->
+				<a class="sign"   style="margin-left:90px;">*</a><a> 性别：</a>
+				<input type="radio" value="male" checked="checked" name="sex"/>男 
+				<input type="radio" value="female" name="sex"/>女<br><br>
+				
+				<!--出生日期-->
+				<a class="sign"  style="margin-left:64px;">*</a><a>出生日期：</a>
+				<input id="birthday" type="text"  name="birthDay" class="easyui-datebox" required="required"  value="1"></input>
+				<br><br>
+			</div>
+			<div class="mode1">
+				<!--提交按钮-->
+				<input type="button"  value="注册"  id="registered"   style="font-size:18px;width:70px;height:30px;margin-left:100px;">
+<!-- 				<a href="javascript:;" onclick="submitForm(this)">注册</a>
+ -->				<input type="button"  value="返回"   id="back"  style="font-size:18px;width:70px;height:30px;">
+			</div>
+			#else
+			#end
 		</form>
     </div>
   </body>

@@ -106,7 +106,7 @@ public class RegisterController {
 			 * 需区分省所/个人登录
 			 * */
 			if(RoleIdEnums.READER_P.getCode().equals(roleId)){
-				int i = registerService.addAuthor(registeRequestDto);
+				int i = registerService.addReader(registeRequestDto);
 				logger.info(i+"");
 				if(i==0){
 					mav = new ModelAndView("error");
