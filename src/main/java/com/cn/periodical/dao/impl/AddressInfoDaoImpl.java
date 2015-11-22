@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.cn.periodical.dao.AddressInfoDao;
 import com.cn.periodical.pojo.AddressInfo;
 import com.cn.periodical.pojo.AddressInfoQuery;
+import com.cn.periodical.pojo.BizDistribut;
 import com.cn.periodical.dao.BaseDao;
 
 @Repository("addressInfoDao")
@@ -65,6 +66,12 @@ public class AddressInfoDaoImpl extends BaseDao implements AddressInfoDao {
 	
 	public int updateByPrimaryKey(AddressInfo record) {
 		return super.getSqlSession().update("AddressInfoMapper.updateByPrimaryKey", record);
+	}
+
+
+	public List<BizDistribut> queryAddressListByUserId(BizDistribut distribut) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("AddressInfoMapper.", distribut);
 	}
 	
 }

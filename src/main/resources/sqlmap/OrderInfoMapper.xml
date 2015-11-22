@@ -103,8 +103,8 @@
 		oi.subscribe_nums as subNums,oi.amount as amount,
 		DATE_FORMAT(oi.create_time, '%Y-%m-%d') as
 		submitTime,DATE_FORMAT(oi.audit_time, '%Y-%m-%d') as auditTime
-		from
-		order_info oi
+		from order_info oi
+		where oi.user_id=#{userId,jdbcType=VARCHAR}
 	</select>
 
 	<select id="queryOrderDetail" parameterType="BizOrder"

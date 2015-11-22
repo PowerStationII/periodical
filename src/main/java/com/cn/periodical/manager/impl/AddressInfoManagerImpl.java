@@ -16,6 +16,7 @@ import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.pojo.AddressInfo;
 import com.cn.periodical.pojo.AddressInfoPage;
 import com.cn.periodical.pojo.AddressInfoQuery;
+import com.cn.periodical.pojo.BizDistribut;
 import com.cn.periodical.utils.Pagenation;
 
 @Component("addressInfoManager")
@@ -75,5 +76,11 @@ public class AddressInfoManagerImpl implements AddressInfoManager {
               addressInfoDao.insertSelective(addressInfo);
           }
     }
+
+
+	public List<BizDistribut> queryAddressListByUserId(BizDistribut distribut) {
+		// TODO Auto-generated method stub
+		return addressInfoDao.queryAddressListByUserId(distribut);
+	}
 }
 

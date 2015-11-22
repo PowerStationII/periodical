@@ -21,6 +21,7 @@ public class PeriodicalDistribut implements Serializable{
 	private java.lang.String addressId;
 	private java.lang.String periodicalId;
 	private java.lang.Integer distributeNums;
+	private java.lang.String distributeStatus;
 	private java.lang.String extend1;
 	private java.lang.String extend2;
 	private java.lang.String extend3;
@@ -127,6 +128,21 @@ public class PeriodicalDistribut implements Serializable{
 	 */
 	public java.lang.Integer getDistributeNums() {
 		return this.distributeNums;
+	}
+	/**
+	 * 配送状态
+	 * @param distributeStatus
+	 */
+	public void setDistributeStatus(java.lang.String distributeStatus) {
+		this.distributeStatus = distributeStatus;
+	}
+	
+	/**
+	 * 配送状态
+	 * @return
+	 */
+	public java.lang.String getDistributeStatus() {
+		return this.distributeStatus;
 	}
 	/**
 	 * 

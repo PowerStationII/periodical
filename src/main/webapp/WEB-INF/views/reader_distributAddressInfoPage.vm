@@ -15,19 +15,24 @@
 	<div id="articleInfos">
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
-				<td>订单号</td>
-				<td>订单金额</td>
-				<td>订阅数</td>
-				<td>期刊名称</td>
+				<td colspan="5"><a href="">上传地址excel</a></td>
+			</tr>
+			<tr>
+				<td>地址id</td>
+				<td>邮寄地址</td>
+				<td>邮政编码</td>
+				<td>联系人姓名</td>
+				<td>联系人手机</td>
                 <td>操作</td>
 			</tr>
-            #foreach($orderInfo in ${list})
+            #foreach($dtos in ${list})
                 <tr>
-                    <td>${orderInfo.orderNo}</td>
-                    <td>${orderInfo.amount}</td>
-                    <td>${orderInfo.subscribeNums}</td>
-                    <td>orderInfo表和periodicalinfo表通过periodicalId关联</td>
-                    <td><a href="../reader/toEditorOrderPage?userId=${userId}&orderId=${orderInfo.orderNo}">编辑订单</a></td>
+                    <td>${dtos.aId}</td>
+                    <td>${dtos.rAddress}</td>
+                    <td>${dtos.rPostCode}</td>
+                    <td>${dtos.rContacter}</td>
+                    <td>${dtos.cMobile}</td>
+                    <td><a href="#">编辑</a><a href="#">删除</a></td>
                 </tr>
             #end
 		</table>

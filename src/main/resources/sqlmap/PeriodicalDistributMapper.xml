@@ -8,6 +8,7 @@
 	  <result column="address_id" jdbcType="VARCHAR" property="addressId" />
 	  <result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
 	  <result column="distribute_nums" jdbcType="INTEGER" property="distributeNums" />
+	  <result column="distribute_status" jdbcType="VARCHAR" property="distributeStatus" />
 	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
 	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
 	  <result column="extend_3" jdbcType="VARCHAR" property="extend3" />
@@ -50,6 +51,9 @@
 	    </if>
       <if test="distributeNums != null" >
 	      and distribute_nums = #{distributeNums,jdbcType=INTEGER}
+	    </if>
+      <if test="distributeStatus != null" >
+	      and distribute_status = #{distributeStatus,jdbcType=VARCHAR}
 	    </if>
       <if test="extend1 != null" >
 	      and extend_1 = #{extend1,jdbcType=VARCHAR}
@@ -126,6 +130,9 @@
       <if test="distributeNums != null">
         distribute_nums = #{distributeNums,jdbcType=INTEGER},
       </if>
+      <if test="distributeStatus != null">
+        distribute_status = #{distributeStatus,jdbcType=VARCHAR},
+      </if>
       <if test="extend1 != null">
         extend_1 = #{extend1,jdbcType=VARCHAR},
       </if>
@@ -190,6 +197,7 @@
     address_id,
     periodical_id,
     distribute_nums,
+    distribute_status,
     extend_1,
     extend_2,
     extend_3,
@@ -217,6 +225,7 @@
         address_id = #{addressId,jdbcType=VARCHAR},
         periodical_id = #{periodicalId,jdbcType=VARCHAR},
         distribute_nums = #{distributeNums,jdbcType=INTEGER},
+        distribute_status = #{distributeStatus,jdbcType=VARCHAR},
         extend_1 = #{extend1,jdbcType=VARCHAR},
         extend_2 = #{extend2,jdbcType=VARCHAR},
         extend_3 = #{extend3,jdbcType=VARCHAR},
@@ -254,6 +263,9 @@
     </if>
     <if test="distributeNums != null">
       distribute_nums,
+    </if>
+    <if test="distributeStatus != null">
+      distribute_status,
     </if>
     <if test="extend1 != null">
       extend_1,
@@ -317,6 +329,7 @@
     #{addressId,jdbcType=VARCHAR},
     #{periodicalId,jdbcType=VARCHAR},
     #{distributeNums,jdbcType=INTEGER},
+    #{distributeStatus,jdbcType=VARCHAR},
     #{extend1,jdbcType=VARCHAR},
     #{extend2,jdbcType=VARCHAR},
     #{extend3,jdbcType=VARCHAR},
@@ -352,6 +365,9 @@
     </if>
     <if test="distributeNums != null">
       #{distributeNums,jdbcType=INTEGER},
+    </if>
+    <if test="distributeStatus != null">
+      #{distributeStatus,jdbcType=VARCHAR},
     </if>
     <if test="extend1 != null">
       #{extend1,jdbcType=VARCHAR},

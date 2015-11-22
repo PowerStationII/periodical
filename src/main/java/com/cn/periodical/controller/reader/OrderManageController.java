@@ -57,7 +57,9 @@ public class OrderManageController extends ReaderController{
 	 */
 	@RequestMapping(value="/toOrderManagePage",method =  { RequestMethod.POST ,RequestMethod.GET})
 	public ModelAndView toOrderManagePage(HttpServletRequest request,@ModelAttribute BizOrder bizOrder) {
+		UserInfo userInfo = getUserInfo(request);
 		logger.info("订单管理Page:[ ]");
+		bizOrder.setUserId(userInfo.getUserId());
 		List<BizOrder> list = orderInfoManager.queryOrderList(bizOrder);
 		ModelAndView mav = new ModelAndView("reader_orderManagePage");
 		mav.addObject("list", list);
