@@ -9,6 +9,9 @@
     <link href="css/data_styles.css" type="text/css" rel="stylesheet"/>
     <link href="css/portal_styles.css" type="text/css" rel="stylesheet"/>
    	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+   	<style type="text/css">
+   		#u27,#u15,#u19,#u23,#u31,#u35,#u11,#u153,#u83,#u85,#u122,#u94,#u99,#u99,#u104,#u109,#u114,#u119{cursor:pointer;}
+   	</style>
   </head>
   <script type="text/javascript">
   	$(function(){
@@ -24,7 +27,7 @@
   			$('#u150').after(frame.replace('totototo','toCouncilShow'));
   		});
   		
-  		//
+  		//点击顶部链接
   		$('#u27').click(function(){
   			$('.right').hide();
   			$('iframe').remove();
@@ -62,6 +65,54 @@
   			$('.right').hide();
   			$('iframe').remove();
   			$('#u150').after(frame.replace('totototo','toLianXi'));
+  		});
+  		
+  		
+  		//点击右侧链接
+  		$('#u83').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toRightTop1'));
+  		});
+  		$('#u85').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toRightTop2'));
+  		});
+  		$('#u122').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toRightTop3'));
+  		});
+  		$('#u94').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toRightMiddle1'));
+  		});
+  		$('#u99').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toRightMiddle2'));
+  		});
+  		$('#u104').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toRightMiddle3'));
+  		});
+  		$('#u109').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toRightMiddle4'));
+  		}); 
+  		$('#u114').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toRightMiddle5'));
+  		});
+  		$('#u119').click(function(){
+  			$('.right').hide();
+  			$('iframe').remove();
+  			$('#u150').after(frame.replace('totototo','toRightMiddle6'));
   		});
   	})
   </script>
