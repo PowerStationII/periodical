@@ -15,7 +15,7 @@
 	<div id="articleInfos">
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
-				<td colspan="5"><a href="">上传地址excel</a></td>
+				<td colspan="5"><a href="../reader/toUploadAddressPage">上传地址excel</a></td>
 			</tr>
 			<tr>
 				<td>地址id</td>
