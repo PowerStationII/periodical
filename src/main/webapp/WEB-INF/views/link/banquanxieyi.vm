@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>版权协议</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="../css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/data_styles.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/portal_styles.css" type="text/css" rel="stylesheet"/>
+   	<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+   	<style>
+   		#text p{padding-left:30px;padding-top:10px;padding-right:30px;}
+   	</style>
+  </head>
+  <body>
+    <div class=""  style="margin-left:30px;margin-right:30px;">
+      <!-- Unnamed (Shape) -->
+      <div id="u46" class="ax_shape"  style="float:left;">
+        <img id="u46_img" class="img " src="img/portal/u68.png"/>
+        <!-- Unnamed () -->
+      </div>
+       <div>
+          <p><span>&nbsp; &nbsp;</span><span>版权协议</span></p>
+        </div>
+      <!-- Unnamed (Shape) -->
+      <div>
+        <!-- Unnamed () -->
+        <div  id="text"  style="background-color:#F7F7F7;">
+          <p><span>
+          	农药科学与管理杂志社<br>
+			著作权转让声明书<br>
+			论文中文题目：《                                   》   <br>
+			论文英文题目：《                                   》 <br>
+			稿 件    号：                                <br>             
+			全体著作权人：注意主体资格          <br>                              
+			        遵照《中华人民共和国著作权法》，自本声明书签署之日起，上述论文全体著作权人同意：上述论文将刊登在《 农药科学与管理 》中文版和英文版上，并将全体著作权人就上述论文（各种语言版本）所享有的复制权、发行权、信息网络传播权、翻译权、汇编权在全世界范围内免费转让给《农药科学与管理 》期刊的出版单位《农药科学与管理 》杂志社有限公司。全体著作权人授权《农药科学与管理 》杂志社根据实际需要独家代理申请上述作品的各种语言版本（包含各种介质）的版权登记事项。<br> 
+			    上述论文的著作权人保证：<br>
+			   （1）上述论文是著作权人独立取得的原创性研究成果；论文内容不涉及国家机密；<br>
+			   （2）未曾以任何形式用任何文种在国内外公开发表过；<br>
+			   （3）上述论文的内容不侵犯他人著作权和其他权利（引用图表），否则著作权人将承担由于论文内容侵权而产生的全部责任，并赔偿由此给《农药科学与管理 》杂志社造成的全部损失。<br>
+			并承诺：<br>
+			    （1）以后不考虑以任何形式在其他地方发表该论文(一稿二投)；<br>
+			    （2）未签字的著作权人授权签字的著作权人作为全体著作权人的代理人签署本声明书的，此声明书对全体著作权人均有约束力；<br>
+			    （3）签字的著作权人保证其本人具有签署此声明书并做出各项承诺之权利。<br>
+			 全体著作权人签名:  注意签名人的资格和真实性<br>
+          </span></p>
+          
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -63,4 +63,12 @@ public class TopController {
 		return "link/tougaoxuzhi";
 	}
 	
+	/**
+	 * 跳转到投稿须知写死页面
+	 */
+	@RequestMapping(value="/toBanQuquan",method = RequestMethod.GET)
+	public String toBanQuquanPage() {
+		return "link/banquanxieyi";
+	}
+	
 }

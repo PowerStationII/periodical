@@ -20,6 +20,46 @@
 			$('#sub').submit();
 		}
 	}  
+	$(function(){
+  		var frame = '<iframe  style="width:650px;height:760px;margin-left:400px;margin-top:75px;position:absolute;" src= "totototo"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe><div><input type="button"  value="返回"   id="back"  onclick="reBack()" style="margin-left:950px;position:absolute;font-size:18px;width:70px;height:30px;"></div>';
+  		$('#u4').click(function(){
+  			$('#login').hide();
+  			$('iframe').remove();
+  			$('#back').remove();
+  			$('#u12').after(frame.replace('totototo','toTouGao'));
+  			$('#back').css('margin-top','740px');
+  		});
+  		$('#u6').click(function(){
+  			$('#login').hide();
+  			$('iframe').remove();
+  			$('#back').remove();
+  			$('#u12').after(frame.replace('totototo','toBanQuquan'));
+  			$('#back').css('margin-top','640px');
+  		});
+  		$('#u8').click(function(){
+  			$('#login').hide();
+  			$('iframe').remove();
+  			$('#back').remove();
+  			$('#u12').after(frame.replace('totototo','toGuiFan'));
+  			$('#back').css('margin-top','740px');
+  		});
+  		$('#u10').click(function(){
+  			window.location.href='portal';
+  		});
+  		$('#u12').click(function(){
+  			$('#login').hide();
+  			$('iframe').remove();
+  			$('#back').remove();
+  			$('#u12').after(frame.replace('totototo','toLianXi'));
+  			$('#back').css('margin-top','640px');
+  		});
+	});
+	
+	function reBack () {
+		$('#login').show();
+		$('iframe').remove();
+		$('#back').remove();
+	}
   </script>
 
 
@@ -34,14 +74,7 @@
         </div>
       </div>
 
-      <!-- Unnamed (Image) -->
-      <div id="u2" class="ax_image">
-        <img id="u2_img" class="img " src="img/login/u2.png"/>
-        <!-- Unnamed () -->
-        <div id="u3" class="text">
-          <p><span></span></p>
-        </div>
-      </div>
+     
 
       <!-- Unnamed (Shape) -->
       <div id="u4" class="ax_shape">
@@ -88,6 +121,16 @@
         </div>
       </div>
 
+      <div   id="login"><!--可以隐藏 -->
+      
+       <!-- Unnamed (Image) -->
+      <div id="u2" class="ax_image">
+        <img id="u2_img" class="img " src="img/login/u2.png"/>
+        <!-- Unnamed () -->
+        <div id="u3" class="text">
+          <p><span></span></p>
+        </div>
+      </div>
       <!-- Unnamed (Image) -->
       <div id="u14" class="ax_image">
         <img id="u14_img" class="img " src="img/login/u14.png"/>
@@ -182,6 +225,7 @@
           <p><span>农药科学与管理</span></p>
         </div>
       </div>
+      </div><!--可以隐藏-->
     </div>
   </body>
 </html>
