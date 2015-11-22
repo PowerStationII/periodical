@@ -59,8 +59,24 @@
 									.append(
 											'<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdatePWPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
 						});
+		$('#yuding')
+		.click(
+				function() {
+					$('#area').hide();
+					$('#other').remove();
+					$('.right')
+							.append(
+									'<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toCreatOrderPage?periodicalId=${dtos.periodicalId}"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+				});
 		$('#other').hide();
 	});
+	function link (value) {
+		$('#area').hide();
+		$('#other').remove();
+		$('.right')
+				.append(
+						'<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toCreatOrderPage?periodicalId='+value+'"  frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+	}
 </script>
 <style>
 .top {
@@ -220,7 +236,7 @@ a {
 						<td>$!{dtos.hostOrganization}</td>
 						<td>$!{dtos.inFixPrice}</td>
 						<td>$!{dtos.outFixPrice}</td>
-						<td><a href="reader/toCreatOrderPage?periodicalId=${dtos.periodicalId}">预定</a></td>
+						<td onclick="link('${dtos.periodicalId}')">设定</td>
 					</tr>
 					#end
 				</table>
