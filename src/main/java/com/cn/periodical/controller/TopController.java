@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * 登录Controller
  */
-@Controller
+@Controller 
 public class TopController {
 
 	private static final Logger logger = LoggerFactory.getLogger(TopController.class);

@@ -12,7 +12,7 @@
 	<style>
 		#u4,#u6,#u8,#u10,#u12{cursor:pointer;}
 	</style>
-  </head>
+  </head> 
   <script type="text/javascript"> 	
 	function submitForm(){  
 		if ($('#u34_input').val()=="" || $('#u35_input').val()=="") {
