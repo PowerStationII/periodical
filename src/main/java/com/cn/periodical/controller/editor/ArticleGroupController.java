@@ -18,8 +18,11 @@ import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.manager.PeriodicalDetailsManager;
 import com.cn.periodical.manager.PeriodicalInfoManager;
 import com.cn.periodical.manager.PeriodicalManager;
+import com.cn.periodical.manager.SectionInfoManager;
 import com.cn.periodical.pojo.Periodical;
 import com.cn.periodical.pojo.PeriodicalDetails;
+import com.cn.periodical.pojo.SectionInfo;
+import com.cn.periodical.pojo.SectionInfoQuery;
 import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.EditorArticleDealService;
 /**
@@ -34,6 +37,9 @@ public class ArticleGroupController extends EditorController{
 	
 	@Autowired
 	PeriodicalManager periodicalManager;
+	
+	@Autowired
+	SectionInfoManager sectionInfoManager;
 	
 	@Autowired
 	EditorArticleDealService articleDealService;
@@ -69,7 +75,11 @@ public class ArticleGroupController extends EditorController{
 		
 		List<EditorArticleDealRespDto> list =articleDealService.articleDeal(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
 		mav.addObject("list", list);
-		
+		SectionInfoQuery query =new SectionInfoQuery();
+		query.setPeriodicalId(periodicalId);
+		List<SectionInfo> sectionInfos = sectionInfoManager.queryList(query);
+		mav.addObject("sList", sectionInfos);
+
 		mav.addObject("periodicalIssueNo", periodicalIssueNo);
 		mav.addObject("periodicalId", periodicalId);
 		return mav;
