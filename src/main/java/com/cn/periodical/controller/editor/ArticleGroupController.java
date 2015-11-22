@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.manager.PeriodicalDetailsManager;
 import com.cn.periodical.manager.PeriodicalInfoManager;
@@ -92,26 +94,29 @@ public class ArticleGroupController extends EditorController{
 	 */
 	@RequestMapping(value="/toArticleGroup")
 	public ModelAndView toArticleGroup(
-			@RequestParam("periodicalId") String periodicalId,
-			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
+			@RequestParam("str") String str,
 			HttpServletRequest request) {
-		logger.info("组稿左右提交进来的:[]&["+periodicalIssueNo+"]");
-		logger.info("----------------");
+//		logger.info("组稿左右提交进来的:[]&["+periodicalIssueNo+"]");
+//		logger.info("----------------");
 		ModelAndView mav = new ModelAndView("editor_articleGroupPage");
-		logger.info(request.getParameter("selectTest"));
-		String sectionInfos=request.getParameter("sectionA");
-		String[] strs = sectionInfos.split(",");
-		for(int i=0;i<strs.length;i++){
-			PeriodicalDetails periodicalDetails = new PeriodicalDetails();
-			periodicalDetails.setPeriodicalId(periodicalId);
-			periodicalDetails.setRefId(strs[i]);
-			periodicalDetails.setType("0000");
-			periodicalDetails.setCreateTime(new Date());
-			periodicalDetails.setPeriodicalIssueNo(periodicalIssueNo);
-//			periodicalDetails.setUserId(userId);
-			periodicalDetails.setSectionId("sectionA");
-			periodicalDetailsManager.savePeriodicalDetails(periodicalDetails);
+		JSONArray array = (JSONArray) JSONArray.parse(str);
+		for(int i=0;i<array.size();i++){
+			System.out.println(array.getJSONObject(i));
 		}
+//		logger.info(request.getParameter("selectTest"));
+//		String sectionInfos=request.getParameter("sectionA");
+//		String[] strs = sectionInfos.split(",");
+//		for(int i=0;i<strs.length;i++){
+//			PeriodicalDetails periodicalDetails = new PeriodicalDetails();
+//			periodicalDetails.setPeriodicalId(periodicalId);
+//			periodicalDetails.setRefId(strs[i]);
+//			periodicalDetails.setType("0000");
+//			periodicalDetails.setCreateTime(new Date());
+//			periodicalDetails.setPeriodicalIssueNo(periodicalIssueNo);
+////			periodicalDetails.setUserId(userId);
+//			periodicalDetails.setSectionId("sectionA");
+//			periodicalDetailsManager.savePeriodicalDetails(periodicalDetails);
+//		}
 		
 		return mav;
 	}
