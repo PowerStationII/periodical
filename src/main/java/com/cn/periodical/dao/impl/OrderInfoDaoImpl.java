@@ -85,5 +85,11 @@ public class OrderInfoDaoImpl extends BaseDao implements OrderInfoDao {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectOne("OrderInfoMapper.queryOrderDetail", bizOrder);
 	}
+
+
+	public List<BizOrder> editorQryOrderInfos(BizOrder bizOrder) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("OrderInfoMapper.editorQueryOrderInfos", bizOrder);
+	}
 	
 }

@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.SystemIdEnums;
 import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.pojo.EditorInfo;
 import com.cn.periodical.pojo.ExpertInfo;
+import com.cn.periodical.pojo.ReaderInfo;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.service.PInfoSettingService;
 
@@ -49,8 +50,9 @@ public class PInfoSettingController {
 			ExpertInfo expertInfo = (ExpertInfo) obj;
 			mav.addObject("expertInfo", expertInfo);
 		} else if (SystemIdEnums.READER_SYS.getCode().equals(userInfo.getSystemId())) {
-			// ReaderInfo readerInfo = (ReaderInfo)obj;
-			// mav.addObject("readerInfo", readerInfo);
+			 ReaderInfo readerInfo = (ReaderInfo)obj;
+			 logger.info(JSON.toJSONString(readerInfo));
+			 mav.addObject("readerInfo", readerInfo);
 		} else if (SystemIdEnums.EDIT_SYS.getCode().equals(userInfo.getSystemId())) {
 			EditorInfo editorInfo = (EditorInfo) obj;
 			mav.addObject("editorInfo", editorInfo);
@@ -65,7 +67,10 @@ public class PInfoSettingController {
 	 */
 	@RequestMapping(value = "/toUpdateSetting", method = RequestMethod.POST)
 	public ModelAndView toUpdateSettingPage(@ModelAttribute AuthorInfo authorInfo,
-			@ModelAttribute ExpertInfo expertInfo, @ModelAttribute EditorInfo editorInfo, HttpServletRequest request) {
+			@ModelAttribute ExpertInfo expertInfo, 
+			@ModelAttribute EditorInfo editorInfo, 
+			@ModelAttribute ReaderInfo readerInfo,
+			HttpServletRequest request) {
 		UserInfo userInfo = (UserInfo) request.getSession().getAttribute("userInfo");
 		logger.info("userId:[" + userInfo.getUserId() + "]修改个人信息");
 		ModelAndView mav = new ModelAndView("updateSettingPage");
@@ -74,7 +79,8 @@ public class PInfoSettingController {
 		} else if (SystemIdEnums.EXPERT_SYS.getCode().equals(userInfo.getSystemId())) {
 			pInfoSettingService.updateSetting(userInfo, expertInfo);
 		} else if (SystemIdEnums.READER_SYS.getCode().equals(userInfo.getSystemId())) {
-			pInfoSettingService.updateSetting(userInfo, authorInfo);
+			logger.info("readerInfo.............."+JSON.toJSONString(readerInfo));
+			pInfoSettingService.updateSetting(userInfo, readerInfo);
 		} else if (SystemIdEnums.EDIT_SYS.getCode().equals(userInfo.getSystemId())) {
 			pInfoSettingService.updateSetting(userInfo, editorInfo);
 		} else {

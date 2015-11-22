@@ -34,5 +34,6 @@ public interface OrderInfoDao {
 	int updateByPrimaryKey(OrderInfo record);
 	
 	List<BizOrder> queryPayInfoLists(BizOrder bizOrder);
+	List<BizOrder> editorQryOrderInfos(BizOrder bizOrder);
 	BizOrder queryOrderInfoDetail(BizOrder bizOrder);
 }

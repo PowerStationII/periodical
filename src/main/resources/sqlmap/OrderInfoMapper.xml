@@ -2,45 +2,72 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderInfoMapper">
 	<resultMap id="BaseResultMap" type="OrderInfo">
-	  <id column="ID" jdbcType="DECIMAL" property="id" />
-	  <result column="user_id" jdbcType="VARCHAR" property="userId" />
-	  <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
-	  <result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
-	  <result column="periodical_year" jdbcType="VARCHAR" property="periodicalYear" />
-	  <result column="amount" jdbcType="DECIMAL" property="amount" />
-	  <result column="already_pay_amount" jdbcType="DECIMAL" property="alreadyPayAmount" />
-	  <result column="payer_id" jdbcType="VARCHAR" property="payerId" />
-	  <result column="subscribe_nums" jdbcType="INTEGER" property="subscribeNums" />
-	  <result column="supplement_id1" jdbcType="VARCHAR" property="supplementId1" />
-	  <result column="supplement_id2" jdbcType="VARCHAR" property="supplementId2" />
-	  <result column="supplement_id3" jdbcType="VARCHAR" property="supplementId3" />
-	  <result column="supplement_id4" jdbcType="VARCHAR" property="supplementId4" />
-	  <result column="supplement_id5" jdbcType="VARCHAR" property="supplementId5" />
-	  <result column="supplement_id6" jdbcType="VARCHAR" property="supplementId6" />
-	  <result column="supplement_id7" jdbcType="VARCHAR" property="supplementId7" />
-	  <result column="supplement_id1_nums" jdbcType="INTEGER" property="supplementId1Nums" />
-	  <result column="supplement_id2_nums" jdbcType="INTEGER" property="supplementId2Nums" />
-	  <result column="supplement_id3_nums" jdbcType="INTEGER" property="supplementId3Nums" />
-	  <result column="supplement_id4_nums" jdbcType="INTEGER" property="supplementId4Nums" />
-	  <result column="supplement_id5_nums" jdbcType="INTEGER" property="supplementId5Nums" />
-	  <result column="supplement_id6_nums" jdbcType="INTEGER" property="supplementId6Nums" />
-	  <result column="supplement_id7_nums" jdbcType="INTEGER" property="supplementId7Nums" />
-	  <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
-	  <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
-	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
-	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
-	  <result column="extend_3" jdbcType="VARCHAR" property="extend3" />
-	  <result column="extend_4" jdbcType="VARCHAR" property="extend4" />
-	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  
-  <select id="queryOrderAndPayList" parameterType="BizOrder"
+		<id column="ID" jdbcType="DECIMAL" property="id" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+		<result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
+		<result column="periodical_year" jdbcType="VARCHAR" property="periodicalYear" />
+		<result column="amount" jdbcType="DECIMAL" property="amount" />
+		<result column="already_pay_amount" jdbcType="DECIMAL"
+			property="alreadyPayAmount" />
+		<result column="payer_id" jdbcType="VARCHAR" property="payerId" />
+		<result column="subscribe_nums" jdbcType="INTEGER" property="subscribeNums" />
+		<result column="supplement_id1" jdbcType="VARCHAR" property="supplementId1" />
+		<result column="supplement_id2" jdbcType="VARCHAR" property="supplementId2" />
+		<result column="supplement_id3" jdbcType="VARCHAR" property="supplementId3" />
+		<result column="supplement_id4" jdbcType="VARCHAR" property="supplementId4" />
+		<result column="supplement_id5" jdbcType="VARCHAR" property="supplementId5" />
+		<result column="supplement_id6" jdbcType="VARCHAR" property="supplementId6" />
+		<result column="supplement_id7" jdbcType="VARCHAR" property="supplementId7" />
+		<result column="supplement_id1_nums" jdbcType="INTEGER"
+			property="supplementId1Nums" />
+		<result column="supplement_id2_nums" jdbcType="INTEGER"
+			property="supplementId2Nums" />
+		<result column="supplement_id3_nums" jdbcType="INTEGER"
+			property="supplementId3Nums" />
+		<result column="supplement_id4_nums" jdbcType="INTEGER"
+			property="supplementId4Nums" />
+		<result column="supplement_id5_nums" jdbcType="INTEGER"
+			property="supplementId5Nums" />
+		<result column="supplement_id6_nums" jdbcType="INTEGER"
+			property="supplementId6Nums" />
+		<result column="supplement_id7_nums" jdbcType="INTEGER"
+			property="supplementId7Nums" />
+		<result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
+		<result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
+		<result column="extend_1" jdbcType="VARCHAR" property="extend1" />
+		<result column="extend_2" jdbcType="VARCHAR" property="extend2" />
+		<result column="extend_3" jdbcType="VARCHAR" property="extend3" />
+		<result column="extend_4" jdbcType="VARCHAR" property="extend4" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+
+	<select id="editorQueryOrderInfos" parameterType="BizOrder"
+		resultType="BizOrder">
+		select oi.order_no as orderNo,oi.already_pay_amount as
+		aPayAmount,oi.create_time as submitTime,oi.order_status as oStatus,
+		oi.periodical_year as pYear,oi.subscribe_nums as subNums,oi.user_id as
+		userId,pi.periodical_cn_name as pCnName,
+		pi.cycle as cycle,pi.in_fix_price as iFprice,oi.amount as
+		oAmount,ri.reader_name as readerName,pi.in_fix_price as iFprice
+		from order_info oi,periodical_info pi,user_info ui,reader_info ri where
+		oi.periodical_id=pi.periodical_id
+		and oi.user_id=ui.user_id and ui.ref_id=ri.reader_id
+		<if test="orderNo != null and ''!=orderNo">
+			and oInfo.order_no = #{orderNo,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+
+	<select id="queryOrderAndPayList" parameterType="BizOrder"
 		resultType="BizOrder">
 		select oInfo.order_no as orderNo,oInfo.user_id as
 		userId,pInfo.periodical_cn_name as
-		pCnName,oInfo.already_pay_amount as aPayAmount,oInfo.periodical_year as
-		pYear,oInfo.audit_time as auditTime,
+		pCnName,oInfo.already_pay_amount as
+		aPayAmount,oInfo.periodical_year as
+		pYear,oInfo.audit_time as
+		auditTime,
 		oInfo.subscribe_nums as
 		subNums,oInfo.order_status as
 		oStatus,oInfo.amount as
@@ -50,11 +77,15 @@
 		payNo,payerInfo.pay_amount as
 		payAmount,payeeInfo.payee_account_no as
 		eAccountNo,
-		payeeInfo.payee_account_name as eAccountName,payerInfo.payer_account
-		as erAccount,payerInfo.payer_name as erName
+		payeeInfo.payee_account_name as
+		eAccountName,payerInfo.payer_account
+		as erAccount,payerInfo.payer_name
+		as erName
 		from order_info
-		oInfo,periodical_info pInfo,payer_info payerInfo,payee_info payeeInfo
-		where oInfo.periodical_id=pInfo.periodical_id
+		oInfo,periodical_info pInfo,payer_info
+		payerInfo,payee_info payeeInfo
+		where
+		oInfo.periodical_id=pInfo.periodical_id
 		and
 		oInfo.order_no=payerInfo.order_no and
 		pInfo.payee_id=payeeInfo.payee_id
@@ -79,572 +110,581 @@
 	<select id="queryOrderDetail" parameterType="BizOrder"
 		resultType="BizOrder">
 		select oInfo.order_no as orderNo,oInfo.order_status as
-		oStatus, pInfo.periodical_cn_name as pCnName ,oInfo.already_pay_amount as aPayAmount,
-		oInfo.amount as oAmount from order_info oInfo,periodical_info pInfo
-		where oInfo.periodical_id=pInfo.periodical_id
-		and oInfo.user_id = #{userId,jdbcType=VARCHAR}
+		oStatus,
+		pInfo.periodical_cn_name as pCnName ,oInfo.already_pay_amount as
+		aPayAmount,
+		oInfo.amount as oAmount from order_info
+		oInfo,periodical_info pInfo
+		where
+		oInfo.periodical_id=pInfo.periodical_id
+		and oInfo.user_id =
+		#{userId,jdbcType=VARCHAR}
 		<if test="orderNo != null and ''!=orderNo">
 			and oInfo.order_no = #{orderNo,jdbcType=VARCHAR}
 		</if>
 	</select>
-  
-  
-  
-  
-  <sql id="Page_Query_Begin">
-    select * from(select t.*,rownum rn from(
-  </sql>
-  <sql id="Page_Query_End">
-  	) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
-  </sql>
-  <sql id="Example_Where_Clause">
-    <where>
-      <trim prefix="(" prefixOverrides="and" suffix=")">
-      <if test="userId != null" >
-	      and user_id = #{userId,jdbcType=VARCHAR}
-	    </if>
-      <if test="orderNo != null" >
-	      and order_no = #{orderNo,jdbcType=VARCHAR}
-	    </if>
-      <if test="periodicalId != null" >
-	      and periodical_id = #{periodicalId,jdbcType=VARCHAR}
-	    </if>
-      <if test="periodicalYear != null" >
-	      and periodical_year = #{periodicalYear,jdbcType=VARCHAR}
-	    </if>
-      <if test="amount != null" >
-	      and amount = #{amount,jdbcType=DECIMAL}
-	    </if>
-      <if test="alreadyPayAmount != null" >
-	      and already_pay_amount = #{alreadyPayAmount,jdbcType=DECIMAL}
-	    </if>
-      <if test="payerId != null" >
-	      and payer_id = #{payerId,jdbcType=VARCHAR}
-	    </if>
-      <if test="subscribeNums != null" >
-	      and subscribe_nums = #{subscribeNums,jdbcType=INTEGER}
-	    </if>
-      <if test="supplementId1 != null" >
-	      and supplement_id1 = #{supplementId1,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId2 != null" >
-	      and supplement_id2 = #{supplementId2,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId3 != null" >
-	      and supplement_id3 = #{supplementId3,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId4 != null" >
-	      and supplement_id4 = #{supplementId4,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId5 != null" >
-	      and supplement_id5 = #{supplementId5,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId6 != null" >
-	      and supplement_id6 = #{supplementId6,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId7 != null" >
-	      and supplement_id7 = #{supplementId7,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId1Nums != null" >
-	      and supplement_id1_nums = #{supplementId1Nums,jdbcType=INTEGER}
-	    </if>
-      <if test="supplementId2Nums != null" >
-	      and supplement_id2_nums = #{supplementId2Nums,jdbcType=INTEGER}
-	    </if>
-      <if test="supplementId3Nums != null" >
-	      and supplement_id3_nums = #{supplementId3Nums,jdbcType=INTEGER}
-	    </if>
-      <if test="supplementId4Nums != null" >
-	      and supplement_id4_nums = #{supplementId4Nums,jdbcType=INTEGER}
-	    </if>
-      <if test="supplementId5Nums != null" >
-	      and supplement_id5_nums = #{supplementId5Nums,jdbcType=INTEGER}
-	    </if>
-      <if test="supplementId6Nums != null" >
-	      and supplement_id6_nums = #{supplementId6Nums,jdbcType=INTEGER}
-	    </if>
-      <if test="supplementId7Nums != null" >
-	      and supplement_id7_nums = #{supplementId7Nums,jdbcType=INTEGER}
-	    </if>
-      <if test="orderStatus != null" >
-	      and order_status = #{orderStatus,jdbcType=VARCHAR}
-	    </if>
-      <if test="auditTime != null" >
-	      and audit_time = #{auditTime,jdbcType=TIMESTAMP}
-	    </if>
-      <if test="extend1 != null" >
-	      and extend_1 = #{extend1,jdbcType=VARCHAR}
-	    </if>
-      <if test="extend2 != null" >
-	      and extend_2 = #{extend2,jdbcType=VARCHAR}
-	    </if>
-      <if test="extend3 != null" >
-	      and extend_3 = #{extend3,jdbcType=VARCHAR}
-	    </if>
-      <if test="extend4 != null" >
-	      and extend_4 = #{extend4,jdbcType=VARCHAR}
-	    </if>
-      <if test="createTime != null" >
-	      and create_time = #{createTime,jdbcType=TIMESTAMP}
-	    </if>
-      <if test="updateTime != null" >
-	      and update_time = #{updateTime,jdbcType=TIMESTAMP}
-	    </if>
-	  </trim>
-    </where>
-  </sql>
-  <sql id="Example_Set_Clause">
-    <set>
-      <trim suffixOverrides=",">
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="orderNo != null">
-        order_no = #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="periodicalId != null">
-        periodical_id = #{periodicalId,jdbcType=VARCHAR},
-      </if>
-      <if test="periodicalYear != null">
-        periodical_year = #{periodicalYear,jdbcType=VARCHAR},
-      </if>
-      <if test="amount != null">
-        amount = #{amount,jdbcType=DECIMAL},
-      </if>
-      <if test="alreadyPayAmount != null">
-        already_pay_amount = #{alreadyPayAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="payerId != null">
-        payer_id = #{payerId,jdbcType=VARCHAR},
-      </if>
-      <if test="subscribeNums != null">
-        subscribe_nums = #{subscribeNums,jdbcType=INTEGER},
-      </if>
-      <if test="supplementId1 != null">
-        supplement_id1 = #{supplementId1,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId2 != null">
-        supplement_id2 = #{supplementId2,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId3 != null">
-        supplement_id3 = #{supplementId3,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId4 != null">
-        supplement_id4 = #{supplementId4,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId5 != null">
-        supplement_id5 = #{supplementId5,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId6 != null">
-        supplement_id6 = #{supplementId6,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId7 != null">
-        supplement_id7 = #{supplementId7,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId1Nums != null">
-        supplement_id1_nums = #{supplementId1Nums,jdbcType=INTEGER},
-      </if>
-      <if test="supplementId2Nums != null">
-        supplement_id2_nums = #{supplementId2Nums,jdbcType=INTEGER},
-      </if>
-      <if test="supplementId3Nums != null">
-        supplement_id3_nums = #{supplementId3Nums,jdbcType=INTEGER},
-      </if>
-      <if test="supplementId4Nums != null">
-        supplement_id4_nums = #{supplementId4Nums,jdbcType=INTEGER},
-      </if>
-      <if test="supplementId5Nums != null">
-        supplement_id5_nums = #{supplementId5Nums,jdbcType=INTEGER},
-      </if>
-      <if test="supplementId6Nums != null">
-        supplement_id6_nums = #{supplementId6Nums,jdbcType=INTEGER},
-      </if>
-      <if test="supplementId7Nums != null">
-        supplement_id7_nums = #{supplementId7Nums,jdbcType=INTEGER},
-      </if>
-      <if test="orderStatus != null">
-        order_status = #{orderStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="auditTime != null">
-        audit_time = #{auditTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="extend1 != null">
-        extend_1 = #{extend1,jdbcType=VARCHAR},
-      </if>
-      <if test="extend2 != null">
-        extend_2 = #{extend2,jdbcType=VARCHAR},
-      </if>
-      <if test="extend3 != null">
-        extend_3 = #{extend3,jdbcType=VARCHAR},
-      </if>
-      <if test="extend4 != null">
-        extend_4 = #{extend4,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      </trim>
-    </set>
-  </sql>
-  <sql id="Base_Column_List">
-    id,
-    user_id,
-    order_no,
-    periodical_id,
-    periodical_year,
-    amount,
-    already_pay_amount,
-    payer_id,
-    subscribe_nums,
-    supplement_id1,
-    supplement_id2,
-    supplement_id3,
-    supplement_id4,
-    supplement_id5,
-    supplement_id6,
-    supplement_id7,
-    supplement_id1_nums,
-    supplement_id2_nums,
-    supplement_id3_nums,
-    supplement_id4_nums,
-    supplement_id5_nums,
-    supplement_id6_nums,
-    supplement_id7_nums,
-    order_status,
-    audit_time,
-    extend_1,
-    extend_2,
-    extend_3,
-    extend_4,
-    create_time,
-    update_time,
-  </sql>
-  <sql id="Base_Set_Clause">
-    <set>
-      <trim suffixOverrides=",">
-        user_id = #{userId,jdbcType=VARCHAR},
-        order_no = #{orderNo,jdbcType=VARCHAR},
-        periodical_id = #{periodicalId,jdbcType=VARCHAR},
-        periodical_year = #{periodicalYear,jdbcType=VARCHAR},
-        amount = #{amount,jdbcType=DECIMAL},
-        already_pay_amount = #{alreadyPayAmount,jdbcType=DECIMAL},
-        payer_id = #{payerId,jdbcType=VARCHAR},
-        subscribe_nums = #{subscribeNums,jdbcType=INTEGER},
-        supplement_id1 = #{supplementId1,jdbcType=VARCHAR},
-        supplement_id2 = #{supplementId2,jdbcType=VARCHAR},
-        supplement_id3 = #{supplementId3,jdbcType=VARCHAR},
-        supplement_id4 = #{supplementId4,jdbcType=VARCHAR},
-        supplement_id5 = #{supplementId5,jdbcType=VARCHAR},
-        supplement_id6 = #{supplementId6,jdbcType=VARCHAR},
-        supplement_id7 = #{supplementId7,jdbcType=VARCHAR},
-        supplement_id1_nums = #{supplementId1Nums,jdbcType=INTEGER},
-        supplement_id2_nums = #{supplementId2Nums,jdbcType=INTEGER},
-        supplement_id3_nums = #{supplementId3Nums,jdbcType=INTEGER},
-        supplement_id4_nums = #{supplementId4Nums,jdbcType=INTEGER},
-        supplement_id5_nums = #{supplementId5Nums,jdbcType=INTEGER},
-        supplement_id6_nums = #{supplementId6Nums,jdbcType=INTEGER},
-        supplement_id7_nums = #{supplementId7Nums,jdbcType=INTEGER},
-        order_status = #{orderStatus,jdbcType=VARCHAR},
-        audit_time = #{auditTime,jdbcType=TIMESTAMP},
-        extend_1 = #{extend1,jdbcType=VARCHAR},
-        extend_2 = #{extend2,jdbcType=VARCHAR},
-        extend_3 = #{extend3,jdbcType=VARCHAR},
-        extend_4 = #{extend4,jdbcType=VARCHAR},
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </trim>
-    </set>
-  </sql>
-  <sql id="Selective_Column_List">
-    <!-- ID, -->
-    <if test="userId != null">
-      user_id,
-    </if>
-    <if test="orderNo != null">
-      order_no,
-    </if>
-    <if test="periodicalId != null">
-      periodical_id,
-    </if>
-    <if test="periodicalYear != null">
-      periodical_year,
-    </if>
-    <if test="amount != null">
-      amount,
-    </if>
-    <if test="alreadyPayAmount != null">
-      already_pay_amount,
-    </if>
-    <if test="payerId != null">
-      payer_id,
-    </if>
-    <if test="subscribeNums != null">
-      subscribe_nums,
-    </if>
-    <if test="supplementId1 != null">
-      supplement_id1,
-    </if>
-    <if test="supplementId2 != null">
-      supplement_id2,
-    </if>
-    <if test="supplementId3 != null">
-      supplement_id3,
-    </if>
-    <if test="supplementId4 != null">
-      supplement_id4,
-    </if>
-    <if test="supplementId5 != null">
-      supplement_id5,
-    </if>
-    <if test="supplementId6 != null">
-      supplement_id6,
-    </if>
-    <if test="supplementId7 != null">
-      supplement_id7,
-    </if>
-    <if test="supplementId1Nums != null">
-      supplement_id1_nums,
-    </if>
-    <if test="supplementId2Nums != null">
-      supplement_id2_nums,
-    </if>
-    <if test="supplementId3Nums != null">
-      supplement_id3_nums,
-    </if>
-    <if test="supplementId4Nums != null">
-      supplement_id4_nums,
-    </if>
-    <if test="supplementId5Nums != null">
-      supplement_id5_nums,
-    </if>
-    <if test="supplementId6Nums != null">
-      supplement_id6_nums,
-    </if>
-    <if test="supplementId7Nums != null">
-      supplement_id7_nums,
-    </if>
-    <if test="orderStatus != null">
-      order_status,
-    </if>
-    <if test="auditTime != null">
-      audit_time,
-    </if>
-    <if test="extend1 != null">
-      extend_1,
-    </if>
-    <if test="extend2 != null">
-      extend_2,
-    </if>
-    <if test="extend3 != null">
-      extend_3,
-    </if>
-    <if test="extend4 != null">
-      extend_4,
-    </if>
-    <if test="createTime != null">
-      create_time,
-    </if>
-    <if test="updateTime != null">
-      update_time,
-    </if>
-  </sql>
-	<sql id="Base_Value_List">
-    #{id,jdbcType=BIGINT},
-    #{userId,jdbcType=VARCHAR},
-    #{orderNo,jdbcType=VARCHAR},
-    #{periodicalId,jdbcType=VARCHAR},
-    #{periodicalYear,jdbcType=VARCHAR},
-    #{amount,jdbcType=DECIMAL},
-    #{alreadyPayAmount,jdbcType=DECIMAL},
-    #{payerId,jdbcType=VARCHAR},
-    #{subscribeNums,jdbcType=INTEGER},
-    #{supplementId1,jdbcType=VARCHAR},
-    #{supplementId2,jdbcType=VARCHAR},
-    #{supplementId3,jdbcType=VARCHAR},
-    #{supplementId4,jdbcType=VARCHAR},
-    #{supplementId5,jdbcType=VARCHAR},
-    #{supplementId6,jdbcType=VARCHAR},
-    #{supplementId7,jdbcType=VARCHAR},
-    #{supplementId1Nums,jdbcType=INTEGER},
-    #{supplementId2Nums,jdbcType=INTEGER},
-    #{supplementId3Nums,jdbcType=INTEGER},
-    #{supplementId4Nums,jdbcType=INTEGER},
-    #{supplementId5Nums,jdbcType=INTEGER},
-    #{supplementId6Nums,jdbcType=INTEGER},
-    #{supplementId7Nums,jdbcType=INTEGER},
-    #{orderStatus,jdbcType=VARCHAR},
-    #{auditTime,jdbcType=TIMESTAMP},
-    #{extend1,jdbcType=VARCHAR},
-    #{extend2,jdbcType=VARCHAR},
-    #{extend3,jdbcType=VARCHAR},
-    #{extend4,jdbcType=VARCHAR},
-    #{createTime,jdbcType=TIMESTAMP},
-    #{updateTime,jdbcType=TIMESTAMP},
+
+
+
+
+	<sql id="Page_Query_Begin">
+		select * from(select t.*,rownum rn from(
 	</sql>
-  <sql id="Selective_Value_List">
-    <!-- SEQ_order_info.nextval, -->
-    <if test="userId != null">
-      #{userId,jdbcType=VARCHAR},
-    </if>
-    <if test="orderNo != null">
-      #{orderNo,jdbcType=VARCHAR},
-    </if>
-    <if test="periodicalId != null">
-      #{periodicalId,jdbcType=VARCHAR},
-    </if>
-    <if test="periodicalYear != null">
-      #{periodicalYear,jdbcType=VARCHAR},
-    </if>
-    <if test="amount != null">
-      #{amount,jdbcType=DECIMAL},
-    </if>
-    <if test="alreadyPayAmount != null">
-      #{alreadyPayAmount,jdbcType=DECIMAL},
-    </if>
-    <if test="payerId != null">
-      #{payerId,jdbcType=VARCHAR},
-    </if>
-    <if test="subscribeNums != null">
-      #{subscribeNums,jdbcType=INTEGER},
-    </if>
-    <if test="supplementId1 != null">
-      #{supplementId1,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId2 != null">
-      #{supplementId2,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId3 != null">
-      #{supplementId3,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId4 != null">
-      #{supplementId4,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId5 != null">
-      #{supplementId5,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId6 != null">
-      #{supplementId6,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId7 != null">
-      #{supplementId7,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId1Nums != null">
-      #{supplementId1Nums,jdbcType=INTEGER},
-    </if>
-    <if test="supplementId2Nums != null">
-      #{supplementId2Nums,jdbcType=INTEGER},
-    </if>
-    <if test="supplementId3Nums != null">
-      #{supplementId3Nums,jdbcType=INTEGER},
-    </if>
-    <if test="supplementId4Nums != null">
-      #{supplementId4Nums,jdbcType=INTEGER},
-    </if>
-    <if test="supplementId5Nums != null">
-      #{supplementId5Nums,jdbcType=INTEGER},
-    </if>
-    <if test="supplementId6Nums != null">
-      #{supplementId6Nums,jdbcType=INTEGER},
-    </if>
-    <if test="supplementId7Nums != null">
-      #{supplementId7Nums,jdbcType=INTEGER},
-    </if>
-    <if test="orderStatus != null">
-      #{orderStatus,jdbcType=VARCHAR},
-    </if>
-    <if test="auditTime != null">
-      #{auditTime,jdbcType=TIMESTAMP},
-    </if>
-    <if test="extend1 != null">
-      #{extend1,jdbcType=VARCHAR},
-    </if>
-    <if test="extend2 != null">
-      #{extend2,jdbcType=VARCHAR},
-    </if>
-    <if test="extend3 != null">
-      #{extend3,jdbcType=VARCHAR},
-    </if>
-    <if test="extend4 != null">
-      #{extend4,jdbcType=VARCHAR},
-    </if>
-    <if test="createTime != null">
-      #{createTime,jdbcType=TIMESTAMP},
-    </if>
-    <if test="updateTime != null">
-      #{updateTime,jdbcType=TIMESTAMP},
-    </if>
-  </sql>
-  
-  <select id="selectByExample" parameterType="OrderInfoQuery" resultMap="BaseResultMap">
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from order_info
-    <include refid="Example_Where_Clause" />
-    <!-- order by CREATE_DATE -->
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from order_info
-    where ID = #{id,jdbcType=DECIMAL}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from order_info
-    where ID = #{id,jdbcType=DECIMAL}
-  </delete>
-  <delete id="deleteByExample" parameterType="OrderInfoQuery">
-    delete from order_info
-    <include refid="Example_Where_Clause" />
-  </delete>
-  <insert id="insert" parameterType="OrderInfo">
-    insert into order_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <include refid="Base_Column_List"/>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <include refid="Base_Value_List"/>
-    </trim>
-  </insert>
-  <insert id="insertSelective" parameterType="OrderInfo">
-    insert into order_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <include refid="Selective_Column_List"/>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <include refid="Selective_Value_List"/>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="OrderInfoQuery" resultType="java.lang.Integer">
-    select count(*) from order_info
-    <include refid="Example_Where_Clause" />
-  </select>
-  <update id="updateByPrimaryKeySelective" parameterType="OrderInfo">
-    update order_info
-    <include refid="Example_Set_Clause"/>
-    where ID = #{id,jdbcType=DECIMAL}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="OrderInfo">
-    update order_info
-    <include refid="Base_Set_Clause"/>
-    where ID = #{id,jdbcType=DECIMAL}
-  </update>
-  
-  <select id="selectPageByExample" parameterType="OrderInfoQuery" resultMap="BaseResultMap">
-  	<include refid="Page_Query_Begin" />
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from order_info
-    <include refid="Example_Where_Clause" />
-    <!-- order by CREATE_DATE -->
-    <include refid="Page_Query_End" />
-  </select>
+	<sql id="Page_Query_End">
+		) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+			<trim prefix="(" prefixOverrides="and" suffix=")">
+				<if test="userId != null">
+					and user_id = #{userId,jdbcType=VARCHAR}
+				</if>
+				<if test="orderNo != null">
+					and order_no = #{orderNo,jdbcType=VARCHAR}
+				</if>
+				<if test="periodicalId != null">
+					and periodical_id = #{periodicalId,jdbcType=VARCHAR}
+				</if>
+				<if test="periodicalYear != null">
+					and periodical_year = #{periodicalYear,jdbcType=VARCHAR}
+				</if>
+				<if test="amount != null">
+					and amount = #{amount,jdbcType=DECIMAL}
+				</if>
+				<if test="alreadyPayAmount != null">
+					and already_pay_amount = #{alreadyPayAmount,jdbcType=DECIMAL}
+				</if>
+				<if test="payerId != null">
+					and payer_id = #{payerId,jdbcType=VARCHAR}
+				</if>
+				<if test="subscribeNums != null">
+					and subscribe_nums = #{subscribeNums,jdbcType=INTEGER}
+				</if>
+				<if test="supplementId1 != null">
+					and supplement_id1 = #{supplementId1,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId2 != null">
+					and supplement_id2 = #{supplementId2,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId3 != null">
+					and supplement_id3 = #{supplementId3,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId4 != null">
+					and supplement_id4 = #{supplementId4,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId5 != null">
+					and supplement_id5 = #{supplementId5,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId6 != null">
+					and supplement_id6 = #{supplementId6,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId7 != null">
+					and supplement_id7 = #{supplementId7,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId1Nums != null">
+					and supplement_id1_nums = #{supplementId1Nums,jdbcType=INTEGER}
+				</if>
+				<if test="supplementId2Nums != null">
+					and supplement_id2_nums = #{supplementId2Nums,jdbcType=INTEGER}
+				</if>
+				<if test="supplementId3Nums != null">
+					and supplement_id3_nums = #{supplementId3Nums,jdbcType=INTEGER}
+				</if>
+				<if test="supplementId4Nums != null">
+					and supplement_id4_nums = #{supplementId4Nums,jdbcType=INTEGER}
+				</if>
+				<if test="supplementId5Nums != null">
+					and supplement_id5_nums = #{supplementId5Nums,jdbcType=INTEGER}
+				</if>
+				<if test="supplementId6Nums != null">
+					and supplement_id6_nums = #{supplementId6Nums,jdbcType=INTEGER}
+				</if>
+				<if test="supplementId7Nums != null">
+					and supplement_id7_nums = #{supplementId7Nums,jdbcType=INTEGER}
+				</if>
+				<if test="orderStatus != null">
+					and order_status = #{orderStatus,jdbcType=VARCHAR}
+				</if>
+				<if test="auditTime != null">
+					and audit_time = #{auditTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="extend1 != null">
+					and extend_1 = #{extend1,jdbcType=VARCHAR}
+				</if>
+				<if test="extend2 != null">
+					and extend_2 = #{extend2,jdbcType=VARCHAR}
+				</if>
+				<if test="extend3 != null">
+					and extend_3 = #{extend3,jdbcType=VARCHAR}
+				</if>
+				<if test="extend4 != null">
+					and extend_4 = #{extend4,jdbcType=VARCHAR}
+				</if>
+				<if test="createTime != null">
+					and create_time = #{createTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="updateTime != null">
+					and update_time = #{updateTime,jdbcType=TIMESTAMP}
+				</if>
+			</trim>
+		</where>
+	</sql>
+	<sql id="Example_Set_Clause">
+		<set>
+			<trim suffixOverrides=",">
+				<if test="userId != null">
+					user_id = #{userId,jdbcType=VARCHAR},
+				</if>
+				<if test="orderNo != null">
+					order_no = #{orderNo,jdbcType=VARCHAR},
+				</if>
+				<if test="periodicalId != null">
+					periodical_id = #{periodicalId,jdbcType=VARCHAR},
+				</if>
+				<if test="periodicalYear != null">
+					periodical_year = #{periodicalYear,jdbcType=VARCHAR},
+				</if>
+				<if test="amount != null">
+					amount = #{amount,jdbcType=DECIMAL},
+				</if>
+				<if test="alreadyPayAmount != null">
+					already_pay_amount = #{alreadyPayAmount,jdbcType=DECIMAL},
+				</if>
+				<if test="payerId != null">
+					payer_id = #{payerId,jdbcType=VARCHAR},
+				</if>
+				<if test="subscribeNums != null">
+					subscribe_nums = #{subscribeNums,jdbcType=INTEGER},
+				</if>
+				<if test="supplementId1 != null">
+					supplement_id1 = #{supplementId1,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId2 != null">
+					supplement_id2 = #{supplementId2,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId3 != null">
+					supplement_id3 = #{supplementId3,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId4 != null">
+					supplement_id4 = #{supplementId4,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId5 != null">
+					supplement_id5 = #{supplementId5,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId6 != null">
+					supplement_id6 = #{supplementId6,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId7 != null">
+					supplement_id7 = #{supplementId7,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId1Nums != null">
+					supplement_id1_nums = #{supplementId1Nums,jdbcType=INTEGER},
+				</if>
+				<if test="supplementId2Nums != null">
+					supplement_id2_nums = #{supplementId2Nums,jdbcType=INTEGER},
+				</if>
+				<if test="supplementId3Nums != null">
+					supplement_id3_nums = #{supplementId3Nums,jdbcType=INTEGER},
+				</if>
+				<if test="supplementId4Nums != null">
+					supplement_id4_nums = #{supplementId4Nums,jdbcType=INTEGER},
+				</if>
+				<if test="supplementId5Nums != null">
+					supplement_id5_nums = #{supplementId5Nums,jdbcType=INTEGER},
+				</if>
+				<if test="supplementId6Nums != null">
+					supplement_id6_nums = #{supplementId6Nums,jdbcType=INTEGER},
+				</if>
+				<if test="supplementId7Nums != null">
+					supplement_id7_nums = #{supplementId7Nums,jdbcType=INTEGER},
+				</if>
+				<if test="orderStatus != null">
+					order_status = #{orderStatus,jdbcType=VARCHAR},
+				</if>
+				<if test="auditTime != null">
+					audit_time = #{auditTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="extend1 != null">
+					extend_1 = #{extend1,jdbcType=VARCHAR},
+				</if>
+				<if test="extend2 != null">
+					extend_2 = #{extend2,jdbcType=VARCHAR},
+				</if>
+				<if test="extend3 != null">
+					extend_3 = #{extend3,jdbcType=VARCHAR},
+				</if>
+				<if test="extend4 != null">
+					extend_4 = #{extend4,jdbcType=VARCHAR},
+				</if>
+				<if test="createTime != null">
+					create_time = #{createTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="updateTime != null">
+					update_time = #{updateTime,jdbcType=TIMESTAMP},
+				</if>
+			</trim>
+		</set>
+	</sql>
+	<sql id="Base_Column_List">
+		id,
+		user_id,
+		order_no,
+		periodical_id,
+		periodical_year,
+		amount,
+		already_pay_amount,
+		payer_id,
+		subscribe_nums,
+		supplement_id1,
+		supplement_id2,
+		supplement_id3,
+		supplement_id4,
+		supplement_id5,
+		supplement_id6,
+		supplement_id7,
+		supplement_id1_nums,
+		supplement_id2_nums,
+		supplement_id3_nums,
+		supplement_id4_nums,
+		supplement_id5_nums,
+		supplement_id6_nums,
+		supplement_id7_nums,
+		order_status,
+		audit_time,
+		extend_1,
+		extend_2,
+		extend_3,
+		extend_4,
+		create_time,
+		update_time,
+	</sql>
+	<sql id="Base_Set_Clause">
+		<set>
+			<trim suffixOverrides=",">
+				user_id = #{userId,jdbcType=VARCHAR},
+				order_no = #{orderNo,jdbcType=VARCHAR},
+				periodical_id = #{periodicalId,jdbcType=VARCHAR},
+				periodical_year = #{periodicalYear,jdbcType=VARCHAR},
+				amount = #{amount,jdbcType=DECIMAL},
+				already_pay_amount = #{alreadyPayAmount,jdbcType=DECIMAL},
+				payer_id = #{payerId,jdbcType=VARCHAR},
+				subscribe_nums = #{subscribeNums,jdbcType=INTEGER},
+				supplement_id1 = #{supplementId1,jdbcType=VARCHAR},
+				supplement_id2 = #{supplementId2,jdbcType=VARCHAR},
+				supplement_id3 = #{supplementId3,jdbcType=VARCHAR},
+				supplement_id4 = #{supplementId4,jdbcType=VARCHAR},
+				supplement_id5 = #{supplementId5,jdbcType=VARCHAR},
+				supplement_id6 = #{supplementId6,jdbcType=VARCHAR},
+				supplement_id7 = #{supplementId7,jdbcType=VARCHAR},
+				supplement_id1_nums = #{supplementId1Nums,jdbcType=INTEGER},
+				supplement_id2_nums = #{supplementId2Nums,jdbcType=INTEGER},
+				supplement_id3_nums = #{supplementId3Nums,jdbcType=INTEGER},
+				supplement_id4_nums = #{supplementId4Nums,jdbcType=INTEGER},
+				supplement_id5_nums = #{supplementId5Nums,jdbcType=INTEGER},
+				supplement_id6_nums = #{supplementId6Nums,jdbcType=INTEGER},
+				supplement_id7_nums = #{supplementId7Nums,jdbcType=INTEGER},
+				order_status = #{orderStatus,jdbcType=VARCHAR},
+				audit_time = #{auditTime,jdbcType=TIMESTAMP},
+				extend_1 = #{extend1,jdbcType=VARCHAR},
+				extend_2 = #{extend2,jdbcType=VARCHAR},
+				extend_3 = #{extend3,jdbcType=VARCHAR},
+				extend_4 = #{extend4,jdbcType=VARCHAR},
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</trim>
+		</set>
+	</sql>
+	<sql id="Selective_Column_List">
+		<!-- ID, -->
+		<if test="userId != null">
+			user_id,
+		</if>
+		<if test="orderNo != null">
+			order_no,
+		</if>
+		<if test="periodicalId != null">
+			periodical_id,
+		</if>
+		<if test="periodicalYear != null">
+			periodical_year,
+		</if>
+		<if test="amount != null">
+			amount,
+		</if>
+		<if test="alreadyPayAmount != null">
+			already_pay_amount,
+		</if>
+		<if test="payerId != null">
+			payer_id,
+		</if>
+		<if test="subscribeNums != null">
+			subscribe_nums,
+		</if>
+		<if test="supplementId1 != null">
+			supplement_id1,
+		</if>
+		<if test="supplementId2 != null">
+			supplement_id2,
+		</if>
+		<if test="supplementId3 != null">
+			supplement_id3,
+		</if>
+		<if test="supplementId4 != null">
+			supplement_id4,
+		</if>
+		<if test="supplementId5 != null">
+			supplement_id5,
+		</if>
+		<if test="supplementId6 != null">
+			supplement_id6,
+		</if>
+		<if test="supplementId7 != null">
+			supplement_id7,
+		</if>
+		<if test="supplementId1Nums != null">
+			supplement_id1_nums,
+		</if>
+		<if test="supplementId2Nums != null">
+			supplement_id2_nums,
+		</if>
+		<if test="supplementId3Nums != null">
+			supplement_id3_nums,
+		</if>
+		<if test="supplementId4Nums != null">
+			supplement_id4_nums,
+		</if>
+		<if test="supplementId5Nums != null">
+			supplement_id5_nums,
+		</if>
+		<if test="supplementId6Nums != null">
+			supplement_id6_nums,
+		</if>
+		<if test="supplementId7Nums != null">
+			supplement_id7_nums,
+		</if>
+		<if test="orderStatus != null">
+			order_status,
+		</if>
+		<if test="auditTime != null">
+			audit_time,
+		</if>
+		<if test="extend1 != null">
+			extend_1,
+		</if>
+		<if test="extend2 != null">
+			extend_2,
+		</if>
+		<if test="extend3 != null">
+			extend_3,
+		</if>
+		<if test="extend4 != null">
+			extend_4,
+		</if>
+		<if test="createTime != null">
+			create_time,
+		</if>
+		<if test="updateTime != null">
+			update_time,
+		</if>
+	</sql>
+	<sql id="Base_Value_List">
+		#{id,jdbcType=BIGINT},
+		#{userId,jdbcType=VARCHAR},
+		#{orderNo,jdbcType=VARCHAR},
+		#{periodicalId,jdbcType=VARCHAR},
+		#{periodicalYear,jdbcType=VARCHAR},
+		#{amount,jdbcType=DECIMAL},
+		#{alreadyPayAmount,jdbcType=DECIMAL},
+		#{payerId,jdbcType=VARCHAR},
+		#{subscribeNums,jdbcType=INTEGER},
+		#{supplementId1,jdbcType=VARCHAR},
+		#{supplementId2,jdbcType=VARCHAR},
+		#{supplementId3,jdbcType=VARCHAR},
+		#{supplementId4,jdbcType=VARCHAR},
+		#{supplementId5,jdbcType=VARCHAR},
+		#{supplementId6,jdbcType=VARCHAR},
+		#{supplementId7,jdbcType=VARCHAR},
+		#{supplementId1Nums,jdbcType=INTEGER},
+		#{supplementId2Nums,jdbcType=INTEGER},
+		#{supplementId3Nums,jdbcType=INTEGER},
+		#{supplementId4Nums,jdbcType=INTEGER},
+		#{supplementId5Nums,jdbcType=INTEGER},
+		#{supplementId6Nums,jdbcType=INTEGER},
+		#{supplementId7Nums,jdbcType=INTEGER},
+		#{orderStatus,jdbcType=VARCHAR},
+		#{auditTime,jdbcType=TIMESTAMP},
+		#{extend1,jdbcType=VARCHAR},
+		#{extend2,jdbcType=VARCHAR},
+		#{extend3,jdbcType=VARCHAR},
+		#{extend4,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP},
+	</sql>
+	<sql id="Selective_Value_List">
+		<!-- SEQ_order_info.nextval, -->
+		<if test="userId != null">
+			#{userId,jdbcType=VARCHAR},
+		</if>
+		<if test="orderNo != null">
+			#{orderNo,jdbcType=VARCHAR},
+		</if>
+		<if test="periodicalId != null">
+			#{periodicalId,jdbcType=VARCHAR},
+		</if>
+		<if test="periodicalYear != null">
+			#{periodicalYear,jdbcType=VARCHAR},
+		</if>
+		<if test="amount != null">
+			#{amount,jdbcType=DECIMAL},
+		</if>
+		<if test="alreadyPayAmount != null">
+			#{alreadyPayAmount,jdbcType=DECIMAL},
+		</if>
+		<if test="payerId != null">
+			#{payerId,jdbcType=VARCHAR},
+		</if>
+		<if test="subscribeNums != null">
+			#{subscribeNums,jdbcType=INTEGER},
+		</if>
+		<if test="supplementId1 != null">
+			#{supplementId1,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId2 != null">
+			#{supplementId2,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId3 != null">
+			#{supplementId3,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId4 != null">
+			#{supplementId4,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId5 != null">
+			#{supplementId5,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId6 != null">
+			#{supplementId6,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId7 != null">
+			#{supplementId7,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId1Nums != null">
+			#{supplementId1Nums,jdbcType=INTEGER},
+		</if>
+		<if test="supplementId2Nums != null">
+			#{supplementId2Nums,jdbcType=INTEGER},
+		</if>
+		<if test="supplementId3Nums != null">
+			#{supplementId3Nums,jdbcType=INTEGER},
+		</if>
+		<if test="supplementId4Nums != null">
+			#{supplementId4Nums,jdbcType=INTEGER},
+		</if>
+		<if test="supplementId5Nums != null">
+			#{supplementId5Nums,jdbcType=INTEGER},
+		</if>
+		<if test="supplementId6Nums != null">
+			#{supplementId6Nums,jdbcType=INTEGER},
+		</if>
+		<if test="supplementId7Nums != null">
+			#{supplementId7Nums,jdbcType=INTEGER},
+		</if>
+		<if test="orderStatus != null">
+			#{orderStatus,jdbcType=VARCHAR},
+		</if>
+		<if test="auditTime != null">
+			#{auditTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="extend1 != null">
+			#{extend1,jdbcType=VARCHAR},
+		</if>
+		<if test="extend2 != null">
+			#{extend2,jdbcType=VARCHAR},
+		</if>
+		<if test="extend3 != null">
+			#{extend3,jdbcType=VARCHAR},
+		</if>
+		<if test="extend4 != null">
+			#{extend4,jdbcType=VARCHAR},
+		</if>
+		<if test="createTime != null">
+			#{createTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateTime != null">
+			#{updateTime,jdbcType=TIMESTAMP},
+		</if>
+	</sql>
+
+	<select id="selectByExample" parameterType="OrderInfoQuery"
+		resultMap="BaseResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from order_info
+		<include refid="Example_Where_Clause" />
+		<!-- order by CREATE_DATE -->
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from order_info
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from order_info
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<delete id="deleteByExample" parameterType="OrderInfoQuery">
+		delete from order_info
+		<include refid="Example_Where_Clause" />
+	</delete>
+	<insert id="insert" parameterType="OrderInfo">
+		insert into order_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Base_Value_List" />
+		</trim>
+	</insert>
+	<insert id="insertSelective" parameterType="OrderInfo">
+		insert into order_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Selective_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Selective_Value_List" />
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="OrderInfoQuery"
+		resultType="java.lang.Integer">
+		select count(*) from order_info
+		<include refid="Example_Where_Clause" />
+	</select>
+	<update id="updateByPrimaryKeySelective" parameterType="OrderInfo">
+		update order_info
+		<include refid="Example_Set_Clause" />
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="OrderInfo">
+		update order_info
+		<include refid="Base_Set_Clause" />
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<select id="selectPageByExample" parameterType="OrderInfoQuery"
+		resultMap="BaseResultMap">
+		<include refid="Page_Query_Begin" />
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from order_info
+		<include refid="Example_Where_Clause" />
+		<!-- order by CREATE_DATE -->
+		<include refid="Page_Query_End" />
+	</select>
 </mapper>

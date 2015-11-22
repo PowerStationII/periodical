@@ -26,9 +26,28 @@ public class BizOrder implements Serializable {
 	private String erAccount;
 	private String erName;
 	private String aPayAmount;
+	private String readerName;
+	private String iFprice;
+	private String cycle;
 	
-	
-	
+	public String getReaderName() {
+		return readerName;
+	}
+	public void setReaderName(String readerName) {
+		this.readerName = readerName;
+	}
+	public String getiFprice() {
+		return iFprice;
+	}
+	public void setiFprice(String iFprice) {
+		this.iFprice = iFprice;
+	}
+	public String getCycle() {
+		return cycle;
+	}
+	public void setCycle(String cycle) {
+		this.cycle = cycle;
+	}
 	public String getaPayAmount() {
 		return aPayAmount;
 	}

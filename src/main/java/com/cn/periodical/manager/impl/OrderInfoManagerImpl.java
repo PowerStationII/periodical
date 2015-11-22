@@ -88,5 +88,11 @@ public class OrderInfoManagerImpl implements OrderInfoManager {
 		// TODO Auto-generated method stub
 		return orderInfoDao.queryOrderInfoDetail(bizOrder);
 	}
+
+
+	public List<BizOrder> editorQryOrderInfos(BizOrder bizOrder) {
+		// TODO Auto-generated method stub
+		return orderInfoDao.editorQryOrderInfos(bizOrder);
+	}
 }
 

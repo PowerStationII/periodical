@@ -188,7 +188,7 @@
 							$('#other').remove();
 							$('.right')
 									.append(
-											'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubscribeOrderManagePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+											'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubOrderManagePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
 						});
 		$('#qikanyouji')
 				.click(

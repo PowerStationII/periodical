@@ -13,11 +13,14 @@ import com.cn.periodical.enums.SystemIdEnums;
 import com.cn.periodical.manager.AuthorInfoManager;
 import com.cn.periodical.manager.EditorInfoManager;
 import com.cn.periodical.manager.ExpertInfoManager;
+import com.cn.periodical.manager.ReaderInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.pojo.AuthorInfoQuery;
 import com.cn.periodical.pojo.EditorInfo;
 import com.cn.periodical.pojo.ExpertInfo;
+import com.cn.periodical.pojo.ReaderInfo;
+import com.cn.periodical.pojo.ReaderInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.pojo.UserInfoQuery;
 import com.cn.periodical.service.PInfoSettingService;
@@ -31,6 +34,9 @@ public class PInfoSettingServiceImpl implements PInfoSettingService {
 	
 	@Autowired 
 	AuthorInfoManager authorInfoManager;
+	
+	@Autowired 
+	ReaderInfoManager readerInfoManager;
 	
 	@Autowired
 	ExpertInfoManager expertInfoManager;
@@ -51,8 +57,8 @@ public class PInfoSettingServiceImpl implements PInfoSettingService {
 			ExpertInfo expertInfo = (ExpertInfo)obj;
 			expertInfoManager.saveExpertInfo(expertInfo);
 		} else if (SystemIdEnums.READER_SYS.getCode().equals(userInfo.getSystemId())) {
-			EditorInfo editorInfo = (EditorInfo)obj;
-			editorInfoManager.saveEditorInfo(editorInfo);
+			ReaderInfo readerInfo = (ReaderInfo)obj;
+			readerInfoManager.saveReaderInfo(readerInfo);
 		} else if (SystemIdEnums.EDIT_SYS.getCode().equals(userInfo.getSystemId())) {
 //			AuthorInfo authorInfo = (AuthorInfo)obj;
 //			authorInfoManager.saveAuthorInfo(authorInfo);
@@ -84,6 +90,11 @@ public class PInfoSettingServiceImpl implements PInfoSettingService {
 			return authorInfo;
 		}else if(RoleIdEnums.READER_P.getCode().equals(userInfo.getRoleId())){
 			//TODO:
+			ReaderInfoQuery readerInfoQuery= new ReaderInfoQuery();
+			readerInfoQuery.setReaderId(userInfo.getRefId());
+			List<ReaderInfo> readerInfos= readerInfoManager.queryList(readerInfoQuery);
+			ReaderInfo readerInfo = readerInfos.get(0);
+			return readerInfo;
 		}
 		return null;
 	}

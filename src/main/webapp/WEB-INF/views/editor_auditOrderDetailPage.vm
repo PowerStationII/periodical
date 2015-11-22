@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+</head>
+<script>
+	$(function() {
+		$('#back').click(function() {
+			history.go(-1);
+		})
+	})
+</script>
+<body>
+	<div>
+		<table style="border: 1px solid;" rules="all">
+			<tr>
+				<td rowspan="2">订阅信息</td>
+				<td>稿件编号：$!{bo.orderNo}</td>
+				<td>订阅单位/个人：$!{bo.readerName}</td>
+				<td>登记时间：$!{bo.submitTime}</td>
+				<td>审核时间：</td>
+			</tr>
+			<tr>
+				<td>$!{bo.pCnName}（月刊，全年共$!{bo.cycle}期）全年定价：$!{bo.iFprice}*$!{bo.cycle}元</td>
+				<td>期刊：$!{bo.pYear}</td>
+				<td>订阅份数：$!{bo.subNums}份</td>
+				<td>金额：$!{bo.oAmount}</td>
+			</tr>
+			<!-- 		<tr>
+			<td   rowspan="2">邮寄信息</td>
+			<td >收件人：张振海</td>
+			<td >联系电话：878888888</td>
+			<td >手机：186000002</td>
+			<td >E-mail：88888@qq.com</td>
+		</tr>
+		<tr>
+			<td colspan="3">详细地址：陕西省渭南市东风街中段60号渭南市农业技术推广中心</td>
+			<td >邮编：100922</td>
+		</tr> -->
+			<tr>
+				<td>汇款信息</td>
+				<td colspan="4"><table style="border: 1px solid;" rules="all">
+						<tr>
+							<td>汇款方式</td>
+							<td>汇款时间</td>
+							<td>流水号</td>
+							<td>银行汇款扫描件</td>
+						</tr>
+						#foreach($dtos in ${list})
+						<tr>
+							<td>${dtos.articleId}</td>
+							<td>${dtos.articleCnTitle}</td>
+							<td>${dtos.aRealAmount}</td>
+							<td><a href="#">下载</a></td>
+						</tr>
+						#end
+
+					</table></td>
+			</tr>
+			<tr>
+				<td>审核记录</td>
+				<td colspan="4"></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="返回" id="back" /></td>
+				<td colspan="4"><input type="button" value="审核"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
