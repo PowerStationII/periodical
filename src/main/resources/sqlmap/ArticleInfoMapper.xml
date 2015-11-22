@@ -583,8 +583,13 @@
 		</trim>
 		from article_info
 		<include refid="Example_Where_Clause" />
+		and article_id not in (select article_id from periodical_details)
 		<!-- order by CREATE_DATE -->
 	</select>
+	
+	
+	
+	
 	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
 		resultMap="BaseResultMap">
 		select

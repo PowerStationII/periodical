@@ -71,7 +71,7 @@ public class AddressInfoDaoImpl extends BaseDao implements AddressInfoDao {
 
 	public List<BizDistribut> queryAddressListByUserId(BizDistribut distribut) {
 		// TODO Auto-generated method stub
-		return super.getSqlSession().selectList("AddressInfoMapper.", distribut);
+		return super.getSqlSession().selectList("AddressInfoMapper.queryAddressListByUserId", distribut);
 	}
 	
 }

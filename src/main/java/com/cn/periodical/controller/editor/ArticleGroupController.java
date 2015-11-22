@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.manager.PeriodicalDetailsManager;
 import com.cn.periodical.manager.PeriodicalInfoManager;
@@ -23,8 +22,10 @@ import com.cn.periodical.manager.PeriodicalManager;
 import com.cn.periodical.manager.SectionInfoManager;
 import com.cn.periodical.pojo.Periodical;
 import com.cn.periodical.pojo.PeriodicalDetails;
+import com.cn.periodical.pojo.PeriodicalQuery;
 import com.cn.periodical.pojo.SectionInfo;
 import com.cn.periodical.pojo.SectionInfoQuery;
+import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.EditorArticleDealService;
 /**
@@ -94,30 +95,43 @@ public class ArticleGroupController extends EditorController{
 	 */
 	@RequestMapping(value="/toArticleGroup")
 	public ModelAndView toArticleGroup(
-			@RequestParam("str") String str,
+			@RequestParam("str") String str,@RequestParam("periodicalIssueNo") String periodicalIssueNo,String periodicalId,
 			HttpServletRequest request) {
-//		logger.info("组稿左右提交进来的:[]&["+periodicalIssueNo+"]");
-//		logger.info("----------------");
+		logger.info("组稿左右提交进来的:[]&["+periodicalIssueNo+"]");
+		UserInfo userInfo = getUserInfo(request);
 		ModelAndView mav = new ModelAndView("editor_articleGroupPage");
 		JSONArray array = (JSONArray) JSONArray.parse(str);
 		for(int i=0;i<array.size();i++){
 			System.out.println(array.getJSONObject(i));
+			PeriodicalDetails periodicalDetails = new PeriodicalDetails();
+			periodicalDetails.setPeriodicalId(periodicalId);
+			periodicalDetails.setRefId(array.getJSONObject(i).getString("id"));
+			periodicalDetails.setType("0000");
+			periodicalDetails.setCreateTime(new Date());
+			periodicalDetails.setPeriodicalIssueNo(periodicalIssueNo);
+			periodicalDetails.setUserId(userInfo.getUserId());
+			periodicalDetails.setSectionId(array.getJSONObject(i).getString("id"));
+			JSONArray jsonArray = array.getJSONObject(i).getJSONArray("data");
+			
+			/**
+			 * periodical_details根据periodicalId&periodicalIssueNo&sectionId先删后插入
+			 * */
+			
+			
+			for(int k=0;k<jsonArray.size();k++){
+				periodicalDetails.setArticleId(jsonArray.getString(k));
+				
+				periodicalDetailsManager.savePeriodicalDetails(periodicalDetails);
+			}
 		}
-//		logger.info(request.getParameter("selectTest"));
-//		String sectionInfos=request.getParameter("sectionA");
-//		String[] strs = sectionInfos.split(",");
-//		for(int i=0;i<strs.length;i++){
-//			PeriodicalDetails periodicalDetails = new PeriodicalDetails();
-//			periodicalDetails.setPeriodicalId(periodicalId);
-//			periodicalDetails.setRefId(strs[i]);
-//			periodicalDetails.setType("0000");
-//			periodicalDetails.setCreateTime(new Date());
-//			periodicalDetails.setPeriodicalIssueNo(periodicalIssueNo);
-////			periodicalDetails.setUserId(userId);
-//			periodicalDetails.setSectionId("sectionA");
-//			periodicalDetailsManager.savePeriodicalDetails(periodicalDetails);
-//		}
-		
+		PeriodicalQuery query =new PeriodicalQuery();
+		query.setPeriodicalId(periodicalId);
+		query.setPeriodicalIssueNo(periodicalIssueNo);
+		List<Periodical> pList = periodicalManager.queryList(query);
+		Periodical p = pList.get(0);
+		p.setId(p.getId());
+		p.setPeriodicalState("0001");/**0000未制作;0001稿件制作中;0002广告制作中;0003制作完成;*/
+		periodicalManager.savePeriodical(p);
 		return mav;
 	}
 }

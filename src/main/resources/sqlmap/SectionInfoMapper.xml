@@ -13,6 +13,27 @@
 	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  
+  <resultMap id="SectionBaseResultMap" type="SectionInfo">
+	  <id column="ID" jdbcType="DECIMAL" property="id" />
+	  <result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
+	  <result column="section_id" jdbcType="VARCHAR" property="sectionId" />
+	  <result column="section_name" jdbcType="VARCHAR" property="sectionName" />
+	  <result column="section_summary" jdbcType="VARCHAR" property="sectionSummary" />
+	  <result column="state" jdbcType="VARCHAR" property="state" />
+	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
+	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
+	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	  <collection property="list" select="selectArticles" column="section_id"></collection>
+  </resultMap>
+  
+  <select id="selectArticles" resultType="hashmap">
+	select ai.article_id,ai.article_cn_title,ai.editor_state from
+	periodical_details pd,article_info ai where ai.article_id=pd.article_id
+	and pd.section_id=#{sectionId,jdbcType=VARCHAR}
+  </select>
+  
   <sql id="Page_Query_Begin">
     select * from(select t.*,rownum rn from(
   </sql>
@@ -185,7 +206,7 @@
     </if>
   </sql>
   
-  <select id="selectByExample" parameterType="SectionInfoQuery" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="SectionInfoQuery" resultMap="SectionBaseResultMap">
     select
     <trim suffixOverrides=",">
       <include refid="Base_Column_List" />

@@ -6,6 +6,10 @@
 package com.cn.periodical.pojo;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+
+import com.cn.periodical.response.EditorArticleDealRespDto;
 
 /**
  * SectionInfo
@@ -25,6 +29,17 @@ public class SectionInfo implements Serializable{
 	private java.lang.String extend2;
 	private java.util.Date createTime;
 	private java.util.Date updateTime;
+	
+	private List<Map<String,Object>> list;
+	
+	
+	public List<Map<String, Object>> getList() {
+		return list;
+	}
+
+	public void setList(List<Map<String, Object>> list) {
+		this.list = list;
+	}
 
 	/**
 	 * @param id

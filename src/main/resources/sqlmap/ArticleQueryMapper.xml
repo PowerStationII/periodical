@@ -232,7 +232,7 @@
 			and auLin.invest_section= #{section,jdbcType=VARCHAR}
 		</if>
 		<if test="authorNames != null  and ''!= authorNames">
-			and INSTR(auLin.authorNames,'#{authorNames,jdbcType=VARCHAR}')
+			and INSTR(auLin.authorNames,#{authorNames,jdbcType=VARCHAR})
 		</if>
 		<if test="createTime != null  and ''!= createTime">
 			and DATE_FORMAT(auLin.create_time, '%Y-%m-%d')= #{createTime,jdbcType=VARCHAR}
@@ -253,7 +253,7 @@
 			and auLin.expert_state= #{expertState,jdbcType=VARCHAR}
 		</if>
 		<if test="cnKeywords != null  and ''!= cnKeywords">
-			and INSTR(auLin.article_cn_keywords,'#{cnKeywords,jdbcType=VARCHAR}')
+			and INSTR(auLin.article_cn_keywords,#{cnKeywords,jdbcType=VARCHAR})
 		</if>
 	</select>
 </mapper>

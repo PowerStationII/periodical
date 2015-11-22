@@ -72,14 +72,20 @@
 	  #foreach($item in ${sList})
 		<div class='box'>
 	  <div>${item.sectionName}</div>
-	  <div class='sectionId'>${item.sectionId}</div>
+	  <div class='sectionId' style="display:none;">${item.sectionId}</div>
 			<table border='1' class='selectedTable'>
 				<tr>
 					<td>稿件编号</td>
 					<td>标题</td>
 					<td>稿件状态</td>
 				</tr>
-
+				#foreach($it in ${item.list})
+				<tr class='selectAble'>
+					<td>${it.article_id}</td>
+					<td>${it.article_cn_title}</td>
+					<td>${it.editor_state}</td>
+				</tr>
+				#end
 			</table>   	 
 		</div>
 	  	#end
@@ -121,7 +127,8 @@ $('#btnSubmit').click(function(){
 	});
 	$.ajax({
 		url:'../editor/toArticleGroup',
-		data:{str:JSON.stringify(sections)},
+//		data:{str:JSON.stringify(sections)},
+		data:{periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',str:JSON.stringify(sections)},
 		success:function(d){
 			alert('success');
 		}
