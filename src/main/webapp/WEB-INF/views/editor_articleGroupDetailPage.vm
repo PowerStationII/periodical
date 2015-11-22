@@ -10,123 +10,76 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
-
-    <script type="text/javascript">
-    
-      /**
-       * @param fromSelectId option移动起始select标签id
-       * @param toSelectId option移动目的地select标签id
-       * @param addOrNot boolean类型——true表示当前进行的是添加操作，否则是删除操作
-       * @param moveAllOrNot boolean类型——true表示当前进行的是“全部”操作，否则当前进行的不是“全部”操作
-       */
-      function moveOptions(fromSelectId, toSelectId, addOrNot, moveAllOrNot){
-        var fromObject = document.getElementById(fromSelectId);
-        var toObject = document.getElementById(toSelectId);
-        if(fromObject.options.length == 0){
-          if(addOrNot){
-            alert("没有找到可添加的选项！");
-          }else{
-            alert("没有找到可删除的选项！");
-          }
-          return;
-        }
-        
-        if(fromObject.selectedIndex == -1 && moveAllOrNot == false){
-          if(addOrNot){
-            alert("请先选择要添加的选项！");
-          }else{
-            alert("请先选择要删除的选项！");
-          }
-          return;
-        }
-        
-        var toSelectOptionsList = new Array(toObject.options.length);//存放option移动目的地select标签所有option选项
-        var toSelectOptionPointer = 0;
-        for(; toSelectOptionPointer < toObject.options.length; toSelectOptionPointer ++){//将option移动目的地原有option选项存放到toSelectOptionsList数组中
-          if(toObject.options[toSelectOptionPointer] != null){
-            toSelectOptionsList[toSelectOptionPointer] = new Option(toObject.options[toSelectOptionPointer].text, toObject.options[toSelectOptionPointer].value);
-          }
-        }
-        
-        for(var i = 0; i < fromObject.options.length; i ++){
-          if(fromObject.options[i] != null && (fromObject.options[i].selected == true || moveAllOrNot)){//将新添加的option选项存放到toSelectOptionsList数组中
-            toSelectOptionsList[toSelectOptionPointer] = new Option(fromObject.options[i].text, fromObject.options[i].value);
-            toSelectOptionPointer ++;
-          }
-        }
-        
-        for(var i = 0; i < toSelectOptionsList.length; i ++){//重新整合option移动目的地select标签的option选项，以使新添加的显示出来
-          if(toSelectOptionsList[ i ] != null){
-            toObject.options[ i ] = toSelectOptionsList[ i ];
-          }
-        }
-        
-        for(var i = fromObject.options.length - 1; i >= 0; i --){//重新整合option移动起始select标签的option选项，以便去掉删除的option选项
-          if(fromObject.options[i] != null && (fromObject.options[i].selected == true || moveAllOrNot)){
-            fromObject.options[i] = null;
-          }
-        }
-      }
-
-      function getSelectedValues(){
-        var selectedValues = "";
-        var rightSelectObject = document.getElementById("rightSelect");
-        for(var i=0; i<rightSelectObject.options.length; i++){
-          selectedValues = rightSelectObject.options[i].value + ',' + selectedValues;
-        }
-        selectedValues = selectedValues.substring(0, selectedValues.lastIndexOf(','));
-        if(selectedValues == ""){
-          alert("你没有选择任何选项！！！");
-        }else{
-          alert("你选中的值为：" + selectedValues);
-          $("#sectionA").val(selectedValues);
-          $('#sub2').submit();
-        }
-      }
-    </script>
-
+  <style>
+	#left,#right {
+		border:1px solid #330033;
+		float:left;
+		width:30%;
+		padding:5px;
+		margin:5px;
+	}
+	#center {		
+		float:left;
+		padding:5px;
+		margin:5px;
+	}
+.box{
+margin:5px;
+padding:5px;
+}
+.selected{
+		border:3px solid red;
+}
+  </style>
+   
 </head>
  <body>  
     <form id="sub2" action="../editor/toArticleGroup" method="POST">  
     <input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}">
     <input type="hidden" name="periodicalId" value="${periodicalId}">
     <input type="text" id="sectionA" name="sectionA" value="">
-    <center style="margin-top:12%"><font color="red" size="5"><b>select标签multiple属性的使用方法</b></font></center>
     <br/>
-    <table border="1" cellspacing="0" align="center">
-      <tr>
-        <td align="center" width="150px">未选择</td>
-        <td align="center" width="150px">操作</td>
-        <td align="center" width="150px">已选择</td>
-      </tr>
-      <tr>
-        <td align="center" width="150px">
-          <select id="leftSelect" name="leftSelect" multiple="multiple" size="15" style="width:100%; height:100%;">
-          
-          	#foreach($articleQueryRespDto in ${list})   
+  
+      <div id='left' >
+	<SELECT id='leftSelect' size='10' style='width:100%' >
+#foreach($articleQueryRespDto in ${list})   
 				<option value="${articleQueryRespDto.articleInfo.articleId}">${articleQueryRespDto.articleInfo.articleCnTitle}</option>
 			#end
-          </select>
-        </td>
-        <td align="center" width="150px">
-          <input type="button" onclick="moveOptions('leftSelect', 'rightSelect', true, false);" value="添加 >>" style="text-align:center; margin-bottom:10px; width:90px;"/>
-          <br/>
-          <input type="button" onclick="moveOptions('rightSelect', 'leftSelect', false, false);" value="删除 <<" style="text-align:center; margin-bottom:10px; width:90px;"/>
-          <br/>
-          <input type="button" onclick="moveOptions('leftSelect', 'rightSelect', true, true);" value="全部添加 >>" style="margin-bottom:10px; width:90px;"/>
-          <br/>
-          <input type="button" onclick="moveOptions('rightSelect', 'leftSelect', false, true);" value="全部删除 <<" style="margin-bottom:10px; width:90px;"/>
-          <br/>
-        </td>
-        <td align="center" width="150px">
-          <select id="rightSelect" name="rightSelect" multiple="multiple" size="15" style="width:100%; height:100%;">
-          
-          </select>
-        </td>
-      </tr>
-    </table>
-    <br/>
-    <center><input type="button" value="获取选项的value值" onclick="getSelectedValues();"/></center>
+	</SELECT>
+  </div>
+
+
+  <div id='center' >
+	<INPUT TYPE="button" VALUE=">>" id='btnRight'/></br>
+	<INPUT TYPE="button" VALUE="<<" id='btnLeft'/>
+  </div>
+
+	  <div id='right'>
+		<div class='box'>
+	  	<SELECT  size='10' style='width:100%'>
+		</SELECT>
+		</div>
+		
+		
+		<div class='box'>
+		<SELECT  size='10' style='width:100%' >
+		</SELECT>
+		</div>
+  </div>
     </form>  
   </body>  
 </html>
+<SCRIPT LANGUAGE="JavaScript">
+$('.box').click(function(){
+	$('.box').removeClass('selected');
+	$(this).addClass('selected');
+});
+
+$('#btnRight').click(function(){
+	$('.selected select').append($('#leftSelect').find('option:selected'));
+});
+
+$('#btnLeft').click(function(){
+	$('#leftSelect').append($('.selected select').find('option:selected'));
+});
+</SCRIPT>

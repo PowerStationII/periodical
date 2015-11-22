@@ -55,6 +55,7 @@
 		<mapper resource="sqlmap/EditorInfoMapper.xml"/><!-- 编辑信息 -->
 		<mapper resource="sqlmap/ExpertInfoMapper.xml"/><!-- 专家信息 -->
 		<mapper resource="sqlmap/ReaderInfoMapper.xml"/><!-- 读者信息 -->
+		<mapper resource="sqlmap/PeriodicalDistributMapper.xml"/><!-- 期刊分发信息 -->
 		<mapper resource="sqlmap/AdInfoMapper.xml"/><!-- 广告信息 -->
 		<mapper resource="sqlmap/SectionInfoMapper.xml"/><!-- 栏目信息 -->
 		<mapper resource="sqlmap/CouncilContractFlowsMapper.xml"/><!-- 理事会付款流水 -->
