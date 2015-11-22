@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * 登录Controller
  */
-@Controller
+@Controller 
 public class TopController {
 
 	private static final Logger logger = LoggerFactory.getLogger(TopController.class);
@@ -61,6 +61,14 @@ public class TopController {
 	@RequestMapping(value="/toTouGao",method = RequestMethod.GET)
 	public String toTouGaoPage() {
 		return "link/tougaoxuzhi";
+	}
+	
+	/**
+	 * 跳转到投稿须知写死页面
+	 */
+	@RequestMapping(value="/toBanQuquan",method = RequestMethod.GET)
+	public String toBanQuquanPage() {
+		return "link/banquanxieyi";
 	}
 	
 }
