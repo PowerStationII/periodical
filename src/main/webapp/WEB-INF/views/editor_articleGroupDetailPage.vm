@@ -10,76 +10,122 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
-  <style>
-	#left,#right {
-		border:1px solid #330033;
-		float:left;
-		width:30%;
-		padding:5px;
-		margin:5px;
-	}
-	#center {		
-		float:left;
-		padding:5px;
-		margin:5px;
-	}
-.box{
-margin:5px;
-padding:5px;
+<style>
+#left, #right {
+	border: 1px solid #330033;
+	float: left;
+	width: 40%;
+	padding: 5px;
+	margin: 5px;
 }
-.selected{
-		border:3px solid red;
+
+#center {
+	float: left;
+	padding: 5px;
+	margin: 5px;
 }
-  </style>
-   
+
+.box {
+	margin: 5px;
+	padding: 5px;
+}
+
+.selected {
+	border: 3px solid red;
+}
+
+.selectedTr {
+	background-color: blue;
+}
+</style>
+
 </head>
- <body>  
-    <form id="sub2" action="../editor/toArticleGroup" method="POST">  
-    <input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}">
-    <input type="hidden" name="periodicalId" value="${periodicalId}">
-    <input type="text" id="sectionA" name="sectionA" value="">
-    <br/>
-  
-      <div id='left' >
-	<SELECT id='leftSelect' size='10' style='width:100%' >
-#foreach($articleQueryRespDto in ${list})   
-				<option value="${articleQueryRespDto.articleInfo.articleId}">${articleQueryRespDto.articleInfo.articleCnTitle}</option>
-			#end
-	</SELECT>
-  </div>
+<body>
+	<form id="sub2" action="../editor/toArticleGroup" method="POST">
+		<input type="hidden" name="periodicalIssueNo"
+			value="${periodicalIssueNo}"> <input type="hidden"
+			name="periodicalId" value="${periodicalId}"> <input
+			type="text" id="sectionA" name="sectionA" value=""> <br />
+		<div id='left'>
+			<table border='1' id='leftSelect' class='selectedTable'>
+				<tr>
+					<td>稿件编号</td>
+					<td>标题</td>
+					<td>稿件状态</td>
+				</tr>
 
-
-  <div id='center' >
-	<INPUT TYPE="button" VALUE=">>" id='btnRight'/></br>
-	<INPUT TYPE="button" VALUE="<<" id='btnLeft'/>
-  </div>
+				#foreach($articleQueryRespDto in ${list})
+				<tr class='selectAble'>
+					<td>${articleQueryRespDto.articleInfo.articleId}</td>
+					<td>${articleQueryRespDto.articleInfo.articleCnTitle}</td>
+					<td>${articleQueryRespDto.articleInfo.editorState}</td>
+				</tr>
+				#end
+			</table>
+		</div>
+		<div id='center'>
+			<INPUT TYPE="button" VALUE=">>" id='btnRight' /></br> 
+			<INPUT TYPE="button" VALUE="<<" id='btnLeft'/>
+ 		 </div>
 
 	  <div id='right'>
+	  #foreach($item in ${sList})
 		<div class='box'>
-	  	<SELECT  size='10' style='width:100%'>
-		</SELECT>
+	  <div>${item.sectionName}</div>
+	  <div class='sectionId'>${item.sectionId}</div>
+			<table border='1' class='selectedTable'>
+				<tr>
+					<td>稿件编号</td>
+					<td>标题</td>
+					<td>稿件状态</td>
+				</tr>
+
+			</table>   	 
 		</div>
-		
-		
-		<div class='box'>
-		<SELECT  size='10' style='width:100%' >
-		</SELECT>
-		</div>
+	  	#end
   </div>
+  <input type='button' value='提交' id='btnSubmit' />
     </form>  
   </body>  
-</html>
 <SCRIPT LANGUAGE="JavaScript">
+$('.selectedTable tr').filter('.selectAble').click(function(){
+	if($(this).hasClass('selectedTr')){
+		$(this).removeClass('selectedTr');
+	}else{
+		$(this).addClass('selectedTr');
+	}
+});
 $('.box').click(function(){
 	$('.box').removeClass('selected');
 	$(this).addClass('selected');
 });
 
 $('#btnRight').click(function(){
-	$('.selected select').append($('#leftSelect').find('option:selected'));
+	$('.selected table').append($('#leftSelect .selectedTr'));
 });
 
 $('#btnLeft').click(function(){
-	$('#leftSelect').append($('.selected select').find('option:selected'));
+	$('#leftSelect').append($('.selected table .selectedTr'));
+});
+
+$('#btnSubmit').click(function(){
+	var sections=[];
+	$('#right .box').each(function(){
+		var section={};
+		section.data=[];
+		section.id=$(this).find('.sectionId').html();
+		$(this).find('.selectAble').each(function(){
+			section.data.push($(this).find('td:first').html());
+		});
+		sections.push(section);
+	});
+	$.ajax({
+		url:'../editor/toArticleGroup',
+		data:{str:JSON.stringify(sections)},
+		success:function(d){
+			alert('success');
+		}
+	});
 });
 </SCRIPT>
+</html>
