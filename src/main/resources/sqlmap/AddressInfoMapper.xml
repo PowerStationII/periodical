@@ -34,6 +34,14 @@
 	  <result column="supplement_id6_nums" jdbcType="INTEGER" property="supplementId6Nums" />
 	  <result column="supplement_id7_nums" jdbcType="INTEGER" property="supplementId7Nums" />
   </resultMap>
+
+
+	<select id="countByBiz" parameterType="BizDistribut" resultType="java.lang.Integer">
+		select count(*) from user_info ui,reader_info ri,address_info ai
+	where ui.ref_id=ri.reader_id and ai.ref_id=ri.reader_id
+	and ui.user_id=#{userId,jdbcType=VARCHAR}
+	</select>
+    
   
   <select id="queryAddressListByUserId" parameterType="BizDistribut" resultType="BizDistribut">
 	select ai.address_id as aId,ai.contacter_name as

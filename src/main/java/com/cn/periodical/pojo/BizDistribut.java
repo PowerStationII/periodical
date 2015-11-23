@@ -2,10 +2,16 @@ package com.cn.periodical.pojo;
 
 import java.io.Serializable;
 
-public class BizDistribut implements Serializable {
+import com.cn.periodical.utils.PagingQuery;
+
+public class BizDistribut extends PagingQuery implements Serializable {
 
 	public BizDistribut() {
 		// TODO Auto-generated constructor stub
+		super(1, 10);
+	}
+	public  BizDistribut(int pageNo, int pageSize){
+		super(pageNo, pageSize);
 	}
 	
 	private String aId;

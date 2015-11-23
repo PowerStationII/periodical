@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.AddressInfo;
+import com.cn.periodical.pojo.AddressInfoQuery;
 import com.cn.periodical.pojo.BizDistribut;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.pojo.UserInfoQuery;
@@ -47,6 +49,7 @@ public class PeriodicalDistributController extends ReaderController{
 		BizDistribut distribut = new BizDistribut();
 		distribut.setUserId(userInfo.getUserId());
 		List<BizDistribut> list = addressInfoManager.queryAddressListByUserId(distribut);
+//		AddressInfoBizPage page= addressInfoManager.queryPageListByBiz(distribut);
 		mav.addObject("list", list);
 		return mav;
 	}
@@ -90,4 +93,29 @@ public class PeriodicalDistributController extends ReaderController{
 		}
 		return mav;
 	}
+	
+	
+	
+	/**
+	 * 删除地址信息
+	 */
+	@RequestMapping(value = "/toDeleteAddressInfo")
+	public ModelAndView toDeleteSectionInfo(String addressId) {
+		ModelAndView mav = new ModelAndView("redirect:../reader/toDistributPage");
+		logger.info("删除期刊下栏目信息 in:["+addressId+"]");
+		try {
+			/**
+			 * 根据addressId删除AddressInfo信息
+			 * */
+			AddressInfoQuery query=new AddressInfoQuery();
+			query.setAddressId(addressId);
+			addressInfoManager.deleteAddressInfo(query);
+		} catch (Exception e) {
+			//记录错误日志
+			logger.error("删除地址信息异常!", e);
+			return new ModelAndView("error");
+		}
+		return mav;
+	}
+	
 }

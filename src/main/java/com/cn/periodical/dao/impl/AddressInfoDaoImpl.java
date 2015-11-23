@@ -23,7 +23,6 @@ public class AddressInfoDaoImpl extends BaseDao implements AddressInfoDao {
 		return super.getSqlSession().selectOne("AddressInfoMapper.countByExample", example);
 	}
 	
-	
 	public int deleteByExample(AddressInfoQuery example) {
 		return super.getSqlSession().delete("AddressInfoMapper.deleteByExample", example);
 	}
@@ -72,6 +71,10 @@ public class AddressInfoDaoImpl extends BaseDao implements AddressInfoDao {
 	public List<BizDistribut> queryAddressListByUserId(BizDistribut distribut) {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectList("AddressInfoMapper.queryAddressListByUserId", distribut);
+	}
+	
+	public int countByBiz(BizDistribut example) {
+		return super.getSqlSession().selectOne("AddressInfoMapper.countByBiz", example);
 	}
 	
 }

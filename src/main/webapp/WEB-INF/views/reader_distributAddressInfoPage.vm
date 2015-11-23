@@ -36,7 +36,7 @@
                     <td>${dtos.rPostCode}</td>
                     <td>${dtos.rContacter}</td>
                     <td>${dtos.cMobile}</td>
-                    <td><a href="#">编辑</a><a href="#">删除</a></td>
+                    <td><a href="../reader/toDeleteAddressInfo?addressId=${dtos.aId}">删除</a></td>
                 </tr>
             #end
 		</table>

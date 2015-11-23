@@ -1,5 +1,6 @@
 package com.cn.periodical.controller.editor;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cn.periodical.manager.OrderInfoManager;
 import com.cn.periodical.manager.PayerInfoManager;
 import com.cn.periodical.pojo.BizOrder;
+import com.cn.periodical.pojo.OrderInfo;
+import com.cn.periodical.pojo.OrderInfoQuery;
 import com.cn.periodical.pojo.PayerInfo;
 import com.cn.periodical.pojo.PayerInfoQuery;
 /**
@@ -61,9 +64,31 @@ public class SubscribeOrderManageController extends EditorController{
 		mav.addObject("bo", list.get(0));
 		
 		PayerInfoQuery query = new PayerInfoQuery();
+		query.setOrderNo(orderNo);
 		List<PayerInfo> payerInfos=payerInfoManager.queryList(query);
 		mav.addObject("list", payerInfos);
 		
+		return mav;
+	}
+	
+	/**
+	 * toAuditOrderManage
+	 * 审核
+	 */
+	@RequestMapping(value="/toAuditOrderManagePage")
+	public ModelAndView toAuditOrderManage(HttpServletRequest request) {
+		logger.info("发行编辑-审核Page:[ ]");
+		ModelAndView mav = new ModelAndView("redirect:../editor/toSubOrderManagePage");
+		String orderNo = request.getParameter("orderNo");
+		String opinion = request.getParameter("opinion");
+		OrderInfoQuery query = new OrderInfoQuery();
+		query.setOrderNo(orderNo);
+		List<OrderInfo> orderInfos = orderInfoManager.queryList(query);
+		OrderInfo orderInfo = orderInfos.get(0);
+		orderInfo.setId(orderInfo.getId());
+		orderInfo.setExtend1(opinion);
+		orderInfo.setAuditTime(new Date());
+		orderInfoManager.saveOrderInfo(orderInfo);
 		return mav;
 	}
 }

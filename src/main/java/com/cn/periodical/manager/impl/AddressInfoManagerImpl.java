@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.cn.periodical.dao.AddressInfoDao;
 import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.pojo.AddressInfo;
+import com.cn.periodical.pojo.AddressInfoBizPage;
 import com.cn.periodical.pojo.AddressInfoPage;
 import com.cn.periodical.pojo.AddressInfoQuery;
 import com.cn.periodical.pojo.BizDistribut;
@@ -70,6 +71,8 @@ public class AddressInfoManagerImpl implements AddressInfoManager {
 		addressInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
 		return addressInfoPage;
 	}
+	
+
 
     public void saveAddressInfos(List<AddressInfo> list){
           for(AddressInfo addressInfo : list){
@@ -82,5 +85,21 @@ public class AddressInfoManagerImpl implements AddressInfoManager {
 		// TODO Auto-generated method stub
 		return addressInfoDao.queryAddressListByUserId(distribut);
 	}
+	
+	public AddressInfoBizPage queryPageListByBiz(BizDistribut query) {
+		AddressInfoBizPage addressInfoPage = new AddressInfoBizPage();
+		Integer itemCount = addressInfoDao.countByBiz(query);
+		query.setItemCount(itemCount);
+		
+		if (itemCount == 0) {
+			addressInfoPage.setValues(null);
+		} else {
+			addressInfoPage.setValues(addressInfoDao.queryAddressListByUserId(query));
+		}
+		
+		addressInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
+		return addressInfoPage;
+	}
+
 }
 

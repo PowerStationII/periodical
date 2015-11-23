@@ -46,16 +46,16 @@
 	<select id="editorQueryOrderInfos" parameterType="BizOrder"
 		resultType="BizOrder">
 		select oi.order_no as orderNo,oi.already_pay_amount as
-		aPayAmount,oi.create_time as submitTime,oi.order_status as oStatus,
+		aPayAmount,DATE_FORMAT(oi.create_time, '%Y-%m-%d') as submitTime,oi.order_status as oStatus,
 		oi.periodical_year as pYear,oi.subscribe_nums as subNums,oi.user_id as
-		userId,pi.periodical_cn_name as pCnName,
+		userId,pi.periodical_cn_name as pCnName, DATE_FORMAT(oi.audit_time, '%Y-%m-%d') as auditTime,
 		pi.cycle as cycle,pi.in_fix_price as iFprice,oi.amount as
 		oAmount,ri.reader_name as readerName,pi.in_fix_price as iFprice
 		from order_info oi,periodical_info pi,user_info ui,reader_info ri where
 		oi.periodical_id=pi.periodical_id
 		and oi.user_id=ui.user_id and ui.ref_id=ri.reader_id
 		<if test="orderNo != null and ''!=orderNo">
-			and oInfo.order_no = #{orderNo,jdbcType=VARCHAR}
+			and oi.order_no = #{orderNo,jdbcType=VARCHAR}
 		</if>
 	</select>
 
@@ -104,7 +104,13 @@
 		DATE_FORMAT(oi.create_time, '%Y-%m-%d') as
 		submitTime,DATE_FORMAT(oi.audit_time, '%Y-%m-%d') as auditTime
 		from order_info oi
-		where oi.user_id=#{userId,jdbcType=VARCHAR}
+		where 1=1
+		<if test="userId != null and ''!=userId">
+		and oi.user_id=#{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="orderNo != null and ''!=orderNo">
+		and oi.order_no=#{orderNo,jdbcType=VARCHAR}
+		</if>
 	</select>
 
 	<select id="queryOrderDetail" parameterType="BizOrder"

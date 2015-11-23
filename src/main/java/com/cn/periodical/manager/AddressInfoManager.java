@@ -8,6 +8,7 @@ package com.cn.periodical.manager;
 import java.util.List;
 
 import com.cn.periodical.pojo.AddressInfo;
+import com.cn.periodical.pojo.AddressInfoBizPage;
 import com.cn.periodical.pojo.AddressInfoPage;
 import com.cn.periodical.pojo.AddressInfoQuery;
 import com.cn.periodical.pojo.BizDistribut;
@@ -28,4 +29,5 @@ public interface AddressInfoManager {
     public void saveAddressInfos(List<AddressInfo> list);
 
 	List<BizDistribut> queryAddressListByUserId(BizDistribut distribut);
+	public AddressInfoBizPage queryPageListByBiz(BizDistribut query);
 }
