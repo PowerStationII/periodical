@@ -11,6 +11,26 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script type="text/javascript">
+	$(function(){
+		
+	});
+	function yijian(value) {
+		$.ajax({
+				url:'../author/toOpinionQueryPage',
+				data:{articleId:value},
+				type:'POST',
+				success:function(res){
+					if (res=='null') {
+						alert('无');
+					}
+					else {
+						alert(eval('(' + res + ')').opinion);
+					}
+				}	
+		});
+	}
+</script>
 <body>
 	<div id="articleInfos"  style="margin-top:50px;">
 		<table style="border: 1px solid black;font-size:14px;" rules="all">
@@ -27,7 +47,7 @@
 				<td><a href="../author/toArticleQueryDetailPage?articleId=${dtos.articleId}">$!{dtos.title}</a></td>
 				<td>$!{dtos.contriTime}</td>
 				<td>$!{dtos.authorState}</td>
-				<td><a href="../author/toOpinionQueryPage?articleId=${dtos.articleId}">查看审稿意见</a></td>
+				<td  onclick="yijian('${dtos.articleId}')">查看审稿意见</td>
 			</tr>
 			#end
 		</table>

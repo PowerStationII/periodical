@@ -12,18 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
-import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.manager.ArticleFlowsManager;
-import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.AuthorQueryDetail;
 import com.cn.periodical.pojo.Opinion;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
-import com.cn.periodical.response.AuthorArticleQueryRespDto;
 import com.cn.periodical.service.ArticleQueryService;
 /**
  * 作者工作区-稿件查询 
@@ -75,14 +73,15 @@ public class ArticleQueryController extends AuthorController{
 	 * toOpinionQueryPage
 	 * 查询审核意见
 	 */
-	@RequestMapping(value="/toOpinionQueryPage")
-	public ModelAndView toOpinionQueryPage(@RequestParam("articleId") String articleId,HttpServletRequest request,
+	@RequestMapping(value="/toOpinionQueryPage",produces = "application/text; charset=utf-8")
+	@ResponseBody
+	public String toOpinionQueryPage(@RequestParam("articleId") String articleId,HttpServletRequest request,
 			HttpServletResponse response) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("查询审稿意见Page in:["+JSON.toJSONString(userInfo)+"]");
-		ModelAndView mav = new ModelAndView("redirect:../author/toArticleQueryPage");
+		//ModelAndView mav = new ModelAndView("redirect:../author/toArticleQueryPage");
 		Opinion opinion = articleFlowsManager.queryOpinion(articleId);
 		logger.info("查询审稿意见Page out:["+JSON.toJSONString(opinion)+"]");
-		return mav;
+		return JSON.toJSONString(opinion);
 	}
 }
