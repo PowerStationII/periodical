@@ -172,4 +172,21 @@ public class OrderManageController extends ReaderController{
         }
 
     }
+    /**
+     * 查看订单审核意见
+     * */
+    @RequestMapping(value="/queryOpinion")
+    public String queryOpinion(String orderNo,HttpServletRequest request) {
+    	/**
+    	 * 根据orderNo查询order_info表
+    	 * 表中extend_1字段为订单审核意见
+    	 * */
+    	OrderInfoQuery orderInfoQuery =  new OrderInfoQuery();
+		orderInfoQuery.setUserId(getUserInfo(request).getUserId());
+		orderInfoQuery.setOrderNo(orderNo);
+		List<OrderInfo> orderInfos = orderInfoManager.queryList(orderInfoQuery);
+		OrderInfo orderInfo = orderInfos.get(0);
+        return orderInfo.getExtend1();
+    }
+    
 }
