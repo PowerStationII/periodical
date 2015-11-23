@@ -181,13 +181,24 @@
 					$('#departmentR').hide();
 				}
   				}
-  				if ($('.wrong').is(':visible')) {
-  					alert("请正确添加注册相关信息!");
-  				}
-  				else {
-  					submitForm();
-  				}	
-  				
+  			    
+  				//验证
+  				$.ajax({
+   					url:'toVerifyLoginName',
+   					data:{loginName:+$('#email').val()},
+   					success:function(res){
+   						if (res==true){
+   		   					alert("该邮箱已存在!");
+   		   					return;
+   		   				}
+   						if ($('.wrong').is(':visible')) {
+   		  					alert("请正确添加注册相关信息!");
+   		  				}
+   		  				else {
+   		  					submitForm();
+   		  				}	
+   					}	
+   				});
   			});
   			
   			$('#back').click(function(){
@@ -196,7 +207,6 @@
   		});
   		
   		function submitForm(){  
-  			    alert(111);
 				$('#form').submit();
 			} 
   </script>
