@@ -11,6 +11,27 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script type="text/javascript">
+	$(function(){
+		
+	});
+	function yijian(value) {
+		$.ajax({
+				url:'../reader/queryOpinion',
+				data:{orderNo:value},
+				type:'POST',
+				success:function(res){
+					if (res=='null' || res=='') {
+						alert('无');
+					}
+					else {
+						alert(res);
+						//alert(eval('(' + res + ')').opinion);
+					}
+				}	
+		});
+	}
+</script>
 <body>
 	<div id="articleInfos">
 		<div><span style="font-size:20">订单管理</span></div>
@@ -34,7 +55,7 @@
                     <td>$!{dtos.submitTime}</td>
                     <td>$!{dtos.auditTime}</td>
                     <td>上传</td>
-                    <td><a href="../reader/toOrderPayPage?orderNo=$!{dtos.orderNo}">订费登记</a>  <a href="../reader/queryOpinion?orderNo=$!{dtos.orderNo}">查看审核信息</a></td>
+                    <td><a href="../reader/toOrderPayPage?orderNo=$!{dtos.orderNo}">订费登记</a>  <a onclick="yijian('$!{dtos.orderNo}')">查看审核信息</a></td>
                 </tr>
             #end
 		</table>

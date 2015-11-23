@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -175,7 +176,8 @@ public class OrderManageController extends ReaderController{
     /**
      * 查看订单审核意见
      * */
-    @RequestMapping(value="/queryOpinion")
+    @RequestMapping(value="/queryOpinion",produces = "application/text; charset=utf-8")
+    @ResponseBody
     public String queryOpinion(String orderNo,HttpServletRequest request) {
     	/**
     	 * 根据orderNo查询order_info表
