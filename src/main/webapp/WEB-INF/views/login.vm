@@ -216,7 +216,7 @@
         <img id="u32_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u33" class="text">
-          <p><span>忘记密码？</span></p>
+          <p><span><a href="resetPwd">忘记密码？</a></span></p>
         </div>
       </div>
 
