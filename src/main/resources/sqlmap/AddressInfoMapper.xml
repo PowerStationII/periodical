@@ -38,7 +38,7 @@
   <select id="queryAddressListByUserId" parameterType="BizDistribut" resultType="BizDistribut">
 	select ai.address_id as aId,ai.contacter_name as
 	cName,ai.contacter_mobile as cMobile,
-	ai.receive_address as rAddress,ai.receive_postcode as rPostCode,ai.receive_contacter as
+	ai.receive_address as rAddress,ai.receive_postcode as rPostCode,ai.contacter_name as
 	rContacter,ai.status as status
 	from user_info ui,reader_info ri,address_info ai
 	where ui.ref_id=ri.reader_id and ai.ref_id=ri.reader_id

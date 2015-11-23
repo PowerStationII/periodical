@@ -14,9 +14,13 @@
 <body>
 	<div id="articleInfos">
 		<table style="border: 1px solid black;" rules="all">
-			<tr>
-				<td colspan="5"><a href="../reader/toUploadAddressPage">上传地址excel</a></td>
-			</tr>
+			<form enctype="multipart/form-data" action="../reader/toUploadAddressPage" method="POST">
+				<tr>
+				<td><input type="file" name="file" value=""></td>
+				<td colspan="5"><input type="submit" value="上传"></td>
+				</tr>
+			</form>
+			
 			<tr>
 				<td>地址id</td>
 				<td>邮寄地址</td>
