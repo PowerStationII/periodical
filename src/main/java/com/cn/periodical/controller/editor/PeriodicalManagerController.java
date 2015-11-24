@@ -96,7 +96,7 @@ public class PeriodicalManagerController extends EditorController {
 				Periodical periodical = new Periodical();
 				periodical.setPeriodicalId(periodicalInfo.getPeriodicalId());
 				periodical.setPeriodicalIssueNo(GenerateOrderNo.generateOrderNo());
-				periodical.setPeriodicalState(PeriodicalStateEnums.NEW_PERIODICAL.getCode());
+				periodical.setPeriodicalState(PeriodicalStateEnums.NEW.getCode());
 				periodical.setCycleNums(i);
 				periodical.setPeriodicalYear(periodicalInfo.getPeriodicalYear()==null?new DateTime().toString("YYYY"):periodicalInfo.getPeriodicalYear());
 //				periodical.setPublishNums(periodicalInfo.getPublishNums()==null?10000:periodicalInfo.get);

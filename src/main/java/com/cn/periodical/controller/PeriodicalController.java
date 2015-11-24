@@ -114,7 +114,7 @@ public class PeriodicalController {
 			for(int i=0;i<periodicalInfo.getCycle();i++){
 				periodical.setPeriodicalId(periodical.getPeriodicalId());
 				periodical.setPeriodicalIssueNo(GenerateOrderNo.generateOrderNo());
-				periodical.setPeriodicalState(PeriodicalStateEnums.NEW_PERIODICAL.getCode());
+				periodical.setPeriodicalState(PeriodicalStateEnums.NEW.getCode());
 				periodical.setCycleNums(i+1);
 				periodical.setPeriodicalYear(periodical.getPeriodicalYear());
 				periodical.setPublishNums(periodical.getPublishNums());

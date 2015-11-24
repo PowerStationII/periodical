@@ -2,17 +2,33 @@ package com.cn.periodical.enums;
 
 public enum PeriodicalStateEnums {
 	/**
-	 * 创建中
+	 * 新刊
 	 * */
-	NEW_PERIODICAL("0","NEW_PERIODICAL"),
+	NEW("N","NEW"),
+	/**
+	 * 稿件组刊中
+	 * */
+	ARTICLE_PART_DEALING("APD","ARTICLE_PART_DEALING"),
+	/**
+	 * 稿件处理完成
+	 * */
+	ARTICLE_PART_OVER("APO","ARTICLE_PART_OVER"),
+	/**
+	 * 广告组刊中
+	 * */
+	AD_PART_DEALING("ADPD","AD_PART_DEALING"),
+	/**
+	 * 广告处理完成
+	 * */
+	AD_PART_OVER("ADPO","AD_PART_OVER"),
 	/**
 	 * 待签发
 	 * */
-	PRE_PERIODICAL("1","PRE_PERIODICAL"),
+	PRE_ISSUE("PI","PRE_ISSUE"),
 	/**
-	 * over
+	 * 已签发
 	 * */
-	OVER_PERIODICAL("9","OVER_PERIODICAL");
+	FINISH_ISSUE("FI","FINISH_ISSUE");
 	
 	private String code;
 	private String name;

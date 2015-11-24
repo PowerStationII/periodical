@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BizPeriodicalMapper">
+	<select id="queryPeriodicalInfosForIssueEditor" parameterType="BizPeriodical"
+		resultType="BizPeriodical">
+		select pi.periodical_id as pId,pi.periodical_cn_name as
+		pCnName,pi.host_organization as hOrgan,pi.cycle as cycle,pi.press as
+		press,pi.issn_no as isNo,pi.in_fix_price as iFPrice,
+		p.cycle_nums as cNums,p.periodical_issue_no as pIsNo,p.periodical_state as
+		pState,p.periodical_year as pYear,p.issue_opinion as
+		isOpinion,p.issue_time as isTime
+		from periodical_info pi,periodical p
+		where
+		pi.periodical_id=p.periodical_id
+		and (p.periodical_state='0' or p.periodical_state='FI')
+	</select>
+</mapper>

@@ -59,6 +59,7 @@
 		<mapper resource="sqlmap/AdInfoMapper.xml"/><!-- 广告信息 -->
 		<mapper resource="sqlmap/SectionInfoMapper.xml"/><!-- 栏目信息 -->
 		<mapper resource="sqlmap/ResetPasswordMapper.xml"/><!-- 忘记密码 -->
+		<mapper resource="sqlmap/BizPeriodicalMapper.xml"/><!-- 期刊业务 -->
 		<mapper resource="sqlmap/CouncilContractFlowsMapper.xml"/><!-- 理事会付款流水 -->
 		<mapper resource="sqlmap/CouncilInfoMapper.xml"/><!-- 理事会信息:一个理事会机构对应多条广告信息(不止一条广告)和付款流水(续签)-->
 		<!-- 业务 -->

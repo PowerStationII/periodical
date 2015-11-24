@@ -15,12 +15,24 @@
 	<div id="articleInfos">
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
-				<td>签发管理</td>
-				<td>稿件标题</td>
-				<td>投稿时间</td>
-				<td>稿件状态</td>
-				<td>备注信息</td>
+				<td>期刊id</td>
+				<td>期刊名称</td>
+				<td>期刊编号</td>
+				<td>期数</td>
+				<td>签发时间</td>
+				<td>操作</td>
 			</tr>
+			
+			#foreach($dtos in ${list})   
+			<tr>
+				<td>$!{dtos.pId}</td>
+				<td>$!{dtos.pCnName}</td>
+				<td>$!{dtos.pIsNo}</td>
+				<td>第$!{dtos.cNums}期</td>
+				<td>$!{dtos.isTime}</td>
+				<td><a href="../editor/toIssue?periodicalId=${dtos.pId}&periodicalIsNo=${dtos.pIsNo}">签发</a></td>
+			</tr>
+			#end
 		</table>
 		<br>
 	</div>
