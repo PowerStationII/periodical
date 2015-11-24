@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>期刊稿件明细</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+	<div id="articleInfos"  style="margin-top:50px;">
+		<table style="border: 1px solid black;font-size:14px;" rules="all">
+			<tr>
+				<td style="width:20%;text-align:center;">期刊名称</td>
+				<td style="width:20%;text-align:center;">期刊号</td>
+				<td style="width:20%;text-align:center;">期号</td>
+				<td style="width:20%;text-align:center;">稿件名称</td>
+				<td style="width:20%;text-align:center;">栏目名称</td>
+				<td style="width:20%;text-align:center;">操作</td>
+			</tr>
+			
+			<tr>
+				<td style="width:20%;text-align:center;">中国农药科学与管理</td>
+				<td style="width:20%;text-align:center;">20150000444001</td>
+				<td style="width:20%;text-align:center;">第一期</td>
+				<td style="width:20%;text-align:center;">稿件名称</td>
+				<td style="width:20%;text-align:center;">栏目名称</td>
+				<td style="width:20%;text-align:center;"><a href="../expert/auditArticleEnDetailPage">审核稿件</a></td>
+			</tr>
+			
+		</table>
+		<br>
+	</div>
+</body>
+</html>

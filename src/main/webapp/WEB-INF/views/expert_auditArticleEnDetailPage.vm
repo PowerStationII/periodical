@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>稿件详情页</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+	<div id="articleInfos"  style="margin-top:50px;">
+		<table style="border: 1px solid black;font-size:14px;" rules="all">
+			<tr>
+				<td style="width:20%;text-align:center;">期刊名称</td>
+				<td style="width:20%;text-align:center;">期刊号</td>
+				<td style="width:20%;text-align:center;">期号</td>
+				<td style="width:20%;text-align:center;">稿件名称</td>
+				<td style="width:20%;text-align:center;">栏目名称</td>
+				<td style="width:20%;text-align:center;">操作</td>
+			</tr>
+			<tr>
+				<td style="width:20%;text-align:center;"><input type="button" value="下载稿件"></td>
+				<td style="width:20%;text-align:center;"><input type="button" value="审核通过"></td>
+				<td style="width:20%;text-align:center;"><input type="button" value="审核不通过"></td>
+				<td style="width:20%;text-align:center;"><input type="button" value="上传稿件"></td>
+				<td style="width:20%;text-align:center;"><input type="button" value="返回上页"></td>
+				<td style="width:20%;text-align:center;">操作</td>
+			</tr>
+			
+			
+			
+			
+			
+		</table>
+		<br>
+	</div>
+</body>
+</html>
