@@ -15,11 +15,14 @@
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
-		})
+		});
+		$('#wait').click(function(){
+			$('form').submit();
+		});
 	})
 </script>
 <body>
-<form action="../expert/toPublishStateModify" method="POST">
+<!-- <form action="../expert/toPublishStateModify" method="POST">
 <input type="hidden" name="articleId" value="$!{respDto.articleId}">
 	<div>
 		<table style="border:1px solid;width:800px;" rules="all">
@@ -85,12 +88,46 @@
 			</tr>
 		</table>
 	</div>
-	<div class="attr_con">
-		<input type="button"  value="返回"  id="back"/>
-		<input type="submit" value="待刊">
-		<a href="../expert/toExpertRepairedPage?articleId=${respDto.articleId}">返修</a>
-		<a href="../expert/toExpertRefundPage?articleId=${respDto.articleId}">退稿</a>
-	</div>
+	</form> -->
+	<form action="../expert/toPublishStateModify" method="POST">
+	<input type="hidden" name="articleId" value="$!{respDto.articleId}">
+			<div>
+				<a style="padding-left:15px;font-size:14px;">稿件状态：</a>
+				<input class="easyui-textbox"  value="$!{respDto.editorState}"  name="editorState"  data-options="readonly:true"  style="width:150px"> 
+				<a style="padding-left:50px;font-size:14px;">稿件中文：</a>
+				<input class="easyui-textbox"  value="$!{respDto.title}"  name="title"  data-options="readonly:true" style="width:150px"> 
+				<a style="padding-left:50px;font-size:14px;">稿件英文标题：</a>
+				<input class="easyui-textbox"  value="$!{respDto.enTitle}"  name="enTitle"  data-options="readonly:true" style="width:150px"> 
+			</div>
+			<div>
+				<a  style="font-size:14px;">中国分类号：</a>
+				<input class="easyui-textbox"  value="$!{respDto.fNums}"  name="fNums"  data-options="readonly:true" style="width:150px"> 
+				<a style="padding-left:50px;font-size:14px;">拟投栏目：</a>
+				<input class="easyui-textbox"  value="$!{respDto.section}"  name="section"  data-options="readonly:true" style="width:150px"> 
+				<a style="padding-left:65px;font-size:14px;">中文关键字：</a>
+				<input class="easyui-textbox"  value="$!{respDto.cnKeywords}"  name="cnKeywords"  data-options="readonly:true" style="width:150px"> 
+			</div>
+			<div>
+				<a style="font-size:14px;">英文关键字：</a>
+				<input class="easyui-textbox"  value="$!{respDto.enKeyWords}"  name="enKeyWords"  data-options="readonly:true"  style="width:150px"> 
+				<a style="padding-left:50px;font-size:14px;">中文摘要：</a>
+				<input class="easyui-textbox"  value="$!{respDto.cnSummary}"  name="cnSummary"  data-options="readonly:true" style="width:150px"> 
+				<a style="padding-left:79px;font-size:14px;">英文摘要：</a>
+				<input class="easyui-textbox"  value="$!{respDto.enSummary}"  name="enSummary"  data-options="readonly:true" style="width:150px"> 
+			</div>
+			<div>
+				<a  style="font-size:14px;">下载原稿件：</a>
+				<input class="easyui-textbox"  value="$!{respDto.attachName}"  name="attachName"  data-options="readonly:true" style="width:150px"> 
+				<input class="easyui-textbox"  value="$!{respDto.attachPath}"   name="attachPath"  data-options="readonly:true" style="width:200px;"> 
+				<a class="easyui-linkbutton" data-options="width:50"  href="../expert/toDownLoadArticle?articleId=${respDto.articleId}">下载</a>
+			</div>
 	</form>
+	<div class="attr_con">
+		<a class="easyui-linkbutton" data-options="width:50"   id="back">返回</a>
+		<a class="easyui-linkbutton" data-options="width:50"   id="wait">待刊</a>
+		<a class="easyui-linkbutton" data-options="width:50"  href="../expert/toExpertRepairedPage?articleId=${respDto.articleId}">返修</a>
+		<a class="easyui-linkbutton" data-options="width:50"  href="../expert/toExpertRefundPage?articleId=${respDto.articleId}">退稿</a>
+	</div>
+	
 </body>
 </html>
