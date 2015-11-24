@@ -25,6 +25,8 @@ public class Periodical implements Serializable{
 	private java.util.Date publishTime;
 	private java.lang.Integer publishNums;
 	private java.lang.String clipPage;
+	private java.lang.String issueOpinion;
+	private java.lang.String issueState;
 	private java.lang.String extend1;
 	private java.lang.String extend2;
 	private java.lang.String extend3;
@@ -179,6 +181,36 @@ public class Periodical implements Serializable{
 	 */
 	public java.lang.String getClipPage() {
 		return this.clipPage;
+	}
+	/**
+	 * 签发人意见
+	 * @param issueOpinion
+	 */
+	public void setIssueOpinion(java.lang.String issueOpinion) {
+		this.issueOpinion = issueOpinion;
+	}
+	
+	/**
+	 * 签发人意见
+	 * @return
+	 */
+	public java.lang.String getIssueOpinion() {
+		return this.issueOpinion;
+	}
+	/**
+	 * 是否签发
+	 * @param issueState
+	 */
+	public void setIssueState(java.lang.String issueState) {
+		this.issueState = issueState;
+	}
+	
+	/**
+	 * 是否签发
+	 * @return
+	 */
+	public java.lang.String getIssueState() {
+		return this.issueState;
 	}
 	/**
 	 * 

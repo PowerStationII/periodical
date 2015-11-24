@@ -12,6 +12,8 @@
 	  <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
 	  <result column="publish_nums" jdbcType="INTEGER" property="publishNums" />
 	  <result column="clip_page" jdbcType="VARCHAR" property="clipPage" />
+	  <result column="issue_opinion" jdbcType="VARCHAR" property="issueOpinion" />
+	  <result column="issue_state" jdbcType="VARCHAR" property="issueState" />
 	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
 	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
 	  <result column="extend_3" jdbcType="VARCHAR" property="extend3" />
@@ -54,6 +56,12 @@
 	    </if>
       <if test="clipPage != null" >
 	      and clip_page = #{clipPage,jdbcType=VARCHAR}
+	    </if>
+      <if test="issueOpinion != null" >
+	      and issue_opinion = #{issueOpinion,jdbcType=VARCHAR}
+	    </if>
+      <if test="issueState != null" >
+	      and issue_state = #{issueState,jdbcType=VARCHAR}
 	    </if>
       <if test="extend1 != null" >
 	      and extend_1 = #{extend1,jdbcType=VARCHAR}
@@ -106,6 +114,12 @@
       <if test="clipPage != null">
         clip_page = #{clipPage,jdbcType=VARCHAR},
       </if>
+      <if test="issueOpinion != null">
+        issue_opinion = #{issueOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="issueState != null">
+        issue_state = #{issueState,jdbcType=VARCHAR},
+      </if>
       <if test="extend1 != null">
         extend_1 = #{extend1,jdbcType=VARCHAR},
       </if>
@@ -138,6 +152,8 @@
     publish_time,
     publish_nums,
     clip_page,
+    issue_opinion,
+    issue_state,
     extend_1,
     extend_2,
     extend_3,
@@ -157,6 +173,8 @@
         publish_time = #{publishTime,jdbcType=TIMESTAMP},
         publish_nums = #{publishNums,jdbcType=INTEGER},
         clip_page = #{clipPage,jdbcType=VARCHAR},
+        issue_opinion = #{issueOpinion,jdbcType=VARCHAR},
+        issue_state = #{issueState,jdbcType=VARCHAR},
         extend_1 = #{extend1,jdbcType=VARCHAR},
         extend_2 = #{extend2,jdbcType=VARCHAR},
         extend_3 = #{extend3,jdbcType=VARCHAR},
@@ -195,6 +213,12 @@
     <if test="clipPage != null">
       clip_page,
     </if>
+    <if test="issueOpinion != null">
+      issue_opinion,
+    </if>
+    <if test="issueState != null">
+      issue_state,
+    </if>
     <if test="extend1 != null">
       extend_1,
     </if>
@@ -225,6 +249,8 @@
     #{publishTime,jdbcType=TIMESTAMP},
     #{publishNums,jdbcType=INTEGER},
     #{clipPage,jdbcType=VARCHAR},
+    #{issueOpinion,jdbcType=VARCHAR},
+    #{issueState,jdbcType=VARCHAR},
     #{extend1,jdbcType=VARCHAR},
     #{extend2,jdbcType=VARCHAR},
     #{extend3,jdbcType=VARCHAR},
@@ -260,6 +286,12 @@
     </if>
     <if test="clipPage != null">
       #{clipPage,jdbcType=VARCHAR},
+    </if>
+    <if test="issueOpinion != null">
+      #{issueOpinion,jdbcType=VARCHAR},
+    </if>
+    <if test="issueState != null">
+      #{issueState,jdbcType=VARCHAR},
     </if>
     <if test="extend1 != null">
       #{extend1,jdbcType=VARCHAR},
