@@ -76,7 +76,9 @@ public class ArticleAuditeController extends ExpertController{
 		logger.info("审稿Page:["+JSON.toJSONString(reqDto)+"]");
 		ModelAndView mav = new ModelAndView("expert_articleAuditPage");
 		reqDto.setUserId(userInfo.getUserId());
-		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
+		logger.info("***********************");
+		logger.info(JSON.toJSONString(reqDto));
+		List<ArticleQueryRespDto> list =articleQueryService.expertQryArticleInfos(reqDto);
 		mav.addObject("list", list);
 		return mav;
 	}

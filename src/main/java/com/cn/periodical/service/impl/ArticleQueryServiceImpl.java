@@ -49,4 +49,9 @@ public class ArticleQueryServiceImpl implements ArticleQueryService {
 		return articleQueryManager.editorQueryArticles(reqDto);
 	}
 
+	public List<ArticleQueryRespDto> expertQryArticleInfos(ArticleQueryReqDto reqDto) {
+		// TODO Auto-generated method stub
+		return articleQueryManager.expertQryArticleInfos(reqDto);
+	}
+
 }

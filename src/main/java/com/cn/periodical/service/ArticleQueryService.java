@@ -13,6 +13,7 @@ import com.cn.periodical.response.ArticleQueryRespDto;
  * */
 public interface ArticleQueryService {
 	public List<ArticleQueryRespDto> queryArticleInfos(ArticleQueryReqDto reqDto);
+	public List<ArticleQueryRespDto> expertQryArticleInfos(ArticleQueryReqDto reqDto);
 	
 	
 	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto);

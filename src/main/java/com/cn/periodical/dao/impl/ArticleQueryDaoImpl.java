@@ -43,4 +43,9 @@ public class ArticleQueryDaoImpl extends BaseDao implements ArticleQueryDao {
 		return super.getSqlSession().selectList("ArticleQueryMapper.editorQueryArticles", reqDto);
 	}
 
+	public List<ArticleQueryRespDto> expertQryArticleInfos(ArticleQueryReqDto reqDto) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("ArticleQueryMapper.selectArticleInfosForExpert", reqDto);
+	}
+
 }

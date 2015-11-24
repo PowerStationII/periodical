@@ -14,6 +14,7 @@ import com.cn.periodical.response.ArticleQueryRespDto;
 
 public interface ArticleQueryDao {
 	public List<ArticleQueryRespDto> queryArticleInfos(ArticleQueryReqDto reqDto);
+	public List<ArticleQueryRespDto> expertQryArticleInfos(ArticleQueryReqDto reqDto);
 	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto);
 	public AuthorQueryDetail queryAuthorQueryDetail(String articleId);
 	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail);

@@ -53,6 +53,57 @@
 		group by
 		ai.article_id,ai.article_cn_title,DATE_FORMAT(ai.create_time,'%Y-%m-%d'),ai.editor_state,ai.expert_state,ai.invest_section
 	</select>
+	
+	
+	<select id="selectArticleInfosForExpert" parameterType="ArticleQueryReqDto"
+		resultMap="ArticleInfosForEditorResultMap">
+		select temp1.article_id as articleId,temp1.article_cn_title as
+		title,DATE_FORMAT(temp1.create_time, '%Y-%m-%d') as contriTime,
+		temp1.authorName as authorName,temp1.editor_state as
+		editorState,temp1.expert_state as expertState,temp1.invest_section as
+		section from (
+		select ai.article_id ,ai.article_cn_title
+		,ai.create_time,group_concat(aui.author_name) as authorName,
+		ai.editor_state ,ai.expert_state ,ai.invest_section
+		from
+		article_info
+		ai,author_info aui
+		where ai.article_id=aui.article_id
+		group by ai.article_id) as temp1 ,(
+		select aie.article_id,max(if(aie.role_id='1003',aie.user_id,'')) as
+		expertId, max(if(aie.role_id='1006',aie.user_id,'')) as editorId,
+		max(if(aie.role_id='1001',aie.user_id,'')) as userId from
+		article_info_extend aie
+		group by aie.article_id) as temp2
+		where temp1.article_id=temp2.article_id
+		<if test="userId != null and ''!=userId">
+			and temp2.expertId = #{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="editorState != null and ''!=editorState">
+			and temp1.editor_state = #{editorState,jdbcType=VARCHAR}
+		</if>
+		<if test="expertState != null and ''!=expertState">
+			and temp1.expert_state = #{expertState,jdbcType=VARCHAR}
+		</if>
+		<if test="articleId != null and ''!=articleId">
+			and temp1.article_id = #{articleId,jdbcType=VARCHAR}
+		</if>
+		<if test="articleCnTitle != null and ''!=articleCnTitle">
+			and temp1.article_cn_title =
+			#{articleCnTitle,jdbcType=VARCHAR}
+		</if>
+		<if test="section != null and ''!=section">
+			and temp1.invest_section = #{section,jdbcType=VARCHAR}
+		</if>
+		<if test="creatTime != null and ''!=creatTime">
+			and DATE_FORMAT(temp1.create_time, '%Y-%m-%d') =
+			#{creatTime,jdbcType=VARCHAR}
+		</if>
+		<if test="authorName != null and ''!=authorName">
+			and  INSTR(temp1.authorName,#{authorName,jdbcType=VARCHAR})
+		</if>
+		group by temp1.article_id
+	</select>
 
 	<resultMap id="ArticleInfoDetailResultMap" type="ArticleQueryRespDto">
 		<result column="articleId" jdbcType="VARCHAR" property="articleId" />
