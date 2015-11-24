@@ -144,7 +144,16 @@ public class ArticlePublishDealController extends EditorController{
 		
 		/**
 		 * 向读者发送待刊确认邮件
+		 * 
+		 * ${作者名}，您好：
+			您向${期刊名称}期刊投递的稿件${稿件名称}已被本刊采用.
+			如不同意发表请点击不同意,否则视为同意发表!
+			此致
+			敬礼
+			${编辑社名称}
+			年月日
 		 * */
+		
 		
 		
 		
