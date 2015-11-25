@@ -56,9 +56,9 @@
 					<th data-options="field:'pYear',width:100">订购年份</th>
 					<th data-options="field:'subNums',width:100">数量</th>
 					<th data-options="field:'amount',width:130">金额</th>
-					<th data-options="field:'amount',width:100">提交日期</th>
-					<th data-options="field:'submitTime',width:100">审核日期</th>
-					<th data-options="field:'auditTime',width:130">银行汇票凭证</th>
+					<th data-options="field:'submitTime',width:100">提交日期</th>
+					<th data-options="field:'auditTime',width:100">审核日期</th>
+					<th data-options="field:'upload',width:130">银行汇票凭证</th>
 	                <th data-options="field:'option',width:220">操作</th>
 				</tr>
 			</thead>
