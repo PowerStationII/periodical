@@ -207,29 +207,33 @@ a {
 		</div>
 		<div class="right">
 			<div id="area" style="margin-top: 20px;">
-				<br> <a style="font-size: 12px;"> 可预订期刊列表 </a>
-				<table style="border: 1px solid black; font-size: 14px;" rules="all">
-					<tr>
-						<td style="width: 20%; text-align: center;">期刊中文名称</td>
-						<td style="width: 20%; text-align: center;">期刊号</td>
-						<td style="width: 20%; text-align: center;">出版社</td>
-						<td style="width: 20%; text-align: center;">主管单位</td>
-						<td style="width: 20%; text-align: center;">国内定价</td>
-						<td style="width: 20%; text-align: center;">国际定价</td>
-						<td style="width: 20%; text-align: center;">操作</td>
-						
-					</tr>
-					#foreach($dtos in ${list})
-					<tr>
-						<td>$!{dtos.periodicalCnName}</td>
-						<td>$!{dtos.issnNo}</td>
-						<td>$!{dtos.press}</td>
-						<td>$!{dtos.hostOrganization}</td>
-						<td>$!{dtos.inFixPrice}</td>
-						<td>$!{dtos.outFixPrice}</td>
-						<td onclick="link('${dtos.periodicalId}')">预订</td>
-					</tr>
-					#end
+				<div id="bt"  style="height:30px;line-height:30px;">可预订期刊列表 </div>
+				<table class="easyui-datagrid" data-options="singleSelect:true,toolbar:'#bt'">
+					<thead>
+						<tr>
+							<th data-options="field:'periodicalCnName',width:150">期刊中文名称</th>
+							<th data-options="field:'issnNo',width:150">期刊号</th>
+							<th data-options="field:'press',width:150">出版社</th>
+							<th data-options="field:'hostOrganization',width:150">主管单位</th>
+							<th data-options="field:'inFixPrice',width:150">国内定价</th>
+							<th data-options="field:'outFixPrice',width:150">国际定价</th>
+							<th data-options="field:'option',width:150">操作</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						#foreach($dtos in ${list})
+						<tr>
+							<td>$!{dtos.periodicalCnName}</td>
+							<td>$!{dtos.issnNo}</td>
+							<td>$!{dtos.press}</td>
+							<td>$!{dtos.hostOrganization}</td>
+							<td>$!{dtos.inFixPrice}</td>
+							<td>$!{dtos.outFixPrice}</td>
+							<td ><a  onclick="link('${dtos.periodicalId}')" href="#" class="easyui-linkbutton"  data-options="width:50">预订</a></td>
+						</tr>
+						#end
+					</tbody>
 				</table>
 			</div>
 		</div>

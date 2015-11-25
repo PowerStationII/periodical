@@ -38,21 +38,31 @@
 	   	 var htmlUrl = "../reader/download?fileName="+fileName+"&filePath="+filePath;
 		 $("#saveImg").attr("src",htmlUrl);
 	 }
+	
+	 function OpenFrame() {
+		 $('#dFrame').remove();
+         $('#address').append("<iframe id='dFrame' style='width:100%;height:100%'src='toDistribution'></iframe>");
+         $('#address').window('open');
+
+     }
 </script>
 <body>
 	<div id="articleInfos">
-		<div><span style="font-size:20">订单管理</span></div>
-		<table style="border: 1px solid black;" rules="all">
-			<tr>
-				<td>订单编号</td>
-				<td>订购年份</td>
-				<td>数量</td>
-				<td>金额</td>
-				<td>提交日期</td>
-				<td>审核日期</td>
-				<td>银行汇票凭证</td>
-                <td>操作</td>
-			</tr>
+		<div id="bt"  style="height:30px;line-height:30px;">订单管理</div>
+		<table class="easyui-datagrid" data-options="singleSelect:true,toolbar:'#bt'">
+			<thead> 
+				<tr>
+					<th data-options="field:'orderNo',width:130">订单编号</th>
+					<th data-options="field:'pYear',width:100">订购年份</th>
+					<th data-options="field:'subNums',width:100">数量</th>
+					<th data-options="field:'amount',width:130">金额</th>
+					<th data-options="field:'amount',width:100">提交日期</th>
+					<th data-options="field:'submitTime',width:100">审核日期</th>
+					<th data-options="field:'auditTime',width:130">银行汇票凭证</th>
+	                <th data-options="field:'option',width:220">操作</th>
+				</tr>
+			</thead>
+			<tbody>
             #foreach($dtos in ${list})
                 <tr>
                     <td>$!{dtos.orderNo}</td>
@@ -62,14 +72,20 @@
                     <td>$!{dtos.submitTime}</td>
                     <td>$!{dtos.auditTime}</td>
                     <td>上传</td>
-                    <td><a href="../reader/toOrderPayPage?orderNo=$!{dtos.orderNo}">订费登记</a>  <a onclick="yijian('$!{dtos.orderNo}')">查看审核信息</a></td>
+                    <td>
+                    	<a href="../reader/toOrderPayPage?orderNo=$!{dtos.orderNo}" class="easyui-linkbutton" data-options="">订费登记</a> 
+                    	<a href="#"  onclick="OpenFrame()" class="easyui-linkbutton" data-options="">编辑订单</a>
+                    	<a href="#"  onclick="yijian('$!{dtos.orderNo}')" class="easyui-linkbutton" data-options="">查看审核信息</a> 
+                    </td>
                 </tr>
             #end
+            </tbody>
 		</table>
-		<a href="../reader/toCreatOrderPage">新建订单</a>
-		<a onclick="import_download()">下载订购指南</a>
-		<iframe height="0" width="0"  name="saveImg" id="saveImg"></iframe>
+		<a href="../reader/toCreatOrderPage"  class="easyui-linkbutton" data-options="">新建订单</a> 
+		<a href="#"  onclick="import_download()" class="easyui-linkbutton" data-options="">下载订购指南</a> 
+		<iframe height="0" width="0"  name="saveImg" id="saveImg"  style="display:none;"></iframe>
 		<br>
+		<div id="address"  class="easyui-window" title="地址信息"  closed="true" style="width:600px;height:480px;padding:5px;"></div>
 	</div>
 </body>
 </html>

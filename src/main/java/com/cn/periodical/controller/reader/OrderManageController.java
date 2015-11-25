@@ -191,4 +191,12 @@ public class OrderManageController extends ReaderController{
         return orderInfo.getExtend1();
     }
     
+	/**
+	 * 跳转到期刊分配页面
+	 */
+	@RequestMapping(value="/toDistribution",method = RequestMethod.GET)
+	public String toAddress() {
+		return "reader_orderDistribution";
+	}
+    
 }
