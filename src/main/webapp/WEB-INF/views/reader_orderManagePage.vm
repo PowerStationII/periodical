@@ -11,9 +11,39 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
-<script type="text/javascript">
+<script type="text/javascript"><!--
 	$(function(){
-		
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#order').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+                 "orderNo":rows[i].orderNo,  
+                 "pYear":rows[i].pYear,
+                 "subNums":rows[i].subNums,  
+                 "amount":rows[i].amount,
+                 "submitTime":rows[i].submitTime,  
+                 "auditTime":rows[i].auditTime, 
+                 "upload":rows[i].upload,  
+                 "option":rows[i].option
+             }) ; 
+		}
+        $("#order").datagrid("loadData", data.slice(0, 5));
+        var pager = $("#order").datagrid("getPager");  
+        pager.pagination({  
+            total:data.length, 
+            pageSize:5,
+            pageList: [5,10,15,20],
+            onSelectPage:function (pageNo, pageSize) {  
+                var start = (pageNo - 1) * pageSize;  
+                var end = start + pageSize;  
+                $("#order").datagrid("loadData", data.slice(start, end));  
+                pager.pagination('refresh', {  
+                    total:data.length,  
+                    pageNumber:pageNo
+                });  
+            }  
+        });  
 	});
 	function yijian(value) {
 		$.ajax({
@@ -45,11 +75,11 @@
          $('#address').window('open');
 
      }
-</script>
+--></script>
 <body>
 	<div id="articleInfos">
 		<div id="bt"  style="height:30px;line-height:30px;">订单管理</div>
-		<table class="easyui-datagrid" data-options="singleSelect:true,toolbar:'#bt'">
+		<table id="order" class="easyui-datagrid" data-options="singleSelect:true,toolbar:'#bt',pagination:true">
 			<thead> 
 				<tr>
 					<th data-options="field:'orderNo',width:130">订单编号</th>
