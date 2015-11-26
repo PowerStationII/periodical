@@ -11,63 +11,104 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script>
+	$(function(){
+		$('#submit').click(function(){
+			$('form').submit();
+		});
+		
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#table').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+                 "councilId":rows[i].councilId,  
+                 "councilCompanyName":rows[i].councilCompanyName,
+                 "type":rows[i].type,  
+                 "contractEndTime":rows[i].contractEndTime,
+                 "amount":rows[i].amount,
+                 "invoiceNo":rows[i].invoiceNo,  
+                 "id":rows[i].id,
+                 "option":rows[i].option
+             }) ; 
+		}
+        $("#table").datagrid("loadData", data.slice(0, 5));
+        var pager = $("#table").datagrid("getPager");  
+        pager.pagination({  
+            total:data.length, 
+            pageSize:5,
+            pageList: [5,10,15,20],
+            onSelectPage:function (pageNo, pageSize) {  
+                var start = (pageNo - 1) * pageSize;  
+                var end = start + pageSize;  
+                $("#table").datagrid("loadData", data.slice(start, end));  
+                pager.pagination('refresh', {  
+                    total:data.length,  
+                    pageNumber:pageNo
+                });  
+            }  
+        });  
+	});
+</script>
 <body>
 	<div id="councileInfos">
 		
 		<form action="../editor/toCouncilManagerPage" method="POST">
-			<table style="border: 1px solid black;" rules="all">
+			<table>
 				<tr>
-					<td>注册时间</td>
-					<td><input type="text" name="registerTime" value=""></td>
-					<td>会员类型</td>
-					<td><select name="type">
+					<td>注册时间：</td>
+					<td><input class="easyui-textbox" type="text" name="registerTime" value=""></td>
+					<td>会员类型：</td>
+					<td><select name="type"  class="easyui-combobox"   style="width:155px;">
 						<option value="" selected>全部</option>
 						<option value="D">理事</option>
 					</select></td>
-					<td>广告刊登</td>
-					<td></td>
+					<td>广告刊登：</td>
+					<td><input class="easyui-textbox" type="text" name="" value=""></td>
 				</tr>
 				<tr>
-					<td>会员编号</td>
-					<td><input type="text" name="councilId" value=""></td>
-					<td>企业名称</td>
-					<td><input type="text" name="councilCompanyName" value=""></td>
-					<td>发票号</td>
-					<td><input type="text" name="invoiceNo" value=""></td>
+					<td>会员编号：</td>
+					<td><input class="easyui-textbox" type="text" name="councilId" value=""></td>
+					<td>企业名称：</td>
+					<td><input class="easyui-textbox" type="text" name="councilCompanyName" value=""></td>
+					<td>发票号：</td>
+					<td><input class="easyui-textbox" type="text" name="invoiceNo" value=""></td>
 				</tr>
 				<tr>
-					<td colspan="3"><input type="submit" value="查询"></td>
-					<td colspan="3"><a href="../editor/toCouncilInfoAdd">新增</a></td>
+					<td colspan="6">
+						<a id="submit" class="easyui-linkbutton"  href="#" style="width:50px;">查询</a>
+						<a  class="easyui-linkbutton"  href="../editor/toCouncilInfoAdd"  style="width:50px;">新增</a>
+					</td>
 				</tr>
 			</table>
 		</form>
-		
-		<br>
-		<br>
-		<table style="border: 1px solid black;" rules="all">
-			<tr>
-				<td>会员编号</td>
-				<td>企业名称</td>
-				<td>会员类型</td>
-				<td>合同日期</td>
-				<td>金额</td>
-				<td>发票号</td>
-				<td>广告刊登</td>
-				<td>操作</td>
-			</tr>
-			
+		<table   id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
+			<thead>
+				<tr>
+					<th data-options="field:'councilId',width:200">会员编号</th>
+					<th data-options="field:'councilCompanyName',width:200">企业名称</th>
+					<th data-options="field:'type',width:100">会员类型</th>
+					<th data-options="field:'contractEndTime',width:100">合同日期</th>
+					<th data-options="field:'amount',width:100">金额</th>
+					<th data-options="field:'invoiceNo',width:100">发票号</th>
+					<th data-options="field:'id',width:100">广告刊登</th>
+					<th data-options="field:'option',width:100">操作</th>
+				</tr>
+			</thead>
+			<tbody>	
 			#foreach($dtos in ${list})   
-			<tr>
-				<td>${dtos.councilId}</td>
-				<td>${dtos.councilCompanyName}</td>
-				<td>${dtos.type}</td>
-				<td>${dtos.contractEndTime}</td>
-				<td>${dtos.amount}</td>
-				<td>${dtos.invoiceNo}</td>
-				<td>此处未做</td>
-				<td><a href="../editor/toQrySingleCouncilInfo?councilId=${dtos.councilId}">编辑</a></td>
-			</tr>
+				<tr>
+					<td>${dtos.councilId}</td>
+					<td>${dtos.councilCompanyName}</td>
+					<td>${dtos.type}</td>
+					<td>${dtos.contractEndTime}</td>
+					<td>${dtos.amount}</td>
+					<td>${dtos.invoiceNo}</td>
+					<td>此处未做</td>
+					<td><a class="easyui-linkbutton" style="width:50px;" href="../editor/toQrySingleCouncilInfo?councilId=${dtos.councilId}">编辑</a></td>
+				</tr>
 			#end
+			</tbody>
 		</table>
 	</div>
 </body>
