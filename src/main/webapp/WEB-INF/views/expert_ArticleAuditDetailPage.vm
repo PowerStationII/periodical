@@ -22,106 +22,61 @@
 	})
 </script>
 <body>
-<!-- <form action="../expert/toPublishStateModify" method="POST">
+ <form action="../expert/toPublishStateModify" method="POST">
 <input type="hidden" name="articleId" value="$!{respDto.articleId}">
 	<div>
-		<table style="border:1px solid;width:800px;" rules="all">
+		<table class="easyui-datagrid"   data-options="singleSelect:true" >
+		<thead>
 			<tr>
-				<td><label>
-						<span class="right">稿件状态:</span>
-				</label></td>
+				<th data-options="field:'name',width:200"></th>
+				<th data-options="field:'value',width:800"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>稿件状态:</td>
 				<td>$!{respDto.editorState}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">稿件中文:</span>
-				</label></td>
+				<td>稿件中文:</td>
 				<td>$!{respDto.title}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">稿件英文标题:</span>
-				</label></td>
+				<td>稿件英文标题:</td>
 				<td>$!{respDto.enTitle}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中国分类号</span>
-				</label></td>
+				<td>中国分类号</td>
 				<td>$!{respDto.fNums}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">拟投栏目:</span>
-				</label></td>
+				<td>拟投栏目:</td>
 				<td>$!{respDto.section}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中文关键字:</span>
-				</label></td>
+				<td>中文关键字:</td>
 				<td>$!{respDto.cnKeywords}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">英文关键字:</span>
-				</label></td>
+				<td>英文关键字:</td>
 				<td>$!{respDto.enKeyWords}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中文摘要:</span>
-				</label></td>
+				<td>中文摘要:</td>
 				<td>$!{respDto.cnSummary}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">英文摘要:</span>
-				</label></td>
+				<td>英文摘要:</td>
 				<td>$!{respDto.enSummary}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">下载原稿件:</span>
-				</label></td>
-				<td>$!{respDto.attachName} <a href="../expert/toDownLoadArticle?articleId=${respDto.articleId}">下载</a>  $!{respDto.attachPath}</td>
+				<td>下载原稿件:</td>
+				<td>$!{respDto.attachName} <a class="easyui-linkbutton" data-options="width:50"  href="../expert/toDownLoadArticle?articleId=${respDto.articleId}">下载</a>  $!{respDto.attachPath}</td>
 			</tr>
+			</tbody>
 		</table>
 	</div>
-	</form> -->
-	<form action="../expert/toPublishStateModify" method="POST">
-	<input type="hidden" name="articleId" value="$!{respDto.articleId}">
-			<div>
-				<a style="padding-left:15px;font-size:14px;">稿件状态：</a>
-				<input class="easyui-textbox"  value="$!{respDto.editorState}"  name="editorState"  data-options="readonly:true"  style="width:150px"> 
-				<a style="padding-left:50px;font-size:14px;">稿件中文：</a>
-				<input class="easyui-textbox"  value="$!{respDto.title}"  name="title"  data-options="readonly:true" style="width:150px"> 
-				<a style="padding-left:50px;font-size:14px;">稿件英文标题：</a>
-				<input class="easyui-textbox"  value="$!{respDto.enTitle}"  name="enTitle"  data-options="readonly:true" style="width:150px"> 
-			</div>
-			<div>
-				<a  style="font-size:14px;">中国分类号：</a>
-				<input class="easyui-textbox"  value="$!{respDto.fNums}"  name="fNums"  data-options="readonly:true" style="width:150px"> 
-				<a style="padding-left:50px;font-size:14px;">拟投栏目：</a>
-				<input class="easyui-textbox"  value="$!{respDto.section}"  name="section"  data-options="readonly:true" style="width:150px"> 
-				<a style="padding-left:65px;font-size:14px;">中文关键字：</a>
-				<input class="easyui-textbox"  value="$!{respDto.cnKeywords}"  name="cnKeywords"  data-options="readonly:true" style="width:150px"> 
-			</div>
-			<div>
-				<a style="font-size:14px;">英文关键字：</a>
-				<input class="easyui-textbox"  value="$!{respDto.enKeyWords}"  name="enKeyWords"  data-options="readonly:true"  style="width:150px"> 
-				<a style="padding-left:50px;font-size:14px;">中文摘要：</a>
-				<input class="easyui-textbox"  value="$!{respDto.cnSummary}"  name="cnSummary"  data-options="readonly:true" style="width:150px"> 
-				<a style="padding-left:79px;font-size:14px;">英文摘要：</a>
-				<input class="easyui-textbox"  value="$!{respDto.enSummary}"  name="enSummary"  data-options="readonly:true" style="width:150px"> 
-			</div>
-			<div>
-				<a  style="font-size:14px;">下载原稿件：</a>
-				<input class="easyui-textbox"  value="$!{respDto.attachName}"  name="attachName"  data-options="readonly:true" style="width:150px"> 
-				<input class="easyui-textbox"  value="$!{respDto.attachPath}"   name="attachPath"  data-options="readonly:true" style="width:200px;"> 
-				<a class="easyui-linkbutton" data-options="width:50"  href="../expert/toDownLoadArticle?articleId=${respDto.articleId}">下载</a>
-			</div>
-	</form>
+	</form> 
 	<div class="attr_con">
 		<a class="easyui-linkbutton" data-options="width:50"   id="back">返回</a>
 		<a class="easyui-linkbutton" data-options="width:50"   id="wait">待刊</a>

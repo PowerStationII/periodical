@@ -80,8 +80,8 @@
 		            <th data-options="field:'remark',width:100,align:'center'"'>备注信息</th>   
 		        </tr>   
 		    </thead> 
+		    <tbody>
 			#foreach($respDto in ${list})   
-			<tbody>
 				<tr>
 					<td>$!{respDto.articleId}</td>
 					<td>$!{respDto.title}</td>
@@ -96,8 +96,8 @@
 					</td>
 					#end
 				</tr>
-			<tbody>
 			#end
+			</tbody>
 		</table>
 		<br>
 	</div>

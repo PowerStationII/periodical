@@ -20,79 +20,64 @@
 </script>
 <body>
 	<div>
-		<table style="border:1px solid;width:800px;" rules="all">
+		<table class="easyui-datagrid"   data-options="singleSelect:true" >
+		<thead>
 			<tr>
-				<td><label>
-						<span class="right">稿件状态：</span>
-				</label></td>
+				<th data-options="field:'name',width:200"></th>
+				<th data-options="field:'value',width:800"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>稿件状态：</td>
 				<td>$!{detail.articleId}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中文标题：</span>
-				</label></td>
+				<td>中文标题：</td>
 				<td>$!{detail.articleCnTitle}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">英文标题：</span>
-				</label></td>
+				<td>英文标题：</td>
 				<td>$!{detail.articleEnTile}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中国分类号：</span>
-				</label></td>
+				<td>中国分类号：</td>
 				<td>$!{detail.cNums}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">拟投栏目：</span>
-				</label></td>
+				<td>拟投栏目：</td>
 				<td>$!{detail.section}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中文关键词：</span>
-				</label></td>
+				<td>中文关键词：</td>
 				<td>$!{detail.articleCnKeywords}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">英文关键词：</span>
-				</label></td>
+				<td>英文关键词：</td>
 				<td>$!{detail.articleEnKeywords}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中文摘要：</span>
-				</label></td>
+				<td>中文摘要：</td>
 				<td>$!{detail.articleCnSummary}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">英文摘要：</span>
-				</label></td>
+				<td>英文摘要：</td>
 				<td>$!{detail.articleEnSummary}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">审批稿件下载：</span>
-				</label></td>
-				<td>$!{detail.attachmentName}下载$!{detail.attachmentPath}</td>
+				<td>审批稿件下载：</td>
+				<td>$!{detail.attachmentName}<a href="#" class="easyui-linkbutton" data-options="width:50">下载</a>$!{detail.attachmentPath}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">专家审稿：</span>
-				</label></td>
-				<td>审稿专家:$!{detail.expertName} 送审时间:$!{detail.dealStartTime} <a href="../author/toOpinionQueryPage?articleId=${detail.articleId}">查看审稿意见</a></td>
+				<td>专家审稿：</td>
+				<td>审稿专家:$!{detail.expertName} 送审时间:$!{detail.dealStartTime} <a class="easyui-linkbutton"  href="../author/toOpinionQueryPage?articleId=${detail.articleId}">查看审稿意见</a></td>
 			</tr>
-			
+			</tbody>
 		</table>
 	</div>
 	<div class="attr_con">
-		<input type="button"  value="返回"  id="back"/>
-		<input type="button"  value="重投"  id="back"/><!-- 如果稿件状态是返修,此按钮需要显示 -->
+		<a id="back" href="#" class="easyui-linkbutton" data-options="width:50">返回</a>
+		<a id="back" href="#" class="easyui-linkbutton" data-options="width:50">重投</a><!-- 如果稿件状态是返修,此按钮需要显示 -->
 	</div>
 </body>
 </html>
