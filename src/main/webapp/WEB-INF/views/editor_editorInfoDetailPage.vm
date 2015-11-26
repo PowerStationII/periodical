@@ -15,24 +15,27 @@
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
-		})
-	})
+		});
+		$('#submit').click(function(){
+			$('form').submit();
+		});
+	});
 </script>
 <body>
 	<div id="articleInfos">
 	<form action="../editor/toSaveEditorInfo" method="POST">
 		<table>
 			<tr>
-				<td>编辑姓名</td>
-				<td><input type="text" name="editorName" value=""></td>
+				<td>编辑姓名：</td>
+				<td><input class="easyui-textbox" type="text" name="editorName" value=""></td>
 			</tr>
 			<tr>
-				<td>email</td>
-				<td><input type="text" name="email" value=""></td>
+				<td>email：</td>
+				<td><input class="easyui-textbox" type="text" name="email" value=""></td>
 			</tr>
 			<tr>
-				<td>编辑类型</td>
-				<td><select name="roleId">
+				<td>编辑类型：</td>
+				<td><select name="roleId"   class="easyui-combobox"   style="width:155px;">
 					<option value="1006" selected>稿件编</option>
 					<option value="1007">广告编</option>
 					<option value="1008">发行编</option>
@@ -40,8 +43,10 @@
 				</select></td>
 			</tr>
 			<tr>
-				<td><input type="button"  value="返回"  id="back"/></td>
-				<td colspan="3"><input type="submit" value="增加"/></td>
+				<td colspan="4">
+					<a  id="back"  class="easyui-linkbutton"  style="width:50px;" href="#">返回</a>
+					<a  id="submit"  class="easyui-linkbutton"  style="width:50px;" href="#">增加</a>
+				</td>
 			</tr>
 		</table>
 	</form>
