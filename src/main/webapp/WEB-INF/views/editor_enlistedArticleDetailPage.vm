@@ -15,64 +15,53 @@
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
-		})
-	})
+		});
+	});
 </script>
 <body>
 	<div>
-		<table style="border:1px solid;width:800px;" rules="all">
+		<table class="easyui-datagrid"   data-options="singleSelect:true">
+			<thead>
+				<tr>
+					<th data-options="field:'name',width:200"></th>
+					<th data-options="field:'value',width:800"></th>
+				</tr>
+			</thead>
+			<tbody>
 			<tr>
-				<td><label>
-						<span class="right">稿件状态:</span>
-				</label></td>
+				<td>稿件状态:</td>
 				<td>$!{respDto.editorState}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">稿件中文:</span>
-				</label></td>
+				<td>稿件中文:</td>
 				<td>$!{respDto.title}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">稿件英文标题:</span>
-				</label></td>
+				<td>稿件英文标题:</td>
 				<td>$!{respDto.enTitle}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中国分类号</span>
-				</label></td>
+				<td>中国分类号</td>
 				<td>$!{respDto.fNums}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">拟投栏目:</span>
-				</label></td>
+				<td>拟投栏目:</td>
 				<td>$!{respDto.section}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中文关键字:</span>
-				</label></td>
+				<td>中文关键字:</td>
 				<td>$!{respDto.cnKeywords}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">英文关键字:</span>
-				</label></td>
+				<td>英文关键字:</td>
 				<td>$!{respDto.enKeyWords}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中文摘要:</span>
-				</label></td>
+				<td>中文摘要:</td>
 				<td>$!{respDto.cnSummary}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">英文摘要:</span>
-				</label></td>
+				<td>英文摘要:</td>
 				<td>$!{respDto.enSummary}</td>
 			</tr>
 			<!-- <tr>
@@ -81,10 +70,11 @@
 				</label></td>
 				<td>$!{respDto.attachName} 下载  $!{respDto.attachPath}</td>
 			</tr> -->
+			</tbody>
 		</table>
 	</div>
 	<div class="attr_con">
-		<a href="../editor/toSubmitPage?articleId=$!{respDto.articleId}">送审</a>
+		<a class="easyui-linkbutton"  style="width:50px;" href="../editor/toSubmitPage?articleId=$!{respDto.articleId}">送审</a>
 	</div>
 </body>
 </html>
