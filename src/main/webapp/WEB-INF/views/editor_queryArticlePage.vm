@@ -11,23 +11,59 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script type="text/javascript">
+	$(function(){
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#table').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+                 "articleId":rows[i].articleId,  
+                 "title":rows[i].title,
+                 "contriTime":rows[i].contriTime,  
+                 "authorState":rows[i].authorState,
+                 "option":rows[i].option
+             }) ; 
+		}
+        $("#table").datagrid("loadData", data.slice(0, 5));
+        var pager = $("#table").datagrid("getPager");  
+        pager.pagination({  
+            total:data.length, 
+            pageSize:5,
+            pageList: [5,10,15,20],
+            onSelectPage:function (pageNo, pageSize) {  
+                var start = (pageNo - 1) * pageSize;  
+                var end = start + pageSize;  
+                $("#table").datagrid("loadData", data.slice(start, end));  
+                pager.pagination('refresh', {  
+                    total:data.length,  
+                    pageNumber:pageNo
+                });  
+            }  
+        });  
+        
+        $('#submit').click(function(){
+        	$('form').submit();
+        });
+	});
+</script>
 <body>
 	<div id="articleInfos">
 		<form action="../editor/toQueryArticlePage">
-			<table>
+			<table style="text-align:right;font-size:14px;">
 				<tr>
-					<td>稿件标题</td>
-					<td><input type="text" name="cnTitle" value=""></td>
-					<td>作者</td>
-					<td><input type="text" name="authorNames" value=""></td>
-					<td>稿件编号</td>
-					<td><input type="text" name="articleId" value=""></td>
-					<td>审稿专家</td>
-					<td><input type="text" name="expertNames" value=""></td>
+					<td>稿件标题：</td>
+					<td><input class="easyui-textbox" type="text" name="cnTitle" value=""></td>
+					<td>作者：</td>
+					<td><input class="easyui-textbox" type="text" name="authorNames" value=""></td>
+					<td>稿件编号：</td>
+					<td><input class="easyui-textbox" type="text" name="articleId" value=""></td>
+					<td>审稿专家：</td>
+					<td><input class="easyui-textbox" type="text" name="expertNames" value=""></td>
 				</tr>
 				<tr>
-					<td>稿件状态</td>
-					<td><select name="state">
+					<td>稿件状态：</td>
+					<td><select name="state"  class="easyui-combobox"   style="width:155px;">
 							<option value="" selected>全部</option>
 							<option value="0000">0000</option>
 							<option value="0001">0001</option>
@@ -37,45 +73,48 @@
 							<option value="0007">0007</option>
 							<option value="0008">0008</option>
 						</select></td>
-					<td>稿件栏目</td>
-					<td><select name="section">
+					<td>稿件栏目：</td>
+					<td><select name="section"   class="easyui-combobox"   style="width:155px;">
 							<option value="" selected>全部</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 						</select></td>
-					<td>中文关键字</td>
-					<td><input type="text" name="cnKeywords" value=""></td>
-					<td>投稿时间</td>
-					<td><input type="text" name="createTime" value=""></td>
+					<td>中文关键字：</td>
+					<td><input type="text" class="easyui-textbox" name="cnKeywords" value=""></td>
+					<td>投稿时间：</td>
+					<td><input type="text"  class="easyui-textbox" name="createTime" value=""></td>
 				</tr>			
 				<tr>
-					<td colspan="8"><input type="submit" value="查询"></td>
+					<td colspan="8"   style="text-align:left;"><a id="submit"  class="easyui-linkbutton"  style="width:50px;" href="#">查询</a></td>
 				</tr>
 			</table>		
 		</form>
-		<table style="border: 1px solid black;" rules="all">
-			<tr>
-				<td>稿件编号</td>
-				<td>标题</td>
-				<td>投稿作者</td>
-				<td>投稿时间</td>
-				<td>审稿专家</td>
-				<td>稿件状态</td>
-				<td>操作</td>
-			</tr>
+		<table  id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
+			<thead>
+				<tr>
+					<th data-options="field:'articleId',width:200">稿件编号</th>
+					<th data-options="field:'cnTitle',width:200">标题</th>
+					<th data-options="field:'authorNames',width:100">投稿作者</th>
+					<th data-options="field:'createTime',width:100">投稿时间</th>
+					<th data-options="field:'expertNames',width:100">审稿专家</th>
+					<th data-options="field:'state',width:100">稿件状态</th>
+					<th data-options="field:'option',width:100">操作</th>
+				</tr>
+			</thead>
+			<tbody>
 			#foreach($dtos in ${list})   
-			<tr>
-				<td>${dtos.articleId}</td>
-				<td>${dtos.cnTitle}</td>
-				<td>${dtos.authorNames}</td>
-				<td>${dtos.createTime}</td>
-				<td>${dtos.expertNames}</td>
-				<td>${dtos.state}</td>
-				<td>妹的</td>
-			</tr>
+				<tr>
+					<td>${dtos.articleId}</td>
+					<td>${dtos.cnTitle}</td>
+					<td>${dtos.authorNames}</td>
+					<td>${dtos.createTime}</td>
+					<td>${dtos.expertNames}</td>
+					<td>${dtos.state}</td>
+					<td>妹的</td>
+				</tr>
 			#end
-			
+			</tbody>
 		</table>
 		<br>
 	</div>
