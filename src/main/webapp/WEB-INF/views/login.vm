@@ -9,6 +9,10 @@
     <link href="css/data_styles.css" type="text/css" rel="stylesheet"/>
     <link href="css/login_styles.css" type="text/css" rel="stylesheet"/>
 	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+	<link href="css/easyui.css" type="text/css" rel="stylesheet" />
+	<link href="css/icon.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
 	<style>
 		#u4,#u6,#u8,#u10,#u12{cursor:pointer;}
 	</style>
@@ -16,7 +20,7 @@
   <script type="text/javascript"> 	
 	function submitForm(){  
 		if ($('#u34_input').val()=="" || $('#u35_input').val()=="") {
-			alert('请输入用户名和密码');
+			$.messager.alert('提示','请输入用户名和密码');
 			return;
 		}
 		else {
