@@ -21,83 +21,67 @@
 <body>
 	<div>
 		<input type="hidden" value="$!{articleInfo.id}" id="id" name="id">
-		<table style="border:1px solid;width:800px;" rules="all">
+		<table class="easyui-datagrid"   data-options="singleSelect:true">
+		<thead>
 			<tr>
-				<td><label>
-						<span class="right">稿件状态：</span>
-				</label></td>
+				<th data-options="field:'name',width:200"></th>
+				<th data-options="field:'value',width:800"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>稿件状态：</td>
 				<td>$!{obj.authorState}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中文标题：</span>
-				</label></td>
+				<td>中文标题：</td>
 				<td>$!{obj.articleCnTitle}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">英文标题：</span>
-				</label></td>
+				<td>英文标题：</td>
 				<td>$!{obj.articleEnTile}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中国分类号：</span>
-				</label></td>
+				<td>中国分类号：</td>
 				<td>$!{obj.cNums}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">拟投栏目：</span>
-				</label></td>
+				<td>拟投栏目：</td>
 				<td>$!{obj.section}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中文关键词：</span>
-				</label></td>
+				<td>中文关键词：</td>
 				<td>$!{obj.articleCnKeywords}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">英文关键词：</span>
-				</label></td>
+				<td>英文关键词：</td>
 				<td>$!{obj.articleEnKeywords}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">中文摘要：</span>
-				</label></td>
+				<td>中文摘要：</td>
 				<td>$!{obj.articleCnSummary}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">英文摘要：</span>
-				</label></td>
+				<td>英文摘要：</td>
 				<td>$!{obj.articleEnSummary}</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">作者信息</span>
-				</label></td>
+				<td>作者信息</td>
 				<td>姓名:***  身份证号:***</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">稿费</span>
-				</label></td>
+				<td>稿费</td>
 				<td>应发金额:$!{obj.aAmount} 扣税:$!{obj.aTaxAmount} 实发金额:$!{obj.aRealAmount} 汇款时间:yyyy-MM-dd</td>
 			</tr>
 			<tr>
-				<td><label>
-						<span class="right">刊登日期</span>
-				</label></td>
+				<td>刊登日期</td>
 				<td>**年**期</td>
 			</tr>
+			</tbody>
 		</table>
 	</div>
 	<div class="attr_con">
-		<input type="button"  value="返回"  id="back"/>
+		<a id="back" href="#" class="easyui-linkbutton" data-options="width:50">返回</a>
 	</div>
 </body>
 </html>
