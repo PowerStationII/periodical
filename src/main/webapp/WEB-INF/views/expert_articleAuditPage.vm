@@ -16,6 +16,36 @@
 		$('#query').click(function(){
 			$('form').submit();
 		});
+		
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#table').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+                 "articleId":rows[i].articleId,  
+                 "title":rows[i].title,
+                 "contriTime":rows[i].contriTime,  
+                 "expertState":rows[i].expertState,
+                 "authorName":rows[i].authorName,  
+                 "remark":rows[i].remark
+             }) ; 
+		}
+        $("#table").datagrid("loadData", data.slice(0, 5));
+        var pager = $("#table").datagrid("getPager");  
+        pager.pagination({  
+            total:data.length, 
+            pageSize:5,
+            pageList: [5,10,15,20],
+            onSelectPage:function (pageNo, pageSize) {  
+                var start = (pageNo - 1) * pageSize;  
+                var end = start + pageSize;  
+                $("#table").datagrid("loadData", data.slice(start, end));  
+                pager.pagination('refresh', {  
+                    total:data.length,  
+                    pageNumber:pageNo
+                });  
+            }  
+        });  
 	});
 </script>
 <body>
@@ -39,7 +69,7 @@
 				<a id="query" href="#" class="easyui-linkbutton" data-options="width:50" >查询</a>
 			</div>
 		</form>	
-		<table class="easyui-datagrid"   data-options="singleSelect:true"  style="padding-top:30px;">
+		<table id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true"  style="padding-top:30px;">
 			<thead>   
 		        <tr>   
 		            <th data-options="field:'articleId',width:200">稿件编号</th>   
