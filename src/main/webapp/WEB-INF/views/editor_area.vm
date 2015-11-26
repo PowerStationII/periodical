@@ -16,51 +16,7 @@
 			$('#other').hide();
 			$('#area').show();
 		});
-		$('.toNewArticlePage')
-		.click(
-				function() {
-					$('#area').hide();
-					$('#other').remove();
-					$('.right')
-							.append(
-									'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toNewArticlePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
-				});
-		$('.toEnlistedArticlePage')
-		.click(
-				function() {
-					$('#area').hide();
-					$('#other').remove();
-					$('.right')
-							.append(
-									'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toEnlistedArticlePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
-				});
-		$('.toPublishArticlePage')
-		.click(
-				function() {
-					$('#area').hide();
-					$('#other').remove();
-					$('.right')
-							.append(
-									'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toPublishArticlePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
-				});
-		$('.toReturnedArticlePage')
-		.click(
-				function() {
-					$('#area').hide();
-					$('#other').remove();
-					$('.right')
-							.append(
-									'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toReturnedArticlePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
-				});
-		$('.toRepaireArticlePage')
-		.click(
-				function() {
-					$('#area').hide();
-					$('#other').remove();
-					$('.right')
-							.append(
-									'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toRepaireArticlePage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
-				});
+
 		$('#xingao')
 				.click(
 						function() {
@@ -244,6 +200,14 @@
 
 		$('#other').hide();
 	});
+	
+	function excute (url) {
+		$('#area').hide();
+		$('#other').remove();
+		$('.right')
+				.append(
+						'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/'+url+'"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+	}
 </script>
 <style>
 .top {
@@ -279,6 +243,7 @@
 	height: 30px;
 	margin-left: 45px;
 	margin-top: 8px;
+	cursor:pointer;
 }
 
 .mode_name {
@@ -315,6 +280,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
+	cursor:pointer;
 }
 
 .li1, .li2, .li3, .li4, .li10, .li11, .li12, .li14, .li17 {
@@ -418,12 +384,15 @@ a {
 			#if(${userInfo.roleId}=='1006')
 				<a style="margin-left: 400px; font-size: 20px;">工作任务一览</a><br>
 				<br>
-				<table style="border: 1px solid black;" rules="all">
+				<table class="easyui-datagrid"   data-options="singleSelect:true">
+				<thead>
 					<tr>
-						<td>稿件</td>
-						<td>总数</td>
-						<td>操作</td>
+						<th data-options="field:'status',width:200">稿件</th>
+						<th data-options="field:'total',width:200">总数</th>
+						<th data-options="field:'option',width:200">操作</th>
 					</tr>
+				</thead>
+				<tbody>
 					<!-- <tr>
 							<td>$!{editorAreaInfos.status}</td>
 							<td>$!{editorAreaInfos.total}</td>
@@ -433,19 +402,20 @@ a {
 						<td>$!{editorAreaInfos.status}</td>
 						<td>$!{editorAreaInfos.total}</td>
 						#if($!{editorAreaInfos.status}=='0000')
-						<td class="toNewArticlePage">进行处理</td>
+						<td><a onclick="excute('toNewArticlePage')" href="#" class="easyui-linkbutton" >进行处理</a></td>
 						#elseif($!{editorAreaInfos.status}=='0001')
-						<td class="toEnlistedArticlePage">进行处理</td>
+						<td><a onclick="excute('toEnlistedArticlePage')" href="#" class="easyui-linkbutton" >进行处理</a></td>
 						#elseif($!{editorAreaInfos.status}=='0003')
-						<td class="toPublishArticlePage">进行处理</td>
+						<td><a onclick="excute('toPublishArticlePage')" href="#" class="easyui-linkbutton" >进行处理</a></td>
 						#elseif($!{editorAreaInfos.status}=='0007')
-						<td class="toReturnedArticlePage">进行处理</td>
+						<td><a onclick="excute('toReturnedArticlePage')" href="#" class="easyui-linkbutton" >进行处理</a></td>
 						#elseif($!{editorAreaInfos.status}=='0006')
-						<td class="toRepaireArticlePage">进行处理</td> 
+						<td><a onclick="excute('toRepaireArticlePage')" href="#" class="easyui-linkbutton" >进行处理</a></td> 
 						#else
 						<td>what?</td> #end
 					</tr>
 					#end
+					</tbody>
 				</table>				
 				#end
 			</div>
