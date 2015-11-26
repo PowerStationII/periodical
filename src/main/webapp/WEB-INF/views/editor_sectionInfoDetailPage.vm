@@ -15,28 +15,33 @@
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
-		})
-	})
+		});
+		$('#submit').click(function(){
+			$('form').submit();
+		});
+	});
 </script>
 <body>
 	<div id="articleInfos">
 	<form action="../editor/toSaveSectionInfo" method="POST">
 		<table>
 			<tr>
-				<td>期刊名称</td>
+				<td>期刊名称：</td>
 				<td>$!{periodical.periodicalCnName}<input type="hidden" name="periodicalId" value="$!{periodical.periodicalId}"></td>
 			</tr>
 			<tr>	
-				<td>栏目名称</td>
-				<td><input type="text" name="sectionName" value=""></td>
+				<td>栏目名称：</td>
+				<td><input class="easyui-textbox"  type="text" name="sectionName" value=""></td>
 			</tr>
 			<tr>	
-				<td>栏目简介</td>
-				<td><textarea name="sectionSummary" rows="" cols=""></textarea></td>
+				<td>栏目简介：</td>
+				<td><textarea name="sectionSummary" style="height:200px;"  rows="" cols=""></textarea></td>
 			</tr>
 			<tr>
-				<td><input type="button"  value="返回"  id="back"/></td>
-				<td colspan="3"><input type="submit" value="增加"/></td>
+				<td colspan="4">
+					<a class="easyui-linkbutton"  style="width:50px;" href="#"  id="back">返回</a>
+					<a class="easyui-linkbutton"  style="width:50px;" href="#"  id="submit">增加</a>
+				</td>
 			</tr>
 		</table>
 	</form>

@@ -11,40 +11,53 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script>
+	$(function(){
+		$('#submit').click(function(){
+			$('form').submit();
+		});
+	});
+</script>
 <body>
 	<div id="articleInfos">
 	<form action="../editor/toPeriodicalManagerPage" method="POST">
 		<table>
 			<tr>
-				<td>期刊名称</td>
-				<td><input type="text" name="periodicalCnName" value=""></td>
+				<td>期刊名称：</td>
+				<td><input class="easyui-textbox" type="text" name="periodicalCnName" value=""></td>
 			</tr>
 			<tr>
-				<td colspan="3"><input type="submit" value="查询"/></td>
-				<td colspan="3"><a href="../editor/toPeriodicalInfoAdd" >新增</a></td>
+				<td colspan="6">
+					<a id="submit"  class="easyui-linkbutton"  style="width:50px;" href="#">查询</a>
+					<a  class="easyui-linkbutton"  style="width:50px;" href="../editor/toPeriodicalInfoAdd"">新增</a>
+				</td>
 			</tr>
 		</table>
 	</form>
 	
-		<table style="border: 1px solid black;" rules="all">
-			<tr>
-				<td>期刊编号</td>
-				<td>期刊名称</td>
-				<td>主办单位</td>
-				<td>编辑社</td>
-				<td>单价</td>
-				<td>操作</td>
-			</tr>
+		<table class="easyui-datagrid"   data-options="singleSelect:true">
+			<thead>
+				<tr>
+					<th data-options="field:'periodicalId',width:200">期刊编号</th>
+					<th data-options="field:'periodicalCnName',width:200">期刊名称</th>
+					<th data-options="field:'hostOrganization',width:200">主办单位</th>
+					<th data-options="field:'press',width:100">编辑社</th>
+					<th data-options="field:'inFixPrice',width:100">单价</th>
+					<th data-options="field:'option',width:100">操作</th>
+				</tr>
+			</thead>
+			<tbody>
 			#foreach($dtos in ${list})   
-			<tr>
-				<td>$!{dtos.periodicalId}</td>
-				<td>$!{dtos.periodicalCnName}</td>
-				<td>$!{dtos.hostOrganization}</td>
-				<td>$!{dtos.press}</td>
-				<td>$!{dtos.inFixPrice}</td>
-				<td><a href="../editor/toSectionManagerPage?periodicalId=${dtos.periodicalId}">编辑栏目信息</a></td>
-			</tr>
+				<tr>
+					<td>$!{dtos.periodicalId}</td>
+					<td>$!{dtos.periodicalCnName}</td>
+					<td>$!{dtos.hostOrganization}</td>
+					<td>$!{dtos.press}</td>
+					<td>$!{dtos.inFixPrice}</td>
+					<td><a class="easyui-linkbutton"  href="../editor/toSectionManagerPage?periodicalId=${dtos.periodicalId}">编辑栏目信息</a></td>
+				</tr>
 			#end
+			</tbody>
 		</table>
 		<br>
 	</div>

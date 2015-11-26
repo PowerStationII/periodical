@@ -15,32 +15,39 @@
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
-		})
-	})
+		});
+		$('#submit').click(function(){
+			$('form').submit();
+		});
+	});
 </script>
 <body>
 	<div id="articleInfos">
 	<form action="../editor/toSectionInfoAdd" method="GET">
 		<input type="hidden" name="periodicalId" value="${periodical.periodicalId}">
-		<input type="submit" value="新增栏目">
-		<input type="button" value="返回" id="back">
+		<a  id="submit" class="easyui-linkbutton" >新增栏目</a>
+		<a  id="back" class="easyui-linkbutton"  style="width:50px;">返回</a>
 	</form>
 	
-		<table style="border: 1px solid black;" rules="all">
-			<tr>
-				<td>期刊名称</td>
-				<td>栏目名称</td>
-				<td>栏目简介</td>
-				<td>操作</td>
-			</tr>
+		<table class="easyui-datagrid"   data-options="singleSelect:true">
+			<thead>
+				<tr>
+					<th data-options="field:'periodicalCnName',width:200">期刊名称</th>
+					<th data-options="field:'sectionName',width:200">栏目名称</th>
+					<th data-options="field:'sectionSummary',width:200">栏目简介</th>
+					<th data-options="field:'option',width:200">操作</th>
+				</tr>
+			</thead>
+			<tbody>
 			#foreach($dtos in ${list})   
-			<tr>
-				<td>$!{periodical.periodicalCnName}</td>
-				<td>$!{dtos.sectionName}</td>
-				<td>$!{dtos.sectionSummary}</td>
-				<td><a href="../editor/toDeleteSectionInfo?sectionId=$!{dtos.sectionId}&periodicalId=${periodical.periodicalId}">删除</a></td>
-			</tr>
+				<tr>
+					<td>$!{periodical.periodicalCnName}</td>
+					<td>$!{dtos.sectionName}</td>
+					<td>$!{dtos.sectionSummary}</td>
+					<td><a class="easyui-linkbutton"  style="width:50px;" href="../editor/toDeleteSectionInfo?sectionId=$!{dtos.sectionId}&periodicalId=${periodical.periodicalId}">删除</a></td>
+				</tr>
 			#end
+			</tbody>
 		</table>
 		<br>
 	</div>
