@@ -11,47 +11,60 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script>
+	$(function(){
+		$('#submit').click(function(){
+			$('form').submit();
+		});
+	});
+</script>
 <body>
 	<div id="articleInfos">
 	<form>
 		<table>
 			<tr>
-				<td>专家姓名</td>
-				<td><input type="text" name="editorName" value=""></td>
-				<td>登录名</td>
-				<td><input type="text" name="logonName" value=""></td>
-				<td>专家类型</td>
-				<td><select name="roleId">
+				<td>专家姓名：</td>
+				<td><input class="easyui-textbox" type="text" name="editorName" value=""></td>
+				<td>登录名：</td>
+				<td><input class="easyui-textbox"  type="text" name="logonName" value=""></td>
+				<td>专家类型：</td>
+				<td><select name="roleId"  class="easyui-combobox"  style="width:155px;">
 					<option value="" selected>全部</option>
 					<option value="1004">英文专家</option>
 					<option value="1003">中文专家</option>
 				</select></td>
 			</tr>
 			<tr>
-				<td colspan="3"><input type="submit" value="查询"/></td>
-				<td colspan="3"><a href="../editor/toExpertInfoAdd" >新增</a></td>
+				<td colspan="6">
+					<a id="submit"  class="easyui-linkbutton"  style="width:50px;" href="#">查询</a>
+					<a  class="easyui-linkbutton"  style="width:50px;" href="../editor/toExpertInfoAdd">新增</a>
+				</td>
 			</tr>
 		</table>
 	</form>
 	
-		<table style="border: 1px solid black;" rules="all">
-			<tr>
-				<td>专家姓名</td>
-				<td>登录名</td>
-				<td>emial</td>
-				<td>角色</td>
-				<!-- <td>操作</td> -->
-			</tr>
-			#foreach($list in ${list})   
-			<tr>
-				<!-- <td>$!{list.refId}</td> -->
-				<td>$!{list.expertName}</td>
-				<td>$!{list.logonName}</td>
-				<td>$!{list.email}</td>
-				<td>$!{list.roleId}</td>
-				<!-- <td>编辑</td> -->
-			</tr>
-			#end
+		<table class="easyui-datagrid"   data-options="singleSelect:true">
+			<thead>
+				<tr>
+					<th data-options="field:'expertName',width:200">专家姓名</th>
+					<th data-options="field:'logonName',width:200">登录名</th>
+					<th data-options="field:'email',width:200">emial</th>
+					<th data-options="field:'roleId',width:200">角色</th>
+					<!-- <td>操作</td> -->
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($list in ${list})   
+				<tr>
+					<!-- <td>$!{list.refId}</td> -->
+					<td>$!{list.expertName}</td>
+					<td>$!{list.logonName}</td>
+					<td>$!{list.email}</td>
+					<td>$!{list.roleId}</td>
+					<!-- <td>编辑</td> -->
+				</tr>
+				#end
+			</tbody>
 		</table>
 		<br>
 	</div>

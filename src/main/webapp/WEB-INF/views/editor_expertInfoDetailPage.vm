@@ -15,8 +15,11 @@
 	$(function() {
 		$('#back').click(function() {
 			history.go(-1);
-		})
-	})
+		});
+		$('#submit').click(function() {
+			$('form').submit();
+		});
+	});
 </script>
 <body>
 	<div id="articleInfos">
@@ -24,22 +27,24 @@
 			<table>
 				<tr>
 					<td>专家姓名</td>
-					<td><input type="text" name="expertName" value=""></td>
+					<td><input class="easyui-textbox" type="text" name="expertName" value=""></td>
 				</tr>
 				<tr>
 					<td>email</td>
-					<td><input type="text" name="email" value=""></td>
+					<td><input class="easyui-textbox" type="text" name="email" value=""></td>
 				</tr>
 				<tr>
 					<td>专家类型</td>
-					<td><select name="roleId">
+					<td><select name="roleId" class="easyui-combobox"  style="width:155px;">
 							<option value="1003">中文专家</option>
 							<option value="1004">英文专家</option>
 					</select></td>
 				</tr>
 				<tr>
-					<td><input type="button" value="返回" id="back" /></td>
-					<td colspan="3"><input type="submit" value="增加" /></td>
+					<td colspan="4">
+						<a id="back"  class="easyui-linkbutton"  style="width:50px;" href="#">返回</a>
+						<a id="submit"  class="easyui-linkbutton"  style="width:50px;" href="#">增加</a>
+					</td>
 				</tr>
 			</table>
 		</form>
