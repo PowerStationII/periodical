@@ -11,65 +11,111 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script>
+	$(function(){
+		$('#submit').click(function(){
+			$('form').submit();
+		});
+		
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#table').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+                 "a1":rows[i].a1,  
+                 "a2":rows[i].a2,
+                 "a3":rows[i].a3,  
+                 "a4":rows[i].a4,
+                 "a5":rows[i].a5,
+                 "a6":rows[i].a6,  
+                 "a7":rows[i].a7,
+                 "a8":rows[i].a8
+             }) ; 
+		}
+        $("#table").datagrid("loadData", data.slice(0, 5));
+        var pager = $("#table").datagrid("getPager");  
+        pager.pagination({  
+            total:data.length, 
+            pageSize:5,
+            pageList: [5,10,15,20],
+            onSelectPage:function (pageNo, pageSize) {  
+                var start = (pageNo - 1) * pageSize;  
+                var end = start + pageSize;  
+                $("#table").datagrid("loadData", data.slice(start, end));  
+                pager.pagination('refresh', {  
+                    total:data.length,  
+                    pageNumber:pageNo
+                });  
+            }  
+        });  
+	});
+
+</script>
 <body>
 	<div id="articleInfos">
 		<form action="../editor/toAdManagerPage" method="POST">
-			<table style="border: 1px solid black;" rules="all">
+			<table>
 				<tr>
-					<td>广告名称</td>
-					<td><input type="text" name="adName" value=""></td>
-					<td>理事会名称</td>
-					<td><input type="text" name="concilName" value=""></td>
-					<td>理事会类型</td>
-					<td><select name="concilType">
+					<td>广告名称：</td>
+					<td><input class="easyui-textbox" type="text" name="adName" value=""></td>
+					<td>理事会名称：</td>
+					<td><input class="easyui-textbox" type="text" name="concilName" value=""></td>
+					<td>理事会类型：</td>
+					<td><select name="concilType"  class="easyui-combobox"  style="width:155px;">
 						<option value="" selected>全部</option>
 						<option value="">理事长</option>
 					</select></td>
 				</tr>
 				<tr>
-					<td>广告类型</td>
-					<td><select name="adType">
+					<td>广告类型：</td>
+					<td><select name="adType" class="easyui-combobox"  style="width:155px;">
 						<option value="" selected>全部</option>
 						<option value="">形象类</option>
 					</select></td>
-					<td>广审号</td>
-					<td><input type="text" name="trialNo" value=""></td>
-					<td>注册时间</td>
-					<td><input type="text" name="registTime" value=""></td>
+					<td>广审号：</td>
+					<td><input class="easyui-textbox" type="text" name="trialNo" value=""></td>
+					<td>注册时间：</td>
+					<td><input class="easyui-textbox" type="text" name="registTime" value=""></td>
 				</tr>
 				<tr>
-					<td>合同开始时间</td>
-					<td colspan="2"><input type="text" name="contractStartTime" value=""></td>
-					<td>合同结束时间</td>
-					<td colspan="2"><input type="text" name="contractEndTime" value=""></td>
+					<td>合同开始时间：</td>
+					<td ><input class="easyui-textbox" type="text" name="contractStartTime" value=""></td>
+					<td>合同结束时间：</td>
+					<td><input class="easyui-textbox" type="text" name="contractEndTime" value=""></td>
 				</tr>
 				<tr>
-					<td colspan="3"><input type="submit" value="查询"></td>
-					<td colspan="3"><a href="../editor/toAdInfoAdd">新增</a></td>
+					<td colspan="6">
+						<a  class="easyui-linkbutton"   style="width:50px;" href="#"  id="submit">查询</a>
+						<a  class="easyui-linkbutton"   style="width:50px;" href="../editor/toAdInfoAdd">新增</a>
+					</td>
 				</tr>
 			</table>
 		</form>
-		<table style="border: 1px solid black;" rules="all">
-			<tr>
-				<td>理事会名称</td>
-				<td>广告名称</td>
-				<td>广审号</td>
-				<td>广告类型</td>
-				<td>注册时间</td>
-				<td>合同开始时间</td>
-				<td>合同结束时间</td>
-				<td>操作</td>
-			</tr>
-			<tr>
-				<td>理事会名称</td>
-				<td>广告名称</td>
-				<td>广审号</td>
-				<td>广告类型</td>
-				<td>注册时间</td>
-				<td>合同开始时间</td>
-				<td>合同结束时间</td>
-				<td><a href="../editor/toQrySingleAdInfo?adId=111">编辑</a></td>
-			</tr>
+		<table   id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
+			<thead>
+				<tr>
+					<th data-options="field:'a1',width:200">理事会名称</th>
+					<th data-options="field:'a2',width:200">广告名称</th>
+					<th data-options="field:'a3',width:100">广审号</th>
+					<th data-options="field:'a4',width:100">广告类型</th>
+					<th data-options="field:'a5',width:100">注册时间</th>
+					<th data-options="field:'a6',width:100">合同开始时间</th>
+					<th data-options="field:'a7',width:100">合同结束时间</th>
+					<th data-options="field:'a8',width:100">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>理事会名称</td>
+					<td>广告名称</td>
+					<td>广审号</td>
+					<td>广告类型</td>
+					<td>注册时间</td>
+					<td>合同开始时间</td>
+					<td>合同结束时间</td>
+					<td><a class="easyui-linkbutton"  style="width:50px;" href="../editor/toQrySingleAdInfo?adId=111">编辑</a></td>
+				</tr>
+			</tbody>
 		</table>
 		<br>
 	</div>
