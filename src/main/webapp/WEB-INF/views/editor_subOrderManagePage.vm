@@ -71,7 +71,8 @@
 					<td>$!{dtos.oAmount}</td>
 					<td>$!{dtos.submitTime}</td>
 					<td>$!{dtos.auditTime}</td>
-					<td><a  class="easyui-linkbutton"   href="../editor/toAuditOrderManagePage?orderNo=$!{dtos.orderNo}"  style="width:50px;">审核</a></td>
+					<td><a  class="easyui-linkbutton"   href="../editor/toAuditOrderManagePage?orderNo=$!{dtos.orderNo}"  style="width:50px;">审核</a>
+					<a  class="easyui-linkbutton"   href="../editor/toSubSupplementManagePage?orderNo=$!{dtos.orderNo}"  style="width:50px;">编辑订单</a></td>
 				</tr>
 			#end
 			</tbody>

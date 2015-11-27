@@ -247,7 +247,7 @@
 		</if>
 	</select>
 
-	<resultMap type="EditorQueryArtilces" id="EditorQueryDetailResult">
+<!-- 	<resultMap type="EditorQueryArtilces" id="EditorQueryDetailResult">
 		<result column="articleId" jdbcType="VARCHAR" property="articleId" />
 		<result column="cnTitle" jdbcType="VARCHAR" property="cnTitle" />
 		<result column="expertState" jdbcType="VARCHAR" property="expertState" />
@@ -257,9 +257,9 @@
 		<result column="createTime" jdbcType="VARCHAR" property="createTime" />
 		<result column="authorNames" jdbcType="VARCHAR" property="authorNames" />
 		<result column="expertNames" jdbcType="VARCHAR" property="expertNames" />
-	</resultMap>
+	</resultMap> -->
 
-	<select id="editorQueryArticles" resultMap="EditorQueryDetailResult"
+	<select id="editorQueryArticles" resultType="EditorQueryArtilces"
 		parameterType="EditorQueryArtilces">
 		select auLin.article_id as articleId,auLin.article_cn_title as
 		cnTitle,auLin.expert_state as expertState,auLin.article_cn_keywords as

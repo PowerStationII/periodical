@@ -91,4 +91,22 @@ public class SubscribeOrderManageController extends EditorController{
 		orderInfoManager.saveOrderInfo(orderInfo);
 		return mav;
 	}
+	
+	/**
+	 * toSubSupplementManagePage
+	 * 发行编辑编辑订单赠刊信息
+	 */
+	@RequestMapping(value="/toSubSupplementManagePage")
+	public ModelAndView toSubSupplementManagePage(HttpServletRequest request,String orderNo) {
+		logger.info("编辑订单赠刊信息 Page:orderNo:[ "+orderNo+" ]");
+		ModelAndView mav = new ModelAndView("redirect:../editor/toSubOrderManagePage");
+		/**
+		 * 编辑读者订单的赠刊信息,编辑信息保存至
+		 * periodical_distribute表
+		 * */
+		
+		
+		
+		return mav;
+	}
 }
