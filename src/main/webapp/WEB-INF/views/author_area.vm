@@ -45,9 +45,9 @@
   		});
   </script>
   <style>
-  		.top{height:80px;background-image:url("img/portal/u2.jpg");line-height:80px;padding-left:30px;}
+  		.top{height:110px;background-image:url("img/portal/u2.jpg");line-height:110px;padding-left:30px;}
   		.left{width:200px;height:530px;float:left;}
-  		.right{width:1070px;height:530px;float:left;position:absolute;margin-left:220px;}
+  		.right{width:1070px;height:500px;float:left;position:absolute;margin-left:220px;}
   		.buttom{height:540px;margin-top:1px;}
 		.work_area{height:30px;background:#4DA20B;}
 		.area_name{height:30px;margin-left:45px;margin-top:8px;cursor:pointer;}
@@ -60,12 +60,12 @@
 		.li3{border:1px solid #349000;}
 		a{text-decoration:none;color:#000000}
   </style>
-  <body style="margin:0px;">
+  <body style="margin:0px;background-color:#E6E6E6;">
     <div class="top">
        	<a>欢迎访问《 农药科学与管理  》网站！</a>
 		<a href="logout" style='text-decoration:none;'>退出系统</a>
     </div>
-    <div class="buttom">
+    <div class="buttom" >
 	    <div class="left">
 	       <div class="leftUp">
 	       		<div  class="work_area"></div>
@@ -83,8 +83,8 @@
 	   </div>
 	    <div class="right">
 			<div id="area"  style="margin-top:20px;">
-					<a style="margin-left:400px;font-size:20px;">作者工作区提示</a><br><br>
-					<a style="font-size:12px;">
+					<a style="margin-left:400px;font-size:30px;">作者工作区提示</a><br><br>
+					<a style="font-size:24px;">
 							1. 上传全文稿件时用Word 97-2003格式存储，不要用Word 2007及以上版本、PDF、LaTeX等，务必删除所有中英文姓名、单位名及作者简介后上传。<br>		
 							2. 作者信息栏中务必将所有作者依次录入，其中有博士生导师的需注明,如第一作者不是通信作者的请在该项复选框中选择。<br>						
 							3.本刊审稿流程较长，需经过两位专家评审，都通过后交作者修改，然后由编委复审，通过后由主编终审，通过后会发送给您录用通知，等待刊登。<br>  
