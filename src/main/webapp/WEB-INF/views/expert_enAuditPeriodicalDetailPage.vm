@@ -22,16 +22,17 @@
 				<td style="width:20%;text-align:center;">栏目名称</td>
 				<td style="width:20%;text-align:center;">操作</td>
 			</tr>
-			
+			#foreach($dtos in ${list})
 			<tr>
-				<td style="width:20%;text-align:center;">中国农药科学与管理</td>
-				<td style="width:20%;text-align:center;">20150000444001</td>
-				<td style="width:20%;text-align:center;">第一期</td>
-				<td style="width:20%;text-align:center;">稿件名称</td>
-				<td style="width:20%;text-align:center;">栏目名称</td>
-				<td style="width:20%;text-align:center;"><a href="../expert/auditArticleEnDetailPage">审核稿件</a></td>
+				<td style="width: 20%; text-align: center;">$!{dtos.pCnName}</td>
+				<td style="width: 20%; text-align: center;">$!{dtos.pIsNo}</td>
+				<td style="width: 20%; text-align: center;">第$!{dtos.cNums}期</td>
+				<td style="width: 20%; text-align: center;">$!{dtos.aCnTitle}</td>
+				<td style="width: 20%; text-align: center;">$!{dtos.section}</td>
+				<td style="width: 20%; text-align: center;"><a
+					href="../expert/auditArticleEnDetailPage">审核稿件</a></td>
 			</tr>
-			
+			#end
 		</table>
 		<br>
 	</div>

@@ -14,4 +14,28 @@
 		pi.periodical_id=p.periodical_id
 		and (p.periodical_state='0' or p.periodical_state='FI')
 	</select>
+	
+	
+	<select id="queryPeriodicalInfosForEnExpert" parameterType="BizPeriodical"
+		resultType="BizPeriodical">
+		select pi.periodical_id as pId,pi.periodical_cn_name as
+		pCnName,pi.host_organization as hOrgan,pi.cycle as cycle,pi.press as
+		press,pi.issn_no as isNo,pi.in_fix_price as iFPrice,
+		p.cycle_nums as cNums,p.periodical_issue_no as pIsNo,p.periodical_state as
+		pState,p.periodical_year as pYear,p.issue_opinion as
+		isOpinion,p.issue_time as isTime
+		from periodical_info pi,periodical p
+		where
+		pi.periodical_id=p.periodical_id
+		and p.periodical_state='FI'
+	</select>
+	
+	<select id="queryPeriodicalInfosForEnExpertDetail" parameterType="BizPeriodical"
+		resultType="BizPeriodical">
+		select ai.article_id as aId,pi.periodical_cn_name as pCnName,si.section_name as section,pd.periodical_issue_no as pIsNo,
+		ai.article_cn_title as aCnTitle,p.cycle_nums as cNums
+		from periodical_details pd,section_info si,periodical_info pi,article_info ai ,periodical p
+		where pd.section_id=si.section_id and pi.periodical_id=pd.periodical_id and p.periodical_issue_no=pd.periodical_issue_no
+		and ai.article_id=pd.article_id
+	</select>
 </mapper>

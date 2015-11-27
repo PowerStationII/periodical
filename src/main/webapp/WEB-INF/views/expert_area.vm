@@ -16,6 +16,11 @@
   				$('#other').hide();
   				$('#area').show();
   			});
+  			$('#yingwenshenkan').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "expert/toEnAuditePeriodicalPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
   			$('#gaojianchaxun').click(function(){
   				$('#area').hide();
   				$('#other').remove();
@@ -75,8 +80,8 @@
 	       	#else
 	       	<div class="cLeft">
 	       		<div  class="mode_name">期刊管理</div>
-       			<div  class="li1"  id="">英文审刊</div>
-       			<div  class="li11"  id="">英文审稿</div>
+       			<div  class="li1"  id="yingwenshenkan">英文审刊</div>
+       			<div  class="li11"  id="yinwenshengao">英文审稿</div>
 		        <div  class="mode_name"  style="margin-top:10px;">个人信息设置</div>
 	       		<div  class="li2"  style="margin-top:10px;" id="xiugaixinxi">修改个人信息</div>
 			    <div  class="li3" id="xiugaimima">修改密码</div>

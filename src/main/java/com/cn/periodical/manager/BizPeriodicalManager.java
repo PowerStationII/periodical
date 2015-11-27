@@ -14,4 +14,7 @@ import com.cn.periodical.pojo.BizPeriodical;
 
 public interface BizPeriodicalManager {
 	public List<BizPeriodical> queryPeriodicalInfosForIssueEditor(BizPeriodical reqDto);
+	public List<BizPeriodical> queryPeriodicalInfosForEnExpert(BizPeriodical reqDto);
+	public List<BizPeriodical> queryPeriodicalInfosForEnExpertDetail(BizPeriodical reqDto);
+
 }

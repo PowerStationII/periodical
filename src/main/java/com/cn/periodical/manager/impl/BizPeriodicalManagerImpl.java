@@ -26,5 +26,15 @@ public class BizPeriodicalManagerImpl implements BizPeriodicalManager {
 		// TODO Auto-generated method stub
 		return bizPeriodicalDao.queryPeriodicalInfosForIssueEditor(reqDto);
 	}
+
+	public List<BizPeriodical> queryPeriodicalInfosForEnExpert(BizPeriodical reqDto) {
+		// TODO Auto-generated method stub
+		return bizPeriodicalDao.queryPeriodicalInfosForEnExpert(reqDto);
+	}
+
+	public List<BizPeriodical> queryPeriodicalInfosForEnExpertDetail(BizPeriodical reqDto) {
+		// TODO Auto-generated method stub
+		return bizPeriodicalDao.queryPeriodicalInfosForEnExpertDetail(reqDto);
+	}
 }
 

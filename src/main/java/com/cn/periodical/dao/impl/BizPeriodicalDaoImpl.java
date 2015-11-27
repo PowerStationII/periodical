@@ -24,4 +24,14 @@ public class BizPeriodicalDaoImpl extends BaseDao implements BizPeriodicalDao {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectList("BizPeriodicalMapper.queryPeriodicalInfosForIssueEditor", reqDto);
 	}
+
+	public List<BizPeriodical> queryPeriodicalInfosForEnExpert(BizPeriodical reqDto) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("BizPeriodicalMapper.queryPeriodicalInfosForEnExpert", reqDto);
+	}
+
+	public List<BizPeriodical> queryPeriodicalInfosForEnExpertDetail(BizPeriodical reqDto) {
+		// TODO Auto-generated method stub queryPeriodicalInfosForEnExpertDetail
+		return super.getSqlSession().selectList("BizPeriodicalMapper.queryPeriodicalInfosForEnExpertDetail", reqDto);
+	}
 }

@@ -21,6 +21,29 @@ public class BizPeriodical implements Serializable {
 	private String pYear;//年份
 	private String isOpinion;//签发意见
 	private String isTime;//签发时间
+	private String aCnTitle;
+	private String aId;
+	private String section;
+	
+	
+	public String getaCnTitle() {
+		return aCnTitle;
+	}
+	public void setaCnTitle(String aCnTitle) {
+		this.aCnTitle = aCnTitle;
+	}
+	public String getaId() {
+		return aId;
+	}
+	public void setaId(String aId) {
+		this.aId = aId;
+	}
+	public String getSection() {
+		return section;
+	}
+	public void setSection(String section) {
+		this.section = section;
+	}
 	public String getpId() {
 		return pId;
 	}

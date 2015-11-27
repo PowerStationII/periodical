@@ -15,11 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.manager.ArticleInfoManager;
+import com.cn.periodical.manager.BizPeriodicalManager;
+import com.cn.periodical.manager.PeriodicalDetailsManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.manager.UserQueryManager;
 import com.cn.periodical.pojo.BizPeriodical;
+import com.cn.periodical.pojo.PeriodicalDetailsQuery;
 import com.cn.periodical.pojo.UserInfo;
-import com.cn.periodical.response.ArticleQueryRespDto;
 import com.cn.periodical.service.ArticleQueryService;
 import com.cn.periodical.service.ArticleWorkFlowService;
 import com.cn.periodical.service.EditorArticleDealService;
@@ -57,6 +59,11 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 	@Autowired
 	ArticleFlowsManager articleFlowsManager;
 	
+	@Autowired
+	BizPeriodicalManager bizPeriodicalManager;
+	@Autowired
+	PeriodicalDetailsManager periodicalDetailsManager;
+	
 	/**
 	 * toEnAuditePeriodicalPage
 	 * 去英文审刊页面
@@ -71,8 +78,8 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 		/**
 		 * 
 		 * */
-//		List<ArticleQueryRespDto> list =articleQueryService.expertQryArticleInfos(reqDto);
-//		mav.addObject("list", list);
+		List<BizPeriodical> list = bizPeriodicalManager.queryPeriodicalInfosForEnExpert(null);
+		mav.addObject("list", list);
 		return mav;
 	}
 	
@@ -93,7 +100,8 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 		/**
 		 * 查询期刊下所有稿件明细
 		 * */
-		
+		List<BizPeriodical> list =bizPeriodicalManager.queryPeriodicalInfosForEnExpertDetail(reqDto);
+		mav.addObject("list", list);
 
 		return mav;
 	}
