@@ -17,6 +17,21 @@
 		for(var i=0;i<rows.length;i++) {
 			$('#editTable').datagrid('beginEdit',i);
 		}
+		$('#submit').click(function(){
+			var array=[];
+			var data = $('#editTable').datagrid('getData');
+			for(var i=0;i<data.rows.length;i++) {
+				$('#editTable').datagrid('endEdit',i);
+				var json={};
+				json.aId = data.rows[i].aId;
+				json.nums = data.rows[i].nums;
+				array.push(JSON.stringify(json));
+			}
+			window.location.href='../reader/toDistribution?array=['+array+']';
+		});
+		$('#back').click(function(){
+			history.go(-1);
+		});
 	});
 </script>
 <body>
@@ -24,25 +39,29 @@
 		 <table id="editTable" class="easyui-datagrid" data-options="singleSelect:true">   
 		    <thead>   
 		        <tr>   
-		            <th data-options="field:'code',width:150">地址</th>   
-		            <th data-options="field:'name',width:150">稿费</th>   
-		            <th data-options="field:'price',width:150,editor:'numberbox'" >价格</th>   
+		            <th data-options="field:'id',width:150">序号</th>   
+		            <th data-options="field:'aId',width:150">地址id</th>   
+		            <th data-options="field:'rAddress',width:150">详细地址</th>   
+		            <th data-options="field:'rContacter',width:150">联系人</th>   
+		            <th data-options="field:'cMobile',width:150">联系电话</th>   
+		            <th data-options="field:'nums',width:150,editor:'numberbox'" >邮寄本数</th>   
 		        </tr>   
 		    </thead>   
 		    <tbody>   
-		        <tr>   
-		            <td>001</td>
-		            <td>name1</td>
-		            <td></td>   
-		        </tr>   
-		        <tr>   
-		            <td>002</td>
-		            <td>name2</td>
-		            <td></td>   
-		        </tr>   
+		    	#foreach($dtos in ${list})
+				<tr>
+					<td>$!{velocityCount}</td>
+					<td>$!{dtos.addressId}</td>
+					<td>$!{dtos.receiveAddress}</td>
+					<td>$!{dtos.contacterName}</td>
+					<td>$!{dtos.contacterTelephone}</td>
+					<td></td>
+				</tr>
+				#end
 		    </tbody>   
 		</table>
-		<a id="btn" href="#" class="easyui-linkbutton">保存</a>  
+		<a id="back" class="easyui-linkbutton"  style="50px;">返回</a> 
+		<a id="submit" class="easyui-linkbutton"  style="50px;">保存</a> 
 	</div>
 </body>
 </html>

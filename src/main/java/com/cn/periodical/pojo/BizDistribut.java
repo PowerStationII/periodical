@@ -22,6 +22,15 @@ public class BizDistribut extends PagingQuery implements Serializable {
 	private String rContacter;
 	private String status;
 	private String userId;
+	private int nums;
+	
+	
+	public int getNums() {
+		return nums;
+	}
+	public void setNums(int nums) {
+		this.nums = nums;
+	}
 	public String getaId() {
 		return aId;
 	}

@@ -18,15 +18,23 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.cn.periodical.enums.OrderStatusEnums;
+import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.manager.OrderInfoManager;
 import com.cn.periodical.manager.PayeeInfoManager;
+import com.cn.periodical.manager.PeriodicalDistributManager;
 import com.cn.periodical.manager.PeriodicalInfoManager;
+import com.cn.periodical.manager.UserInfoManager;
+import com.cn.periodical.pojo.AddressInfo;
+import com.cn.periodical.pojo.AddressInfoQuery;
+import com.cn.periodical.pojo.BizDistribut;
 import com.cn.periodical.pojo.BizOrder;
 import com.cn.periodical.pojo.OrderInfo;
 import com.cn.periodical.pojo.OrderInfoQuery;
 import com.cn.periodical.pojo.PayeeInfo;
 import com.cn.periodical.pojo.PayeeInfoQuery;
+import com.cn.periodical.pojo.PeriodicalDistribut;
 import com.cn.periodical.pojo.PeriodicalInfo;
 import com.cn.periodical.pojo.PeriodicalInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
@@ -52,12 +60,19 @@ public class OrderManageController extends ReaderController{
     
     @Autowired
     PayeeInfoManager payeeInfoManager;
+    
+    @Autowired
+    AddressInfoManager addressInfoManager;
+    @Autowired
+    UserInfoManager userInfoManager;
+    @Autowired
+    PeriodicalDistributManager periodicalDistributManager;
 	/**
 	 * toOrderManagePage
 	 * 订单管理页面
 	 */
-	@RequestMapping(value="/toOrderManagePage",method =  { RequestMethod.POST ,RequestMethod.GET})
-	public ModelAndView toOrderManagePage(HttpServletRequest request,@ModelAttribute BizOrder bizOrder) {
+	@RequestMapping(value="/toOrderManagePage")
+	public ModelAndView toOrderManagePage(HttpServletRequest request,BizOrder bizOrder) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("订单管理Page:[ ]");
 		bizOrder.setUserId(userInfo.getUserId());
@@ -151,7 +166,7 @@ public class OrderManageController extends ReaderController{
 	@RequestMapping(value="/toEditorOrder",method ={ RequestMethod.POST ,RequestMethod.GET})
 	public ModelAndView toEditorOrder(String userId ,@ModelAttribute OrderInfo orderInfo) {
 		logger.info("读者修改订单Page:["+userId+"]&["+JSON.toJSONString(orderInfo)+"]");
-		ModelAndView mav = new ModelAndView("redirect:../reader/toOrderListManagePage");
+		ModelAndView mav = new ModelAndView("redirect:../reader/toOrderManagePage");
 		
 		orderInfoManager.saveOrderInfo(orderInfo);
 		
@@ -194,9 +209,35 @@ public class OrderManageController extends ReaderController{
 	/**
 	 * 跳转到期刊分配页面
 	 */
-	@RequestMapping(value="/toDistribution",method = RequestMethod.GET)
-	public String toAddress() {
-		return "reader_orderDistribution";
+	@RequestMapping(value="/toDistributionPage")
+	public ModelAndView toDistributionPage(HttpServletRequest request) {
+		UserInfo userInfo = getUserInfo(request);
+		AddressInfoQuery query = new AddressInfoQuery();
+		query.setRefId(userInfo.getRefId());
+		query.setRefRoleId(userInfo.getRoleId());
+		List<AddressInfo> list = addressInfoManager.queryList(query);
+		ModelAndView mav = new ModelAndView("reader_orderDistribution");
+		mav.addObject("list", list);
+		return mav;
+	}
+	
+	
+	/**
+	 * 期刊分配
+	 */
+	@RequestMapping(value="/toDistribution")
+	public ModelAndView toDistribution(HttpServletRequest request,String array) {
+		UserInfo userInfo = getUserInfo(request);
+		logger.info("期刊分配入参:["+array+"]");
+		JSONArray str = (JSONArray) JSONArray.parse(array);
+		for (int i=0;i<str.size();i++){
+			PeriodicalDistribut p = new PeriodicalDistribut();
+			p.setAddressId(str.getJSONObject(i).getString("aId"));
+			p.setDistributeNums(Integer.valueOf(str.getJSONObject(i).getString("nums")==""?"0":str.getJSONObject(i).getString("nums")));
+			periodicalDistributManager.savePeriodicalDistribut(p);
+		}
+		ModelAndView mav = new ModelAndView("redirect:../reader/toOrderManagePage");
+		return mav;
 	}
     
 }
