@@ -14,9 +14,12 @@
 	  <result column="expert_tax_amount" jdbcType="DECIMAL" property="expertTaxAmount" />
 	  <result column="expert_real_amount" jdbcType="DECIMAL" property="expertRealAmount" />
 	  <result column="expert_amount" jdbcType="DECIMAL" property="expertAmount" />
-	  <result column="payee_id" jdbcType="VARCHAR" property="payeeId" />
+	  <result column="expert_payee_id" jdbcType="VARCHAR" property="expertPayeeId" />
+	  <result column="author_payee_id" jdbcType="VARCHAR" property="authorPayeeId" />
 	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
 	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
+	  <result column="extend_3" jdbcType="VARCHAR" property="extend3" />
+	  <result column="extend_4" jdbcType="VARCHAR" property="extend4" />
 	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -62,14 +65,23 @@
       <if test="expertAmount != null" >
 	      and expert_amount = #{expertAmount,jdbcType=DECIMAL}
 	    </if>
-      <if test="payeeId != null" >
-	      and payee_id = #{payeeId,jdbcType=VARCHAR}
+      <if test="expertPayeeId != null" >
+	      and expert_payee_id = #{expertPayeeId,jdbcType=VARCHAR}
+	    </if>
+      <if test="authorPayeeId != null" >
+	      and author_payee_id = #{authorPayeeId,jdbcType=VARCHAR}
 	    </if>
       <if test="extend1 != null" >
 	      and extend_1 = #{extend1,jdbcType=VARCHAR}
 	    </if>
       <if test="extend2 != null" >
 	      and extend_2 = #{extend2,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend3 != null" >
+	      and extend_3 = #{extend3,jdbcType=VARCHAR}
+	    </if>
+      <if test="extend4 != null" >
+	      and extend_4 = #{extend4,jdbcType=VARCHAR}
 	    </if>
       <if test="createTime != null" >
 	      and create_time = #{createTime,jdbcType=TIMESTAMP}
@@ -116,14 +128,23 @@
       <if test="expertAmount != null">
         expert_amount = #{expertAmount,jdbcType=DECIMAL},
       </if>
-      <if test="payeeId != null">
-        payee_id = #{payeeId,jdbcType=VARCHAR},
+      <if test="expertPayeeId != null">
+        expert_payee_id = #{expertPayeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="authorPayeeId != null">
+        author_payee_id = #{authorPayeeId,jdbcType=VARCHAR},
       </if>
       <if test="extend1 != null">
         extend_1 = #{extend1,jdbcType=VARCHAR},
       </if>
       <if test="extend2 != null">
         extend_2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null">
+        extend_3 = #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null">
+        extend_4 = #{extend4,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -147,9 +168,12 @@
     expert_tax_amount,
     expert_real_amount,
     expert_amount,
-    payee_id,
+    expert_payee_id,
+    author_payee_id,
     extend_1,
     extend_2,
+    extend_3,
+    extend_4,
     create_time,
     update_time,
   </sql>
@@ -167,9 +191,12 @@
         expert_tax_amount = #{expertTaxAmount,jdbcType=DECIMAL},
         expert_real_amount = #{expertRealAmount,jdbcType=DECIMAL},
         expert_amount = #{expertAmount,jdbcType=DECIMAL},
-        payee_id = #{payeeId,jdbcType=VARCHAR},
+        expert_payee_id = #{expertPayeeId,jdbcType=VARCHAR},
+        author_payee_id = #{authorPayeeId,jdbcType=VARCHAR},
         extend_1 = #{extend1,jdbcType=VARCHAR},
         extend_2 = #{extend2,jdbcType=VARCHAR},
+        extend_3 = #{extend3,jdbcType=VARCHAR},
+        extend_4 = #{extend4,jdbcType=VARCHAR},
         create_time = #{createTime,jdbcType=TIMESTAMP},
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </trim>
@@ -210,14 +237,23 @@
     <if test="expertAmount != null">
       expert_amount,
     </if>
-    <if test="payeeId != null">
-      payee_id,
+    <if test="expertPayeeId != null">
+      expert_payee_id,
+    </if>
+    <if test="authorPayeeId != null">
+      author_payee_id,
     </if>
     <if test="extend1 != null">
       extend_1,
     </if>
     <if test="extend2 != null">
       extend_2,
+    </if>
+    <if test="extend3 != null">
+      extend_3,
+    </if>
+    <if test="extend4 != null">
+      extend_4,
     </if>
     <if test="createTime != null">
       create_time,
@@ -239,9 +275,12 @@
     #{expertTaxAmount,jdbcType=DECIMAL},
     #{expertRealAmount,jdbcType=DECIMAL},
     #{expertAmount,jdbcType=DECIMAL},
-    #{payeeId,jdbcType=VARCHAR},
+    #{expertPayeeId,jdbcType=VARCHAR},
+    #{authorPayeeId,jdbcType=VARCHAR},
     #{extend1,jdbcType=VARCHAR},
     #{extend2,jdbcType=VARCHAR},
+    #{extend3,jdbcType=VARCHAR},
+    #{extend4,jdbcType=VARCHAR},
     #{createTime,jdbcType=TIMESTAMP},
     #{updateTime,jdbcType=TIMESTAMP},
 	</sql>
@@ -280,14 +319,23 @@
     <if test="expertAmount != null">
       #{expertAmount,jdbcType=DECIMAL},
     </if>
-    <if test="payeeId != null">
-      #{payeeId,jdbcType=VARCHAR},
+    <if test="expertPayeeId != null">
+      #{expertPayeeId,jdbcType=VARCHAR},
+    </if>
+    <if test="authorPayeeId != null">
+      #{authorPayeeId,jdbcType=VARCHAR},
     </if>
     <if test="extend1 != null">
       #{extend1,jdbcType=VARCHAR},
     </if>
     <if test="extend2 != null">
       #{extend2,jdbcType=VARCHAR},
+    </if>
+    <if test="extend3 != null">
+      #{extend3,jdbcType=VARCHAR},
+    </if>
+    <if test="extend4 != null">
+      #{extend4,jdbcType=VARCHAR},
     </if>
     <if test="createTime != null">
       #{createTime,jdbcType=TIMESTAMP},

@@ -27,9 +27,12 @@ public class AccountInfo implements Serializable{
 	private java.lang.Long expertTaxAmount;
 	private java.lang.Long expertRealAmount;
 	private java.lang.Long expertAmount;
-	private java.lang.String payeeId;
+	private java.lang.String expertPayeeId;
+	private java.lang.String authorPayeeId;
 	private java.lang.String extend1;
 	private java.lang.String extend2;
+	private java.lang.String extend3;
+	private java.lang.String extend4;
 	private java.util.Date createTime;
 	private java.util.Date updateTime;
 
@@ -77,7 +80,7 @@ public class AccountInfo implements Serializable{
 		return this.authorAmount;
 	}
 	/**
-	 * 
+	 * 付款时间
 	 * @param payTime
 	 */
 	public void setPayTime(java.util.Date payTime) {
@@ -85,7 +88,7 @@ public class AccountInfo implements Serializable{
 	}
 	
 	/**
-	 * 
+	 * 付款时间
 	 * @return
 	 */
 	public java.util.Date getPayTime() {
@@ -212,19 +215,34 @@ public class AccountInfo implements Serializable{
 		return this.expertAmount;
 	}
 	/**
-	 * 收款人信息
-	 * @param payeeId
+	 * 专家收款账号id
+	 * @param expertPayeeId
 	 */
-	public void setPayeeId(java.lang.String payeeId) {
-		this.payeeId = payeeId;
+	public void setExpertPayeeId(java.lang.String expertPayeeId) {
+		this.expertPayeeId = expertPayeeId;
 	}
 	
 	/**
-	 * 收款人信息
+	 * 专家收款账号id
 	 * @return
 	 */
-	public java.lang.String getPayeeId() {
-		return this.payeeId;
+	public java.lang.String getExpertPayeeId() {
+		return this.expertPayeeId;
+	}
+	/**
+	 * 作者收款信息id
+	 * @param authorPayeeId
+	 */
+	public void setAuthorPayeeId(java.lang.String authorPayeeId) {
+		this.authorPayeeId = authorPayeeId;
+	}
+	
+	/**
+	 * 作者收款信息id
+	 * @return
+	 */
+	public java.lang.String getAuthorPayeeId() {
+		return this.authorPayeeId;
 	}
 	/**
 	 * 
@@ -255,6 +273,36 @@ public class AccountInfo implements Serializable{
 	 */
 	public java.lang.String getExtend2() {
 		return this.extend2;
+	}
+	/**
+	 * 
+	 * @param extend3
+	 */
+	public void setExtend3(java.lang.String extend3) {
+		this.extend3 = extend3;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.String getExtend3() {
+		return this.extend3;
+	}
+	/**
+	 * 
+	 * @param extend4
+	 */
+	public void setExtend4(java.lang.String extend4) {
+		this.extend4 = extend4;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.String getExtend4() {
+		return this.extend4;
 	}
 	/**
 	 * 
