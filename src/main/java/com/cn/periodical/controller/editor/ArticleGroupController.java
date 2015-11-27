@@ -134,4 +134,22 @@ public class ArticleGroupController extends EditorController{
 		periodicalManager.savePeriodical(p);
 		return mav;
 	}
+	
+	
+	/**
+	 * toEditArticleFeePage
+	 * 编辑稿费
+	 */
+	@RequestMapping(value="/toEditArticleFeePage")
+	public ModelAndView toEditArticleFeePage(HttpServletRequest request) {
+		logger.info("编辑稿费Page:[ ]");
+		/**
+		 * 期刊id+periodical+periodical_detail+article_info+account_info
+		 * */
+		ModelAndView mav = new ModelAndView("editor_editArticleFeePage");
+		
+		
+		
+		return mav;
+	}
 }

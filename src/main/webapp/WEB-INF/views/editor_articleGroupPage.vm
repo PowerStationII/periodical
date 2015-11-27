@@ -28,7 +28,11 @@
 				<td>${periodical.cycleNums}</td>
 				<td>${periodical.cycleNums}</td>
 				<td>${periodical.periodicalState}</td>
+				#if(${periodical.periodicalState}=='FI')
+				<td><a href="../editor/toEditArticleFeePage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">编辑稿费</a></td>
+				#else
 				<td><a href="../editor/toArticleGroupDetailPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">组稿</a></td>
+				#end
 			</tr>
 			#end
 		</table>
