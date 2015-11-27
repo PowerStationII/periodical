@@ -15,8 +15,23 @@
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
-		})
-	})
+		});
+	});
+	function yijian(value) {
+		$.ajax({
+				url:'../author/toOpinionQueryPage',
+				data:{articleId:value},
+				type:'POST',
+				success:function(res){
+					if (res=='null') {
+						$.messager.alert('审稿意见','无');    
+					}
+					else {
+						$.messager.alert('审稿意见',eval('(' + res + ')').opinion); 
+					}
+				}	
+		});
+	}
 </script>
 <body>
 	<div>
@@ -24,7 +39,7 @@
 		<thead>
 			<tr>
 				<th data-options="field:'name',width:200"></th>
-				<th data-options="field:'value',width:800"></th>
+				<th data-options="field:'value',width:867"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -70,14 +85,14 @@
 			</tr>
 			<tr>
 				<td>专家审稿：</td>
-				<td>审稿专家:$!{detail.expertName} 送审时间:$!{detail.dealStartTime} <a class="easyui-linkbutton"  href="../author/toOpinionQueryPage?articleId=${detail.articleId}">查看审稿意见</a></td>
+				<td>审稿专家:$!{detail.expertName} 送审时间:$!{detail.dealStartTime} <a onclick="yijian('$!{detail.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
 			</tr>
 			</tbody>
 		</table>
 	</div>
 	<div class="attr_con">
 		<a id="back" href="#" class="easyui-linkbutton" data-options="width:50">返回</a>
-		<a id="back" href="#" class="easyui-linkbutton" data-options="width:50">重投</a><!-- 如果稿件状态是返修,此按钮需要显示 -->
+		<!-- <a id="back" href="#" class="easyui-linkbutton" data-options="width:50">重投</a> --><!-- 如果稿件状态是返修,此按钮需要显示 -->
 	</div>
 </body>
 </html>

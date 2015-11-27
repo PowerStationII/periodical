@@ -48,9 +48,9 @@
 		<table id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
 			<thead>
 				<tr>
-					<th data-options="field:'articleId',width:200">稿件编号</th>
-					<th data-options="field:'articleCnTitle',width:200">稿件标题</th>
-					<th data-options="field:'aRealAmount',width:200">稿费金额</th>
+					<th data-options="field:'articleId',width:400">稿件编号</th>
+					<th data-options="field:'articleCnTitle',width:380">稿件标题</th>
+					<th data-options="field:'aRealAmount',width:287">稿费金额</th>
 				</tr>
 			</thead>
 			<tbody>

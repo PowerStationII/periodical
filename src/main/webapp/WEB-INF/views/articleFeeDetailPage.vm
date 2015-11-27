@@ -25,7 +25,7 @@
 		<thead>
 			<tr>
 				<th data-options="field:'name',width:200"></th>
-				<th data-options="field:'value',width:800"></th>
+				<th data-options="field:'value',width:867"></th>
 			</tr>
 		</thead>
 		<tbody>
