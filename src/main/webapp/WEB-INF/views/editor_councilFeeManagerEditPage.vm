@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>新增理事会信息</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+</head>
+<script>
+	$(function(){
+		$('#back').click(function(){
+			history.go(-1);
+		})
+	})
+</script>
+<body>
+	<form action="../editor/toSaveCouncilInfo" method="POST">
+		<table style="border: 1px solid black;" rules="all">
+			<tr>
+				<td colspan="2">单位名称</td>
+				<td colspan="6">${c.councilCompany}</td>
+			</tr>
+			<!-- <tr>
+				<td colspan="2">会员类型</td>
+				<td colspan="2"><select name="type">
+						<option value="D">理事</option>
+						<option value="SD">常务理事</option>
+				</select></td>
+				<td ROWSPAN="4" colspan="4">上传logo</td>
+			</tr>
+			<tr>
+				<td colspan="2">成立时间</td>
+				<td colspan="2"><input type="text" name="companySetupTime" value=""></td>
+			</tr>
+			<tr>
+				<td colspan="2">员工人数</td>
+				<td colspan="2"><input type="text" name="employeeNums" value=""></td>
+			</tr>
+			<tr>
+				<td colspan="2">邮政编码</td>
+				<td colspan="2"><input type="text" name="postCode" value=""></td>
+			</tr>
+			<tr>
+				<td colspan="2">所在地区</td>
+				<td colspan="2"><SELECT NAME="areaPro">
+						<OPTION VALUE="dd" SELECTED>DD</OPTION>
+						<OPTION VALUE="">
+				</SELECT></td>
+				<td colspan="4"><SELECT NAME="areaCity">
+						<OPTION VALUE="hh" SELECTED>RD</OPTION>
+						<OPTION VALUE="">
+				</SELECT></td>
+			</tr> -->
+			<tr>
+				<td colspan="2">详细地址</td>
+				<td colspan="6">${c.addressDetail}</td>
+			</tr>
+			<tr>
+				<td colspan="2">法人代表</td>
+				<td colspan="6">${c.legalName}</td>
+			</tr>
+			<tr>
+				<td colspan="2">法人联系电话</td>
+				<td colspan="2">${c.legalTelephone}</td>
+			</tr>
+			<tr>
+				<td colspan="2">职务</td>
+				<td colspan="6">${c.legalDuties}</td>
+			</tr>
+			<tr>
+				<td colspan="2">联系人</td>
+				<td colspan="6">${c.contactName}</td>
+			</tr>
+			<tr>
+				<td colspan="2">联系电话</td>
+				<td colspan="6">${c.contactTelephone}</td>
+			</tr>
+			<tr>
+				<td colspan="2">企业网址</td>
+				<td colspan="6">${c.website}</td>
+			</tr>
+			<tr>
+				<td colspan="8">---------------------------------</td>
+			</tr>
+
+<!-- 			<tr>
+				<td colspan="2">注册时间</td>
+				<td colspan="6"><input type="text" name="extend1" value=""></td>
+			</tr> -->
+			<tr>
+				<td colspan="2">合同开始时间</td>
+				<td colspan="2"><input type="text" name="startTime" value=""></td>
+				<td colspan="2">合同结束时间</td>
+				<td colspan="2"><input type="text" name="endTime" value=""></td>
+			</tr>
+			<tr>
+				<td colspan="2">合同金额</td>
+				<td colspan="6"><input type="text" name="amount" value=""></td>
+			</tr>
+			<tr>
+				<td colspan="2">联系电话</td>
+				<td colspan="6"><input type="text" name="contractContacterPhone" value=""></td>
+			</tr>
+			<tr>
+				<td colspan="2">发票号</td>
+				<td colspan="6"><input type="text" name="invoiceNo" value=""></td>
+			</tr>
+		</table>
+		<input type="button"  value="返回"  id="back"/>
+		<input type="submit" value="保存">
+	</form>
+</body>
+</html>

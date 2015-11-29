@@ -13,7 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.manager.CouncilContractFlowsManager;
+import com.cn.periodical.manager.CouncilInfoManager;
 import com.cn.periodical.pojo.BizCouncil;
+import com.cn.periodical.pojo.CouncilContractFlows;
+import com.cn.periodical.pojo.CouncilInfo;
+import com.cn.periodical.pojo.CouncilInfoQuery;
 import com.cn.periodical.request.AdCouncilManagerReqDto;
 import com.cn.periodical.service.AdCouncilManagerService;
 /**
@@ -26,6 +31,10 @@ public class AdCouncilManagerController extends EditorController{
 	
 	@Autowired
 	AdCouncilManagerService adCouncilManagerService;
+	@Autowired
+	CouncilInfoManager councilInfoManager;
+	@Autowired
+	CouncilContractFlowsManager councilContractFlowsManager;
 	/**
 	 * toCouncilManagerPage
 	 * 会员管理 End
@@ -72,21 +81,13 @@ public class AdCouncilManagerController extends EditorController{
 	 * */
 	@RequestMapping(value = "/toQrySingleCouncilInfo")
 	public ModelAndView toQrySingleAdInfo(@RequestParam("councilId") String councilId) {
-		ModelAndView mav = new ModelAndView("redirect:../editor/toCouncilInfoEdit");
-
-		
-		return mav;
-	}
-	
-	/**
-	 * 理事会编辑页面
-	 * */
-	@RequestMapping(value = "/toCouncilInfoEdit")
-	public ModelAndView toAdInfoEdit() {
 		ModelAndView mav = new ModelAndView("editor_councilManagerEditPage");
-		
-		
-
+		CouncilInfoQuery query =new CouncilInfoQuery();
+		query.setCouncilId(councilId);
+		List<CouncilInfo> councilInfos = councilInfoManager.queryList(query);
+		logger.info("理事会信息...."+councilInfos.size());
+		CouncilInfo councilInfo = councilInfos.get(0);
+		mav.addObject("c", councilInfo);
 		return mav;
 	}
 	
@@ -94,11 +95,40 @@ public class AdCouncilManagerController extends EditorController{
 	 * 理事会编辑保存Action
 	 * */
 	@RequestMapping(value = "/toSaveCouncilInfoEdit")
-	public ModelAndView toSaveAdInfoEdit() {
+	public ModelAndView toSaveAdInfoEdit(@ModelAttribute CouncilInfo c) {
+		logger.info("修改理事会信息:"+JSON.toJSONString(c));
 		ModelAndView mav = new ModelAndView("redirect:../editor/toCouncilManagerPage");
-
+		c.setId(c.getId());
+		councilInfoManager.saveCouncilInfo(c);
+		return mav;
+	}
+	
+	
+	/**
+	 * 续费页
+	 * */
+	@RequestMapping(value = "/toRenewPage")
+	public ModelAndView toRenewPage(@RequestParam("councilId") String councilId) {
+		ModelAndView mav = new ModelAndView("editor_councilFeeManagerEditPage");
+		CouncilInfoQuery query =new CouncilInfoQuery();
+		query.setCouncilId(councilId);
+		List<CouncilInfo> councilInfos = councilInfoManager.queryList(query);
+		CouncilInfo councilInfo = councilInfos.get(0);
+		mav.addObject("c", councilInfo);
 		return mav;
 	}
 
-	
+	/**
+	 * 续费
+	 * */
+	@RequestMapping(value = "/toSaveRenewInfo")
+	public ModelAndView toSaveRenewInfo(@ModelAttribute CouncilContractFlows ccf) {
+		ModelAndView mav = new ModelAndView("redirect:../editor/toCouncilManagerPage");
+		/**
+		 * 续费信息表中的发票号是否唯一
+		 * 因为续费信息表中没有id
+		 * */
+		councilContractFlowsManager.saveCouncilContractFlows(ccf);
+		return mav;
+	}
 }

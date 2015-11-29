@@ -104,8 +104,9 @@
 					<td>${dtos.contractEndTime}</td>
 					<td>${dtos.amount}</td>
 					<td>${dtos.invoiceNo}</td>
-					<td>此处未做</td>
-					<td><a class="easyui-linkbutton" style="width:50px;" href="../editor/toQrySingleCouncilInfo?councilId=${dtos.councilId}">编辑</a></td>
+					<td></td>
+					<td><a class="easyui-linkbutton" style="width:50px;" href="../editor/toQrySingleCouncilInfo?councilId=${dtos.councilId}">编辑</a>
+					<a class="easyui-linkbutton" style="width:50px;" href="../editor/toRenewPage?councilId=${dtos.councilId}">续费</a></td>
 				</tr>
 			#end
 			</tbody>
