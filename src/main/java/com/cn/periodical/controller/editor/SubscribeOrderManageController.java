@@ -99,6 +99,24 @@ public class SubscribeOrderManageController extends EditorController{
 	@RequestMapping(value="/toSubSupplementManagePage")
 	public ModelAndView toSubSupplementManagePage(HttpServletRequest request,String orderNo) {
 		logger.info("编辑订单赠刊信息 Page:orderNo:[ "+orderNo+" ]");
+		ModelAndView mav = new ModelAndView("editor_toSubOrderDetailPage");
+		/**
+		 * 编辑读者订单的赠刊信息,编辑信息保存至
+		 * periodical_distribute表
+		 * */
+		
+		
+		
+		return mav;
+	}
+	
+	
+	/**
+	 * toSubSupplement
+	 * 保存增刊信息
+	 */
+	@RequestMapping(value="/toSubSupplement")
+	public ModelAndView toSubSupplement(HttpServletRequest request,String orderNo) {
 		ModelAndView mav = new ModelAndView("redirect:../editor/toSubOrderManagePage");
 		/**
 		 * 编辑读者订单的赠刊信息,编辑信息保存至

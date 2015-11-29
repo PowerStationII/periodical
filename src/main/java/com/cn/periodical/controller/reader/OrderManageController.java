@@ -210,13 +210,20 @@ public class OrderManageController extends ReaderController{
 	 * 跳转到期刊分配页面
 	 */
 	@RequestMapping(value="/toDistributionPage")
-	public ModelAndView toDistributionPage(HttpServletRequest request) {
+	public ModelAndView toDistributionPage(HttpServletRequest request,String orderNo ) {
+		logger.info("读者编辑订单-订单号:["+orderNo+"]");
 		UserInfo userInfo = getUserInfo(request);
+		ModelAndView mav = new ModelAndView("reader_orderDistribution");
+		OrderInfoQuery orderQuery=new OrderInfoQuery();
+		orderQuery.setUserId(userInfo.getUserId());
+		orderQuery.setOrderNo(orderNo);
+		List<OrderInfo> orderInfos = orderInfoManager.queryList(orderQuery);
+		OrderInfo orderInfo = orderInfos.get(0);
+		mav.addObject("orderInfo", orderInfo);
 		AddressInfoQuery query = new AddressInfoQuery();
 		query.setRefId(userInfo.getRefId());
 		query.setRefRoleId(userInfo.getRoleId());
 		List<AddressInfo> list = addressInfoManager.queryList(query);
-		ModelAndView mav = new ModelAndView("reader_orderDistribution");
 		mav.addObject("list", list);
 		return mav;
 	}
@@ -226,12 +233,15 @@ public class OrderManageController extends ReaderController{
 	 * 期刊分配
 	 */
 	@RequestMapping(value="/toDistribution")
-	public ModelAndView toDistribution(HttpServletRequest request,String array) {
+	public ModelAndView toDistribution(HttpServletRequest request,String array,String periodicalId,String orderNo) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("期刊分配入参:["+array+"]");
+		logger.info("读者编辑订单-订单号:["+orderNo+"]&periodicalId["+periodicalId+"]");
 		JSONArray str = (JSONArray) JSONArray.parse(array);
 		for (int i=0;i<str.size();i++){
 			PeriodicalDistribut p = new PeriodicalDistribut();
+			p.setPeriodicalId(periodicalId);
+			p.setRefId(orderNo);
 			p.setAddressId(str.getJSONObject(i).getString("aId"));
 			p.setDistributeNums(Integer.valueOf(str.getJSONObject(i).getString("nums")==""?"0":str.getJSONObject(i).getString("nums")));
 			periodicalDistributManager.savePeriodicalDistribut(p);

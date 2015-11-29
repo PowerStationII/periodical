@@ -138,6 +138,7 @@ public class ArticleEnlistedDealController extends EditorController{
 		dto.setRoleId(RoleIdEnums.CN_EXPERT.getCode());
 		dto.setRefId(expertId);
 		dto.setSystemId(SystemIdEnums.EXPERT_SYS.getCode());
+		logger.info("为毛多一个参数!!!!!"+JSON.toJSONString(dto));
 		UserQueryReqDto dtoResult = userQueryManager.queryUserRef(dto);
 		
 		/**

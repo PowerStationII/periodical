@@ -98,7 +98,7 @@
                     <td>上传</td>
                     <td>
                     	<a href="../reader/toOrderPayPage?orderNo=$!{dtos.orderNo}" class="easyui-linkbutton" data-options="">订费登记</a> 
-                    	<a href="toDistributionPage"  onclick="OpenFrame()" class="easyui-linkbutton" data-options="">编辑订单</a>
+                    	<a href="../reader/toDistributionPage?orderNo=$!{dtos.orderNo}"  class="easyui-linkbutton" data-options="">编辑订单</a>
                     	<a href="#"  onclick="yijian('$!{dtos.orderNo}')" class="easyui-linkbutton" data-options="">查看审核信息</a> 
                     </td>
                 </tr>

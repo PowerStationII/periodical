@@ -27,7 +27,7 @@
 				json.nums = data.rows[i].nums;
 				array.push(JSON.stringify(json));
 			}
-			window.location.href='../reader/toDistribution?array=['+array+']&periodicalId=$!{orderInfo.periodicalId}&orderNo=$!{orderInfo.orderNo}';
+			window.location.href='../reader/toDistribution?array=['+array+']';
 		});
 		$('#back').click(function(){
 			history.go(-1);

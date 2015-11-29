@@ -212,10 +212,12 @@
 		ui.ref_id=ei.expert_id
 		and
 		ai.article_id=aai.article_id and
-		ai.article_id=#{articleId,jdbcType=VARCHAR} and aai.type='1006'
-		and
-		af.article_id=ai.article_id and af.role_id='1003'
+		ai.article_id=#{articleId,jdbcType=VARCHAR} 
+		and aai.type='1006'
+		group by ai.article_id
 	</select>
+	
+	<!-- and af.article_id=ai.article_id and af.role_id='1003' -->
 
 	<select id="articleFeeQuery" resultMap="AuthorQueryDetailResult"
 		parameterType="AuthorQueryDetail">
