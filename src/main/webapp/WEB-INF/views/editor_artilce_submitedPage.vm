@@ -11,27 +11,29 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
-<script>
+<!-- <script>
 	$(function(){
-		$('#submit').click(function(){
+		$('#dd').click(function(){
+			alert($('.rrr').val());
 			$('form').submit();
 		});
 	});
-</script>
+</script> -->
 <body>
 	<form action="../editor/toSubmitState" method="POST">
 		<input type="hidden" name="articleId" value="${respDto.articleId}">
 		<div id="articleInfos">
 			<div  id="bt">稿件送审</div>
 			
-			<table  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt'">
-			<thead>
+<!-- 			<table  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt'">
+ -->			<table >
+			<!-- <thead>
 				<tr>
 					<th data-options="field:'name',width:200"></th>
 					<th data-options="field:'value',width:800"></th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody> -->
 				<tr>
 					<td>稿件编号:</td>
 					<td>${respDto.articleId}</td>
@@ -60,9 +62,10 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td><a id="submit"  class="easyui-linkbutton"  style="width:50px;" href="#">送审</a></td>
+<!-- 				<a id="dd"  class="easyui-linkbutton"  style="width:50px;">送审</a>
+ -->					<td><input type="submit" value="送审"></td>
 				</tr>
-				</tbody>
+			<!-- 	</tbody> -->
 			</table>
 			<br>
 		</div>
