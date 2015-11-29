@@ -69,5 +69,11 @@ public class PeriodicalInfoManagerImpl implements PeriodicalInfoManager {
 		periodicalInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
 		return periodicalInfoPage;
 	}
+
+
+	public PeriodicalInfo selectByPeriodicalId(String periodicalId) {
+		// TODO Auto-generated method stub
+		return periodicalInfoDao.selectByPeriodicalId(periodicalId);
+	}
 }
 

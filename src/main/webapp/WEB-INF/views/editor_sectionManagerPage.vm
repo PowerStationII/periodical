@@ -24,7 +24,7 @@
 <body>
 	<div id="articleInfos">
 	<form action="../editor/toSectionInfoAdd" method="GET">
-		<input type="hidden" name="periodicalId" value="${periodical.periodicalId}">
+		<input type="text" name="periodicalId" value="${periodical.periodicalId}">
 		<a  id="submit" class="easyui-linkbutton" >新增栏目</a>
 		<a  id="back" class="easyui-linkbutton"  style="width:50px;">返回</a>
 	</form>

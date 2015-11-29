@@ -30,4 +30,6 @@ public interface PeriodicalInfoDao {
 	int updateByPrimaryKeySelective(PeriodicalInfo record);
 	
 	int updateByPrimaryKey(PeriodicalInfo record);
+	
+	public PeriodicalInfo selectByPeriodicalId(String periodicalId);
 }

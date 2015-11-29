@@ -42,10 +42,8 @@
 </head>
 <body>
 	<form id="sub2" action="../editor/toArticleGroup" method="POST">
-		<input type="hidden" name="periodicalIssueNo"
-			value="${periodicalIssueNo}"> <input type="hidden"
-			name="periodicalId" value="${periodicalId}"> <input
-			type="text" id="sectionA" name="sectionA" value=""> <br />
+		<input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}"> 
+		<input type="hidden" name="periodicalId" value="${periodicalId}"> <br />
 		<div id='left'>
 			<table border='1' id='leftSelect' class='selectedTable'>
 				<tr>
@@ -53,7 +51,6 @@
 					<td>标题</td>
 					<td>稿件状态</td>
 				</tr>
-
 				#foreach($articleQueryRespDto in ${list})
 				<tr class='selectAble'>
 					<td>${articleQueryRespDto.articleInfo.articleId}</td>
@@ -64,7 +61,7 @@
 			</table>
 		</div>
 		<div id='center'>
-			<INPUT TYPE="button" VALUE=">>" id='btnRight' /></br> 
+			<INPUT TYPE="button" VALUE=">>" id='btnRight' /><br/> 
 			<INPUT TYPE="button" VALUE="<<" id='btnLeft'/>
  		 </div>
 
@@ -115,24 +112,30 @@ $('#btnLeft').click(function(){
 });
 
 $('#btnSubmit').click(function(){
-	var sections=[];
-	$('#right .box').each(function(){
-		var section={};
-		section.data=[];
-		section.id=$(this).find('.sectionId').html();
-		$(this).find('.selectAble').each(function(){
-			section.data.push($(this).find('td:first').html());
+	 if (confirm('提交后不可修改,请确认后提交!') == true) {
+		var sections=[];
+		var leftArray=[];
+		$('#right .box').each(function(){
+			var section={};
+			section.data=[];
+			section.id=$(this).find('.sectionId').html();
+			$(this).find('.selectAble').each(function(){
+				section.data.push($(this).find('td:first').html());
+			});
+			sections.push(section);
 		});
-		sections.push(section);
-	});
-	$.ajax({
-		url:'../editor/toArticleGroup',
-//		data:{str:JSON.stringify(sections)},
-		data:{periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',str:JSON.stringify(sections)},
-		success:function(d){
-			alert('success');
-		}
-	});
+		$('#leftSelect .selectAble').each(function(){
+			leftArray.push($(this).find('td:first').html());
+		});
+	 	$.ajax({
+			url:'../editor/toArticleGroup',
+	//		data:{str:JSON.stringify(sections)},
+			data:{leftArray:leftArray.toString(),periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',str:JSON.stringify(sections)},
+			success:function(d){
+				window.location.href='../editor/toGroupPage?periodicalId=${periodicalId}';
+			}
+		});  
+	 }
 });
 </SCRIPT>
 </html>

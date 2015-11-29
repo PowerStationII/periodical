@@ -31,7 +31,9 @@
   <select id="selectArticles" resultType="hashmap">
 	select ai.article_id,ai.article_cn_title,ai.editor_state from
 	periodical_details pd,article_info ai where ai.article_id=pd.article_id
-	and pd.section_id=#{sectionId,jdbcType=VARCHAR}
+	and pd.section_id=#{sectionId,jdbcType=VARCHAR} 
+	and pd.periodical_issue_no=#{periodicalIssueNo,jdbcType=VARCHAR}
+	and pd.periodical_id=#{periodicalId,jdbcType=VARCHAR}
   </select>
   
   <sql id="Page_Query_Begin">

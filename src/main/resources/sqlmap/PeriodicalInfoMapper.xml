@@ -2,592 +2,693 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="PeriodicalInfoMapper">
 	<resultMap id="BaseResultMap" type="PeriodicalInfo">
-	  <id column="ID" jdbcType="DECIMAL" property="id" />
-	  <result column="payee_id" jdbcType="VARCHAR" property="payeeId" />
-	  <result column="periodical_year" jdbcType="VARCHAR" property="periodicalYear" />
-	  <result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
-	  <result column="periodical_cn_name" jdbcType="VARCHAR" property="periodicalCnName" />
-	  <result column="periodical_en_name" jdbcType="VARCHAR" property="periodicalEnName" />
-	  <result column="periodical_type" jdbcType="VARCHAR" property="periodicalType" />
-	  <result column="competent_organization" jdbcType="VARCHAR" property="competentOrganization" />
-	  <result column="host_organization" jdbcType="VARCHAR" property="hostOrganization" />
-	  <result column="cycle" jdbcType="INTEGER" property="cycle" />
-	  <result column="publish_place" jdbcType="VARCHAR" property="publishPlace" />
-	  <result column="languages" jdbcType="VARCHAR" property="languages" />
-	  <result column="format" jdbcType="VARCHAR" property="format" />
-	  <result column="press" jdbcType="VARCHAR" property="press" />
-	  <result column="website" jdbcType="VARCHAR" property="website" />
-	  <result column="publish_area" jdbcType="VARCHAR" property="publishArea" />
-	  <result column="issn_no" jdbcType="VARCHAR" property="issnNo" />
-	  <result column="cn_no" jdbcType="VARCHAR" property="cnNo" />
-	  <result column="mail_no" jdbcType="VARCHAR" property="mailNo" />
-	  <result column="in_unit_price" jdbcType="DECIMAL" property="inUnitPrice" />
-	  <result column="in_fix_price" jdbcType="DECIMAL" property="inFixPrice" />
-	  <result column="out_fix_price" jdbcType="DECIMAL" property="outFixPrice" />
-	  <result column="open_time" jdbcType="TIMESTAMP" property="openTime" />
-	  <result column="used_titles" jdbcType="VARCHAR" property="usedTitles" />
-	  <result column="awards" jdbcType="VARCHAR" property="awards" />
-	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
-	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
-	  <result column="extend_3" jdbcType="VARCHAR" property="extend3" />
-	  <result column="extend_4" jdbcType="VARCHAR" property="extend4" />
-	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  <sql id="Page_Query_Begin">
-    select * from(select t.*,rownum rn from(
-  </sql>
-  <sql id="Page_Query_End">
-  	) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
-  </sql>
-  <sql id="Example_Where_Clause">
-    <where>
-      <trim prefix="(" prefixOverrides="and" suffix=")">
-      <if test="payeeId != null" >
-	      and payee_id = #{payeeId,jdbcType=VARCHAR}
-	    </if>
-      <if test="periodicalYear != null" >
-	      and periodical_year = #{periodicalYear,jdbcType=VARCHAR}
-	    </if>
-      <if test="periodicalId != null" >
-	      and periodical_id = #{periodicalId,jdbcType=VARCHAR}
-	    </if>
-      <if test="periodicalCnName != null" >
-	      and periodical_cn_name = #{periodicalCnName,jdbcType=VARCHAR}
-	    </if>
-      <if test="periodicalEnName != null" >
-	      and periodical_en_name = #{periodicalEnName,jdbcType=VARCHAR}
-	    </if>
-      <if test="periodicalType != null" >
-	      and periodical_type = #{periodicalType,jdbcType=VARCHAR}
-	    </if>
-      <if test="competentOrganization != null" >
-	      and competent_organization = #{competentOrganization,jdbcType=VARCHAR}
-	    </if>
-      <if test="hostOrganization != null" >
-	      and host_organization = #{hostOrganization,jdbcType=VARCHAR}
-	    </if>
-      <if test="cycle != null" >
-	      and cycle = #{cycle,jdbcType=INTEGER}
-	    </if>
-      <if test="publishPlace != null" >
-	      and publish_place = #{publishPlace,jdbcType=VARCHAR}
-	    </if>
-      <if test="languages != null" >
-	      and languages = #{languages,jdbcType=VARCHAR}
-	    </if>
-      <if test="format != null" >
-	      and format = #{format,jdbcType=VARCHAR}
-	    </if>
-      <if test="press != null" >
-	      and press = #{press,jdbcType=VARCHAR}
-	    </if>
-      <if test="website != null" >
-	      and website = #{website,jdbcType=VARCHAR}
-	    </if>
-      <if test="publishArea != null" >
-	      and publish_area = #{publishArea,jdbcType=VARCHAR}
-	    </if>
-      <if test="issnNo != null" >
-	      and issn_no = #{issnNo,jdbcType=VARCHAR}
-	    </if>
-      <if test="cnNo != null" >
-	      and cn_no = #{cnNo,jdbcType=VARCHAR}
-	    </if>
-      <if test="mailNo != null" >
-	      and mail_no = #{mailNo,jdbcType=VARCHAR}
-	    </if>
-      <if test="inUnitPrice != null" >
-	      and in_unit_price = #{inUnitPrice,jdbcType=DECIMAL}
-	    </if>
-      <if test="inFixPrice != null" >
-	      and in_fix_price = #{inFixPrice,jdbcType=DECIMAL}
-	    </if>
-      <if test="outFixPrice != null" >
-	      and out_fix_price = #{outFixPrice,jdbcType=DECIMAL}
-	    </if>
-      <if test="openTime != null" >
-	      and open_time = #{openTime,jdbcType=TIMESTAMP}
-	    </if>
-      <if test="usedTitles != null" >
-	      and used_titles = #{usedTitles,jdbcType=VARCHAR}
-	    </if>
-      <if test="awards != null" >
-	      and awards = #{awards,jdbcType=VARCHAR}
-	    </if>
-      <if test="extend1 != null" >
-	      and extend_1 = #{extend1,jdbcType=VARCHAR}
-	    </if>
-      <if test="extend2 != null" >
-	      and extend_2 = #{extend2,jdbcType=VARCHAR}
-	    </if>
-      <if test="extend3 != null" >
-	      and extend_3 = #{extend3,jdbcType=VARCHAR}
-	    </if>
-      <if test="extend4 != null" >
-	      and extend_4 = #{extend4,jdbcType=VARCHAR}
-	    </if>
-      <if test="createTime != null" >
-	      and create_time = #{createTime,jdbcType=TIMESTAMP}
-	    </if>
-      <if test="updateTime != null" >
-	      and update_time = #{updateTime,jdbcType=TIMESTAMP}
-	    </if>
-	  </trim>
-    </where>
-  </sql>
-  <sql id="Example_Set_Clause">
-    <set>
-      <trim suffixOverrides=",">
-      <if test="payeeId != null">
-        payee_id = #{payeeId,jdbcType=VARCHAR},
-      </if>
-      <if test="periodicalYear != null">
-        periodical_year = #{periodicalYear,jdbcType=VARCHAR},
-      </if>
-      <if test="periodicalId != null">
-        periodical_id = #{periodicalId,jdbcType=VARCHAR},
-      </if>
-      <if test="periodicalCnName != null">
-        periodical_cn_name = #{periodicalCnName,jdbcType=VARCHAR},
-      </if>
-      <if test="periodicalEnName != null">
-        periodical_en_name = #{periodicalEnName,jdbcType=VARCHAR},
-      </if>
-      <if test="periodicalType != null">
-        periodical_type = #{periodicalType,jdbcType=VARCHAR},
-      </if>
-      <if test="competentOrganization != null">
-        competent_organization = #{competentOrganization,jdbcType=VARCHAR},
-      </if>
-      <if test="hostOrganization != null">
-        host_organization = #{hostOrganization,jdbcType=VARCHAR},
-      </if>
-      <if test="cycle != null">
-        cycle = #{cycle,jdbcType=INTEGER},
-      </if>
-      <if test="publishPlace != null">
-        publish_place = #{publishPlace,jdbcType=VARCHAR},
-      </if>
-      <if test="languages != null">
-        languages = #{languages,jdbcType=VARCHAR},
-      </if>
-      <if test="format != null">
-        format = #{format,jdbcType=VARCHAR},
-      </if>
-      <if test="press != null">
-        press = #{press,jdbcType=VARCHAR},
-      </if>
-      <if test="website != null">
-        website = #{website,jdbcType=VARCHAR},
-      </if>
-      <if test="publishArea != null">
-        publish_area = #{publishArea,jdbcType=VARCHAR},
-      </if>
-      <if test="issnNo != null">
-        issn_no = #{issnNo,jdbcType=VARCHAR},
-      </if>
-      <if test="cnNo != null">
-        cn_no = #{cnNo,jdbcType=VARCHAR},
-      </if>
-      <if test="mailNo != null">
-        mail_no = #{mailNo,jdbcType=VARCHAR},
-      </if>
-      <if test="inUnitPrice != null">
-        in_unit_price = #{inUnitPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="inFixPrice != null">
-        in_fix_price = #{inFixPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="outFixPrice != null">
-        out_fix_price = #{outFixPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="openTime != null">
-        open_time = #{openTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="usedTitles != null">
-        used_titles = #{usedTitles,jdbcType=VARCHAR},
-      </if>
-      <if test="awards != null">
-        awards = #{awards,jdbcType=VARCHAR},
-      </if>
-      <if test="extend1 != null">
-        extend_1 = #{extend1,jdbcType=VARCHAR},
-      </if>
-      <if test="extend2 != null">
-        extend_2 = #{extend2,jdbcType=VARCHAR},
-      </if>
-      <if test="extend3 != null">
-        extend_3 = #{extend3,jdbcType=VARCHAR},
-      </if>
-      <if test="extend4 != null">
-        extend_4 = #{extend4,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      </trim>
-    </set>
-  </sql>
-  <sql id="Base_Column_List">
-    id,
-    payee_id,
-    periodical_year,
-    periodical_id,
-    periodical_cn_name,
-    periodical_en_name,
-    periodical_type,
-    competent_organization,
-    host_organization,
-    cycle,
-    publish_place,
-    languages,
-    format,
-    press,
-    website,
-    publish_area,
-    issn_no,
-    cn_no,
-    mail_no,
-    in_unit_price,
-    in_fix_price,
-    out_fix_price,
-    open_time,
-    used_titles,
-    awards,
-    extend_1,
-    extend_2,
-    extend_3,
-    extend_4,
-    create_time,
-    update_time,
-  </sql>
-  <sql id="Base_Set_Clause">
-    <set>
-      <trim suffixOverrides=",">
-        payee_id = #{payeeId,jdbcType=VARCHAR},
-        periodical_year = #{periodicalYear,jdbcType=VARCHAR},
-        periodical_id = #{periodicalId,jdbcType=VARCHAR},
-        periodical_cn_name = #{periodicalCnName,jdbcType=VARCHAR},
-        periodical_en_name = #{periodicalEnName,jdbcType=VARCHAR},
-        periodical_type = #{periodicalType,jdbcType=VARCHAR},
-        competent_organization = #{competentOrganization,jdbcType=VARCHAR},
-        host_organization = #{hostOrganization,jdbcType=VARCHAR},
-        cycle = #{cycle,jdbcType=INTEGER},
-        publish_place = #{publishPlace,jdbcType=VARCHAR},
-        languages = #{languages,jdbcType=VARCHAR},
-        format = #{format,jdbcType=VARCHAR},
-        press = #{press,jdbcType=VARCHAR},
-        website = #{website,jdbcType=VARCHAR},
-        publish_area = #{publishArea,jdbcType=VARCHAR},
-        issn_no = #{issnNo,jdbcType=VARCHAR},
-        cn_no = #{cnNo,jdbcType=VARCHAR},
-        mail_no = #{mailNo,jdbcType=VARCHAR},
-        in_unit_price = #{inUnitPrice,jdbcType=DECIMAL},
-        in_fix_price = #{inFixPrice,jdbcType=DECIMAL},
-        out_fix_price = #{outFixPrice,jdbcType=DECIMAL},
-        open_time = #{openTime,jdbcType=TIMESTAMP},
-        used_titles = #{usedTitles,jdbcType=VARCHAR},
-        awards = #{awards,jdbcType=VARCHAR},
-        extend_1 = #{extend1,jdbcType=VARCHAR},
-        extend_2 = #{extend2,jdbcType=VARCHAR},
-        extend_3 = #{extend3,jdbcType=VARCHAR},
-        extend_4 = #{extend4,jdbcType=VARCHAR},
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </trim>
-    </set>
-  </sql>
-  <sql id="Selective_Column_List">
-    <!-- ID, -->
-    <if test="payeeId != null">
-      payee_id,
-    </if>
-    <if test="periodicalYear != null">
-      periodical_year,
-    </if>
-    <if test="periodicalId != null">
-      periodical_id,
-    </if>
-    <if test="periodicalCnName != null">
-      periodical_cn_name,
-    </if>
-    <if test="periodicalEnName != null">
-      periodical_en_name,
-    </if>
-    <if test="periodicalType != null">
-      periodical_type,
-    </if>
-    <if test="competentOrganization != null">
-      competent_organization,
-    </if>
-    <if test="hostOrganization != null">
-      host_organization,
-    </if>
-    <if test="cycle != null">
-      cycle,
-    </if>
-    <if test="publishPlace != null">
-      publish_place,
-    </if>
-    <if test="languages != null">
-      languages,
-    </if>
-    <if test="format != null">
-      format,
-    </if>
-    <if test="press != null">
-      press,
-    </if>
-    <if test="website != null">
-      website,
-    </if>
-    <if test="publishArea != null">
-      publish_area,
-    </if>
-    <if test="issnNo != null">
-      issn_no,
-    </if>
-    <if test="cnNo != null">
-      cn_no,
-    </if>
-    <if test="mailNo != null">
-      mail_no,
-    </if>
-    <if test="inUnitPrice != null">
-      in_unit_price,
-    </if>
-    <if test="inFixPrice != null">
-      in_fix_price,
-    </if>
-    <if test="outFixPrice != null">
-      out_fix_price,
-    </if>
-    <if test="openTime != null">
-      open_time,
-    </if>
-    <if test="usedTitles != null">
-      used_titles,
-    </if>
-    <if test="awards != null">
-      awards,
-    </if>
-    <if test="extend1 != null">
-      extend_1,
-    </if>
-    <if test="extend2 != null">
-      extend_2,
-    </if>
-    <if test="extend3 != null">
-      extend_3,
-    </if>
-    <if test="extend4 != null">
-      extend_4,
-    </if>
-    <if test="createTime != null">
-      create_time,
-    </if>
-    <if test="updateTime != null">
-      update_time,
-    </if>
-  </sql>
-	<sql id="Base_Value_List">
-    #{id,jdbcType=BIGINT},
-    #{payeeId,jdbcType=VARCHAR},
-    #{periodicalYear,jdbcType=VARCHAR},
-    #{periodicalId,jdbcType=VARCHAR},
-    #{periodicalCnName,jdbcType=VARCHAR},
-    #{periodicalEnName,jdbcType=VARCHAR},
-    #{periodicalType,jdbcType=VARCHAR},
-    #{competentOrganization,jdbcType=VARCHAR},
-    #{hostOrganization,jdbcType=VARCHAR},
-    #{cycle,jdbcType=INTEGER},
-    #{publishPlace,jdbcType=VARCHAR},
-    #{languages,jdbcType=VARCHAR},
-    #{format,jdbcType=VARCHAR},
-    #{press,jdbcType=VARCHAR},
-    #{website,jdbcType=VARCHAR},
-    #{publishArea,jdbcType=VARCHAR},
-    #{issnNo,jdbcType=VARCHAR},
-    #{cnNo,jdbcType=VARCHAR},
-    #{mailNo,jdbcType=VARCHAR},
-    #{inUnitPrice,jdbcType=DECIMAL},
-    #{inFixPrice,jdbcType=DECIMAL},
-    #{outFixPrice,jdbcType=DECIMAL},
-    #{openTime,jdbcType=TIMESTAMP},
-    #{usedTitles,jdbcType=VARCHAR},
-    #{awards,jdbcType=VARCHAR},
-    #{extend1,jdbcType=VARCHAR},
-    #{extend2,jdbcType=VARCHAR},
-    #{extend3,jdbcType=VARCHAR},
-    #{extend4,jdbcType=VARCHAR},
-    #{createTime,jdbcType=TIMESTAMP},
-    #{updateTime,jdbcType=TIMESTAMP},
+		<id column="ID" jdbcType="DECIMAL" property="id" />
+		<result column="payee_id" jdbcType="VARCHAR" property="payeeId" />
+		<result column="periodical_year" jdbcType="VARCHAR" property="periodicalYear" />
+		<result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
+		<result column="periodical_cn_name" jdbcType="VARCHAR"
+			property="periodicalCnName" />
+		<result column="periodical_en_name" jdbcType="VARCHAR"
+			property="periodicalEnName" />
+		<result column="periodical_type" jdbcType="VARCHAR" property="periodicalType" />
+		<result column="competent_organization" jdbcType="VARCHAR"
+			property="competentOrganization" />
+		<result column="host_organization" jdbcType="VARCHAR" property="hostOrganization" />
+		<result column="cycle" jdbcType="INTEGER" property="cycle" />
+		<result column="publish_place" jdbcType="VARCHAR" property="publishPlace" />
+		<result column="languages" jdbcType="VARCHAR" property="languages" />
+		<result column="format" jdbcType="VARCHAR" property="format" />
+		<result column="press" jdbcType="VARCHAR" property="press" />
+		<result column="website" jdbcType="VARCHAR" property="website" />
+		<result column="publish_area" jdbcType="VARCHAR" property="publishArea" />
+		<result column="issn_no" jdbcType="VARCHAR" property="issnNo" />
+		<result column="cn_no" jdbcType="VARCHAR" property="cnNo" />
+		<result column="mail_no" jdbcType="VARCHAR" property="mailNo" />
+		<result column="in_unit_price" jdbcType="DECIMAL" property="inUnitPrice" />
+		<result column="in_fix_price" jdbcType="DECIMAL" property="inFixPrice" />
+		<result column="out_fix_price" jdbcType="DECIMAL" property="outFixPrice" />
+		<result column="open_time" jdbcType="TIMESTAMP" property="openTime" />
+		<result column="used_titles" jdbcType="VARCHAR" property="usedTitles" />
+		<result column="awards" jdbcType="VARCHAR" property="awards" />
+		<result column="extend_1" jdbcType="VARCHAR" property="extend1" />
+		<result column="extend_2" jdbcType="VARCHAR" property="extend2" />
+		<result column="extend_3" jdbcType="VARCHAR" property="extend3" />
+		<result column="extend_4" jdbcType="VARCHAR" property="extend4" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+	<sql id="Page_Query_Begin">
+		select * from(select t.*,rownum rn from(
 	</sql>
-  <sql id="Selective_Value_List">
-    <!-- SEQ_periodical_info.nextval, -->
-    <if test="payeeId != null">
-      #{payeeId,jdbcType=VARCHAR},
-    </if>
-    <if test="periodicalYear != null">
-      #{periodicalYear,jdbcType=VARCHAR},
-    </if>
-    <if test="periodicalId != null">
-      #{periodicalId,jdbcType=VARCHAR},
-    </if>
-    <if test="periodicalCnName != null">
-      #{periodicalCnName,jdbcType=VARCHAR},
-    </if>
-    <if test="periodicalEnName != null">
-      #{periodicalEnName,jdbcType=VARCHAR},
-    </if>
-    <if test="periodicalType != null">
-      #{periodicalType,jdbcType=VARCHAR},
-    </if>
-    <if test="competentOrganization != null">
-      #{competentOrganization,jdbcType=VARCHAR},
-    </if>
-    <if test="hostOrganization != null">
-      #{hostOrganization,jdbcType=VARCHAR},
-    </if>
-    <if test="cycle != null">
-      #{cycle,jdbcType=INTEGER},
-    </if>
-    <if test="publishPlace != null">
-      #{publishPlace,jdbcType=VARCHAR},
-    </if>
-    <if test="languages != null">
-      #{languages,jdbcType=VARCHAR},
-    </if>
-    <if test="format != null">
-      #{format,jdbcType=VARCHAR},
-    </if>
-    <if test="press != null">
-      #{press,jdbcType=VARCHAR},
-    </if>
-    <if test="website != null">
-      #{website,jdbcType=VARCHAR},
-    </if>
-    <if test="publishArea != null">
-      #{publishArea,jdbcType=VARCHAR},
-    </if>
-    <if test="issnNo != null">
-      #{issnNo,jdbcType=VARCHAR},
-    </if>
-    <if test="cnNo != null">
-      #{cnNo,jdbcType=VARCHAR},
-    </if>
-    <if test="mailNo != null">
-      #{mailNo,jdbcType=VARCHAR},
-    </if>
-    <if test="inUnitPrice != null">
-      #{inUnitPrice,jdbcType=DECIMAL},
-    </if>
-    <if test="inFixPrice != null">
-      #{inFixPrice,jdbcType=DECIMAL},
-    </if>
-    <if test="outFixPrice != null">
-      #{outFixPrice,jdbcType=DECIMAL},
-    </if>
-    <if test="openTime != null">
-      #{openTime,jdbcType=TIMESTAMP},
-    </if>
-    <if test="usedTitles != null">
-      #{usedTitles,jdbcType=VARCHAR},
-    </if>
-    <if test="awards != null">
-      #{awards,jdbcType=VARCHAR},
-    </if>
-    <if test="extend1 != null">
-      #{extend1,jdbcType=VARCHAR},
-    </if>
-    <if test="extend2 != null">
-      #{extend2,jdbcType=VARCHAR},
-    </if>
-    <if test="extend3 != null">
-      #{extend3,jdbcType=VARCHAR},
-    </if>
-    <if test="extend4 != null">
-      #{extend4,jdbcType=VARCHAR},
-    </if>
-    <if test="createTime != null">
-      #{createTime,jdbcType=TIMESTAMP},
-    </if>
-    <if test="updateTime != null">
-      #{updateTime,jdbcType=TIMESTAMP},
-    </if>
-  </sql>
-  
-  <select id="selectByExample" parameterType="PeriodicalInfoQuery" resultMap="BaseResultMap">
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from periodical_info
-    <include refid="Example_Where_Clause" />
-    <!-- order by CREATE_DATE -->
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from periodical_info
-    where ID = #{id,jdbcType=DECIMAL}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from periodical_info
-    where ID = #{id,jdbcType=DECIMAL}
-  </delete>
-  <delete id="deleteByExample" parameterType="PeriodicalInfoQuery">
-    delete from periodical_info
-    <include refid="Example_Where_Clause" />
-  </delete>
-  <insert id="insert" parameterType="PeriodicalInfo">
-    insert into periodical_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <include refid="Base_Column_List"/>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <include refid="Base_Value_List"/>
-    </trim>
-  </insert>
-  <insert id="insertSelective" parameterType="PeriodicalInfo">
-    insert into periodical_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <include refid="Selective_Column_List"/>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <include refid="Selective_Value_List"/>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="PeriodicalInfoQuery" resultType="java.lang.Integer">
-    select count(*) from periodical_info
-    <include refid="Example_Where_Clause" />
-  </select>
-  <update id="updateByPrimaryKeySelective" parameterType="PeriodicalInfo">
-    update periodical_info
-    <include refid="Example_Set_Clause"/>
-    where ID = #{id,jdbcType=DECIMAL}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="PeriodicalInfo">
-    update periodical_info
-    <include refid="Base_Set_Clause"/>
-    where ID = #{id,jdbcType=DECIMAL}
-  </update>
-  
-  <select id="selectPageByExample" parameterType="PeriodicalInfoQuery" resultMap="BaseResultMap">
-  	<include refid="Page_Query_Begin" />
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from periodical_info
-    <include refid="Example_Where_Clause" />
-    <!-- order by CREATE_DATE -->
-    <include refid="Page_Query_End" />
-  </select>
+	<sql id="Page_Query_End">
+		) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+			<trim prefix="(" prefixOverrides="and" suffix=")">
+				<if test="payeeId != null">
+					and payee_id = #{payeeId,jdbcType=VARCHAR}
+				</if>
+				<if test="periodicalYear != null">
+					and periodical_year = #{periodicalYear,jdbcType=VARCHAR}
+				</if>
+				<if test="periodicalId != null">
+					and periodical_id = #{periodicalId,jdbcType=VARCHAR}
+				</if>
+				<if test="periodicalCnName != null">
+					and periodical_cn_name =
+					#{periodicalCnName,jdbcType=VARCHAR}
+				</if>
+				<if test="periodicalEnName != null">
+					and periodical_en_name =
+					#{periodicalEnName,jdbcType=VARCHAR}
+				</if>
+				<if test="periodicalType != null">
+					and periodical_type = #{periodicalType,jdbcType=VARCHAR}
+				</if>
+				<if test="competentOrganization != null">
+					and competent_organization =
+					#{competentOrganization,jdbcType=VARCHAR}
+				</if>
+				<if test="hostOrganization != null">
+					and host_organization =
+					#{hostOrganization,jdbcType=VARCHAR}
+				</if>
+				<if test="cycle != null">
+					and cycle = #{cycle,jdbcType=INTEGER}
+				</if>
+				<if test="publishPlace != null">
+					and publish_place = #{publishPlace,jdbcType=VARCHAR}
+				</if>
+				<if test="languages != null">
+					and languages = #{languages,jdbcType=VARCHAR}
+				</if>
+				<if test="format != null">
+					and format = #{format,jdbcType=VARCHAR}
+				</if>
+				<if test="press != null">
+					and press = #{press,jdbcType=VARCHAR}
+				</if>
+				<if test="website != null">
+					and website = #{website,jdbcType=VARCHAR}
+				</if>
+				<if test="publishArea != null">
+					and publish_area = #{publishArea,jdbcType=VARCHAR}
+				</if>
+				<if test="issnNo != null">
+					and issn_no = #{issnNo,jdbcType=VARCHAR}
+				</if>
+				<if test="cnNo != null">
+					and cn_no = #{cnNo,jdbcType=VARCHAR}
+				</if>
+				<if test="mailNo != null">
+					and mail_no = #{mailNo,jdbcType=VARCHAR}
+				</if>
+				<if test="inUnitPrice != null">
+					and in_unit_price = #{inUnitPrice,jdbcType=DECIMAL}
+				</if>
+				<if test="inFixPrice != null">
+					and in_fix_price = #{inFixPrice,jdbcType=DECIMAL}
+				</if>
+				<if test="outFixPrice != null">
+					and out_fix_price = #{outFixPrice,jdbcType=DECIMAL}
+				</if>
+				<if test="openTime != null">
+					and open_time = #{openTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="usedTitles != null">
+					and used_titles = #{usedTitles,jdbcType=VARCHAR}
+				</if>
+				<if test="awards != null">
+					and awards = #{awards,jdbcType=VARCHAR}
+				</if>
+				<if test="extend1 != null">
+					and extend_1 = #{extend1,jdbcType=VARCHAR}
+				</if>
+				<if test="extend2 != null">
+					and extend_2 = #{extend2,jdbcType=VARCHAR}
+				</if>
+				<if test="extend3 != null">
+					and extend_3 = #{extend3,jdbcType=VARCHAR}
+				</if>
+				<if test="extend4 != null">
+					and extend_4 = #{extend4,jdbcType=VARCHAR}
+				</if>
+				<if test="createTime != null">
+					and create_time = #{createTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="updateTime != null">
+					and update_time = #{updateTime,jdbcType=TIMESTAMP}
+				</if>
+			</trim>
+		</where>
+	</sql>
+	<sql id="Example_Set_Clause">
+		<set>
+			<trim suffixOverrides=",">
+				<if test="payeeId != null">
+					payee_id = #{payeeId,jdbcType=VARCHAR},
+				</if>
+				<if test="periodicalYear != null">
+					periodical_year = #{periodicalYear,jdbcType=VARCHAR},
+				</if>
+				<if test="periodicalId != null">
+					periodical_id = #{periodicalId,jdbcType=VARCHAR},
+				</if>
+				<if test="periodicalCnName != null">
+					periodical_cn_name =
+					#{periodicalCnName,jdbcType=VARCHAR},
+				</if>
+				<if test="periodicalEnName != null">
+					periodical_en_name =
+					#{periodicalEnName,jdbcType=VARCHAR},
+				</if>
+				<if test="periodicalType != null">
+					periodical_type = #{periodicalType,jdbcType=VARCHAR},
+				</if>
+				<if test="competentOrganization != null">
+					competent_organization =
+					#{competentOrganization,jdbcType=VARCHAR},
+				</if>
+				<if test="hostOrganization != null">
+					host_organization =
+					#{hostOrganization,jdbcType=VARCHAR},
+				</if>
+				<if test="cycle != null">
+					cycle = #{cycle,jdbcType=INTEGER},
+				</if>
+				<if test="publishPlace != null">
+					publish_place = #{publishPlace,jdbcType=VARCHAR},
+				</if>
+				<if test="languages != null">
+					languages = #{languages,jdbcType=VARCHAR},
+				</if>
+				<if test="format != null">
+					format = #{format,jdbcType=VARCHAR},
+				</if>
+				<if test="press != null">
+					press = #{press,jdbcType=VARCHAR},
+				</if>
+				<if test="website != null">
+					website = #{website,jdbcType=VARCHAR},
+				</if>
+				<if test="publishArea != null">
+					publish_area = #{publishArea,jdbcType=VARCHAR},
+				</if>
+				<if test="issnNo != null">
+					issn_no = #{issnNo,jdbcType=VARCHAR},
+				</if>
+				<if test="cnNo != null">
+					cn_no = #{cnNo,jdbcType=VARCHAR},
+				</if>
+				<if test="mailNo != null">
+					mail_no = #{mailNo,jdbcType=VARCHAR},
+				</if>
+				<if test="inUnitPrice != null">
+					in_unit_price = #{inUnitPrice,jdbcType=DECIMAL},
+				</if>
+				<if test="inFixPrice != null">
+					in_fix_price = #{inFixPrice,jdbcType=DECIMAL},
+				</if>
+				<if test="outFixPrice != null">
+					out_fix_price = #{outFixPrice,jdbcType=DECIMAL},
+				</if>
+				<if test="openTime != null">
+					open_time = #{openTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="usedTitles != null">
+					used_titles = #{usedTitles,jdbcType=VARCHAR},
+				</if>
+				<if test="awards != null">
+					awards = #{awards,jdbcType=VARCHAR},
+				</if>
+				<if test="extend1 != null">
+					extend_1 = #{extend1,jdbcType=VARCHAR},
+				</if>
+				<if test="extend2 != null">
+					extend_2 = #{extend2,jdbcType=VARCHAR},
+				</if>
+				<if test="extend3 != null">
+					extend_3 = #{extend3,jdbcType=VARCHAR},
+				</if>
+				<if test="extend4 != null">
+					extend_4 = #{extend4,jdbcType=VARCHAR},
+				</if>
+				<if test="createTime != null">
+					create_time = #{createTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="updateTime != null">
+					update_time = #{updateTime,jdbcType=TIMESTAMP},
+				</if>
+			</trim>
+		</set>
+	</sql>
+	<sql id="Base_Column_List">
+		id,
+		payee_id,
+		periodical_year,
+		periodical_id,
+		periodical_cn_name,
+		periodical_en_name,
+		periodical_type,
+		competent_organization,
+		host_organization,
+		cycle,
+		publish_place,
+		languages,
+		format,
+		press,
+		website,
+		publish_area,
+		issn_no,
+		cn_no,
+		mail_no,
+		in_unit_price,
+		in_fix_price,
+		out_fix_price,
+		open_time,
+		used_titles,
+		awards,
+		extend_1,
+		extend_2,
+		extend_3,
+		extend_4,
+		create_time,
+		update_time,
+	</sql>
+	<sql id="Base_Set_Clause">
+		<set>
+			<trim suffixOverrides=",">
+				payee_id = #{payeeId,jdbcType=VARCHAR},
+				periodical_year = #{periodicalYear,jdbcType=VARCHAR},
+				periodical_id =
+				#{periodicalId,jdbcType=VARCHAR},
+				periodical_cn_name =
+				#{periodicalCnName,jdbcType=VARCHAR},
+				periodical_en_name =
+				#{periodicalEnName,jdbcType=VARCHAR},
+				periodical_type =
+				#{periodicalType,jdbcType=VARCHAR},
+				competent_organization =
+				#{competentOrganization,jdbcType=VARCHAR},
+				host_organization =
+				#{hostOrganization,jdbcType=VARCHAR},
+				cycle =
+				#{cycle,jdbcType=INTEGER},
+				publish_place =
+				#{publishPlace,jdbcType=VARCHAR},
+				languages =
+				#{languages,jdbcType=VARCHAR},
+				format = #{format,jdbcType=VARCHAR},
+				press = #{press,jdbcType=VARCHAR},
+				website =
+				#{website,jdbcType=VARCHAR},
+				publish_area =
+				#{publishArea,jdbcType=VARCHAR},
+				issn_no =
+				#{issnNo,jdbcType=VARCHAR},
+				cn_no = #{cnNo,jdbcType=VARCHAR},
+				mail_no
+				= #{mailNo,jdbcType=VARCHAR},
+				in_unit_price =
+				#{inUnitPrice,jdbcType=DECIMAL},
+				in_fix_price =
+				#{inFixPrice,jdbcType=DECIMAL},
+				out_fix_price =
+				#{outFixPrice,jdbcType=DECIMAL},
+				open_time =
+				#{openTime,jdbcType=TIMESTAMP},
+				used_titles =
+				#{usedTitles,jdbcType=VARCHAR},
+				awards = #{awards,jdbcType=VARCHAR},
+				extend_1 = #{extend1,jdbcType=VARCHAR},
+				extend_2 =
+				#{extend2,jdbcType=VARCHAR},
+				extend_3 = #{extend3,jdbcType=VARCHAR},
+				extend_4 = #{extend4,jdbcType=VARCHAR},
+				create_time =
+				#{createTime,jdbcType=TIMESTAMP},
+				update_time =
+				#{updateTime,jdbcType=TIMESTAMP},
+			</trim>
+		</set>
+	</sql>
+	<sql id="Selective_Column_List">
+		<!-- ID, -->
+		<if test="payeeId != null">
+			payee_id,
+		</if>
+		<if test="periodicalYear != null">
+			periodical_year,
+		</if>
+		<if test="periodicalId != null">
+			periodical_id,
+		</if>
+		<if test="periodicalCnName != null">
+			periodical_cn_name,
+		</if>
+		<if test="periodicalEnName != null">
+			periodical_en_name,
+		</if>
+		<if test="periodicalType != null">
+			periodical_type,
+		</if>
+		<if test="competentOrganization != null">
+			competent_organization,
+		</if>
+		<if test="hostOrganization != null">
+			host_organization,
+		</if>
+		<if test="cycle != null">
+			cycle,
+		</if>
+		<if test="publishPlace != null">
+			publish_place,
+		</if>
+		<if test="languages != null">
+			languages,
+		</if>
+		<if test="format != null">
+			format,
+		</if>
+		<if test="press != null">
+			press,
+		</if>
+		<if test="website != null">
+			website,
+		</if>
+		<if test="publishArea != null">
+			publish_area,
+		</if>
+		<if test="issnNo != null">
+			issn_no,
+		</if>
+		<if test="cnNo != null">
+			cn_no,
+		</if>
+		<if test="mailNo != null">
+			mail_no,
+		</if>
+		<if test="inUnitPrice != null">
+			in_unit_price,
+		</if>
+		<if test="inFixPrice != null">
+			in_fix_price,
+		</if>
+		<if test="outFixPrice != null">
+			out_fix_price,
+		</if>
+		<if test="openTime != null">
+			open_time,
+		</if>
+		<if test="usedTitles != null">
+			used_titles,
+		</if>
+		<if test="awards != null">
+			awards,
+		</if>
+		<if test="extend1 != null">
+			extend_1,
+		</if>
+		<if test="extend2 != null">
+			extend_2,
+		</if>
+		<if test="extend3 != null">
+			extend_3,
+		</if>
+		<if test="extend4 != null">
+			extend_4,
+		</if>
+		<if test="createTime != null">
+			create_time,
+		</if>
+		<if test="updateTime != null">
+			update_time,
+		</if>
+	</sql>
+	<sql id="Base_Value_List">
+		#{id,jdbcType=BIGINT},
+		#{payeeId,jdbcType=VARCHAR},
+		#{periodicalYear,jdbcType=VARCHAR},
+		#{periodicalId,jdbcType=VARCHAR},
+		#{periodicalCnName,jdbcType=VARCHAR},
+		#{periodicalEnName,jdbcType=VARCHAR},
+		#{periodicalType,jdbcType=VARCHAR},
+		#{competentOrganization,jdbcType=VARCHAR},
+		#{hostOrganization,jdbcType=VARCHAR},
+		#{cycle,jdbcType=INTEGER},
+		#{publishPlace,jdbcType=VARCHAR},
+		#{languages,jdbcType=VARCHAR},
+		#{format,jdbcType=VARCHAR},
+		#{press,jdbcType=VARCHAR},
+		#{website,jdbcType=VARCHAR},
+		#{publishArea,jdbcType=VARCHAR},
+		#{issnNo,jdbcType=VARCHAR},
+		#{cnNo,jdbcType=VARCHAR},
+		#{mailNo,jdbcType=VARCHAR},
+		#{inUnitPrice,jdbcType=DECIMAL},
+		#{inFixPrice,jdbcType=DECIMAL},
+		#{outFixPrice,jdbcType=DECIMAL},
+		#{openTime,jdbcType=TIMESTAMP},
+		#{usedTitles,jdbcType=VARCHAR},
+		#{awards,jdbcType=VARCHAR},
+		#{extend1,jdbcType=VARCHAR},
+		#{extend2,jdbcType=VARCHAR},
+		#{extend3,jdbcType=VARCHAR},
+		#{extend4,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP},
+	</sql>
+	<sql id="Selective_Value_List">
+		<!-- SEQ_periodical_info.nextval, -->
+		<if test="payeeId != null">
+			#{payeeId,jdbcType=VARCHAR},
+		</if>
+		<if test="periodicalYear != null">
+			#{periodicalYear,jdbcType=VARCHAR},
+		</if>
+		<if test="periodicalId != null">
+			#{periodicalId,jdbcType=VARCHAR},
+		</if>
+		<if test="periodicalCnName != null">
+			#{periodicalCnName,jdbcType=VARCHAR},
+		</if>
+		<if test="periodicalEnName != null">
+			#{periodicalEnName,jdbcType=VARCHAR},
+		</if>
+		<if test="periodicalType != null">
+			#{periodicalType,jdbcType=VARCHAR},
+		</if>
+		<if test="competentOrganization != null">
+			#{competentOrganization,jdbcType=VARCHAR},
+		</if>
+		<if test="hostOrganization != null">
+			#{hostOrganization,jdbcType=VARCHAR},
+		</if>
+		<if test="cycle != null">
+			#{cycle,jdbcType=INTEGER},
+		</if>
+		<if test="publishPlace != null">
+			#{publishPlace,jdbcType=VARCHAR},
+		</if>
+		<if test="languages != null">
+			#{languages,jdbcType=VARCHAR},
+		</if>
+		<if test="format != null">
+			#{format,jdbcType=VARCHAR},
+		</if>
+		<if test="press != null">
+			#{press,jdbcType=VARCHAR},
+		</if>
+		<if test="website != null">
+			#{website,jdbcType=VARCHAR},
+		</if>
+		<if test="publishArea != null">
+			#{publishArea,jdbcType=VARCHAR},
+		</if>
+		<if test="issnNo != null">
+			#{issnNo,jdbcType=VARCHAR},
+		</if>
+		<if test="cnNo != null">
+			#{cnNo,jdbcType=VARCHAR},
+		</if>
+		<if test="mailNo != null">
+			#{mailNo,jdbcType=VARCHAR},
+		</if>
+		<if test="inUnitPrice != null">
+			#{inUnitPrice,jdbcType=DECIMAL},
+		</if>
+		<if test="inFixPrice != null">
+			#{inFixPrice,jdbcType=DECIMAL},
+		</if>
+		<if test="outFixPrice != null">
+			#{outFixPrice,jdbcType=DECIMAL},
+		</if>
+		<if test="openTime != null">
+			#{openTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="usedTitles != null">
+			#{usedTitles,jdbcType=VARCHAR},
+		</if>
+		<if test="awards != null">
+			#{awards,jdbcType=VARCHAR},
+		</if>
+		<if test="extend1 != null">
+			#{extend1,jdbcType=VARCHAR},
+		</if>
+		<if test="extend2 != null">
+			#{extend2,jdbcType=VARCHAR},
+		</if>
+		<if test="extend3 != null">
+			#{extend3,jdbcType=VARCHAR},
+		</if>
+		<if test="extend4 != null">
+			#{extend4,jdbcType=VARCHAR},
+		</if>
+		<if test="createTime != null">
+			#{createTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateTime != null">
+			#{updateTime,jdbcType=TIMESTAMP},
+		</if>
+	</sql>
+
+
+	<!-- 查询期刊明细 -->
+	<select id="selectByPeriodicalId" parameterType="String"
+		resultMap="BaseResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from periodical_info
+		where periodical_id = #{periodicalId,jdbcType=VARCHAR}
+	</select>
+
+
+	<select id="selectByExample" parameterType="PeriodicalInfoQuery"
+		resultMap="BaseResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from periodical_info
+		<where>
+			<trim prefix="(" prefixOverrides="and" suffix=")">
+				<if test="payeeId != null">
+					and payee_id = #{payeeId,jdbcType=VARCHAR}
+				</if>
+				<if test="periodicalYear != null">
+					and periodical_year = #{periodicalYear,jdbcType=VARCHAR}
+				</if>
+				<if test="periodicalId != null">
+					and periodical_id = #{periodicalId,jdbcType=VARCHAR}
+				</if>
+				<if test="periodicalCnName != null">
+					and periodical_cn_name =
+					#{periodicalCnName,jdbcType=VARCHAR}
+				</if>
+				<if test="periodicalType != null">
+					and periodical_type = #{periodicalType,jdbcType=VARCHAR}
+				</if>
+				<if test="competentOrganization != null">
+					and competent_organization =
+					#{competentOrganization,jdbcType=VARCHAR}
+				</if>
+				<if test="hostOrganization != null">
+					and host_organization =
+					#{hostOrganization,jdbcType=VARCHAR}
+				</if>
+				<if test="cycle != null">
+					and cycle = #{cycle,jdbcType=INTEGER}
+				</if>
+				<if test="press != null">
+					and press = #{press,jdbcType=VARCHAR}
+				</if>
+				<if test="issnNo != null">
+					and issn_no = #{issnNo,jdbcType=VARCHAR}
+				</if>
+				<if test="cnNo != null">
+					and cn_no = #{cnNo,jdbcType=VARCHAR}
+				</if>
+				<if test="mailNo != null">
+					and mail_no = #{mailNo,jdbcType=VARCHAR}
+				</if>
+				<if test="openTime != null">
+					and open_time = #{openTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="usedTitles != null">
+					and used_titles = #{usedTitles,jdbcType=VARCHAR}
+				</if>
+			</trim>
+		</where>
+	</select>
+
+
+
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from periodical_info
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		periodical_info
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<delete id="deleteByExample" parameterType="PeriodicalInfoQuery">
+		delete from periodical_info
+		<include refid="Example_Where_Clause" />
+	</delete>
+	<insert id="insert" parameterType="PeriodicalInfo">
+		insert into periodical_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Base_Value_List" />
+		</trim>
+	</insert>
+	<insert id="insertSelective" parameterType="PeriodicalInfo">
+		insert into periodical_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Selective_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Selective_Value_List" />
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="PeriodicalInfoQuery"
+		resultType="java.lang.Integer">
+		select count(*) from periodical_info
+		<include refid="Example_Where_Clause" />
+	</select>
+	<update id="updateByPrimaryKeySelective" parameterType="PeriodicalInfo">
+		update periodical_info
+		<include refid="Example_Set_Clause" />
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="PeriodicalInfo">
+		update periodical_info
+		<include refid="Base_Set_Clause" />
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<select id="selectPageByExample" parameterType="PeriodicalInfoQuery"
+		resultMap="BaseResultMap">
+		<include refid="Page_Query_Begin" />
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from periodical_info
+		<include refid="Example_Where_Clause" />
+		<!-- order by CREATE_DATE -->
+		<include refid="Page_Query_End" />
+	</select>
 </mapper>

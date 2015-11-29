@@ -56,10 +56,9 @@ public class SectionManagerController extends EditorController {
 		 * 
 		 * 查询一个list列表,页面展示用
 		 * */
-		PeriodicalInfoQuery queryInfo = new PeriodicalInfoQuery();
-		query.setPeriodicalId(periodicalId);
-		List<PeriodicalInfo> list = periodicalInfoManager.queryList(queryInfo);
-		mav.addObject("periodical", list.get(0));
+		PeriodicalInfo p= periodicalInfoManager.selectByPeriodicalId(periodicalId);
+		
+		mav.addObject("periodical", p);
 		
 		query.setPeriodicalId(periodicalId);
 		List<SectionInfo> lists = sectionInfoManager.queryList(query);

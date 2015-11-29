@@ -138,7 +138,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		articleInfo.setFundTitle(contributeRequestDto.getFundTitle());
 		articleInfo.setIsAvaliable("Y");
 		articleInfo.setExtends2("");
-		articleInfo.setExtends3("");
+		articleInfo.setExtends3("N");
 		articleInfo.setExtends4("");
 		articleInfo.setInvestSection(contributeRequestDto.getInvestSection());
 		articleInfo.setAuthorState(ArticleStateEnums.NEW_ARTICLE.getCode());
