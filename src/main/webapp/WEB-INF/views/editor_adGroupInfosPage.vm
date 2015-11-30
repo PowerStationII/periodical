@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>刊登广告</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -41,21 +41,21 @@
 
 </head>
 <body>
-	<form id="sub2" action="../editor/toArticleGroup" method="POST">
+	<form id="sub2" action="../editor/toSaveAdGroup" method="POST">
 		<input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}"> 
 		<input type="hidden" name="periodicalId" value="${periodicalId}"> <br />
 		<div id='left'>
 			<table border='1' id='leftSelect' class='selectedTable'>
 				<tr>
-					<td>稿件编号</td>
+					<td>广告编号</td>
 					<td>标题</td>
-					<td>稿件状态</td>
+					<td>广告类型</td>
 				</tr>
-				#foreach($articleQueryRespDto in ${list})
+				#foreach($ad in ${list})
 				<tr class='selectAble'>
-					<td>${articleQueryRespDto.articleInfo.articleId}</td>
-					<td>${articleQueryRespDto.articleInfo.articleCnTitle}</td>
-					<td>${articleQueryRespDto.articleInfo.editorState}</td>
+					<td>${ad.adId}</td>
+					<td>${ad.adName}</td>
+					<td>${ad.adType}</td>
 				</tr>
 				#end
 			</table>
@@ -72,15 +72,15 @@
 	  <div class='sectionId' style="display:none;">${item.sectionId}</div>
 			<table border='1' class='selectedTable'>
 				<tr>
-					<td>稿件编号</td>
-					<td>标题</td>
-					<td>稿件状态</td>
+					<td>广告编号</td>
+					<td>广告标题</td>
+					<td>广告类型</td>
 				</tr>
 				#foreach($it in ${item.list})
 				<tr class='selectAble'>
-					<td>${it.article_id}</td>
-					<td>${it.article_cn_title}</td>
-					<td>${it.editor_state}</td>
+					<td>${it.ad_id}</td>
+					<td>${it.ad_name}</td>
+					<td>${it.ad_type}</td>
 				</tr>
 				#end
 			</table>   	 
@@ -128,10 +128,10 @@ $('#btnSubmit').click(function(){
 			leftArray.push($(this).find('td:first').html());
 		});
 	 	$.ajax({
-			url:'../editor/toArticleGroup',
+			url:'../editor/toSaveAdGroup',
 			data:{leftArray:leftArray.toString(),periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',str:JSON.stringify(sections)},
 			success:function(d){
-				window.location.href='../editor/toGroupPage?periodicalId=${periodicalId}';
+				window.location.href='../editor/toAdGroupDetailPage?periodicalId=${periodicalId}';
 			}
 		});  
 	 }

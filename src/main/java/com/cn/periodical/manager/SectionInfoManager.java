@@ -17,6 +17,7 @@ public interface SectionInfoManager {
 	SectionInfo findSectionInfoById(Long id);
 	
 	List<SectionInfo> queryList(SectionInfoQuery query);
+	List<SectionInfo> selectByExampleForAd(SectionInfoQuery query);
 	
 	void deleteSectionInfoById(Long id);
 	

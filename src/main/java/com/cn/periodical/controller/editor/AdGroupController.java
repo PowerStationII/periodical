@@ -1,9 +1,7 @@
 package com.cn.periodical.controller.editor;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -20,18 +18,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.enums.PeriodicalStateEnums;
+import com.cn.periodical.manager.AdInfoManager;
 import com.cn.periodical.manager.ArticleInfoManager;
-import com.cn.periodical.manager.AuthorInfoManager;
 import com.cn.periodical.manager.PeriodicalDetailsManager;
 import com.cn.periodical.manager.PeriodicalInfoManager;
 import com.cn.periodical.manager.PeriodicalManager;
 import com.cn.periodical.manager.SectionInfoManager;
+import com.cn.periodical.pojo.AdInfo;
 import com.cn.periodical.pojo.ArticleInfo;
-import com.cn.periodical.pojo.ArticleInfoQuery;
-import com.cn.periodical.pojo.AuthorInfo;
-import com.cn.periodical.pojo.AuthorInfoQuery;
 import com.cn.periodical.pojo.Periodical;
 import com.cn.periodical.pojo.PeriodicalDetails;
 import com.cn.periodical.pojo.PeriodicalDetailsQuery;
@@ -40,15 +35,14 @@ import com.cn.periodical.pojo.PeriodicalQuery;
 import com.cn.periodical.pojo.SectionInfo;
 import com.cn.periodical.pojo.SectionInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
-import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.EditorArticleDealService;
 /**
- * 稿件编辑-组刊Controller
+ * 广告-组刊Controller
  * */
 @Controller
-public class ArticleGroupController extends EditorController{
+public class AdGroupController extends EditorController{
 	
-	private static final Logger logger = LoggerFactory.getLogger(ArticleGroupController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdGroupController.class);
 	@Autowired
 	PeriodicalInfoManager periodicalInfoManager;
 	
@@ -66,28 +60,28 @@ public class ArticleGroupController extends EditorController{
 	@Autowired
 	ArticleInfoManager articleInfoManager;
 	@Autowired
-	AuthorInfoManager authorInfoManager;
+	AdInfoManager adInfoManager;
 	
 	/**
-	 * toArticleGroupPage
-	 * 排刊
+	 * toAdGroupPage
+	 * 广告排刊
 	 */
-	@RequestMapping(value="/toArticleGroupPage",method = RequestMethod.GET)
-	public ModelAndView toArticleGroupPage(HttpServletRequest request) {
-		logger.info("排刊组稿Page:[ ]");
-		ModelAndView mav = new ModelAndView("editor_articleGroupPage");
+	@RequestMapping(value="/toAdGroupPage",method = RequestMethod.GET)
+	public ModelAndView toAdGroupPage(HttpServletRequest request) {
+		logger.info("广告排刊Page:[ ]");
+		ModelAndView mav = new ModelAndView("editor_adGroupPage");
 		List<PeriodicalInfo> periodicalInfos = periodicalInfoManager.queryList(null);
 		mav.addObject("list", periodicalInfos);
 		return mav;
 	}
 	/**
-	 * toGroupPage
-	 * 组稿
+	 * toAdGroupDetailPage
+	 * 广告组刊-
 	 */
-	@RequestMapping(value="/toGroupPage")
-	public ModelAndView toGroupPage(HttpServletRequest request,String periodicalId,String periodicalIssueNo) {
-		logger.info("组稿Page:[ "+periodicalId+" ]");
-		ModelAndView mav = new ModelAndView("editor_groupPage");
+	@RequestMapping(value="/toAdGroupDetailPage")
+	public ModelAndView toAdGroupDetailPage(HttpServletRequest request,String periodicalId,String periodicalIssueNo) {
+		logger.info("广告组刊Page:[ "+periodicalId+" ]");
+		ModelAndView mav = new ModelAndView("editor_adGroupDetailPage");
 		PeriodicalInfo periodicalInfo = periodicalInfoManager.selectByPeriodicalId(periodicalId);
 		PeriodicalQuery query = new PeriodicalQuery();
 		query.setPeriodicalId(periodicalId);
@@ -100,63 +94,50 @@ public class ArticleGroupController extends EditorController{
 	
 	
 	/**
-	 * toArticleGroupDetailPage
-	 * 组稿详情页
+	 * toAdGroupInfosPage
+	 * 广告刊登详情页
 	 */
-	@RequestMapping(value="/toArticleGroupDetailPage",method = RequestMethod.GET)
-	public ModelAndView toArticleGroupDetailPage(
+	@RequestMapping(value="/toAdGroupInfosPage")
+	public ModelAndView toAdGroupInfosPage(
 			@RequestParam("periodicalId") String periodicalId,
 			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
 			HttpServletRequest request) {
-		logger.info("组稿左右Page:[ "+periodicalId+"]&["+periodicalIssueNo+"]");
-		ModelAndView mav = new ModelAndView("editor_articleGroupDetailPage");
-		
-		List<EditorArticleDealRespDto> list = new ArrayList<EditorArticleDealRespDto>();
-		ArticleInfoQuery articleInfoQuery = new ArticleInfoQuery();
+		logger.info("广告组刊左右Page:[ "+periodicalId+"]&["+periodicalIssueNo+"]");
+		ModelAndView mav = new ModelAndView("editor_adGroupInfosPage");
 		/**
-		 * 取编辑处理完成(点击待刊按钮后)且专家是待刊的状态的稿件进行组刊
+		 * 查询广告信息
 		 * */
-		articleInfoQuery.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
-		articleInfoQuery.setExpertState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
-		articleInfoQuery.setExtends3("N");
-		List<ArticleInfo> articleInfos = articleInfoManager.queryList(articleInfoQuery);
-		Iterator<ArticleInfo> iters = articleInfos.iterator();
-		while(iters.hasNext()){
-			EditorArticleDealRespDto editorArticleDealRespDto = new EditorArticleDealRespDto();
-			ArticleInfo articleInfo = iters.next();
-			AuthorInfoQuery authorInfoQuery = new AuthorInfoQuery();
-			authorInfoQuery.setArticleId(articleInfo.getArticleId());
-			List<AuthorInfo> authorInfos = authorInfoManager.queryList(authorInfoQuery);
-			editorArticleDealRespDto.setArticleInfo(articleInfo);
-			editorArticleDealRespDto.setAuthorInfos(authorInfos);
-//			editorArticleDealRespDto.setArticleAttachmentInfo(articleAttachmentInfo);
-			list.add(editorArticleDealRespDto);
-		}
+		List<AdInfo> adInfos = adInfoManager.queryList(null);
+		mav.addObject("list", adInfos);
 		
-		mav.addObject("list", list);
+		/**
+		 * 循环广告可以刊登的位置
+		 * 等同于栏目信息
+		 * */
 		SectionInfoQuery query =new SectionInfoQuery();
 		query.setPeriodicalId(periodicalId);
-		query.setExtend1("N");
-		List<SectionInfo> sectionInfos = sectionInfoManager.queryList(query);
+		query.setExtend1("Y");
+		List<SectionInfo> sectionInfos = sectionInfoManager.selectByExampleForAd(query);
 		mav.addObject("sList", sectionInfos);
 
 		mav.addObject("periodicalIssueNo", periodicalIssueNo);
 		mav.addObject("periodicalId", periodicalId);
 		return mav;
+		
 	}
 	
 	
 	/**
-	 * toArticleGroup
-	 * 组稿
+	 * toSaveAdGroup
+	 * 确认广告
 	 */
-	@RequestMapping(value="/toArticleGroup")
-	public void toArticleGroup(
+	@RequestMapping(value="/toSaveAdGroup")
+	public void toSaveAdGroup(
 			@RequestParam("str") String str,
 			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
 			String leftArray,
 			String periodicalId,HttpServletRequest request) {
-		logger.info("组稿左右提交进来的:leftArray:["+leftArray+"]"
+		logger.info("广告 广告进来的左右提交进来的:leftArray:["+leftArray+"]"
 				+ "&periodicalIssueNo:["+periodicalIssueNo+"]"
 						+ "&str["+str+"]&periodicalId:["+periodicalId+"]");
 		UserInfo userInfo = getUserInfo(request);
@@ -167,7 +148,7 @@ public class ArticleGroupController extends EditorController{
 		PeriodicalDetailsQuery dQuery = new PeriodicalDetailsQuery();
 		dQuery.setPeriodicalId(periodicalId);
 		dQuery.setPeriodicalIssueNo(periodicalIssueNo);
-		dQuery.setType("0000");
+		dQuery.setType("0001");
 		logger.info("删除details表中已存在的数据......"+JSON.toJSONString(dQuery));
 		periodicalDetailsManager.deletePeriodicalDetails(dQuery);
 		logger.info("删除details表中已存在的数据......");
@@ -178,41 +159,21 @@ public class ArticleGroupController extends EditorController{
 			PeriodicalDetails periodicalDetails = new PeriodicalDetails();
 			periodicalDetails.setPeriodicalId(periodicalId);
 			periodicalDetails.setRefId(array.getJSONObject(i).getString("id"));
-			periodicalDetails.setType("0000");//0000是稿件的意思
+			periodicalDetails.setType("0001");//0000是稿件的意思
 			periodicalDetails.setCreateTime(new Date());
 			periodicalDetails.setPeriodicalIssueNo(periodicalIssueNo);
 			periodicalDetails.setUserId(userInfo.getUserId());
 			periodicalDetails.setSectionId(array.getJSONObject(i).getString("id"));
 			JSONArray jsonArray = array.getJSONObject(i).getJSONArray("data");
 			
-			/**
-			 * 页面如何将左边里存在的值传入后台,如果左边有值,需要将articleInfo.extend_3的状态变回N
-			 * */
-			if(!"".equals(leftArray)){
-				String[] leftStrs = leftArray.split(",");
-				for(int l=0;l<leftStrs.length;l++){
-					Map map = new HashMap();
-					map.put("articleId", leftStrs[l]);
-					ArticleInfo a = articleInfoManager.qryInfoByArticleId(map);
-					a.setId(a.getId());
-					a.setExtends3("N");
-					articleInfoManager.saveArticleInfo(a);
-				}
-			}
-			
 			for(int k=0;k<jsonArray.size();k++){
-				periodicalDetails.setArticleId(jsonArray.getString(k));
+				periodicalDetails.setAdId(jsonArray.getString(k));
 				periodicalDetailsManager.savePeriodicalDetails(periodicalDetails);
 				/**
 				 * 将已经在栏目下的稿件artcileInfo.extend_3字段变更为Y
+				 * 如果广告在这一期已经存在,实际是不应该查出来的
 				 * 为了让左边不在查出这条数据
 				 * */
-				Map map = new HashMap();
-				map.put("articleId", jsonArray.getString(k));
-				ArticleInfo a = articleInfoManager.qryInfoByArticleId(map);
-				a.setId(a.getId());
-				a.setExtends3("Y");
-				articleInfoManager.saveArticleInfo(a);
 			}
 		}
 		PeriodicalQuery query =new PeriodicalQuery();
@@ -221,25 +182,7 @@ public class ArticleGroupController extends EditorController{
 		List<Periodical> pList = periodicalManager.queryList(query);
 		Periodical p = pList.get(0);
 		p.setId(p.getId());
-		p.setPeriodicalState(PeriodicalStateEnums.ARTICLE_PART_DEALING.getCode());
+		p.setPeriodicalState(PeriodicalStateEnums.AD_PART_OVER.getCode());
 		periodicalManager.savePeriodical(p);
-	}
-	
-	
-	/**
-	 * toEditArticleFeePage
-	 * 编辑稿费
-	 */
-	@RequestMapping(value="/toEditArticleFeePage")
-	public ModelAndView toEditArticleFeePage(HttpServletRequest request) {
-		logger.info("编辑稿费Page:[ ]");
-		/**
-		 * 期刊id+periodical+periodical_detail+article_info+account_info
-		 * */
-		ModelAndView mav = new ModelAndView("editor_editArticleFeePage");
-		
-		
-		
-		return mav;
 	}
 }

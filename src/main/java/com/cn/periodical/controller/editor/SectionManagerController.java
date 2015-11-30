@@ -94,6 +94,15 @@ public class SectionManagerController extends EditorController {
 			String sectionId = UUID.randomUUID().toString().replaceAll("-", "");
 			sectionInfo.setSectionId(sectionId);
 			sectionInfo.setPeriodicalId(periodicalId);
+			/**
+			 * 如果是广告类型,则extend1变为Y
+			 * 否则默认为N
+			 * */
+			if("0001".equals(sectionInfo.getState())){
+				sectionInfo.setExtend1("Y");
+			}else{
+				sectionInfo.setExtend1("N");
+			}
 			sectionInfoManager.saveSectionInfo(sectionInfo);
 			
 		} catch (Exception e) {

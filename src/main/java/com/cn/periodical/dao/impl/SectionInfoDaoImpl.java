@@ -46,6 +46,9 @@ public class SectionInfoDaoImpl extends BaseDao implements SectionInfoDao {
 	public List<SectionInfo> selectByExample(SectionInfoQuery example) {
 		return super.getSqlSession().selectList("SectionInfoMapper.selectByExample", example);
 	}
+	public List<SectionInfo> selectByExampleForAd(SectionInfoQuery example) {
+		return super.getSqlSession().selectList("SectionInfoMapper.selectByExampleForAd", example);
+	}
 	
 	
 	public List<SectionInfo> selectPageByExample(SectionInfoQuery example) {

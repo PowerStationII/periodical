@@ -22,6 +22,7 @@ public interface SectionInfoDao {
 	int insertSelective(SectionInfo record);
 	
 	List<SectionInfo> selectByExample(SectionInfoQuery example);
+	List<SectionInfo> selectByExampleForAd(SectionInfoQuery example);
 	
 	List<SectionInfo> selectPageByExample(SectionInfoQuery example);
 	

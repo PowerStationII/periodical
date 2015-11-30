@@ -196,6 +196,15 @@
 									.append(
 											'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toPeriodicalManagerPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
 						});
+		$('#adzukan')
+		.click(
+				function() {
+					$('#area').hide();
+					$('#other').remove();
+					$('.right')
+							.append(
+									'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toAdGroupPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+				});
 		//<!-- 主编 end-->
 
 		$('#other').hide();
@@ -336,7 +345,8 @@ a {
 				</div>
 				<div class="mode_name">广告管理</div>
 				<div style="padding: 10px;">
-					<div class="li9" id="adguanli">广告管理</div>
+					<div class="li17" id="adguanli">广告管理</div>
+					<div class="li18" id="adzukan">广告组刊</div>
 				</div>
 			</div>
 			#elseif(${userInfo.roleId}=='1008')

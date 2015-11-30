@@ -86,7 +86,6 @@
 				<tr>
 					<td colspan="6">
 						<a  class="easyui-linkbutton"   style="width:50px;" href="#"  id="submit">查询</a>
-						<a  class="easyui-linkbutton"   style="width:50px;" href="../editor/toAdInfoAdd">新增</a>
 					</td>
 				</tr>
 			</table>

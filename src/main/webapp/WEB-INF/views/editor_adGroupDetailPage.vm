@@ -17,6 +17,7 @@
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
 				<td>期刊名称</td>
+				<td>期刊编号</td>
 				<td>发行年份</td>
 				<td>发行期</td>
 				<td>签发时间</td>
@@ -26,16 +27,17 @@
 			#foreach($periodical in ${list})   
 			<tr>
 				<td>${p.periodicalCnName}</td>
+				<td>${periodical.periodicalIssueNo}</td>
 				<td>${periodical.periodicalYear}</td>
 				<td>${periodical.cycleNums}</td>
 				<td>${periodical.cycleNums}</td>
 				<td>${periodical.periodicalState}</td>
-				#if(${periodical.periodicalState}=='FI')
-				<td><a href="../editor/toEditArticleFeePage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">编辑稿费</a></td>
-				#elseif(${periodical.periodicalState}=='APD'||${periodical.periodicalState}=='ADPO')
-				<td>已完成</td>
+				#if(${periodical.periodicalState}=='APD')
+				<td><a href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">刊登广告</a></td>
+				#elseif(${periodical.periodicalState}=='ADPO')
+				<td>期刊已制作完成</td>
 				#else
-				<td><a href="../editor/toArticleGroupDetailPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">组稿</a></td>
+				<td>组稿中..</td>
 				#end
 			</tr>
 			#end

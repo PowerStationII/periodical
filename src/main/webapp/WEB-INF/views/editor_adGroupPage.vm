@@ -17,26 +17,14 @@
 		<table style="border: 1px solid black;" rules="all">
 			<tr>
 				<td>期刊名称</td>
-				<td>发行年份</td>
 				<td>发行期</td>
-				<td>签发时间</td>
-				<td>状态</td>
 				<td>操作</td>
 			</tr>
-			#foreach($periodical in ${list})   
+			#foreach($periodicalInfo in ${list})   
 			<tr>
-				<td>${p.periodicalCnName}</td>
-				<td>${periodical.periodicalYear}</td>
-				<td>${periodical.cycleNums}</td>
-				<td>${periodical.cycleNums}</td>
-				<td>${periodical.periodicalState}</td>
-				#if(${periodical.periodicalState}=='FI')
-				<td><a href="../editor/toEditArticleFeePage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">编辑稿费</a></td>
-				#elseif(${periodical.periodicalState}=='APD'||${periodical.periodicalState}=='ADPO')
-				<td>已完成</td>
-				#else
-				<td><a href="../editor/toArticleGroupDetailPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">组稿</a></td>
-				#end
+				<td>${periodicalInfo.periodicalCnName}</td>
+				<td>${periodicalInfo.cycle}</td>
+				<td><a href="../editor/toAdGroupDetailPage?periodicalId=${periodicalInfo.periodicalId}">刊登广告</a></td>
 			</tr>
 			#end
 		</table>

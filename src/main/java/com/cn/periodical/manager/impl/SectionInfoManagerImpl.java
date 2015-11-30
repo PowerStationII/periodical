@@ -69,5 +69,11 @@ public class SectionInfoManagerImpl implements SectionInfoManager {
 		sectionInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
 		return sectionInfoPage;
 	}
+
+
+	public List<SectionInfo> selectByExampleForAd(SectionInfoQuery query) {
+		// TODO Auto-generated method stub
+		return sectionInfoDao.selectByExampleForAd(query);
+	}
 }
 

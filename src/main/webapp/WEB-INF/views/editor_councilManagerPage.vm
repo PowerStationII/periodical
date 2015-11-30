@@ -106,7 +106,8 @@
 					<td>${dtos.invoiceNo}</td>
 					<td></td>
 					<td><a class="easyui-linkbutton" style="width:50px;" href="../editor/toQrySingleCouncilInfo?councilId=${dtos.councilId}">编辑</a>
-					<a class="easyui-linkbutton" style="width:50px;" href="../editor/toRenewPage?councilId=${dtos.councilId}">续费</a></td>
+					<a class="easyui-linkbutton" style="width:50px;" href="../editor/toRenewPage?councilId=${dtos.councilId}">续费</a>
+					<a class="easyui-linkbutton" style="width:50px;" href="../editor/toAdInfoAdd?councilId=${dtos.councilId}">添加广告</a></td>
 				</tr>
 			#end
 			</tbody>

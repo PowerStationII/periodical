@@ -31,8 +31,19 @@ public class SectionInfo implements Serializable{
 	private java.util.Date updateTime;
 	
 	private List<Map<String,Object>> list;
+	private List<Map<String,Object>> listAd;
 	
 	
+	
+	
+	public List<Map<String, Object>> getListAd() {
+		return listAd;
+	}
+
+	public void setListAd(List<Map<String, Object>> listAd) {
+		this.listAd = listAd;
+	}
+
 	public List<Map<String, Object>> getList() {
 		return list;
 	}
