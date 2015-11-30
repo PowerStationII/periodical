@@ -242,4 +242,21 @@ public class ArticleGroupController extends EditorController{
 		
 		return mav;
 	}
+	
+	/**
+	 * toSaveArticleFee
+	 * 保存稿费信息
+	 */
+	@RequestMapping(value="/toSaveArticleFee")
+	public ModelAndView toSaveArticleFee(HttpServletRequest request,String array,String periodicalId) {
+		logger.info("保存稿费信息Page:[------ ]"+array+"------periodicalId"+periodicalId);
+		/**
+		 * 期刊id+periodical+periodical_detail+article_info+account_info
+		 * */
+		ModelAndView mav = new ModelAndView("editor_editArticleFeePage");
+		
+		
+		
+		return mav;
+	}
 }

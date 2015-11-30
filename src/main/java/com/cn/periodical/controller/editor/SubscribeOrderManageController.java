@@ -116,7 +116,8 @@ public class SubscribeOrderManageController extends EditorController{
 	 * 保存增刊信息
 	 */
 	@RequestMapping(value="/toSubSupplement")
-	public ModelAndView toSubSupplement(HttpServletRequest request,String orderNo) {
+	public ModelAndView toSubSupplement(HttpServletRequest request,String array,String orderNo) {
+		logger.info("---------------" + "array:" + array + "------orderNo:" + orderNo);
 		ModelAndView mav = new ModelAndView("redirect:../editor/toSubOrderManagePage");
 		/**
 		 * 编辑读者订单的赠刊信息,编辑信息保存至

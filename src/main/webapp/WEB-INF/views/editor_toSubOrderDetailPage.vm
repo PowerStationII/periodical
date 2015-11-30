@@ -23,11 +23,12 @@
 			for(var i=0;i<data.rows.length;i++) {
 				$('#editTable').datagrid('endEdit',i);
 				var json={};
-				json.aId = data.rows[i].aId;
-				json.nums = data.rows[i].nums;
+				json.num1 = data.rows[i].num1;
+				json.num2 = data.rows[i].num2;
+				json.num3 = data.rows[i].num3;
 				array.push(JSON.stringify(json));
 			}
-			window.location.href='../reader/toDistribution?array=['+array+']';
+			window.location.href='../editor/toSubSupplement?array=['+array+']&orderNo=111';
 		});
 		$('#back').click(function(){
 			history.go(-1);
@@ -41,14 +42,17 @@
 		        <tr>   
 		            <th data-options="field:'id',width:150">序号</th>   
 		            <th data-options="field:'aId',width:150">地址id</th>   
-		            <th data-options="field:'rAddress',width:150">详细地址</th>   
-		            <th data-options="field:'rContacter',width:150">联系人</th>   
-		            <th data-options="field:'cMobile',width:150">联系电话</th>   
-		            <th data-options="field:'nums',width:150,editor:'numberbox'" >邮寄本数</th>   
+		            <th data-options="field:'rAddress',width:100">详细地址</th>   
+		            <th data-options="field:'rContacter',width:100">联系人</th>   
+		            <th data-options="field:'cMobile',width:100">联系电话</th>   
+		            <th data-options="field:'nums',width:100" >邮寄本数</th> 
+		            <th data-options="field:'num1',width:100,editor:'numberbox'" >增刊1</th> 
+		            <th data-options="field:'num2',width:100,editor:'numberbox'" >增刊2</th> 
+		            <th data-options="field:'num3',width:100,editor:'numberbox'" >增刊3</th> 
 		        </tr>   
 		    </thead>   
 		    <tbody>   
-		    	#foreach($dtos in ${list})
+		    	<!-- #foreach($dtos in ${list})
 				<tr>
 					<td>$!{velocityCount}</td>
 					<td>$!{dtos.addressId}</td>
@@ -56,8 +60,22 @@
 					<td>$!{dtos.contacterName}</td>
 					<td>$!{dtos.contacterTelephone}</td>
 					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
-				#end
+				#end -->
+				<tr>
+					<td>111</td>
+					<td>222</td>
+					<td>333</td>
+					<td>444</td>
+					<td>555</td>
+					<td>666</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
 		    </tbody>   
 		</table>
 		<a id="back" class="easyui-linkbutton"  style="50px;">返回</a> 

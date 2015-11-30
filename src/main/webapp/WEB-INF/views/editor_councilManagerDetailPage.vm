@@ -20,7 +20,7 @@
 </script>
 <body>
 	<form action="../editor/toSaveCouncilInfo" method="POST">
-		<table style="border: 1px solid black;" rules="all">
+		<table style="border: 1px solid green;" rules="all">
 			<tr>
 				<td colspan="2">单位名称</td>
 				<td colspan="6"><input type="text" name="councilCompany" value=""></td>
@@ -67,6 +67,7 @@
 			<tr>
 				<td colspan="2">法人联系电话</td>
 				<td colspan="2"><input type="text" name="legalTelephone" value=""></td>
+				<td colspan="4"><input type="file" name="" value=""></td>
 			</tr>
 			<tr>
 				<td colspan="2">职务</td>

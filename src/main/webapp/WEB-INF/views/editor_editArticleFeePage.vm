@@ -11,39 +11,98 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
-
+<script type="text/javascript">
+	$(function(){
+		var rows = $('#editTable').datagrid('getRows');
+		for(var i=0;i<rows.length;i++) {
+			$('#editTable').datagrid('beginEdit',i);
+		}
+		$('#submit').click(function(){
+			var array=[];
+			var data = $('#editTable').datagrid('getData');
+			for(var i=0;i<data.rows.length;i++) {
+				$('#editTable').datagrid('endEdit',i);
+				var json={};
+				json.zzID = data.rows[i].zzID;
+				json.zjID = data.rows[i].zjID;
+				json.num1 = data.rows[i].num1;
+				json.num2 = data.rows[i].num2;
+				json.num3 = data.rows[i].num3;
+				json.num4 = data.rows[i].num4;
+				json.num5 = data.rows[i].num5;
+				json.num6 = data.rows[i].num6;
+				array.push(JSON.stringify(json));
+			}
+			window.location.href='../editor/toSaveArticleFee?array=['+array+']&periodicalId=111';
+		});
+		$('#back').click(function(){
+			history.go(-1);
+		});
+	});
+</script>
 <body>
 	<div id="articleInfos"  style="margin-top:50px;">
-		<table  id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
+		<table  id="editTable"  class="easyui-datagrid"   data-options="singleSelect:true">
 			<thead>
 				<tr>
-					<th data-options="field:'name1',width:200">栏目</th>
-					<th data-options="field:'name2',width:200">稿件编号</th>
-					<th data-options="field:'name3',width:200">标题</th>
-					<th data-options="field:'name4',width:200">作者</th>
-					<th data-options="field:'name5',width:200">账户名</th>
-					<th data-options="field:'name6',width:200">账号</th>
-					<th data-options="field:'name7',width:200">应发金额</th>
-					<th data-options="field:'name8',width:200">扣税</th>
-					<th data-options="field:'name9',width:200">实发金额</th>
+					<th data-options="field:'name1',width:50">栏目</th>
+					<th data-options="field:'name2',width:80">稿件编号</th>
+					<th data-options="field:'name3',width:40">标题</th>
+					<th data-options="field:'zzID',width:40">作者</th>
+					<th data-options="field:'name5',width:80">作者账户名</th>
+					<th data-options="field:'name6',width:80">作者账号</th>
+					<th data-options="field:'num1',width:80,editor:'numberbox'">作者应发金额</th>
+					<th data-options="field:'num2',width:80,editor:'numberbox'">作者扣税</th>
+					<th data-options="field:'num3',width:80,editor:'numberbox'">作者实发金额</th>
+					
+					<th data-options="field:'zjID',width:40">专家</th>
+					<th data-options="field:'name11',width:80">专家账户名</th>
+					<th data-options="field:'name12',width:80">专家账号</th>
+					<th data-options="field:'num4',width:80,editor:'numberbox'">专家应发金额</th>
+					<th data-options="field:'num5',width:80,editor:'numberbox'">专家扣税</th>
+					<th data-options="field:'num6',width:80,editor:'numberbox'">专家实发金额</th>
+					
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<th>发的方法</th>
-					<th>22231233332</th>
-					<th>发送佛顶骨</th>
-					<th>发发</th>
-					<th>风</th>
-					<th>2222222</th>
-					<th>11</th>
-					<th>22</th>
-					<th>22</th>
+					<td>发的方法</td>
+					<td>22231233332</td>
+					<td>发送佛顶骨</td>
+					<td>发发</td>
+					<td>风</td>
+					<td>2222222</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>发发</td>
+					<td>风</td>
+					<td>2222222</td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
-			
+				<tr>
+					<td>4324</td>
+					<td>22231233332</td>
+					<td>43243骨</td>
+					<td>4324</td>
+					<td>43243</td>
+					<td>2222222</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>rewrewr</td>
+					<td>rewrew</td>
+					<td>3333333</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
 			</tbody>
 		</table>
-		<br>
+		<a id="back" class="easyui-linkbutton"  style="50px;">返回</a> 
+		<a id="submit" class="easyui-linkbutton"  style="50px;">保存</a>
 	</div>
 </body>
 </html>
