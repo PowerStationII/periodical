@@ -86,13 +86,13 @@
 			<thead>
 				<tr>
 					<th data-options="field:'councilId',width:200">会员编号</th>
-					<th data-options="field:'councilCompanyName',width:200">企业名称</th>
+					<th data-options="field:'councilCompanyName',width:130">企业名称</th>
 					<th data-options="field:'type',width:100">会员类型</th>
 					<th data-options="field:'contractEndTime',width:100">合同日期</th>
 					<th data-options="field:'amount',width:100">金额</th>
 					<th data-options="field:'invoiceNo',width:100">发票号</th>
 					<th data-options="field:'id',width:100">广告刊登</th>
-					<th data-options="field:'option',width:100">操作</th>
+					<th data-options="field:'option',width:210">操作</th>
 				</tr>
 			</thead>
 			<tbody>	
@@ -107,7 +107,7 @@
 					<td></td>
 					<td><a class="easyui-linkbutton" style="width:50px;" href="../editor/toQrySingleCouncilInfo?councilId=${dtos.councilId}">编辑</a>
 					<a class="easyui-linkbutton" style="width:50px;" href="../editor/toRenewPage?councilId=${dtos.councilId}">续费</a>
-					<a class="easyui-linkbutton" style="width:50px;" href="../editor/toAdInfoAdd?councilId=${dtos.councilId}">添加广告</a></td>
+					<a class="easyui-linkbutton"  href="../editor/toAdInfoAdd?councilId=${dtos.councilId}">添加广告</a></td>
 				</tr>
 			#end
 			</tbody>
