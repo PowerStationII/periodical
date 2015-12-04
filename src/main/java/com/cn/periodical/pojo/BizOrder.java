@@ -29,7 +29,63 @@ public class BizOrder implements Serializable {
 	private String readerName;
 	private String iFprice;
 	private String cycle;
+	private String periodicalId;
+	private String addressId;
+	private String contacterName;
+	private String contacterTelephone;
+	private String receiveAddress;
+	private String receivePostCode;
+	private String distributNum;
+	private String distributId;
 	
+	public String getDistributId() {
+		return distributId;
+	}
+	public void setDistributId(String distributId) {
+		this.distributId = distributId;
+	}
+	public String getPeriodicalId() {
+		return periodicalId;
+	}
+	public void setPeriodicalId(String periodicalId) {
+		this.periodicalId = periodicalId;
+	}
+	public String getAddressId() {
+		return addressId;
+	}
+	public void setAddressId(String addressId) {
+		this.addressId = addressId;
+	}
+	public String getContacterName() {
+		return contacterName;
+	}
+	public void setContacterName(String contacterName) {
+		this.contacterName = contacterName;
+	}
+	public String getContacterTelephone() {
+		return contacterTelephone;
+	}
+	public void setContacterTelephone(String contacterTelephone) {
+		this.contacterTelephone = contacterTelephone;
+	}
+	public String getReceiveAddress() {
+		return receiveAddress;
+	}
+	public void setReceiveAddress(String receiveAddress) {
+		this.receiveAddress = receiveAddress;
+	}
+	public String getReceivePostCode() {
+		return receivePostCode;
+	}
+	public void setReceivePostCode(String receivePostCode) {
+		this.receivePostCode = receivePostCode;
+	}
+	public String getDistributNum() {
+		return distributNum;
+	}
+	public void setDistributNum(String distributNum) {
+		this.distributNum = distributNum;
+	}
 	public String getReaderName() {
 		return readerName;
 	}

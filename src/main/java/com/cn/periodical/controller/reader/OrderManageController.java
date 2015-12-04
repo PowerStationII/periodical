@@ -21,6 +21,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.cn.periodical.enums.OrderStatusEnums;
 import com.cn.periodical.manager.AddressInfoManager;
+import com.cn.periodical.manager.BizOrderManager;
 import com.cn.periodical.manager.OrderInfoManager;
 import com.cn.periodical.manager.PayeeInfoManager;
 import com.cn.periodical.manager.PeriodicalDistributManager;
@@ -28,7 +29,6 @@ import com.cn.periodical.manager.PeriodicalInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.AddressInfo;
 import com.cn.periodical.pojo.AddressInfoQuery;
-import com.cn.periodical.pojo.BizDistribut;
 import com.cn.periodical.pojo.BizOrder;
 import com.cn.periodical.pojo.OrderInfo;
 import com.cn.periodical.pojo.OrderInfoQuery;
@@ -63,6 +63,9 @@ public class OrderManageController extends ReaderController{
     
     @Autowired
     AddressInfoManager addressInfoManager;
+    @Autowired
+    BizOrderManager bizOrderManager;
+    
     @Autowired
     UserInfoManager userInfoManager;
     @Autowired
@@ -214,17 +217,30 @@ public class OrderManageController extends ReaderController{
 		logger.info("读者编辑订单-订单号:["+orderNo+"]");
 		UserInfo userInfo = getUserInfo(request);
 		ModelAndView mav = new ModelAndView("reader_orderDistribution");
+		
+		
+		
+		
 		OrderInfoQuery orderQuery=new OrderInfoQuery();
 		orderQuery.setUserId(userInfo.getUserId());
 		orderQuery.setOrderNo(orderNo);
 		List<OrderInfo> orderInfos = orderInfoManager.queryList(orderQuery);
 		OrderInfo orderInfo = orderInfos.get(0);
 		mav.addObject("orderInfo", orderInfo);
-		AddressInfoQuery query = new AddressInfoQuery();
-		query.setRefId(userInfo.getRefId());
-		query.setRefRoleId(userInfo.getRoleId());
-		List<AddressInfo> list = addressInfoManager.queryList(query);
+//		
+//		
+//		
+//		AddressInfoQuery query = new AddressInfoQuery();
+//		query.setRefId(userInfo.getRefId());
+//		query.setRefRoleId(userInfo.getRoleId());
+//		List<AddressInfo> list = addressInfoManager.queryList(query);
+//		mav.addObject("list", list);
+//		
+		BizOrder bizOrder = new BizOrder();
+		bizOrder.setOrderNo(orderNo);
+		List<BizOrder> list = bizOrderManager.queryDistributeOrderInfos(bizOrder);
 		mav.addObject("list", list);
+		
 		return mav;
 	}
 	
@@ -242,8 +258,21 @@ public class OrderManageController extends ReaderController{
 			PeriodicalDistribut p = new PeriodicalDistribut();
 			p.setPeriodicalId(periodicalId);
 			p.setRefId(orderNo);
+			
+			logger.info("++++++++++++++++++++++++++");
+			logger.info((str.getJSONObject(i).getString("pId")=="")+"");
+			logger.info((str.getJSONObject(i).getString("pId")==null)+"");
+			logger.info("++++++++++++++++++++++++++");
+			if(!"".equals(str.getJSONObject(i).getString("pId"))){
+				p.setId(Long.valueOf(str.getJSONObject(i).getString("pId")));/**需要把pd的id传进来,进行修改,否则就会是添加*/
+			}
 			p.setAddressId(str.getJSONObject(i).getString("aId"));
-			p.setDistributeNums(Integer.valueOf(str.getJSONObject(i).getString("nums")==""?"0":str.getJSONObject(i).getString("nums")));
+			
+			if(!"".equals(str.getJSONObject(i).getString("nums"))){
+				p.setDistributeNums(Integer.valueOf(str.getJSONObject(i).getString("nums")));
+			}else{
+				p.setDistributeNums(0);
+			}
 			periodicalDistributManager.savePeriodicalDistribut(p);
 		}
 		ModelAndView mav = new ModelAndView("redirect:../reader/toOrderManagePage");

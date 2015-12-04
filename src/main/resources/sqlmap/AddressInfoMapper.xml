@@ -2,614 +2,633 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AddressInfoMapper">
 	<resultMap id="BaseResultMap" type="AddressInfo">
-	  <id column="ID" jdbcType="DECIMAL" property="id" />
-	  <result column="ref_id" jdbcType="VARCHAR" property="refId" />
-	  <result column="ref_role_id" jdbcType="VARCHAR" property="refRoleId" />
-	  <result column="address_id" jdbcType="VARCHAR" property="addressId" />
-	  <result column="contacter_name" jdbcType="VARCHAR" property="contacterName" />
-	  <result column="contacter_telephone" jdbcType="VARCHAR" property="contacterTelephone" />
-	  <result column="contacter_mobile" jdbcType="VARCHAR" property="contacterMobile" />
-	  <result column="receive_address" jdbcType="VARCHAR" property="receiveAddress" />
-	  <result column="receive_postcode" jdbcType="VARCHAR" property="receivePostcode" />
-	  <result column="receive_contacter" jdbcType="VARCHAR" property="receiveContacter" />
-	  <result column="status" jdbcType="VARCHAR" property="status" />
-	  <result column="subscribe_nums" jdbcType="INTEGER" property="subscribeNums" />
-	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
-	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
-	  <result column="extend_3" jdbcType="VARCHAR" property="extend3" />
-	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-	  <result column="supplement_id1" jdbcType="VARCHAR" property="supplementId1" />
-	  <result column="supplement_id2" jdbcType="VARCHAR" property="supplementId2" />
-	  <result column="supplement_id3" jdbcType="VARCHAR" property="supplementId3" />
-	  <result column="supplement_id4" jdbcType="VARCHAR" property="supplementId4" />
-	  <result column="supplement_id5" jdbcType="VARCHAR" property="supplementId5" />
-	  <result column="supplement_id6" jdbcType="VARCHAR" property="supplementId6" />
-	  <result column="supplement_id7" jdbcType="VARCHAR" property="supplementId7" />
-	  <result column="supplement_id1_nums" jdbcType="INTEGER" property="supplementId1Nums" />
-	  <result column="supplement_id2_nums" jdbcType="INTEGER" property="supplementId2Nums" />
-	  <result column="supplement_id3_nums" jdbcType="INTEGER" property="supplementId3Nums" />
-	  <result column="supplement_id4_nums" jdbcType="INTEGER" property="supplementId4Nums" />
-	  <result column="supplement_id5_nums" jdbcType="INTEGER" property="supplementId5Nums" />
-	  <result column="supplement_id6_nums" jdbcType="INTEGER" property="supplementId6Nums" />
-	  <result column="supplement_id7_nums" jdbcType="INTEGER" property="supplementId7Nums" />
-  </resultMap>
+		<id column="ID" jdbcType="DECIMAL" property="id" />
+		<result column="ref_id" jdbcType="VARCHAR" property="refId" />
+		<result column="ref_role_id" jdbcType="VARCHAR" property="refRoleId" />
+		<result column="address_id" jdbcType="VARCHAR" property="addressId" />
+		<result column="contacter_name" jdbcType="VARCHAR" property="contacterName" />
+		<result column="contacter_telephone" jdbcType="VARCHAR"
+			property="contacterTelephone" />
+		<result column="contacter_mobile" jdbcType="VARCHAR" property="contacterMobile" />
+		<result column="receive_address" jdbcType="VARCHAR" property="receiveAddress" />
+		<result column="receive_postcode" jdbcType="VARCHAR" property="receivePostcode" />
+		<result column="receive_contacter" jdbcType="VARCHAR" property="receiveContacter" />
+		<result column="status" jdbcType="VARCHAR" property="status" />
+		<result column="subscribe_nums" jdbcType="INTEGER" property="subscribeNums" />
+		<result column="extend_1" jdbcType="VARCHAR" property="extend1" />
+		<result column="extend_2" jdbcType="VARCHAR" property="extend2" />
+		<result column="extend_3" jdbcType="VARCHAR" property="extend3" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+		<result column="supplement_id1" jdbcType="VARCHAR" property="supplementId1" />
+		<result column="supplement_id2" jdbcType="VARCHAR" property="supplementId2" />
+		<result column="supplement_id3" jdbcType="VARCHAR" property="supplementId3" />
+		<result column="supplement_id4" jdbcType="VARCHAR" property="supplementId4" />
+		<result column="supplement_id5" jdbcType="VARCHAR" property="supplementId5" />
+		<result column="supplement_id6" jdbcType="VARCHAR" property="supplementId6" />
+		<result column="supplement_id7" jdbcType="VARCHAR" property="supplementId7" />
+		<result column="supplement_id1_nums" jdbcType="INTEGER"
+			property="supplementId1Nums" />
+		<result column="supplement_id2_nums" jdbcType="INTEGER"
+			property="supplementId2Nums" />
+		<result column="supplement_id3_nums" jdbcType="INTEGER"
+			property="supplementId3Nums" />
+		<result column="supplement_id4_nums" jdbcType="INTEGER"
+			property="supplementId4Nums" />
+		<result column="supplement_id5_nums" jdbcType="INTEGER"
+			property="supplementId5Nums" />
+		<result column="supplement_id6_nums" jdbcType="INTEGER"
+			property="supplementId6Nums" />
+		<result column="supplement_id7_nums" jdbcType="INTEGER"
+			property="supplementId7Nums" />
+	</resultMap>
 
+
+	<!-- 订单编辑 start -->
+	
+
+
+	<!-- 订单编辑 end -->
 
 	<select id="countByBiz" parameterType="BizDistribut" resultType="java.lang.Integer">
 		select count(*) from user_info ui,reader_info ri,address_info ai
-	where ui.ref_id=ri.reader_id and ai.ref_id=ri.reader_id
-	and ui.user_id=#{userId,jdbcType=VARCHAR}
+		where ui.ref_id=ri.reader_id and ai.ref_id=ri.reader_id
+		and ui.user_id=#{userId,jdbcType=VARCHAR}
 	</select>
-    
-  
-  <select id="queryAddressListByUserId" parameterType="BizDistribut" resultType="BizDistribut">
-	select ai.address_id as aId,ai.contacter_name as
-	cName,ai.contacter_mobile as cMobile,
-	ai.receive_address as rAddress,ai.receive_postcode as rPostCode,ai.contacter_name as
-	rContacter,ai.status as status
-	from user_info ui,reader_info ri,address_info ai
-	where ui.ref_id=ri.reader_id and ai.ref_id=ri.reader_id
-	and ui.user_id=#{userId,jdbcType=VARCHAR}
-  </select>
-  
-  
-  
-  
-  <sql id="Page_Query_Begin">
-    select * from(select t.*,rownum rn from(
-  </sql>
-  <sql id="Page_Query_End">
-  	) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
-  </sql>
-  <sql id="Example_Where_Clause">
-    <where>
-      <trim prefix="(" prefixOverrides="and" suffix=")">
-      <if test="refId != null" >
-	      and ref_id = #{refId,jdbcType=VARCHAR}
-	    </if>
-      <if test="refRoleId != null" >
-	      and ref_role_id = #{refRoleId,jdbcType=VARCHAR}
-	    </if>
-      <if test="addressId != null" >
-	      and address_id = #{addressId,jdbcType=VARCHAR}
-	    </if>
-      <if test="contacterName != null" >
-	      and contacter_name = #{contacterName,jdbcType=VARCHAR}
-	    </if>
-      <if test="contacterTelephone != null" >
-	      and contacter_telephone = #{contacterTelephone,jdbcType=VARCHAR}
-	    </if>
-      <if test="contacterMobile != null" >
-	      and contacter_mobile = #{contacterMobile,jdbcType=VARCHAR}
-	    </if>
-      <if test="receiveAddress != null" >
-	      and receive_address = #{receiveAddress,jdbcType=VARCHAR}
-	    </if>
-      <if test="receivePostcode != null" >
-	      and receive_postcode = #{receivePostcode,jdbcType=VARCHAR}
-	    </if>
-      <if test="receiveContacter != null" >
-	      and receive_contacter = #{receiveContacter,jdbcType=VARCHAR}
-	    </if>
-      <if test="status != null" >
-	      and status = #{status,jdbcType=VARCHAR}
-	    </if>
-      <if test="subscribeNums != null" >
-	      and subscribe_nums = #{subscribeNums,jdbcType=INTEGER}
-	    </if>
-      <if test="extend1 != null" >
-	      and extend_1 = #{extend1,jdbcType=VARCHAR}
-	    </if>
-      <if test="extend2 != null" >
-	      and extend_2 = #{extend2,jdbcType=VARCHAR}
-	    </if>
-      <if test="extend3 != null" >
-	      and extend_3 = #{extend3,jdbcType=VARCHAR}
-	    </if>
-      <if test="createTime != null" >
-	      and create_time = #{createTime,jdbcType=TIMESTAMP}
-	    </if>
-      <if test="updateTime != null" >
-	      and update_time = #{updateTime,jdbcType=TIMESTAMP}
-	    </if>
-      <if test="supplementId1 != null" >
-	      and supplement_id1 = #{supplementId1,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId2 != null" >
-	      and supplement_id2 = #{supplementId2,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId3 != null" >
-	      and supplement_id3 = #{supplementId3,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId4 != null" >
-	      and supplement_id4 = #{supplementId4,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId5 != null" >
-	      and supplement_id5 = #{supplementId5,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId6 != null" >
-	      and supplement_id6 = #{supplementId6,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId7 != null" >
-	      and supplement_id7 = #{supplementId7,jdbcType=VARCHAR}
-	    </if>
-      <if test="supplementId1Nums != null" >
-	      and supplement_id1_nums = #{supplementId1Nums,jdbcType=INTEGER}
-	    </if>
-      <if test="supplementId2Nums != null" >
-	      and supplement_id2_nums = #{supplementId2Nums,jdbcType=INTEGER}
-	    </if>
-      <if test="supplementId3Nums != null" >
-	      and supplement_id3_nums = #{supplementId3Nums,jdbcType=INTEGER}
-	    </if>
-      <if test="supplementId4Nums != null" >
-	      and supplement_id4_nums = #{supplementId4Nums,jdbcType=INTEGER}
-	    </if>
-      <if test="supplementId5Nums != null" >
-	      and supplement_id5_nums = #{supplementId5Nums,jdbcType=INTEGER}
-	    </if>
-      <if test="supplementId6Nums != null" >
-	      and supplement_id6_nums = #{supplementId6Nums,jdbcType=INTEGER}
-	    </if>
-      <if test="supplementId7Nums != null" >
-	      and supplement_id7_nums = #{supplementId7Nums,jdbcType=INTEGER}
-	    </if>
-	  </trim>
-    </where>
-  </sql>
-  <sql id="Example_Set_Clause">
-    <set>
-      <trim suffixOverrides=",">
-      <if test="refId != null">
-        ref_id = #{refId,jdbcType=VARCHAR},
-      </if>
-      <if test="refRoleId != null">
-        ref_role_id = #{refRoleId,jdbcType=VARCHAR},
-      </if>
-      <if test="addressId != null">
-        address_id = #{addressId,jdbcType=VARCHAR},
-      </if>
-      <if test="contacterName != null">
-        contacter_name = #{contacterName,jdbcType=VARCHAR},
-      </if>
-      <if test="contacterTelephone != null">
-        contacter_telephone = #{contacterTelephone,jdbcType=VARCHAR},
-      </if>
-      <if test="contacterMobile != null">
-        contacter_mobile = #{contacterMobile,jdbcType=VARCHAR},
-      </if>
-      <if test="receiveAddress != null">
-        receive_address = #{receiveAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="receivePostcode != null">
-        receive_postcode = #{receivePostcode,jdbcType=VARCHAR},
-      </if>
-      <if test="receiveContacter != null">
-        receive_contacter = #{receiveContacter,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="subscribeNums != null">
-        subscribe_nums = #{subscribeNums,jdbcType=INTEGER},
-      </if>
-      <if test="extend1 != null">
-        extend_1 = #{extend1,jdbcType=VARCHAR},
-      </if>
-      <if test="extend2 != null">
-        extend_2 = #{extend2,jdbcType=VARCHAR},
-      </if>
-      <if test="extend3 != null">
-        extend_3 = #{extend3,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="supplementId1 != null">
-        supplement_id1 = #{supplementId1,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId2 != null">
-        supplement_id2 = #{supplementId2,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId3 != null">
-        supplement_id3 = #{supplementId3,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId4 != null">
-        supplement_id4 = #{supplementId4,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId5 != null">
-        supplement_id5 = #{supplementId5,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId6 != null">
-        supplement_id6 = #{supplementId6,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId7 != null">
-        supplement_id7 = #{supplementId7,jdbcType=VARCHAR},
-      </if>
-      <if test="supplementId1Nums != null">
-        supplement_id1_nums = #{supplementId1Nums,jdbcType=INTEGER},
-      </if>
-      <if test="supplementId2Nums != null">
-        supplement_id2_nums = #{supplementId2Nums,jdbcType=INTEGER},
-      </if>
-      <if test="supplementId3Nums != null">
-        supplement_id3_nums = #{supplementId3Nums,jdbcType=INTEGER},
-      </if>
-      <if test="supplementId4Nums != null">
-        supplement_id4_nums = #{supplementId4Nums,jdbcType=INTEGER},
-      </if>
-      <if test="supplementId5Nums != null">
-        supplement_id5_nums = #{supplementId5Nums,jdbcType=INTEGER},
-      </if>
-      <if test="supplementId6Nums != null">
-        supplement_id6_nums = #{supplementId6Nums,jdbcType=INTEGER},
-      </if>
-      <if test="supplementId7Nums != null">
-        supplement_id7_nums = #{supplementId7Nums,jdbcType=INTEGER},
-      </if>
-      </trim>
-    </set>
-  </sql>
-  <sql id="Base_Column_List">
-    id,
-    ref_id,
-    ref_role_id,
-    address_id,
-    contacter_name,
-    contacter_telephone,
-    contacter_mobile,
-    receive_address,
-    receive_postcode,
-    receive_contacter,
-    status,
-    subscribe_nums,
-    extend_1,
-    extend_2,
-    extend_3,
-    create_time,
-    update_time,
-    supplement_id1,
-    supplement_id2,
-    supplement_id3,
-    supplement_id4,
-    supplement_id5,
-    supplement_id6,
-    supplement_id7,
-    supplement_id1_nums,
-    supplement_id2_nums,
-    supplement_id3_nums,
-    supplement_id4_nums,
-    supplement_id5_nums,
-    supplement_id6_nums,
-    supplement_id7_nums,
-  </sql>
-  <sql id="Base_Set_Clause">
-    <set>
-      <trim suffixOverrides=",">
-        ref_id = #{refId,jdbcType=VARCHAR},
-        ref_role_id = #{refRoleId,jdbcType=VARCHAR},
-        address_id = #{addressId,jdbcType=VARCHAR},
-        contacter_name = #{contacterName,jdbcType=VARCHAR},
-        contacter_telephone = #{contacterTelephone,jdbcType=VARCHAR},
-        contacter_mobile = #{contacterMobile,jdbcType=VARCHAR},
-        receive_address = #{receiveAddress,jdbcType=VARCHAR},
-        receive_postcode = #{receivePostcode,jdbcType=VARCHAR},
-        receive_contacter = #{receiveContacter,jdbcType=VARCHAR},
-        status = #{status,jdbcType=VARCHAR},
-        subscribe_nums = #{subscribeNums,jdbcType=INTEGER},
-        extend_1 = #{extend1,jdbcType=VARCHAR},
-        extend_2 = #{extend2,jdbcType=VARCHAR},
-        extend_3 = #{extend3,jdbcType=VARCHAR},
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-        supplement_id1 = #{supplementId1,jdbcType=VARCHAR},
-        supplement_id2 = #{supplementId2,jdbcType=VARCHAR},
-        supplement_id3 = #{supplementId3,jdbcType=VARCHAR},
-        supplement_id4 = #{supplementId4,jdbcType=VARCHAR},
-        supplement_id5 = #{supplementId5,jdbcType=VARCHAR},
-        supplement_id6 = #{supplementId6,jdbcType=VARCHAR},
-        supplement_id7 = #{supplementId7,jdbcType=VARCHAR},
-        supplement_id1_nums = #{supplementId1Nums,jdbcType=INTEGER},
-        supplement_id2_nums = #{supplementId2Nums,jdbcType=INTEGER},
-        supplement_id3_nums = #{supplementId3Nums,jdbcType=INTEGER},
-        supplement_id4_nums = #{supplementId4Nums,jdbcType=INTEGER},
-        supplement_id5_nums = #{supplementId5Nums,jdbcType=INTEGER},
-        supplement_id6_nums = #{supplementId6Nums,jdbcType=INTEGER},
-        supplement_id7_nums = #{supplementId7Nums,jdbcType=INTEGER},
-      </trim>
-    </set>
-  </sql>
-  <sql id="Selective_Column_List">
-    <!-- ID, -->
-    <if test="refId != null">
-      ref_id,
-    </if>
-    <if test="refRoleId != null">
-      ref_role_id,
-    </if>
-    <if test="addressId != null">
-      address_id,
-    </if>
-    <if test="contacterName != null">
-      contacter_name,
-    </if>
-    <if test="contacterTelephone != null">
-      contacter_telephone,
-    </if>
-    <if test="contacterMobile != null">
-      contacter_mobile,
-    </if>
-    <if test="receiveAddress != null">
-      receive_address,
-    </if>
-    <if test="receivePostcode != null">
-      receive_postcode,
-    </if>
-    <if test="receiveContacter != null">
-      receive_contacter,
-    </if>
-    <if test="status != null">
-      status,
-    </if>
-    <if test="subscribeNums != null">
-      subscribe_nums,
-    </if>
-    <if test="extend1 != null">
-      extend_1,
-    </if>
-    <if test="extend2 != null">
-      extend_2,
-    </if>
-    <if test="extend3 != null">
-      extend_3,
-    </if>
-    <if test="createTime != null">
-      create_time,
-    </if>
-    <if test="updateTime != null">
-      update_time,
-    </if>
-    <if test="supplementId1 != null">
-      supplement_id1,
-    </if>
-    <if test="supplementId2 != null">
-      supplement_id2,
-    </if>
-    <if test="supplementId3 != null">
-      supplement_id3,
-    </if>
-    <if test="supplementId4 != null">
-      supplement_id4,
-    </if>
-    <if test="supplementId5 != null">
-      supplement_id5,
-    </if>
-    <if test="supplementId6 != null">
-      supplement_id6,
-    </if>
-    <if test="supplementId7 != null">
-      supplement_id7,
-    </if>
-    <if test="supplementId1Nums != null">
-      supplement_id1_nums,
-    </if>
-    <if test="supplementId2Nums != null">
-      supplement_id2_nums,
-    </if>
-    <if test="supplementId3Nums != null">
-      supplement_id3_nums,
-    </if>
-    <if test="supplementId4Nums != null">
-      supplement_id4_nums,
-    </if>
-    <if test="supplementId5Nums != null">
-      supplement_id5_nums,
-    </if>
-    <if test="supplementId6Nums != null">
-      supplement_id6_nums,
-    </if>
-    <if test="supplementId7Nums != null">
-      supplement_id7_nums,
-    </if>
-  </sql>
-	<sql id="Base_Value_List">
-    #{id,jdbcType=BIGINT},
-    #{refId,jdbcType=VARCHAR},
-    #{refRoleId,jdbcType=VARCHAR},
-    #{addressId,jdbcType=VARCHAR},
-    #{contacterName,jdbcType=VARCHAR},
-    #{contacterTelephone,jdbcType=VARCHAR},
-    #{contacterMobile,jdbcType=VARCHAR},
-    #{receiveAddress,jdbcType=VARCHAR},
-    #{receivePostcode,jdbcType=VARCHAR},
-    #{receiveContacter,jdbcType=VARCHAR},
-    #{status,jdbcType=VARCHAR},
-    #{subscribeNums,jdbcType=INTEGER},
-    #{extend1,jdbcType=VARCHAR},
-    #{extend2,jdbcType=VARCHAR},
-    #{extend3,jdbcType=VARCHAR},
-    #{createTime,jdbcType=TIMESTAMP},
-    #{updateTime,jdbcType=TIMESTAMP},
-    #{supplementId1,jdbcType=VARCHAR},
-    #{supplementId2,jdbcType=VARCHAR},
-    #{supplementId3,jdbcType=VARCHAR},
-    #{supplementId4,jdbcType=VARCHAR},
-    #{supplementId5,jdbcType=VARCHAR},
-    #{supplementId6,jdbcType=VARCHAR},
-    #{supplementId7,jdbcType=VARCHAR},
-    #{supplementId1Nums,jdbcType=INTEGER},
-    #{supplementId2Nums,jdbcType=INTEGER},
-    #{supplementId3Nums,jdbcType=INTEGER},
-    #{supplementId4Nums,jdbcType=INTEGER},
-    #{supplementId5Nums,jdbcType=INTEGER},
-    #{supplementId6Nums,jdbcType=INTEGER},
-    #{supplementId7Nums,jdbcType=INTEGER},
+
+
+	<select id="queryAddressListByUserId" parameterType="BizDistribut"
+		resultType="BizDistribut">
+		select ai.address_id as aId,ai.contacter_name as
+		cName,ai.contacter_mobile as cMobile,
+		ai.receive_address as rAddress,ai.receive_postcode as rPostCode,ai.contacter_name as
+		rContacter,ai.status as status
+		from user_info ui,reader_info ri,address_info ai
+		where ui.ref_id=ri.reader_id and ai.ref_id=ri.reader_id
+		and ui.user_id=#{userId,jdbcType=VARCHAR}
+	</select>
+
+
+
+
+	<sql id="Page_Query_Begin">
+		select * from(select t.*,rownum rn from(
 	</sql>
-  <sql id="Selective_Value_List">
-    <!-- SEQ_address_info.nextval, -->
-    <if test="refId != null">
-      #{refId,jdbcType=VARCHAR},
-    </if>
-    <if test="refRoleId != null">
-      #{refRoleId,jdbcType=VARCHAR},
-    </if>
-    <if test="addressId != null">
-      #{addressId,jdbcType=VARCHAR},
-    </if>
-    <if test="contacterName != null">
-      #{contacterName,jdbcType=VARCHAR},
-    </if>
-    <if test="contacterTelephone != null">
-      #{contacterTelephone,jdbcType=VARCHAR},
-    </if>
-    <if test="contacterMobile != null">
-      #{contacterMobile,jdbcType=VARCHAR},
-    </if>
-    <if test="receiveAddress != null">
-      #{receiveAddress,jdbcType=VARCHAR},
-    </if>
-    <if test="receivePostcode != null">
-      #{receivePostcode,jdbcType=VARCHAR},
-    </if>
-    <if test="receiveContacter != null">
-      #{receiveContacter,jdbcType=VARCHAR},
-    </if>
-    <if test="status != null">
-      #{status,jdbcType=VARCHAR},
-    </if>
-    <if test="subscribeNums != null">
-      #{subscribeNums,jdbcType=INTEGER},
-    </if>
-    <if test="extend1 != null">
-      #{extend1,jdbcType=VARCHAR},
-    </if>
-    <if test="extend2 != null">
-      #{extend2,jdbcType=VARCHAR},
-    </if>
-    <if test="extend3 != null">
-      #{extend3,jdbcType=VARCHAR},
-    </if>
-    <if test="createTime != null">
-      #{createTime,jdbcType=TIMESTAMP},
-    </if>
-    <if test="updateTime != null">
-      #{updateTime,jdbcType=TIMESTAMP},
-    </if>
-    <if test="supplementId1 != null">
-      #{supplementId1,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId2 != null">
-      #{supplementId2,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId3 != null">
-      #{supplementId3,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId4 != null">
-      #{supplementId4,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId5 != null">
-      #{supplementId5,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId6 != null">
-      #{supplementId6,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId7 != null">
-      #{supplementId7,jdbcType=VARCHAR},
-    </if>
-    <if test="supplementId1Nums != null">
-      #{supplementId1Nums,jdbcType=INTEGER},
-    </if>
-    <if test="supplementId2Nums != null">
-      #{supplementId2Nums,jdbcType=INTEGER},
-    </if>
-    <if test="supplementId3Nums != null">
-      #{supplementId3Nums,jdbcType=INTEGER},
-    </if>
-    <if test="supplementId4Nums != null">
-      #{supplementId4Nums,jdbcType=INTEGER},
-    </if>
-    <if test="supplementId5Nums != null">
-      #{supplementId5Nums,jdbcType=INTEGER},
-    </if>
-    <if test="supplementId6Nums != null">
-      #{supplementId6Nums,jdbcType=INTEGER},
-    </if>
-    <if test="supplementId7Nums != null">
-      #{supplementId7Nums,jdbcType=INTEGER},
-    </if>
-  </sql>
-  
-  <select id="selectByExample" parameterType="AddressInfoQuery" resultMap="BaseResultMap">
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from address_info
-    <include refid="Example_Where_Clause" />
-    <!-- order by CREATE_DATE -->
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from address_info
-    where ID = #{id,jdbcType=DECIMAL}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from address_info
-    where ID = #{id,jdbcType=DECIMAL}
-  </delete>
-  <delete id="deleteByExample" parameterType="AddressInfoQuery">
-    delete from address_info
-    <include refid="Example_Where_Clause" />
-  </delete>
-  <insert id="insert" parameterType="AddressInfo">
-    insert into address_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <include refid="Base_Column_List"/>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <include refid="Base_Value_List"/>
-    </trim>
-  </insert>
-  <insert id="insertSelective" parameterType="AddressInfo">
-    insert into address_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <include refid="Selective_Column_List"/>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <include refid="Selective_Value_List"/>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="AddressInfoQuery" resultType="java.lang.Integer">
-    select count(*) from address_info
-    <include refid="Example_Where_Clause" />
-  </select>
-  <update id="updateByPrimaryKeySelective" parameterType="AddressInfo">
-    update address_info
-    <include refid="Example_Set_Clause"/>
-    where ID = #{id,jdbcType=DECIMAL}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="AddressInfo">
-    update address_info
-    <include refid="Base_Set_Clause"/>
-    where ID = #{id,jdbcType=DECIMAL}
-  </update>
-  
-  <select id="selectPageByExample" parameterType="AddressInfoQuery" resultMap="BaseResultMap">
-  	<include refid="Page_Query_Begin" />
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from address_info
-    <include refid="Example_Where_Clause" />
-    <!-- order by CREATE_DATE -->
-    <include refid="Page_Query_End" />
-  </select>
+	<sql id="Page_Query_End">
+		) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+			<trim prefix="(" prefixOverrides="and" suffix=")">
+				<if test="refId != null">
+					and ref_id = #{refId,jdbcType=VARCHAR}
+				</if>
+				<if test="refRoleId != null">
+					and ref_role_id = #{refRoleId,jdbcType=VARCHAR}
+				</if>
+				<if test="addressId != null">
+					and address_id = #{addressId,jdbcType=VARCHAR}
+				</if>
+				<if test="contacterName != null">
+					and contacter_name = #{contacterName,jdbcType=VARCHAR}
+				</if>
+				<if test="contacterTelephone != null">
+					and contacter_telephone = #{contacterTelephone,jdbcType=VARCHAR}
+				</if>
+				<if test="contacterMobile != null">
+					and contacter_mobile = #{contacterMobile,jdbcType=VARCHAR}
+				</if>
+				<if test="receiveAddress != null">
+					and receive_address = #{receiveAddress,jdbcType=VARCHAR}
+				</if>
+				<if test="receivePostcode != null">
+					and receive_postcode = #{receivePostcode,jdbcType=VARCHAR}
+				</if>
+				<if test="receiveContacter != null">
+					and receive_contacter = #{receiveContacter,jdbcType=VARCHAR}
+				</if>
+				<if test="status != null">
+					and status = #{status,jdbcType=VARCHAR}
+				</if>
+				<if test="subscribeNums != null">
+					and subscribe_nums = #{subscribeNums,jdbcType=INTEGER}
+				</if>
+				<if test="extend1 != null">
+					and extend_1 = #{extend1,jdbcType=VARCHAR}
+				</if>
+				<if test="extend2 != null">
+					and extend_2 = #{extend2,jdbcType=VARCHAR}
+				</if>
+				<if test="extend3 != null">
+					and extend_3 = #{extend3,jdbcType=VARCHAR}
+				</if>
+				<if test="createTime != null">
+					and create_time = #{createTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="updateTime != null">
+					and update_time = #{updateTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="supplementId1 != null">
+					and supplement_id1 = #{supplementId1,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId2 != null">
+					and supplement_id2 = #{supplementId2,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId3 != null">
+					and supplement_id3 = #{supplementId3,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId4 != null">
+					and supplement_id4 = #{supplementId4,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId5 != null">
+					and supplement_id5 = #{supplementId5,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId6 != null">
+					and supplement_id6 = #{supplementId6,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId7 != null">
+					and supplement_id7 = #{supplementId7,jdbcType=VARCHAR}
+				</if>
+				<if test="supplementId1Nums != null">
+					and supplement_id1_nums = #{supplementId1Nums,jdbcType=INTEGER}
+				</if>
+				<if test="supplementId2Nums != null">
+					and supplement_id2_nums = #{supplementId2Nums,jdbcType=INTEGER}
+				</if>
+				<if test="supplementId3Nums != null">
+					and supplement_id3_nums = #{supplementId3Nums,jdbcType=INTEGER}
+				</if>
+				<if test="supplementId4Nums != null">
+					and supplement_id4_nums = #{supplementId4Nums,jdbcType=INTEGER}
+				</if>
+				<if test="supplementId5Nums != null">
+					and supplement_id5_nums = #{supplementId5Nums,jdbcType=INTEGER}
+				</if>
+				<if test="supplementId6Nums != null">
+					and supplement_id6_nums = #{supplementId6Nums,jdbcType=INTEGER}
+				</if>
+				<if test="supplementId7Nums != null">
+					and supplement_id7_nums = #{supplementId7Nums,jdbcType=INTEGER}
+				</if>
+			</trim>
+		</where>
+	</sql>
+	<sql id="Example_Set_Clause">
+		<set>
+			<trim suffixOverrides=",">
+				<if test="refId != null">
+					ref_id = #{refId,jdbcType=VARCHAR},
+				</if>
+				<if test="refRoleId != null">
+					ref_role_id = #{refRoleId,jdbcType=VARCHAR},
+				</if>
+				<if test="addressId != null">
+					address_id = #{addressId,jdbcType=VARCHAR},
+				</if>
+				<if test="contacterName != null">
+					contacter_name = #{contacterName,jdbcType=VARCHAR},
+				</if>
+				<if test="contacterTelephone != null">
+					contacter_telephone = #{contacterTelephone,jdbcType=VARCHAR},
+				</if>
+				<if test="contacterMobile != null">
+					contacter_mobile = #{contacterMobile,jdbcType=VARCHAR},
+				</if>
+				<if test="receiveAddress != null">
+					receive_address = #{receiveAddress,jdbcType=VARCHAR},
+				</if>
+				<if test="receivePostcode != null">
+					receive_postcode = #{receivePostcode,jdbcType=VARCHAR},
+				</if>
+				<if test="receiveContacter != null">
+					receive_contacter = #{receiveContacter,jdbcType=VARCHAR},
+				</if>
+				<if test="status != null">
+					status = #{status,jdbcType=VARCHAR},
+				</if>
+				<if test="subscribeNums != null">
+					subscribe_nums = #{subscribeNums,jdbcType=INTEGER},
+				</if>
+				<if test="extend1 != null">
+					extend_1 = #{extend1,jdbcType=VARCHAR},
+				</if>
+				<if test="extend2 != null">
+					extend_2 = #{extend2,jdbcType=VARCHAR},
+				</if>
+				<if test="extend3 != null">
+					extend_3 = #{extend3,jdbcType=VARCHAR},
+				</if>
+				<if test="createTime != null">
+					create_time = #{createTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="updateTime != null">
+					update_time = #{updateTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="supplementId1 != null">
+					supplement_id1 = #{supplementId1,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId2 != null">
+					supplement_id2 = #{supplementId2,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId3 != null">
+					supplement_id3 = #{supplementId3,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId4 != null">
+					supplement_id4 = #{supplementId4,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId5 != null">
+					supplement_id5 = #{supplementId5,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId6 != null">
+					supplement_id6 = #{supplementId6,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId7 != null">
+					supplement_id7 = #{supplementId7,jdbcType=VARCHAR},
+				</if>
+				<if test="supplementId1Nums != null">
+					supplement_id1_nums = #{supplementId1Nums,jdbcType=INTEGER},
+				</if>
+				<if test="supplementId2Nums != null">
+					supplement_id2_nums = #{supplementId2Nums,jdbcType=INTEGER},
+				</if>
+				<if test="supplementId3Nums != null">
+					supplement_id3_nums = #{supplementId3Nums,jdbcType=INTEGER},
+				</if>
+				<if test="supplementId4Nums != null">
+					supplement_id4_nums = #{supplementId4Nums,jdbcType=INTEGER},
+				</if>
+				<if test="supplementId5Nums != null">
+					supplement_id5_nums = #{supplementId5Nums,jdbcType=INTEGER},
+				</if>
+				<if test="supplementId6Nums != null">
+					supplement_id6_nums = #{supplementId6Nums,jdbcType=INTEGER},
+				</if>
+				<if test="supplementId7Nums != null">
+					supplement_id7_nums = #{supplementId7Nums,jdbcType=INTEGER},
+				</if>
+			</trim>
+		</set>
+	</sql>
+	<sql id="Base_Column_List">
+		id,
+		ref_id,
+		ref_role_id,
+		address_id,
+		contacter_name,
+		contacter_telephone,
+		contacter_mobile,
+		receive_address,
+		receive_postcode,
+		receive_contacter,
+		status,
+		subscribe_nums,
+		extend_1,
+		extend_2,
+		extend_3,
+		create_time,
+		update_time,
+		supplement_id1,
+		supplement_id2,
+		supplement_id3,
+		supplement_id4,
+		supplement_id5,
+		supplement_id6,
+		supplement_id7,
+		supplement_id1_nums,
+		supplement_id2_nums,
+		supplement_id3_nums,
+		supplement_id4_nums,
+		supplement_id5_nums,
+		supplement_id6_nums,
+		supplement_id7_nums,
+	</sql>
+	<sql id="Base_Set_Clause">
+		<set>
+			<trim suffixOverrides=",">
+				ref_id = #{refId,jdbcType=VARCHAR},
+				ref_role_id = #{refRoleId,jdbcType=VARCHAR},
+				address_id = #{addressId,jdbcType=VARCHAR},
+				contacter_name = #{contacterName,jdbcType=VARCHAR},
+				contacter_telephone = #{contacterTelephone,jdbcType=VARCHAR},
+				contacter_mobile = #{contacterMobile,jdbcType=VARCHAR},
+				receive_address = #{receiveAddress,jdbcType=VARCHAR},
+				receive_postcode = #{receivePostcode,jdbcType=VARCHAR},
+				receive_contacter = #{receiveContacter,jdbcType=VARCHAR},
+				status = #{status,jdbcType=VARCHAR},
+				subscribe_nums = #{subscribeNums,jdbcType=INTEGER},
+				extend_1 = #{extend1,jdbcType=VARCHAR},
+				extend_2 = #{extend2,jdbcType=VARCHAR},
+				extend_3 = #{extend3,jdbcType=VARCHAR},
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+				supplement_id1 = #{supplementId1,jdbcType=VARCHAR},
+				supplement_id2 = #{supplementId2,jdbcType=VARCHAR},
+				supplement_id3 = #{supplementId3,jdbcType=VARCHAR},
+				supplement_id4 = #{supplementId4,jdbcType=VARCHAR},
+				supplement_id5 = #{supplementId5,jdbcType=VARCHAR},
+				supplement_id6 = #{supplementId6,jdbcType=VARCHAR},
+				supplement_id7 = #{supplementId7,jdbcType=VARCHAR},
+				supplement_id1_nums = #{supplementId1Nums,jdbcType=INTEGER},
+				supplement_id2_nums = #{supplementId2Nums,jdbcType=INTEGER},
+				supplement_id3_nums = #{supplementId3Nums,jdbcType=INTEGER},
+				supplement_id4_nums = #{supplementId4Nums,jdbcType=INTEGER},
+				supplement_id5_nums = #{supplementId5Nums,jdbcType=INTEGER},
+				supplement_id6_nums = #{supplementId6Nums,jdbcType=INTEGER},
+				supplement_id7_nums = #{supplementId7Nums,jdbcType=INTEGER},
+			</trim>
+		</set>
+	</sql>
+	<sql id="Selective_Column_List">
+		<!-- ID, -->
+		<if test="refId != null">
+			ref_id,
+		</if>
+		<if test="refRoleId != null">
+			ref_role_id,
+		</if>
+		<if test="addressId != null">
+			address_id,
+		</if>
+		<if test="contacterName != null">
+			contacter_name,
+		</if>
+		<if test="contacterTelephone != null">
+			contacter_telephone,
+		</if>
+		<if test="contacterMobile != null">
+			contacter_mobile,
+		</if>
+		<if test="receiveAddress != null">
+			receive_address,
+		</if>
+		<if test="receivePostcode != null">
+			receive_postcode,
+		</if>
+		<if test="receiveContacter != null">
+			receive_contacter,
+		</if>
+		<if test="status != null">
+			status,
+		</if>
+		<if test="subscribeNums != null">
+			subscribe_nums,
+		</if>
+		<if test="extend1 != null">
+			extend_1,
+		</if>
+		<if test="extend2 != null">
+			extend_2,
+		</if>
+		<if test="extend3 != null">
+			extend_3,
+		</if>
+		<if test="createTime != null">
+			create_time,
+		</if>
+		<if test="updateTime != null">
+			update_time,
+		</if>
+		<if test="supplementId1 != null">
+			supplement_id1,
+		</if>
+		<if test="supplementId2 != null">
+			supplement_id2,
+		</if>
+		<if test="supplementId3 != null">
+			supplement_id3,
+		</if>
+		<if test="supplementId4 != null">
+			supplement_id4,
+		</if>
+		<if test="supplementId5 != null">
+			supplement_id5,
+		</if>
+		<if test="supplementId6 != null">
+			supplement_id6,
+		</if>
+		<if test="supplementId7 != null">
+			supplement_id7,
+		</if>
+		<if test="supplementId1Nums != null">
+			supplement_id1_nums,
+		</if>
+		<if test="supplementId2Nums != null">
+			supplement_id2_nums,
+		</if>
+		<if test="supplementId3Nums != null">
+			supplement_id3_nums,
+		</if>
+		<if test="supplementId4Nums != null">
+			supplement_id4_nums,
+		</if>
+		<if test="supplementId5Nums != null">
+			supplement_id5_nums,
+		</if>
+		<if test="supplementId6Nums != null">
+			supplement_id6_nums,
+		</if>
+		<if test="supplementId7Nums != null">
+			supplement_id7_nums,
+		</if>
+	</sql>
+	<sql id="Base_Value_List">
+		#{id,jdbcType=BIGINT},
+		#{refId,jdbcType=VARCHAR},
+		#{refRoleId,jdbcType=VARCHAR},
+		#{addressId,jdbcType=VARCHAR},
+		#{contacterName,jdbcType=VARCHAR},
+		#{contacterTelephone,jdbcType=VARCHAR},
+		#{contacterMobile,jdbcType=VARCHAR},
+		#{receiveAddress,jdbcType=VARCHAR},
+		#{receivePostcode,jdbcType=VARCHAR},
+		#{receiveContacter,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
+		#{subscribeNums,jdbcType=INTEGER},
+		#{extend1,jdbcType=VARCHAR},
+		#{extend2,jdbcType=VARCHAR},
+		#{extend3,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP},
+		#{supplementId1,jdbcType=VARCHAR},
+		#{supplementId2,jdbcType=VARCHAR},
+		#{supplementId3,jdbcType=VARCHAR},
+		#{supplementId4,jdbcType=VARCHAR},
+		#{supplementId5,jdbcType=VARCHAR},
+		#{supplementId6,jdbcType=VARCHAR},
+		#{supplementId7,jdbcType=VARCHAR},
+		#{supplementId1Nums,jdbcType=INTEGER},
+		#{supplementId2Nums,jdbcType=INTEGER},
+		#{supplementId3Nums,jdbcType=INTEGER},
+		#{supplementId4Nums,jdbcType=INTEGER},
+		#{supplementId5Nums,jdbcType=INTEGER},
+		#{supplementId6Nums,jdbcType=INTEGER},
+		#{supplementId7Nums,jdbcType=INTEGER},
+	</sql>
+	<sql id="Selective_Value_List">
+		<!-- SEQ_address_info.nextval, -->
+		<if test="refId != null">
+			#{refId,jdbcType=VARCHAR},
+		</if>
+		<if test="refRoleId != null">
+			#{refRoleId,jdbcType=VARCHAR},
+		</if>
+		<if test="addressId != null">
+			#{addressId,jdbcType=VARCHAR},
+		</if>
+		<if test="contacterName != null">
+			#{contacterName,jdbcType=VARCHAR},
+		</if>
+		<if test="contacterTelephone != null">
+			#{contacterTelephone,jdbcType=VARCHAR},
+		</if>
+		<if test="contacterMobile != null">
+			#{contacterMobile,jdbcType=VARCHAR},
+		</if>
+		<if test="receiveAddress != null">
+			#{receiveAddress,jdbcType=VARCHAR},
+		</if>
+		<if test="receivePostcode != null">
+			#{receivePostcode,jdbcType=VARCHAR},
+		</if>
+		<if test="receiveContacter != null">
+			#{receiveContacter,jdbcType=VARCHAR},
+		</if>
+		<if test="status != null">
+			#{status,jdbcType=VARCHAR},
+		</if>
+		<if test="subscribeNums != null">
+			#{subscribeNums,jdbcType=INTEGER},
+		</if>
+		<if test="extend1 != null">
+			#{extend1,jdbcType=VARCHAR},
+		</if>
+		<if test="extend2 != null">
+			#{extend2,jdbcType=VARCHAR},
+		</if>
+		<if test="extend3 != null">
+			#{extend3,jdbcType=VARCHAR},
+		</if>
+		<if test="createTime != null">
+			#{createTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateTime != null">
+			#{updateTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="supplementId1 != null">
+			#{supplementId1,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId2 != null">
+			#{supplementId2,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId3 != null">
+			#{supplementId3,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId4 != null">
+			#{supplementId4,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId5 != null">
+			#{supplementId5,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId6 != null">
+			#{supplementId6,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId7 != null">
+			#{supplementId7,jdbcType=VARCHAR},
+		</if>
+		<if test="supplementId1Nums != null">
+			#{supplementId1Nums,jdbcType=INTEGER},
+		</if>
+		<if test="supplementId2Nums != null">
+			#{supplementId2Nums,jdbcType=INTEGER},
+		</if>
+		<if test="supplementId3Nums != null">
+			#{supplementId3Nums,jdbcType=INTEGER},
+		</if>
+		<if test="supplementId4Nums != null">
+			#{supplementId4Nums,jdbcType=INTEGER},
+		</if>
+		<if test="supplementId5Nums != null">
+			#{supplementId5Nums,jdbcType=INTEGER},
+		</if>
+		<if test="supplementId6Nums != null">
+			#{supplementId6Nums,jdbcType=INTEGER},
+		</if>
+		<if test="supplementId7Nums != null">
+			#{supplementId7Nums,jdbcType=INTEGER},
+		</if>
+	</sql>
+
+	<select id="selectByExample" parameterType="AddressInfoQuery"
+		resultMap="BaseResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from address_info
+		<include refid="Example_Where_Clause" />
+		<!-- order by CREATE_DATE -->
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from address_info
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from address_info
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<delete id="deleteByExample" parameterType="AddressInfoQuery">
+		delete from address_info
+		<include refid="Example_Where_Clause" />
+	</delete>
+	<insert id="insert" parameterType="AddressInfo">
+		insert into address_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Base_Value_List" />
+		</trim>
+	</insert>
+	<insert id="insertSelective" parameterType="AddressInfo">
+		insert into address_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Selective_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Selective_Value_List" />
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="AddressInfoQuery"
+		resultType="java.lang.Integer">
+		select count(*) from address_info
+		<include refid="Example_Where_Clause" />
+	</select>
+	<update id="updateByPrimaryKeySelective" parameterType="AddressInfo">
+		update address_info
+		<include refid="Example_Set_Clause" />
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="AddressInfo">
+		update address_info
+		<include refid="Base_Set_Clause" />
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<select id="selectPageByExample" parameterType="AddressInfoQuery"
+		resultMap="BaseResultMap">
+		<include refid="Page_Query_Begin" />
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from address_info
+		<include refid="Example_Where_Clause" />
+		<!-- order by CREATE_DATE -->
+		<include refid="Page_Query_End" />
+	</select>
 </mapper>

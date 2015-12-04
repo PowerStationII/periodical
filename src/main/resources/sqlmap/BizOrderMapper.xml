@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BizOrderMapper">
+	<select id="queryDistributeOrderInfos" parameterType="BizOrder"
+		resultType="BizOrder">
+		select lin.user_id as userId, lin.order_no as orderNo,
+		lin.periodical_id as periodicalId,lin.subscribe_nums as
+		subNums,lin.order_status as oStatus,lin.address_id as
+		addressId,lin.contacter_name as contacterName,lin.contacter_telephone
+		as contacterTelephone,lin.receive_address as
+		receiveAddress,lin.receive_postcode as
+		receivePostCode,pd.distribute_nums as
+		distributNum,pd.distribute_status,pd.id as distributId from
+		(select
+		oi.user_id,oi.order_no,oi.periodical_id,oi.subscribe_nums,oi.order_status,ai.address_id,
+		ai.contacter_name,ai.contacter_telephone,ai.receive_address,ai.receive_postcode
+		from order_info oi,address_info ai,user_info ui
+		where oi.user_id=ui.user_id and ui.ref_id=ai.ref_id ) as lin left join
+		periodical_distribut pd on lin.address_id=pd.address_id and
+		lin.order_no=pd.ref_id
+		where lin.order_no=#{orderNo,jdbcType=VARCHAR}
+	</select>
+</mapper>
