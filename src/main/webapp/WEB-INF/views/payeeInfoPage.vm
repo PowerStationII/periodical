@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>payeeInfo账户信息编辑</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+</head>
+<script type="text/javascript">
+	$(function() {
+		// 表格数据源  
+		var data = [];
+		var rows = $('#table').datagrid('getRows');
+		for (var i = 0; i < rows.length; i++) {
+			data.push({
+				"articleId" : rows[i].articleId,
+				"title" : rows[i].title,
+				"contriTime" : rows[i].contriTime,
+				"authorState" : rows[i].authorState,
+				"option" : rows[i].option
+			});
+		}
+		$("#table").datagrid("loadData", data.slice(0, 5));
+		var pager = $("#table").datagrid("getPager");
+		pager.pagination({
+			total : data.length,
+			pageSize : 5,
+			pageList : [ 5, 10, 15, 20 ],
+			onSelectPage : function(pageNo, pageSize) {
+				var start = (pageNo - 1) * pageSize;
+				var end = start + pageSize;
+				$("#table").datagrid("loadData", data.slice(start, end));
+				pager.pagination('refresh', {
+					total : data.length,
+					pageNumber : pageNo
+				});
+			}
+		});
+	});
+	function yijian(value) {
+		$.ajax({
+			url : '../author/toOpinionQueryPage',
+			data : {
+				articleId : value
+			},
+			type : 'POST',
+			success : function(res) {
+				if (res == 'null') {
+					$.messager.alert('审稿意见', '无');
+				} else {
+					$.messager.alert('审稿意见', eval('(' + res + ')').opinion);
+				}
+			}
+		});
+	}
+</script>
+<body>
+	<div id="articleInfos" style="margin-top: 50px;">
+		<form action="">
+			<table style="border: 1px solid black;" rules="all">
+				<tr><td colspan="2">稿件名称:${articleInfo.articleCnTitle}</td></tr>
+				<tr>
+					<td></td>
+					<td>作者姓名</td>
+				</tr>
+				#foreach($dtos in ${list})
+				<tr>
+					<td><input type="radio" name=""></td>
+					<td>${dtos.authorName}<a href="../author/toAddAuthorPayeeInfoPage?articleId=${articleInfo.articleId}&authorId=${dtos.authorId}">编辑账户信息</a></td>
+				</tr>
+				#end
+			</table>
+			<br>
+		</form>
+	</div>
+</body>
+</html>

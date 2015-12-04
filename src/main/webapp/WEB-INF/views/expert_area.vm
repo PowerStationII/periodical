@@ -36,6 +36,11 @@
   				$('#other').remove();
   				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "setting/toUpdateSettingPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
   			});
+  			$('#zhanghuxinxi').click(function(){
+  				$('#area').hide();
+  				$('#other').remove();
+  				$('.right').append('<div id="other"><iframe  width ="100%"   height = "530" src= "expert/toAddExpertPayeeInfoPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+  			});
   			$('#xiugaimima').click(function(){
   				$('#area').hide();
   				$('#other').remove();
@@ -74,7 +79,8 @@
        			<div  class="li1"  id="gaojianchaxun">稿件审核</div>
        			<div  class="li11"  id="gaofeichaxun">稿费查询</div>
 		        <div  class="mode_name"  style="margin-top:10px;">个人信息设置</div>
-	       		<div  class="li2"  style="margin-top:10px;" id="xiugaixinxi">修改个人信息</div>
+	       		<div  class="li2"  style="margin-top:10px;" id="zhanghuxinxi">编辑账户信息</div>
+	       		<div  class="li2"   id="xiugaixinxi">修改个人信息</div>
 			    <div  class="li3" id="xiugaimima">修改密码</div>
 	       	</div>
 	       	#else

@@ -105,8 +105,8 @@
             #end
             </tbody>
 		</table>
-		<a href="../reader/toCreatOrderPage"  class="easyui-linkbutton" data-options="">新建订单</a> 
-		<a href="#"  onclick="import_download()" class="easyui-linkbutton" data-options="">下载订购指南</a> 
+		<!-- <a href="../reader/toCreatOrderPage"  class="easyui-linkbutton" data-options="">新建订单</a>  -->
+		<!--  <a href="#"  onclick="import_download()" class="easyui-linkbutton" data-options="">下载订购指南</a>  --> 
 		<iframe height="0" width="0"  name="saveImg" id="saveImg"  style="display:none;"></iframe>
 		<br>
 	</div>

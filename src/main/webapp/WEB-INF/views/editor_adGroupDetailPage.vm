@@ -14,16 +14,19 @@
 <body>
 	<div id="articleInfos">
 		<form action="" method="POST">
-		<table style="border: 1px solid black;" rules="all">
-			<tr>
-				<td>期刊名称</td>
-				<td>期刊编号</td>
-				<td>发行年份</td>
-				<td>发行期</td>
-				<td>签发时间</td>
-				<td>状态</td>
-				<td>操作</td>
-			</tr>
+		<table class="easyui-datagrid"   data-options="singleSelect:true">
+			<thead>
+				<tr>
+					<th data-options="field:'periodicalCnName',width:200">期刊名称</th>
+					<th data-options="field:'periodicalIssueNo',width:200">期刊编号</th>
+					<th data-options="field:'periodicalYear',width:100">发行年份</th>
+					<th data-options="field:'cycleNums',width:100">发行期</th>
+					<th data-options="field:'time',width:200">签发时间</th>
+					<th data-options="field:'periodicalState',width:100">状态</th>
+					<th data-options="field:'option',width:165">操作</th>
+				</tr>
+			</thead>
+			<tbody>
 			#foreach($periodical in ${list})   
 			<tr>
 				<td>${p.periodicalCnName}</td>
@@ -33,7 +36,7 @@
 				<td>${periodical.cycleNums}</td>
 				<td>${periodical.periodicalState}</td>
 				#if(${periodical.periodicalState}=='APD')
-				<td><a href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">刊登广告</a></td>
+				<td><a class="easyui-linkbutton" href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">刊登广告</a></td>
 				#elseif(${periodical.periodicalState}=='ADPO')
 				<td>期刊已制作完成</td>
 				#else
@@ -41,6 +44,7 @@
 				#end
 			</tr>
 			#end
+			</tbody>
 		</table>
 		<br>
 		</form>

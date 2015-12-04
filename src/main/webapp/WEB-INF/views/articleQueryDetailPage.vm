@@ -81,7 +81,8 @@
 			</tr>
 			<tr>
 				<td>审批稿件下载：</td>
-				<td>$!{detail.attachmentName}<a href="#" class="easyui-linkbutton" data-options="width:50">下载</a>$!{detail.attachmentPath}</td>
+				<!-- $!{detail.attachmentPath}  $!{detail.attachmentName}-->
+				<td><a href="../downloadAttachment?fileName=$!{detail.attachmentName}&filePath=$!{detail.attachmentPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
 			</tr>
 			<tr>
 				<td>专家审稿：</td>

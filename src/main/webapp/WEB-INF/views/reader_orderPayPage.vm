@@ -25,17 +25,21 @@
 			<input type="button"  value="返回"  id="back"/>
 			<input type="submit" value="新增付款信息">		
 		</form>
-		<table style="border: 1px solid black;" rules="all">
+		<!-- <table style="border: 1px solid black;" rules="all"> -->
+		<table class="easyui-datagrid"   data-options="singleSelect:true">
+		<thead>
 			<tr>
-				<td>订单号</td>
-				<td>期刊名称</td>
-				<td>订单总金额</td>
-				<td>已付金额</td>
-				<td>付款方账号</td>
-				<td>付款方账户名</td>
-				<td>收款账户名</td>
-				<td>收款方账户名</td>
+				<th data-options="field:'orderNo',width:100">订单号</th>
+				<th data-options="field:'pCnName',width:100">期刊名称</th>
+				<th data-options="field:'oAmount',width:100">订单总金额</th>
+				<th data-options="field:'aPayAmount',width:100">已付金额</th>
+				<th data-options="field:'erAccount',width:100">付款方账号</th>
+				<th data-options="field:'erName',width:100">付款方账户名</th>
+				<th data-options="field:'eAccountNo',width:100">收款账户名</th>
+				<th data-options="field:'eAccountName',width:100">收款方账户名</th>
 			</tr>
+		</thead>
+		<tbody>
 			#foreach($dtos in ${list})   
 			<tr>
 				<td>$!{dtos.orderNo}</td>
@@ -48,6 +52,7 @@
 				<td>$!{dtos.eAccountName}</td>
 			</tr>
 			#end
+		</tbody>
 		</table>
 		<br>
 	</div>

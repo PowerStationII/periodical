@@ -10,25 +10,54 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+	$(function(){
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#table').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+                 "aId":rows[i].aId,  
+                 "rAddress":rows[i].rAddress,
+                 "rPostCode":rows[i].rPostCode,  
+                 "rContacter":rows[i].rContacter,
+                 "cMobile":rows[i].cMobile,
+                 "option":rows[i].option
+             }) ; 
+		}
+        $("#table").datagrid("loadData", data.slice(0, 5));
+        var pager = $("#table").datagrid("getPager");  
+        pager.pagination({  
+            total:data.length, 
+            pageSize:5,
+            pageList: [5,10,15,20],
+            onSelectPage:function (pageNo, pageSize) {  
+                var start = (pageNo - 1) * pageSize;  
+                var end = start + pageSize;  
+                $("#table").datagrid("loadData", data.slice(start, end));  
+                pager.pagination('refresh', {  
+                    total:data.length,  
+                    pageNumber:pageNo
+                });  
+            }  
+        });  
+	});
+</script>
 </head>
 <body>
 	<div id="articleInfos">
-		<table style="border: 1px solid black;" rules="all">
-			<form enctype="multipart/form-data" action="../reader/toUploadAddressPage" method="POST">
-				<tr>
-				<td><input type="file" name="file" value=""></td>
-				<td colspan="5"><input type="submit" value="上传"></td>
-				</tr>
-			</form>
-			
+		<table id="table"  class="easyui-datagrid"   data-options="singleSelect:true,pagination:true">
+			<thead>
 			<tr>
-				<td>地址id</td>
-				<td>邮寄地址</td>
-				<td>邮政编码</td>
-				<td>联系人姓名</td>
-				<td>联系人手机</td>
-                <td>操作</td>
+				<th data-options="field:'aId',width:200">地址id</th>
+				<th data-options="field:'rAddress',width:200">邮寄地址</th>
+				<th data-options="field:'rPostCode',width:200">邮政编码</th>
+				<th data-options="field:'rContacter',width:200">联系人姓名</th>
+				<th data-options="field:'cMobile',width:200">联系人手机</th>
+                <th data-options="field:'option',width:50">操作</th>
 			</tr>
+			</thead>
+			<tbody>
             #foreach($dtos in ${list})
                 <tr>
                     <td>${dtos.aId}</td>
@@ -36,11 +65,16 @@
                     <td>${dtos.rPostCode}</td>
                     <td>${dtos.rContacter}</td>
                     <td>${dtos.cMobile}</td>
-                    <td><a href="../reader/toDeleteAddressInfo?addressId=${dtos.aId}">删除</a></td>
+                    <td><a class="easyui-linkbutton" href="../reader/toDeleteAddressInfo?addressId=${dtos.aId}">删除</a></td>
                 </tr>
             #end
+            </tbody>
 		</table>
 		<br>
+		<form enctype="multipart/form-data" action="../reader/toUploadAddressPage" method="POST">
+		<input type="file" name="file" value="">
+		<input type="submit" value="上传">
+		</form>
 	</div>
 </body>
 </html>

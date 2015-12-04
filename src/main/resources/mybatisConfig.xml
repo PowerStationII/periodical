@@ -65,5 +65,6 @@
 		<!-- 业务 -->
 		<mapper resource="sqlmap/ArticleQueryMapper.xml"/>
 		<mapper resource="sqlmap/UserQueryMapper.xml"/>
+		<mapper resource="sqlmap/BizArticleFeeMapper.xml"/><!-- 稿费查询 -->
 	</mappers>
 </configuration>

@@ -8,6 +8,7 @@
 		<result column="authorName" jdbcType="VARCHAR" property="authorName" />
 		<result column="editorState" jdbcType="VARCHAR" property="editorState" />
 		<result column="expertState" jdbcType="VARCHAR" property="expertState" />
+		<result column="authorState" jdbcType="VARCHAR" property="authorState" />
 		<result column="section" jdbcType="VARCHAR" property="section" />
 	</resultMap>
 
@@ -17,7 +18,7 @@
 		title,DATE_FORMAT(ai.create_time, '%Y-%m-%d') as
 		contriTime,group_concat(aui.author_name) as authorName,
 		ai.editor_state as editorState,ai.expert_state as
-		expertState,ai.invest_section as section
+		expertState,ai.author_state as authorState,ai.invest_section as section
 		from
 		article_info
 		ai,article_info_extend aie,author_info aui
@@ -213,10 +214,9 @@
 		and
 		ai.article_id=aai.article_id and
 		ai.article_id=#{articleId,jdbcType=VARCHAR} 
-		and aai.type='1006'
 		group by ai.article_id
 	</select>
-	
+	<!-- and aai.type='1006' -->
 	<!-- and af.article_id=ai.article_id and af.role_id='1003' -->
 
 	<select id="articleFeeQuery" resultMap="AuthorQueryDetailResult"

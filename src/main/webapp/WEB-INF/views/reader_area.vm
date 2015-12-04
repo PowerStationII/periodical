@@ -68,6 +68,13 @@
 				.append(
 						'<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toCreatOrderPage?periodicalId='+value+'"  frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
 	}
+	//文件下载
+	 function import_download () {
+		 var fileName = 'dinggouzhinan.png';//文件名称
+		 var filePath = "E:\\temp\\";//文件路径
+	   	 var htmlUrl = "reader/download?fileName="+fileName+"&filePath="+filePath;
+		 $("#saveImg").attr("src",htmlUrl);
+	 }
 </script>
 <style>
 .top {
@@ -230,11 +237,15 @@ a {
 							<td>$!{dtos.hostOrganization}</td>
 							<td>$!{dtos.inFixPrice}</td>
 							<td>$!{dtos.outFixPrice}</td>
-							<td ><a  onclick="link('${dtos.periodicalId}')" href="#" class="easyui-linkbutton"  data-options="width:50">预订</a></td>
+							<td >
+								<a  onclick="link('${dtos.periodicalId}')" href="#" class="easyui-linkbutton"  data-options="width:50">预订</a>
+								<a href="#"  onclick="import_download()" class="easyui-linkbutton" data-options="">下载订购指南</a>
+							</td>
 						</tr>
 						#end
 					</tbody>
 				</table>
+				<iframe height="0" width="0"  name="saveImg" id="saveImg"  style="display:none;"></iframe>
 			</div>
 		</div>
 	</div>

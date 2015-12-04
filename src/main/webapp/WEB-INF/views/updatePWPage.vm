@@ -17,31 +17,42 @@
 			$('#other', window.parent.document).hide();
 			$('#area', window.parent.document).show();
 		});
+		
+		$('#submit').click(function(){
+			if ($('#logonPwd').val()==$('#oldpwd').val()) {
+				if($('#newpwd1').val()==$('#newpwd2').val()) {
+					$('form').submit();
+				}
+				else {
+					alert('两次新密码不一致');
+				}
+			}
+			else {
+				alert('旧密码不正确');
+			}
+		});
 	})
 </script>
 <body>
+	<div id="articleInfos"  style="margin-left:300px;margin-top:50px;">
 	<form action="../setting/toUpdatePw" method="POST">
-		<div id="articleInfos"  style="margin-left:300px;margin-top:50px;">
-			<table style="border: 1px solid black;" rules="all">
-				<input type="text" name="password" value="$!{userInfo.logonPwd}">
-				<tr>
-					<td>旧密码:</td>
-					<td><input type="password" name="orgPw" value=""></td>
-				</tr>
-				<tr>
-					<td>新密码:</td>
-					<td><input type="password" name="newPw" value=""></td>
-				</tr>
-				<tr>
-					<td>确认密码:</td>
-					<td><input type="password" name="confimNewPw" value=""></td>
-				</tr>
-				<tr>
-					<td><input type="button" value="取消"  id="back"></td>
-					<td><input type="submit" value="确认修改"></td>
-				</tr>
-			</table>
-		</div>
-	</form>
+		<table style="border: 1px solid green;" rules="all">
+			<input type="hidden" id="logonPwd" name="password" value="$!{userInfo.logonPwd}">
+			<tr>
+				<td>旧密码:</td>
+				<td><input type="password" id="oldpwd" name="orgPw" value=""></td>
+			</tr>
+			<tr>
+				<td>新密码:</td>
+				<td><input type="password" id="newpwd1" name="newPw" value=""></td>
+			</tr>
+			<tr>
+				<td>确认密码:</td>
+				<td><input type="password" id="newpwd2"  name="confimNewPw" value=""></td>
+			</tr>
+		</table>
+		</form>
+		<input type="button" value="取消"  id="back"><input type="button" id="submit" value="确认修改">
+	</div>
 </body>
 </html>

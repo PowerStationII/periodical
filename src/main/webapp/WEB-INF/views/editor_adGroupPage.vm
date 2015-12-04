@@ -14,19 +14,23 @@
 <body>
 	<div id="articleInfos">
 		<form action="" method="POST">
-		<table style="border: 1px solid black;" rules="all">
+		<table class="easyui-datagrid"   data-options="singleSelect:true">
+			<thead>
 			<tr>
-				<td>期刊名称</td>
-				<td>发行期</td>
-				<td>操作</td>
+				<th data-options="field:'periodicalCnName',width:200">期刊名称</th>
+				<th data-options="field:'cycle',width:200">发行期</th>
+				<th data-options="field:'option',width:200">操作</th>
 			</tr>
+			</thead>
+			<tbody>
 			#foreach($periodicalInfo in ${list})   
 			<tr>
 				<td>${periodicalInfo.periodicalCnName}</td>
 				<td>${periodicalInfo.cycle}</td>
-				<td><a href="../editor/toAdGroupDetailPage?periodicalId=${periodicalInfo.periodicalId}">刊登广告</a></td>
+				<td><a class="easyui-linkbutton" href="../editor/toAdGroupDetailPage?periodicalId=${periodicalInfo.periodicalId}">刊登广告</a></td>
 			</tr>
 			#end
+			</tbody>
 		</table>
 		<br>
 		</form>

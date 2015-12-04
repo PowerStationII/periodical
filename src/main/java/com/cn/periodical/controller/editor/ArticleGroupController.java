@@ -224,39 +224,4 @@ public class ArticleGroupController extends EditorController{
 		p.setPeriodicalState(PeriodicalStateEnums.ARTICLE_PART_DEALING.getCode());
 		periodicalManager.savePeriodical(p);
 	}
-	
-	
-	/**
-	 * toEditArticleFeePage
-	 * 编辑稿费
-	 */
-	@RequestMapping(value="/toEditArticleFeePage")
-	public ModelAndView toEditArticleFeePage(HttpServletRequest request) {
-		logger.info("编辑稿费Page:[ ]");
-		/**
-		 * 期刊id+periodical+periodical_detail+article_info+account_info
-		 * */
-		ModelAndView mav = new ModelAndView("editor_editArticleFeePage");
-		
-		
-		
-		return mav;
-	}
-	
-	/**
-	 * toSaveArticleFee
-	 * 保存稿费信息
-	 */
-	@RequestMapping(value="/toSaveArticleFee")
-	public ModelAndView toSaveArticleFee(HttpServletRequest request,String array,String periodicalId) {
-		logger.info("保存稿费信息Page:[------ ]"+array+"------periodicalId"+periodicalId);
-		/**
-		 * 期刊id+periodical+periodical_detail+article_info+account_info
-		 * */
-		ModelAndView mav = new ModelAndView("editor_editArticleFeePage");
-		
-		
-		
-		return mav;
-	}
 }

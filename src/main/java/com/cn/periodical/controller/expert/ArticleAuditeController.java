@@ -2,8 +2,10 @@ package com.cn.periodical.controller.expert;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,26 +13,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.enums.RoleIdEnums;
-import com.cn.periodical.enums.SystemIdEnums;
 import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.manager.ArticleInfoManager;
+import com.cn.periodical.manager.ExpertInfoManager;
+import com.cn.periodical.manager.PayeeInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.manager.UserQueryManager;
 import com.cn.periodical.pojo.ArticleFlows;
 import com.cn.periodical.pojo.ArticleFlowsQuery;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.ArticleInfoQuery;
+import com.cn.periodical.pojo.ExpertInfo;
+import com.cn.periodical.pojo.ExpertInfoQuery;
+import com.cn.periodical.pojo.PayeeInfo;
+import com.cn.periodical.pojo.PayeeInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.AritcleWorkFlowReqDto;
 import com.cn.periodical.request.ArticleQueryReqDto;
-import com.cn.periodical.request.UserQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
 import com.cn.periodical.service.ArticleQueryService;
 import com.cn.periodical.service.ArticleWorkFlowService;
@@ -53,6 +58,10 @@ public class ArticleAuditeController extends ExpertController{
 	
 	@Autowired
 	UserInfoManager userInfoManager;
+	@Autowired
+	ExpertInfoManager expertInfoManager;
+	@Autowired
+	PayeeInfoManager payeeInfoManager;
 	
 	@Autowired 
 	UserQueryManager userQueryManager;
@@ -375,6 +384,51 @@ public class ArticleAuditeController extends ExpertController{
 		
 		
 		logger.info("专家审核页-下载稿件Action出参:[]");
+		return mav;
+	}
+	
+	/**
+	 * 编辑账户信息start
+	 * */
+	/**
+	 * toAddExpertPayeeInfoPage
+	 * 收款账户信息新增页面
+	 */
+	@RequestMapping(value="/toAddExpertPayeeInfoPage")
+	public ModelAndView toAddExpertPayeeInfoPage(HttpServletRequest request,
+			HttpServletResponse response) {
+		UserInfo userInfo = getUserInfo(request);
+		ModelAndView mav = new ModelAndView("expert_payeeInfoPage");
+		ExpertInfoQuery query = new ExpertInfoQuery();
+		query.setExpertId(userInfo.getRefId());
+		List<ExpertInfo> expertInfos = expertInfoManager.queryList(query);
+		mav.addObject("ei", expertInfos.get(0));
+		
+		PayeeInfoQuery pQry= new PayeeInfoQuery();
+		pQry.setRefId(userInfo.getRefId());
+		List<PayeeInfo> payeeInfos = payeeInfoManager.queryList(pQry);
+		if(payeeInfos!=null && payeeInfos.size()==1){
+			mav.addObject("payeeInfo", payeeInfos.get(0));
+		}
+		return mav;
+	}
+	
+	/**
+	 * toSaveExpertPayeeInfoPage
+	 * 保存收款账户信息
+	 */
+	@RequestMapping(value="/toSaveExpertPayeeInfoPage")
+	public ModelAndView toSaveExpertPayeeInfoPage(
+			@ModelAttribute PayeeInfo payeeInfo ,HttpServletRequest request,
+			HttpServletResponse response) {
+		UserInfo userInfo = getUserInfo(request);
+		logger.info("保存专家收款账户信息Page in:["+JSON.toJSONString(payeeInfo)+"]");
+		ModelAndView mav = new ModelAndView("redirect:../expert/toArticleAuditePage");
+		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+		payeeInfo.setPayeeId(uuid);
+		payeeInfo.setRefId(userInfo.getRefId());
+		payeeInfo.setType("002");
+		payeeInfoManager.savePayeeInfo(payeeInfo);
 		return mav;
 	}
 }

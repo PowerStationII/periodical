@@ -17,23 +17,27 @@
 		for(var i=0;i<rows.length;i++) {
 			$('#editTable').datagrid('beginEdit',i);
 		}
+		$('#editTable').datagrid('hideColumn','articleId');
+		$('#editTable').datagrid('hideColumn','authorPayeeId');
+		$('#editTable').datagrid('hideColumn','expertPayeeId');
 		$('#submit').click(function(){
 			var array=[];
 			var data = $('#editTable').datagrid('getData');
 			for(var i=0;i<data.rows.length;i++) {
 				$('#editTable').datagrid('endEdit',i);
 				var json={};
-				json.zzID = data.rows[i].zzID;
-				json.zjID = data.rows[i].zjID;
-				json.num1 = data.rows[i].num1;
-				json.num2 = data.rows[i].num2;
-				json.num3 = data.rows[i].num3;
-				json.num4 = data.rows[i].num4;
-				json.num5 = data.rows[i].num5;
-				json.num6 = data.rows[i].num6;
+				json.articleId = data.rows[i].articleId;
+				json.authorPayeeId = data.rows[i].authorPayeeId;
+				json.expertPayeeId = data.rows[i].expertPayeeId;
+				json.authorAmount = data.rows[i].authorAmount==''?0:data.rows[i].authorAmount;
+				json.authorTaxAmount = data.rows[i].authorTaxAmount==''?0:data.rows[i].authorTaxAmount;
+				json.authorRealAmount = data.rows[i].authorRealAmount==''?0:data.rows[i].authorRealAmount;
+				json.expertAmount = data.rows[i].expertAmount==''?0:data.rows[i].expertAmount;
+				json.expertTaxAmount = data.rows[i].expertTaxAmount==''?0:data.rows[i].expertTaxAmount;
+				json.expertRealAmount = data.rows[i].expertRealAmount==''?0:data.rows[i].expertRealAmount;
 				array.push(JSON.stringify(json));
 			}
-			window.location.href='../editor/toSaveArticleFee?array=['+array+']&periodicalId=111';
+			window.location.href='../editor/toSaveArticleFee?array=['+array+']';
 		});
 		$('#back').click(function(){
 			history.go(-1);
@@ -45,60 +49,47 @@
 		<table  id="editTable"  class="easyui-datagrid"   data-options="singleSelect:true">
 			<thead>
 				<tr>
-					<th data-options="field:'name1',width:50">栏目</th>
-					<th data-options="field:'name2',width:80">稿件编号</th>
-					<th data-options="field:'name3',width:40">标题</th>
-					<th data-options="field:'zzID',width:40">作者</th>
-					<th data-options="field:'name5',width:80">作者账户名</th>
-					<th data-options="field:'name6',width:80">作者账号</th>
-					<th data-options="field:'num1',width:80,editor:'numberbox'">作者应发金额</th>
-					<th data-options="field:'num2',width:80,editor:'numberbox'">作者扣税</th>
-					<th data-options="field:'num3',width:80,editor:'numberbox'">作者实发金额</th>
+					<th data-options="field:'articleId',width:0">1id</th>
+					<th data-options="field:'authorPayeeId',width:0">2id</th>
+					<th data-options="field:'expertPayeeId',width:0">3id</th>
+					<th data-options="field:'periodicalCnName',width:120">期刊名称</th>
+					<th data-options="field:'periodicalIssueNo',width:120">期刊号</th>
+					<th data-options="field:'sectionName',width:100">栏目名称</th>
+					<th data-options="field:'articleId',width:100">稿件编号</th>
+					<th data-options="field:'articleCnTitle',width:100">标题</th>
+					<th data-options="field:'authorName',width:60">作者</th>
+					<th data-options="field:'authorAmount',width:80,editor:'numberbox'">作者应发金额</th>
+					<th data-options="field:'authorTaxAmount',width:80,editor:'numberbox'">作者扣税</th>
+					<th data-options="field:'authorRealAmount',width:80,editor:'numberbox'">作者实发金额</th>
 					
-					<th data-options="field:'zjID',width:40">专家</th>
-					<th data-options="field:'name11',width:80">专家账户名</th>
-					<th data-options="field:'name12',width:80">专家账号</th>
-					<th data-options="field:'num4',width:80,editor:'numberbox'">专家应发金额</th>
-					<th data-options="field:'num5',width:80,editor:'numberbox'">专家扣税</th>
-					<th data-options="field:'num6',width:80,editor:'numberbox'">专家实发金额</th>
+					<th data-options="field:'expertName',width:60">专家</th>
+					<th data-options="field:'expertAmount',width:80,editor:'numberbox'">专家应发金额</th>
+					<th data-options="field:'expertTaxAmount',width:80,editor:'numberbox'">专家扣税</th>
+					<th data-options="field:'expertRealAmount',width:80,editor:'numberbox'">专家实发金额</th>
 					
 				</tr>
 			</thead>
 			<tbody>
+				#foreach($dtos in ${list}) 
 				<tr>
-					<td>发的方法</td>
-					<td>22231233332</td>
-					<td>发送佛顶骨</td>
-					<td>发发</td>
-					<td>风</td>
-					<td>2222222</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>发发</td>
-					<td>风</td>
-					<td>2222222</td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>$!{dtos.articleId}</td>
+					<td>$!{dtos.authorPayeeId}</td>
+					<td>$!{dtos.expertPayeeId}</td>
+					<td>$!{dtos.periodicalCnName}</td>
+					<td>$!{dtos.periodicalIssueNo}</td>
+					<td>$!{dtos.sectionName}</td>
+					<td>$!{dtos.articleId}</td>
+					<td>$!{dtos.articleCnTitle}</td>
+					<td>$!{dtos.authorName}</td>
+					<td>$!{dtos.authorAmount}</td>
+					<td>$!{dtos.authorTaxAmount}</td>
+					<td>$!{dtos.authorRealAmount}</td>
+					<td>$!{dtos.expertName}</td>
+					<td>$!{dtos.expertAmount}</td>
+					<td>$!{dtos.expertTaxAmount}</td>
+					<td>$!{dtos.expertRealAmount}</td>
 				</tr>
-				<tr>
-					<td>4324</td>
-					<td>22231233332</td>
-					<td>43243骨</td>
-					<td>4324</td>
-					<td>43243</td>
-					<td>2222222</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>rewrewr</td>
-					<td>rewrew</td>
-					<td>3333333</td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+				#end
 			</tbody>
 		</table>
 		<a id="back" class="easyui-linkbutton"  style="50px;">返回</a> 

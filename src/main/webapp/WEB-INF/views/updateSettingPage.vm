@@ -24,7 +24,7 @@
 		#if(${userInfo.roleId}=='1001')
 		<div id="articleInfos">
 			<input type="hidden" value="$!{authorInfo.id}" id="id" name="id">
-			<table style="border: 1px solid; width: 800px;" rules="all">
+			<table style="border: 1px solid green; width: 800px;" rules="all">
 				<tr style="display:none;">
 					<td>
 						<label>
@@ -223,7 +223,103 @@
 		#elseif($!{userInfo.roleId}=='1002')
 		<div id="articleInfos">
 			<input type="hidden" value="$!{readerInfo.id}" id="id" name="id">
-			<table style="border: 1px solid; width: 800px;" rules="all">
+			<table style="border: 1px solid green; width: 800px;" rules="all">
+				<!-- <tr style="display:none;">
+					<td>
+						<label>
+							<span class="right">登录名：</span>
+						</label>
+					</td>
+					<td>
+						<input maxlength="30"
+						class="wid333 ip_input_con lightgrey"
+						value="$!{userInfo.logonName}" id="logonName" name="logonName">
+					</td>
+				</tr> -->
+				<tr style="display:none;">
+					<td>
+						<label>
+							<span class="right">用户ID：</span>
+						</label>
+					</td>
+					<td>
+						<input maxlength="30"
+						class="wid333 ip_input_con lightgrey"
+						value="$!{readerInfo.readerId}" id="readerId" name="readerId">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>
+							<span class="right">读者姓名：</span>
+						</label>
+					</td>
+					<td>
+						<input maxlength="30"
+						class="wid333 ip_input_con lightgrey"
+						value="$!{readerInfo.readerName}" id="readerName"
+						name="readerName">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>
+							<span class="right">email：</span>
+						</label>
+					</td>
+					<td>
+						<input maxlength="30"
+						class="wid333 ip_input_con lightgrey" value="$!{readerInfo.email}"
+						id="email" name="email">
+					</td>
+				</tr>
+				<!-- <tr>
+					<td>
+						<label>
+							<span class="right">出生日期：</span>
+						</label>
+					</td>
+					<td>
+						<input maxlength="30"
+						class="wid333 ip_input_con lightgrey"
+						value="$!{readerInfo.birthday}" id="birthday" name="birthday">
+					</td>
+				</tr> -->
+				<tr>
+					<td>
+						<label>
+							<span class="right">公司名称：</span>
+						</label>
+					</td>
+					<td>
+						<input maxlength="30"
+						class="wid333 ip_input_con lightgrey"
+						value="$!{readerInfo.companyName}" id="companyName"
+						name="companyName">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>
+							<span class="right">部门/院系：</span>
+						</label>
+					</td>
+					<td>
+						<input maxlength="30"
+						class="wid333 ip_input_con lightgrey"
+						value="$!{readerInfo.companyDepartment}" id="companyDepartment"
+						name="companyDepartment">
+					</td>
+				</tr>
+			</table>
+			<div class="attr_con">
+				 <input type="button" value="返回"  id="back" ><input type="submit" value="保存">
+			</div>
+		</div>
+		#elseif($!{userInfo.roleId}=='1003')
+		<div id="articleInfos">
+			<input type="hidden" value="$!{readerInfo.id}" id="id" name="id">
+			<table style="border: 1px solid green; width: 800px;" rules="all">
 				<!-- <tr style="display:none;">
 					<td>
 						<label>

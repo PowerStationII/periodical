@@ -22,7 +22,7 @@
 	<div>
 	<form action="../reader/toSaveOrderInfoPage" method="POST">
 	<input type="hidden" name="orderNo" value="$!{bo.orderNo}">
-		<table style="border:1px solid;width:800px;" rules="all">
+		<table style="border:1px solid green;width:800px;" rules="all">
 			<tr>
 				<td><label>
 						<span class="right">订单号：</span>
@@ -95,7 +95,7 @@
 				</label></td>
 				<td><input type="text" name="invoiceTile" value=""></td>
 			</tr>
-			<<!-- tr>
+			<!-- tr>
 				<td><label>
 						<span class="right">汇款时间：</span>
 				</label></td>

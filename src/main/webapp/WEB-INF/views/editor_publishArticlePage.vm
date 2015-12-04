@@ -20,8 +20,8 @@
         	 data.push({  
                  "articleId":rows[i].articleId,  
                  "title":rows[i].title,
-                 "contriTime":rows[i].contriTime,  
-                 "authorState":rows[i].authorState,
+                 "authorName":rows[i].authorName,  
+                 "expertState":rows[i].expertState,
                  "option":rows[i].option
              }) ; 
 		}

@@ -88,12 +88,20 @@
 					<td>$!{respDto.contriTime}</td>
 					<td>$!{respDto.expertState}</td>
 					<td>$!{respDto.authorName}</td>
-					#if($!{respDto.expertState}=='0003' || $!{respDto.expertState}=='0006' || $!{respDto.expertState}=='0007')
-						<td><!-- 查看稿件信息 --></td>
-					#else
+					<!-- || $!{respDto.expertState}=='0006' || $!{respDto.expertState}=='0007' -->
+					#if($!{respDto.editorState}=='0008'&&$!{respDto.expertState}=='0003')
+						<td><!-- <a href="#">编辑账户信息</a> --></td>
+					#elseif($!{respDto.expertState}=='0006')
+						<td><!-- 查看稿件信息 --></td><!-- 返修 -->
+					#elseif($!{respDto.expertState}=='0007')
+						<td><!-- 查看稿件信息 --></td><!-- 退稿 -->
+					#elseif($!{respDto.editorState}=='0002')
 					<td>
+						<!-- 专家只操作editorState是0002的稿件 -->
 						<a id="btn" href="../expert/toAuditeDetailPage?articleId=${respDto.articleId}" class="easyui-linkbutton" data-options="width:50">审核</a>  
 					</td>
+					#else
+						<td><!-- 查看稿件信息 --></td><!-- 状态不对 -->
 					#end
 				</tr>
 			#end

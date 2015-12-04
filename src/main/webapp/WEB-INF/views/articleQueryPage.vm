@@ -77,7 +77,11 @@
 					<td><a href="../author/toArticleQueryDetailPage?articleId=${dtos.articleId}">$!{dtos.title}</a></td>
 					<td>$!{dtos.contriTime}</td>
 					<td>$!{dtos.authorState}</td>
+					#if($!{dtos.authorState}=='0003')
+					<td><a href="../author/toEditAuthorPayeeInfoPage?articleId=${dtos.articleId}" class="easyui-linkbutton" >账户信息</a><a onclick="yijian('${dtos.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
+					#else
 					<td><a onclick="yijian('${dtos.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
+					#end
 				</tr>
 				#end
 			</tbody>

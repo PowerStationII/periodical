@@ -15,7 +15,7 @@
 	<div id="articleInfos">
 		<form method="POST"  action="../editor/toSaveAdInfo">
 			<input type="hidden" name="councilId" value="${c.councilId}">
-			<table style="border: 1px solid black;" rules="all">
+			<table style="border: 1px solid green;" rules="all">
 				<tr>
 					<td>理事会名称:</td>
 					<td>${c.councilCompany}</td>

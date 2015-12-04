@@ -21,7 +21,7 @@
 <body>
 	<form action="../editor/toSaveCouncilInfoEdit" method="POST">
 		<input type="hidden" name="id" value="${c.id}" >
-		<table style="border: 1px solid black;" rules="all">
+		<table style="border: 1px solid green;margin-left:300px;margin-top:50px;" rules="all">
 			<tr>
 				<td colspan="2">单位名称</td>
 				<td colspan="6"><input type="text" name="councilCompany" value="${c.councilCompany}"></td>
@@ -85,9 +85,11 @@
 				<td colspan="2">企业网址</td>
 				<td colspan="6"><input type="text" name="website" value="${c.website}"></td>
 			</tr>
+			<tr>
+				<td colspan="2"><input type="button"  value="返回"  id="back"/></td>
+				<td colspan="6"><input type="submit" value="保存"></td>
+			</tr>
 		</table>
-		<input type="button"  value="返回"  id="back"/>
-		<input type="submit" value="保存">
 	</form>
 </body>
 </html>

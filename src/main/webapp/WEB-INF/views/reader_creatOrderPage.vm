@@ -14,17 +14,32 @@
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
-		})
+		});
+		var priceAllYear = ${periodicalInfo.inFixPrice} * ${periodicalInfo.cycle};
+		$('#priceAllYear').text('全年定价：'+priceAllYear);
+		
+		$('#orderNums').blur(function(){
+			if(!isNaN($('#orderNums').val())){
+			    var price = ${periodicalInfo.inFixPrice} * parseInt($('#orderNums').val());
+				$('#price').text('金额：'+price); 
+			}
+			else {
+				alert('请输入正确数字');
+				$('#orderNums').val('0');
+				$('#price').text('金额：0');
+			}
+			
+		});
+		$
 	})
 </script>
 <body>
-	<div id="articleInfos">
+	<div id="articleInfos"  style="margin-left:300px;margin-top:50px;">
 	<form action="../reader/toCreatOrder" method="POST">
 		<input type="hidden" name="periodicalId" value="${periodicalInfo.periodicalId}">
 		<input type="hidden" name="singlPrice" value="${periodicalInfo.inFixPrice}">
 		<input type="hidden" name="payeeId" value="${periodicalInfo.payeeId}">
-		
-		<table style="border: 1px solid black;" rules="all">
+		<table style="border: 1px solid green;" rules="all">
 			<tr>
 				<th>期刊信息</th>
 			</tr>
@@ -38,7 +53,7 @@
                 <td>出版周期：${periodicalInfo.cycle}</td>
             </tr>
             <tr>
-                <td>全年定价：算出来</td>
+                <td id="priceAllYear">全年定价：算出来</td>
             </tr>
             <tr>
                 <td>收款单位：${payeeInfo.payeeAccountName}</td>
@@ -69,13 +84,13 @@
                 </select></td>
             </tr>
             <tr>
-                <td>订阅数：<input type="text" name="orderNums" value=""></td>
+                <td>订阅数：<input type="text" name="orderNums" id="orderNums" value="0"></td>
             </tr>
             <tr>
-                <td>金额：js算出来</td>
+                <td id="price">金额：0</td>
             </tr>
             <tr>
-                <td ><input type="submit" value="提交"> <input type="button"  value="返回"  id="back"/></td>
+                <td ><input type="submit" value="提交"> <input type="button" onclick="history.go(-1);" value="返回"  id="back"/></td>
             </tr>
 		</table>
 		<br>
