@@ -54,8 +54,8 @@ public class AdManageController extends EditorController{
 		 * 查询一个list列表,页面展示用
 		 * */
 		
-		
-		
+		List<BizAd> bizAds = adInfoManager.selectAdsForEditor(null);
+		mav.addObject("list", bizAds);
 		logger.info("广告管理首页Page out:[]");
 		return mav;
 	}

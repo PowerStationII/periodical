@@ -16,6 +16,7 @@ import com.cn.periodical.manager.AdInfoManager;
 import com.cn.periodical.pojo.AdInfo;
 import com.cn.periodical.pojo.AdInfoPage;
 import com.cn.periodical.pojo.AdInfoQuery;
+import com.cn.periodical.pojo.BizAd;
 import com.cn.periodical.utils.Pagenation;
 
 @Component("adInfoManager")
@@ -68,6 +69,12 @@ public class AdInfoManagerImpl implements AdInfoManager {
 		
 		adInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
 		return adInfoPage;
+	}
+
+
+	public List<BizAd> selectAdsForEditor(BizAd bizAd) {
+		// TODO Auto-generated method stub
+		return adInfoDao.selectAdsForEditor(bizAd);
 	}
 }
 

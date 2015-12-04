@@ -10,6 +10,7 @@ import java.util.List;
 import com.cn.periodical.pojo.AdInfo;
 import com.cn.periodical.pojo.AdInfoPage;
 import com.cn.periodical.pojo.AdInfoQuery;
+import com.cn.periodical.pojo.BizAd;
 
 public interface AdInfoManager {
 	void saveAdInfo(AdInfo adInfo);
@@ -23,4 +24,6 @@ public interface AdInfoManager {
 	void deleteAdInfo(AdInfoQuery query);
 	
 	AdInfoPage queryPageList(AdInfoQuery query);
+	
+	List<BizAd> selectAdsForEditor(BizAd bizAd);
 }

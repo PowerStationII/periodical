@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.cn.periodical.pojo.AdInfo;
 import com.cn.periodical.pojo.AdInfoQuery;
+import com.cn.periodical.pojo.BizAd;
 
 public interface AdInfoDao {
 	int countByExample(AdInfoQuery example);
@@ -30,4 +31,6 @@ public interface AdInfoDao {
 	int updateByPrimaryKeySelective(AdInfo record);
 	
 	int updateByPrimaryKey(AdInfo record);
+	
+	List<BizAd> selectAdsForEditor(BizAd bizAd);
 }

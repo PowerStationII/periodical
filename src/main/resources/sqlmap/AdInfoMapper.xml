@@ -25,6 +25,21 @@
 	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <!-- 广告管理查询sql start -->
+
+	<select id="selectAdsForEditor" parameterType="BizAd" resultType="BizAd">
+		select
+		ai.ad_id as adId,ci.council_id as councilId,ai.ad_name as adName,
+		ci.council_name as councilName,ci.council_type as councilType,
+		ai.ad_type as adType,ai.trial_no as trialNo,ci.create_time as createTime,ccf.start_time as startTime,
+		ccf.end_time as endTime
+		from council_info ci,ad_info ai,council_contract_flows ccf
+		where ci.council_id=ai.council_id and ccf.council_id=ci.council_id and
+		NOW() BETWEEN start_time AND end_time
+		
+	</select>
+  <!-- 广告管理查询sql end -->
+  
   <sql id="Page_Query_Begin">
     select * from(select t.*,rownum rn from(
   </sql>

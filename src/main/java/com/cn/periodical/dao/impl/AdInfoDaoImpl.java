@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.cn.periodical.dao.AdInfoDao;
 import com.cn.periodical.pojo.AdInfo;
 import com.cn.periodical.pojo.AdInfoQuery;
+import com.cn.periodical.pojo.BizAd;
 import com.cn.periodical.dao.BaseDao;
 
 @Repository("adInfoDao")
@@ -65,6 +66,12 @@ public class AdInfoDaoImpl extends BaseDao implements AdInfoDao {
 	
 	public int updateByPrimaryKey(AdInfo record) {
 		return super.getSqlSession().update("AdInfoMapper.updateByPrimaryKey", record);
+	}
+
+
+	public List<BizAd> selectAdsForEditor(BizAd bizAd) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("AdInfoMapper.selectAdsForEditor", bizAd);
 	}
 	
 }

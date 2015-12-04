@@ -22,13 +22,13 @@
         var rows = $('#table').datagrid('getRows');
         for(var i=0;i<rows.length;i++) {
         	 data.push({  
-                 "a1":rows[i].a1,  
-                 "a2":rows[i].a2,
-                 "a3":rows[i].a3,  
-                 "a4":rows[i].a4,
-                 "a5":rows[i].a5,
-                 "a6":rows[i].a6,  
-                 "a7":rows[i].a7,
+                 "concilName":rows[i].concilName,  
+                 "adName":rows[i].adName,
+                 "trialNo":rows[i].trialNo,  
+                 "adType":rows[i].adType,
+                 "createTime":rows[i].createTime,
+                 "startTime":rows[i].startTime,  
+                 "endTime":rows[i].endTime,
                  "a8":rows[i].a8
              }) ; 
 		}
@@ -93,27 +93,29 @@
 		<table   id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
 			<thead>
 				<tr>
-					<th data-options="field:'a1',width:200">理事会名称</th>
-					<th data-options="field:'a2',width:200">广告名称</th>
-					<th data-options="field:'a3',width:100">广审号</th>
-					<th data-options="field:'a4',width:100">广告类型</th>
-					<th data-options="field:'a5',width:100">注册时间</th>
-					<th data-options="field:'a6',width:100">合同开始时间</th>
-					<th data-options="field:'a7',width:100">合同结束时间</th>
-					<th data-options="field:'a8',width:100">操作</th>
+					<th data-options="field:'concilName',width:200">理事会名称</th>
+					<th data-options="field:'adName',width:200">广告名称</th>
+					<th data-options="field:'trialNo',width:100">广审号</th>
+					<th data-options="field:'adType',width:100">广告类型</th>
+					<th data-options="field:'createTime',width:100">注册时间</th>
+					<th data-options="field:'startTime',width:100">合同开始时间</th>
+					<th data-options="field:'endTime',width:100">合同结束时间</th>
+					<th data-options="field:'option',width:100">操作</th>
 				</tr>
 			</thead>
 			<tbody>
+			#foreach($dtos in ${list})   
 				<tr>
-					<td>理事会名称</td>
-					<td>广告名称</td>
-					<td>广审号</td>
-					<td>广告类型</td>
-					<td>注册时间</td>
-					<td>合同开始时间</td>
-					<td>合同结束时间</td>
+					<td>${dtos.concilName}</td>
+					<td>${dtos.adName}</td>
+					<td>${dtos.trialNo}</td>
+					<td>${dtos.adType}</td>
+					<td>${dtos.createTime}</td>
+					<td>${dtos.startTime}</td>
+					<td>${dtos.endTime}</td>
 					<td><a class="easyui-linkbutton"  style="width:50px;" href="../editor/toQrySingleAdInfo?adId=111">编辑</a></td>
 				</tr>
+			#end
 			</tbody>
 		</table>
 		<br>

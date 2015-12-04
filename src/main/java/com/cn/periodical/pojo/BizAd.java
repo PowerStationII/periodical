@@ -15,6 +15,43 @@ public class BizAd implements Serializable {
 	private String trialNo;
 	private String contractStartTime;
 	private String contractEndTime;
+	private String adId;
+	private String councilId;
+	private String createTime;
+	private String startTime;
+	private String endTime;
+	
+	
+	public String getAdId() {
+		return adId;
+	}
+	public void setAdId(String adId) {
+		this.adId = adId;
+	}
+	public String getCouncilId() {
+		return councilId;
+	}
+	public void setCouncilId(String councilId) {
+		this.councilId = councilId;
+	}
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+	public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
 	public String getAdName() {
 		return adName;
 	}
