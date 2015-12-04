@@ -60,10 +60,10 @@
 					<td>广告附件路径：</td>
 					<td><input type="text" name="adAttachmentPath" value=""></td>
 				</tr>
-				<!-- <tr>
+				<tr>
 					<td>报批日期：</td>
 					<td><input type="text" name="adRecordTime" value=""></td>
-				</tr> -->
+				</tr>
 				<tr>
 					<td>联系人姓名：</td>
 					<td><input type="text" name="adContactName" value=""></td>
