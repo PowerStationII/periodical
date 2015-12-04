@@ -151,7 +151,7 @@ public class ArticleGroupController extends EditorController{
 	 * 组稿
 	 */
 	@RequestMapping(value="/toArticleGroup")
-	public void toArticleGroup(
+	public ModelAndView toArticleGroup(
 			@RequestParam("str") String str,
 			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
 			String leftArray,
@@ -160,6 +160,8 @@ public class ArticleGroupController extends EditorController{
 				+ "&periodicalIssueNo:["+periodicalIssueNo+"]"
 						+ "&str["+str+"]&periodicalId:["+periodicalId+"]");
 		UserInfo userInfo = getUserInfo(request);
+		ModelAndView mav = new ModelAndView("redirect:../editor/toGroupPage");
+		mav.addObject("periodicalId", periodicalId);
 		/*
 		 * 每点击一次提交periodical_details,表中的数据会根据条件删除
 		 * periodical_details根据periodicalId&periodicalIssueNo&sectionId先删后插入
@@ -223,5 +225,6 @@ public class ArticleGroupController extends EditorController{
 		p.setId(p.getId());
 		p.setPeriodicalState(PeriodicalStateEnums.ARTICLE_PART_DEALING.getCode());
 		periodicalManager.savePeriodical(p);
+		return mav;
 	}
 }

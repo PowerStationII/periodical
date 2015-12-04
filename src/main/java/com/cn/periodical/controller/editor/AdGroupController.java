@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -132,7 +133,8 @@ public class AdGroupController extends EditorController{
 	 * 确认广告
 	 */
 	@RequestMapping(value="/toSaveAdGroup")
-	public void toSaveAdGroup(
+	@ResponseBody
+	public ModelAndView toSaveAdGroup(
 			@RequestParam("str") String str,
 			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
 			String leftArray,
@@ -140,6 +142,10 @@ public class AdGroupController extends EditorController{
 		logger.info("广告 广告进来的左右提交进来的:leftArray:["+leftArray+"]"
 				+ "&periodicalIssueNo:["+periodicalIssueNo+"]"
 						+ "&str["+str+"]&periodicalId:["+periodicalId+"]");
+		ModelAndView mav = new ModelAndView("redirect:../editor/toAdGroupDetailPage");
+		mav.addObject("periodicalId", periodicalId);
+		
+		
 		UserInfo userInfo = getUserInfo(request);
 		/*
 		 * 每点击一次提交periodical_details,表中的数据会根据条件删除
@@ -184,5 +190,6 @@ public class AdGroupController extends EditorController{
 		p.setId(p.getId());
 		p.setPeriodicalState(PeriodicalStateEnums.AD_PART_OVER.getCode());
 		periodicalManager.savePeriodical(p);
+		return mav;
 	}
 }

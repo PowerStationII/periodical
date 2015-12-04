@@ -41,7 +41,8 @@
 
 </head>
 <body>
-	<form id="sub2" action="../editor/toSaveAdGroup" method="POST">
+<!-- ../editor/toSaveAdGroup -->
+	<form id="sub2" action="" method="POST">
 		<input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}"> 
 		<input type="hidden" name="periodicalId" value="${periodicalId}"> <br />
 		<div id='left'>

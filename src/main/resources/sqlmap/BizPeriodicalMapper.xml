@@ -27,7 +27,7 @@
 		from periodical_info pi,periodical p
 		where
 		pi.periodical_id=p.periodical_id
-		and p.periodical_state='FI'
+		and p.periodical_state='ADPO'
 	</select>
 	
 	<select id="queryPeriodicalInfosForEnExpertDetail" parameterType="BizPeriodical"
