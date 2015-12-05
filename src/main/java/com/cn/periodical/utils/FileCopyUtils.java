@@ -3,6 +3,7 @@ package com.cn.periodical.utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.slf4j.Logger;
@@ -13,12 +14,14 @@ public class FileCopyUtils {
 	public FileCopyUtils() {
 		// TODO Auto-generated constructor stub
 	}
+
 	private static final Logger logger = LoggerFactory.getLogger(FileCopyUtils.class);
 
-	public static void main(String[] args){
-		String oldPath="E:"+File.separator+"temp"+File.separator+"a412660db39145b1bb9af80fb83da998"+File.separator+"0c8290ecab4b4c029a330ecccf56185b"+File.separator;
-		String newPath="F:"+File.separator+"sss"+File.separator;
-		copyFile(oldPath,"1.bmp",newPath,"1.bmp");
+	public static void main(String[] args) {
+		String oldPath = "E:" + File.separator + "temp" + File.separator + "a412660db39145b1bb9af80fb83da998"
+				+ File.separator + "0c8290ecab4b4c029a330ecccf56185b" + File.separator;
+		String newPath = "F:" + File.separator + "sss" + File.separator;
+		copyFile(oldPath, "1.bmp", newPath, "1.bmp");
 	}
 
 	/**
@@ -30,30 +33,50 @@ public class FileCopyUtils {
 	 *            String 复制后路径 如：f:/fqf.txt
 	 * @return boolean
 	 */
-	public static void copyFile(String oldPath,String oldName, String newPath,String newName) {
+	public static void copyFile(String oldPath, String oldName, String newPath, String newName) {
 		try {
 			int bytesum = 0;
 			int byteread = 0;
-			StringBuffer oldFileAbslute=new StringBuffer();
+			StringBuffer oldFileAbslute = new StringBuffer();
 			oldFileAbslute.append(oldPath);
-			if(!"".equals(oldName)){
+			if (!"".equals(oldName)) {
 				oldFileAbslute.append(oldName);
 			}
 			File oldfile = new File(oldFileAbslute.toString());
-			
-			File newfile = new File(newPath);
-			if(!newfile.exists()){
-				newfile.mkdirs();
+
+			// File newfileDir = new File(newPath);
+			// if(!newfileDir.exists()){
+			// newfileDir.mkdirs();
+			// }
+			// StringBuffer newFileAbslute=new StringBuffer();
+			// newFileAbslute.append(newPath);
+			// newFileAbslute.append(newName);
+			// File newFile=new File(newFileAbslute.toString());
+			// if(!newFile.exists()){
+			// newFile.createNewFile();
+			// }
+
+			// path表示你所创建文件的路径
+			File f = new File(newPath);
+			if (!f.exists()) {
+				f.mkdirs();
 			}
-			StringBuffer newFileAbslute=new StringBuffer();
-			newFileAbslute.append(newPath);
-			newFileAbslute.append(newName);
-			
-			logger.info("开始复制稿件信息:\n从["+oldFileAbslute.toString()+"]\n到["+newFileAbslute.toString()+"]");
+			// fileName表示你创建的文件名；为txt类型；
+			File file = new File(f, newName);
+			if (!file.exists()) {
+				try {
+					file.createNewFile();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			logger.info("开始复制稿件信息:\n从[" + oldFileAbslute.toString() + "]\n到[" + file.getAbsolutePath() + "]");
 			if (oldfile.exists()) { // 文件存在时
-				InputStream inStream = new FileInputStream(oldFileAbslute.toString()); // 读入原文件
-				FileOutputStream fs = new FileOutputStream(newFileAbslute.toString());
-				byte[] buffer = new byte[1444];
+				FileInputStream  inStream = new FileInputStream(oldFileAbslute.toString()); // 读入原文件
+				FileOutputStream fs = new FileOutputStream(file.getAbsolutePath());
+				byte[] buffer = new byte[1024 * 9];
 				int length;
 				while ((byteread = inStream.read(buffer)) != -1) {
 					bytesum += byteread; // 字节数 文件大小
@@ -63,7 +86,7 @@ public class FileCopyUtils {
 				fs.close();
 			}
 		} catch (Exception e) {
-			logger.error("复制单个文件操作出错",e);
+			logger.error("复制单个文件操作出错", e);
 			e.printStackTrace();
 
 		}

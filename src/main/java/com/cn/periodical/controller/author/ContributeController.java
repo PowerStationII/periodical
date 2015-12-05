@@ -1,5 +1,7 @@
 package com.cn.periodical.controller.author;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,6 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.manager.SectionInfoManager;
+import com.cn.periodical.pojo.SectionInfo;
+import com.cn.periodical.pojo.SectionInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.AuthorContributeReqDto;
 import com.cn.periodical.service.AuthorContributeService;
@@ -29,6 +34,9 @@ public class ContributeController extends AuthorController{
 	@Autowired
 	AuthorContributeService contributeService;
 	
+	@Autowired
+	SectionInfoManager sectionInfoManager;
+	
 	/**
 	 * toContributePage
 	 * author/toContributePage
@@ -39,8 +47,11 @@ public class ContributeController extends AuthorController{
 		UserInfo userInfo = (UserInfo)request.getSession().getAttribute("userInfo");
 		logger.info("投稿Page:["+JSON.toJSONString(userInfo)+"]");
 		ModelAndView mav = new ModelAndView("contributePage");
-		mav.addObject("userId", userInfo.getUserId());
-		mav.addObject("roleId", userInfo.getRoleId());
+		SectionInfoQuery query = new SectionInfoQuery();
+		query.setPeriodicalId("20ea08451ad2405f9a833ba8644de463");
+		query.setExtend1("N");
+		List<SectionInfo> sectionInfos = sectionInfoManager.queryList(query);
+		mav.addObject("infos", sectionInfos);
 		return mav;
 	}
 	
@@ -61,8 +72,8 @@ public class ContributeController extends AuthorController{
 		ModelAndView mav = null;
 		try{
 	        mav=new ModelAndView("redirect:/author/toArticleQueryPage");
-			mav.addObject("userId", contributeRequestDto.getUserId());
-			mav.addObject("roleId", contributeRequestDto.getRoleId());
+			contributeRequestDto.setUserId(getUserInfo(request).getUserId());
+			contributeRequestDto.setRoleId(getUserInfo(request).getRoleId());
 			/**
 			 * 	保存投稿信息 
 			 * */

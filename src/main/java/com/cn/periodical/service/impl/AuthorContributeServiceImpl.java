@@ -249,6 +249,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 			articleAttachmentInfoManager.saveArticleAttachmentInfo(copyFile);
 		}catch(Exception e){
 			logger.info("稿件复制异常!!!怎么通知系统呢?");
+			throw new Exception("复制稿件到编辑目录出错!!"+e.getMessage()); 
 		}
 	}
 	

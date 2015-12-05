@@ -249,8 +249,6 @@
   	</div>
 <!-- </form> -->
 <!-- <form action="../author/toContribute" method="POST"> -->
-<input type="hidden" name="userId" value=${userId}>
-<input type="hidden" name="roleId" value=${roleId}>
   	<div id="step4">
   			<div  id="articleInfo">
   				<a style="margin-left:400px;font-size:20px;">填写稿件信息</a><br>
@@ -326,9 +324,12 @@
   						<td>拟投栏目</td>
   						<td>
   							<select id="investSection" class="easyui-combobox" name="investSection" style="width:140px;" data-options="editable:false,panelHeight:'auto'" > 
-							    <option  value="1">农学、农业基础科学</option> 
+							    #foreach($info in  ${infos})
+							    	<option  value="${info.sectionId}">${info.sectionName}</option> 
+							    #end
+							    <!-- <option  value="1">农学、农业基础科学</option> 
 							    <option  value="2">林学、园艺</option> 
-							    <option  value="3">水产、渔业</option>    
+							    <option  value="3">水产、渔业</option>     -->
 							</select><br>
 							<a class="txtSize">【从下拉列表框中选择最适合或最接近您论文的栏目】</a>
   						</td>
@@ -372,7 +373,7 @@
   				<table  id="authorTab1" style="border:1px solid black;" rules="all">
   					<tr>
   						<td>稿件类型</td>
-  						<td>第1作者</td>
+  						<td>第1作者 <input type="hidden"  value="Y"   name="authorList[0].isfirstauthor"> 提示:第一作者将作为稿费收款人,请确认该作者为稿费收款人.</td>
   					</tr>
   					<tr>
   						<td>是通讯作者？</td>
@@ -394,13 +395,13 @@
 							<input  type="radio"  value="female" name="authorList[0].sex"/>女<br>
   						</td>
   					</tr>
-  					<!-- <tr>
+  					<tr>
   						<td>出生年月日</td>
   						<td>
   							<input id="birthday" type="text" class="easyui-datebox" required="required"  value="1"   
   							name="authorList[0].birthday"></input>
   						</td>
-  					</tr> -->
+  					</tr>
   					<tr>
   						<td>单位</td>
   						<td>

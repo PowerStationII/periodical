@@ -15,15 +15,40 @@
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
-		})
+		});
+		
+		$('#submit').click(function(){
+			$('#all').submit();
+		});
+		
+		//上传按钮
+		$('#submit2').click(function(){
+			$('#fileUpload').submit();
+		});
 	})
 </script>
 <body>
-	<form action="../editor/toSaveCouncilInfo" method="POST">
+
+	<table style="border: 1px solid green;" rules="all">
+		<tr>
+			<td colspan="2">上传文件&nbsp;&nbsp;</td>
+			<td style="width:448px;">
+				<form id="fileUpload" enctype="multipart/form-data" action="../editor/uploadLogo" method="POST">
+				<input id="submit2" type="button" value="上传logo"><input type="file" name="files" value="">
+				<img style="width:100px;height:105px;" alt="" id="logoImg" width="100%" height="100%" src="../councilImg/${fileName}">
+				</form>
+			</td>
+		</tr>
+	</table>
+	
+		
+
+
+	<form id="all" action="../editor/toSaveCouncilInfo" method="POST" >
 		<table style="border: 1px solid green;" rules="all">
 			<tr>
 				<td colspan="2">单位名称</td>
-				<td colspan="6"><input type="text" name="councilCompany" value=""></td>
+				<td colspan="6"><input id="councilCompany" type="text" name="councilCompany" value=""></td>
 			</tr>
 			<tr>
 				<td colspan="2">会员类型</td>
@@ -31,19 +56,24 @@
 						<option value="D">理事</option>
 						<option value="SD">常务理事</option>
 				</select></td>
-				<td ROWSPAN="4" colspan="4">上传logo</td>
+				<input type="hidden" name="logoName" value="${fileName}">
+				<input type="hidden" name="logoUrl" value="${filePath}">
+				<td  colspan="4"></td>
 			</tr>
 			<tr>
 				<td colspan="2">成立时间</td>
 				<td colspan="2"><input type="text" name="companySetupTime" value=""></td>
+				<td  colspan="4"></td>
 			</tr>
 			<tr>
 				<td colspan="2">员工人数</td>
 				<td colspan="2"><input type="text" name="employeeNums" value=""></td>
+				<td  colspan="4"></td>
 			</tr>
 			<tr>
 				<td colspan="2">邮政编码</td>
 				<td colspan="2"><input type="text" name="postCode" value=""></td>
+				<td  colspan="4"></td>
 			</tr>
 			<tr>
 				<td colspan="2">所在地区</td>
@@ -67,7 +97,7 @@
 			<tr>
 				<td colspan="2">法人联系电话</td>
 				<td colspan="2"><input type="text" name="legalTelephone" value=""></td>
-				<td colspan="4"><input type="file" name="" value=""></td>
+				<td colspan="4"></td>
 			</tr>
 			<tr>
 				<td colspan="2">职务</td>
@@ -112,8 +142,8 @@
 				<td colspan="6"><input type="text" name="invoiceNo" value=""></td>
 			</tr>
 		</table>
-		<input type="button"  value="返回"  id="back"/>
-		<input type="submit" value="保存">
 	</form>
+		<input type="button"  value="返回"  id="back"/>
+		<input type="button" value="保存"  id="submit">
 </body>
 </html>
