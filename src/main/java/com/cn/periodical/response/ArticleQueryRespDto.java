@@ -44,7 +44,14 @@ public class ArticleQueryRespDto extends ResponseDto {
 	private String authorState;
 	private String editorState;
 	private String expertState;
+	private String extend1;
 	
+	public String getExtend1() {
+		return extend1;
+	}
+	public void setExtend1(String extend1) {
+		this.extend1 = extend1;
+	}
 	public String getAuthorState() {
 		return authorState;
 	}

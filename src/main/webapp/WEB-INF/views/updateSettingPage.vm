@@ -16,7 +16,11 @@
 		$('#back').click(function(){
 			$('#other', window.parent.document).hide();
 			$('#area', window.parent.document).show();
-		})
+		});
+		$('#certificateType').combobox('setValue','$!{authorInfo.certificateType}');
+		$('#education').combobox('setValue','$!{authorInfo.degree}');
+		$('#academicDegree').combobox('setValue','$!{authorInfo.academicDegree}');
+		$('#compayType').combobox('setValue','$!{authorInfo.compayType}');
 	})
 </script>
 <body>
@@ -95,10 +99,11 @@
 						</label>
 					</td>
 					<td>
-						<input maxlength="30"
-						class="wid333 ip_input_con lightgrey"
-						value="$!{authorInfo.certificateType}" id="certificateType"
-						name="certificateType">
+						<select id="certificateType" class="easyui-combobox" name="certificateType" style="width:80px;"> 
+						    <option  value="IDCARD">身份证</option> 
+						    <option  value="PASSPORT">护照</option>   
+						    <option  value="OFFICERCARD">军警证</option>     
+						</select>
 					</td>
 				</tr>
 				<tr>
@@ -121,7 +126,7 @@
 					</td>
 					<td>
 						<input maxlength="30"
-						class="wid333 ip_input_con lightgrey"
+						class="easyui-datebox"
 						value="$!{authorInfo.birthday}" id="birthday" name="birthday">
 					</td>
 				</tr>
@@ -145,9 +150,17 @@
 						</label>
 					</td>
 					<td>
-						<input maxlength="30"
-						class="wid333 ip_input_con lightgrey"
-						value="$!{authorInfo.degree}" id="degree" name="degree">
+						<select id="education" name="degree" class="easyui-combobox" style="width:100px;"> 
+						    <option value="JUNIOR_SCHOOL">小学</option> 
+						    <option value="MIDDLE_SCHOOL">初中</option> 
+						    <option value="SENIOR_SCHOOL">高中</option> 
+						    <option value="POLYTECHNIC_SCHOOL">中专</option> 
+						    <option value="VOCATIONAL_SCHOOL">高职</option> 
+						    <option value="JUNIOR_COLLEGE">专科</option> 
+						    <option value="BACHELOR_DEGREE">本科</option> 
+						    <option value="MASTER_DEGREE">硕士研究生</option> 
+						    <option value="DOCTORAL">博士研究生</option> 
+						</select>
 					</td>
 				</tr>
 				<tr>
@@ -157,10 +170,12 @@
 						</label>
 					</td>
 					<td>
-						<input maxlength="30"
-						class="wid333 ip_input_con lightgrey"
-						value="$!{authorInfo.academicDegree}" id="academicDegree"
-						name="academicDegree">
+						<select id="academicDegree" class="easyui-combobox" name="academicDegree" style="width:100px;"> 
+						    <option value="BACHELOR">学士</option> 
+						    <option value="MASTER">硕士</option>   
+						    <option value="DOCTOR">博士</option>     
+						    <option value="POST">博士后</option>     
+						</select>
 					</td>
 				</tr>
 				<tr>
@@ -183,10 +198,13 @@
 						</label>
 					</td>
 					<td>
-						<input maxlength="30"
-						class="wid333 ip_input_con lightgrey"
-						value="$!{authorInfo.compayType}" id="compayType"
-						name="compayType">
+						<select id="compayType" class="easyui-combobox" name="compayType" style="width:100px;"> 
+						    <option value="ENTERPRISES">国企</option> 
+						    <option value="PRIVATE_ENTERPRISES">私企</option>   
+						    <option value="FOREIGN_COMPANY">外企</option>     
+						    <option value="RESEARCH_COMPANY">科研单位</option>     
+						    <option value="COMPANY_OTHERS">其他</option>  
+						</select>
 					</td>
 				</tr>
 				<tr>

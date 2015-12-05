@@ -12,7 +12,7 @@
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 <style>
 #left, #right {
-	border: 1px solid #330033;
+	/* border: 1px solid green; */
 	float: left;
 	width: 40%;
 	padding: 5px;
@@ -35,7 +35,7 @@
 }
 
 .selectedTr {
-	background-color: blue;
+	background-color: #349000;
 }
 </style>
 
@@ -46,7 +46,7 @@
 		<input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}"> 
 		<input type="hidden" name="periodicalId" value="${periodicalId}"> <br />
 		<div id='left'>
-			<table border='1' id='leftSelect' class='selectedTable'>
+			<table style="border:1px solid green;width:100%;font-size:14px;" rules="all" id='leftSelect' class='selectedTable'>
 				<tr>
 					<td>广告编号</td>
 					<td>标题</td>
@@ -71,7 +71,7 @@
 		<div class='box'>
 	  <div>${item.sectionName}</div>
 	  <div class='sectionId' style="display:none;">${item.sectionId}</div>
-			<table border='1' class='selectedTable'>
+			<table style="border:1px solid green;width:100%;font-size:14px;" rules="all" class='selectedTable'>
 				<tr>
 					<td>广告编号</td>
 					<td>广告标题</td>

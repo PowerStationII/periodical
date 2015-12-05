@@ -98,7 +98,7 @@
 					#elseif($!{respDto.editorState}=='0002')
 					<td>
 						<!-- 专家只操作editorState是0002的稿件 -->
-						<a id="btn" href="../expert/toAuditeDetailPage?articleId=${respDto.articleId}" class="easyui-linkbutton" data-options="width:50">审核</a>  
+						<a id="btn" href="../expert/toAuditeDetailPage?articleId=${respDto.articleId}&downloadState=N" class="easyui-linkbutton" data-options="width:50">审核</a>  
 					</td>
 					#else
 						<td><!-- 查看稿件信息 --></td><!-- 状态不对 -->

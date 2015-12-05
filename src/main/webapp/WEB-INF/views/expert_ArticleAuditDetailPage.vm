@@ -79,9 +79,15 @@
 	</form> 
 	<div class="attr_con">
 		<a class="easyui-linkbutton" data-options="width:50"   id="back">返回</a>
+		#if(${downloadState} =='N')
+		<a class="easyui-linkbutton" data-options="width:50,disabled:true"   id="wait">待刊</a>
+		<a class="easyui-linkbutton" data-options="width:50,disabled:true"  href="#">返修</a>
+		<a class="easyui-linkbutton" data-options="width:50,disabled:true"  href="#">退稿</a>
+		#else
 		<a class="easyui-linkbutton" data-options="width:50"   id="wait">待刊</a>
 		<a class="easyui-linkbutton" data-options="width:50"  href="../expert/toExpertRepairedPage?articleId=${respDto.articleId}">返修</a>
 		<a class="easyui-linkbutton" data-options="width:50"  href="../expert/toExpertRefundPage?articleId=${respDto.articleId}">退稿</a>
+		#end
 	</div>
 	
 </body>

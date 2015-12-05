@@ -97,7 +97,7 @@ public class ArticleAuditeController extends ExpertController{
 	 * 去审稿明细页面
 	 */
 	@RequestMapping(value="/toAuditeDetailPage")
-	public ModelAndView toArticleAuditeDetailPage(@RequestParam("articleId") String articleId) {
+	public ModelAndView toArticleAuditeDetailPage(@RequestParam("articleId") String articleId,String downloadState) {
 		logger.info("审稿明细Page:["+articleId+"]");
 		ModelAndView mav = new ModelAndView("expert_ArticleAuditDetailPage");
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
@@ -105,6 +105,7 @@ public class ArticleAuditeController extends ExpertController{
 		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**专家下载编辑的稿件*/
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
 		mav.addObject("respDto", articleQueryRespDto);
+		mav.addObject("downloadState", downloadState);
 		logger.info("审稿明细出参:["+JSON.toJSONString(articleQueryRespDto)+"]");
 		return mav;
 	}
@@ -365,6 +366,8 @@ public class ArticleAuditeController extends ExpertController{
 		logger.info("专家审核页-下载稿件Action入参:artilceId:["+articleId+"]");
 		ModelAndView mav = new ModelAndView("redirect:/expert/toAuditeDetailPage");
 		mav.addObject("articleId", articleId);
+		mav.addObject("downloadState", "Y");
+
 		/**
 		 * 记录稿件开始处理流水
 		 * */
@@ -376,11 +379,12 @@ public class ArticleAuditeController extends ExpertController{
 		reqDto.setDealStartTime(new Date());
 		reqDto.setExtend(userInfo.getUserId());
 		articleWorkFlowService.registArticleWorkFlow(reqDto);
+		
+		
+		
 		/**
 		 * TODO:稿件下载
 		 * */
-		
-		
 		
 		
 		logger.info("专家审核页-下载稿件Action出参:[]");
