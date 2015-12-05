@@ -24,8 +24,34 @@ public class BizPeriodical implements Serializable {
 	private String aCnTitle;
 	private String aId;
 	private String section;
+	private String extend1;//英文专家是否审核完毕Y
 	
 	
+	public String getExtend1() {
+		return extend1;
+	}
+	public void setExtend1(String extend1) {
+		this.extend1 = extend1;
+	}
+
+	private String attachmentName;
+	private String attachmentPath;
+	
+	
+	
+	
+	public String getAttachmentName() {
+		return attachmentName;
+	}
+	public void setAttachmentName(String attachmentName) {
+		this.attachmentName = attachmentName;
+	}
+	public String getAttachmentPath() {
+		return attachmentPath;
+	}
+	public void setAttachmentPath(String attachmentPath) {
+		this.attachmentPath = attachmentPath;
+	}
 	public String getaCnTitle() {
 		return aCnTitle;
 	}

@@ -58,6 +58,8 @@
 			and oi.order_no = #{orderNo,jdbcType=VARCHAR}
 		</if>
 	</select>
+	
+	
 
 
 	<select id="queryOrderAndPayList" parameterType="BizOrder"

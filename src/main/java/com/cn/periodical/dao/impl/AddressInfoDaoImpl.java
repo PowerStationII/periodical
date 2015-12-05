@@ -76,5 +76,15 @@ public class AddressInfoDaoImpl extends BaseDao implements AddressInfoDao {
 	public int countByBiz(BizDistribut example) {
 		return super.getSqlSession().selectOne("AddressInfoMapper.countByBiz", example);
 	}
+
+	public List<BizDistribut> queryAddressListForSubEditor(BizDistribut distribut) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("AddressInfoMapper.queryAddressListForSubEditor", distribut);
+	}
+
+	public List<BizDistribut> exportReaderAddressInfos(BizDistribut distribut) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("AddressInfoMapper.exportReaderAddressInfos", distribut);
+	}
 	
 }

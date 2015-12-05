@@ -37,7 +37,14 @@ public class BizOrder implements Serializable {
 	private String receivePostCode;
 	private String distributNum;
 	private String distributId;
+	private String pIsNo;
 	
+	public String getpIsNo() {
+		return pIsNo;
+	}
+	public void setpIsNo(String pIsNo) {
+		this.pIsNo = pIsNo;
+	}
 	public String getDistributId() {
 		return distributId;
 	}

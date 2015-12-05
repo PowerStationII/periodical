@@ -101,5 +101,17 @@ public class AddressInfoManagerImpl implements AddressInfoManager {
 		return addressInfoPage;
 	}
 
+
+	public List<BizDistribut> queryAddressListForSubEditor(BizDistribut distribut) {
+		// TODO Auto-generated method stub
+		return addressInfoDao.queryAddressListForSubEditor(distribut);
+	}
+
+
+	public List<BizDistribut> exportReaderAddressInfos(BizDistribut distribut) {
+		// TODO Auto-generated method stub
+		return addressInfoDao.exportReaderAddressInfos(distribut);
+	}
+
 }
 

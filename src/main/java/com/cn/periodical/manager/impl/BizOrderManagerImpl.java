@@ -26,5 +26,13 @@ public class BizOrderManagerImpl implements BizOrderManager {
 		// TODO Auto-generated method stub
 		return bizOrderDao.queryDistributeOrderInfos(example);
 	}
+	public List<BizOrder> queryOrderInfosForSubEditor(BizOrder example) {
+		// TODO Auto-generated method stub
+		return bizOrderDao.queryOrderInfosForSubEditor(example);
+	}
+	public List<BizOrder> queryOrderInfosForSubEditorDetails(BizOrder example) {
+		// TODO Auto-generated method stub
+		return bizOrderDao.queryOrderInfosForSubEditorDetails(example);
+	}
 }
 

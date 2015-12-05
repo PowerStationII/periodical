@@ -309,4 +309,22 @@
 			and INSTR(auLin.article_cn_keywords,#{cnKeywords,jdbcType=VARCHAR})
 		</if>
 	</select>
+	
+	
+	<!-- 英文专家审核稿件查询start -->
+	
+	<select id="articleDetailForEnExpert" resultType="AuthorQueryDetail"
+		parameterType="AuthorQueryDetail">
+		select 
+		ai.article_id as articleId,ai.article_cn_title as articleCnTitle,
+		ai.article_cn_summary as articleCnSummary,ai.article_cn_keywords as articleCnKeywords,
+		ai.article_en_keywords as articleEnKeywords,ai.article_en_summary asarticleEnSummary ,ai.article_en_tile as articleEnTile,
+		aai.attachment_name as attachmentName,aai.attachment_path as attachmentPath
+		from periodical_details pd,article_info ai,article_attachment_info aai
+		where pd.article_id=ai.article_id and aai.article_id=ai.article_id and aai.type='1006' and ai.expert_state='0003' and ai.editor_state='0008'
+		<if test="articleId != null  and ''!= articleId">
+			and ai.article_id= #{articleId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
 </mapper>

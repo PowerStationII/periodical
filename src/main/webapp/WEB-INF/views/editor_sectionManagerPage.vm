@@ -14,7 +14,7 @@
 <script>
 	$(function(){
 		$('#back').click(function(){
-			history.go(-1);
+			window.location.href='../editor/toPeriodicalManagerPage';
 		});
 		$('#submit').click(function(){
 			$('form').submit();
@@ -24,7 +24,7 @@
 <body>
 	<div id="articleInfos">
 	<form action="../editor/toSectionInfoAdd" method="GET">
-		<input type="text" name="periodicalId" value="${periodical.periodicalId}">
+		<input type="hidden" name="periodicalId" value="${periodical.periodicalId}">
 		<a  id="submit" class="easyui-linkbutton" >新增栏目</a>
 		<a  id="back" class="easyui-linkbutton"  style="width:50px;">返回</a>
 	</form>
@@ -32,10 +32,10 @@
 		<table class="easyui-datagrid"   data-options="singleSelect:true">
 			<thead>
 				<tr>
-					<th data-options="field:'periodicalCnName',width:200">期刊名称</th>
-					<th data-options="field:'sectionName',width:200">栏目名称</th>
-					<th data-options="field:'sectionSummary',width:200">栏目简介</th>
-					<th data-options="field:'option',width:200">操作</th>
+					<th data-options="field:'periodicalCnName',width:250">期刊名称</th>
+					<th data-options="field:'sectionName',width:250">栏目名称</th>
+					<th data-options="field:'sectionSummary',width:250">栏目简介</th>
+					<th data-options="field:'option',width:310">操作</th>
 				</tr>
 			</thead>
 			<tbody>

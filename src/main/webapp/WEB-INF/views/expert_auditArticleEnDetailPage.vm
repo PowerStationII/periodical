@@ -15,27 +15,51 @@
 	<div id="articleInfos"  style="margin-top:50px;">
 		<table style="border: 1px solid black;font-size:14px;" rules="all">
 			<tr>
-				<td style="width:20%;text-align:center;">期刊名称</td>
-				<td style="width:20%;text-align:center;">期刊号</td>
-				<td style="width:20%;text-align:center;">期号</td>
-				<td style="width:20%;text-align:center;">稿件名称</td>
-				<td style="width:20%;text-align:center;">栏目名称</td>
-				<td style="width:20%;text-align:center;">操作</td>
+				<td>中文标题：</td>
+				<td>$!{dto.articleCnTitle}</td>
 			</tr>
 			<tr>
-				<td style="width:20%;text-align:center;"><input type="button" value="下载稿件"></td>
+				<td>英文标题：</td>
+				<td>$!{dto.articleEnTile}</td>
+			</tr>
+			<tr>
+				<td>中文关键词：</td>
+				<td>$!{dto.articleCnKeywords}</td>
+			</tr>
+			<tr>
+				<td>英文关键词：</td>
+				<td>$!{dto.articleEnKeywords}</td>
+			</tr>
+			<tr>
+				<td>中文摘要：</td>
+				<td>$!{dto.articleCnSummary}</td>
+			</tr>
+			<tr>
+				<td>英文摘要：</td>
+				<td>$!{dto.articleEnSummary}</td>
+			</tr>
+			<tr>
+				<td>审批稿件下载：</td>
+				<!-- $!{detail.attachmentPath}  $!{detail.attachmentName}-->
+				<td><a href="../downloadAttachment?fileName=$!{dto.attachmentName}&filePath=$!{dto.attachmentPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
+			</tr>
+			<tr>
 				<td style="width:20%;text-align:center;"><input type="button" value="审核通过"></td>
 				<td style="width:20%;text-align:center;"><input type="button" value="审核不通过"></td>
 				<td style="width:20%;text-align:center;"><input type="button" value="上传稿件"></td>
 				<td style="width:20%;text-align:center;"><input type="button" value="返回上页"></td>
-				<td style="width:20%;text-align:center;">操作</td>
-			</tr>
-			
-			
-			
-			
-			
+			</tr
+			>
 		</table>
+		
+		<form action="../expert/toEnAuditAgreePage">
+			<input type="text" name="aId" value="${dto.articleId}">
+			<input type="text" name="pId" value="${periodicalId}">
+			<input type="text" name="isNo" value="${periodicalIssueNo}">
+			<input type="text" name="attachmentName" value="${dto.attachmentName}">
+			<input type="text" name="attachmentPath" value="${dto.attachmentPath}">
+			<input type="submit" value="审核通过">
+		</form>
 		<br>
 	</div>
 </body>

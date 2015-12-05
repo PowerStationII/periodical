@@ -29,8 +29,13 @@
 				<td style="width: 20%; text-align: center;">第$!{dtos.cNums}期</td>
 				<td style="width: 20%; text-align: center;">$!{dtos.aCnTitle}</td>
 				<td style="width: 20%; text-align: center;">$!{dtos.section}</td>
+				
+				#if(${dtos.extend1}=='Y')
+				<td style="width: 20%; text-align: center;"></td>
+				#else
 				<td style="width: 20%; text-align: center;"><a
-					href="../expert/auditArticleEnDetailPage">审核稿件</a></td>
+					href="../expert/auditArticleEnDetailPage?articleId=${dtos.aId}&periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">审核稿件</a></td>
+				#end
 			</tr>
 			#end
 		</table>

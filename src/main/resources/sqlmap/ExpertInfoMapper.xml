@@ -34,6 +34,9 @@
 		<if test="expertId != null and ''!=expertId">
 			and A.expert_id = #{expertId,jdbcType=VARCHAR}
 		</if>
+		<if test="expertName != null and ''!=expertName">
+			and A.expert_name = #{expertName,jdbcType=VARCHAR}
+		</if>
 		<if test="logonName != null and ''!=logonName">
 			and B.logon_name = #{logonName,jdbcType=VARCHAR}
 		</if>

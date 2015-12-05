@@ -22,4 +22,5 @@ public interface ArticleQueryManager {
 	public AuthorQueryDetail queryAuthorQueryDetail(String articleId);
 	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail);
 	public List<EditorQueryArtilces> editorQueryArticles(EditorQueryArtilces reqDto);
+	public AuthorQueryDetail articleDetailForEnExpert(AuthorQueryDetail articleId);
 }

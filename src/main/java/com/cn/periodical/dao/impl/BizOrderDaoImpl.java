@@ -21,5 +21,15 @@ public class BizOrderDaoImpl extends BaseDao implements BizOrderDao {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectList("BizOrderMapper.queryDistributeOrderInfos", example);
 	}
+
+	public List<BizOrder> queryOrderInfosForSubEditor(BizOrder example) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("BizOrderMapper.queryOrderInfosForSubEditor", example);
+	}
+
+	public List<BizOrder> queryOrderInfosForSubEditorDetails(BizOrder example) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("BizOrderMapper.queryOrderInfosForSubEditorDetails", example);
+	}
 	
 }

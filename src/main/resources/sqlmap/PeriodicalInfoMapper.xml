@@ -55,7 +55,7 @@
 				<if test="periodicalId != null">
 					and periodical_id = #{periodicalId,jdbcType=VARCHAR}
 				</if>
-				<if test="periodicalCnName != null">
+				<if test="periodicalCnName != null and periodicalCnName!=''">
 					and periodical_cn_name =
 					#{periodicalCnName,jdbcType=VARCHAR}
 				</if>

@@ -53,4 +53,9 @@ public class ArticleQueryManagerImpl implements ArticleQueryManager {
 		return articleQueryDao.expertQryArticleInfos(reqDto);
 	}
 
+	public AuthorQueryDetail articleDetailForEnExpert(AuthorQueryDetail articleId) {
+		// TODO Auto-generated method stub
+		return articleQueryDao.articleDetailForEnExpert(articleId);
+	}
+
 }

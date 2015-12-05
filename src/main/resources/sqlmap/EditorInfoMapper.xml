@@ -35,6 +35,9 @@
 		<if test="editorId != null and ''!=editorId">
 			and A.editor_id = #{editorId,jdbcType=VARCHAR}
 		</if>
+		<if test="editorName != null and ''!=editorName">
+			and A.editor_name = #{editorName,jdbcType=VARCHAR}
+		</if>
 		<if test="logonName != null and ''!=logonName">
 			and B.logon_name = #{logonName,jdbcType=VARCHAR}
 		</if>

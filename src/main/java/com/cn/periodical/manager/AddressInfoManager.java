@@ -29,5 +29,9 @@ public interface AddressInfoManager {
     public void saveAddressInfos(List<AddressInfo> list);
 
 	List<BizDistribut> queryAddressListByUserId(BizDistribut distribut);
+	List<BizDistribut> queryAddressListForSubEditor(BizDistribut distribut);
+
+	public List<BizDistribut> exportReaderAddressInfos(BizDistribut distribut);
+	
 	public AddressInfoBizPage queryPageListByBiz(BizDistribut query);
 }

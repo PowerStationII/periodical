@@ -14,13 +14,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONArray;
+import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.manager.OrderInfoManager;
 import com.cn.periodical.manager.PayerInfoManager;
+import com.cn.periodical.manager.PeriodicalDistributManager;
+import com.cn.periodical.pojo.BizDistribut;
 import com.cn.periodical.pojo.BizOrder;
 import com.cn.periodical.pojo.OrderInfo;
 import com.cn.periodical.pojo.OrderInfoQuery;
 import com.cn.periodical.pojo.PayerInfo;
 import com.cn.periodical.pojo.PayerInfoQuery;
+import com.cn.periodical.pojo.PeriodicalDistribut;
+import com.cn.periodical.pojo.PeriodicalDistributQuery;
 /**
  * 发行编辑-订单管理Controller
  * */
@@ -32,6 +38,11 @@ public class SubscribeOrderManageController extends EditorController{
 	OrderInfoManager orderInfoManager;
 	@Autowired
 	PayerInfoManager payerInfoManager;
+	@Autowired
+	AddressInfoManager addressInfoManager;
+	@Autowired
+	PeriodicalDistributManager periodicalDistributManager;
+	
 	
 	/**
 	 * toSubOrderManagePage
@@ -104,8 +115,11 @@ public class SubscribeOrderManageController extends EditorController{
 		 * 编辑读者订单的赠刊信息,编辑信息保存至
 		 * periodical_distribute表
 		 * */
-		
-		
+		BizDistribut distribut =  new BizDistribut();
+		distribut.setOrderNo(orderNo);
+		List<BizDistribut> list = addressInfoManager.queryAddressListForSubEditor(distribut);
+		mav.addObject("list", list);
+		mav.addObject("orderNo", orderNo);
 		
 		return mav;
 	}
@@ -123,9 +137,24 @@ public class SubscribeOrderManageController extends EditorController{
 		 * 编辑读者订单的赠刊信息,编辑信息保存至
 		 * periodical_distribute表
 		 * */
-		
-		
-		
+		JSONArray arr = (JSONArray) JSONArray.parse(array);
+		for(int i=0;i<arr.size();i++){
+			PeriodicalDistributQuery query = new PeriodicalDistributQuery();
+			query.setRefId(orderNo);
+			query.setAddressId(arr.getJSONObject(i).getString("aId"));
+			List<PeriodicalDistribut> pds = periodicalDistributManager.queryList(query);
+			logger.info(pds.size()+"");
+			PeriodicalDistribut pd = pds.get(0);
+			pd.setId(pd.getId());
+			pd.setSupplementId1("111");
+			pd.setSupplementId1Nums(Integer.valueOf(arr.getJSONObject(i).getString("sIdNums1")));
+			pd.setSupplementId2("222");
+			pd.setSupplementId2Nums(Integer.valueOf(arr.getJSONObject(i).getString("sIdNums2")));
+			pd.setSupplementId3("333");
+			pd.setSupplementId3Nums(Integer.valueOf(arr.getJSONObject(i).getString("sIdNums3")));
+			periodicalDistributManager.savePeriodicalDistribut(pd);
+		}
 		return mav;
 	}
+	
 }

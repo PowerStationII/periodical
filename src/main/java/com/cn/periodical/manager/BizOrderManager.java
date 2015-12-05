@@ -15,4 +15,6 @@ import com.cn.periodical.pojo.BizOrder;
 
 public interface BizOrderManager {
 	public List<BizOrder> queryDistributeOrderInfos(BizOrder example);
+	public List<BizOrder> queryOrderInfosForSubEditor(BizOrder example);
+	public List<BizOrder> queryOrderInfosForSubEditorDetails(BizOrder example);
 }

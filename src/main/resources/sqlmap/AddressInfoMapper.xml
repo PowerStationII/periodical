@@ -67,8 +67,37 @@
 		where ui.ref_id=ri.reader_id and ai.ref_id=ri.reader_id
 		and ui.user_id=#{userId,jdbcType=VARCHAR}
 	</select>
+	<!-- 发行编辑编辑增刊 -->
+	<select id="queryAddressListForSubEditor" parameterType="BizDistribut"
+		resultType="BizDistribut">
+		select addi.address_id as aId,addi.contacter_name as cName,addi.contacter_mobile as cMobile,addi.contacter_telephone,
+		addi.receive_address as rAddress,addi.contacter_name as rContacter,addi.receive_postcode as rPostCode,
+		pdis.distribute_nums as dNums,pdis.distribute_status as dStatus,pdis.periodical_id as pId,pdis.supplement_id1 as sId1,pdis.supplement_id1_nums as sIdNums1,
+		pdis.supplement_id2 as sId2,pdis.supplement_id2_nums as sIdNums2,
+		pdis.supplement_id3 as sId3,pdis.supplement_id3_nums as sIdNums3,pi.periodical_cn_name as pCnName,
+		oi.amount as amount,oi.order_no as orderNo,oi.order_status as oStatus,oi.subscribe_nums as nums,oi.user_id as userId
+		from periodical_distribut pdis,periodical_info pi,order_info oi,address_info addi
+		where oi.order_no=pdis.ref_id and  pdis.periodical_id=pi.periodical_id and addi.address_id=pdis.address_id
+		and oi.order_no=#{orderNo,jdbcType=VARCHAR}
+	</select>
 
 
+	<!-- 导出读者订阅地址信息 -->
+	<select id="exportReaderAddressInfos" parameterType="BizDistribut"
+		resultType="BizDistribut">
+		select addi.address_id as aId,addi.contacter_name as cName,addi.contacter_mobile as cMobile,
+		addi.receive_address as rAddress,addi.receive_postcode as rPostCode,pdis.distribute_nums as dNums,
+		pdis.distribute_status  as dStatus,pdis.periodical_id as pId,
+		pdis.supplement_id1 as sId1,pdis.supplement_id1_nums as sIdNums1,
+		pdis.supplement_id2 as sId2,pdis.supplement_id2_nums as sIdNums2,
+		pdis.supplement_id3 as sId3,pdis.supplement_id3_nums as sIdNums3,
+		pi.periodical_cn_name as pCnName,oi.order_no as orderNo,p.periodical_issue_no as pIsNo
+		from address_info addi,periodical_distribut pdis,periodical_info pi,order_info oi,periodical p
+		where pdis.address_id=addi.address_id and pdis.periodical_id=pi.periodical_id and pdis.ref_id=oi.order_no and pi.periodical_id=p.periodical_id 
+		and p.periodical_issue_no=#{pIsNo,jdbcType=VARCHAR} 
+		and oi.order_no=#{orderNo,jdbcType=VARCHAR}
+		and p.periodical_id=#{pId,jdbcType=VARCHAR}
+	</select>
 
 
 	<sql id="Page_Query_Begin">

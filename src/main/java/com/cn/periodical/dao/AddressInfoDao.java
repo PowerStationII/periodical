@@ -33,6 +33,8 @@ public interface AddressInfoDao {
 	int updateByPrimaryKey(AddressInfo record);
 	
 	List<BizDistribut> queryAddressListByUserId(BizDistribut distribut);
+	List<BizDistribut> queryAddressListForSubEditor(BizDistribut distribut);
+	List<BizDistribut> exportReaderAddressInfos(BizDistribut distribut);
 	
 	public int countByBiz(BizDistribut example);
 }
