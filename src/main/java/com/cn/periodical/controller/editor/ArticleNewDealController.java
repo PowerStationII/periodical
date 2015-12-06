@@ -80,7 +80,7 @@ public class ArticleNewDealController extends EditorController{
 	 */
 	@RequestMapping(value="/toNewArticleDetailPage",method = RequestMethod.GET)
 	public ModelAndView toNewArticleDetailPage(@RequestParam("artilceId") String artilceId,
-			HttpServletRequest request) {
+			HttpServletRequest request ) {
 		logger.info("新稿详情页Page入参:artilceId:["+artilceId+"]");
 		ModelAndView mav = new ModelAndView("editor_newArticleDetailPage");
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
@@ -98,7 +98,7 @@ public class ArticleNewDealController extends EditorController{
 	 */
 	@RequestMapping(value="/toEnlistedPage",method = RequestMethod.GET)
 	public ModelAndView toEnlistedPage(@RequestParam("articleId") String articleId,
-			HttpServletRequest request) {
+			HttpServletRequest request,String downloadState) {
 		logger.info("稿件登记Page入参:artilceId:["+articleId+"]");
 		ModelAndView mav = new ModelAndView("editor_artilce_enlistedPage");
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
@@ -106,6 +106,7 @@ public class ArticleNewDealController extends EditorController{
 		reqDto.setRoleId(RoleIdEnums.AUTHOR.getCode());/**编辑下载作者的稿件*/
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
 		mav.addObject("respDto", articleQueryRespDto);
+		mav.addObject("downloadState", downloadState);
 		logger.info("稿件登记Page出参:["+JSON.toJSONString(articleQueryRespDto)+"]");
 		return mav;
 	}
@@ -168,6 +169,7 @@ public class ArticleNewDealController extends EditorController{
 		logger.info("稿件登记页-下载稿件Action入参:artilceId:["+articleId+"]");
 		ModelAndView mav = new ModelAndView("redirect:/editor/toEnlistedPage");
 		mav.addObject("articleId", articleId);
+		mav.addObject("downloadState", "Y");
 		/**
 		 * 记录稿件开始处理流水
 		 * */

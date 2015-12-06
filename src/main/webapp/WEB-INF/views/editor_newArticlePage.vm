@@ -62,7 +62,7 @@
 				<td><a href="../editor/toNewArticleDetailPage?artilceId=${obj.articleId}">$!{obj.title}</a></td>
 				<td>$!{obj.authorName}</td>
 				<td>$!{obj.contriTime}</td>
-				<td><a class="easyui-linkbutton"  href="../editor/toEnlistedPage?articleId=${obj.articleId}"  style="width:50px;">登记</a></td>
+				<td><a class="easyui-linkbutton"  href="../editor/toEnlistedPage?articleId=${obj.articleId}&downloadState=N"  style="width:50px;">登记</a></td>
 			</tr>
 			#end
 		</tbody>

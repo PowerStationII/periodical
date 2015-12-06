@@ -13,11 +13,20 @@
 </head>
 <script>
 	$(function(){
-		$('#submit').click(function(){
-			$('form').submit();
-		});
+		if('${downloadState}'=='N'){
+			$('#submit').click(function(){
+					alert('请先下载稿件');
+					return;
+			});
+		}
+		else {
+			$('#submit').click(function(){
+				$('form').submit();
+			});
+		}
+		
 		$('#back').click(function(){
-			history.go(-1);
+			window.location.href='../editor/toNewArticlePage';
 		});
 	});
 </script>
@@ -69,7 +78,7 @@
 					<tr>
 						<td>
 							<a id="submit" class="easyui-linkbutton"  href="#"  style="width:50px;">登记</a>
-							<a id="back" class="easyui-linkbutton"  href="#"  style="width:50px;">返回</a>
+							<a id="back" class="easyui-linkbutton"   style="width:50px;">返回</a>
 						</td>
 					</tr>
 				</tbody>

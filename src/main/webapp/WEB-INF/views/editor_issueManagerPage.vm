@@ -13,16 +13,18 @@
 </head>
 <body>
 	<div id="articleInfos">
-		<table style="border: 1px solid black;" rules="all">
+		<table  class="easyui-datagrid"   data-options="singleSelect:true">
+		<thead>
 			<tr>
-				<td>期刊id</td>
-				<td>期刊名称</td>
-				<td>期刊编号</td>
-				<td>期数</td>
-				<td>签发时间</td>
-				<td>操作</td>
+				<th data-options="field:'pId',width:200">期刊id</th>
+				<th data-options="field:'pCnName',width:200">期刊名称</th>
+				<th data-options="field:'pIsNo',width:200">期刊编号</th>
+				<th data-options="field:'cNums',width:200">期数</th>
+				<th data-options="field:'isTime',width:200">签发时间</th>
+				<th data-options="field:'option',width:70">操作</th>
 			</tr>
-			
+		</thead>
+		<tbody>
 			#foreach($dtos in ${list})   
 			<tr>
 				<td>$!{dtos.pId}</td>
@@ -33,6 +35,7 @@
 				<td><a href="../editor/toIssue?periodicalId=${dtos.pId}&periodicalIsNo=${dtos.pIsNo}">签发</a></td>
 			</tr>
 			#end
+		</tbody>	
 		</table>
 		<br>
 	</div>
