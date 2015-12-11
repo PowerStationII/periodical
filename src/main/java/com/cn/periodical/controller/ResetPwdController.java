@@ -1,10 +1,12 @@
 package com.cn.periodical.controller;
 
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +49,7 @@ public class ResetPwdController {
 	 * 发送重置密码邮件
 	 * */
 	@RequestMapping(value = "/toReset")
-	public ModelAndView toReset(HttpServletRequest request,String email) {
+	public ModelAndView toReset(HttpServletRequest request,String email,HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("portal");
 		
 		ResetPassword resetPassword = new ResetPassword();
@@ -67,6 +69,18 @@ public class ResetPwdController {
 		}
 		//reset?logonName=&randomStr=
 		resetPasswordManager.saveResetPassword(resetPassword);
+		try{
+			response.setContentType("text/html; charset=utf-8");
+		    PrintWriter out = response.getWriter();  
+		    out.println("<html>");  
+		    out.println("<script>");  
+		    out.println("alert('密码重置邮件已发送,请登录邮箱进行密码重置');"); 
+		    out.println("window.open ('/periodical-web/portal','_top')");  
+		    out.println("</script>");  
+		    out.println("</html>");  
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return mav;
 	}
 	
