@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>用户登录</title>
+    <title>专家登录</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -13,61 +13,11 @@
 	<link href="css/icon.css" type="text/css" rel="stylesheet" />
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="js/login.js"></script>
 	<style>
 		#u4,#u6,#u8,#u10,#u12{cursor:pointer;}
 	</style>
   </head> 
-  <script type="text/javascript"> 	
-	function submitForm(){  
-		if ($('#u34_input').val()=="" || $('#u35_input').val()=="") {
-			$.messager.alert('提示','请输入用户名和密码');
-			return;
-		}
-		else {
-			$('#sub').submit();
-		}
-	}  
-	$(function(){
-  		var frame = '<iframe  style="width:650px;height:760px;margin-left:400px;margin-top:75px;position:absolute;" src= "totototo"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe><div><input type="button"  value="返回"   id="back"  onclick="reBack()" style="margin-left:950px;position:absolute;font-size:18px;width:70px;height:30px;"></div>';
-  		$('#u4').click(function(){
-  			$('#login').hide();
-  			$('iframe').remove();
-  			$('#back').remove();
-  			$('#u12').after(frame.replace('totototo','toTouGao'));
-  			$('#back').css('margin-top','740px');
-  		});
-  		$('#u6').click(function(){
-  			$('#login').hide();
-  			$('iframe').remove();
-  			$('#back').remove();
-  			$('#u12').after(frame.replace('totototo','toBanQuquan'));
-  			$('#back').css('margin-top','640px');
-  		});
-  		$('#u8').click(function(){
-  			$('#login').hide();
-  			$('iframe').remove();
-  			$('#back').remove();
-  			$('#u12').after(frame.replace('totototo','toGuiFan'));
-  			$('#back').css('margin-top','740px');
-  		});
-  		$('#u10').click(function(){
-  			window.location.href='portal';
-  		});
-  		$('#u12').click(function(){
-  			$('#login').hide();
-  			$('iframe').remove();
-  			$('#back').remove();
-  			$('#u12').after(frame.replace('totototo','toLianXi'));
-  			$('#back').css('margin-top','640px');
-  		});
-	});
-	
-	function reBack () {
-		$('#login').show();
-		$('iframe').remove();
-		$('#back').remove();
-	}
-  </script>
 
 
   <body>
@@ -202,7 +152,7 @@
         <img id="u28_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u29" class="text">
-          <p><a href="toRegister?systemId=${systemId}&roleId=${roleId}" style='text-decoration:none;'><span>注册</span></a></p>
+          <p><span><a href="resetPwd">忘记密码？</a></span></p>
         </div>
       </div>
 
@@ -211,7 +161,7 @@
         <img id="u30_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u31" class="text">
-          <p><span>|</span></p>
+          <p><span></span></p>
         </div>
       </div>
 
@@ -220,7 +170,7 @@
         <img id="u32_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u33" class="text">
-          <p><span><a href="resetPwd">忘记密码？</a></span></p>
+          <p></p>
         </div>
       </div>
 
@@ -233,6 +183,9 @@
         </div>
       </div>
       </div><!--可以隐藏-->
+      <div style="position:absolute;width:300px;margin-left:320px;margin-top:40px;">
+        --专家系统
+      </div>
     </div>
   </body>
 </html>

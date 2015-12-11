@@ -41,7 +41,19 @@ public class LoginController {
 	public ModelAndView login(@RequestParam("systemId") String systemId, @RequestParam("roleId") String roleId,
 			HttpServletRequest request) {
 		logger.info("登录系统systemId:[" + systemId + "]");
-		ModelAndView mav = new ModelAndView("login");
+		ModelAndView mav = null;
+		
+		if(SystemIdEnums.READER_SYS.getCode().equals(systemId)){
+			mav = new ModelAndView("login_reader");
+		}else if(SystemIdEnums.AUTHOR_SYS.getCode().equals(systemId)){
+			mav = new ModelAndView("login_author");
+		}else if(SystemIdEnums.EDIT_SYS.getCode().equals(systemId)){
+			mav = new ModelAndView("login_editor");
+		}else if(SystemIdEnums.EXPERT_SYS.getCode().equals(systemId)){
+			mav = new ModelAndView("login_expert");
+		}else{
+			mav=new ModelAndView("error");
+		}
 		mav.addObject("systemId", systemId);
 		mav.addObject("roleId", roleId);
 		return mav;
