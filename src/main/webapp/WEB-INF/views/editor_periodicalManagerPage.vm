@@ -25,6 +25,10 @@
 			<tr>
 				<td>期刊名称：</td>
 				<td><input class="easyui-textbox" type="text" name="periodicalCnName" value=""></td>
+				<td>期刊编号：</td>
+				<td><input class="easyui-textbox" type="text" name="periodicalId" value=""></td>
+				<td>主办单位：</td>
+				<td><input class="easyui-textbox" type="text" name="hostOrganization" value=""></td>
 			</tr>
 			<tr>
 				<td colspan="6">
