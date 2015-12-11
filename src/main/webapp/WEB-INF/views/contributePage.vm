@@ -74,6 +74,7 @@
   			$('#more').click(function(){
   				var author = $('#author1');
   				var ss = $('#authorTab1').clone();
+  				ss.find('tr').eq(4).find('td:last').html('<input id="birthday" type="text" class="easyui-datebox" required="required"  value="1" name="authorList[0].birthday"></input>');
   				ss.attr('id','authorTab'+(count+2));
   				var names = ss.find('[name*=0]');
   				$.each(names,function(i){
@@ -83,7 +84,7 @@
   				ss.find('[type="text"]').val('');
   				author.append(ss);
   				author.append('<br>');
-  				
+  				$.parser.parse();
   				count = count + 1;
   				if (count>=1) {
   					$('#del').remove();

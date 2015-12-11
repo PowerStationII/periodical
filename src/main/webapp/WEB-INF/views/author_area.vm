@@ -60,7 +60,7 @@
 		.li3{border:1px solid #349000;}
 		a{text-decoration:none;color:#000000}
   </style>
-  <body style="margin:0px;background-color:#E6E6E6;">
+  <body style="margin:0px;">
     <div class="top">
        	<a>欢迎访问《 农药科学与管理  》网站！</a>
 		<a href="logout" style='text-decoration:none;'>退出系统</a>
