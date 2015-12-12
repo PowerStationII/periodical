@@ -9,6 +9,7 @@ public class BizCouncil {
 	}
 	private String adCounts;
 	private String amount;
+	private String contractStartTime;
 	private String contractEndTime;
 	private String registerTime;
 	private String type;
@@ -17,6 +18,14 @@ public class BizCouncil {
 	private String councilCompanyName;
 	private String invoiceNo;
 	
+	
+	
+	public String getContractStartTime() {
+		return contractStartTime;
+	}
+	public void setContractStartTime(String contractStartTime) {
+		this.contractStartTime = contractStartTime;
+	}
 	public String getType() {
 		return type;
 	}

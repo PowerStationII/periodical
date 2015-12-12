@@ -183,14 +183,17 @@ function getSex(value){
  */
 function getCouncilType(){
 	var data=[{    
+	    "value":'',
+	    "text":"全部"
+	},{    
 	    "value":'DG',
-	    "text":"理事长",
+	    "text":"理事长"
 	},{    
 	    "value":'SD',    
 	    "text":"常务理事"   
 	},{    
 	    "value":'VDG',    
-	    "text":"副理事长",    
+	    "text":"副理事长"    
 	},{    
 	    "value":'D',    
 	    "text":"理事"   

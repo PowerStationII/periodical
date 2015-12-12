@@ -46,8 +46,8 @@ public class AdCouncilManagerServiceImpl implements AdCouncilManagerService {
 		councilInfo.setCouncilCompany(reqDto.getCouncilCompany());
 		councilInfo.setCouncilId(councilId);
 		councilInfo.setCouncilName(reqDto.getCouncilCompany());
-//		councilInfo.setCouncilType(reqDto.getType().getCode());
-//		councilInfo.setEmployeeNums(reqDto.getEmployeeNums());
+		councilInfo.setCouncilType(reqDto.getType());
+		councilInfo.setEmployeeNums(reqDto.getEmployeeNums());
 		councilInfo.setCreateTime(new Date());
 		councilInfo.setIsad("");
 		councilInfo.setIscouncil("");

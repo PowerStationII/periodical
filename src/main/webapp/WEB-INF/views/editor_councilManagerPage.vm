@@ -10,6 +10,8 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
+<script type="text/javascript" src="../js/enums-combox.js"></script>
 </head>
 <script>
 	$(function(){
@@ -24,11 +26,11 @@
         	 data.push({  
                  "councilId":rows[i].councilId,  
                  "councilCompanyName":rows[i].councilCompanyName,
-                 "type":rows[i].type,  
+                 "type":CouncilType(rows[i].type),  
+                 "contractStartTime":rows[i].contractStartTime,
                  "contractEndTime":rows[i].contractEndTime,
                  "amount":rows[i].amount,
                  "invoiceNo":rows[i].invoiceNo,  
-                 "id":rows[i].id,
                  "option":rows[i].option
              }) ; 
 		}
@@ -48,7 +50,18 @@
                 });  
             }  
         });  
+        
+        $("#typeCombobox").combobox({
+        	data:getCouncilType(),
+        	onLoadSuccess: function () { //数据加载完毕事件
+                var data = $('#typeCombobox').combobox('getData');
+                if (data.length > 0) {
+                    $("#typeCombobox").combobox('select', data[0].value);
+                }
+            }
+        })
 	});
+	
 </script>
 <body>
 	<div id="councileInfos">
@@ -56,15 +69,13 @@
 		<form action="../editor/toCouncilManagerPage" method="POST">
 			<table>
 				<tr>
-					<td>注册时间：</td>
-					<td><input class="easyui-textbox" type="text" name="registerTime" value=""></td>
 					<td>会员类型：</td>
-					<td><select name="type"  class="easyui-combobox"   style="width:155px;">
-						<option value="" selected>全部</option>
-						<option value="D">理事</option>
+					<td><select id="typeCombobox" name="type"  class="easyui-combobox"   style="width:155px;">
 					</select></td>
-					<td>广告刊登：</td>
-					<td><input class="easyui-textbox" type="text" name="" value=""></td>
+					<td>合同开始时间：</td>
+					<td><input class="easyui-datebox" type="text" name="contractStartTime" value="2015-01-01"></td>
+					<td>合同结束时间：</td>
+					<td><input class="easyui-datebox" type="text" name="contractEndTime" value="2017-01-01"></td>
 				</tr>
 				<tr>
 					<td>会员编号：</td>
@@ -88,10 +99,10 @@
 					<th data-options="field:'councilId',width:200">会员编号</th>
 					<th data-options="field:'councilCompanyName',width:130">企业名称</th>
 					<th data-options="field:'type',width:100">会员类型</th>
-					<th data-options="field:'contractEndTime',width:100">合同日期</th>
+					<th data-options="field:'contractStartTime',width:100">合同开始日期</th>
+					<th data-options="field:'contractEndTime',width:100">合同结束日期</th>
 					<th data-options="field:'amount',width:100">金额</th>
 					<th data-options="field:'invoiceNo',width:100">发票号</th>
-					<th data-options="field:'id',width:100">广告刊登</th>
 					<th data-options="field:'option',width:210">操作</th>
 				</tr>
 			</thead>
@@ -101,10 +112,10 @@
 					<td>${dtos.councilId}</td>
 					<td>${dtos.councilCompanyName}</td>
 					<td>${dtos.type}</td>
+					<td>${dtos.contractStartTime}</td>
 					<td>${dtos.contractEndTime}</td>
 					<td>${dtos.amount}</td>
 					<td>${dtos.invoiceNo}</td>
-					<td></td>
 					<td><a class="easyui-linkbutton" style="width:50px;" href="../editor/toQrySingleCouncilInfo?councilId=${dtos.councilId}">编辑</a>
 					<a class="easyui-linkbutton" style="width:50px;" href="../editor/toRenewPage?councilId=${dtos.councilId}">续费</a>
 					<a class="easyui-linkbutton"  href="../editor/toAdInfoAdd?councilId=${dtos.councilId}">添加广告</a></td>

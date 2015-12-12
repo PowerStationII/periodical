@@ -8,11 +8,11 @@ public class AdCouncilManagerReqDto extends RequestDto {
 		// TODO Auto-generated constructor stub
 	}
 	
-//	private CouncilMemberTypeEnums type;
+	private String type;
 	private String invoiceNo;
 	private java.lang.String councilCompany;
 	private String companySetupTime;
-//	private java.lang.Integer employeeNums;
+	private java.lang.Integer employeeNums;
 	private String postCode;
 	private java.lang.String areaPro;
 	private java.lang.String areaCity;
@@ -33,6 +33,13 @@ public class AdCouncilManagerReqDto extends RequestDto {
 	private String logoUrl;
 	
 	
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getLogoName() {
 		return logoName;
 	}
@@ -69,12 +76,12 @@ public class AdCouncilManagerReqDto extends RequestDto {
 	public void setCompanySetupTime(String companySetupTime) {
 		this.companySetupTime = companySetupTime;
 	}
-//	public java.lang.Integer getEmployeeNums() {
-//		return employeeNums;
-//	}
-//	public void setEmployeeNums(java.lang.Integer employeeNums) {
-//		this.employeeNums = employeeNums;
-//	}
+	public java.lang.Integer getEmployeeNums() {
+		return employeeNums;
+	}
+	public void setEmployeeNums(java.lang.Integer employeeNums) {
+		this.employeeNums = employeeNums;
+	}
 	public java.lang.String getPostCode() {
 		return postCode;
 	}

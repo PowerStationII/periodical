@@ -22,3 +22,21 @@ function ArticleStateEnums(status){
 		return '未知';
 	}
 }
+
+/**
+ * 会员类型枚举下拉
+ * @returns {Array}
+ */
+function CouncilType(status){
+	if('DG' == status){
+		return '理事长';
+	}else if('SD' == status){
+		return '常务理事';
+	}else if('VDG' == status){
+		return '副理事长';
+	}else if('D' == status){
+		return '理事';
+	}else{
+		return '未知';
+	}
+}

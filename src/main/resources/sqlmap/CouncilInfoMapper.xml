@@ -699,9 +699,16 @@
 		DATE_FORMAT(ci.create_time, '%Y-%m-%d') as registerTime,ci.council_type as type,
 		ci.council_company as councilCompanyName,
 		ci.council_id as councilId,DATE_FORMAT(ccf.end_time, '%Y-%m-%d') as contractEndTime,
+		DATE_FORMAT(ccf.start_time, '%Y-%m-%d') as contractStartTime,
 		ccf.amount as amount,ccf.invoice_no as invoiceNo
 		from council_info ci,council_contract_flows ccf 
-		where ci.council_id=ccf.council_id and NOW() BETWEEN start_time AND end_time
+		where ci.council_id=ccf.council_id 
+		<if test="contractStartTime != null and ''!=contractStartTime">
+			and #{contractStartTime,jdbcType=VARCHAR} &lt;= DATE_FORMAT(start_time, '%Y-%m-%d') 
+		</if>
+		<if test="contractEndTime != null and ''!=contractEndTime">
+			and #{contractEndTime,jdbcType=VARCHAR} &gt;= DATE_FORMAT(end_time, '%Y-%m-%d')
+		</if>
 		<if test="registerTime != null and ''!=registerTime">
 			and DATE_FORMAT(ci.create_time, '%Y-%m-%d') = #{registerTime,jdbcType=VARCHAR}
 		</if>
