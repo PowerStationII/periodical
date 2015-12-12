@@ -18,6 +18,7 @@
         var rows = $('#table').datagrid('getRows');
         for(var i=0;i<rows.length;i++) {
         	 data.push({  
+		 		 "id":rows[i].id,  
                  "articleId":rows[i].articleId,  
                  "title":rows[i].title,
                  "contriTime":rows[i].contriTime,  
@@ -63,25 +64,29 @@
 		<table  id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
 			<thead>
 				<tr>
-					<th data-options="field:'articleId',width:267">稿件编号</th>
+					<th data-options="field:'id',width:45">序号</th>
+					<th data-options="field:'articleId',width:262">稿件编号</th>
 					<th data-options="field:'title',width:200">稿件标题</th>
-					<th data-options="field:'contriTime',width:200">投稿时间</th>
-					<th data-options="field:'authorState',width:200">稿件状态</th>
+					<th data-options="field:'contriTime',width:185">投稿时间</th>
+					<th data-options="field:'authorState',width:185">稿件状态</th>
 					<th data-options="field:'option',width:200">备注信息</th>
 				</tr>
 			</thead>
 			<tbody>
 				#foreach($dtos in ${list})   
 				<tr>
+					<td>$!{velocityCount}</td>
 					<td>$!{dtos.articleId}</td>
 					<td><a href="../author/toArticleQueryDetailPage?articleId=${dtos.articleId}">$!{dtos.title}</a></td>
 					<td>$!{dtos.contriTime}</td>
 					<td>$!{dtos.authorState}</td>
 					#if($!{dtos.authorState}=='0003')
 					<td><a href="../author/toEditAuthorPayeeInfoPage?articleId=${dtos.articleId}" class="easyui-linkbutton" >账户信息</a><a onclick="yijian('${dtos.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
+					#elseif($!{dtos.authorState}=='0000')
+					<td></td>
 					#else
 					<td><a onclick="yijian('${dtos.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
-					#end
+					#end 
 				</tr>
 				#end
 			</tbody>
