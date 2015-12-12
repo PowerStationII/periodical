@@ -8,6 +8,8 @@
 	  <result column="expert_download" jdbcType="VARCHAR" property="expertDownload" />
 	  <result column="editor_download_time" jdbcType="TIMESTAMP" property="editorDownloadTime" />
 	  <result column="expert_download_time" jdbcType="TIMESTAMP" property="expertDownloadTime" />
+	  <result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
+	  <result column="periodical_name" jdbcType="VARCHAR" property="periodicalName" />
   </resultMap>
   <sql id="Page_Query_Begin">
     select * from(select t.*,rownum rn from(
@@ -33,6 +35,12 @@
       <if test="expertDownloadTime != null" >
 	      and expert_download_time = #{expertDownloadTime,jdbcType=TIMESTAMP}
 	    </if>
+      <if test="periodicalId != null" >
+	      and periodical_id = #{periodicalId,jdbcType=VARCHAR}
+	    </if>
+      <if test="periodicalName != null" >
+	      and periodical_name = #{periodicalName,jdbcType=VARCHAR}
+	    </if>
 	  </trim>
     </where>
   </sql>
@@ -54,6 +62,12 @@
       <if test="expertDownloadTime != null">
         expert_download_time = #{expertDownloadTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="periodicalId != null">
+        periodical_id = #{periodicalId,jdbcType=VARCHAR},
+      </if>
+      <if test="periodicalName != null">
+        periodical_name = #{periodicalName,jdbcType=VARCHAR},
+      </if>
       </trim>
     </set>
   </sql>
@@ -64,6 +78,8 @@
     expert_download,
     editor_download_time,
     expert_download_time,
+    periodical_id,
+    periodical_name,
   </sql>
   <sql id="Base_Set_Clause">
     <set>
@@ -73,6 +89,8 @@
         expert_download = #{expertDownload,jdbcType=VARCHAR},
         editor_download_time = #{editorDownloadTime,jdbcType=TIMESTAMP},
         expert_download_time = #{expertDownloadTime,jdbcType=TIMESTAMP},
+        periodical_id = #{periodicalId,jdbcType=VARCHAR},
+        periodical_name = #{periodicalName,jdbcType=VARCHAR},
       </trim>
     </set>
   </sql>
@@ -93,6 +111,12 @@
     <if test="expertDownloadTime != null">
       expert_download_time,
     </if>
+    <if test="periodicalId != null">
+      periodical_id,
+    </if>
+    <if test="periodicalName != null">
+      periodical_name,
+    </if>
   </sql>
 	<sql id="Base_Value_List">
     #{id,jdbcType=BIGINT},
@@ -101,6 +125,8 @@
     #{expertDownload,jdbcType=VARCHAR},
     #{editorDownloadTime,jdbcType=TIMESTAMP},
     #{expertDownloadTime,jdbcType=TIMESTAMP},
+    #{periodicalId,jdbcType=VARCHAR},
+    #{periodicalName,jdbcType=VARCHAR},
 	</sql>
   <sql id="Selective_Value_List">
     <!-- SEQ_article_info_state.nextval, -->
@@ -118,6 +144,12 @@
     </if>
     <if test="expertDownloadTime != null">
       #{expertDownloadTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="periodicalId != null">
+      #{periodicalId,jdbcType=VARCHAR},
+    </if>
+    <if test="periodicalName != null">
+      #{periodicalName,jdbcType=VARCHAR},
     </if>
   </sql>
   

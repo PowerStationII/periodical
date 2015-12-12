@@ -45,7 +45,24 @@ public class AuthorContributeReqDto extends RequestDto {
 	private ArticleTypeEnums articleType;
 	private String inovationPoint;
 	private String roleId;
+	private String periodicalId;
+	private String periodicalName;
+	
+	public String getPeriodicalId() {
+		return periodicalId;
+	}
 
+	public void setPeriodicalId(String periodicalId) {
+		this.periodicalId = periodicalId;
+	}
+
+	public String getPeriodicalName() {
+		return periodicalName;
+	}
+
+	public void setPeriodicalName(String periodicalName) {
+		this.periodicalName = periodicalName;
+	}
 	/**
 	 * article_attachment_info aai
 	 * */

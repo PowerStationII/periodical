@@ -164,6 +164,8 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		articleInfoState.setArticleId(articleId);
 		articleInfoState.setEditorDownload("N");
 		articleInfoState.setExpertDownload("N");
+		articleInfoState.setPeriodicalId(contributeRequestDto.getPeriodicalId());
+		articleInfoState.setPeriodicalName(contributeRequestDto.getPeriodicalName());
 		
 		final List<AuthorInfo> authorInfos = contributeRequestDto.getAuthorList();
 		final List<AddressInfo> addressInfos = contributeRequestDto.getAddressInfos();

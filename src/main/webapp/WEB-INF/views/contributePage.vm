@@ -226,10 +226,6 @@
 				三、著作权人承诺<br>
 				（一）以后不考虑以任何形式，中文之外的任何语种，在其他地方发表该论文。<br>
 				（二）因特殊原因未能亲自签署字的著作权人，已授权签字的著作权人代其签署本协议。签字的著作权人保证本人具有签署此协议并做出各项承诺之权利。此协议对全体著作权人均有约束力。<br>
-				论文题名：<br>
-				稿件编号：<br>
-				作者签名（请按论文作者排名顺序填写）<br>             
-				签名日期：<br>
 			</a><br>
 			<input type="button"  id="disagree"  value="不同意"><input type="button"  id="agree"  value="同意">
 		</div>
@@ -365,15 +361,22 @@
   						</td>
   					</tr>
   					<tr>
+  						<td>拟投期刊</td>
+  						<td>
+  							<select id="periodicalId" class="easyui-combobox" name="periodicalId" style="width:140px;" data-options="editable:false,panelHeight:'auto'" > 
+							    #foreach($info in  ${periodicalInfos})
+							    	<option value="${info.periodicalId}">${info.periodicalCnName}</option> 
+							    #end
+							</select><br>
+  						</td>
+  					</tr>
+  					<tr>
   						<td>拟投栏目</td>
   						<td>
   							<select id="investSection" class="easyui-combobox" name="investSection" style="width:140px;" data-options="editable:false,panelHeight:'auto'" > 
 							    #foreach($info in  ${infos})
 							    	<option  value="${info.sectionId}">${info.sectionName}</option> 
 							    #end
-							    <!-- <option  value="1">农学、农业基础科学</option> 
-							    <option  value="2">林学、园艺</option> 
-							    <option  value="3">水产、渔业</option>     -->
 							</select><br>
 							<a class="txtSize">【从下拉列表框中选择最适合或最接近您论文的栏目】</a>
   						</td>
@@ -429,7 +432,7 @@
   					<tr>
   						<td>真实姓名</td>
   						<td>
-  							<input  type="text"   name="authorList[0].authorName"/>
+  							<input  type="text"   name="authorList[0].authorName" value="$!{authorInfo.authorName}"/>
   						</td>
   					</tr>
   					<tr>
@@ -456,7 +459,7 @@
   					<tr>
   						<td>邮编</td>
   						<td>
-  							<input  type="text"   name="addressInfos[0].receivePostcode"/>
+  							<input  type="text" name="addressInfos[0].receivePostcode"/>
   						</td>
   					</tr>
   					<tr>

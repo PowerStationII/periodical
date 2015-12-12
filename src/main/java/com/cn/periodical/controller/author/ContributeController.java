@@ -17,7 +17,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.manager.AuthorInfoManager;
+import com.cn.periodical.manager.PeriodicalInfoManager;
 import com.cn.periodical.manager.SectionInfoManager;
+import com.cn.periodical.pojo.AuthorInfo;
+import com.cn.periodical.pojo.AuthorInfoQuery;
+import com.cn.periodical.pojo.PeriodicalInfo;
+import com.cn.periodical.pojo.PeriodicalInfoQuery;
 import com.cn.periodical.pojo.SectionInfo;
 import com.cn.periodical.pojo.SectionInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
@@ -36,6 +42,10 @@ public class ContributeController extends AuthorController{
 	
 	@Autowired
 	SectionInfoManager sectionInfoManager;
+	@Autowired
+	PeriodicalInfoManager periodicalInfoManager;
+	@Autowired
+	AuthorInfoManager authorInfoManager;
 	
 	/**
 	 * toContributePage
@@ -47,11 +57,21 @@ public class ContributeController extends AuthorController{
 		UserInfo userInfo = (UserInfo)request.getSession().getAttribute("userInfo");
 		logger.info("投稿Page:["+JSON.toJSONString(userInfo)+"]");
 		ModelAndView mav = new ModelAndView("contributePage");
+		AuthorInfoQuery authorQuery=new AuthorInfoQuery();
+		authorQuery.setAuthorId(userInfo.getRefId());
+		List<AuthorInfo> authorInfos = authorInfoManager.queryList(authorQuery);
+		mav.addObject("authorInfo",authorInfos.get(0));
+		
+		PeriodicalInfoQuery periodicalInfoQuery =  new PeriodicalInfoQuery();
+		List<PeriodicalInfo> periodicalInfos =periodicalInfoManager.queryList(periodicalInfoQuery);
+		mav.addObject("periodicalInfos", periodicalInfos);
+		
 		SectionInfoQuery query = new SectionInfoQuery();
 		query.setPeriodicalId("20ea08451ad2405f9a833ba8644de463");
 		query.setExtend1("N");
 		List<SectionInfo> sectionInfos = sectionInfoManager.queryList(query);
 		mav.addObject("infos", sectionInfos);
+		
 		return mav;
 	}
 	
@@ -64,10 +84,6 @@ public class ContributeController extends AuthorController{
 	@RequestMapping(value="/toContribute",method = RequestMethod.POST)
 	public ModelAndView toContribute(@ModelAttribute(value="contributeRequestDto") AuthorContributeReqDto contributeRequestDto,
 			@RequestParam(value="files", required=true) MultipartFile[] files,HttpServletRequest request) {
-		logger.info("00000000000");
-		logger.info(JSON.toJSONString(request.getSession().getAttribute("userInfo")));
-		logger.info("00000000000");
-		
 		logger.info("提交投稿信息入参:["+JSON.toJSONString(contributeRequestDto)+"]&上传附件数量["+files.length+"]");
 		ModelAndView mav = null;
 		try{

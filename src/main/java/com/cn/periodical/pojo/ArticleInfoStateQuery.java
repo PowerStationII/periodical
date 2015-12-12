@@ -28,6 +28,8 @@ public class ArticleInfoStateQuery extends PagingQuery {
 	private java.lang.String expertDownload;
 	private java.util.Date editorDownloadTime;
 	private java.util.Date expertDownloadTime;
+	private java.lang.String periodicalId;
+	private java.lang.String periodicalName;
 
 	/**
 	 * 
@@ -103,5 +105,35 @@ public class ArticleInfoStateQuery extends PagingQuery {
 	 */
 	public java.util.Date getExpertDownloadTime() {
 		return this.expertDownloadTime;
+	}
+	/**
+	 * 
+	 * @param periodicalId
+	 */
+	public void setPeriodicalId(java.lang.String periodicalId) {
+		this.periodicalId = periodicalId;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.String getPeriodicalId() {
+		return this.periodicalId;
+	}
+	/**
+	 * 
+	 * @param periodicalName
+	 */
+	public void setPeriodicalName(java.lang.String periodicalName) {
+		this.periodicalName = periodicalName;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public java.lang.String getPeriodicalName() {
+		return this.periodicalName;
 	}
 }
