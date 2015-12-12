@@ -10,17 +10,22 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
 <script>
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
 		});
+		var data=$('#grid').datagrid('getData');
+	    data.rows[1].value=ArticleStateEnums('$!{respDto.editorState}');
+	    $("#grid").datagrid("loadData", data);
 	});
 </script>
 <body>
+	<div id="test"></div>
 	<div>
-		<table  class="easyui-datagrid"   data-options="singleSelect:true">
+		<table id="grid" class="easyui-datagrid"   data-options="singleSelect:true">
 		<thead>
 			<tr>
 				<th data-options="field:'name',width:200"></th>
@@ -34,7 +39,9 @@
 			</tr>
 			<tr>
 				<td>稿件状态:</td>
-				<td>$!{respDto.editorState}</td>
+				
+					<td></td>
+				
 			</tr>
 			<tr>
 				<td>稿件中文:</td>
@@ -68,12 +75,12 @@
 				<td>英文摘要:</td>
 				<td>$!{respDto.enSummary}</td>
 			</tr>
-			<!-- <tr>
+			<tr>
 				<td><label>
 						<span class="right">下载原稿件:</span>
 				</label></td>
-				<td>$!{respDto.attachName} 下载  $!{respDto.attachPath}</td>
-			</tr> -->
+				<td>$!{respDto.attachName}<a class="easyui-linkbutton"  href="../downloadAttachment?fileName=$!{respDto.attachName}&filePath=$!{respDto.attachPath}">下载原稿</a></td>
+			</tr>
 			</tbody>
 		</table>
 	</div>

@@ -107,7 +107,7 @@
 		group by temp1.article_id
 	</select>
 
-	<resultMap id="ArticleInfoDetailResultMap" type="ArticleQueryRespDto">
+	<!-- <resultMap id="ArticleInfoDetailResultMap" type="ArticleQueryRespDto">
 		<result column="articleId" jdbcType="VARCHAR" property="articleId" />
 		<result column="title" jdbcType="VARCHAR" property="title" />
 		<result column="editorState" jdbcType="VARCHAR" property="editorState" />
@@ -125,16 +125,14 @@
 		<result column="authorName" jdbcType="VARCHAR" property="authorName" />
 		<result column="expertDownload" jdbcType="VARCHAR" property="expertDownload" />
 		<result column="editorDownload" jdbcType="VARCHAR" property="editorDownload" />
-	</resultMap>
+	</resultMap> -->
 	<select id="selectArticleInfoDetail" parameterType="ArticleQueryReqDto"
-		resultMap="ArticleInfoDetailResultMap">
+		resultType="ArticleQueryRespDto">
 		select ai.article_id as articleId,ai.article_cn_title as title,
 		ai.editor_state as editorState,ai.expert_state as
 		expertState,ai.author_state as authorState,
 		ai.article_en_tile as
-		enTitle,ai.classification_nums as fNums,
-		ai.invest_section as
-		section,ai.article_cn_keywords as cnKeywords,
+		enTitle,ai.classification_nums as fNums,ai.article_cn_keywords as cnKeywords,
 		ai.article_en_keywords as
 		enKeywords,ai.article_cn_summary as
 		cnSummary,
@@ -144,10 +142,12 @@
 		attachPath,group_concat(aui.author_name) as authorName,
 		DATE_FORMAT(ai.create_time , '%Y-%m-%d') as contriTime
 		,ais.editor_download as editorDownload,ais.expert_download as expertDownload
+		,si.section_name as section
 		from
 		article_info ai,article_info_extend aie,article_attachment_info
-		aai,author_info aui,article_info_state ais
-		where ai.article_id=aie.article_id and
+		aai,author_info aui,article_info_state ais,section_info si
+		
+		where si.section_id=ai.invest_section and ai.article_id=aie.article_id and
 		ai.article_id=aai.article_id and aui.article_id=ai.article_id
 		and ais.article_id=ai.article_id and
 		aai.type=#{roleId,jdbcType=VARCHAR}

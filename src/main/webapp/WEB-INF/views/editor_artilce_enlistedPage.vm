@@ -10,6 +10,7 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
 <script>
 	$(function(){
@@ -28,6 +29,10 @@
 		$('#back').click(function(){
 			window.location.href='../editor/toNewArticlePage';
 		});
+		
+		var data=$('#grid').datagrid('getData');
+	    data.rows[1].value=ArticleStateEnums('$!{respDto.editorState}');
+	    $("#grid").datagrid("loadData", data);
 	});
 </script>
 <body>
@@ -35,7 +40,7 @@
 	<input type="hidden" name="articleId" value="${respDto.articleId}">
 		<div id="articleInfos">
 			<a style="font-size: 20px; color: #0000CC;">稿件登记</a><br>
-			<table  class="easyui-datagrid"   data-options="singleSelect:true" >
+			<table id="grid" class="easyui-datagrid"   data-options="singleSelect:true" >
 			<thead>
 				<tr>
 					<th data-options="field:'name',width:200"></th>
@@ -49,7 +54,7 @@
 					</tr>
 					<tr>
 						<td>稿件状态:</td>
-						<td>$!{respDto.editorState}</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td>标题:</td>
@@ -79,14 +84,10 @@
 					#else
 					
 					#end
-					<tr>
-						<td>
-							<a id="submit" class="easyui-linkbutton"  href="#"  style="width:50px;">登记</a>
-							<a id="back" class="easyui-linkbutton"   style="width:50px;">返回</a>
-						</td>
-					</tr>
 				</tbody>
 			</table>
+			<a id="submit" class="easyui-linkbutton"  href="#"  style="width:50px;">登记</a>
+			<a id="back" class="easyui-linkbutton"   style="width:50px;">返回</a>
 			<br>
 		</div>
 	</form>

@@ -187,6 +187,8 @@ public class ArticleNewDealController extends EditorController{
 		 * TODO:稿件下载
 		 * */
 		UtilLoad.fileDownload(request, response,fileName,filePath.replace(fileName,""));
+		
+		
 		ArticleInfoStateQuery stateQuery= new ArticleInfoStateQuery();
 		stateQuery.setArticleId(articleId);
 		List<ArticleInfoState> articleInfoStates = articleInfoStateManager.queryList(stateQuery);

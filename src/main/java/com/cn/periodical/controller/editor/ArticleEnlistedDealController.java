@@ -1,9 +1,7 @@
 package com.cn.periodical.controller.editor;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,18 +20,18 @@ import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.enums.SystemIdEnums;
 import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.manager.ArticleInfoManager;
+import com.cn.periodical.manager.ExpertInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.manager.UserQueryManager;
-import com.cn.periodical.pojo.ArticleFlows;
-import com.cn.periodical.pojo.ArticleFlowsQuery;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.ArticleInfoQuery;
+import com.cn.periodical.pojo.ExpertInfo;
+import com.cn.periodical.pojo.ExpertInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.AritcleWorkFlowReqDto;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.request.UserQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
-import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.ArticleQueryService;
 import com.cn.periodical.service.ArticleWorkFlowService;
 import com.cn.periodical.service.EditorArticleDealService;
@@ -65,6 +63,8 @@ public class ArticleEnlistedDealController extends EditorController{
 	
 	@Autowired 
 	UserQueryManager userQueryManager;
+	@Autowired 
+	ExpertInfoManager expertInfoManager;
 	
 	/**
 	 * toEnlistedArticlePage
@@ -117,6 +117,15 @@ public class ArticleEnlistedDealController extends EditorController{
 		reqDto.setRoleId(RoleIdEnums.AUTHOR.getCode());/**编辑下载作者的稿件*/
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
 		mav.addObject("respDto", articleQueryRespDto);
+		
+		/**
+		 * 查询专家
+		 * */
+		ExpertInfoQuery query = new ExpertInfoQuery();
+		
+		List<ExpertInfo> expertInfos = expertInfoManager.queryList(query);
+		
+		mav.addObject("expertInfos", expertInfos);
 		logger.info("送审Page出参:["+JSON.toJSONString(articleQueryRespDto)+"]");
 		return mav;
 	}
@@ -127,16 +136,16 @@ public class ArticleEnlistedDealController extends EditorController{
 	 * 稿件状态变更 End
 	 */
 	@RequestMapping(value="/toSubmitState",method = RequestMethod.POST)
-	public ModelAndView toSubmitState(@RequestParam("articleId") String articleId,String expertId,
+	public ModelAndView toSubmitState(@RequestParam("articleId") String articleId,String eId,
 			HttpServletRequest request) {
-		logger.info("修改稿件送审入参:artilceId:["+articleId+"]&expertId:["+expertId+"]");
+		logger.info("修改稿件送审入参:artilceId:["+articleId+"]&expertId:["+eId+"]");
 		ModelAndView mav = new ModelAndView("redirect:../editor/toEnlistedArticlePage");
 		/**
 		 * 编辑送审给哪个专家
 		 * */
 		UserQueryReqDto dto = new UserQueryReqDto();
 		dto.setRoleId(RoleIdEnums.CN_EXPERT.getCode());
-		dto.setRefId(expertId);
+		dto.setRefId(eId.split(",")[0]);
 		dto.setSystemId(SystemIdEnums.EXPERT_SYS.getCode());
 		logger.info("为毛多一个参数!!!!!"+JSON.toJSONString(dto));
 		UserQueryReqDto dtoResult = userQueryManager.queryUserRef(dto);

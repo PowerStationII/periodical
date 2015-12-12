@@ -37,7 +37,7 @@ public class UtilLoad {
 		/*filePath = request.getSession().getServletContext().getRealPath("/")
 				+ filePath;*/
 		System.out.println("文件的下载路径为：" + filePath);
-		response.reset();// 先清空之前的缓存信息
+//		response.reset();// 先清空之前的缓存信息
 		response.setContentType("application/x-download");// 确保文件是下载的方式而不是浏览器中直接打开
 
 		try {
