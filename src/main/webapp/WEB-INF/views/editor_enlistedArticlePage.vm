@@ -20,6 +20,7 @@
         	 data.push({  
                  "articleId":rows[i].articleId,  
                  "title":rows[i].title,
+                 "authorName":rows[i].authorName,
                  "contriTime":rows[i].contriTime,  
                  "authorState":rows[i].authorState,
                  "option":rows[i].option

@@ -29,6 +29,10 @@
 		</thead>
 		<tbody>
 			<tr>
+				<td>稿件编号:</td>
+				<td>$!{respDto.articleId}</td>
+			</tr>
+			<tr>
 				<td>稿件状态:</td>
 				<td>$!{respDto.editorState}</td>
 			</tr>
@@ -54,7 +58,7 @@
 			</tr>
 			<tr>
 				<td>英文关键字:</td>
-				<td>$!{respDto.enKeyWords}</td>
+				<td>$!{respDto.enKeywords}</td>
 			</tr>
 			<tr>
 				<td>中文摘要:</td>

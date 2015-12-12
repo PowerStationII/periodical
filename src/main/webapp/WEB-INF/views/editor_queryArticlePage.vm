@@ -10,6 +10,8 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
+<script type="text/javascript" src="../js/enums-combox.js"></script>
 </head>
 <script type="text/javascript">
 	$(function(){
@@ -23,7 +25,7 @@
                  "authorNames":rows[i].authorNames,  
                  "createTime":rows[i].createTime,
                  "expertNames":rows[i].expertNames,
-                 "state":rows[i].state,
+                 "state":ArticleStateEnums(rows[i].state),
                  "option":rows[i].option
              }) ; 
 		}
@@ -47,7 +49,12 @@
         $('#submit').click(function(){
         	$('form').submit();
         });
+        
+         $('#state').combobox({
+        	data:getArticleState()
+        }); 
 	});
+	
 </script>
 <body>
 	<div id="articleInfos">
@@ -65,16 +72,9 @@
 				</tr>
 				<tr>
 					<td>稿件状态：</td>
-					<td><select name="state"  class="easyui-combobox"   style="width:155px;">
-							<option value="" selected>全部</option>
-							<option value="0000">0000</option>
-							<option value="0001">0001</option>
-							<option value="0002">0002</option>
-							<option value="0003">0003</option>
-							<option value="0006">0006</option>
-							<option value="0007">0007</option>
-							<option value="0008">0008</option>
-						</select></td>
+					<td><select name="state"  id="state" class="easyui-combobox"  editable="false" style="width:155px;">
+						</select>
+					</td>
 					<td>稿件栏目：</td>
 					<td><select name="section"   class="easyui-combobox"   style="width:155px;">
 							<option value="" selected>全部</option>

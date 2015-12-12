@@ -53,6 +53,7 @@
 		</if>
 		group by
 		ai.article_id,ai.article_cn_title,DATE_FORMAT(ai.create_time,'%Y-%m-%d'),ai.editor_state,ai.expert_state,ai.invest_section
+		order by ai.create_time desc
 	</select>
 	
 	
@@ -138,7 +139,7 @@
 		ai.article_en_summary as
 		enSummary,aai.attachment_name as attachName,
 		aai.attachment_path as
-		attachPath,group_concat(aui.author_name) as authorName
+		attachPath,group_concat(aui.author_name) as authorName,DATE_FORMAT(ai.create_time , '%Y-%m-%d') as contriTime
 		from
 		article_info ai,article_info_extend aie,article_attachment_info
 		aai,author_info aui
@@ -260,7 +261,7 @@
 		<result column="authorNames" jdbcType="VARCHAR" property="authorNames" />
 		<result column="expertNames" jdbcType="VARCHAR" property="expertNames" />
 	</resultMap> -->
-
+	<!-- 编辑-稿件查询 -->
 	<select id="editorQueryArticles" resultType="EditorQueryArtilces"
 		parameterType="EditorQueryArtilces">
 		select auLin.article_id as articleId,auLin.article_cn_title as
@@ -308,6 +309,7 @@
 		<if test="cnKeywords != null  and ''!= cnKeywords">
 			and INSTR(auLin.article_cn_keywords,#{cnKeywords,jdbcType=VARCHAR})
 		</if>
+		order by auLin.create_time desc
 	</select>
 	
 	

@@ -31,7 +31,7 @@ public class QueryArticleController extends EditorController{
 	 * toQueryArticlePage
 	 * 编辑稿件查询
 	 */
-	@RequestMapping(value="/toQueryArticlePage",method = RequestMethod.GET)
+	@RequestMapping(value="/toQueryArticlePage")
 	public ModelAndView toQueryArticlePage(HttpServletRequest request ,@ModelAttribute EditorQueryArtilces reqDto) {
 		logger.info("稿件查询Page in :["+JSON.toJSONString(reqDto)+"]");
 		ModelAndView mav = new ModelAndView("editor_queryArticlePage");

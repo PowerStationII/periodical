@@ -104,7 +104,7 @@ public class ExpertManagerController extends EditorController {
 			addUserInfo.setUserId(userId);
 			addUserInfo.setRefId(expertId);
 			addUserInfo.setRoleId(roleId);
-			addUserInfo.setSystemId(SystemIdEnums.EDIT_SYS.getCode());
+			addUserInfo.setSystemId(SystemIdEnums.EXPERT_SYS.getCode());
 			userInfoManager.saveUserInfo(addUserInfo);
 			
 			/**
