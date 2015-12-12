@@ -29,22 +29,25 @@
 		<a  id="back" class="easyui-linkbutton"  style="width:50px;">返回</a>
 	</form>
 	
-		<table class="easyui-datagrid"   data-options="singleSelect:true">
+		<table class="easyui-datagrid"   data-options="singleSelect:true,fitColumns:true" >
 			<thead>
 				<tr>
-					<th data-options="field:'periodicalCnName',width:250">期刊名称</th>
-					<th data-options="field:'sectionName',width:250">栏目名称</th>
-					<th data-options="field:'sectionSummary',width:250">栏目简介</th>
-					<th data-options="field:'option',width:310">操作</th>
+					<th data-options="field:'id',width:45">序号</th>
+					<th data-options="field:'periodicalCnName',width:235">期刊名称</th>
+					<th data-options="field:'sectionName',width:235">栏目名称</th>
+					<th data-options="field:'sectionSummary',width:450">栏目简介</th>
+					<th data-options="field:'option',width:70">操作</th>
 				</tr>
 			</thead>
 			<tbody>
 			#foreach($dtos in ${list})   
 				<tr>
+					<td>$!{velocityCount}</td>
 					<td>$!{periodical.periodicalCnName}</td>
 					<td>$!{dtos.sectionName}</td>
 					<td>$!{dtos.sectionSummary}</td>
-					<td><a class="easyui-linkbutton"  style="width:50px;" href="../editor/toDeleteSectionInfo?sectionId=$!{dtos.sectionId}&periodicalId=${periodical.periodicalId}">删除</a></td>
+					<td><a class="easyui-linkbutton"  style="width:50px;" href="../editor/toDeleteSectionInfo?sectionId=$!{dtos.sectionId}&periodicalId=${periodical.periodicalId}">删除</a>
+					</td>
 				</tr>
 			#end
 			</tbody>

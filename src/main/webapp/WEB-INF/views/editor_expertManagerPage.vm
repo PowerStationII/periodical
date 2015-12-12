@@ -46,9 +46,10 @@
 		<table class="easyui-datagrid"   data-options="singleSelect:true,fitColumns:true">
 			<thead>
 				<tr>
+					<th data-options="field:'id',width:200">序号</th>
 					<th data-options="field:'expertName',width:200">专家姓名</th>
 					<th data-options="field:'logonName',width:200">登录名</th>
-					<th data-options="field:'email',width:200">emial</th>
+					<th data-options="field:'email',width:200">email</th>
 					<th data-options="field:'roleId',width:200">角色</th>
 					<!-- <td>操作</td> -->
 				</tr>
@@ -56,7 +57,7 @@
 			<tbody>
 				#foreach($list in ${list})   
 				<tr>
-					<!-- <td>$!{list.refId}</td> -->
+					<td>$!{velocityCount}</td>
 					<td>$!{list.expertName}</td>
 					<td>$!{list.logonName}</td>
 					<td>$!{list.email}</td>

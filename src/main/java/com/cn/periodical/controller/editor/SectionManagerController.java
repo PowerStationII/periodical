@@ -150,4 +150,15 @@ public class SectionManagerController extends EditorController {
 		}
 		return mav;
 	}
+	
+	
+//	@RequestMapping(value = "/toSectionInfoUpdate")
+//	public ModelAndView toSectionInfoUpdate(@RequestParam("periodicalId") String periodicalId) {
+//		ModelAndView mav = new ModelAndView("editor_sectionInfoUpdatePage");
+//		PeriodicalInfoQuery query = new PeriodicalInfoQuery();
+//		query.setPeriodicalId(periodicalId);
+//		List<PeriodicalInfo> list = periodicalInfoManager.queryList(query);
+//		mav.addObject("periodical", list.get(0));
+//		return mav;
+//	}
 }

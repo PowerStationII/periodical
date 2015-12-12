@@ -72,8 +72,13 @@ public class PInfoSettingServiceImpl implements PInfoSettingService {
 		// TODO Auto-generated method stub
 		userInfo.setId(userInfo.getId());
 		userInfo.setLogonPwd(password);
-		userInfoManager.saveUserInfo(userInfo);
-		return 0;
+		try{
+			userInfoManager.saveUserInfo(userInfo);
+			return 1;
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 	public Object queryObject(String userId) {

@@ -1,6 +1,7 @@
 package com.cn.periodical.controller;
 
 import java.beans.PropertyEditorSupport;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -112,10 +113,38 @@ public class PInfoSettingController {
 	 * 修改密码
 	 */
 	@RequestMapping(value = "/toUpdatePw", method = RequestMethod.POST)
-	public ModelAndView toUpdatePw(HttpServletRequest request, @RequestParam("newPw") String newPw) {
+	public ModelAndView toUpdatePw(HttpServletRequest request, HttpServletResponse response,@RequestParam("newPw") String newPw) {
 		UserInfo userInfo = (UserInfo) request.getSession().getAttribute("userInfo");
 		ModelAndView mav = new ModelAndView("updatePWPage");
 		int i = pInfoSettingService.updatePw(userInfo, newPw);
+		logger.info(i+"");
+		if(i==1){
+			try{
+				response.setContentType("text/html; charset=utf-8");
+			    PrintWriter out = response.getWriter();  
+			    out.println("<html>");  
+			    out.println("<script>");  
+			    out.println("alert('密码重置成功,请重新登录');"); 
+			    out.println("window.open ('/periodical-web/portal','_top')");  
+			    out.println("</script>");  
+			    out.println("</html>");  
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else{
+			try{
+				response.setContentType("text/html; charset=utf-8");
+			    PrintWriter out = response.getWriter();  
+			    out.println("<html>");  
+			    out.println("<script>");  
+			    out.println("alert('密码重置失败');"); 
+			    out.println("window.open ('/periodical-web/portal','_top')");  
+			    out.println("</script>");  
+			    out.println("</html>");  
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 		return mav;
 	}
 	

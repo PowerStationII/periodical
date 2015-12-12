@@ -22,23 +22,26 @@
 			if ($('#logonPwd').val()==$('#oldpwd').val()) {
 				if ($('#newpwd1').val()=="" || $('#newpwd2').val()=="") {
 					alert('新密码不允许为空');
+					return;
 				}
 				if($('#newpwd1').val()==$('#newpwd2').val()) {
 					$('form').submit();
 				}
 				else {
 					alert('两次新密码不一致');
+					return;
 				}
 			}
 			else {
 				alert('旧密码不正确');
+				return;
 			}
 		});
 	})
 </script>
 <body>
 	<div id="articleInfos"  style="margin-left:300px;margin-top:50px;">
-	<form action="../setting/toUpdatePwd" method="POST">
+	<form action="../setting/toUpdatePw" method="POST">
 		<table style="border: 1px solid green;" rules="all">
 			<input type="hidden" id="logonPwd" name="password" value="$!{userInfo.logonPwd}">
 			<tr>
