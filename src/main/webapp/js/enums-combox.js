@@ -175,4 +175,26 @@ function getSex(value){
 		return 'UNKNOWN';
 	}
 }
+
+
+/**
+ * 会员类型枚举下拉
+ * @returns {Array}
+ */
+function getCouncilType(){
+	var data=[{    
+	    "value":'DG',
+	    "text":"理事长",
+	},{    
+	    "value":'SD',    
+	    "text":"常务理事"   
+	},{    
+	    "value":'VDG',    
+	    "text":"副理事长",    
+	},{    
+	    "value":'D',    
+	    "text":"理事"   
+	}] ;
+	return data;
+}
  

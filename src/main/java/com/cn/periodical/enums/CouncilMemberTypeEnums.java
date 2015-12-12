@@ -4,19 +4,19 @@ public enum CouncilMemberTypeEnums {
 	/**
 	 * 理事长
 	 * */
-	DIRECTOR_GENERAL("DG","DIRECTOR_GENERAL"),
+	DIRECTOR_GENERAL("DG","理事长"),
 	/**
 	 * 常务理事
 	 * */
-	STANDING_DIRECTOR("SD","STANDING_DIRECTOR"),
+	STANDING_DIRECTOR("SD","常务理事"),
 	/**
 	 * 副理事长
 	 * */
-	VICE_DIRECTOR_GENERAL("VDG","VICE_DIRECTOR_GENERAL"),
+	VICE_DIRECTOR_GENERAL("VDG","副理事长"),
 	/**
 	 * 理事
 	 * */
-	DIRECTOR("D","DIRECTOR");
+	DIRECTOR("D","理事");
 	
 	private String code;
 	private String name;

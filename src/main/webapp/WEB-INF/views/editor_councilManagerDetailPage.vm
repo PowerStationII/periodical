@@ -10,6 +10,7 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-combox.js"></script>
 </head>
 <script>
 	
@@ -26,6 +27,16 @@
 		$('#submit2').click(function(){
 			$('#fileUpload').submit();
 		});
+		
+		$('#type').combobox({
+			data:getCouncilType(),
+			onLoadSuccess: function () { //数据加载完毕事件
+                var data = $('#type').combobox('getData');
+                if (data.length > 0) {
+                    $("#type").combobox('select', data[0].value);
+                }
+            }
+		})
 	});
 	
 	//定义数组，存储省份信息    
@@ -269,9 +280,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">会员类型</td>
-				<td colspan="2"><select name="type">
-						<option value="D">理事</option>
-						<option value="SD">常务理事</option>
+				<td colspan="2"><select class="easyui-combobox"  editable="false" name="type"  id="type"   style="width:70px;">
 				</select></td>
 				<input type="hidden" name="logoName" value="${fileName}">
 				<input type="hidden" name="logoUrl" value="${filePath}">
@@ -279,7 +288,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">成立时间</td>
-				<td colspan="2"><input type="text" name="companySetupTime" value=""></td>
+				<td colspan="2"><input type="text"  class="easyui-datebox"  value="1"  required="required"  name="companySetupTime" value=""></td>
 				<td  colspan="4"></td>
 			</tr>
 			<tr>
@@ -334,13 +343,13 @@
 
 			<tr>
 				<td colspan="2">注册时间</td>
-				<td colspan="6"><input type="text" name="extend1" value=""></td>
+				<td colspan="6"><input type="text" name="extend1"  class="easyui-datebox"  value="1"  required="required" ></td>
 			</tr>
 			<tr>
 				<td colspan="2">合同开始时间</td>
-				<td colspan="2"><input type="text" name="startTime" value=""></td>
+				<td colspan="2"><input type="text" name="startTime"  class="easyui-datebox"  value="1"  required="required" ></td>
 				<td colspan="2">合同结束时间</td>
-				<td colspan="2"><input type="text" name="endTime" value=""></td>
+				<td colspan="2"><input type="text" name="endTime"  class="easyui-datebox"  value="1"  required="required" ></td>
 			</tr>
 			<tr>
 				<td colspan="2">合同金额</td>
