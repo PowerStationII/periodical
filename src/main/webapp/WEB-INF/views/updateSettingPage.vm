@@ -10,6 +10,7 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-combox.js"></script>
 </head>
 <script>
 	$(function(){
@@ -17,10 +18,12 @@
 			$('#other', window.parent.document).hide();
 			$('#area', window.parent.document).show();
 		});
-		$('#certificateType').combobox('setValue','$!{authorInfo.certificateType}');
-		$('#education').combobox('setValue','$!{authorInfo.degree}');
-		$('#academicDegree').combobox('setValue','$!{authorInfo.academicDegree}');
-		$('#compayType').combobox('setValue','$!{authorInfo.compayType}');
+
+		$('#certificateType').combobox('select',getCtfcType('$!{authorInfo.certificateType}'));
+		$('#education').combobox('select',getEducation('$!{authorInfo.degree}'));
+		$('#academicDegree').combobox('select',getAcademicDegree('$!{authorInfo.academicDegree}'));
+		$('#compayType').combobox('select',getCompayType('$!{authorInfo.compayType}')); 
+		$('#sex').val(getSex('$!{authorInfo.sex}'));
 	})
 </script>
 <body>
@@ -99,7 +102,7 @@
 						</label>
 					</td>
 					<td>
-						<select id="certificateType" class="easyui-combobox" name="certificateType" style="width:80px;"> 
+						<select id="certificateType" class="easyui-combobox" editable="false" name="certificateType" style="width:80px;"> 
 						    <option  value="IDCARD">身份证</option> 
 						    <option  value="PASSPORT">护照</option>   
 						    <option  value="OFFICERCARD">军警证</option>     
@@ -113,8 +116,8 @@
 						</label>
 					</td>
 					<td>
-						<input maxlength="30"
-						class="wid333 ip_input_con lightgrey" value="$!{authorInfo.sex}"
+						<input maxlength="30" 
+						class="wid333 ip_input_con lightgrey" value=""
 						id="sex" name="sex">
 					</td>
 				</tr>
@@ -150,7 +153,7 @@
 						</label>
 					</td>
 					<td>
-						<select id="education" name="degree" class="easyui-combobox" style="width:100px;"> 
+						<select id="education" name="degree" class="easyui-combobox" editable="false" style="width:100px;"> 
 						    <option value="JUNIOR_SCHOOL">小学</option> 
 						    <option value="MIDDLE_SCHOOL">初中</option> 
 						    <option value="SENIOR_SCHOOL">高中</option> 
@@ -170,7 +173,7 @@
 						</label>
 					</td>
 					<td>
-						<select id="academicDegree" class="easyui-combobox" name="academicDegree" style="width:100px;"> 
+						<select id="academicDegree" class="easyui-combobox" name="academicDegree" editable="false" style="width:100px;"> 
 						    <option value="BACHELOR">学士</option> 
 						    <option value="MASTER">硕士</option>   
 						    <option value="DOCTOR">博士</option>     
@@ -198,7 +201,7 @@
 						</label>
 					</td>
 					<td>
-						<select id="compayType" class="easyui-combobox" name="compayType" style="width:100px;"> 
+						<select id="compayType" class="easyui-combobox" name="compayType"  editable="false" style="width:100px;"> 
 						    <option value="ENTERPRISES">国企</option> 
 						    <option value="PRIVATE_ENTERPRISES">私企</option>   
 						    <option value="FOREIGN_COMPANY">外企</option>     

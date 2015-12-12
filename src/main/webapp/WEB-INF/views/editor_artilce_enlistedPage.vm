@@ -73,7 +73,7 @@
 					</tr>
 					<tr>
 						<td>原稿下载:</td>
-						<td>$!{respDto.attachName} <a class="easyui-linkbutton"  href="../editor/toDownLoadArticle?articleId=${respDto.articleId}">下载原稿</a> $!{respDto.attachPath} </td>
+						<td>$!{respDto.attachName} <a class="easyui-linkbutton"  href="../editor/toDownLoadArticle?articleId=${respDto.articleId}&fileName=$!{respDto.attachName}&filePath=$!{respDto.attachPath}">下载原稿</a> $!{respDto.attachPath} </td>
 					</tr>
 					<tr>
 						<td>

@@ -34,6 +34,7 @@ import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.ArticleQueryService;
 import com.cn.periodical.service.ArticleWorkFlowService;
 import com.cn.periodical.service.EditorArticleDealService;
+import com.cn.periodical.utils.UtilLoad;
 /**
  * 稿件编辑-稿件处理Controller
  * */
@@ -164,9 +165,9 @@ public class ArticleNewDealController extends EditorController{
 	 * 停留在登记操作页面 End
 	 */
 	@RequestMapping(value="/toDownLoadArticle")
-	public ModelAndView toDownLoadArticle(@RequestParam("articleId") String articleId,
-			HttpServletRequest request) {
-		logger.info("稿件登记页-下载稿件Action入参:artilceId:["+articleId+"]");
+	public ModelAndView toDownLoadArticle(@RequestParam("articleId") String articleId,String fileName,String filePath,
+			HttpServletRequest request,HttpServletResponse response) {
+		logger.info("稿件登记页-下载稿件Action入参:artilceId:["+articleId+"]fileName:["+fileName+"]filePath:["+filePath+"]");
 		ModelAndView mav = new ModelAndView("redirect:/editor/toEnlistedPage");
 		mav.addObject("articleId", articleId);
 		mav.addObject("downloadState", "Y");
@@ -184,8 +185,7 @@ public class ArticleNewDealController extends EditorController{
 		/**
 		 * TODO:稿件下载
 		 * */
-		
-		
+		UtilLoad.fileDownload(request, response,fileName,filePath.replace(fileName,""));
 		
 		
 		logger.info("稿件登记页-下载稿件Action出参:[]");
