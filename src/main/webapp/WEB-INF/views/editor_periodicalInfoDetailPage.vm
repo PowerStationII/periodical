@@ -16,12 +16,86 @@
 		$('#back').click(function(){
 			history.go(-1);
 		})
+		
+		$("input[name='periodicalCnName']").blur(function(){
+			if ($("input[name='periodicalCnName']").val()=='') {
+				alert('期刊名称不能为空');
+				return;
+			}
+			else {
+				$.post('../editor/isPerNameExsit',{name:$("input[name='periodicalCnName']").val()},function(data){
+					if(data==true) {
+						alert('期刊名称【'+$("input[name='periodicalCnName']").val()+'】已存在');
+						$("input[name='periodicalCnName']").val('');
+						return;
+					}
+				})
+			}
+		})
+		
+		$('#submit').click(function(){
+			if ($("input[name='periodicalCnName']").val()=='') {
+				alert('期刊名称不能为空');
+				return;
+			}
+			else if ($("input[name='hostOrganization']").val()=='') {
+				alert('期刊主办单位不能为空');
+				return;
+			}
+			else if ($("input[name='press']").val()=='') {
+				alert('编辑出版社不能为空');
+				return;
+			}
+			else if ($("input[name='inFixPrice']").val()=='') {
+				alert('单价不能为空');
+				return;
+			}
+			else if ($("input[name='issnNo']").val()=='') {
+				alert('期刊号不能为空');
+				return;
+			}
+			else if ($("input[name='cycle']").val()=='') {
+				alert('周期不能为空');
+				return;
+			}
+			else if ($("input[name='payeeAccountNo']").val()=='') {
+				alert('收款账户不能为空');
+				return;
+			}
+			else if ($("input[name='payeeAccountName']").val()=='') {
+				alert('收款姓名不能为空');
+				return;
+			}
+			else if ($("input[name='payeeAccountOpen']").val()=='') {
+				alert('开户行不能为空');
+				return;
+			}
+			else if ($("input[name='payeeAccountAddress']").val()=='') {
+				alert('邮局汇款收款单位地址不能为空');
+				return;
+			}
+			else if ($("input[name='payeeAccountPost']").val()=='') {
+				alert('邮局汇款收款单位不能为空');
+				return;
+			}
+			else if ($("input[name='payeeAccountPostCode']").val()=='') {
+				alert('汇款邮编不能为空');
+				return;
+			}
+			else if ($("input[name='payeeIdcardNo']").val()=='') {
+				alert('收款人卡号不能为空');
+				return;
+			}
+			else {
+				$('form').submit();
+			}
+		})
 	})
 </script>
 <body>
 	<div id="articleInfos">
 	<form action="../editor/toSavePeriodicalInfo" method="POST">
-		<table>
+		<table  style="border:1px solid green;margin-left:300px;margin-top:50px;" rules="all">
 			<tr>
 				<td>期刊名称</td>
 				<td colspan="3"><input type="text" name="periodicalCnName" value=""/></td>
@@ -74,12 +148,12 @@
 				<td>收款人卡号</td>
 				<td colspan="3"><input type="text" name="payeeIdcardNo" value=""/></td>
 			</tr>
-			<tr>
-				<td><input type="button"  value="返回"  id="back"/></td>
-				<td colspan="3"><input type="submit" value="增加"/></td>
-			</tr>
 		</table>
 	</form>
+		<div style="margin-left:300px;">
+		<input type="button"  value="返回"  id="back"/>
+		<input type="button" id="submit" value="增加"/>
+		</div>
 	</div>
 </body>
 </html>

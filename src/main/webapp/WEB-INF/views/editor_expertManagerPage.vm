@@ -28,7 +28,7 @@
 				<td>登录名：</td>
 				<td><input class="easyui-textbox"  type="text" name="logonName" value=""></td>
 				<td>专家类型：</td>
-				<td><select name="roleId"  class="easyui-combobox"  style="width:155px;">
+				<td><select name="roleId"  class="easyui-combobox" editable="false" style="width:155px;">
 					<option value="" selected>全部</option>
 					<option value="1004">英文专家</option>
 					<option value="1003">中文专家</option>
@@ -43,7 +43,7 @@
 		</table>
 	</form>
 	
-		<table class="easyui-datagrid"   data-options="singleSelect:true">
+		<table class="easyui-datagrid"   data-options="singleSelect:true,fitColumns:true">
 			<thead>
 				<tr>
 					<th data-options="field:'expertName',width:200">专家姓名</th>

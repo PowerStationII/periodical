@@ -17,7 +17,28 @@
 			history.go(-1);
 		});
 		$('#submit').click(function(){
-			$('form').submit();
+			if ($("#sectionName").val()=='') {
+				alert('栏目名称不能为空');
+				return;
+			}
+			else {
+				$('form').submit();
+			}
+		});
+		$('#sectionName').blur(function(){
+			if ($("#sectionName").val()=='') {
+				alert('栏目名称不能为空');
+				return;
+			}
+			else {
+				$.post('../editor/isSecNameExsit',{name:$("#sectionName").val(),value:'$!{periodical.periodicalId}'},function(data){
+					if(data==true) {
+						alert('栏目名称【'+$("#sectionName").val()+'】已存在');
+						$("#sectionName").val('');
+						return;
+					}
+				})
+			}
 		});
 	});
 </script>
@@ -31,11 +52,11 @@
 			</tr>
 			<tr>	
 				<td>栏目名称：</td>
-				<td><input class="easyui-textbox"  type="text" name="sectionName" value=""></td>
+				<td><input id="sectionName" type="text" name="sectionName" value="" size="38"></td>
 			</tr>
 			<tr>	
 				<td>栏目简介：</td>
-				<td><textarea name="sectionSummary" style="height:200px;"  rows="" cols=""></textarea></td>
+				<td><textarea name="sectionSummary" style="height:200px;"  rows="100" cols="200"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="4">

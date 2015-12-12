@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -76,6 +77,19 @@ public class SectionManagerController extends EditorController {
 		List<PeriodicalInfo> list = periodicalInfoManager.queryList(query);
 		mav.addObject("periodical", list.get(0));
 		return mav;
+	}
+	
+	@RequestMapping(value = "/isSecNameExsit")
+	@ResponseBody
+	public boolean isSecNameExsit(HttpServletRequest request,String name,String value) {
+		SectionInfoQuery query = new SectionInfoQuery();
+		query.setSectionName(name);
+		query.setPeriodicalId(value);
+		List<SectionInfo> pInfos = sectionInfoManager.queryList(query);
+		if(pInfos!=null && pInfos.size()>=1){
+			return true;
+		}
+		return false;
 	}
 	
 	/**

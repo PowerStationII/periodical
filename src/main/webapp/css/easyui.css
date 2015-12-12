@@ -2640,8 +2640,8 @@
   display: none;
 }
 .validatebox-invalid {
-  border-color: #ffa8a8;
-  background-color: #fff3f3;
+  border-color: #319200;
+  background-color: #ffffff;
   color: #000;
 }
 .tooltip {

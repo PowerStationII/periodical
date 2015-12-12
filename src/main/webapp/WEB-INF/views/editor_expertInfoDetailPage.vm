@@ -10,14 +10,59 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/validate.js"></script>
 </head>
 <script>
 	$(function() {
 		$('#back').click(function() {
 			history.go(-1);
 		});
-		$('#submit').click(function() {
-			$('form').submit();
+		$('#submit').click(function(){
+			if ($("#expertName").val()=='') {
+				alert('专家姓名不能为空');
+				return;
+			}
+			else if ($("#email").val()=='') {
+				alert('email不能为空');
+				return;
+			}
+			else if (emailCheck($("#email"))==false) {
+				alert('请输入正确的email格式');
+				return;
+			}
+			else {
+				$('form').submit();
+			}
+		});
+		$('#expertName').blur(function(){
+			if ($("#expertName").val()=='') {
+				alert('专家姓名不能为空');
+				return;
+			}
+			else {
+				$.post('../editor/isExpertNameExsit',{name:$("#expertName").val()},function(data){
+					if(data==true) {
+						alert('专家姓名【'+$("#expertName").val()+'】已存在');
+						$("#expertName").val('');
+						return;
+					}
+				})
+			}
+		});
+		$('#email').blur(function(){
+			if ($("#email").val()=='') {
+				alert('email不能为空');
+				return;
+			}
+			else {
+				$.post('../editor/isUserNameExsit',{name:$("#email").val()},function(data){
+					if(data==true) {
+						alert('email【'+$("#email").val()+'】已存在');
+						$("#email").val('');
+						return;
+					}
+				})
+			}
 		});
 	});
 </script>
@@ -27,15 +72,15 @@
 			<table>
 				<tr>
 					<td>专家姓名</td>
-					<td><input class="easyui-textbox" type="text" name="expertName" value=""></td>
+					<td><input id="expertName" type="text" name="expertName" value=""></td>
 				</tr>
 				<tr>
 					<td>email</td>
-					<td><input class="easyui-textbox" type="text" name="email" value=""></td>
+					<td><input  id="email"  type="text" name="email" value=""></td>
 				</tr>
 				<tr>
 					<td>专家类型</td>
-					<td><select name="roleId" class="easyui-combobox"  style="width:155px;">
+					<td><select name="roleId" class="easyui-combobox" editable="false" style="width:155px;">
 							<option value="1003">中文专家</option>
 							<option value="1004">英文专家</option>
 					</select></td>

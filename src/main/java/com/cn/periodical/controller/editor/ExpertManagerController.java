@@ -13,16 +13,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.SystemIdEnums;
-import com.cn.periodical.manager.EditorInfoManager;
 import com.cn.periodical.manager.ExpertInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.BizEditor;
 import com.cn.periodical.pojo.ExpertInfo;
+import com.cn.periodical.pojo.ExpertInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.pojo.UserInfoQuery;
 
 /**
  * 主编-专家管理
@@ -67,6 +69,18 @@ public class ExpertManagerController extends EditorController {
 		ModelAndView mav = new ModelAndView("editor_expertInfoDetailPage");
 
 		return mav;
+	}
+	
+	@RequestMapping(value = "/isExpertNameExsit")
+	@ResponseBody
+	public boolean isExpertNameExsit(HttpServletRequest request,String name) {
+		ExpertInfoQuery query = new ExpertInfoQuery();
+		query.setExpertName(name);
+		List<ExpertInfo> pInfos = expertInfoManager.queryList(query);
+		if(pInfos!=null && pInfos.size()>=1){
+			return true;
+		}
+		return false;
 	}
 	
 	/**

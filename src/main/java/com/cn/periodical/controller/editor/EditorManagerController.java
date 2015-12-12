@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -21,7 +22,11 @@ import com.cn.periodical.manager.EditorInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.BizEditor;
 import com.cn.periodical.pojo.EditorInfo;
+import com.cn.periodical.pojo.EditorInfoQuery;
+import com.cn.periodical.pojo.SectionInfo;
+import com.cn.periodical.pojo.SectionInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.pojo.UserInfoQuery;
 
 /**
  * 主编-编辑管理
@@ -67,6 +72,30 @@ public class EditorManagerController extends EditorController {
 		ModelAndView mav = new ModelAndView("editor_editorInfoDetailPage");
 
 		return mav;
+	}
+	
+	@RequestMapping(value = "/isEditorNameExsit")
+	@ResponseBody
+	public boolean isEditorNameExsit(HttpServletRequest request,String name) {
+		EditorInfoQuery query = new EditorInfoQuery();
+		query.setEditorName(name);
+		List<EditorInfo> pInfos = editorInfoManager.queryList(query);
+		if(pInfos!=null && pInfos.size()>=1){
+			return true;
+		}
+		return false;
+	}
+	
+	@RequestMapping(value = "/isUserNameExsit")
+	@ResponseBody
+	public boolean isUserNameExsit(HttpServletRequest request,String name) {
+		UserInfoQuery query = new UserInfoQuery();
+		query.setLogonName(name);
+		List<UserInfo> pInfos = userInfoManager.queryList(query);
+		if(pInfos!=null && pInfos.size()>=1){
+			return true;
+		}
+		return false;
 	}
 	
 	/**

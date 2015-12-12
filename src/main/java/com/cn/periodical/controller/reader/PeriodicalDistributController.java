@@ -1,11 +1,17 @@
 package com.cn.periodical.controller.reader;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSON;
 import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.AddressInfo;
@@ -115,6 +120,41 @@ public class PeriodicalDistributController extends ReaderController{
 			logger.error("删除地址信息异常!", e);
 			return new ModelAndView("error");
 		}
+		return mav;
+	}
+	
+	
+	/**
+	 * toDownloadAddressPage
+	 * 下载地址信息模板
+	 */
+	@RequestMapping(value="/toDownloadAddressPage")
+	public ModelAndView toDownloadAddressPage(HttpServletRequest request,HttpServletResponse response) {
+		UserInfo userInfo = getUserInfo(request);
+		logger.info("下载地址信息模板 Page in:["+userInfo.getUserId()+"]");
+		ModelAndView mav = new ModelAndView("redirect:../reader/toDistributPage");
+		String fileName="地址信息模板.xls";
+		String path = Thread.currentThread().getContextClassLoader().getResource("").getPath()+"template"+File.separator+fileName;
+		logger.info("开始下载文件:["+fileName+"]");
+		logger.info("开始下载文件:["+path+"]");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("multipart/form-data");
+		response.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
+		try {
+			File file = new File(path);
+			InputStream inputStream = new FileInputStream(file);
+			OutputStream os = response.getOutputStream();
+			byte[] b = new byte[1024*10];
+			int length;
+			while ((length = inputStream.read(b)) > 0) {
+				os.write(b, 0, length);
+			}
+			inputStream.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 		return mav;
 	}
 	

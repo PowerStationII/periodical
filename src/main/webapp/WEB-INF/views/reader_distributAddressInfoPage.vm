@@ -71,6 +71,9 @@
             </tbody>
 		</table>
 		<br>
+		<form action="../reader/toDownloadAddressPage" method="POST">
+			<input type="submit" value="下载地址模板">
+		</form>
 		<form enctype="multipart/form-data" action="../reader/toUploadAddressPage" method="POST">
 		<input type="file" name="file" value="">
 		<input type="submit" value="上传">

@@ -28,7 +28,7 @@
 				<td>登录名：</td>
 				<td><input class="easyui-textbox" type="text" name="logonName" value=""></td>
 				<td>编辑类型：</td>
-				<td><select name="roleId" class="easyui-combobox"  style="width:155px;">
+				<td><select name="roleId" class="easyui-combobox" editable="false" style="width:155px;">
 					<option value="" selected>全部</option>
 					<option value="1006">稿件编</option>
 					<option value="1007">广告编</option>
@@ -45,7 +45,7 @@
 		</table>
 	</form>
 	
-		<table class="easyui-datagrid"   data-options="singleSelect:true">
+		<table class="easyui-datagrid"   data-options="singleSelect:true,fitColumns:true">
 			<thead>
 				<tr>
 					<th data-options="field:'editorName',width:200">编辑姓名</th>

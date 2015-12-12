@@ -318,7 +318,7 @@
   						<td>基金项目中文名称</td>
   						<td>
   							<input  type="text"   name="fundTitle"/><br>
-							<a class="txtSize">【如系统未从稿件文档中提取到论文的基金项目，请直接在上面文本框中输入，或点击框左边的“浏览”选择基金项目。非基金资助类论文请输入“无基金”或“非基金”】</a>
+							<a class="txtSize"></a>
   						</td>
   					</tr>
   					<tr>

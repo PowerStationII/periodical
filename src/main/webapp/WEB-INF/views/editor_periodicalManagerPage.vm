@@ -39,7 +39,7 @@
 		</table>
 	</form>
 	
-		<table class="easyui-datagrid"   data-options="singleSelect:true">
+		<table class="easyui-datagrid"   data-options="singleSelect:true,fitColumns:true">
 			<thead>
 				<tr>
 					<th data-options="field:'periodicalId',width:200">期刊编号</th>

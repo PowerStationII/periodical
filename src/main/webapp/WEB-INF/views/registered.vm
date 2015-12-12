@@ -220,9 +220,54 @@
   		.tip{font-size:12px;margin-left:70px;}
   		.titles{float:left;border:1px solid;width:100px;height:40px;line-height:40px;margin-top:25px;margin-left:10px;text-align:center;border-radius:5px;background:#ffffff;}
   		.wrong,.right{display:none;}
+  		#u60 {
+		  position:absolute;
+		  left:240px;
+		  top:0px;
+		  width:260px;
+		  height:10px;
+		  line-height:10px;
+		}
+		#u60_img {
+		  position:absolute;
+		  left:0px;
+		  top:0px;
+		  width:260px;
+		  height:40px;
+		}
+		#u61 {
+		  position:absolute;
+		  left:0px;
+		  top:0px;
+		  width:260px;
+		  white-space:nowrap;
+		  font-family:'黑体 Bold', '黑体';
+		  font-weight:700;
+		  font-style:normal;
+		  font-size:35px;
+		}
   </style>
   <body style="background-color:#EBEBEB;margin-top:0px;">
 	<div class="top"></div>
+	<!-- Unnamed (Shape) -->
+    <div id="u60" class="ax_paragraph">
+      <img id="u60_img" class="img " src="img/portal/transparent.gif"/>
+      <!-- Unnamed () -->
+      <div id="u61" class="text">
+        <p><span>农药科学与管理</span></p>
+      </div>
+      #if($roleId=='1001')
+      <div style="position:absolute;width:300px;margin-left:290px;margin-top:40px;">
+        --作者注册
+      </div>
+      #elseif($roleId=='1002')
+      <div style="position:absolute;width:300px;margin-left:290px;margin-top:40px;">
+        --读者注册
+      </div>
+      #else
+      #end
+    </div>
+    
     <div class="all">
     	<form action="register" id="form" method="POST">
     		<input type="hidden" name="systemId" value="${systemId}">

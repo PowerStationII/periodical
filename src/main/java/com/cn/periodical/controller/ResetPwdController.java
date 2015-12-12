@@ -104,7 +104,7 @@ public class ResetPwdController {
 	
 	
 	@RequestMapping(value = "/toUpdatePwd")
-	public ModelAndView updatePwd(HttpServletRequest request,String logonName) {
+	public ModelAndView updatePwd(HttpServletRequest request,HttpServletResponse response,String logonName) {
 		ModelAndView mav = new ModelAndView("portal");
 		String password = request.getParameter("password");
 		UserInfoQuery query = new UserInfoQuery();
@@ -114,6 +114,19 @@ public class ResetPwdController {
 		userInfo.setId(userInfo.getId());
 		userInfo.setLogonPwd(password);
 		userInfoManager.saveUserInfo(userInfo);
+		
+		try{
+			response.setContentType("text/html; charset=utf-8");
+		    PrintWriter out = response.getWriter();  
+		    out.println("<html>");  
+		    out.println("<script>");  
+		    out.println("alert('密码重置成功');"); 
+		    out.println("window.open ('/periodical-web/portal','_top')");  
+		    out.println("</script>");  
+		    out.println("</html>");  
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return mav;
 	}
 	

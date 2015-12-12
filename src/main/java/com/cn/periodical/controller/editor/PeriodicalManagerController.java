@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -67,11 +68,23 @@ public class PeriodicalManagerController extends EditorController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/toPeriodicalInfoAdd", method = RequestMethod.GET)
+	@RequestMapping(value = "/toPeriodicalInfoAdd")
 	public ModelAndView toPeriodicalInfoAdd(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("editor_periodicalInfoDetailPage");
 
 		return mav;
+	}
+	
+	@RequestMapping(value = "/isPerNameExsit")
+	@ResponseBody
+	public boolean isPerNameExsit(HttpServletRequest request,String name) {
+		PeriodicalInfoQuery query = new PeriodicalInfoQuery();
+		query.setPeriodicalCnName(name);
+		List<PeriodicalInfo> pInfos = periodicalInfoManager.queryList(query);
+		if(pInfos!=null && pInfos.size()>=1){
+			return true;
+		}
+		return false;
 	}
 	
 	/**
