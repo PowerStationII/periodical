@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>工作区首页</title>
+<title></title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -384,7 +384,7 @@ a {
 				</div> -->
 				<div class="mode_name">期刊管理</div>
 				<div style="overflow: auto; padding: 10px;">
-					<div class="li18" id="qikanguanli">期刊管理</div>
+					<div class="li18" id="qikanguanli">添加期刊</div>
 				</div>
 			</div>
 			#end

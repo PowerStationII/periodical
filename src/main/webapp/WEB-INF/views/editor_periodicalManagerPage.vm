@@ -58,7 +58,7 @@
 					<td>$!{dtos.hostOrganization}</td>
 					<td>$!{dtos.press}</td>
 					<td>$!{dtos.inFixPrice}</td>
-					<td><a class="easyui-linkbutton"  href="../editor/toSectionManagerPage?periodicalId=${dtos.periodicalId}">编辑栏目信息</a></td>
+					<td><a class="easyui-linkbutton"  href="../editor/toSectionManagerPage?periodicalId=${dtos.periodicalId}">新增栏目</a></td>
 				</tr>
 			#end
 			</tbody>

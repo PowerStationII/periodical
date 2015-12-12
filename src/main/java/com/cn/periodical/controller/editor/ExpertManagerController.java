@@ -100,7 +100,7 @@ public class ExpertManagerController extends EditorController {
 			 * */
 			UserInfo addUserInfo= new UserInfo();
 			addUserInfo.setLogonName(expertInfo.getEmail());
-			addUserInfo.setLogonPwd("1");
+			addUserInfo.setLogonPwd("111111");
 			addUserInfo.setUserId(userId);
 			addUserInfo.setRefId(expertId);
 			addUserInfo.setRoleId(roleId);

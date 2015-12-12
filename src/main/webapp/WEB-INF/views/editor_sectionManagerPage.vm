@@ -35,6 +35,7 @@
 					<th data-options="field:'id',width:45">序号</th>
 					<th data-options="field:'periodicalCnName',width:235">期刊名称</th>
 					<th data-options="field:'sectionName',width:235">栏目名称</th>
+					<th data-options="field:'extend1',width:235">栏目类别</th>
 					<th data-options="field:'sectionSummary',width:450">栏目简介</th>
 					<th data-options="field:'option',width:70">操作</th>
 				</tr>
@@ -45,6 +46,7 @@
 					<td>$!{velocityCount}</td>
 					<td>$!{periodical.periodicalCnName}</td>
 					<td>$!{dtos.sectionName}</td>
+					<td>$!{dtos.extend1}</td>
 					<td>$!{dtos.sectionSummary}</td>
 					<td><a class="easyui-linkbutton"  style="width:50px;" href="../editor/toDeleteSectionInfo?sectionId=$!{dtos.sectionId}&periodicalId=${periodical.periodicalId}">删除</a>
 					</td>

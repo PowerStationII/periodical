@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>栏目增加</title>
+<title></title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -57,8 +57,8 @@
 			<tr>	
 				<td>栏目类别：</td>
 				<td><select name="extend1">
-					<option value="N">广告类</option>
 					<option value="Y">稿件类</option>
+					<option value="N">广告类</option>
 				</select></td>
 			</tr>
 			<tr>	

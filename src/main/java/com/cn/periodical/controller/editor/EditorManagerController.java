@@ -114,7 +114,7 @@ public class EditorManagerController extends EditorController {
 			 * */
 			UserInfo addUserInfo= new UserInfo();
 			addUserInfo.setLogonName(editorInfo.getEmail());
-			addUserInfo.setLogonPwd("1");
+			addUserInfo.setLogonPwd("111111");
 			addUserInfo.setUserId(userId);
 			addUserInfo.setRefId(editorId);
 			addUserInfo.setRoleId(roleId);

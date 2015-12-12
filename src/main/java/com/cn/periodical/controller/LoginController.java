@@ -18,9 +18,11 @@ import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.ExceptionEnums;
 import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.enums.SystemIdEnums;
+import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.EditorAreaInfos;
 import com.cn.periodical.pojo.PeriodicalInfo;
 import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.pojo.UserInfoQuery;
 import com.cn.periodical.service.LoginService;
 
 /**
@@ -33,6 +35,8 @@ public class LoginController {
 
 	@Autowired
 	LoginService loginService;
+	@Autowired
+	UserInfoManager userInfoManager;
 
 	/**
 	 * 跳转到登录页面
@@ -69,14 +73,18 @@ public class LoginController {
 		ModelAndView mav = null;
 		String systemId = request.getParameter("systemId");
 		//查询userInfo信息
-		UserInfo userInfo = null;
 		try {
-			userInfo = loginService.queryUserInfo(email, password, "", "");
-			if (userInfo == null) {
+//			UserInfo userInfo = loginService.queryUserInfo(email, password, "", "");
+			UserInfoQuery userInfoQuery =  new UserInfoQuery();
+			userInfoQuery.setLogonName(email);
+			userInfoQuery.setLogonPwd(password);
+			List<UserInfo> userInfos = userInfoManager.queryList(userInfoQuery);
+			if (userInfos != null && userInfos.size()==0) {
 				mav = new ModelAndView("error");
 				mav.addObject("message", ExceptionEnums.USER_NOT_EXSITS.getName());
 				return mav;
 			}
+			UserInfo userInfo =userInfos.get(0);
 			if(!systemId.equals(userInfo.getSystemId())){
 				mav = new ModelAndView("error");
 				int sysId = Integer.valueOf(systemId);
@@ -94,60 +102,60 @@ public class LoginController {
 			}
 			logger.info(JSON.toJSONString(userInfo));
 			request.getSession().setAttribute("userInfo", userInfo);
+		
+			if (SystemIdEnums.EDIT_SYS.getCode().equals(systemId)) {
+				// 编辑
+				String roleId = userInfo.getRoleId();
+				if (RoleIdEnums.ARTICLE_EDITOR.getCode().equals(roleId)) {
+					logger.info("编辑...");
+					mav = new ModelAndView("editor_area");
+					List<EditorAreaInfos> list = loginService.queryArticleInfos("", "");
+					mav.addObject("list", list);
+					return mav;
+				} else if (RoleIdEnums.SUBSCRIBE_EDITOR.getCode().equals(roleId)) {
+					mav = new ModelAndView("editor_area");
+					return mav;
+				} else if (RoleIdEnums.AD_EDITOR.getCode().equals(roleId)) {
+					mav = new ModelAndView("editor_area");
+					return mav;
+				} else if (RoleIdEnums.ISSUER.getCode().equals(roleId)) {
+					mav = new ModelAndView("editor_area");
+					return mav;
+				}else if (RoleIdEnums.EDITOR.getCode().equals(roleId)) {
+					mav = new ModelAndView("editor_area");
+					return mav;
+				}
+			} else if (SystemIdEnums.EXPERT_SYS.getCode().equals(systemId)) {
+				// 专家
+				String role_id = userInfo.getRoleId();
+				if (RoleIdEnums.EN_EXPERT.getCode().equals(role_id)) {
+					mav = new ModelAndView("expert_area");
+					return mav;
+				} else if (RoleIdEnums.CN_EXPERT.getCode().equals(role_id)) {
+					mav = new ModelAndView("expert_area");
+					return mav;
+				}
+			} else if (SystemIdEnums.AUTHOR_SYS.getCode().equals(systemId)) {
+				// 作者
+				mav = new ModelAndView("author_area");
+				return mav;
+			} else if (SystemIdEnums.READER_SYS.getCode().equals(systemId)) {
+				// 读者:需区分省所/个人登录
+				String roleId = userInfo.getRoleId();
+				if (RoleIdEnums.READER_P.getCode().equals(roleId)) {
+					mav = new ModelAndView("reader_area");
+					List<PeriodicalInfo> infos = loginService.queryPeriodicalInfos();
+					mav.addObject("list", infos);
+					return mav;
+				} else if (RoleIdEnums.READER_E.getCode().equals(roleId)) {
+					mav = new ModelAndView("reader_area");
+					return mav;
+				}
+			}
 		} catch (Exception e) {
 			mav = new ModelAndView("error");
 			mav.addObject("message", e.getMessage());
 			return mav;
-		}
-
-		if (SystemIdEnums.EDIT_SYS.getCode().equals(systemId)) {
-			// 编辑
-			String roleId = userInfo.getRoleId();
-			if (RoleIdEnums.ARTICLE_EDITOR.getCode().equals(roleId)) {
-				logger.info("编辑...");
-				mav = new ModelAndView("editor_area");
-				List<EditorAreaInfos> list = loginService.queryArticleInfos("", "");
-				mav.addObject("list", list);
-				return mav;
-			} else if (RoleIdEnums.SUBSCRIBE_EDITOR.getCode().equals(roleId)) {
-				mav = new ModelAndView("editor_area");
-				return mav;
-			} else if (RoleIdEnums.AD_EDITOR.getCode().equals(roleId)) {
-				mav = new ModelAndView("editor_area");
-				return mav;
-			} else if (RoleIdEnums.ISSUER.getCode().equals(roleId)) {
-				mav = new ModelAndView("editor_area");
-				return mav;
-			}else if (RoleIdEnums.EDITOR.getCode().equals(roleId)) {
-				mav = new ModelAndView("editor_area");
-				return mav;
-			}
-		} else if (SystemIdEnums.EXPERT_SYS.getCode().equals(systemId)) {
-			// 专家
-			String role_id = userInfo.getRoleId();
-			if (RoleIdEnums.EN_EXPERT.getCode().equals(role_id)) {
-				mav = new ModelAndView("expert_area");
-				return mav;
-			} else if (RoleIdEnums.CN_EXPERT.getCode().equals(role_id)) {
-				mav = new ModelAndView("expert_area");
-				return mav;
-			}
-		} else if (SystemIdEnums.AUTHOR_SYS.getCode().equals(systemId)) {
-			// 作者
-			mav = new ModelAndView("author_area");
-			return mav;
-		} else if (SystemIdEnums.READER_SYS.getCode().equals(systemId)) {
-			// 读者:需区分省所/个人登录
-			String roleId = userInfo.getRoleId();
-			if (RoleIdEnums.READER_P.getCode().equals(roleId)) {
-				mav = new ModelAndView("reader_area");
-				List<PeriodicalInfo> infos = loginService.queryPeriodicalInfos();
-				mav.addObject("list", infos);
-				return mav;
-			} else if (RoleIdEnums.READER_E.getCode().equals(roleId)) {
-				mav = new ModelAndView("reader_area");
-				return mav;
-			}
 		}
 		mav = new ModelAndView("error");
 		mav.addObject("message", ExceptionEnums.ENTER_NOT_EXSITS.getName());
