@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
+</head>
+<script type="text/javascript">
+	$(function(){
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#table').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+		 		 "id":rows[i].id,  
+                 "authorName":rows[i].authorName,  
+                 "email":rows[i].email,
+                 "certificateType":ArticleStateEnums(rows[i].certificateType),  
+                 "certificateNo":rows[i].certificateNo,  
+                 "duties":rows[i].duties,
+                 "technicalTitle":rows[i].technicalTitle,
+                 "option":rows[i].option
+             }) ; 
+		}
+        $("#table").datagrid("loadData", data.slice(0, 5));
+        var pager = $("#table").datagrid("getPager");  
+        pager.pagination({  
+            total:data.length, 
+            pageSize:5,
+            pageList: [5,10,15,20],
+            onSelectPage:function (pageNo, pageSize) {  
+                var start = (pageNo - 1) * pageSize;  
+                var end = start + pageSize;  
+                $("#table").datagrid("loadData", data.slice(start, end));  
+                pager.pagination('refresh', {  
+                    total:data.length,  
+                    pageNumber:pageNo
+                });  
+            }  
+        });  
+	});
+	}
+</script>
+<body>
+	<div id="articleInfos"  style="margin-top:50px;">
+		<table  id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
+			<thead>
+				<tr>
+					<th data-options="field:'id',width:45">序号</th>
+					<th data-options="field:'authorName',width:262">姓名</th>
+					<th data-options="field:'email',width:200">email</th>
+					<th data-options="field:'certificateType',width:185">证件类型</th>
+					<th data-options="field:'certificateNo',width:185">证件号</th>
+					<th data-options="field:'duties',width:185">职务</th>
+					<th data-options="field:'technicalTitle',width:200">职称</th>
+					<th data-options="field:'option',width:200">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($dtos in ${list})   
+				<tr>
+					<td>$!{velocityCount}</td>
+					<td>$!{dtos.authorName}</td>
+					<td>$!{dtos.email}</td>
+					<td>$!{dtos.certificateType}</td>
+					<td>$!{dtos.certificateNo}</td>
+					<td>$!{dtos.duties}</td>
+					<td>$!{dtos.technicalTitle}</td>
+					<td><a href="../editor/toQueryAuthorInfoDetailPage?authorId=${dtos.authorId}">查看</a></td>
+				</tr>
+				#end
+			</tbody>
+		</table>
+		<br>
+	</div>
+</body>
+</html>

@@ -206,6 +206,15 @@
 							.append(
 									'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toAdGroupPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
 				});
+		$('#chakanxitongzuozhe')
+		.click(
+				function() {
+					$('#area').hide();
+					$('#other').remove();
+					$('.right')
+							.append(
+									'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toQueryAuthorInfosPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+				});
 		//<!-- 主编 end-->
 
 		$('#other').hide();
@@ -385,8 +394,9 @@ a {
 				</div> -->
 				<div class="mode_name">人员管理</div>
 				<div style="overflow: auto; padding: 10px;">
-					<div class="li17" id="bianjiguanli">编辑管理</div>
-					<div class="li18" id="zhuangjiaguanli">专家管理</div>
+					<div class="li1" id="bianjiguanli">编辑管理</div>
+					<div class="li2" id="zhuangjiaguanli">专家管理</div>
+					<div class="li3" id="chakanxitongzuozhe">查看系统作者</div>
 				</div>
 				<!-- <div class="mode_name">稿件查询</div>
 				<div style="overflow: auto; padding: 10px;">
