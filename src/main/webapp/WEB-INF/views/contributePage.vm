@@ -157,6 +157,23 @@
   				}
   			});
 
+  			var _mkid = $('#periodicalId').combobox({
+                editable: false,
+                onSelect: function (record) {
+                    _zhbid.combobox({
+                        disabled: false,
+                        url: '../toQuerySectionInfos?periodicalId=' + record.value,
+                        onLoadSuccess: function () { //数据加载完毕事件
+                            var data = _zhbid.combobox('getData');
+                            if (data.length > 0) {
+                            	_zhbid.combobox('select', data[0].value);
+                            }
+                        }
+                    }).combobox('clear');
+                }
+            });
+            var _zhbid = $('#investSection').combobox({
+            });
   		});
 
   		function delAuthor () {
