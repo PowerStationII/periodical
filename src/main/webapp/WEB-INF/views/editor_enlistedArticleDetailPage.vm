@@ -24,7 +24,7 @@
 </script>
 <body>
 	<div>
-		<table id="grid" class="easyui-datagrid"   data-options="singleSelect:true">
+		<table id="grid" class="easyui-datagrid"   data-options="singleSelect:true,height:455"">
 			<thead>
 				<tr>
 					<th data-options="field:'name',width:200"></th>
@@ -62,11 +62,11 @@
 			</tr>
 			<tr>
 				<td>中文摘要:</td>
-				<td>$!{respDto.cnSummary}</td>
+				<td><textarea readonly="readonly" style="height:100px;width:600px;">$!{respDto.cnSummary}</textarea></td>
 			</tr>
 			<tr>
 				<td>英文摘要:</td>
-				<td>$!{respDto.enSummary}</td>
+				<td><textarea readonly="readonly" style="height:100px;width:600px;">$!{respDto.enSummary}</textarea></td>
 			</tr>
 			<tr>
 				<td><label>

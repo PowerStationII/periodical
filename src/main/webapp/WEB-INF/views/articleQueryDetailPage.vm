@@ -35,7 +35,7 @@
 </script>
 <body>
 	<div>
-		<table class="easyui-datagrid"   data-options="singleSelect:true" >
+		<table class="easyui-datagrid"   data-options="singleSelect:true,height:455" >
 		<thead>
 			<tr>
 				<th data-options="field:'name',width:200"></th>
@@ -73,11 +73,11 @@
 			</tr>
 			<tr>
 				<td>中文摘要：</td>
-				<td>$!{detail.articleCnSummary}</td>
+				<td><textarea readonly="readonly" style="height:100px;width:600px;">$!{detail.articleCnSummary}</textarea></td>
 			</tr>
 			<tr>
 				<td>英文摘要：</td>
-				<td>$!{detail.articleEnSummary}</td>
+				<td><textarea readonly="readonly" style="height:100px;width:600px;">$!{detail.articleEnSummary}</textarea></td>
 			</tr>
 			<tr>
 				<td>审批稿件下载：</td>
