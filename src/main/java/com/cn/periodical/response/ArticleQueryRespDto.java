@@ -46,6 +46,23 @@ public class ArticleQueryRespDto extends ResponseDto {
 	private String expertState;
 	private String extend1;
 	
+	private String editorDownload;
+	private String expertDownload;
+	
+	
+	
+	public String getExpertDownload() {
+		return expertDownload;
+	}
+	public void setExpertDownload(String expertDownload) {
+		this.expertDownload = expertDownload;
+	}
+	public String getEditorDownload() {
+		return editorDownload;
+	}
+	public void setEditorDownload(String editorDownload) {
+		this.editorDownload = editorDownload;
+	}
 	public String getExtend1() {
 		return extend1;
 	}

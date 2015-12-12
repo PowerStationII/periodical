@@ -62,6 +62,7 @@
 		<mapper resource="sqlmap/BizPeriodicalMapper.xml"/><!-- 期刊业务 -->
 		<mapper resource="sqlmap/CouncilContractFlowsMapper.xml"/><!-- 理事会付款流水 -->
 		<mapper resource="sqlmap/CouncilInfoMapper.xml"/><!-- 理事会信息:一个理事会机构对应多条广告信息(不止一条广告)和付款流水(续签)-->
+		<mapper resource="sqlmap/ArticleInfoStateMapper.xml"/><!-- 稿件下载触发记录稿件流水时使用-->
 		<!-- 业务 -->
 		<mapper resource="sqlmap/ArticleQueryMapper.xml"/>
 		<mapper resource="sqlmap/UserQueryMapper.xml"/>

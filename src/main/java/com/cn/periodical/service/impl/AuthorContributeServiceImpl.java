@@ -22,6 +22,7 @@ import com.cn.periodical.manager.ArticleAttachmentInfoManager;
 import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.manager.ArticleInfoExtendManager;
 import com.cn.periodical.manager.ArticleInfoManager;
+import com.cn.periodical.manager.ArticleInfoStateManager;
 import com.cn.periodical.manager.AuthorInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.pojo.AddressInfo;
@@ -29,10 +30,9 @@ import com.cn.periodical.pojo.ArticleAttachmentInfo;
 import com.cn.periodical.pojo.ArticleFlows;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.ArticleInfoExtend;
+import com.cn.periodical.pojo.ArticleInfoState;
 import com.cn.periodical.pojo.AuthorInfo;
-import com.cn.periodical.request.AritcleWorkFlowReqDto;
 import com.cn.periodical.request.AuthorContributeReqDto;
-import com.cn.periodical.service.ArticleWorkFlowService;
 import com.cn.periodical.service.AuthorContributeService;
 import com.cn.periodical.utils.FileCopyUtils;
 import com.cn.periodical.utils.PropertiesInitManager;
@@ -58,6 +58,8 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 	
 	@Autowired
 	ArticleInfoExtendManager articleInfoExtendManager;
+	@Autowired
+	ArticleInfoStateManager articleInfoStateManager;
 	
 	@Autowired
 	TransactionTemplate transactionTemplate;
@@ -128,7 +130,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		articleInfo.setArticleEnTile(contributeRequestDto.getArticleEnTile());
 		articleInfo.setArticleId(articleId);
 		articleInfo.setArticleName(contributeRequestDto.getArticleName());
-		articleInfo.setArticleType(contributeRequestDto.getArticleType().getCode());
+		articleInfo.setArticleType(contributeRequestDto.getArticleType().getCode());//0新稿1返修稿
 		articleInfo.setArtilce(null);
 		articleInfo.setClassificationNums(contributeRequestDto.getClassificationNums());
 		articleInfo.setDocumentCode(contributeRequestDto.getDocumentCode());
@@ -158,6 +160,10 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		articleInfoExtend.setArticleId(articleId);
 		articleInfoExtend.setRoleId(contributeRequestDto.getRoleId());
 		
+		final ArticleInfoState articleInfoState =  new ArticleInfoState();
+		articleInfoState.setArticleId(articleId);
+		articleInfoState.setEditorDownload("N");
+		articleInfoState.setExpertDownload("N");
 		
 		final List<AuthorInfo> authorInfos = contributeRequestDto.getAuthorList();
 		final List<AddressInfo> addressInfos = contributeRequestDto.getAddressInfos();
@@ -182,7 +188,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 						authorInfoManager.saveAuthorInfo(authorInfo);
 						addressInfoManager.saveAddressInfo(addressInfo);
 					}
-					
+					articleInfoStateManager.saveArticleInfoState(articleInfoState);
 					articleInfoManager.saveArticleInfo(articleInfo);
 					articleAttachmentInfoManager.saveArticleAttachmentInfo(articleAttachmentInfo);
 					articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);

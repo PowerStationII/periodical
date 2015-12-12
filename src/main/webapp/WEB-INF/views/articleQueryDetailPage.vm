@@ -84,10 +84,10 @@
 				<!-- $!{detail.attachmentPath}  $!{detail.attachmentName}-->
 				<td><a href="../downloadAttachment?fileName=$!{detail.attachmentName}&filePath=$!{detail.attachmentPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
 			</tr>
-			<tr>
+			<!-- tr>
 				<td>专家审稿：</td>
 				<td>审稿专家:$!{detail.expertName} 送审时间:$!{detail.dealStartTime} <a onclick="yijian('$!{detail.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
-			</tr>
+			</tr-->
 			</tbody>
 		</table>
 	</div>

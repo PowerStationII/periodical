@@ -123,6 +123,8 @@
 		<result column="attachName" jdbcType="VARCHAR" property="attachName" />
 		<result column="attachPath" jdbcType="VARCHAR" property="attachPath" />
 		<result column="authorName" jdbcType="VARCHAR" property="authorName" />
+		<result column="expertDownload" jdbcType="VARCHAR" property="expertDownload" />
+		<result column="editorDownload" jdbcType="VARCHAR" property="editorDownload" />
 	</resultMap>
 	<select id="selectArticleInfoDetail" parameterType="ArticleQueryReqDto"
 		resultMap="ArticleInfoDetailResultMap">
@@ -139,16 +141,17 @@
 		ai.article_en_summary as
 		enSummary,aai.attachment_name as attachName,
 		aai.attachment_path as
-		attachPath,group_concat(aui.author_name) as authorName,DATE_FORMAT(ai.create_time , '%Y-%m-%d') as contriTime
+		attachPath,group_concat(aui.author_name) as authorName,
+		DATE_FORMAT(ai.create_time , '%Y-%m-%d') as contriTime
+		,ais.editor_download as editorDownload,ais.expert_download as expertDownload
 		from
 		article_info ai,article_info_extend aie,article_attachment_info
-		aai,author_info aui
+		aai,author_info aui,article_info_state ais
 		where ai.article_id=aie.article_id and
 		ai.article_id=aai.article_id and aui.article_id=ai.article_id
-		and
+		and ais.article_id=ai.article_id and
 		aai.type=#{roleId,jdbcType=VARCHAR}
-		and
-		ai.article_id=#{articleId,jdbcType=VARCHAR}
+		and ai.article_id=#{articleId,jdbcType=VARCHAR}
 		<if test="editorState != null">
 			and ai.editor_state = #{editorState,jdbcType=VARCHAR}
 		</if>
@@ -199,20 +202,20 @@
 		ai.article_cn_keywords as articleCnKeywords,ai.article_en_keywords as
 		articleEnKeywords,
 		ai.article_cn_summary as
-		articleCnSummary,ai.invest_section as section,ai.classification_nums
+		articleCnSummary,ai.classification_nums
 		as cNums,
 		ai.article_en_summary as articleEnSummary,aai.attachment_name
 		as attachmentName,aai.attachment_path as attachmentPath,
 		af.ref_id as
 		refId,DATE_FORMAT(af.deal_start_time, '%Y-%m-%d') as
-		dealStartTime,ei.expert_name as expertName
+		dealStartTime,ei.expert_name as expertName,si.section_name as section
 		from article_info
 		ai,article_attachment_info aai,article_flows
 		af,expert_info
-		ei,user_info ui
+		ei,user_info ui,section_info si
 		where af.ref_id=ui.user_id and
 		ui.ref_id=ei.expert_id
-		and
+		and si.section_id=ai.invest_section and
 		ai.article_id=aai.article_id and
 		ai.article_id=#{articleId,jdbcType=VARCHAR} 
 		group by ai.article_id

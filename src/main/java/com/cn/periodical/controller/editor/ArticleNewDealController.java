@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,14 +22,16 @@ import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.manager.ArticleInfoManager;
+import com.cn.periodical.manager.ArticleInfoStateManager;
 import com.cn.periodical.pojo.ArticleFlows;
 import com.cn.periodical.pojo.ArticleFlowsQuery;
 import com.cn.periodical.pojo.ArticleInfo;
+import com.cn.periodical.pojo.ArticleInfoState;
+import com.cn.periodical.pojo.ArticleInfoStateQuery;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.AritcleWorkFlowReqDto;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
-import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.ArticleQueryService;
 import com.cn.periodical.service.ArticleWorkFlowService;
 import com.cn.periodical.service.EditorArticleDealService;
@@ -57,6 +58,8 @@ public class ArticleNewDealController extends EditorController{
 	
 	@Autowired
 	ArticleFlowsManager articleFlowsManager;
+	@Autowired
+	ArticleInfoStateManager articleInfoStateManager;
 	
 	/**
 	 * toNewArticlePage
@@ -99,7 +102,7 @@ public class ArticleNewDealController extends EditorController{
 	 */
 	@RequestMapping(value="/toEnlistedPage",method = RequestMethod.GET)
 	public ModelAndView toEnlistedPage(@RequestParam("articleId") String articleId,
-			HttpServletRequest request,String downloadState) {
+			HttpServletRequest request) {
 		logger.info("稿件登记Page入参:artilceId:["+articleId+"]");
 		ModelAndView mav = new ModelAndView("editor_artilce_enlistedPage");
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
@@ -107,7 +110,6 @@ public class ArticleNewDealController extends EditorController{
 		reqDto.setRoleId(RoleIdEnums.AUTHOR.getCode());/**编辑下载作者的稿件*/
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
 		mav.addObject("respDto", articleQueryRespDto);
-		mav.addObject("downloadState", downloadState);
 		logger.info("稿件登记Page出参:["+JSON.toJSONString(articleQueryRespDto)+"]");
 		return mav;
 	}
@@ -170,7 +172,6 @@ public class ArticleNewDealController extends EditorController{
 		logger.info("稿件登记页-下载稿件Action入参:artilceId:["+articleId+"]fileName:["+fileName+"]filePath:["+filePath+"]");
 		ModelAndView mav = new ModelAndView("redirect:/editor/toEnlistedPage");
 		mav.addObject("articleId", articleId);
-		mav.addObject("downloadState", "Y");
 		/**
 		 * 记录稿件开始处理流水
 		 * */
@@ -186,8 +187,14 @@ public class ArticleNewDealController extends EditorController{
 		 * TODO:稿件下载
 		 * */
 		UtilLoad.fileDownload(request, response,fileName,filePath.replace(fileName,""));
-		
-		
+		ArticleInfoStateQuery stateQuery= new ArticleInfoStateQuery();
+		stateQuery.setArticleId(articleId);
+		List<ArticleInfoState> articleInfoStates = articleInfoStateManager.queryList(stateQuery);
+		ArticleInfoState articleInfoState = articleInfoStates.get(0);
+		articleInfoState.setId(articleInfoState.getId());
+		articleInfoState.setEditorDownload("Y");
+		articleInfoState.setExpertDownloadTime(new Date());
+		articleInfoStateManager.saveArticleInfoState(articleInfoState);
 		logger.info("稿件登记页-下载稿件Action出参:[]");
 		return mav;
 	}

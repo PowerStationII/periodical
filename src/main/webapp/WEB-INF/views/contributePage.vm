@@ -305,11 +305,7 @@
   					<tr>
   						<td>稿件类型</td>
   						<td>
-  							<select id="articleType" class="easyui-combobox" name="articleType" style="width:80px;" data-options="editable:false,panelHeight:'auto'" > 
-							    <option  value="NEW_ARTICLE">新稿</option> 
-							    <option  value="REPAIR_ARTICLE">返修重投</option>     
-							</select><br>
-							<a class="txtSize">【在系统中投稿后（自行）撤稿或被退稿的稿件，补充、修改、完善后重新再投，需选择“退后重投”】</a>
+  							新稿<input type="hidden" name="articleType" value="NEW_ARTICLE">
   						</td>
   					</tr>
   					<tr>

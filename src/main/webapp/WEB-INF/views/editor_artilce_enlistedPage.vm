@@ -13,7 +13,7 @@
 </head>
 <script>
 	$(function(){
-		if('${downloadState}'=='N'){
+		if('${respDto.editorDownload}'=='N'){
 			$('#submit').click(function(){
 					alert('请先下载稿件');
 					return;
@@ -71,10 +71,14 @@
 						<td>登记日期:</td>
 						<td></td>
 					</tr>
+					#if(${respDto.editorDownload}=='N')
 					<tr>
 						<td>原稿下载:</td>
-						<td>$!{respDto.attachName} <a class="easyui-linkbutton"  href="../editor/toDownLoadArticle?articleId=${respDto.articleId}&fileName=$!{respDto.attachName}&filePath=$!{respDto.attachPath}">下载原稿</a> $!{respDto.attachPath} </td>
+						<td>$!{respDto.attachName} <a class="easyui-linkbutton"  href="../editor/toDownLoadArticle?articleId=${respDto.articleId}&fileName=$!{respDto.attachName}&filePath=$!{respDto.attachPath}">下载原稿</a></td>
 					</tr>
+					#else
+					
+					#end
 					<tr>
 						<td>
 							<a id="submit" class="easyui-linkbutton"  href="#"  style="width:50px;">登记</a>
