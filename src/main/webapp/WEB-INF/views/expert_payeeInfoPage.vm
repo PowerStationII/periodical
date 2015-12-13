@@ -15,6 +15,7 @@
 <body>
 	<div id="articleInfos" style="margin-left:300px;margin-top:50px;">
 		<form action="../expert/toSaveExpertPayeeInfoPage">
+		<input type="hidden"  name="id" value="$!{payeeInfo.id}">
 			<table style="border: 1px solid green;" rules="all">
 				<tr>
 					<td>专家姓名:</td>
