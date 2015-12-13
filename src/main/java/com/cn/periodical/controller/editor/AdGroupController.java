@@ -120,6 +120,9 @@ public class AdGroupController extends EditorController{
 		query.setPeriodicalIssueNo(periodicalIssueNo);
 		query.setExtend1("Y");
 		List<SectionInfo> sectionInfos = sectionInfoManager.selectByExampleForAd(query);
+		logger.info("+++++++++++++++");
+		logger.info(JSON.toJSONString(sectionInfos));
+		logger.info("+++++++++++++++");
 		mav.addObject("sList", sectionInfos);
 
 		mav.addObject("periodicalIssueNo", periodicalIssueNo);

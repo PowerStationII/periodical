@@ -77,7 +77,7 @@
 					<td>广告标题</td>
 					<td>广告类型</td>
 				</tr>
-				#foreach($it in ${item.list})
+				#foreach($it in ${item.listAd})
 				<tr class='selectAble'>
 					<td>${it.ad_id}</td>
 					<td>${it.ad_name}</td>
