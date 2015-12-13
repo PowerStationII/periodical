@@ -13,6 +13,43 @@
 </head>
 <script type="text/javascript">
 	$(function(){
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#editTable').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+		 		 "id":rows[i].id,  
+                 "aId":rows[i].aId,  
+                 "rAddress":rows[i].rAddress,
+                 "rContacter":rows[i].rContacter,  
+                 "cMobile":rows[i].cMobile,
+                 "dNums":rows[i].dNums,
+                 "sIdNums1":rows[i].sIdNums1,
+                 "sIdNums2":rows[i].sIdNums2,
+                 "sIdNums3":rows[i].sIdNums3
+             }) ; 
+		}
+        $("#editTable").datagrid("loadData", data.slice(0, 15));
+        var pager = $("#editTable").datagrid("getPager");  
+        pager.pagination({  
+            total:data.length, 
+            pageSize:15,
+            pageList: [15,20],
+            onSelectPage:function (pageNo, pageSize) {  
+                var start = (pageNo - 1) * pageSize;  
+                var end = start + pageSize;  
+                $("#editTable").datagrid("loadData", data.slice(start, end));  
+                pager.pagination('refresh', {  
+                    total:data.length,  
+                    pageNumber:pageNo
+                });  
+                var rows = $('#editTable').datagrid('getRows');
+        		for(var i=0;i<rows.length;i++) {
+        			$('#editTable').datagrid('beginEdit',i);
+        		}
+            }  
+        });  
+        
 		var rows = $('#editTable').datagrid('getRows');
 		for(var i=0;i<rows.length;i++) {
 			$('#editTable').datagrid('beginEdit',i);
@@ -38,12 +75,12 @@
 </script>
 <body>
 	<div>
-		 <table id="editTable" class="easyui-datagrid" data-options="singleSelect:true">   
+		 <table id="editTable" class="easyui-datagrid" data-options="singleSelect:true,pagination:true">   
 		    <thead>   
 		        <tr>   
-		            <th data-options="field:'id',width:150">序号</th>   
-		            <th data-options="field:'aId',width:150">地址id</th>   
-		            <th data-options="field:'rAddress',width:100">详细地址</th>   
+		            <th data-options="field:'id',width:50">序号</th>   
+		            <th data-options="field:'aId',width:200">地址id</th>   
+		            <th data-options="field:'rAddress',width:200">详细地址</th>   
 		            <th data-options="field:'rContacter',width:100">联系人</th>   
 		            <th data-options="field:'cMobile',width:100">联系电话</th>   
 		            <th data-options="field:'dNums',width:100" >邮寄本数</th> 
@@ -70,6 +107,7 @@
 		</table>
 		<a id="back" class="easyui-linkbutton"  style="50px;">返回</a> 
 		<a id="submit" class="easyui-linkbutton"  style="50px;">保存</a> 
+		<a style="font-size:10px;color:red;">修改后请保存</a>
 	</div>
 </body>
 </html>

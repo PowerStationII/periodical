@@ -24,7 +24,6 @@
                  "amount":rows[i].amount,
                  "submitTime":rows[i].submitTime,  
                  "auditTime":rows[i].auditTime, 
-                 "upload":rows[i].upload,  
                  "option":rows[i].option
              }) ; 
 		}
@@ -73,16 +72,15 @@
 <body>
 	<div id="articleInfos">
 		<div id="bt"  style="height:30px;line-height:30px;">订单管理</div>
-		<table id="order" class="easyui-datagrid" data-options="singleSelect:true,toolbar:'#bt',pagination:true">
+		<table id="order" class="easyui-datagrid" data-options="fitColumns:true,singleSelect:true,toolbar:'#bt',pagination:true">
 			<thead> 
 				<tr>
-					<th data-options="field:'orderNo',width:130">订单编号</th>
+					<th data-options="field:'orderNo',width:200">订单编号</th>
 					<th data-options="field:'pYear',width:100">订购年份</th>
 					<th data-options="field:'subNums',width:100">数量</th>
 					<th data-options="field:'amount',width:130">金额</th>
-					<th data-options="field:'submitTime',width:100">提交日期</th>
-					<th data-options="field:'auditTime',width:100">审核日期</th>
-					<th data-options="field:'upload',width:130">银行汇票凭证</th>
+					<th data-options="field:'submitTime',width:150">提交日期</th>
+					<th data-options="field:'auditTime',width:150">审核日期</th>
 	                <th data-options="field:'option',width:220">操作</th>
 				</tr>
 			</thead>
@@ -95,7 +93,6 @@
                     <td>$!{dtos.amount}</td>
                     <td>$!{dtos.submitTime}</td>
                     <td>$!{dtos.auditTime}</td>
-                    <td>上传</td>
                     <td>
                     	<a href="../reader/toOrderPayPage?orderNo=$!{dtos.orderNo}" class="easyui-linkbutton" data-options="">订费登记</a> 
                     	<a href="../reader/toDistributionPage?orderNo=$!{dtos.orderNo}"  class="easyui-linkbutton" data-options="">编辑订单</a>

@@ -20,7 +20,7 @@
 </script>
 <body>
 	<div>
-	<form action="../reader/toSaveOrderInfoPage" method="POST">
+	<form action="../reader/toSaveOrderInfoPage" method="POST"  enctype="multipart/form-data">
 	<input type="hidden" name="orderNo" value="$!{bo.orderNo}">
 		<table style="border:1px solid green;width:800px;" rules="all">
 			<tr>
@@ -103,7 +103,8 @@
 			</tr> -->
 			<tr>
 				<td><input type="button"  value="返回"  id="back"/></td>
-				<td><input type="submit"  value="提交"></td>
+				<td><input type="submit"  value="提交">
+				<input type="file" value=""  name="file">
 			</tr>
 		</table>
 		</form>

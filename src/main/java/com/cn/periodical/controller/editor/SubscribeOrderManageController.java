@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONArray;
@@ -27,6 +29,7 @@ import com.cn.periodical.pojo.PayerInfo;
 import com.cn.periodical.pojo.PayerInfoQuery;
 import com.cn.periodical.pojo.PeriodicalDistribut;
 import com.cn.periodical.pojo.PeriodicalDistributQuery;
+import com.cn.periodical.utils.UtilLoad;
 /**
  * 发行编辑-订单管理Controller
  * */
@@ -155,6 +158,19 @@ public class SubscribeOrderManageController extends EditorController{
 			periodicalDistributManager.savePeriodicalDistribut(pd);
 		}
 		return mav;
+	}
+	
+	/**
+	 * toPzDownloadPage
+	 * 发行编辑编辑订单赠刊信息
+	 */
+	@RequestMapping(value="/toPzDownloadPage")
+	@ResponseBody
+	public String toPzDownloadPage(HttpServletRequest request,HttpServletResponse response,String filePath,String fileName) {
+		logger.info("----" + filePath + "====" + fileName);
+		
+		UtilLoad.fileDownload(request, response, fileName, filePath.replace(fileName, ""));
+		return "";
 	}
 	
 }

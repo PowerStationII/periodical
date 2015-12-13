@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cn.periodical.enums.ArticleStateEnums;
@@ -262,7 +263,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 	}
 	
 	
-	private String saveFile(MultipartFile file,HttpServletRequest request,String userId,String articleId) throws Exception{  
+	private String saveFile(@RequestParam(value="file", required=true) MultipartFile file,HttpServletRequest request,String userId,String articleId) throws Exception{  
     	PropertiesInitManager.dataInit();
     	String basePath = PropertiesInitManager.PROPERTIES.getProperty("filePath");
     	StringBuffer sbPath = new StringBuffer();

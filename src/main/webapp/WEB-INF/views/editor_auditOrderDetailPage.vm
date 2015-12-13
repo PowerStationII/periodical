@@ -23,13 +23,13 @@
 	<form action="../editor/toAuditOrderManagePage" method="POST">
 		<input type="hidden" name="orderNo" value=${bo.orderNo}>
 	
-		<table style="border: 1px solid;" rules="all">
+		<table style="border: 1px solid green;width:100%" rules="all">
 			<tr>
 				<td rowspan="2">订阅信息</td>
 				<td>订单编号：$!{bo.orderNo}</td>
 				<td>订阅单位/个人：$!{bo.readerName}</td>
 				<td>登记时间：$!{bo.submitTime}</td>
-				<td>审核时间：</td>
+				<td>审核时间：$!{bo.submitTime}</td>
 			</tr>
 			<tr>
 				<td>$!{bo.pCnName}（月刊，全年共$!{bo.cycle}期）全年定价：$!{bo.iFprice}*$!{bo.cycle}元</td>
@@ -50,7 +50,7 @@
 		</tr> -->
 			<tr>
 				<td>汇款信息</td>
-				<td colspan="4"><table style="border: 1px solid;" rules="all">
+				<td colspan="4"><table style="border: 1px solid green;width:100%" rules="all">
 						<tr>
 							<td>汇款方式</td>
 							<td>汇款时间</td>
@@ -62,7 +62,7 @@
 							<td>$!{dtos.payType}</td>
 							<td>$!{dtos.createTime}</td>
 							<td>$!{dtos.payerId}</td>
-							<td><a href="#">下载</a></td>
+							<td><a href="../editor/toPzDownloadPage?filePath=$!{dtos.draftUrl}&fileName=$!{dtos.draftName}">下载</a></td>
 						</tr>
 						#end
 
@@ -70,7 +70,7 @@
 			</tr>
 			<tr>
 				<td>审核记录</td>
-				<td colspan="4"><textarea name="opinion" rows="" cols=""></textarea></td>
+				<td colspan="4"><textarea name="opinion" rows="10" cols="100"></textarea></td>
 			</tr>
 			<tr>
 				<td><input type="button" value="返回" id="back" /></td>

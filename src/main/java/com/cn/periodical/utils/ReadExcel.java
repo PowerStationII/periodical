@@ -5,6 +5,11 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -51,52 +56,54 @@ public class ReadExcel {
 		try {
 			// InputStream is = new FileInputStream( this.filePath+
 			// File.separator+this.fileName);
-			HSSFWorkbook hssfWorkbook = new HSSFWorkbook(this.is);
+			Workbook wb = WorkbookFactory.create(is);
+			Sheet sheet =wb.getSheetAt(0);
+//			HSSFWorkbook hssfWorkbook = new HSSFWorkbook(this.is);
 
 			List<AddressInfo> list = new ArrayList<AddressInfo>();
-			// 循环工作表Sheet
-			HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
-			if (hssfSheet == null) {
-				return null;
-			}
+//			// 循环工作表Sheet
+//			HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
+//			if (hssfSheet == null) {
+//				return null;
+//			}
 			// 循环行Row,第0行是标题，不解析
-			for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+			for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
 				AddressInfo addressInfo = new AddressInfo();
-				HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+				Row hssfRow = sheet.getRow(rowNum);
 				if (hssfRow == null) {
 					continue;
 				}
 
 				// 邮编
-				HSSFCell hssfCell0 = hssfRow.getCell(0);
+				Cell hssfCell0 = hssfRow.getCell(0);
 				if (hssfCell0 == null || "".equals(hssfCell0)) {
 					addressInfo.setReceivePostcode("");
 				} else {
 					addressInfo.setReceivePostcode(getValue(hssfCell0));
 				}
 				// 通讯地址
-				HSSFCell hssfCell1 = hssfRow.getCell(1);
+				Cell hssfCell1 = hssfRow.getCell(1);
 				if (hssfCell1 == null || "".equals(hssfCell1)) {
 					addressInfo.setReceiveAddress("");
 				} else {
 					addressInfo.setReceiveAddress(getValue(hssfCell1));
 				}
 				// 单位名称
-				HSSFCell hssfCell2 = hssfRow.getCell(2);
+				Cell hssfCell2 = hssfRow.getCell(2);
 				if (hssfCell2 == null || "".equals(hssfCell2)) {
 					addressInfo.setContacterName("");
 				} else {
 					addressInfo.setContacterName(getValue(hssfCell2));
 				}
 				// 联系人
-				HSSFCell hssfCell3 = hssfRow.getCell(3);
+				Cell hssfCell3 = hssfRow.getCell(3);
 				if (hssfCell3 == null || "".equals(hssfCell3)) {
 					addressInfo.setContacterName("");
 				} else {
 					addressInfo.setContacterName(getValue(hssfCell3));
 				}
 				// 联系电话
-				HSSFCell hssfCell4 = hssfRow.getCell(4);
+				Cell hssfCell4 = hssfRow.getCell(4);
 				if (hssfCell4 == null || "".equals(hssfCell4)) {
 					addressInfo.setContacterTelephone("");
 					addressInfo.setContacterMobile("");
@@ -117,11 +124,11 @@ public class ReadExcel {
 //				}
 				addressInfo.setRefRoleId(this.refRoleId);
 				addressInfo.setRefId(this.refId);
-//				if ("".equals(addressInfo.getReceivePostcode()) && "".equals(addressInfo.getReceiveAddress())
-//						&& "".equals(addressInfo.getContacterName()) && "".equals(addressInfo.getContacterName())
-//						&& 0 == addressInfo.getSubscribeNums()) {
-//					break;
-//				}
+				if ("".equals(addressInfo.getReceivePostcode()) && "".equals(addressInfo.getReceiveAddress())
+						&& "".equals(addressInfo.getContacterName()) && "".equals(addressInfo.getContacterName())
+						) {
+					break;
+				}
 				list.add(addressInfo);
 			}
 			return list;
@@ -133,7 +140,7 @@ public class ReadExcel {
 	}
 
 	@SuppressWarnings("static-access")
-	private String getValue(HSSFCell hssfCell) {
+	private String getValue(Cell hssfCell) {
 		if (hssfCell.getCellType() == hssfCell.CELL_TYPE_BOOLEAN) {
 			return String.valueOf(hssfCell.getBooleanCellValue());
 		} else if (hssfCell.getCellType() == hssfCell.CELL_TYPE_NUMERIC) {
