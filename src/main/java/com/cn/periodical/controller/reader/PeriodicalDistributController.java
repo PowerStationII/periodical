@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -134,12 +135,22 @@ public class PeriodicalDistributController extends ReaderController{
 		logger.info("下载地址信息模板 Page in:["+userInfo.getUserId()+"]");
 		ModelAndView mav = new ModelAndView("redirect:../reader/toDistributPage");
 		String fileName="地址信息模板.xls";
-		String path = Thread.currentThread().getContextClassLoader().getResource("").getPath()+"template"+File.separator+fileName;
+		//String path = Thread.currentThread().getContextClassLoader().getResource("").getPath()+"template"+File.separator+fileName;
+		String path =  request.getSession().getServletContext().getRealPath("/")+"template"+File.separator+fileName;
 		logger.info("开始下载文件:["+fileName+"]");
 		logger.info("开始下载文件:["+path+"]");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("multipart/form-data");
-		response.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
+		//response.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
+		try {
+			// 弹出下载对话框
+			// 为了解决浏览器弹出下载框时框中的中文名称显示问题需要转换编码。
+			// 为了解决火狐浏览器中文空格问题需加上\"\"来解决
+			response.addHeader("Content-Disposition", "attachment;filename=\""
+					+ new String(fileName.getBytes("gbk"), "ISO-8859-1") + "\"");
+		} catch (UnsupportedEncodingException e1) {
+			System.out.println("文件下载方法中：文件名称编码异常！");
+		}
 		try {
 			File file = new File(path);
 			InputStream inputStream = new FileInputStream(file);

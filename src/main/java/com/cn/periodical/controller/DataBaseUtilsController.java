@@ -43,6 +43,7 @@ public class DataBaseUtilsController {
 			JSONObject j = new JSONObject();
 			j.put("id", sectionInfos.get(i).getSectionId());
 			j.put("text", sectionInfos.get(i).getSectionName());
+			j.put("value", sectionInfos.get(i).getSectionId());
 			a.add(j);
 		}
 		return a;
