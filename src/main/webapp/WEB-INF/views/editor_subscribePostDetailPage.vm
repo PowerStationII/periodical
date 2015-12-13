@@ -83,8 +83,8 @@
 		    </tbody>   
 		</table>
 		<a id="back" class="easyui-linkbutton"  style="50px;">返回</a> 
-		<a href="../editor/toExportReaderAddressInfo?orderNo=20151204132438549001&periodicalId=20ea08451ad2405f9a833ba8644de463&periodicalIssueNo=20151129210912113001" class="easyui-linkbutton">导出邮寄地址信息</a> 
-		<a href="../editor/toExportAuthorAddressInfo"  class="easyui-linkbutton">导出作者地址信息</a> 
+		<a href="../editor/toExportReaderAddressInfo?orderNo=20151204132438549001&periodicalId=20ea08451ad2405f9a833ba8644de463&periodicalIssueNo=20151129210912113001">导出邮寄地址信息</a> 
+		<a href="../editor/toExportAuthorAddressInfo">导出作者地址信息</a> 
 	</div>
 </body>
 </html>
