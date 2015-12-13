@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cn.periodical.manager.AddressInfoManager;
@@ -27,6 +28,7 @@ import com.cn.periodical.manager.OrderInfoManager;
 import com.cn.periodical.pojo.BizDistribut;
 import com.cn.periodical.pojo.BizOrder;
 import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.utils.UtilLoad;
 import com.lowagie.text.Cell;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -96,12 +98,11 @@ public class SubscribePostController extends EditorController {
 	 * toExportReaderAddressInfo 导出读者订阅地址及信息 periodical_distribute表
 	 */
 	@RequestMapping(value = "/toExportReaderAddressInfo")
-	public ModelAndView toExportReaderAddressInfo(HttpServletRequest request,HttpServletResponse response,
+	@ResponseBody
+	public String toExportReaderAddressInfo(HttpServletRequest request,HttpServletResponse response,
 			String orderNo,String periodicalId,String periodicalIssueNo) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("发行编辑-导出读者订阅地址信息Page:[" + userInfo.getUserId() + "]");
-		ModelAndView mav = new ModelAndView("editor_subscribePostPage");
-		
 		BizDistribut distribut = new BizDistribut();
 		distribut.setOrderNo(orderNo);
 		distribut.setpId(periodicalId);
@@ -110,6 +111,7 @@ public class SubscribePostController extends EditorController {
 		
 		try {
 			createWord(list);
+			UtilLoad.fileDownload(request, response, "word.doc", "e:\\");
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -141,7 +143,7 @@ public class SubscribePostController extends EditorController {
 		// mav.addObject("list", list);
 		// mav.addObject("orderNo", orderNo);
 
-		return mav;
+		return "";
 	}
 
 	/**
@@ -197,84 +199,15 @@ public class SubscribePostController extends EditorController {
 		   Document document =new Document(PageSize.A4);//设置导出大小
 		   RtfWriter2.getInstance(document, new FileOutputStream(excelPath));
 		   document.open();
-		   //页眉样式设置
-		   BaseFont bfChinese = BaseFont.createFont("c:\\windows\\fonts\\simsun.ttc,1", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-		   Font titleFont = new Font(bfChinese);  
-		  Paragraph title = new Paragraph("智慧城市",titleFont); 
-		   title.font().setColor(Color.red);
-		   title.font().setSize(48);
-		   //设置标题格式对齐方式
-		   title.setAlignment(Element.ALIGN_CENTER);
-		   document.add(title);
-		   
-		   //内容设置
-		    String contextString = "智慧城市，是基于物联网、云计算、人工智能、数据挖掘等技术而形成的，一种新型信息化的城市形态，它被认为是继工业化、电气化和信息化之后的“第四次浪潮。"
-		     + " \n"// 换行
-		     + "它让城市越来越聪明，数字医疗、智能交通等电影中的情景都有望变成现实。"
-		     + "近日，中国有关部门公布了首批90个国家智慧城市试点名单。";
-		   Font contextFont = new Font(bfChinese);  
-		  Paragraph context = new Paragraph(contextString,contextFont);
-		   context.setAlignment(Element.ALIGN_LEFT);
-		   
-		   //离上一段落（标题）空的行数
-		   context.setSpacingBefore(5);
-		   // 设置第一行空的列数
-		   context.setFirstLineIndent(20);
-		   context.font().setColor(Color.black);//字体颜色
-		   context.font().setSize(10);  //字体大小
-		   document.add(context); 
-		  
-		   // 设置 Table 表格
-		   Table aTable = new Table(7);//5----代表表格列数
-		   aTable.setAlignment(Element.ALIGN_CENTER);//居中显示
-		   aTable.setAlignment(Element.ALIGN_MIDDLE);//纵向居中显示
-		   aTable.setAutoFillEmptyCells(true); //自动填满
-		   aTable.setBorderWidth(1); //边框宽度
-		   aTable.setBorderColor(new Color(50, 125, 255)); //边框颜色
-		   aTable.setPadding(0);//单元格高度
-		   aTable.setSpacing(0);//即单元格之间的间距
-		   aTable.setBorder(2);//边框
-		   
-		   //设置表格行头
-		   Font font = new Font(bfChinese, 18, Font.NORMAL, Color.red);
-		   Cell cell = new Cell(new Phrase("详细地址",font));  
-		   Cell cella = new Cell(new Phrase("联系人",font));  
-		   Cell cellb = new Cell(new Phrase("联系电话",font));  
-		   Cell cellc = new Cell(new Phrase("邮寄本数",font));  
-		   Cell celld = new Cell(new Phrase("增刊1",font));  
-		   Cell celle = new Cell(new Phrase("增刊2",font)); 
-		   Cell cellf = new Cell(new Phrase("增刊3",font)); 
-		  
-		   cell.setHorizontalAlignment(Element.ALIGN_CENTER);//字体居中
-		   cella.setHorizontalAlignment(Element.ALIGN_CENTER);//字体居中
-		   cellb.setHorizontalAlignment(Element.ALIGN_CENTER);//字体居中
-		   cellc.setHorizontalAlignment(Element.ALIGN_CENTER);//字体居中
-		   celld.setHorizontalAlignment(Element.ALIGN_CENTER);//字体居中
-		   celle.setHorizontalAlignment(Element.ALIGN_CENTER);//字体居中
-		   cellf.setHorizontalAlignment(Element.ALIGN_CENTER);//字体居中
-		      //cell.setHeader(true);       
-		     //cell.setColspan(2);   
-		 
-		   aTable.addCell(cell, 0, 0);
-		   aTable.addCell(cella,0, 1);
-		   aTable.addCell(cellb, 0, 2); 
-		   aTable.addCell(cellc, 0, 3);
-		   aTable.addCell(celld, 0, 4);
-		   aTable.addCell(cellc, 0, 5);
-		   aTable.addCell(celld, 0, 6);
-		   //表格内容，可从数据库取数据导出
 		   for (int i = 0; i < list.size(); i++) {
-		   aTable.addCell(new Cell(list.get(i).getrAddress()), i, 0);
-		   aTable.addCell(new Cell(list.get(i).getcName()), i, 1);
-		   aTable.addCell(new Cell(list.get(i).getcMobile()), i, 2); 
-		   aTable.addCell(new Cell(list.get(i).getNums()+""), i, 3);
-		   aTable.addCell(new Cell(list.get(i).getsIdNums1()+""), i, 4);
-		   aTable.addCell(new Cell(list.get(i).getsIdNums2()+""), i, 5);
-		   aTable.addCell(new Cell(list.get(i).getsIdNums3()+""), i, 6);
+			   document.add(new Paragraph("详细地址:"+list.get(i).getrAddress()));
+			   document.add(new Paragraph("联系人:"+list.get(i).getcName()));
+			   document.add(new Paragraph("联系电话:"+list.get(i).getcMobile()));
+			   document.add(new Paragraph("邮寄本数:"+list.get(i).getdNums()));
+			   document.add(new Paragraph("增刊1:"+list.get(i).getsIdNums1()));
+			   document.add(new Paragraph("增刊2:"+list.get(i).getsIdNums2()));
+			   document.add(new Paragraph("增刊3:"+list.get(i).getsIdNums3()+"\n\n\n\n"));
 		   }
-		   document.add(aTable);
-		   document.add(new Paragraph("\n"));
-		        
 		  document.close();
 		  }
 }
