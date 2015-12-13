@@ -24,6 +24,7 @@ public class SectionInfoQuery extends PagingQuery {
 	}
 	
 	private java.lang.String periodicalId;
+	private java.lang.String periodicalIssueNo;
 	private java.lang.String sectionId;
 	private java.lang.String sectionName;
 	private java.lang.String sectionSummary;
@@ -32,6 +33,16 @@ public class SectionInfoQuery extends PagingQuery {
 	private java.lang.String extend2;
 	private java.util.Date createTime;
 	private java.util.Date updateTime;
+
+	
+	
+	public java.lang.String getPeriodicalIssueNo() {
+		return periodicalIssueNo;
+	}
+
+	public void setPeriodicalIssueNo(java.lang.String periodicalIssueNo) {
+		this.periodicalIssueNo = periodicalIssueNo;
+	}
 
 	/**
 	 * 

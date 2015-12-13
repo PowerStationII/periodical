@@ -134,8 +134,11 @@ public class ArticleGroupController extends EditorController{
 		}
 		
 		mav.addObject("list", list);
+		
+		
 		SectionInfoQuery query =new SectionInfoQuery();
 		query.setPeriodicalId(periodicalId);
+		query.setPeriodicalIssueNo(periodicalIssueNo);
 		query.setExtend1("N");
 		List<SectionInfo> sectionInfos = sectionInfoManager.queryList(query);
 		mav.addObject("sList", sectionInfos);
@@ -155,7 +158,7 @@ public class ArticleGroupController extends EditorController{
 			@RequestParam("str") String str,
 			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
 			String leftArray,
-			String periodicalId,HttpServletRequest request) {
+			String periodicalId,HttpServletRequest request,String type) {
 		logger.info("组稿左右提交进来的:leftArray:["+leftArray+"]"
 				+ "&periodicalIssueNo:["+periodicalIssueNo+"]"
 						+ "&str["+str+"]&periodicalId:["+periodicalId+"]");
@@ -223,7 +226,11 @@ public class ArticleGroupController extends EditorController{
 		List<Periodical> pList = periodicalManager.queryList(query);
 		Periodical p = pList.get(0);
 		p.setId(p.getId());
-		p.setPeriodicalState(PeriodicalStateEnums.ARTICLE_PART_DEALING.getCode());
+		if("Y".equals(type)){
+			p.setPeriodicalState(PeriodicalStateEnums.ARTICLE_PART_OVER.getCode());
+		}else{
+			p.setPeriodicalState(PeriodicalStateEnums.ARTICLE_PART_DEALING.getCode());
+		}
 		periodicalManager.savePeriodical(p);
 		return mav;
 	}

@@ -29,20 +29,31 @@ public class SectionInfo implements Serializable{
 	private java.lang.String extend2;
 	private java.util.Date createTime;
 	private java.util.Date updateTime;
-	
-	private List<Map<String,Object>> list;
-	private List<Map<String,Object>> listAd;
+	private String periodicalIssueNo;
 	
 	
 	
-	
-	public List<Map<String, Object>> getListAd() {
-		return listAd;
+	public String getPeriodicalIssueNo() {
+		return periodicalIssueNo;
 	}
 
-	public void setListAd(List<Map<String, Object>> listAd) {
-		this.listAd = listAd;
+	public void setPeriodicalIssueNo(String periodicalIssueNo) {
+		this.periodicalIssueNo = periodicalIssueNo;
 	}
+
+	private List<Map<String,Object>> list;
+//	private List<Map<String,Object>> listAd;
+//	
+//	
+//	
+//	
+//	public List<Map<String, Object>> getListAd() {
+//		return listAd;
+//	}
+//
+//	public void setListAd(List<Map<String, Object>> listAd) {
+//		this.listAd = listAd;
+//	}
 
 	public List<Map<String, Object>> getList() {
 		return list;
