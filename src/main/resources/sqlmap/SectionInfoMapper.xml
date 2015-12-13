@@ -2,312 +2,324 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="SectionInfoMapper">
 	<resultMap id="BaseResultMap" type="SectionInfo">
-	  <id column="ID" jdbcType="DECIMAL" property="id" />
-	  <result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
-	  <result column="section_id" jdbcType="VARCHAR" property="sectionId" />
-	  <result column="section_name" jdbcType="VARCHAR" property="sectionName" />
-	  <result column="section_summary" jdbcType="VARCHAR" property="sectionSummary" />
-	  <result column="state" jdbcType="VARCHAR" property="state" />
-	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
-	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
-	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  <!-- 广告组刊使用 -->
-    <resultMap id="AdBaseResultMap" type="SectionInfo">
-	  <id column="ID" jdbcType="DECIMAL" property="id" />
-	  <result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
-	  <result column="section_id" jdbcType="VARCHAR" property="sectionId" />
-	  <result column="section_name" jdbcType="VARCHAR" property="sectionName" />
-	  <result column="section_summary" jdbcType="VARCHAR" property="sectionSummary" />
-	  <result column="state" jdbcType="VARCHAR" property="state" />
-	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
-	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
-	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-	  <collection property="listAd" select="selectAds" column="section_id"></collection>
-  </resultMap>
-  
-   <select id="selectAds" resultType="hashmap">
-	select ai.ad_id,ai.ad_name,ai.ad_type from
-	periodical_details pd,ad_info ai where ai.ad_id=pd.ad_id
-	and pd.section_id=#{sectionId,jdbcType=VARCHAR} 
-	and pd.periodical_issue_no=#{periodicalIssueNo,jdbcType=VARCHAR}
-	and pd.periodical_id=#{periodicalId,jdbcType=VARCHAR}
-  </select>
-  
-  <resultMap id="SectionBaseResultMap" type="SectionInfo">
-	  <id column="ID" jdbcType="DECIMAL" property="id" />
-	  <result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
-	  <result column="section_id" jdbcType="VARCHAR" property="sectionId" />
-	  <result column="section_name" jdbcType="VARCHAR" property="sectionName" />
-	  <result column="section_summary" jdbcType="VARCHAR" property="sectionSummary" />
-	  <result column="state" jdbcType="VARCHAR" property="state" />
-	  <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
-	  <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
-	  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-	  <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-	  <collection property="list" select="selectArticles" column="section_id"></collection>
-  </resultMap>
-  
-  <select id="selectArticles" resultType="hashmap">
-	select ai.article_id,ai.article_cn_title,ai.editor_state from
-	periodical_details pd,article_info ai where ai.article_id=pd.article_id
-	and pd.section_id=#{sectionId,jdbcType=VARCHAR} 
-	and pd.periodical_issue_no=#{periodicalIssueNo,jdbcType=VARCHAR}
-	and pd.periodical_id=#{periodicalId,jdbcType=VARCHAR}
-  </select>
-  
-  <sql id="Page_Query_Begin">
-    select * from(select t.*,rownum rn from(
-  </sql>
-  <sql id="Page_Query_End">
-  	) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
-  </sql>
-  <sql id="Example_Where_Clause">
-    <where>
-      <trim prefix="(" prefixOverrides="and" suffix=")">
-      <if test="periodicalId != null" >
-	      and periodical_id = #{periodicalId,jdbcType=VARCHAR}
-	    </if>
-      <if test="sectionId != null" >
-	      and section_id = #{sectionId,jdbcType=VARCHAR}
-	    </if>
-      <if test="sectionName != null" >
-	      and section_name = #{sectionName,jdbcType=VARCHAR}
-	    </if>
-      <if test="sectionSummary != null" >
-	      and section_summary = #{sectionSummary,jdbcType=VARCHAR}
-	    </if>
-      <if test="state != null" >
-	      and state = #{state,jdbcType=VARCHAR}
-	    </if>
-      <if test="extend1 != null" >
-	      and extend_1 = #{extend1,jdbcType=VARCHAR}
-	    </if>
-      <if test="extend2 != null" >
-	      and extend_2 = #{extend2,jdbcType=VARCHAR}
-	    </if>
-      <if test="createTime != null" >
-	      and create_time = #{createTime,jdbcType=TIMESTAMP}
-	    </if>
-      <if test="updateTime != null" >
-	      and update_time = #{updateTime,jdbcType=TIMESTAMP}
-	    </if>
-	  </trim>
-    </where>
-  </sql>
-  <sql id="Example_Set_Clause">
-    <set>
-      <trim suffixOverrides=",">
-      <if test="periodicalId != null">
-        periodical_id = #{periodicalId,jdbcType=VARCHAR},
-      </if>
-      <if test="sectionId != null">
-        section_id = #{sectionId,jdbcType=VARCHAR},
-      </if>
-      <if test="sectionName != null">
-        section_name = #{sectionName,jdbcType=VARCHAR},
-      </if>
-      <if test="sectionSummary != null">
-        section_summary = #{sectionSummary,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        state = #{state,jdbcType=VARCHAR},
-      </if>
-      <if test="extend1 != null">
-        extend_1 = #{extend1,jdbcType=VARCHAR},
-      </if>
-      <if test="extend2 != null">
-        extend_2 = #{extend2,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      </trim>
-    </set>
-  </sql>
-  <sql id="Base_Column_List">
-    id,
-    periodical_id,
-    section_id,
-    section_name,
-    section_summary,
-    state,
-    extend_1,
-    extend_2,
-    create_time,
-    update_time,
-  </sql>
-  <sql id="Base_Set_Clause">
-    <set>
-      <trim suffixOverrides=",">
-        periodical_id = #{periodicalId,jdbcType=VARCHAR},
-        section_id = #{sectionId,jdbcType=VARCHAR},
-        section_name = #{sectionName,jdbcType=VARCHAR},
-        section_summary = #{sectionSummary,jdbcType=VARCHAR},
-        state = #{state,jdbcType=VARCHAR},
-        extend_1 = #{extend1,jdbcType=VARCHAR},
-        extend_2 = #{extend2,jdbcType=VARCHAR},
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </trim>
-    </set>
-  </sql>
-  <sql id="Selective_Column_List">
-    <!-- ID, -->
-    <if test="periodicalId != null">
-      periodical_id,
-    </if>
-    <if test="sectionId != null">
-      section_id,
-    </if>
-    <if test="sectionName != null">
-      section_name,
-    </if>
-    <if test="sectionSummary != null">
-      section_summary,
-    </if>
-    <if test="state != null">
-      state,
-    </if>
-    <if test="extend1 != null">
-      extend_1,
-    </if>
-    <if test="extend2 != null">
-      extend_2,
-    </if>
-    <if test="createTime != null">
-      create_time,
-    </if>
-    <if test="updateTime != null">
-      update_time,
-    </if>
-  </sql>
-	<sql id="Base_Value_List">
-    #{id,jdbcType=BIGINT},
-    #{periodicalId,jdbcType=VARCHAR},
-    #{sectionId,jdbcType=VARCHAR},
-    #{sectionName,jdbcType=VARCHAR},
-    #{sectionSummary,jdbcType=VARCHAR},
-    #{state,jdbcType=VARCHAR},
-    #{extend1,jdbcType=VARCHAR},
-    #{extend2,jdbcType=VARCHAR},
-    #{createTime,jdbcType=TIMESTAMP},
-    #{updateTime,jdbcType=TIMESTAMP},
+		<id column="ID" jdbcType="DECIMAL" property="id" />
+		<result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
+		<result column="section_id" jdbcType="VARCHAR" property="sectionId" />
+		<result column="section_name" jdbcType="VARCHAR" property="sectionName" />
+		<result column="section_summary" jdbcType="VARCHAR" property="sectionSummary" />
+		<result column="state" jdbcType="VARCHAR" property="state" />
+		<result column="extend_1" jdbcType="VARCHAR" property="extend1" />
+		<result column="extend_2" jdbcType="VARCHAR" property="extend2" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+	<!-- 广告组刊使用 -->
+	<!-- <resultMap id="AdBaseResultMap" type="SectionInfo"> <id column="ID" 
+		jdbcType="DECIMAL" property="id" /> <result column="periodical_id" jdbcType="VARCHAR" 
+		property="periodicalId" /> <result column="section_id" jdbcType="VARCHAR" 
+		property="sectionId" /> <result column="section_name" jdbcType="VARCHAR" 
+		property="sectionName" /> <result column="section_summary" jdbcType="VARCHAR" 
+		property="sectionSummary" /> <result column="state" jdbcType="VARCHAR" property="state" 
+		/> <result column="extend_1" jdbcType="VARCHAR" property="extend1" /> <result 
+		column="extend_2" jdbcType="VARCHAR" property="extend2" /> <result column="create_time" 
+		jdbcType="TIMESTAMP" property="createTime" /> <result column="update_time" 
+		jdbcType="TIMESTAMP" property="updateTime" /> <collection property="listAd" 
+		select="selectAds" column="section_id"></collection> </resultMap> -->
+	<!-- 广告排刊时使用 -->
+	<!-- <select id="selectByExampleForAd" parameterType="SectionInfoQuery" 
+		resultMap="AdBaseResultMap"> select <trim suffixOverrides=","> <include refid="Base_Column_List" 
+		/> </trim> from section_info <include refid="Example_Where_Clause" /> </select> -->
+
+	<!-- <select id="selectAds" resultType="hashmap"> select ai.ad_id,ai.ad_name,ai.ad_type 
+		from periodical_details pd,ad_info ai where ai.ad_id=pd.ad_id and pd.section_id=#{sectionId,jdbcType=VARCHAR} 
+		and pd.periodical_issue_no=#{periodicalIssueNo,jdbcType=VARCHAR} and pd.periodical_id=#{periodicalId,jdbcType=VARCHAR} 
+		</select> -->
+
+	<resultMap id="SectionBaseResultMap" type="SectionInfo">
+		<id column="id" jdbcType="DECIMAL" property="id" />
+		<result column="periodicalId" jdbcType="VARCHAR" property="periodicalId" />
+		<result column="sectionId" jdbcType="VARCHAR" property="sectionId" />
+		<result column="sectionName" jdbcType="VARCHAR" property="sectionName" />
+		<result column="sectionSummary" jdbcType="VARCHAR" property="sectionSummary" />
+		<result column="periodicalIssueNo" jdbcType="VARCHAR" property="periodicalIssueNo" />
+		<result column="state" jdbcType="VARCHAR" property="state" />
+		<result column="extend1" jdbcType="VARCHAR" property="extend1" />
+		<result column="extend2" jdbcType="VARCHAR" property="extend2" />
+		<collection property="list" select="selectArticles"
+			column="{sectionId=sectionId,periodicalIssueNo=periodicalIssueNo,periodicalId=periodicalId}"></collection>
+	</resultMap>
+	<select id="selectArticles" resultType="hashmap">
+		select ai.article_id,ai.article_cn_title,ai.editor_state,ai.expert_state from
+		periodical_details pd,article_info ai where
+		ai.article_id=pd.article_id
+		and pd.section_id=#{sectionId,jdbcType=VARCHAR}
+		and pd.periodical_issue_no=#{periodicalIssueNo,jdbcType=VARCHAR}
+		and pd.periodical_id=#{periodicalId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectByExample" parameterType="SectionInfoQuery"
+		resultMap="SectionBaseResultMap">
+		select
+		si.id as id,
+		si.periodical_id as periodicalId,
+		si.section_id as sectionId,
+		si.section_name as sectionName,
+		si.section_summary as sectionSummary,
+		si.state as state,
+		si.extend_1 as extend1,
+		si.extend_2 as extend2,
+		p.periodical_issue_no as periodicalIssueNo
+		from section_info si ,periodical_info pi,periodical p
+		where si.periodical_id=pi.periodical_id and
+		p.periodical_id=pi.periodical_id
+		<if test="periodicalId != null and ''!=periodicalId">
+			and si.periodical_id = #{periodicalId,jdbcType=VARCHAR}
+		</if>
+		<if test="periodicalIssueNo != null and ''!=periodicalIssueNo">
+			and p.periodical_issue_no = #{periodicalIssueNo,jdbcType=VARCHAR}
+		</if>
+		<if test="extend1 != null and ''!=extend1">
+			and si.extend_1 = #{extend1,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+
+
+
+
+	<sql id="Page_Query_Begin">
+		select * from(select t.*,rownum rn from(
 	</sql>
-  <sql id="Selective_Value_List">
-    <!-- SEQ_section_info.nextval, -->
-    <if test="periodicalId != null">
-      #{periodicalId,jdbcType=VARCHAR},
-    </if>
-    <if test="sectionId != null">
-      #{sectionId,jdbcType=VARCHAR},
-    </if>
-    <if test="sectionName != null">
-      #{sectionName,jdbcType=VARCHAR},
-    </if>
-    <if test="sectionSummary != null">
-      #{sectionSummary,jdbcType=VARCHAR},
-    </if>
-    <if test="state != null">
-      #{state,jdbcType=VARCHAR},
-    </if>
-    <if test="extend1 != null">
-      #{extend1,jdbcType=VARCHAR},
-    </if>
-    <if test="extend2 != null">
-      #{extend2,jdbcType=VARCHAR},
-    </if>
-    <if test="createTime != null">
-      #{createTime,jdbcType=TIMESTAMP},
-    </if>
-    <if test="updateTime != null">
-      #{updateTime,jdbcType=TIMESTAMP},
-    </if>
-  </sql>
-  
-  <select id="selectByExample" parameterType="SectionInfoQuery" resultMap="SectionBaseResultMap">
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from section_info
-    <include refid="Example_Where_Clause" />
-    <!-- order by CREATE_DATE -->
-  </select>
-  
-  <!-- 广告排刊时使用 -->
-  <select id="selectByExampleForAd" parameterType="SectionInfoQuery" resultMap="AdBaseResultMap">
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from section_info
-    <include refid="Example_Where_Clause" />
-  </select>
-  
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from section_info
-    where ID = #{id,jdbcType=DECIMAL}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from section_info
-    where ID = #{id,jdbcType=DECIMAL}
-  </delete>
-  <delete id="deleteByExample" parameterType="SectionInfoQuery">
-    delete from section_info
-    <include refid="Example_Where_Clause" />
-  </delete>
-  <insert id="insert" parameterType="SectionInfo">
-    insert into section_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <include refid="Base_Column_List"/>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <include refid="Base_Value_List"/>
-    </trim>
-  </insert>
-  <insert id="insertSelective" parameterType="SectionInfo">
-    insert into section_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <include refid="Selective_Column_List"/>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <include refid="Selective_Value_List"/>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="SectionInfoQuery" resultType="java.lang.Integer">
-    select count(*) from section_info
-    <include refid="Example_Where_Clause" />
-  </select>
-  <update id="updateByPrimaryKeySelective" parameterType="SectionInfo">
-    update section_info
-    <include refid="Example_Set_Clause"/>
-    where ID = #{id,jdbcType=DECIMAL}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="SectionInfo">
-    update section_info
-    <include refid="Base_Set_Clause"/>
-    where ID = #{id,jdbcType=DECIMAL}
-  </update>
-  
-  <select id="selectPageByExample" parameterType="SectionInfoQuery" resultMap="BaseResultMap">
-  	<include refid="Page_Query_Begin" />
-    select
-    <trim suffixOverrides=",">
-      <include refid="Base_Column_List" />
-    </trim>
-    from section_info
-    <include refid="Example_Where_Clause" />
-    <!-- order by CREATE_DATE -->
-    <include refid="Page_Query_End" />
-  </select>
+	<sql id="Page_Query_End">
+		) t where rownum &lt;= ${endRow}) where rn &gt; ${startRow}
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+			<trim prefix="(" prefixOverrides="and" suffix=")">
+				<if test="periodicalId != null">
+					and periodical_id = #{periodicalId,jdbcType=VARCHAR}
+				</if>
+				<if test="sectionId != null">
+					and section_id = #{sectionId,jdbcType=VARCHAR}
+				</if>
+				<if test="sectionName != null">
+					and section_name = #{sectionName,jdbcType=VARCHAR}
+				</if>
+				<if test="sectionSummary != null">
+					and section_summary = #{sectionSummary,jdbcType=VARCHAR}
+				</if>
+				<if test="state != null">
+					and state = #{state,jdbcType=VARCHAR}
+				</if>
+				<if test="extend1 != null">
+					and extend_1 = #{extend1,jdbcType=VARCHAR}
+				</if>
+				<if test="extend2 != null">
+					and extend_2 = #{extend2,jdbcType=VARCHAR}
+				</if>
+				<if test="createTime != null">
+					and create_time = #{createTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="updateTime != null">
+					and update_time = #{updateTime,jdbcType=TIMESTAMP}
+				</if>
+			</trim>
+		</where>
+	</sql>
+	<sql id="Example_Set_Clause">
+		<set>
+			<trim suffixOverrides=",">
+				<if test="periodicalId != null">
+					periodical_id = #{periodicalId,jdbcType=VARCHAR},
+				</if>
+				<if test="sectionId != null">
+					section_id = #{sectionId,jdbcType=VARCHAR},
+				</if>
+				<if test="sectionName != null">
+					section_name = #{sectionName,jdbcType=VARCHAR},
+				</if>
+				<if test="sectionSummary != null">
+					section_summary = #{sectionSummary,jdbcType=VARCHAR},
+				</if>
+				<if test="state != null">
+					state = #{state,jdbcType=VARCHAR},
+				</if>
+				<if test="extend1 != null">
+					extend_1 = #{extend1,jdbcType=VARCHAR},
+				</if>
+				<if test="extend2 != null">
+					extend_2 = #{extend2,jdbcType=VARCHAR},
+				</if>
+				<if test="createTime != null">
+					create_time = #{createTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="updateTime != null">
+					update_time = #{updateTime,jdbcType=TIMESTAMP},
+				</if>
+			</trim>
+		</set>
+	</sql>
+	<sql id="Base_Column_List">
+		id,
+		periodical_id,
+		section_id,
+		section_name,
+		section_summary,
+		state,
+		extend_1,
+		extend_2,
+		create_time,
+		update_time,
+	</sql>
+	<sql id="Base_Set_Clause">
+		<set>
+			<trim suffixOverrides=",">
+				periodical_id = #{periodicalId,jdbcType=VARCHAR},
+				section_id = #{sectionId,jdbcType=VARCHAR},
+				section_name = #{sectionName,jdbcType=VARCHAR},
+				section_summary = #{sectionSummary,jdbcType=VARCHAR},
+				state = #{state,jdbcType=VARCHAR},
+				extend_1 = #{extend1,jdbcType=VARCHAR},
+				extend_2 = #{extend2,jdbcType=VARCHAR},
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</trim>
+		</set>
+	</sql>
+	<sql id="Selective_Column_List">
+		<!-- ID, -->
+		<if test="periodicalId != null">
+			periodical_id,
+		</if>
+		<if test="sectionId != null">
+			section_id,
+		</if>
+		<if test="sectionName != null">
+			section_name,
+		</if>
+		<if test="sectionSummary != null">
+			section_summary,
+		</if>
+		<if test="state != null">
+			state,
+		</if>
+		<if test="extend1 != null">
+			extend_1,
+		</if>
+		<if test="extend2 != null">
+			extend_2,
+		</if>
+		<if test="createTime != null">
+			create_time,
+		</if>
+		<if test="updateTime != null">
+			update_time,
+		</if>
+	</sql>
+	<sql id="Base_Value_List">
+		#{id,jdbcType=BIGINT},
+		#{periodicalId,jdbcType=VARCHAR},
+		#{sectionId,jdbcType=VARCHAR},
+		#{sectionName,jdbcType=VARCHAR},
+		#{sectionSummary,jdbcType=VARCHAR},
+		#{state,jdbcType=VARCHAR},
+		#{extend1,jdbcType=VARCHAR},
+		#{extend2,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP},
+	</sql>
+	<sql id="Selective_Value_List">
+		<!-- SEQ_section_info.nextval, -->
+		<if test="periodicalId != null">
+			#{periodicalId,jdbcType=VARCHAR},
+		</if>
+		<if test="sectionId != null">
+			#{sectionId,jdbcType=VARCHAR},
+		</if>
+		<if test="sectionName != null">
+			#{sectionName,jdbcType=VARCHAR},
+		</if>
+		<if test="sectionSummary != null">
+			#{sectionSummary,jdbcType=VARCHAR},
+		</if>
+		<if test="state != null">
+			#{state,jdbcType=VARCHAR},
+		</if>
+		<if test="extend1 != null">
+			#{extend1,jdbcType=VARCHAR},
+		</if>
+		<if test="extend2 != null">
+			#{extend2,jdbcType=VARCHAR},
+		</if>
+		<if test="createTime != null">
+			#{createTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateTime != null">
+			#{updateTime,jdbcType=TIMESTAMP},
+		</if>
+	</sql>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from section_info
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from section_info
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<delete id="deleteByExample" parameterType="SectionInfoQuery">
+		delete from section_info
+		<include refid="Example_Where_Clause" />
+	</delete>
+	<insert id="insert" parameterType="SectionInfo">
+		insert into section_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Base_Value_List" />
+		</trim>
+	</insert>
+	<insert id="insertSelective" parameterType="SectionInfo">
+		insert into section_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Selective_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Selective_Value_List" />
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="SectionInfoQuery"
+		resultType="java.lang.Integer">
+		select count(*) from section_info
+		<include refid="Example_Where_Clause" />
+	</select>
+	<update id="updateByPrimaryKeySelective" parameterType="SectionInfo">
+		update section_info
+		<include refid="Example_Set_Clause" />
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="SectionInfo">
+		update section_info
+		<include refid="Base_Set_Clause" />
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<select id="selectPageByExample" parameterType="SectionInfoQuery"
+		resultMap="BaseResultMap">
+		<include refid="Page_Query_Begin" />
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from section_info
+		<include refid="Example_Where_Clause" />
+		<!-- order by CREATE_DATE -->
+		<include refid="Page_Query_End" />
+	</select>
 </mapper>

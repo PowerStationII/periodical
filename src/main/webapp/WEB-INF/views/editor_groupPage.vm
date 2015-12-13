@@ -37,7 +37,7 @@
 				<td>${periodical.periodicalState}</td>
 				#if(${periodical.periodicalState}=='FI')
 				<td><a class="easyui-linkbutton" href="../editor/toEditArticleFeePage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">编辑稿费</a></td>
-				#elseif(${periodical.periodicalState}=='APD'||${periodical.periodicalState}=='ADPO')
+				#elseif(${periodical.periodicalState}=='APO'||${periodical.periodicalState}=='ADPO')
 				<td>已完成</td>
 				#else
 				<td><a class="easyui-linkbutton" href="../editor/toArticleGroupDetailPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">组稿</a></td>
