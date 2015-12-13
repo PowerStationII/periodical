@@ -23,4 +23,9 @@ public interface ArticleQueryManager {
 	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail);
 	public List<EditorQueryArtilces> editorQueryArticles(EditorQueryArtilces reqDto);
 	public AuthorQueryDetail articleDetailForEnExpert(AuthorQueryDetail articleId);
+	
+	/**
+	 * 编辑人员,待刊明细页查询
+	 * */
+	public List<ArticleQueryRespDto> editorDKMXPage(ArticleQueryReqDto articleQueryReqDto);
 }

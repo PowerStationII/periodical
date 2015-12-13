@@ -8,8 +8,8 @@ public class BizAd implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	private String adName;
-	private String concilName;
-	private String concilType;
+	private String councilName;
+	private String councilType;
 	private String registTime;
 	private String adType;
 	private String trialNo;
@@ -22,6 +22,18 @@ public class BizAd implements Serializable {
 	private String endTime;
 	
 	
+	public String getCouncilName() {
+		return councilName;
+	}
+	public void setCouncilName(String councilName) {
+		this.councilName = councilName;
+	}
+	public String getCouncilType() {
+		return councilType;
+	}
+	public void setCouncilType(String councilType) {
+		this.councilType = councilType;
+	}
 	public String getAdId() {
 		return adId;
 	}
@@ -57,18 +69,6 @@ public class BizAd implements Serializable {
 	}
 	public void setAdName(String adName) {
 		this.adName = adName;
-	}
-	public String getConcilName() {
-		return concilName;
-	}
-	public void setConcilName(String concilName) {
-		this.concilName = concilName;
-	}
-	public String getConcilType() {
-		return concilType;
-	}
-	public void setConcilType(String concilType) {
-		this.concilType = concilType;
 	}
 	public String getRegistTime() {
 		return registTime;

@@ -10,8 +10,11 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-combox.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
 <script>
+
 	$(function(){
 		$('#submit').click(function(){
 			$('form').submit();
@@ -22,10 +25,10 @@
         var rows = $('#table').datagrid('getRows');
         for(var i=0;i<rows.length;i++) {
         	 data.push({  
-                 "concilName":rows[i].concilName,  
+                 "councilName":rows[i].councilName,  
                  "adName":rows[i].adName,
                  "trialNo":rows[i].trialNo,  
-                 "adType":rows[i].adType,
+                 "adType":getAdsType(rows[i].adType),
                  "createTime":rows[i].createTime,
                  "startTime":rows[i].startTime,  
                  "endTime":rows[i].endTime,
@@ -47,7 +50,17 @@
                     pageNumber:pageNo
                 });  
             }  
-        });  
+        }); 
+        
+        $('#adType').combobox({
+        	data:getAdType(),
+        	editable:false
+        });
+        
+        $('#concilType').combobox({
+        	data:getCouncilType(),
+        	editable:false
+        });
 	});
 
 </script>
@@ -61,27 +74,21 @@
 					<td>理事会名称：</td>
 					<td><input class="easyui-textbox" type="text" name="concilName" value=""></td>
 					<td>理事会类型：</td>
-					<td><select name="concilType"  class="easyui-combobox"  style="width:155px;">
-						<option value="" selected>全部</option>
-						<option value="">理事长</option>
+					<td><select id="concilType" name="councilType"  class="easyui-combobox"  style="width:155px;">
 					</select></td>
 				</tr>
 				<tr>
 					<td>广告类型：</td>
-					<td><select name="adType" class="easyui-combobox"  style="width:155px;">
-						<option value="" selected>全部</option>
-						<option value="">形象类</option>
+					<td><select id="adType" name="adType" class="easyui-combobox"  style="width:155px;">
 					</select></td>
 					<td>广审号：</td>
 					<td><input class="easyui-textbox" type="text" name="trialNo" value=""></td>
-					<td>注册时间：</td>
-					<td><input class="easyui-textbox" type="text" name="registTime" value=""></td>
 				</tr>
 				<tr>
 					<td>合同开始时间：</td>
-					<td ><input class="easyui-textbox" type="text" name="contractStartTime" value=""></td>
+					<td ><input class="easyui-datebox" type="text" name="contractStartTime" value="1"></td>
 					<td>合同结束时间：</td>
-					<td><input class="easyui-textbox" type="text" name="contractEndTime" value=""></td>
+					<td><input class="easyui-datebox" type="text" name="contractEndTime" value="1"></td>
 				</tr>
 				<tr>
 					<td colspan="6">
@@ -93,7 +100,7 @@
 		<table   id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
 			<thead>
 				<tr>
-					<th data-options="field:'concilName',width:200">理事会名称</th>
+					<th data-options="field:'councilName',width:200">理事会名称</th>
 					<th data-options="field:'adName',width:200">广告名称</th>
 					<th data-options="field:'trialNo',width:100">广审号</th>
 					<th data-options="field:'adType',width:100">广告类型</th>
@@ -106,13 +113,13 @@
 			<tbody>
 			#foreach($dtos in ${list})   
 				<tr>
-					<td>${dtos.concilName}</td>
-					<td>${dtos.adName}</td>
-					<td>${dtos.trialNo}</td>
-					<td>${dtos.adType}</td>
-					<td>${dtos.createTime}</td>
-					<td>${dtos.startTime}</td>
-					<td>${dtos.endTime}</td>
+					<td>$!{dtos.councilName}</td>
+					<td>$!{dtos.adName}</td>
+					<td>$!{dtos.trialNo}</td>
+					<td>$!{dtos.adType}</td>
+					<td>$!{dtos.createTime}</td>
+					<td>$!{dtos.startTime}</td>
+					<td>$!{dtos.endTime}</td>
 					<td><a class="easyui-linkbutton"  style="width:50px;" href="../editor/toQrySingleAdInfo?adId=111">编辑</a></td>
 				</tr>
 			#end

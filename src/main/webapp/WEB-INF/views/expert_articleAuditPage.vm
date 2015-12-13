@@ -10,6 +10,7 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
 <script>
 	$(function(){
@@ -25,7 +26,7 @@
                  "articleId":rows[i].articleId,  
                  "title":rows[i].title,
                  "contriTime":rows[i].contriTime,  
-                 "expertState":rows[i].expertState,
+                 "expertState":ArticleStateEnums(rows[i].expertState),
                  "authorName":rows[i].authorName,  
                  "remark":rows[i].remark
              }) ; 

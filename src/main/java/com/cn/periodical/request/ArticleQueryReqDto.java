@@ -20,11 +20,6 @@ public class ArticleQueryReqDto extends RequestDto{
 	private String userId;
 	private String section;
 	
-	
-	
-	
-	
-	
 	public String getSection() {
 		return section;
 	}

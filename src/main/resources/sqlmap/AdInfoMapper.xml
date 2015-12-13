@@ -31,12 +31,34 @@
 		select
 		ai.ad_id as adId,ci.council_id as councilId,ai.ad_name as adName,
 		ci.council_name as councilName,ci.council_type as councilType,
-		ai.ad_type as adType,ai.trial_no as trialNo,ci.create_time as createTime,ccf.start_time as startTime,
-		ccf.end_time as endTime
+		ai.ad_type as adType,ai.trial_no as trialNo,DATE_FORMAT(ci.create_time, '%Y-%m-%d') as createTime,
+		DATE_FORMAT(ccf.start_time, '%Y-%m-%d') as startTime, DATE_FORMAT(ccf.start_time, '%Y-%m-%d') as endTime
 		from council_info ci,ad_info ai,council_contract_flows ccf
-		where ci.council_id=ai.council_id and ccf.council_id=ci.council_id and
-		NOW() BETWEEN start_time AND end_time
-		
+		where ci.council_id=ai.council_id and ccf.council_id=ci.council_id 
+		<if test="startTime != null and ''!=startTime">
+			and #{startTime,jdbcType=VARCHAR} &lt;= DATE_FORMAT(ccf.start_time, '%Y-%m-%d') 
+		</if>
+		<if test="endTime != null and ''!=endTime">
+			and #{endTime,jdbcType=VARCHAR} &gt;= DATE_FORMAT(ccf.start_time, '%Y-%m-%d')
+		</if>
+		<!-- <if test="createTime != null and ''!=createTime">
+			and DATE_FORMAT(ci.create_time, '%Y-%m-%d') = #{createTime,jdbcType=VARCHAR}
+		</if> -->
+		<if test="councilType != null  and ''!=councilType">
+			and ci.council_type =#{councilType,jdbcType=VARCHAR}
+		</if>
+		<if test="adType != null  and ''!=adType">
+			and ai.ad_type =#{adType,jdbcType=VARCHAR}
+		</if>
+		<if test="councilName != null and ''!=councilName">
+			and ci.council_name = #{councilName,jdbcType=VARCHAR}
+		</if>
+		<if test="adName != null and ''!=adName">
+			and ai.ad_name = #{adName,jdbcType=VARCHAR}
+		</if>
+		<if test="trialNo != null and ''!=trialNo">
+			and ai.trial_no = #{trialNo,jdbcType=VARCHAR}
+		</if>
 	</select>
   <!-- 广告管理查询sql end -->
   

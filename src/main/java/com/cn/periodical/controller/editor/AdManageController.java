@@ -46,7 +46,7 @@ public class AdManageController extends EditorController{
 	 * toAdManagerPage
 	 * 广告管理
 	 */
-	@RequestMapping(value="/toAdManagerPage",method = RequestMethod.GET)
+	@RequestMapping(value="/toAdManagerPage")
 	public ModelAndView toAdManagerPage(HttpServletRequest request,@ModelAttribute BizAd ad) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("广告管理首页Page in:[]");
@@ -61,7 +61,7 @@ public class AdManageController extends EditorController{
 		 * 查询一个list列表,页面展示用
 		 * */
 		
-		List<BizAd> bizAds = adInfoManager.selectAdsForEditor(null);
+		List<BizAd> bizAds = adInfoManager.selectAdsForEditor(ad);
 		mav.addObject("list", bizAds);
 		logger.info("广告管理首页Page out:[]");
 		return mav;

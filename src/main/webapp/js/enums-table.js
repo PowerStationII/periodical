@@ -40,3 +40,13 @@ function CouncilType(status){
 		return '未知';
 	}
 }
+
+function getAdsType(status){
+	if('XX' == status){
+		return '形象类';
+	}else if('SP' == status){
+		return '审批类';
+	}else{
+		return '未知';
+	}
+}

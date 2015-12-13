@@ -145,7 +145,7 @@ public class ArticleEnlistedDealController extends EditorController{
 		 * */
 		UserQueryReqDto dto = new UserQueryReqDto();
 		dto.setRoleId(RoleIdEnums.CN_EXPERT.getCode());
-		dto.setRefId(eId.split(",")[0]);
+		dto.setRefId(eId.split(",")[0].trim());
 		dto.setSystemId(SystemIdEnums.EXPERT_SYS.getCode());
 		logger.info("为毛多一个参数!!!!!"+JSON.toJSONString(dto));
 		UserQueryReqDto dtoResult = userQueryManager.queryUserRef(dto);

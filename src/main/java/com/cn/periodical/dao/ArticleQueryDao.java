@@ -24,5 +24,9 @@ public interface ArticleQueryDao {
 	 * */
 	public List<EditorQueryArtilces> editorQueryArticles(EditorQueryArtilces reqDto);
 	
+	/**
+	 * 编辑人员,待刊明细页查询
+	 * */
+	public List<ArticleQueryRespDto> editorDKMXPage(ArticleQueryReqDto articleQueryReqDto);
 	
 }

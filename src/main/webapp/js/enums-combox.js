@@ -200,4 +200,22 @@ function getCouncilType(){
 	}] ;
 	return data;
 }
+
+/**
+ * 会员类型枚举下拉
+ * @returns {Array}
+ */
+function getAdType(){
+	var data=[{    
+	    "value":'',
+	    "text":"全部"
+	},{    
+	    "value":'XX',
+	    "text":"形象类"
+	},{    
+	    "value":'SP',    
+	    "text":"审批类"   
+	}] ;
+	return data;
+}
  

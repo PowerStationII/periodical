@@ -1,9 +1,7 @@
 package com.cn.periodical.controller.editor;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,21 +18,24 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.enums.RoleIdEnums;
-import com.cn.periodical.enums.SystemIdEnums;
 import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.manager.ArticleInfoManager;
+import com.cn.periodical.manager.ArticleQueryManager;
+import com.cn.periodical.manager.ExpertInfoManager;
+import com.cn.periodical.manager.SectionInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.manager.UserQueryManager;
-import com.cn.periodical.pojo.ArticleFlows;
-import com.cn.periodical.pojo.ArticleFlowsQuery;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.ArticleInfoQuery;
+import com.cn.periodical.pojo.ExpertInfo;
+import com.cn.periodical.pojo.ExpertInfoQuery;
+import com.cn.periodical.pojo.SectionInfo;
+import com.cn.periodical.pojo.SectionInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.pojo.UserInfoQuery;
 import com.cn.periodical.request.AritcleWorkFlowReqDto;
 import com.cn.periodical.request.ArticleQueryReqDto;
-import com.cn.periodical.request.UserQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
-import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.ArticleQueryService;
 import com.cn.periodical.service.ArticleWorkFlowService;
 import com.cn.periodical.service.EditorArticleDealService;
@@ -56,13 +57,20 @@ public class ArticlePublishDealController extends EditorController{
 	ArticleWorkFlowService articleWorkFlowService;
 	
 	@Autowired
+	ArticleQueryManager articleQueryManager;
+	
+	@Autowired
 	ArticleInfoManager articleInfoManager;
+	@Autowired
+	SectionInfoManager sectionInfoManager;
 	
 	@Autowired
 	ArticleFlowsManager articleFlowsManager;
 	
 	@Autowired
 	UserInfoManager userInfoManager;
+	@Autowired
+	ExpertInfoManager expertInfoManager;
 	
 	@Autowired 
 	UserQueryManager userQueryManager;
@@ -96,11 +104,32 @@ public class ArticlePublishDealController extends EditorController{
 		
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
 		reqDto.setArticleId(articleId);
-		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**编辑和专家共用一个稿件目录*/
-		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
+		List<ArticleQueryRespDto> articleQueryRespDtos = articleQueryManager.editorDKMXPage(reqDto);
+		
+		
+//		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
+//		reqDto.setArticleId(articleId);
+//		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**编辑和专家共用一个稿件目录*/
+//		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
+		ArticleQueryRespDto articleQueryRespDto = articleQueryRespDtos.get(0);
 		mav.addObject("respDto", articleQueryRespDto);
 		
-		logger.info("待刊Page out :["+JSON.toJSONString(articleQueryRespDto)+"]");
+		String sectionId = articleQueryRespDto.getSection();
+		SectionInfoQuery query = new SectionInfoQuery();
+		query.setSectionId(sectionId);
+		List<SectionInfo> sectionInfos = sectionInfoManager.queryList(query);
+		mav.addObject("sectionInfo", sectionInfos.get(0));
+		
+		UserInfoQuery userInfoQuery = new UserInfoQuery();
+		userInfoQuery.setUserId(articleQueryRespDto.getExpertId());
+		List<UserInfo> userInfos = userInfoManager.queryList(userInfoQuery);
+		UserInfo user = userInfos.get(0);
+
+		ExpertInfoQuery expertInfoQuery = new ExpertInfoQuery();
+		expertInfoQuery.setExpertId(user.getRefId());
+		List<ExpertInfo> expertInfos = expertInfoManager.queryList(expertInfoQuery);
+		mav.addObject("expertInfo", expertInfos.get(0));
+		logger.info("待刊Page out :["+JSON.toJSONString(mav)+"]");
 		return mav;
 	}
 	
@@ -139,7 +168,7 @@ public class ArticlePublishDealController extends EditorController{
 		 * */
 		articleInfo.setId(articleInfo.getId());
 		articleInfo.setAuthorState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
-		articleInfo.setEditorState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
+		articleInfo.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
 		articleInfoManager.saveArticleInfo(articleInfo);
 		
 		/**

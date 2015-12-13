@@ -50,7 +50,51 @@ public class ArticleQueryRespDto extends ResponseDto {
 	private String expertDownload;
 	
 	
+	private String authorAttachementPath;
+	private String editorAttachementPath;
+	private String editorDKSJ;
+	private String expertDKSJ;
+	private String epxertDKYJ;
+	private String expertId;
 	
+	
+	
+	public String getExpertId() {
+		return expertId;
+	}
+	public void setExpertId(String expertId) {
+		this.expertId = expertId;
+	}
+	public String getAuthorAttachementPath() {
+		return authorAttachementPath;
+	}
+	public void setAuthorAttachementPath(String authorAttachementPath) {
+		this.authorAttachementPath = authorAttachementPath;
+	}
+	public String getEditorAttachementPath() {
+		return editorAttachementPath;
+	}
+	public void setEditorAttachementPath(String editorAttachementPath) {
+		this.editorAttachementPath = editorAttachementPath;
+	}
+	public String getEditorDKSJ() {
+		return editorDKSJ;
+	}
+	public void setEditorDKSJ(String editorDKSJ) {
+		this.editorDKSJ = editorDKSJ;
+	}
+	public String getExpertDKSJ() {
+		return expertDKSJ;
+	}
+	public void setExpertDKSJ(String expertDKSJ) {
+		this.expertDKSJ = expertDKSJ;
+	}
+	public String getEpxertDKYJ() {
+		return epxertDKYJ;
+	}
+	public void setEpxertDKYJ(String epxertDKYJ) {
+		this.epxertDKYJ = epxertDKYJ;
+	}
 	public String getExpertDownload() {
 		return expertDownload;
 	}

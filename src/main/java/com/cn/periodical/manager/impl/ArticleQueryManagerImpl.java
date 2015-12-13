@@ -58,4 +58,9 @@ public class ArticleQueryManagerImpl implements ArticleQueryManager {
 		return articleQueryDao.articleDetailForEnExpert(articleId);
 	}
 
+	public List<ArticleQueryRespDto> editorDKMXPage(ArticleQueryReqDto articleQueryReqDto) {
+		// TODO Auto-generated method stub
+		return articleQueryDao.editorDKMXPage(articleQueryReqDto);
+	}
+
 }

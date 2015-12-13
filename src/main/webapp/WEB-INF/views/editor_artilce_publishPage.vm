@@ -48,15 +48,15 @@
 					</tr>
 					<tr>
 						<td>原稿:</td>
-						<td></td>
+						<td>$!{respDto.authorAttachementPath}</td>
 					</tr>
 					<tr>
 						<td>审核稿:</td>
-						<td></td>
+						<td>$!{respDto.editorAttachementPath}</td>
 					</tr>
 					<tr>
 						<td>拟投栏目:</td>
-						<td>$!{respDto.section}</td>
+						<td>$!{sectionInfo.sectionName}</td>
 					</tr>
 					<tr>
 						<td>作者:</td>
@@ -68,19 +68,19 @@
 					</tr>
 					<tr>
 						<td>登记日期:</td>
-						<td></td>
+						<td>$!{respDto.editorDKSJ}</td>
 					</tr>
 					<tr>
-						<td>返修时间:</td>
-						<td></td>
+						<td>待刊时间:</td>
+						<td>$!{respDto.expertDKSJ}</td>
 					</tr>
 					<tr>
 						<td>审稿专家:</td>
-						<td></td>
+						<td>$!{expertInfo.expertName}</td>
 					</tr>
 					<tr>
 						<td>审稿意见:</td>
-						<td>专家的巴拉巴拉的</td>
+						<td>$!{respDto.epxertDKYJ}</td>
 					</tr>
 					<tr>
 						<td>编辑意见:</td>

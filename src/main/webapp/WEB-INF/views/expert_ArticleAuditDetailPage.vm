@@ -10,6 +10,7 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
 <script>
 	$(function(){
@@ -19,13 +20,16 @@
 		$('#wait').click(function(){
 			$('form').submit();
 		});
+		var data=$('#grid').datagrid('getData');
+	    data.rows[1].value=ArticleStateEnums('$!{respDto.editorState}');
+	    $("#grid").datagrid("loadData", data);
 	})
 </script>
 <body>
  <form action="../expert/toPublishStateModify" method="POST">
 <input type="hidden" name="articleId" value="$!{respDto.articleId}">
 	<div>
-		<table class="easyui-datagrid"   data-options="singleSelect:true" >
+		<table id="grid" class="easyui-datagrid"   data-options="singleSelect:true" >
 		<thead>
 			<tr>
 				<th data-options="field:'name',width:200"></th>
@@ -33,6 +37,10 @@
 			</tr>
 		</thead>
 		<tbody>
+			<tr>
+				<td>稿件编号:</td>
+				<td>$!{respDto.articleId}</td>
+			</tr>
 			<tr>
 				<td>稿件状态:</td>
 				<td>$!{respDto.editorState}</td>
@@ -59,7 +67,7 @@
 			</tr>
 			<tr>
 				<td>英文关键字:</td>
-				<td>$!{respDto.enKeyWords}</td>
+				<td>$!{respDto.enKeywords}</td>
 			</tr>
 			<tr>
 				<td>中文摘要:</td>
@@ -71,7 +79,7 @@
 			</tr>
 			<tr>
 				<td>下载原稿件:</td>
-				<td>$!{respDto.attachName} <a class="easyui-linkbutton" data-options="width:50"  href="../expert/toDownLoadArticle?articleId=${respDto.articleId}">下载</a>  $!{respDto.attachPath}</td>
+				<td>$!{respDto.attachName} <a class="easyui-linkbutton" data-options="width:50"  href="../expert/toDownLoadArticle?articleId=${respDto.articleId}">下载</a></td>
 			</tr>
 			</tbody>
 		</table>

@@ -332,4 +332,45 @@
 		</if>
 	</select>
 	
+	
+	
+	<!-- 编辑待刊明细页 -->
+	<select id="EditorDKMXPage" resultType="ArticleQueryRespDto"
+		parameterType="ArticleQueryReqDto">
+		select temp1.article_id as articleId,temp1.article_cn_title as title,DATE_FORMAT(temp1.create_time, '%Y-%m-%d') as contriTime, temp1.authorName as authorName,temp1.editor_state as editorState,temp1.expert_state as expertState,temp1.invest_section as section ,temp2.expertId as expertId,temp3.authorAttachementPath as authorAttachementPath,temp3.editorAttachementPath as editorAttachementPath,temp4.editorDKSJ,temp4.expertDKSJ,temp4.expertDKYJ
+
+		from ( 
+		select ai.article_id ,ai.article_cn_title ,ai.create_time,group_concat(aui.author_name) as authorName, ai.editor_state ,ai.expert_state ,ai.invest_section from article_info ai,author_info aui where ai.article_id=aui.article_id group by ai.article_id) as temp1 ,
+		
+		( select aie.article_id,max(if(aie.role_id='1003',aie.user_id,'')) as expertId, max(if(aie.role_id='1006',aie.user_id,'')) as editorId, max(if(aie.role_id='1001',aie.user_id,'')) as userId from article_info_extend aie group by aie.article_id) as temp2 ,
+		
+		(select aai.article_id,max(if(aai.type='1003',aai.attachment_path,'')) as expertAttachementPath, 
+		max(if(aai.type='1006',aai.attachment_path,'')) as editorAttachementPath, 
+		max(if(aai.type='1001',aai.attachment_path,'')) as authorAttachementPath from article_attachment_info aai group by aai.article_id) as temp3,
+		
+		(select af.article_id,
+		max(if(af.role_id='1003' and af.deal_state='0001',af.deal_start_time,'')) as expertDKSJ, 
+		max(if(af.role_id='1006' and af.deal_state='0001',af.deal_start_time,'')) as editorDKSJ,
+		max(if(af.role_id='1003' and af.deal_state='0002',af.deal_start_time,'')) as expertFXSJ,
+		max(if(af.role_id='1003' and af.deal_state='0003',af.deal_start_time,'')) as expertTGSJ,
+		max(if(af.role_id='1006' and af.deal_state='0002',af.deal_start_time,'')) as editorFXSJ,
+		max(if(af.role_id='1006' and af.deal_state='0003',af.deal_start_time,'')) as editorTGSJ,
+		
+		max(if(af.role_id='1003' and af.deal_state='0006',af.deal_opinion,'')) as expertDKYJ, 
+		max(if(af.role_id='1006' and af.deal_state='0001',af.deal_opinion,'')) as editorDKYJ,
+		max(if(af.role_id='1003' and af.deal_state='0002',af.deal_opinion,'')) as expertFXYJ,
+		max(if(af.role_id='1003' and af.deal_state='0003',af.deal_opinion,'')) as expertTGYJ,
+		max(if(af.role_id='1006' and af.deal_state='0002',af.deal_opinion,'')) as editorFXYJ,
+		max(if(af.role_id='1006' and af.deal_state='0003',af.deal_opinion,'')) as editorTGYJ
+		
+		from article_flows af group by af.article_id)as temp4
+		
+		where temp1.article_id=temp2.article_id and temp3.article_id=temp2.article_id 
+		and temp4.article_id=temp2.article_id 
+		<if test="articleId != null  and ''!= articleId">
+			and temp1.article_id= #{articleId,jdbcType=VARCHAR}
+		</if>
+		 group by temp1.article_id 
+		
+	</select>
 </mapper>
