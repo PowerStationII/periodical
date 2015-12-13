@@ -35,7 +35,7 @@
 				<td>${periodical.cycleNums}</td>
 				<td>${periodical.cycleNums}</td>
 				<td>${periodical.periodicalState}</td>
-				#if(${periodical.periodicalState}=='APD')
+				#if(${periodical.periodicalState}=='APD'||${periodical.periodicalState}=='ADPD')
 				<td><a class="easyui-linkbutton" href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">刊登广告</a></td>
 				#elseif(${periodical.periodicalState}=='ADPO')
 				<td>期刊已制作完成</td>

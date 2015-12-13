@@ -75,5 +75,11 @@ public class SectionInfoManagerImpl implements SectionInfoManager {
 		// TODO Auto-generated method stub
 		return sectionInfoDao.selectByExampleForAd(query);
 	}
+
+
+	public List<SectionInfo> queryListForGroupAticle(SectionInfoQuery query) {
+		// TODO Auto-generated method stub
+		return sectionInfoDao.queryListForGroupAticle(query);
+	}
 }
 

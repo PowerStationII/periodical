@@ -31,4 +31,9 @@ public interface SectionInfoDao {
 	int updateByPrimaryKeySelective(SectionInfo record);
 	
 	int updateByPrimaryKey(SectionInfo record);
+	
+	/**
+	 * 排刊组稿调用sql
+	 * */
+	List<SectionInfo> queryListForGroupAticle(SectionInfoQuery query);
 }

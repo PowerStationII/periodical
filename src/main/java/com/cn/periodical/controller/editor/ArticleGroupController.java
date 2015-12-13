@@ -140,7 +140,7 @@ public class ArticleGroupController extends EditorController{
 		query.setPeriodicalId(periodicalId);
 		query.setPeriodicalIssueNo(periodicalIssueNo);
 		query.setExtend1("N");
-		List<SectionInfo> sectionInfos = sectionInfoManager.queryList(query);
+		List<SectionInfo> sectionInfos = sectionInfoManager.queryListForGroupAticle(query);
 		mav.addObject("sList", sectionInfos);
 
 		mav.addObject("periodicalIssueNo", periodicalIssueNo);

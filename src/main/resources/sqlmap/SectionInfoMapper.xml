@@ -14,27 +14,55 @@
 		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
 	</resultMap>
 	<!-- 广告组刊使用 -->
-	<!-- <resultMap id="AdBaseResultMap" type="SectionInfo"> <id column="ID" 
-		jdbcType="DECIMAL" property="id" /> <result column="periodical_id" jdbcType="VARCHAR" 
-		property="periodicalId" /> <result column="section_id" jdbcType="VARCHAR" 
-		property="sectionId" /> <result column="section_name" jdbcType="VARCHAR" 
-		property="sectionName" /> <result column="section_summary" jdbcType="VARCHAR" 
-		property="sectionSummary" /> <result column="state" jdbcType="VARCHAR" property="state" 
-		/> <result column="extend_1" jdbcType="VARCHAR" property="extend1" /> <result 
-		column="extend_2" jdbcType="VARCHAR" property="extend2" /> <result column="create_time" 
-		jdbcType="TIMESTAMP" property="createTime" /> <result column="update_time" 
-		jdbcType="TIMESTAMP" property="updateTime" /> <collection property="listAd" 
-		select="selectAds" column="section_id"></collection> </resultMap> -->
-	<!-- 广告排刊时使用 -->
-	<!-- <select id="selectByExampleForAd" parameterType="SectionInfoQuery" 
-		resultMap="AdBaseResultMap"> select <trim suffixOverrides=","> <include refid="Base_Column_List" 
-		/> </trim> from section_info <include refid="Example_Where_Clause" /> </select> -->
+	<resultMap id="AdBaseResultMap" type="SectionInfo">
+	<id column="id" jdbcType="DECIMAL" property="id" />
+	<result column="periodicalId" jdbcType="VARCHAR" property="periodicalId" />
+	<result column="sectionId" jdbcType="VARCHAR" property="sectionId" />
+	<result column="sectionName" jdbcType="VARCHAR" property="sectionName" />
+	<result column="sectionSummary" jdbcType="VARCHAR" property="sectionSummary" />
+	<result column="periodicalIssueNo" jdbcType="VARCHAR" property="periodicalIssueNo" />
+	<result column="state" jdbcType="VARCHAR" property="state" />
+	<result column="extend1" jdbcType="VARCHAR" property="extend1" />
+	<result column="extend2" jdbcType="VARCHAR" property="extend2" />
+	<collection property="listAd" select="selectAds" column="{sectionId=sectionId,periodicalIssueNo=periodicalIssueNo,periodicalId=periodicalId}"></collection>
 
-	<!-- <select id="selectAds" resultType="hashmap"> select ai.ad_id,ai.ad_name,ai.ad_type 
-		from periodical_details pd,ad_info ai where ai.ad_id=pd.ad_id and pd.section_id=#{sectionId,jdbcType=VARCHAR} 
-		and pd.periodical_issue_no=#{periodicalIssueNo,jdbcType=VARCHAR} and pd.periodical_id=#{periodicalId,jdbcType=VARCHAR} 
-		</select> -->
+</resultMap>
+	<!-- 广告排刊时使用 start-->
+	<select id="selectByExampleForAd" parameterType="SectionInfoQuery" resultMap="AdBaseResultMap">
+		select
+		si.id as id,
+		si.periodical_id as periodicalId,
+		si.section_id as sectionId,
+		si.section_name as sectionName,
+		si.section_summary as sectionSummary,
+		si.state as state,
+		si.extend_1 as extend1,
+		si.extend_2 as extend2,
+		p.periodical_issue_no as periodicalIssueNo
+		from section_info si ,periodical_info pi,periodical p
+		where si.periodical_id=pi.periodical_id and
+		p.periodical_id=pi.periodical_id
+		<if test="periodicalId != null and ''!=periodicalId">
+			and si.periodical_id = #{periodicalId,jdbcType=VARCHAR}
+		</if>
+		<if test="periodicalIssueNo != null and ''!=periodicalIssueNo">
+			and p.periodical_issue_no = #{periodicalIssueNo,jdbcType=VARCHAR}
+		</if>
+		<if test="extend1 != null and ''!=extend1">
+			and si.extend_1 = #{extend1,jdbcType=VARCHAR}
+		</if>
+</select>
 
+	<select id="selectAds" resultType="hashmap">
+	select ai.ad_id,ai.ad_name,ai.ad_type
+	from periodical_details pd,ad_info ai where ai.ad_id=pd.ad_id and
+	pd.section_id=#{sectionId,jdbcType=VARCHAR}
+	and pd.periodical_issue_no=#{periodicalIssueNo,jdbcType=VARCHAR} and
+	pd.periodical_id=#{periodicalId,jdbcType=VARCHAR}
+</select>
+	<!-- 组广告sql end-->
+	
+	<!-- 组稿sql start-->
 	<resultMap id="SectionBaseResultMap" type="SectionInfo">
 		<id column="id" jdbcType="DECIMAL" property="id" />
 		<result column="periodicalId" jdbcType="VARCHAR" property="periodicalId" />
@@ -57,7 +85,7 @@
 		and pd.periodical_id=#{periodicalId,jdbcType=VARCHAR}
 	</select>
 
-	<select id="selectByExample" parameterType="SectionInfoQuery"
+	<select id="queryListForGroupAticle" parameterType="SectionInfoQuery"
 		resultMap="SectionBaseResultMap">
 		select
 		si.id as id,
@@ -82,6 +110,18 @@
 			and si.extend_1 = #{extend1,jdbcType=VARCHAR}
 		</if>
 	</select>
+	<!-- 组稿sql end-->
+
+
+	  <select id="selectByExample" parameterType="SectionInfoQuery" resultMap="SectionBaseResultMap">
+	    select
+	    <trim suffixOverrides=",">
+	      <include refid="Base_Column_List" />
+	    </trim>
+	    from section_info
+	    <include refid="Example_Where_Clause" />
+	    <!-- order by CREATE_DATE -->
+	  </select>
 
 
 

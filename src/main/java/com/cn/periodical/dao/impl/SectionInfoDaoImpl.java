@@ -69,5 +69,11 @@ public class SectionInfoDaoImpl extends BaseDao implements SectionInfoDao {
 	public int updateByPrimaryKey(SectionInfo record) {
 		return super.getSqlSession().update("SectionInfoMapper.updateByPrimaryKey", record);
 	}
+
+
+	public List<SectionInfo> queryListForGroupAticle(SectionInfoQuery query) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("SectionInfoMapper.queryListForGroupAticle", query);
+	}
 	
 }

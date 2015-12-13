@@ -88,6 +88,7 @@
 		</div>
 	  	#end
   </div>
+  <input type='button' value='保存' id='btnPreSubmit' />
   <input type='button' value='提交' id='btnSubmit' />
     </form>  
   </body>  
@@ -130,12 +131,38 @@ $('#btnSubmit').click(function(){
 		});
 	 	$.ajax({
 			url:'../editor/toSaveAdGroup',
-			data:{leftArray:leftArray.toString(),periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',str:JSON.stringify(sections)},
+			data:{leftArray:leftArray.toString(),periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',str:JSON.stringify(sections),type:'Y'},
 			success:function(d){
 				window.location.href='../editor/toAdGroupDetailPage?periodicalId=${periodicalId}';
 			}
 		});  
 	 }
+});
+
+
+//保存按钮
+$('#btnPreSubmit').click(function(){
+		var sections=[];
+		var leftArray=[];
+		$('#right .box').each(function(){
+			var section={};
+			section.data=[];
+			section.id=$(this).find('.sectionId').html();
+			$(this).find('.selectAble').each(function(){
+				section.data.push($(this).find('td:first').html());
+			});
+			sections.push(section);
+		});
+		$('#leftSelect .selectAble').each(function(){
+			leftArray.push($(this).find('td:first').html());
+		});
+	 	$.ajax({
+			url:'../editor/toSaveAdGroup',
+			data:{leftArray:leftArray.toString(),periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',str:JSON.stringify(sections),type:''},
+			success:function(d){
+				window.location.href='../editor/toAdGroupDetailPage?periodicalId=${periodicalId}';
+			}
+		});  
 });
 </SCRIPT>
 </html>
