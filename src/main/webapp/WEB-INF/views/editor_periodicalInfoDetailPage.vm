@@ -105,12 +105,44 @@
 				<td colspan="3"><input type="text" name="hostOrganization" value=""/></td>
 			</tr>
 			<tr>
+				<td>主编</td>
+				<td colspan="3"><input type="text" name="extend1" value=""/></td>
+			</tr>
+			<tr>
 				<td>编辑出版社</td>
 				<td colspan="3"><input type="text" name="press" value=""/></td>
 			</tr>
 			<tr>
-				<td>单价</td>
+				<td>地址</td>
+				<td colspan="3"><input type="text" name="usedTitles" value=""/></td>
+			</tr>
+			<tr>
+				<td>邮政编码</td>
+				<td colspan="3"><input type="text" name="extend1" value=""/></td>
+			</tr>
+			<tr>
+				<td>电话</td>
+				<td colspan="3"><input type="text" name="extend3" value=""/></td>
+			</tr>
+			<tr>
+				<td>电子邮件</td>
+				<td colspan="3"><input type="text" name="extend4" value=""/></td>
+			</tr>
+			<tr>
+				<td>国内统一刊号</td>
+				<td colspan="3"><input type="text" name="cnNo" value=""/></td>
+			</tr>
+			<tr>
+				<td>国际标准刊号</td>
+				<td colspan="3"><input type="text" name="issnNo" value=""/></td>
+			</tr>
+			<tr>
+				<td>国内定价</td>
 				<td colspan="3"><input type="text" name="inFixPrice" value=""/></td>
+			</tr>
+			<tr>
+				<td>国际定价</td>
+				<td colspan="3"><input type="text" name="outFixPrice" value=""/></td>
 			</tr>
 			<tr>
 				<td>期刊号</td>
