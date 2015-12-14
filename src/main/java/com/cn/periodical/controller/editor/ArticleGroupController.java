@@ -193,7 +193,7 @@ public class ArticleGroupController extends EditorController{
 			/**
 			 * 页面如何将左边里存在的值传入后台,如果左边有值,需要将articleInfo.extend_3的状态变回N
 			 * */
-			if(!"".equals(leftArray)){
+			if(!"".equals(leftArray) && leftArray!=null){
 				String[] leftStrs = leftArray.split(",");
 				for(int l=0;l<leftStrs.length;l++){
 					Map map = new HashMap();

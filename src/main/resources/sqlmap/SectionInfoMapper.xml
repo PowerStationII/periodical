@@ -113,7 +113,7 @@
 	<!-- 组稿sql end-->
 
 
-	  <select id="selectByExample" parameterType="SectionInfoQuery" resultMap="SectionBaseResultMap">
+	  <select id="selectByExample" parameterType="SectionInfoQuery" resultMap="BaseResultMap">
 	    select
 	    <trim suffixOverrides=",">
 	      <include refid="Base_Column_List" />
