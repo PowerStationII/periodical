@@ -19,10 +19,8 @@
         for(var i=0;i<rows.length;i++) {
         	 data.push({  
                  "articleId":rows[i].articleId,  
-                 "title":rows[i].title,
-                 "contriTime":rows[i].contriTime,  
-                 "authorState":rows[i].authorState,
-                 "option":rows[i].option
+                 "articleCnTitle":rows[i].articleCnTitle,
+                 "aRealAmount":rows[i].aRealAmount
              }) ; 
 		}
         $("#table").datagrid("loadData", data.slice(0, 5));

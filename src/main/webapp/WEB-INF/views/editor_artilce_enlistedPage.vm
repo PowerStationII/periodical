@@ -14,26 +14,42 @@
 </head>
 <script>
 	$(function(){
-		if('${respDto.editorDownload}'=='N'){
-			$('#submit').click(function(){
-					alert('请先下载稿件');
-					return;
-			});
-		}
-		else {
-			$('#submit').click(function(){
-				$('form').submit();
-			});
-		}
+		
+		//点击登记按钮提交
+		$('#submit').click(function(){
+			$('form').submit();
+		});
+		
+		//点击下载按钮--始发(记录流水并返回刷新)
+		$('.down').click(function(){
+			window.location.href='../editor/toDownLoadArticle?isDown=true&articleId=${respDto.articleId}&editorDownload=${respDto.editorDownload}';
+		});
 		
 		$('#back').click(function(){
 			window.location.href='../editor/toNewArticlePage';
 		});
 		
+		//返回刷新后根据带过来的值进行判断，决定走向
+		if('${respDto.editorDownload}'=='Y') {
+			$("#submit").removeAttr("disabled")
+		}
+		else {
+			$("#submit").attr({"disabled":"disabled"});
+		}
+		
+		if ('${isDown}'=='true') {
+			$('#hid').click();
+		}
+		
 		var data=$('#grid').datagrid('getData');
 	    data.rows[1].value=ArticleStateEnums('$!{respDto.editorState}');
 	    $("#grid").datagrid("loadData", data);
 	});
+	
+	//真正的点击下载按钮(隐藏)
+	function download (a1,a2,a3) {
+		window.location.href='../editor/toDownLoadNewArticle?articleId='+a1+'&fileName='+a2+'&filePath='+a3;
+	}
 </script>
 <body>
 	<form action="../editor/toEnlistedModify" method="POST">
@@ -76,20 +92,19 @@
 						<td>登记日期:</td>
 						<td></td>
 					</tr>
-					#if(${respDto.editorDownload}=='N')
 					<tr>
 						<td>原稿下载:</td>
-						<td>$!{respDto.attachName} <a class="easyui-linkbutton"  href="../editor/toDownLoadArticle?articleId=${respDto.articleId}&fileName=$!{respDto.attachName}&filePath=$!{respDto.attachPath}">下载原稿</a></td>
+						<td>$!{respDto.attachName} </td>
 					</tr>
-					#else
-					
-					#end
 				</tbody>
 			</table>
-			<a id="submit" class="easyui-linkbutton"  href="#"  style="width:50px;">登记</a>
-			<a id="back" class="easyui-linkbutton"   style="width:50px;">返回</a>
 			<br>
 		</div>
 	</form>
+	<input type="button" id="submit" value="登记">
+	#set($d=$!{respDto.attachPath})
+	<input type="button" id="back" value="返回">
+	<input type="button" class="down" value="下载原稿">#set($d=$d.replace("\","\\"))
+	<input type="button" onclick="download('${respDto.articleId}','$!{respDto.attachName}','$d')" value="隐藏" id="hid" style="display:none;">
 </body>
 </html>

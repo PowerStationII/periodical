@@ -83,8 +83,8 @@
 	   </div>
 	    <div class="right">
 			<div id="area"  style="margin-top:20px;">
-					<a style="margin-left:400px;font-size:30px;">作者工作区提示</a><br><br>
-					<a style="font-size:24px;">
+					<a style="margin-left:400px;font-size:20px;">作者工作区提示</a><br><br>
+					<a style="font-size:12px;">
 							1. 上传全文稿件时用Word 97-2003格式存储，不要用Word 2007及以上版本、PDF、LaTeX等，务必删除所有中英文姓名、单位名及作者简介后上传。<br>		
 							2. 作者信息栏中务必将所有作者依次录入，其中有博士生导师的需注明,如第一作者不是通信作者的请在该项复选框中选择。<br>						
 							3.本刊审稿流程较长，需经过两位专家评审，都通过后交作者修改，然后由编委复审，通过后由主编终审，通过后会发送给您录用通知，等待刊登。<br>  

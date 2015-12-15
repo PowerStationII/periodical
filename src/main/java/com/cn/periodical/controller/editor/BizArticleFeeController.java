@@ -18,7 +18,7 @@ import com.cn.periodical.manager.BizArticleFeeManager;
 import com.cn.periodical.pojo.AccountInfo;
 import com.cn.periodical.pojo.BizArticleFee;
 /**
- * 稿件编辑-组刊Controller
+ * 稿件编辑-编辑稿费Controller
  * */
 @Controller
 public class BizArticleFeeController extends EditorController{

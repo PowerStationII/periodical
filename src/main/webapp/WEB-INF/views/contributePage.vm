@@ -152,8 +152,18 @@
   				else if (intNotZeroCheck($("input[name='totalTabs']"))==false) {
   					alert('表格数必须是整数');
   				}
+  				else if ($("#investSection").combobox("getText")=="") {
+  					alert('请选择拟投栏目');
+  				}
   				else {
-  					$("form").submit(); 
+  					/* var email = $("input[name^='authorList[].email']");
+  				    for (var i=0;i<email.length;i++){
+  						if (intNotZeroCheck(email.eq(i))) {
+  							alert('第'+i+1+'个作者邮箱格式错误');
+  							return;
+  						}
+  					}  */
+  					$("form").submit();
   				}
   			});
 
@@ -319,6 +329,13 @@
   						<td>稿件类型</td>
   						<td>
   							新稿<input type="hidden" name="articleType" value="NEW_ARTICLE">
+  						</td>
+  					</tr>
+  					<tr>
+  						<td>中国分类号</td>
+  						<td>
+  							<input  type="text" size="58"  name="classificationNums"/><br>
+							<a class="txtSize"></a>
   						</td>
   					</tr>
   					<tr>

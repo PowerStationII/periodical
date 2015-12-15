@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -40,6 +42,7 @@ import com.cn.periodical.service.EditorArticleDealService;
 import com.cn.periodical.service.ExpertArticleAuditeService;
 import com.cn.periodical.utils.FileCopyUtils;
 import com.cn.periodical.utils.PropertiesInitManager;
+import com.cn.periodical.utils.UtilLoad;
 
 /**
  * 英文审刊
@@ -158,18 +161,19 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 	 * 下载
 	 */
 	@RequestMapping(value="/toDownLoadArticlePage")
-	public ModelAndView toDownLoadArticlePage(HttpServletRequest request,
-			@ModelAttribute BizPeriodical reqDto) {
+	@ResponseBody
+	public String toDownLoadArticlePage(HttpServletRequest request,
+			@ModelAttribute BizPeriodical reqDto,HttpServletResponse response,String fileName,String filePath) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("英文审刊-稿件审核:["+JSON.toJSONString(reqDto)+"]");
-		ModelAndView mav = new ModelAndView("redirect:../expert/auditArticleEnDetailPage");
+		//ModelAndView mav = new ModelAndView("redirect:../expert/auditArticleEnDetailPage");
 		logger.info(JSON.toJSONString(reqDto));
 		/**
 		 * 下载编辑&专家文件夹下稿件
 		 * */
-		
+		UtilLoad.fileDownload(request, response, fileName, filePath.replace(fileName,""));
 
-		return mav;
+		return "";
 	}
 	
 	/**
@@ -252,6 +256,9 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 		/**
 		 * 审核不通过
 		 * */
+		
+		
+		
 		
 		/**
 		 * 向英文专家显示上传按钮

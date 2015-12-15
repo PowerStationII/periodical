@@ -11,33 +11,70 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script type="text/javascript">
+	$(function(){
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#table').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+		 		 "pCnName":rows[i].pCnName,  
+                 "pIsNo":rows[i].pIsNo,  
+                 "cNums":rows[i].cNums,
+                 "aCnTitle":rows[i].aCnTitle,  
+                 "section":rows[i].section,
+                 "option":rows[i].option
+             }) ; 
+		}
+        $("#table").datagrid("loadData", data.slice(0, 15));
+        var pager = $("#table").datagrid("getPager");  
+        pager.pagination({  
+            total:data.length, 
+            pageSize:15,
+            pageList: [15,20],
+            onSelectPage:function (pageNo, pageSize) {  
+                var start = (pageNo - 1) * pageSize;  
+                var end = start + pageSize;  
+                $("#table").datagrid("loadData", data.slice(start, end));  
+                pager.pagination('refresh', {  
+                    total:data.length,  
+                    pageNumber:pageNo
+                });  
+            }  
+        });  
+	});
+</script>
 <body>
 	<div id="articleInfos"  style="margin-top:50px;">
-		<table style="border: 1px solid black;font-size:14px;" rules="all">
+		<table  id="table"  class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true,pagination:true">
+			<thead>
 			<tr>
-				<td style="width:20%;text-align:center;">期刊名称</td>
-				<td style="width:20%;text-align:center;">期刊号</td>
-				<td style="width:20%;text-align:center;">期号</td>
-				<td style="width:20%;text-align:center;">稿件名称</td>
-				<td style="width:20%;text-align:center;">栏目名称</td>
-				<td style="width:20%;text-align:center;">操作</td>
+				<th  data-options="field:'pCnName',width:45">期刊名称</th>
+				<th  data-options="field:'pIsNo',width:45">期刊号</th>
+				<th  data-options="field:'cNums',width:45">期号</th>
+				<th  data-options="field:'aCnTitle',width:45">稿件名称</th>
+				<th  data-options="field:'section',width:45">栏目名称</th>
+				<th  data-options="field:'option',width:45">操作</th>
 			</tr>
+			</thead>
+			<tbody>
 			#foreach($dtos in ${list})
 			<tr>
-				<td style="width: 20%; text-align: center;">$!{dtos.pCnName}</td>
-				<td style="width: 20%; text-align: center;">$!{dtos.pIsNo}</td>
-				<td style="width: 20%; text-align: center;">第$!{dtos.cNums}期</td>
-				<td style="width: 20%; text-align: center;">$!{dtos.aCnTitle}</td>
-				<td style="width: 20%; text-align: center;">$!{dtos.section}</td>
+				<td>$!{dtos.pCnName}</td>
+				<td>$!{dtos.pIsNo}</td>
+				<td>第$!{dtos.cNums}期</td>
+				<td>$!{dtos.aCnTitle}</td>
+				<td>$!{dtos.section}</td>
 				
 				#if(${dtos.extend1}=='Y')
-				<td style="width: 20%; text-align: center;"></td>
+				<td></td>
 				#else
-				<td style="width: 20%; text-align: center;"><a
-					href="../expert/auditArticleEnDetailPage?articleId=${dtos.aId}&periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">审核稿件</a></td>
+				<td><a
+					class="easyui-linkbutton" href="../expert/auditArticleEnDetailPage?articleId=${dtos.aId}&periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">审核稿件</a></td>
 				#end
 			</tr>
 			#end
+			</tbody>
 		</table>
 		<br>
 	</div>

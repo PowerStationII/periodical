@@ -14,16 +14,50 @@
 </head>
 <script>
 	$(function(){
-		$('#back').click(function(){
-			history.go(-1);
+	    $('#back').click(function(){
+	    	window.location.href='../expert/toArticleAuditePage';
 		});
 		$('#wait').click(function(){
 			$('form').submit();
 		});
+		$('.down').click(function(){
+			window.location.href='../expert/toDownLoadArticle?isDown=true&articleId=${respDto.articleId}&expertDownload=${respDto.expertDownload}';
+		});
+		
+		//返回刷新后根据带过来的值进行判断，决定走向
+		if('${respDto.expertDownload}'=='Y') {
+			$("#fx").removeAttr("disabled");
+			$("#wait").removeAttr("disabled");
+			$("#tg").removeAttr("disabled");
+		}
+		else {
+			$("#fx").attr({"disabled":"disabled"});
+			$("#wait").attr({"disabled":"disabled"});
+			$("#tg").attr({"disabled":"disabled"});
+		}
+		
+		if ('${isDown}'=='true') {
+			$('#hid').click();
+		}
+		
 		var data=$('#grid').datagrid('getData');
 	    data.rows[1].value=ArticleStateEnums('$!{respDto.editorState}');
-	    $("#grid").datagrid("loadData", data);
-	})
+	    $("#grid").datagrid("loadData", data);  
+	    
+	});
+	
+	function fx () {
+		window.loction.href='../expert/toExpertRepairedPage?articleId=${respDto.articleId}';
+	}
+	
+	function tg () {
+		window.loction.href='../expert/toExpertRefundPage?articleId=${respDto.articleId}';
+	}
+	
+	//真正的点击下载按钮(隐藏)
+	function download (a1,a2,a3) {
+		window.location.href='../expert/toExpertDownLoadNewArticle?articleId='+a1+'&fileName='+a2+'&filePath='+a3;
+	}
 </script>
 <body>
  <form action="../expert/toPublishStateModify" method="POST">
@@ -79,24 +113,20 @@
 			</tr>
 			<tr>
 				<td>下载原稿件:</td>
-				<td>$!{respDto.attachName} <a class="easyui-linkbutton" data-options="width:50"  href="../expert/toDownLoadArticle?articleId=${respDto.articleId}">下载</a></td>
+				<td>$!{respDto.attachName}</td>
 			</tr>
 			</tbody>
 		</table>
 	</div>
 	</form> 
 	<div class="attr_con">
-		<a class="easyui-linkbutton" data-options="width:50"   id="back">返回</a>
-		#if(${downloadState} =='N')
-		<a class="easyui-linkbutton" data-options="width:50,disabled:true"   id="wait">待刊</a>
-		<a class="easyui-linkbutton" data-options="width:50,disabled:true"  href="#">返修</a>
-		<a class="easyui-linkbutton" data-options="width:50,disabled:true"  href="#">退稿</a>
-		#else
-		<a class="easyui-linkbutton" data-options="width:50"   id="wait">待刊</a>
-		<a class="easyui-linkbutton" data-options="width:50"  href="../expert/toExpertRepairedPage?articleId=${respDto.articleId}">返修</a>
-		<a class="easyui-linkbutton" data-options="width:50"  href="../expert/toExpertRefundPage?articleId=${respDto.articleId}">退稿</a>
-		#end
+		<input type="button" id="back" value="返回">
+		<input type="button" id="wait" value="待刊">
+		<input type="button" id="fx" onclick="fx()" value="返修">
+		<input type="button" id="tg" onclick="tg()" value="退稿">
+		#set($d=$!{respDto.attachPath})
+		<input type="button" class="down" value="下载">#set($d=$d.replace("\","\\"))
+		<input type="button" onclick="download('${respDto.articleId}','$!{respDto.attachName}','$d')" value="隐藏" id="hid" style="display:none;">
 	</div>
-	
 </body>
 </html>

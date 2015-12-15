@@ -21,6 +21,7 @@ import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.manager.ArticleInfoManager;
+import com.cn.periodical.manager.ArticleInfoStateManager;
 import com.cn.periodical.manager.ExpertInfoManager;
 import com.cn.periodical.manager.PayeeInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
@@ -29,6 +30,8 @@ import com.cn.periodical.pojo.ArticleFlows;
 import com.cn.periodical.pojo.ArticleFlowsQuery;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.ArticleInfoQuery;
+import com.cn.periodical.pojo.ArticleInfoState;
+import com.cn.periodical.pojo.ArticleInfoStateQuery;
 import com.cn.periodical.pojo.ExpertInfo;
 import com.cn.periodical.pojo.ExpertInfoQuery;
 import com.cn.periodical.pojo.PayeeInfo;
@@ -41,6 +44,7 @@ import com.cn.periodical.service.ArticleQueryService;
 import com.cn.periodical.service.ArticleWorkFlowService;
 import com.cn.periodical.service.EditorArticleDealService;
 import com.cn.periodical.service.ExpertArticleAuditeService;
+import com.cn.periodical.utils.UtilLoad;
 
 @Controller
 public class ArticleAuditeController extends ExpertController{
@@ -75,6 +79,9 @@ public class ArticleAuditeController extends ExpertController{
 	@Autowired
 	ArticleFlowsManager articleFlowsManager;
 	
+	@Autowired
+	ArticleInfoStateManager articleInfoStateManager;
+	
 	/**
 	 * toArticleAuditePage
 	 * 去审稿页面
@@ -97,15 +104,15 @@ public class ArticleAuditeController extends ExpertController{
 	 * 去审稿明细页面
 	 */
 	@RequestMapping(value="/toAuditeDetailPage")
-	public ModelAndView toArticleAuditeDetailPage(@RequestParam("articleId") String articleId,String downloadState) {
-		logger.info("审稿明细Page:["+articleId+"]");
+	public ModelAndView toArticleAuditeDetailPage(@RequestParam("articleId") String articleId,String isDown) {
+		logger.info("审稿明细Page:["+articleId+"]"+"isDown-----------" + isDown);
 		ModelAndView mav = new ModelAndView("expert_ArticleAuditDetailPage");
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
 		reqDto.setArticleId(articleId);
 		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**专家下载编辑的稿件*/
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
 		mav.addObject("respDto", articleQueryRespDto);
-		mav.addObject("downloadState", downloadState);
+		mav.addObject("isDown", isDown);
 		logger.info("审稿明细出参:["+JSON.toJSONString(articleQueryRespDto)+"]");
 		return mav;
 	}
@@ -361,34 +368,50 @@ public class ArticleAuditeController extends ExpertController{
 	 * 停留在审核操作页面 End
 	 */
 	@RequestMapping(value="/toDownLoadArticle")
-	public ModelAndView toDownLoadArticle(@RequestParam("articleId") String articleId,
+	public ModelAndView toDownLoadArticle(@RequestParam("articleId") String articleId,String expertDownload,
+			String fileName,String filePath,String isDown,
 			HttpServletRequest request) {
 		logger.info("专家审核页-下载稿件Action入参:artilceId:["+articleId+"]");
-		ModelAndView mav = new ModelAndView("redirect:/expert/toAuditeDetailPage");
+		ModelAndView mav = new ModelAndView("redirect:../expert/toAuditeDetailPage");
 		mav.addObject("articleId", articleId);
-		mav.addObject("downloadState", "Y");
+		mav.addObject("isDown", isDown);
 
-		/**
-		 * 记录稿件开始处理流水
-		 * */
-		AritcleWorkFlowReqDto reqDto = new AritcleWorkFlowReqDto();
-		UserInfo userInfo = getUserInfo(request);
-		reqDto.setUserId(userInfo.getUserId());
-		reqDto.setArticleId(articleId);
-		reqDto.setRoleId(userInfo.getRoleId());
-		reqDto.setDealStartTime(new Date());
-		reqDto.setExtend(userInfo.getUserId());
-		articleWorkFlowService.registArticleWorkFlow(reqDto);
+		if ("N".equals(expertDownload)) {
+			/**
+			 * 记录稿件开始处理流水
+			 * */
+			AritcleWorkFlowReqDto reqDto = new AritcleWorkFlowReqDto();
+			UserInfo userInfo = getUserInfo(request);
+			reqDto.setUserId(userInfo.getUserId());
+			reqDto.setArticleId(articleId);
+			reqDto.setRoleId(userInfo.getRoleId());
+			reqDto.setDealStartTime(new Date());
+			reqDto.setExtend(userInfo.getUserId());
+			articleWorkFlowService.registArticleWorkFlow(reqDto);
+			
+			ArticleInfoStateQuery stateQuery= new ArticleInfoStateQuery();
+			stateQuery.setArticleId(articleId);
+			List<ArticleInfoState> articleInfoStates = articleInfoStateManager.queryList(stateQuery);
+			ArticleInfoState articleInfoState = articleInfoStates.get(0);
+			articleInfoState.setId(articleInfoState.getId());
+			articleInfoState.setExpertDownload("Y");
+			articleInfoState.setExpertDownloadTime(new Date());
+			articleInfoStateManager.saveArticleInfoState(articleInfoState);
+			logger.info("稿件登记页-下载稿件Action出参:[]");
+		}
 		
 		
-		
-		/**
-		 * TODO:稿件下载
-		 * */
 		
 		
 		logger.info("专家审核页-下载稿件Action出参:[]");
 		return mav;
+	}
+	
+	@RequestMapping(value="/toExpertDownLoadNewArticle")
+	public void download (HttpServletRequest request,HttpServletResponse response,
+				String fileName,String filePath) {
+		logger.info(filePath);
+		UtilLoad.fileDownload(request, response,fileName,filePath.replace(fileName,""));
 	}
 	
 	/**

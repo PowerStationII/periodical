@@ -15,7 +15,7 @@
 <script>
 	$(function(){
 		$('#back').click(function(){
-			history.go(-1);
+			window.location.href='../editor/toNewArticlePage';
 		});
 		var data=$('#grid').datagrid('getData');
 	    data.rows[1].value=ArticleStateEnums('$!{respDto.editorState}');
@@ -85,9 +85,10 @@
 		</table>
 	</div>
 	<div class="attr_con">
-		<a class="easyui-linkbutton"   href="../editor/toEnlistedPage?articleId=$!{respDto.articleId}"  style="width:50px;">登记</a>
-		<a class="easyui-linkbutton"  href="#"   id="back"  style="width:50px;">返修</a>
-		<a class="easyui-linkbutton"  href="#"   id=""  style="width:50px;">退稿</a>
+		<!-- <a class="easyui-linkbutton"   href="../editor/toEnlistedPage?articleId=$!{respDto.articleId}"  style="width:50px;">登记</a>
+		<a class="easyui-linkbutton"  href="#"   id=""  style="width:50px;">返修</a>
+		<a class="easyui-linkbutton"  href="#"   id=""  style="width:50px;">退稿</a> -->
+		<a class="easyui-linkbutton"  href="#"   id="back"  style="width:50px;">返回</a>
 	</div>
 </body>
 </html>

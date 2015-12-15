@@ -19,11 +19,8 @@
         for(var i=0;i<rows.length;i++) {
         	 data.push({  
                  "articleId":rows[i].articleId,  
-                 "title":rows[i].title,
-                 "contriTime":rows[i].contriTime,  
-                 "expertState":rows[i].expertState,
-                 "authorName":rows[i].authorName,  
-                 "remark":rows[i].remark
+                 "articleCnTitle":rows[i].articleCnTitle,
+                 "eRealAmount":rows[i].eRealAmount
              }) ; 
 		}
         $("#table").datagrid("loadData", data.slice(0, 5));
@@ -49,9 +46,9 @@
 		<table id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true" >
 			<thead> 
 				<tr>
-					<th data-options="field:'articleId',width:300">稿件编号</th>
-					<th data-options="field:'articleId',width:300">稿件标题</th>
-					<th data-options="field:'articleId',width:300">稿费金额</th>
+					<th data-options="field:'articleId',width:400">稿件编号</th>
+					<th data-options="field:'articleCnTitle',width:380">稿件标题</th>
+					<th data-options="field:'eRealAmount',width:287">稿费金额</th>
 				</tr>
 			</thead>
 			<tbody>

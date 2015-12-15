@@ -1,5 +1,6 @@
 package com.cn.periodical.controller.editor;
 
+import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -100,9 +102,9 @@ public class ArticleNewDealController extends EditorController{
 	 * toEnlistedPage
 	 * 登记稿件状态页 End
 	 */
-	@RequestMapping(value="/toEnlistedPage",method = RequestMethod.GET)
+	@RequestMapping(value="/toEnlistedPage")
 	public ModelAndView toEnlistedPage(@RequestParam("articleId") String articleId,
-			HttpServletRequest request) {
+			HttpServletRequest request,String isDown) {
 		logger.info("稿件登记Page入参:artilceId:["+articleId+"]");
 		ModelAndView mav = new ModelAndView("editor_artilce_enlistedPage");
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
@@ -110,6 +112,7 @@ public class ArticleNewDealController extends EditorController{
 		reqDto.setRoleId(RoleIdEnums.AUTHOR.getCode());/**编辑下载作者的稿件*/
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
 		mav.addObject("respDto", articleQueryRespDto);
+		mav.addObject("isDown", isDown);
 		logger.info("稿件登记Page出参:["+JSON.toJSONString(articleQueryRespDto)+"]");
 		return mav;
 	}
@@ -167,37 +170,44 @@ public class ArticleNewDealController extends EditorController{
 	 * 停留在登记操作页面 End
 	 */
 	@RequestMapping(value="/toDownLoadArticle")
-	public ModelAndView toDownLoadArticle(@RequestParam("articleId") String articleId,String fileName,String filePath,
+	public ModelAndView toDownLoadArticle(@RequestParam("articleId") String articleId,String editorDownload,
+			String fileName,String filePath,String isDown,
 			HttpServletRequest request,HttpServletResponse response) {
-		logger.info("稿件登记页-下载稿件Action入参:artilceId:["+articleId+"]fileName:["+fileName+"]filePath:["+filePath+"]");
-		ModelAndView mav = new ModelAndView("redirect:/editor/toEnlistedPage");
+		logger.info("稿件登记页-下载稿件Action入参:editorDownload:["+editorDownload+"],artilceId:["+articleId+"]fileName:["+fileName+"]filePath:["+filePath+"]");
+		ModelAndView mav = new ModelAndView("redirect:../editor/toEnlistedPage");
 		mav.addObject("articleId", articleId);
-		/**
-		 * 记录稿件开始处理流水
-		 * */
-		AritcleWorkFlowReqDto reqDto = new AritcleWorkFlowReqDto();
-		UserInfo userInfo = getUserInfo(request);
-		reqDto.setUserId(userInfo.getUserId());
-		reqDto.setArticleId(articleId);
-		reqDto.setRoleId(userInfo.getRoleId());
-		reqDto.setDealStartTime(new Date());
-		reqDto.setToRoleId(userInfo.getRoleId());
-		articleWorkFlowService.registArticleWorkFlow(reqDto);
-		/**
-		 * TODO:稿件下载
-		 * */
-//		UtilLoad.fileDownload(request, response,fileName,filePath.replace(fileName,""));
-		
-		
-		ArticleInfoStateQuery stateQuery= new ArticleInfoStateQuery();
-		stateQuery.setArticleId(articleId);
-		List<ArticleInfoState> articleInfoStates = articleInfoStateManager.queryList(stateQuery);
-		ArticleInfoState articleInfoState = articleInfoStates.get(0);
-		articleInfoState.setId(articleInfoState.getId());
-		articleInfoState.setEditorDownload("Y");
-		articleInfoState.setExpertDownloadTime(new Date());
-		articleInfoStateManager.saveArticleInfoState(articleInfoState);
-		logger.info("稿件登记页-下载稿件Action出参:[]");
+		mav.addObject("isDown", isDown);
+		if("N".equals(editorDownload)&&editorDownload!=null){
+			/**
+			 * 记录稿件开始处理流水
+			 * 如果编辑人员未下载过稿件,第一次稿件下载的时候会记录稿件的流水和下载状态变更.
+			 * */
+			AritcleWorkFlowReqDto reqDto = new AritcleWorkFlowReqDto();
+			UserInfo userInfo = getUserInfo(request);
+			reqDto.setUserId(userInfo.getUserId());
+			reqDto.setArticleId(articleId);
+			reqDto.setRoleId(userInfo.getRoleId());
+			reqDto.setDealStartTime(new Date());
+			reqDto.setToRoleId(userInfo.getRoleId());
+			articleWorkFlowService.registArticleWorkFlow(reqDto);
+			
+			ArticleInfoStateQuery stateQuery= new ArticleInfoStateQuery();
+			stateQuery.setArticleId(articleId);
+			List<ArticleInfoState> articleInfoStates = articleInfoStateManager.queryList(stateQuery);
+			ArticleInfoState articleInfoState = articleInfoStates.get(0);
+			articleInfoState.setId(articleInfoState.getId());
+			articleInfoState.setEditorDownload("Y");
+			articleInfoState.setEditorDownloadTime(new Date());
+			articleInfoStateManager.saveArticleInfoState(articleInfoState);
+			logger.info("稿件登记页-下载稿件Action出参:[]");
+		}
 		return mav;
+	}
+	
+	@RequestMapping(value="/toDownLoadNewArticle")
+	public void download (HttpServletRequest request,HttpServletResponse response,
+				String fileName,String filePath) {
+		logger.info(filePath);
+		UtilLoad.fileDownload(request, response,fileName,filePath.replace(fileName,""));
 	}
 }
