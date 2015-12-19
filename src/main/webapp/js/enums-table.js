@@ -42,9 +42,9 @@ function CouncilType(status){
 }
 
 function getAdsType(status){
-	if('XX' == status){
+	if('XXGG' == status){
 		return '形象类';
-	}else if('SP' == status){
+	}else if('SPGG' == status){
 		return '审批类';
 	}else{
 		return '未知';
@@ -57,24 +57,45 @@ function getZJType(status){
 		return '身份证';
 	}else if('1' == status){
 		return '户口簿';
-	}if('2' == status){
+	}else if('2' == status){
 		return '护照';
 	}else if('3' == status){
 		return '军官证';
-	}if('4' == status){
+	}else if('4' == status){
 		return '士兵证';
 	}else if('5' == status){
 		return '港澳居民来往内地通行证';
-	}if('6' == status){
+	}else if('6' == status){
 		return '台湾同胞来往内地通行证';
 	}else if('7' == status){
 		return '临时身份证';
-	}if('8' == status){
+	}else if('8' == status){
 		return '外国人居留证';
 	}else if('9' == status){
 		return '警官证';
 	}else if('X' == status){
 		return '其他证件';
+	}else{
+		return '未知';
+	}
+}
+
+//期刊类型
+function getPeriodicalType(status){
+	if('N' == status){
+		return '新刊';
+	}else if('APD' == status){
+		return '稿件部分组刊中';
+	}else if('APO' == status){
+		return '稿件部分组刊完成';
+	}else if('ADPD' == status){
+		return '广告组刊中';
+	}else if('ADPO' == status){
+		return '广告组刊完成';
+	}else if('PI' == status){
+		return '待签发';
+	}else if('FI' == status){
+		return '已签发';
 	}else{
 		return '未知';
 	}

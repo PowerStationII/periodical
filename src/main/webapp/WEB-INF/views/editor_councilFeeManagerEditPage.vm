@@ -58,32 +58,32 @@
 			</tr> -->
 			<tr>
 				<td colspan="2">详细地址</td>
-				<td colspan="6">${c.addressDetail}</td>
+				<td colspan="6">$!{c.addressDetail}</td>
 			</tr>
 			<tr>
 				<td colspan="2">法人代表</td>
-				<td colspan="6">${c.legalName}</td>
+				<td colspan="6">$!{c.legalName}</td>
 			</tr>
 			<tr>
 				<td colspan="2">法人联系电话</td>
-				<td colspan="2">${c.legalTelephone}</td>
+				<td colspan="2">$!{c.legalTelephone}</td>
 				<td colspan="4"></td>
 			</tr>
 			<tr>
 				<td colspan="2">职务</td>
-				<td colspan="6">${c.legalDuties}</td>
+				<td colspan="6">$!{c.legalDuties}</td>
 			</tr>
 			<tr>
 				<td colspan="2">联系人</td>
-				<td colspan="6">${c.contactName}</td>
+				<td colspan="6">$!{c.contactName}</td>
 			</tr>
 			<tr>
 				<td colspan="2">联系电话</td>
-				<td colspan="6">${c.contactTelephone}</td>
+				<td colspan="6">$!{c.contactTelephone}</td>
 			</tr>
 			<tr>
 				<td colspan="2">企业网址</td>
-				<td colspan="6">${c.website}</td>
+				<td colspan="6">$!{c.website}</td>
 			</tr>
 			<tr>
 				<td colspan="8">---------------------------------</td>
@@ -95,9 +95,9 @@
 			</tr> -->
 			<tr>
 				<td colspan="2">合同开始时间</td>
-				<td colspan="2"><input type="text" name="startTime" value=""></td>
+				<td colspan="2"><input class="easyui-datebox" name="startTime" value="1"></td>
 				<td colspan="2">合同结束时间</td>
-				<td colspan="2"><input type="text" name="endTime" value=""></td>
+				<td colspan="2"><input class="easyui-datebox" name="endTime" value="1"></td>
 			</tr>
 			<tr>
 				<td colspan="2">合同金额</td>

@@ -46,7 +46,7 @@
 </head>
 <body>
 	<div id="articleInfos">
-		<table id="table"  class="easyui-datagrid"   data-options="singleSelect:true,pagination:true">
+		<table id="table"  class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true,pagination:true">
 			<thead>
 			<tr>
 				<th data-options="field:'aId',width:200">地址id</th>
@@ -71,13 +71,21 @@
             </tbody>
 		</table>
 		<br>
-		<form action="../reader/toDownloadAddressPage" method="POST">
-			<input type="submit" value="下载地址模板">
-		</form>
-		<form enctype="multipart/form-data" action="../reader/toUploadAddressPage" method="POST">
-		<input type="file" name="file" value="">
-		<input type="submit" value="上传">
-		</form>
+		<table>
+			<tr>
+				<td style="width:600px;">
+					<form action="../reader/toDownloadAddressPage" method="POST">
+						<input type="submit" value="下载地址模板">
+					</form>
+				</td>
+				<td>
+					<form enctype="multipart/form-data" action="../reader/toUploadAddressPage" method="POST">
+						<input type="file" name="file" value="">
+						<input type="submit" value="上传">
+					</form>
+				</td>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>

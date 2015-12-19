@@ -73,10 +73,10 @@
 					<td>联系人电话：</td>
 					<td><input type="text" name="adContactPhone" value=""></td>
 				</tr>
-				<tr>
+<!-- 				<tr>
 					<td>刊登费：</td>
 					<td><input type="text" name="adFee" value=""></td>
-				</tr>
+				</tr> -->	
 				<tr>
 					<td><input type="button" value="返回"></td>
 					<td><input type="submit" value="提交"></td>

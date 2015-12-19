@@ -24,7 +24,7 @@
 		<table style="border: 1px solid green;margin-left:300px;margin-top:50px;" rules="all">
 			<tr>
 				<td colspan="2">单位名称</td>
-				<td colspan="6"><input type="text" name="councilCompany" value="${c.councilCompany}"></td>
+				<td colspan="6"><input type="text" name="councilCompany" value="$!{c.councilCompany}"></td>
 			</tr>
 			<!-- <tr>
 				<td colspan="2">会员类型</td>
@@ -44,7 +44,7 @@
 			</tr> -->
 			<tr>
 				<td colspan="2">邮政编码</td>
-				<td colspan="2"><input type="text" name="postCode" value="${c.postCode}"></td>
+				<td colspan="2"><input type="text" name="postCode" value="$!{c.postCode}"></td>
 			</tr>
 			<!-- <tr>
 				<td colspan="2">所在地区</td>
@@ -59,31 +59,31 @@
 			</tr> -->
 			<tr>
 				<td colspan="2">详细地址</td>
-				<td colspan="6"><input type="text" name="addressDetail" value="${c.addressDetail}"></td>
+				<td colspan="6"><input type="text" name="addressDetail" value="$!{c.addressDetail}"></td>
 			</tr>
 			<tr>
 				<td colspan="2">法人代表</td>
-				<td colspan="6"><input type="text" name="legalName" value="${c.legalName}"></td>
+				<td colspan="6"><input type="text" name="legalName" value="$!{c.legalName}"></td>
 			</tr>
 			<tr>
 				<td colspan="2">法人联系电话</td>
-				<td colspan="2"><input type="text" name="legalTelephone" value="${c.legalTelephone}"></td>
+				<td colspan="2"><input type="text" name="legalTelephone" value="$!{c.legalTelephone}"></td>
 			</tr>
 			<tr>
 				<td colspan="2">职务</td>
-				<td colspan="6"><input type="text" name="legalDuties" value="${c.legalDuties}"></td>
+				<td colspan="6"><input type="text" name="legalDuties" value="$!{c.legalDuties}"></td>
 			</tr>
 			<tr>
 				<td colspan="2">联系人</td>
-				<td colspan="6"><input type="text" name="contactName" value="${c.contactName}"></td>
+				<td colspan="6"><input type="text" name="contactName" value="$!{c.contactName}"></td>
 			</tr>
 			<tr>
 				<td colspan="2">联系电话</td>
-				<td colspan="6"><input type="text" name="contactTelephone" value="${c.contactTelephone}"></td>
+				<td colspan="6"><input type="text" name="contactTelephone" value="$!{c.contactTelephone}"></td>
 			</tr>
 			<tr>
 				<td colspan="2">企业网址</td>
-				<td colspan="6"><input type="text" name="website" value="${c.website}"></td>
+				<td colspan="6"><input type="text" name="website" value="$!{c.website}"></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="button"  value="返回"  id="back"/></td>

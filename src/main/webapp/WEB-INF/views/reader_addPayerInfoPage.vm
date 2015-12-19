@@ -15,7 +15,18 @@
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
-		})
+		});
+		
+		$('#submit').click(function(){
+			if ($('input[name=file]').val()=='') {
+				alert('请选择上传文件');
+				return;
+			}
+			else {
+				$('form').submit();
+			}
+		});
+		
 	})
 </script>
 <body>
@@ -95,19 +106,20 @@
 				</label></td>
 				<td><input type="text" name="invoiceTile" value=""></td>
 			</tr>
+			<tr>
+				<td>上传汇款凭证</td>
+				<td><input type="file" value=""  name="file"></td>
+			</tr>
 			<!-- tr>
 				<td><label>
 						<span class="right">汇款时间：</span>
 				</label></td>
 				<td><input type="text" name="payTime" value=""></td>
 			</tr> -->
-			<tr>
-				<td><input type="button"  value="返回"  id="back"/></td>
-				<td><input type="submit"  value="提交">
-				<input type="file" value=""  name="file">
-			</tr>
 		</table>
 		</form>
+		<input type="button"  value="返回"  id="back"/>
+		<input type="button" id="submit"  value="提交">
 	</div>
 </body>
 </html>

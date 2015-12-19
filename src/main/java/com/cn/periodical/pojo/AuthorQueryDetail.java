@@ -41,7 +41,22 @@ public class AuthorQueryDetail implements Serializable {
 	private String eAmount;
 	private String eTaxAmount;
 	
+	private String periodicalId;
+	private String periodicalIssueNo;
 	
+	
+	public String getPeriodicalId() {
+		return periodicalId;
+	}
+	public void setPeriodicalId(String periodicalId) {
+		this.periodicalId = periodicalId;
+	}
+	public String getPeriodicalIssueNo() {
+		return periodicalIssueNo;
+	}
+	public void setPeriodicalIssueNo(String periodicalIssueNo) {
+		this.periodicalIssueNo = periodicalIssueNo;
+	}
 	public String geteRealAmount() {
 		return eRealAmount;
 	}

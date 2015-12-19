@@ -210,10 +210,10 @@ function getAdType(){
 	    "value":'',
 	    "text":"全部"
 	},{    
-	    "value":'XX',
+	    "value":'XXGG',
 	    "text":"形象类"
 	},{    
-	    "value":'SP',    
+	    "value":'SPGG',    
 	    "text":"审批类"   
 	}] ;
 	return data;

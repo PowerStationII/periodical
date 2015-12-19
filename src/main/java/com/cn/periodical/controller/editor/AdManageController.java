@@ -26,6 +26,7 @@ import com.alibaba.fastjson.JSON;
 import com.cn.periodical.manager.AdInfoManager;
 import com.cn.periodical.manager.CouncilInfoManager;
 import com.cn.periodical.pojo.AdInfo;
+import com.cn.periodical.pojo.AdInfoQuery;
 import com.cn.periodical.pojo.BizAd;
 import com.cn.periodical.pojo.CouncilInfo;
 import com.cn.periodical.pojo.CouncilInfoQuery;
@@ -99,9 +100,10 @@ public class AdManageController extends EditorController{
 	 * */
 	@RequestMapping(value = "/toQrySingleAdInfo")
 	public ModelAndView toQrySingleAdInfo(@RequestParam("adId") String adId) {
-		ModelAndView mav = new ModelAndView("redirect:../editor/toAdInfoEdit");
-
-		
+		ModelAndView mav = new ModelAndView("editor_adManagerEditPage");
+		AdInfoQuery query = new AdInfoQuery();
+		List<AdInfo> adInfos = adInfoManager.queryList(query);
+		mav.addObject("adInfo",adInfos.get(0));
 		return mav;
 	}
 	
@@ -111,7 +113,7 @@ public class AdManageController extends EditorController{
 	@RequestMapping(value = "/toAdInfoEdit")
 	public ModelAndView toAdInfoEdit() {
 		ModelAndView mav = new ModelAndView("editor_adManagerEditPage");
-
+		
 		return mav;
 	}
 	

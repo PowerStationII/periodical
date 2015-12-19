@@ -108,7 +108,7 @@
 
 .area_name {
 	height: 30px;
-	margin-left: 45px;
+	margin-left: 70px;
 	margin-top: 8px;
 	cursor: pointer;
 }
@@ -187,7 +187,7 @@ a {
 			<div class="cLeft">
 				<div class="mode_name">期刊征订</div>
 				<!-- <div  class="li1"  id="jiansuo">关键词检索</div> -->
-				<div class="li2" id="dingdanguanli">订单管理</div>
+				<div class="li2" style="margin-top: 10px;" id="dingdanguanli">订单管理</div>
 				<div class="li3" id="youjidizhiguanli">邮寄地址管理</div>
 、				<div class="mode_name" style="margin-top: 10px;">个人信息设置</div>
 				<div class="li2" style="margin-top: 10px;" id="xiugaixinxi">修改个人信息</div>
@@ -204,7 +204,7 @@ a {
 			<div class="cLeft">
 				<div class="mode_name">期刊征订</div>
 				<!-- <div  class="li1"  id="jiansuo">关键词检索</div> -->
-				<div class="li2" id="dingdanguanli">订单管理</div>
+				<div class="li2" style="margin-top: 10px;" id="dingdanguanli">订单管理</div>
 				<div class="li3" id="gaofeidengji">订费登记</div>
 				<div class="mode_name" style="margin-top: 10px;">个人信息设置</div>
 				<div class="li2" style="margin-top: 10px;" id="xiugaixinxi">修改个人信息</div>
@@ -215,7 +215,7 @@ a {
 		<div class="right">
 			<div id="area" style="margin-top: 20px;">
 				<div id="bt"  style="height:30px;line-height:30px;">可预订期刊列表 </div>
-				<table class="easyui-datagrid" data-options="singleSelect:true,toolbar:'#bt'">
+				<table class="easyui-datagrid" data-options="fitColumns:true,singleSelect:true,toolbar:'#bt'">
 					<thead>
 						<tr>
 							<th data-options="field:'periodicalCnName',width:150">期刊中文名称</th>

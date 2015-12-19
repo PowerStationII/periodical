@@ -41,7 +41,7 @@ public class LoginController {
 	/**
 	 * 跳转到登录页面
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(@RequestParam("systemId") String systemId, @RequestParam("roleId") String roleId,
 			HttpServletRequest request) {
 		logger.info("登录系统systemId:[" + systemId + "]");

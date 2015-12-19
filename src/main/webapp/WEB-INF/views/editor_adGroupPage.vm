@@ -14,7 +14,7 @@
 <body>
 	<div id="articleInfos">
 		<form action="" method="POST">
-		<table class="easyui-datagrid"   data-options="singleSelect:true">
+		<table class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true">
 			<thead>
 			<tr>
 				<th data-options="field:'periodicalCnName',width:200">期刊名称</th>

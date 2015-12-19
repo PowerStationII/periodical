@@ -385,6 +385,12 @@
 		<if test="articleId != null  and ''!= articleId">
 			and ai.article_id= #{articleId,jdbcType=VARCHAR}
 		</if>
+		<if test="periodicalId != null  and ''!= periodicalId">
+			and pd.periodical_id= #{periodicalId,jdbcType=VARCHAR}
+		</if>
+		<if test="periodicalIssueNo != null  and ''!= periodicalIssueNo">
+			and pd.periodical_issue_no= #{periodicalIssueNo,jdbcType=VARCHAR}
+		</if>
 	</select>
 	
 	

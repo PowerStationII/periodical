@@ -339,7 +339,18 @@
         <img id="u48_img" class="img " src="img/portal/u48.png"/>
         <!-- Unnamed () -->
         <div id="u49" class="text">
-          <p><a href="login?systemId=111&roleId=0000" style='text-decoration:none;'><span>编辑办公系统</span></a></p>
+          <form id="editorForm" action="login" method="POST">
+          	<input type="hidden" name="systemId" value="111">
+          	<input type="hidden" name="roleId" value="0000">
+          </form>
+          <script>
+          	$(function(){
+          		$('#editorSys').click(function(){
+          			$('#editorForm').submit();
+          		});
+          	})
+          </script>
+          <p><span id="editorSys">编辑办公系统</span></p>
         </div>
       </div>
 
@@ -348,7 +359,18 @@
         <img id="u50_img" class="img " src="img/portal/u48.png"/>
         <!-- Unnamed () -->
         <div id="u51" class="text">
-          <p><a href="login?systemId=222&roleId=0000" style='text-decoration:none;'><span>专家审稿系统</span></a></p>
+          <form id="expertForm" action="login" method="POST">
+          	<input type="hidden" name="systemId" value="222">
+          	<input type="hidden" name="roleId" value="0000">
+          </form>
+          <script>
+          	$(function(){
+          		$('#expertSys').click(function(){
+          			$('#expertForm').submit();
+          		});
+          	})
+          </script>
+          <p><span id="expertSys">专家审稿系统</span></p>
         </div>
       </div>
 
@@ -357,7 +379,18 @@
         <img id="u52_img" class="img " src="img/portal/u48.png"/>
         <!-- Unnamed () -->
         <div id="u53" class="text">
-          <p><a href="login?systemId=333&roleId=1001" style='text-decoration:none;'><span>作者投稿系统</span></a></p>
+          <form id="authorForm" action="login" method="POST">
+          	<input type="hidden" name="systemId" value="333">
+          	<input type="hidden" name="roleId" value="1001">
+          </form>
+          <script>
+          	$(function(){
+          		$('#authorSys').click(function(){
+          			$('#authorForm').submit();
+          		});
+          	})
+          </script>
+          <p><span id="authorSys">作者投稿系统</span></p>
         </div>
       </div>
       
@@ -366,7 +399,18 @@
         <img id="u146_img" class="img " src="img/portal/u48.png"/>
         <!-- Unnamed () -->
         <div id="u147" class="text">
-          <p><a href="login?systemId=444&roleId=1002" style='text-decoration:none;'><span>读者订阅系统</span></a></p>
+          <form id="readerForm" action="login" method="POST">
+          	<input type="hidden" name="systemId" value="444">
+          	<input type="hidden" name="roleId" value="1002">
+          </form>
+          <script>
+          	$(function(){
+          		$('#readerSys').click(function(){
+          			$('#readerForm').submit();
+          		});
+          	})
+          </script>
+          <p><span id="readerSys">读者订阅系统</span></p>
         </div>
       </div>
 

@@ -16,9 +16,23 @@
 		$('#back').click(function(){
 			window.location.href='../expert/auditPeriodicalDetailPage?periodicalId=${periodicalId}&periodicalIssueNo=${periodicalIssueNo}';
 		});
-		$('#upload').click(function(){
-			$('#formUp').submit();
-		})
+		$('#no').click(function(){
+			if(confirm('确定修改吗')==true) {
+				$('#ok').show();
+				$('#up').show();
+				$('#no').hide();
+				$('#yes').hide();
+			}
+			else {
+				return;
+			}
+		});
+		$('#yes').click(function(){
+			window.location.href='../expert/toEnAuditAgreePage?articleId=${dto.articleId}&periodicalId=${periodicalId}&periodicalIssueNo=${periodicalIssueNo}';
+		});
+		$('#ok').click(function(){
+			$('#formFile').submit();
+		});
 	})
 </script>
 <body>
@@ -62,13 +76,23 @@
 			</tr>
 			</tbody>
 		</table>
-		<input type="button" value="审核通过"  id="yes">
-		<input type="button" value="审核不通过" id="no">
-		<form id="formUp" action="../expert/toEnAuditDisagreePage" enctype="multipart/form-data">
-			<input type="file" value="上传稿件" name="up">
-		</form>
-		<input type="button" value="上传稿件"  id="upload">
-		<input type="button" value="返回上页"  id="back">
+		<table>
+			<tr>
+				<td>
+					<input type="button" value="通过"  id="yes">
+					<input type="button" value="英文修改" id="no">
+					<input type="button" value="通过" style="display:none;" id="ok">
+				</td>
+				<td>
+					<form id="formFile" action="">
+						<input type="file" value="上传稿件" name="up" style="display:none;" id="up">
+					</form>
+				</td>
+				<td>
+					<input type="button" value="返回上页"  id="back">
+				</td>
+			</tr>
+		</table>
 		<!-- <form action="../expert/toEnAuditAgreePage">
 			<input type="text" name="aId" value="${dto.articleId}">
 			<input type="text" name="pId" value="${periodicalId}">

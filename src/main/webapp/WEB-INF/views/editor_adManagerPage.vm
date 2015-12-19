@@ -32,7 +32,7 @@
                  "createTime":rows[i].createTime,
                  "startTime":rows[i].startTime,  
                  "endTime":rows[i].endTime,
-                 "a8":rows[i].a8
+                 "option":rows[i].option
              }) ; 
 		}
         $("#table").datagrid("loadData", data.slice(0, 5));
@@ -74,12 +74,12 @@
 					<td>理事会名称：</td>
 					<td><input class="easyui-textbox" type="text" name="concilName" value=""></td>
 					<td>理事会类型：</td>
-					<td><select id="concilType" name="councilType"  class="easyui-combobox"  style="width:155px;">
+					<td><select id="concilType" data-options="panelHeight:'auto'" name="councilType"  class="easyui-combobox"  style="width:155px;">
 					</select></td>
 				</tr>
 				<tr>
 					<td>广告类型：</td>
-					<td><select id="adType" name="adType" class="easyui-combobox"  style="width:155px;">
+					<td><select id="adType" name="adType"  data-options="panelHeight:'auto'" class="easyui-combobox"  style="width:155px;">
 					</select></td>
 					<td>广审号：</td>
 					<td><input class="easyui-textbox" type="text" name="trialNo" value=""></td>
@@ -97,7 +97,7 @@
 				</tr>
 			</table>
 		</form>
-		<table   id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
+		<table   id="table"  class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true,toolbar:'#bt',pagination:true">
 			<thead>
 				<tr>
 					<th data-options="field:'councilName',width:200">理事会名称</th>
@@ -107,7 +107,7 @@
 					<th data-options="field:'createTime',width:100">注册时间</th>
 					<th data-options="field:'startTime',width:100">合同开始时间</th>
 					<th data-options="field:'endTime',width:100">合同结束时间</th>
-					<th data-options="field:'option',width:100">操作</th>
+					<!-- <th data-options="field:'option',width:100">操作</th> -->
 				</tr>
 			</thead>
 			<tbody>
@@ -120,7 +120,7 @@
 					<td>$!{dtos.createTime}</td>
 					<td>$!{dtos.startTime}</td>
 					<td>$!{dtos.endTime}</td>
-					<td><a class="easyui-linkbutton"  style="width:50px;" href="../editor/toQrySingleAdInfo?adId=111">编辑</a></td>
+					<td><!-- <a class="easyui-linkbutton"  style="width:50px;" href="../editor/toQrySingleAdInfo?adId=111">编辑</a> --></td>
 				</tr>
 			#end
 			</tbody>

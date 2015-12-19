@@ -46,7 +46,7 @@
 	<select id="editorQueryOrderInfos" parameterType="BizOrder"
 		resultType="BizOrder">
 		select oi.order_no as orderNo,oi.already_pay_amount as
-		aPayAmount,DATE_FORMAT(oi.create_time, '%Y-%m-%d') as submitTime,oi.order_status as oStatus,
+		aPayAmount,DATE_FORMAT(oi.create_time, '%Y-%m-%d') as create_time,oi.order_status as oStatus,
 		oi.periodical_year as pYear,oi.subscribe_nums as subNums,oi.user_id as
 		userId,pi.periodical_cn_name as pCnName, DATE_FORMAT(oi.audit_time, '%Y-%m-%d') as auditTime,
 		pi.cycle as cycle,pi.in_fix_price as iFprice,oi.amount as
@@ -68,7 +68,7 @@
 		userId,pInfo.periodical_cn_name as
 		pCnName,oInfo.already_pay_amount as
 		aPayAmount,oInfo.periodical_year as
-		pYear,oInfo.audit_time as
+		pYear,DATE_FORMAT(oInfo.audit_time, '%Y-%m-%d')  as
 		auditTime,
 		oInfo.subscribe_nums as
 		subNums,oInfo.order_status as

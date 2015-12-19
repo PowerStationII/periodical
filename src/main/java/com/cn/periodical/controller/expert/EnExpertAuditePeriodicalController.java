@@ -151,6 +151,8 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 		 * */
 		AuthorQueryDetail aqd=new AuthorQueryDetail();
 		aqd.setArticleId(articleId);
+		aqd.setPeriodicalId(periodicalId);
+		aqd.setPeriodicalIssueNo(periodicalIssueNo);
 		AuthorQueryDetail dto = articleQueryManager.articleDetailForEnExpert(aqd);
 		mav.addObject("dto", dto);
 		mav.addObject("periodicalId", periodicalId);

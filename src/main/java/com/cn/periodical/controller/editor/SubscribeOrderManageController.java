@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.manager.OrderInfoManager;
@@ -81,7 +82,8 @@ public class SubscribeOrderManageController extends EditorController{
 		query.setOrderNo(orderNo);
 		List<PayerInfo> payerInfos=payerInfoManager.queryList(query);
 		mav.addObject("list", payerInfos);
-		
+		logger.info("----------------------");
+		logger.info(JSON.toJSONString(payerInfos));
 		return mav;
 	}
 	

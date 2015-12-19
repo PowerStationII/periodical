@@ -240,13 +240,13 @@
     remit_pro,
     invoice_tile,
     receive_remit_day,
-    pay_time,
+    DATE_FORMAT(pay_time, '%Y-%m-%d') as pay_time,
     pay_type,
     extend_1,
     extend_2,
     extend_3,
     extend_4,
-    create_time,
+    DATE_FORMAT(create_time, '%Y-%m-%d') as create_time ,
     update_time,
   </sql>
   <sql id="Base_Set_Clause">

@@ -10,11 +10,46 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
+<script type="text/javascript">
+	$(function(){
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#table').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+		 		 "periodicalCnName":rows[i].periodicalCnName,  
+                 "periodicalIssueNo":rows[i].periodicalIssueNo,  
+                 "periodicalYear":rows[i].periodicalYear,
+                 "cycleNums":rows[i].cycleNums,  
+                 "time":rows[i].time,
+                 "periodicalState":getPeriodicalType(rows[i].periodicalState),
+                 "option":rows[i].option
+             }) ; 
+		}
+        $("#table").datagrid("loadData", data.slice(0, 15));
+        var pager = $("#table").datagrid("getPager");  
+        pager.pagination({  
+            total:data.length, 
+            pageSize:15,
+            pageList: [15,20],
+            onSelectPage:function (pageNo, pageSize) {  
+                var start = (pageNo - 1) * pageSize;  
+                var end = start + pageSize;  
+                $("#table").datagrid("loadData", data.slice(start, end));  
+                pager.pagination('refresh', {  
+                    total:data.length,  
+                    pageNumber:pageNo
+                });  
+            }  
+        });  
+	});
+</script>
 <body>
 	<div id="articleInfos">
 		<form action="" method="POST">
-		<table class="easyui-datagrid"   data-options="singleSelect:true">
+		<table id="table" class="easyui-datagrid"   data-options="singleSelect:true,pagination:true">
 			<thead>
 				<tr>
 					<th data-options="field:'periodicalCnName',width:200">期刊名称</th>
@@ -46,7 +81,7 @@
 			#end
 			</tbody>
 		</table>
-		<br>
+		<a class="easyui-linkbutton" style="width:50px;" href="../editor/toAdGroupPage">返回</a>
 		</form>
 	</div>
 </body>

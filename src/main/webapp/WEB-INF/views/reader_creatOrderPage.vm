@@ -12,9 +12,6 @@
 </head>
 <script>
 	$(function(){
-		$('#back').click(function(){
-			history.go(-1);
-		});
 		var priceAllYear = ${periodicalInfo.inFixPrice} * ${periodicalInfo.cycle};
 		$('#priceAllYear').text('全年定价：'+priceAllYear);
 		
@@ -70,9 +67,9 @@
             <tr>
                 <td>邮编：${payeeInfo.payeeAccountPostCode}</td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>订购指南：下载</td>
-            </tr>
+            </tr> -->
             
           	<tr>
                 <th>订阅信息</th>
@@ -90,7 +87,10 @@
                 <td id="price">金额：0</td>
             </tr>
             <tr>
-                <td ><input type="submit" value="提交"> <input type="button" onclick="history.go(-1);" value="返回"  id="back"/></td>
+                <td>
+	                <input type="submit" value="提交"> 
+	                <input type="button" onclick="window.location.href='../reader/toOrderManagePage';" value="返回">
+                </td>
             </tr>
 		</table>
 		<br>

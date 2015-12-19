@@ -62,7 +62,7 @@
 							<td>$!{dtos.payType}</td>
 							<td>$!{dtos.createTime}</td>
 							<td>$!{dtos.payerId}</td>
-							<td><a href="../editor/toPzDownloadPage?filePath=$!{dtos.draftUrl}&fileName=$!{dtos.draftName}">下载</a></td>
+							<td><a class="easyui-linkbutton" style="width:50px;" href="../editor/toPzDownloadPage?filePath=$!{dtos.draftUrl}&fileName=$!{dtos.draftName}">下载</a></td>
 						</tr>
 						#end
 
