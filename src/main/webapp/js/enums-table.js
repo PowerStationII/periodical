@@ -50,3 +50,32 @@ function getAdsType(status){
 		return '未知';
 	}
 }
+
+//证件类型
+function getZJType(status){
+	if('0' == status){
+		return '身份证';
+	}else if('1' == status){
+		return '户口簿';
+	}if('2' == status){
+		return '护照';
+	}else if('3' == status){
+		return '军官证';
+	}if('4' == status){
+		return '士兵证';
+	}else if('5' == status){
+		return '港澳居民来往内地通行证';
+	}if('6' == status){
+		return '台湾同胞来往内地通行证';
+	}else if('7' == status){
+		return '临时身份证';
+	}if('8' == status){
+		return '外国人居留证';
+	}else if('9' == status){
+		return '警官证';
+	}else if('X' == status){
+		return '其他证件';
+	}else{
+		return '未知';
+	}
+}

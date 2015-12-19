@@ -36,4 +36,8 @@ public interface ArticleInfoDao {
 	public List<EditorAreaInfos> queryArticleTotalInfos(Map<String,String> map);
 	public List<ArticleInfo> qryListByUserId(Map reqMap);
 	ArticleInfo qryInfoByArticleId(Map reqMap);
+	/**
+	 * 主编查看系统稿件信息
+	 * */
+	List<ArticleInfo> querySysArticleInfosList(ArticleInfoQuery query);
 }

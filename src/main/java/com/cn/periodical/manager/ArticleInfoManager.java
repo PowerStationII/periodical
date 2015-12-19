@@ -19,6 +19,10 @@ public interface ArticleInfoManager {
 	ArticleInfo findArticleInfoById(Long id);
 	
 	List<ArticleInfo> queryList(ArticleInfoQuery query);
+	/**
+	 * 主编查看系统稿件信息
+	 * */
+	List<ArticleInfo> querySysArticleInfosList(ArticleInfoQuery query);
 	
 	void deleteArticleInfoById(Long id);
 	

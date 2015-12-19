@@ -8,6 +8,7 @@ import com.cn.periodical.pojo.ArticleAttachmentInfo;
 import com.cn.periodical.pojo.ArticleFlows;
 import com.cn.periodical.pojo.ArticleInfo;
 import com.cn.periodical.pojo.AuthorInfo;
+import com.cn.periodical.pojo.BizAuthorAddressInfo;
 
 /**
  * 稿件查询接口出参
@@ -23,6 +24,15 @@ public class ArticleQueryRespDto extends ResponseDto {
 	private List<AuthorInfo> authorInfos;
 	private List<AddressInfo> addressInfo;
 	
+	private List<BizAuthorAddressInfo> bizAuthorAddressInfos;
+
+	public List<BizAuthorAddressInfo> getBizAuthorAddressInfos() {
+		return bizAuthorAddressInfos;
+	}
+	public void setBizAuthorAddressInfos(List<BizAuthorAddressInfo> bizAuthorAddressInfos) {
+		this.bizAuthorAddressInfos = bizAuthorAddressInfos;
+	}
+
 	private ArticleFlows articleFlows;
 	private AccountInfo accountInfo;
 	

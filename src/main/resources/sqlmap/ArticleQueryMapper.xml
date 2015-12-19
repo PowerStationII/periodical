@@ -4,13 +4,65 @@
 	<resultMap id="ArticleInfosForEditorResultMap" type="ArticleQueryRespDto">
 		<result column="articleId" jdbcType="VARCHAR" property="articleId" />
 		<result column="title" jdbcType="VARCHAR" property="title" />
-		<result column="contriTime" jdbcType="VARCHAR" property="contriTime" />
 		<result column="authorName" jdbcType="VARCHAR" property="authorName" />
+		<result column="contriTime" jdbcType="VARCHAR" property="contriTime" />
 		<result column="editorState" jdbcType="VARCHAR" property="editorState" />
 		<result column="expertState" jdbcType="VARCHAR" property="expertState" />
 		<result column="authorState" jdbcType="VARCHAR" property="authorState" />
 		<result column="section" jdbcType="VARCHAR" property="section" />
+		<collection property="bizAuthorAddressInfos" select="selectBizAuthorAddressInfos" column="articleId}">
+		</collection>
 	</resultMap>
+	
+	<select id="selectBizAuthorAddressInfos" resultType="BizAuthorAddressInfo">
+		select aui.id as au_id,aui.article_id as au_articleId,aui.author_name as au_authroName,aui.author_id as au_authorId,
+		aui.academic_degree as au_academicDegree,aui.birthday as au_birthday,aui.certificate_no as au_certificateNo,aui.certificate_type as au_certificateType,
+		aui.company_department as au_companyDepartment,aui.company_name as au_companyName, aui.compay_type as au_compayType,aui.degree as au_degree,aui.duties as au_duties,
+		aui.email as au_email,aui.technical_title as au_technicalTitle,aui.sex as au_sex,aui.research_area as au_researchArea,aui.isreviewer as au_isreviewer,
+		aui.isfirstauthor as au_isfirstauthor,aui.isContacter as au_isContacter,adi.address_id as ad_addressId,adi.contacter_mobile as ad_contacterMobile,
+		adi.contacter_name as ad_contacterName,adi.contacter_telephone as ad_contacterTelephone,adi.receive_address as ad_receiveAddress,adi.receive_contacter as ad_receiveContacter,
+		adi.receive_postcode as ad_receivePostcode,adi.ref_role_id as ad_refRoleId ,adi.id as ad_id
+		from author_info aui ,address_info adi where aui.author_id=adi.ref_id
+		and aui.article_id=#{articleId,jdbcType=VARCHAR}
+	</select>
+	
+<!-- 	<select id="selectArticleInfosForEditor" parameterType="ArticleQueryReqDto"
+		resultMap="ArticleInfosForEditorResultMap">
+		select ai.article_id as articleId,ai.article_cn_title as
+		title,DATE_FORMAT(ai.create_time, '%Y-%m-%d') as
+		contriTime,ai.editor_state as editorState,ai.expert_state as
+		expertState,ai.author_state as authorState,ai.invest_section as section
+		from article_info ai,article_info_extend aie
+		where
+		ai.article_id=aie.article_id and ai.article_id=aui.article_id
+		<if test="userId != null and ''!=userId">
+			and aie.user_id = #{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="editorState != null and ''!=editorState">
+			and ai.editor_state = #{editorState,jdbcType=VARCHAR}
+		</if>
+		<if test="expertState != null and ''!=expertState">
+			and ai.expert_state = #{expertState,jdbcType=VARCHAR}
+		</if>
+		<if test="articleId != null and ''!=articleId">
+			and ai.article_id = #{articleId,jdbcType=VARCHAR}
+		</if>
+		<if test="articleCnTitle != null and ''!=articleCnTitle">
+			and ai.article_cn_title =
+			#{articleCnTitle,jdbcType=VARCHAR}
+		</if>
+		<if test="section != null and ''!=section">
+			and ai.invest_section = #{section,jdbcType=VARCHAR}
+		</if>
+		<if test="creatTime != null and ''!=creatTime">
+			and DATE_FORMAT(ai.create_time, '%Y-%m-%d') =
+			#{creatTime,jdbcType=VARCHAR}
+		</if>
+		<if test="authorName != null and ''!=authorName">
+			and #{authorName,jdbcType=VARCHAR} in (select group_concat(aui.author_name))
+		</if>
+	</select> -->
+	
 
 	<select id="selectArticleInfosForEditor" parameterType="ArticleQueryReqDto"
 		resultMap="ArticleInfosForEditorResultMap">
@@ -26,6 +78,9 @@
 		ai.article_id=aie.article_id and ai.article_id=aui.article_id
 		<if test="userId != null and ''!=userId">
 			and aie.user_id = #{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="roleId != null and ''!=roleId">
+			and aie.role_id = #{roleId,jdbcType=VARCHAR}
 		</if>
 		<if test="editorState != null and ''!=editorState">
 			and ai.editor_state = #{editorState,jdbcType=VARCHAR}

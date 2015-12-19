@@ -140,17 +140,22 @@ public class ArticleQueryController extends AuthorController{
 		UserInfo userInfo = getUserInfo(request);
 //		logger.info("编辑待刊稿件收款账户信息Page in:["+JSON.toJSONString(articleId)+"]");
 		ModelAndView mav = new ModelAndView("addPayeeInfoPage");
-		AuthorInfoQuery query =  new AuthorInfoQuery();
+		
+		AuthorInfoQuery query = new AuthorInfoQuery();
+		query.setArticleId(articleId);
 		query.setAuthorId(authorId);
 		List<AuthorInfo> authorInfos = authorInfoManager.queryList(query);
-//		PayeeInfoQuery payInfoQuery = new PayeeInfoQuery();
-//		payInfoQuery.setExtend1(authorId);
-//		List<PayeeInfo> payeeInfos = payeeInfoManager.queryList(payInfoQuery);
-//		if(payeeInfos==null || payeeInfos.size()==0){
-//			mav.addObject("payeeInfo", "空");
-//		}else{
-//			mav.addObject("payeeInfo", payeeInfos.get(0));
-//		}
+		AuthorInfo authorInfo =authorInfos.get(0);
+		PayeeInfoQuery payInfoQuery = new PayeeInfoQuery();
+		payInfoQuery.setExtend1(articleId);
+		payInfoQuery.setRefId(authorInfo.getAuthorId());
+		payInfoQuery.setType("001");
+		List<PayeeInfo> payeeInfos = payeeInfoManager.queryList(payInfoQuery);
+		if(payeeInfos==null || payeeInfos.size()==0){
+			mav.addObject("payeeInfo", "");
+		}else{
+			mav.addObject("payeeInfo", payeeInfos.get(0));
+		}
 		mav.addObject("author", authorInfos.get(0));
 		mav.addObject("articleId", articleId);
 		return mav;
@@ -172,7 +177,7 @@ public class ArticleQueryController extends AuthorController{
 		payeeInfo.setRefId(authorId);
 		payeeInfo.setExtend1(articleId);
 		payeeInfo.setType("001");
-//		payeeInfo.setId(payeeInfo.getId());
+		payeeInfo.setId(payeeInfo.getId());
 		payeeInfoManager.savePayeeInfo(payeeInfo);
 		/**
 		 * 将该作者状态修改为第一作者

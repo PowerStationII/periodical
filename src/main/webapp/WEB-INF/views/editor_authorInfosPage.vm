@@ -22,19 +22,19 @@
 		 		 "id":rows[i].id,  
                  "authorName":rows[i].authorName,  
                  "email":rows[i].email,
-                 "certificateType":ArticleStateEnums(rows[i].certificateType),  
+                 "certificateType":getZJType(rows[i].certificateType),  
                  "certificateNo":rows[i].certificateNo,  
                  "duties":rows[i].duties,
                  "technicalTitle":rows[i].technicalTitle,
                  "option":rows[i].option
              }) ; 
 		}
-        $("#table").datagrid("loadData", data.slice(0, 5));
+        $("#table").datagrid("loadData", data.slice(0, 15));
         var pager = $("#table").datagrid("getPager");  
         pager.pagination({  
             total:data.length, 
-            pageSize:5,
-            pageList: [5,10,15,20],
+            pageSize:15,
+            pageList: [15,20],
             onSelectPage:function (pageNo, pageSize) {  
                 var start = (pageNo - 1) * pageSize;  
                 var end = start + pageSize;  
@@ -46,11 +46,11 @@
             }  
         });  
 	});
-	}
+	
 </script>
 <body>
-	<div id="articleInfos"  style="margin-top:50px;">
-		<table  id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
+	<div id="articleInfos">
+		<table  id="table"  class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true,pagination:true">
 			<thead>
 				<tr>
 					<th data-options="field:'id',width:45">序号</th>
@@ -73,7 +73,7 @@
 					<td>$!{dtos.certificateNo}</td>
 					<td>$!{dtos.duties}</td>
 					<td>$!{dtos.technicalTitle}</td>
-					<td><a href="../editor/toQueryAuthorInfoDetailPage?authorId=${dtos.authorId}">查看</a></td>
+					<td><a class="easyui-linkbutton" style="width:50px;" href="../editor/toQueryAuthorInfoDetailPage?authorId=${dtos.authorId}">查看</a></td>
 				</tr>
 				#end
 			</tbody>

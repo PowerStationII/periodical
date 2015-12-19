@@ -6,6 +6,8 @@
 package com.cn.periodical.pojo;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * ArticleInfo
@@ -49,6 +51,25 @@ public class ArticleInfo implements Serializable{
 	private java.lang.String extends4;
 	private java.util.Date createTime;
 	private java.util.Date updateTime;
+	
+	private List<BizAuthorAddressInfo> bizAuthorAddressInfos;
+	private List<ArticleAttachmentInfo> articleAttachmentInfos;
+
+	public List<BizAuthorAddressInfo> getBizAuthorAddressInfos() {
+		return bizAuthorAddressInfos;
+	}
+
+	public void setBizAuthorAddressInfos(List<BizAuthorAddressInfo> bizAuthorAddressInfos) {
+		this.bizAuthorAddressInfos = bizAuthorAddressInfos;
+	}
+
+	public List<ArticleAttachmentInfo> getArticleAttachmentInfos() {
+		return articleAttachmentInfos;
+	}
+
+	public void setArticleAttachmentInfos(List<ArticleAttachmentInfo> articleAttachmentInfos) {
+		this.articleAttachmentInfos = articleAttachmentInfos;
+	}
 
 	/**
 	 * @param id

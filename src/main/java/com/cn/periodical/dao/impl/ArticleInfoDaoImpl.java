@@ -86,5 +86,12 @@ public class ArticleInfoDaoImpl extends BaseDao implements ArticleInfoDao {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectOne("ArticleInfoMapper.selectInfoDetail",reqMap);
 	}
+
+
+	@Override
+	public List<ArticleInfo> querySysArticleInfosList(ArticleInfoQuery query) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("ArticleInfoMapper.querySysArticleInfosList",query);
+	}
 	
 }

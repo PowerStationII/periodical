@@ -74,10 +74,12 @@ public class ArticleRepairedDealController extends EditorController{
 	@RequestMapping(value="/toRepaireArticlePage",method = RequestMethod.GET)
 	public ModelAndView toRepairedArticlePage(HttpServletRequest request) {
 		logger.info("返修PageList in:[]");
+		UserInfo userInfo = getUserInfo(request);
 		ModelAndView mav = new ModelAndView("editor_repaireArticlePage");
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
 		reqDto.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
 		reqDto.setExpertState(ArticleStateEnums.REPAIR_ARTICLE.getCode());
+		reqDto.setRoleId(userInfo.getRoleId());
 		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
 		mav.addObject("list", list);
 		logger.info("返修PageList out:["+JSON.toJSONString(list)+"]");

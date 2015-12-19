@@ -10,6 +10,11 @@
 	  <result column="expert_download_time" jdbcType="TIMESTAMP" property="expertDownloadTime" />
 	  <result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
 	  <result column="periodical_name" jdbcType="VARCHAR" property="periodicalName" />
+	  <result column="editor_dj_time" jdbcType="TIMESTAMP" property="editorDjTime" />
+	  <result column="editor_ss_time" jdbcType="TIMESTAMP" property="editorSsTime" />
+	  <result column="cn_expert_sh_time" jdbcType="TIMESTAMP" property="cnExpertShTime" />
+	  <result column="en_expert_sh_time" jdbcType="TIMESTAMP" property="enExpertShTime" />
+	  <result column="en_expert_upload" jdbcType="VARCHAR" property="enExpertUpload" />
   </resultMap>
   <sql id="Page_Query_Begin">
     select * from(select t.*,rownum rn from(
@@ -41,6 +46,21 @@
       <if test="periodicalName != null" >
 	      and periodical_name = #{periodicalName,jdbcType=VARCHAR}
 	    </if>
+      <if test="editorDjTime != null" >
+	      and editor_dj_time = #{editorDjTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="editorSsTime != null" >
+	      and editor_ss_time = #{editorSsTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="cnExpertShTime != null" >
+	      and cn_expert_sh_time = #{cnExpertShTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="enExpertShTime != null" >
+	      and en_expert_sh_time = #{enExpertShTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="enExpertUpload != null" >
+	      and en_expert_upload = #{enExpertUpload,jdbcType=VARCHAR}
+	    </if>
 	  </trim>
     </where>
   </sql>
@@ -68,6 +88,21 @@
       <if test="periodicalName != null">
         periodical_name = #{periodicalName,jdbcType=VARCHAR},
       </if>
+      <if test="editorDjTime != null">
+        editor_dj_time = #{editorDjTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editorSsTime != null">
+        editor_ss_time = #{editorSsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cnExpertShTime != null">
+        cn_expert_sh_time = #{cnExpertShTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enExpertShTime != null">
+        en_expert_sh_time = #{enExpertShTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enExpertUpload != null">
+        en_expert_upload = #{enExpertUpload,jdbcType=VARCHAR},
+      </if>
       </trim>
     </set>
   </sql>
@@ -80,6 +115,11 @@
     expert_download_time,
     periodical_id,
     periodical_name,
+    editor_dj_time,
+    editor_ss_time,
+    cn_expert_sh_time,
+    en_expert_sh_time,
+    en_expert_upload,
   </sql>
   <sql id="Base_Set_Clause">
     <set>
@@ -91,6 +131,11 @@
         expert_download_time = #{expertDownloadTime,jdbcType=TIMESTAMP},
         periodical_id = #{periodicalId,jdbcType=VARCHAR},
         periodical_name = #{periodicalName,jdbcType=VARCHAR},
+        editor_dj_time = #{editorDjTime,jdbcType=TIMESTAMP},
+        editor_ss_time = #{editorSsTime,jdbcType=TIMESTAMP},
+        cn_expert_sh_time = #{cnExpertShTime,jdbcType=TIMESTAMP},
+        en_expert_sh_time = #{enExpertShTime,jdbcType=TIMESTAMP},
+        en_expert_upload = #{enExpertUpload,jdbcType=VARCHAR},
       </trim>
     </set>
   </sql>
@@ -117,6 +162,21 @@
     <if test="periodicalName != null">
       periodical_name,
     </if>
+    <if test="editorDjTime != null">
+      editor_dj_time,
+    </if>
+    <if test="editorSsTime != null">
+      editor_ss_time,
+    </if>
+    <if test="cnExpertShTime != null">
+      cn_expert_sh_time,
+    </if>
+    <if test="enExpertShTime != null">
+      en_expert_sh_time,
+    </if>
+    <if test="enExpertUpload != null">
+      en_expert_upload,
+    </if>
   </sql>
 	<sql id="Base_Value_List">
     #{id,jdbcType=BIGINT},
@@ -127,6 +187,11 @@
     #{expertDownloadTime,jdbcType=TIMESTAMP},
     #{periodicalId,jdbcType=VARCHAR},
     #{periodicalName,jdbcType=VARCHAR},
+    #{editorDjTime,jdbcType=TIMESTAMP},
+    #{editorSsTime,jdbcType=TIMESTAMP},
+    #{cnExpertShTime,jdbcType=TIMESTAMP},
+    #{enExpertShTime,jdbcType=TIMESTAMP},
+    #{enExpertUpload,jdbcType=VARCHAR},
 	</sql>
   <sql id="Selective_Value_List">
     <!-- SEQ_article_info_state.nextval, -->
@@ -150,6 +215,21 @@
     </if>
     <if test="periodicalName != null">
       #{periodicalName,jdbcType=VARCHAR},
+    </if>
+    <if test="editorDjTime != null">
+      #{editorDjTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="editorSsTime != null">
+      #{editorSsTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="cnExpertShTime != null">
+      #{cnExpertShTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="enExpertShTime != null">
+      #{enExpertShTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="enExpertUpload != null">
+      #{enExpertUpload,jdbcType=VARCHAR},
     </if>
   </sql>
   

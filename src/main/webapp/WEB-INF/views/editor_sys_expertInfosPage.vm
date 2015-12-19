@@ -20,10 +20,12 @@
         for(var i=0;i<rows.length;i++) {
         	 data.push({  
 		 		 "id":rows[i].id,  
-                 "articleId":rows[i].articleId,  
-                 "title":rows[i].title,
-                 "contriTime":rows[i].contriTime,  
-                 "authorState":ArticleStateEnums(rows[i].authorState),
+                 "expertName":rows[i].expertName,  
+                 "email":rows[i].email,
+                 "certificateType":getZJType(rows[i].certificateType),  
+                 "certificateNo":rows[i].certificateNo,  
+                 "duties":rows[i].duties,
+                 "technicalTitle":rows[i].technicalTitle,
                  "option":rows[i].option
              }) ; 
 		}
@@ -44,50 +46,34 @@
             }  
         });  
 	});
-	function yijian(value) {
-		$.ajax({
-				url:'../author/toOpinionQueryPage',
-				data:{articleId:value},
-				type:'POST',
-				success:function(res){
-					if (res=='null') {
-						$.messager.alert('审稿意见','无');    
-					}
-					else {
-						$.messager.alert('审稿意见',eval('(' + res + ')').opinion); 
-					}
-				}	
-		});
-	}
+	
 </script>
 <body>
 	<div id="articleInfos">
-		<table  id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
+		<table  id="table"  class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true,pagination:true">
 			<thead>
 				<tr>
 					<th data-options="field:'id',width:45">序号</th>
-					<th data-options="field:'articleId',width:262">稿件编号</th>
-					<th data-options="field:'title',width:200">稿件标题</th>
-					<th data-options="field:'contriTime',width:185">投稿时间</th>
-					<th data-options="field:'authorState',width:185">稿件状态</th>
-					<th data-options="field:'option',width:200">备注信息</th>
+					<th data-options="field:'expertName',width:262">姓名</th>
+					<th data-options="field:'email',width:200">email</th>
+					<th data-options="field:'certificateType',width:185">证件类型</th>
+					<th data-options="field:'certificateNo',width:185">证件号</th>
+					<th data-options="field:'duties',width:185">职务</th>
+					<th data-options="field:'technicalTitle',width:200">职称</th>
+					<th data-options="field:'option',width:200">操作</th>
 				</tr>
 			</thead>
 			<tbody>
 				#foreach($dtos in ${list})   
 				<tr>
 					<td>$!{velocityCount}</td>
-					<td>$!{dtos.articleId}</td>
-					<td><a href="../author/toArticleQueryDetailPage?articleId=${dtos.articleId}">$!{dtos.title}</a></td>
-					<td>$!{dtos.contriTime}</td>
-					<td>$!{dtos.authorState}</td>
-					#if($!{dtos.authorState}=='0003')
-					<td><a href="../author/toEditAuthorPayeeInfoPage?articleId=${dtos.articleId}" class="easyui-linkbutton" >账户信息</a><a onclick="yijian('${dtos.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
-					#elseif($!{dtos.authorState}=='0000')
-					<td><!-- <a href="" class="easyui-linkbutton" >修改</a> --></td>
-					#else
-					<td><a onclick="yijian('${dtos.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
-					#end 
+					<td>$!{dtos.expertName}</td>
+					<td>$!{dtos.email}</td>
+					<td>$!{dtos.certificateType}</td>
+					<td>$!{dtos.certificateNo}</td>
+					<td>$!{dtos.duties}</td>
+					<td>$!{dtos.technicalTitle}</td>
+					<td><a class="easyui-linkbutton" style="width:50px;" href="../editor/toQuerySysExpertInfoDetailPage?expertId=${dtos.expertId}">查看</a></td>
 				</tr>
 				#end
 			</tbody>

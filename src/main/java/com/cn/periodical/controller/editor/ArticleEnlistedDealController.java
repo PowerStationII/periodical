@@ -78,6 +78,7 @@ public class ArticleEnlistedDealController extends EditorController{
 		ModelAndView mav = new ModelAndView("editor_enlistedArticlePage");
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
 		reqDto.setEditorState(ArticleStateEnums.ENLISTED_ARTICLE.getCode());
+		reqDto.setRoleId(userInfo.getRoleId());
 		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
 		mav.addObject("list", list);
 		logger.info("已登记Page出参:["+JSON.toJSONString(list)+"]");

@@ -18,19 +18,17 @@
 		var rows = $('#table').datagrid('getRows');
 		for (var i = 0; i < rows.length; i++) {
 			data.push({
-				"articleId" : rows[i].articleId,
-				"title" : rows[i].title,
-				"contriTime" : rows[i].contriTime,
-				"authorState" : rows[i].authorState,
+				"id" : rows[i].id,
+				"name" : rows[i].name,
 				"option" : rows[i].option
 			});
 		}
-		$("#table").datagrid("loadData", data.slice(0, 5));
+		$("#table").datagrid("loadData", data.slice(0, 15));
 		var pager = $("#table").datagrid("getPager");
 		pager.pagination({
 			total : data.length,
-			pageSize : 5,
-			pageList : [ 5, 10, 15, 20 ],
+			pageSize : 15,
+			pageList : [ 15,20 ],
 			onSelectPage : function(pageNo, pageSize) {
 				var start = (pageNo - 1) * pageSize;
 				var end = start + pageSize;
@@ -41,39 +39,35 @@
 				});
 			}
 		});
-	});
-	function yijian(value) {
-		$.ajax({
-			url : '../author/toOpinionQueryPage',
-			data : {
-				articleId : value
-			},
-			type : 'POST',
-			success : function(res) {
-				if (res == 'null') {
-					$.messager.alert('审稿意见', '无');
-				} else {
-					$.messager.alert('审稿意见', eval('(' + res + ')').opinion);
-				}
+		//$('#r1').attr('checked','checked');
+		$('input[id^=r]').click(function(){
+			if (this.checked==true) {
+				var bID= this.id.replace('r','a');
+				$('a[id^=a]').hide();
+				$('#'+bID).show();
 			}
 		});
-	}
+	});
 </script>
 <body>
 	<div id="articleInfos" style="margin-top: 50px;">
+		<div id="bt">稿件名称:${articleInfo.articleCnTitle}</div>
 		<form action="">
-			<table style="border: 1px solid black;" rules="all">
-				<tr><td colspan="2">稿件名称:${articleInfo.articleCnTitle}</td></tr>
-				<tr>
-					<td></td>
-					<td>作者姓名</td>
-				</tr>
+			<table  id="table"  class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true,toolbar:'#bt',pagination:true">
+				<thead>
+					<th data-options="field:'id',width:45">选择第一作者填写账户信息</th>
+					<th data-options="field:'name',width:45">作者姓名</th>
+					<th data-options="field:'option',width:45">操作</th>
+				</thead>
+				<tbody>
 				#foreach($dtos in ${list})
 				<tr>
-					<td><input type="radio" name=""></td>
-					<td>${dtos.authorName}<a href="../author/toAddAuthorPayeeInfoPage?articleId=${articleInfo.articleId}&authorId=${dtos.authorId}">编辑账户信息</a></td>
+					<td><input type="radio"  name="selectRadio" id="r$!{velocityCount}"></td>
+					<td>${dtos.authorName}${dtos.authorId}</td>
+					<td><a id="a$!{velocityCount}" style="display:none;" class="easyui-linkbutton"  href="../author/toAddAuthorPayeeInfoPage?articleId=${articleInfo.articleId}&authorId=${dtos.authorId}">编辑账户信息</a></td>
 				</tr>
 				#end
+				</tbody>
 			</table>
 			<br>
 		</form>

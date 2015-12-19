@@ -74,10 +74,12 @@ public class ArticleRefundDealController extends EditorController{
 	@RequestMapping(value="/toReturnedArticlePage",method = RequestMethod.GET)
 	public ModelAndView toReturnedArticlePage(HttpServletRequest request) {
 		logger.info("退稿PageList in:[]");
+		UserInfo userInfo = getUserInfo(request);
 		ModelAndView mav = new ModelAndView("editor_returnedArticlePage");
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
 		reqDto.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
 		reqDto.setExpertState(ArticleStateEnums.RETURNED_ARTICLE.getCode());
+		reqDto.setRoleId(userInfo.getRoleId());
 		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
 		mav.addObject("list", list);
 		logger.info("退稿PageList out:["+JSON.toJSONString(list)+"]");

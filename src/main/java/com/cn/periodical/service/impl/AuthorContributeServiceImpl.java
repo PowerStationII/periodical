@@ -163,8 +163,9 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		
 		final ArticleInfoState articleInfoState =  new ArticleInfoState();
 		articleInfoState.setArticleId(articleId);
-		articleInfoState.setEditorDownload("N");
-		articleInfoState.setExpertDownload("N");
+		articleInfoState.setEditorDownload("N");//编辑第一次下载稿件时,记录流水
+		articleInfoState.setExpertDownload("N");//专家第一次下载稿件时,记录流水
+		articleInfoState.setEnExpertUpload("N");
 		articleInfoState.setPeriodicalId(contributeRequestDto.getPeriodicalId());
 		articleInfoState.setPeriodicalName(contributeRequestDto.getPeriodicalName());
 		

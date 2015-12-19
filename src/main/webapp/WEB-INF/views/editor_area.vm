@@ -215,6 +215,24 @@
 							.append(
 									'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toQueryAuthorInfosPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
 				});
+		$('#xitongzhuanjia')
+		.click(
+				function() {
+					$('#area').hide();
+					$('#other').remove();
+					$('.right')
+							.append(
+									'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toQuerySysExpertInfosPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+				});
+		$('#xitonggaojian')
+		.click(
+				function() {
+					$('#area').hide();
+					$('#other').remove();
+					$('.right')
+							.append(
+									'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toQuerySysArticleInfosPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+				});
 		//<!-- 主编 end-->
 
 		$('#other').hide();
@@ -395,8 +413,7 @@ a {
 				<div class="mode_name">人员管理</div>
 				<div style="overflow: auto; padding: 10px;">
 					<div class="li1" id="bianjiguanli">编辑管理</div>
-					<div class="li2" id="zhuangjiaguanli">专家管理</div>
-					<div class="li3" id="chakanxitongzuozhe">查看系统作者</div>
+					<div class="li18" id="zhuangjiaguanli">专家管理</div>
 				</div>
 				<!-- <div class="mode_name">稿件查询</div>
 				<div style="overflow: auto; padding: 10px;">
@@ -406,6 +423,12 @@ a {
 				<div style="overflow: auto; padding: 10px;">
 					<div class="li18" id="qikanguanli">添加期刊</div>
 				</div>
+				<div class="mode_name">系统信息</div>
+				<div style="overflow: auto; padding: 10px;">
+					<div class="li1" id="chakanxitongzuozhe">系统作者</div>
+					<div class="li2" id="xitongzhuanjia">系统专家</div>
+					<div class="li18" id="xitonggaojian">系统稿件</div>
+				</div>				
 			</div>
 			#end
 		</div>

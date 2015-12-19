@@ -27,37 +27,62 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>作者姓名:</td>
-					<td>${authorInfo.authorName}</td>
+					<td>稿件编号:</td>
+					<td>${articleInfo.articleId}</td>
 				</tr>
 				<tr>
-					<td>详细地址:</td>
-					<td>$!{addressInfo.receiveAddress}</td>
+					<td>中国分类号:</td>
+					<td>$!{articleInfo.classificationNums}</td>
 				</tr>
 				<tr>
-					<td>邮政编码:</td>
-					<td>$!{addressInfo.receivePostcode}</td>
+					<td>中文标题:</td>
+					<td>$!{articleInfo.articleCnTitle}</td>
 				</tr>
 				<tr>
-					<td>邮政编码:</td>
-					<td>$!{addressInfo.receivePostcode}</td>
+					<td>英文标题:</td>
+					<td>$!{articleInfo.articleEnTile}</td>
 				</tr>
 				<tr>
-					<td>邮政编码:</td>
-					<td>$!{addressInfo.receivePostcode}</td>
+					<td>中文摘要:</td>
+					<td>$!{articleInfo.articleCnSummary}</td>
 				</tr>
 				<tr>
-					<td>邮政编码:</td>
-					<td>$!{addressInfo.receivePostcode}</td>
+					<td>英文摘要:</td>
+					<td>$!{articleInfo.articleEnSummary}</td>
 				</tr>
 				<tr>
-					<td>邮政编码:</td>
-					<td>$!{addressInfo.receivePostcode}</td>
+					<td>中文关键词:</td>
+					<td>$!{articleInfo.articleCnKeywords}</td>
 				</tr>
 				<tr>
-					<td>邮政编码:</td>
-					<td>$!{addressInfo.receivePostcode}</td>
+					<td>英文关键词:</td>
+					<td>$!{articleInfo.articleEnKeywords}</td>
 				</tr>
+				<tr>
+					<td>稿件作者:</td>
+					<td></td>
+				</tr>
+				
+				#foreach($auDtos in ${articleInfo.bizAuthorAddressInfos})
+				<tr>
+					<td>作者姓名：</td>
+					<td>${auDtos.au_authorName}</td>
+				</tr>
+				#end
+				<tr>
+					<td>稿件下载:</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>稿件名称:</td>
+					<td>下载</td>
+				</tr>
+				#foreach($aDtos in ${articleInfo.articleAttachmentInfos})
+				<tr>
+					<td>${aDtos.attachmentName}</td>
+					<td>${aDtos.attachmentPath}</td>
+				</tr>
+				#end
 			</tbody>	
 		</table>
 		<input type="button" value="返回"  id="back">

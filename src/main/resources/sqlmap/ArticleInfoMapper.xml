@@ -43,6 +43,76 @@
 		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
 	</resultMap>
+	<!-- 主编查看系统稿件 start -->
+	
+	<resultMap id="QuerySysResultMap" type="ArticleInfo">
+		<id column="ID" jdbcType="DECIMAL" property="id" />
+		<result column="article_name" jdbcType="VARCHAR" property="articleName" />
+		<result column="article_id" jdbcType="VARCHAR" property="articleId" />
+		<result column="article_type" jdbcType="VARCHAR" property="articleType" />
+		<result column="article_cn_title" jdbcType="VARCHAR" property="articleCnTitle" />
+		<result column="article_en_tile" jdbcType="VARCHAR" property="articleEnTile" />
+		<result column="article_cn_summary" jdbcType="VARCHAR" property="articleCnSummary" />
+		<result column="article_en_summary" jdbcType="VARCHAR" property="articleEnSummary" />
+		<result column="artilce" jdbcType="LONGVARBINARY" property="artilce" />
+		<result column="article_cn_keywords" jdbcType="VARCHAR" property="articleCnKeywords" />
+		<result column="article_en_keywords" jdbcType="VARCHAR" property="articleEnKeywords" />
+		<result column="isfund" jdbcType="VARCHAR" property="isfund" />
+		<result column="invest_section" jdbcType="VARCHAR" property="investSection" />
+		<result column="classification_nums" jdbcType="VARCHAR" property="classificationNums" />
+		<result column="document_code" jdbcType="VARCHAR" property="documentCode" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="inovation_point" jdbcType="VARCHAR" property="inovationPoint" />
+		<result column="reference_doc" jdbcType="VARCHAR" property="referenceDoc" />
+		<result column="receive_article_time" jdbcType="TIMESTAMP" property="receiveArticleTime" />
+		<result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+		<result column="total_pics" jdbcType="INTEGER" property="totalPics" />
+		<result column="total_tabs" jdbcType="INTEGER" property="totalTabs" />
+		<result column="total_pages" jdbcType="INTEGER" property="totalPages" />
+		<result column="fund_title" jdbcType="VARCHAR" property="fundTitle" />
+		<result column="editor_state" jdbcType="VARCHAR" property="editorState" />
+		<result column="expert_state" jdbcType="VARCHAR" property="expertState" />
+		<result column="author_state" jdbcType="VARCHAR" property="authorState" />
+		<result column="isAvaliable" jdbcType="VARCHAR" property="isAvaliable" />
+		<result column="lately_flows_id" jdbcType="BIGINT" property="latelyFlowsId" />
+		<result column="extends_2" jdbcType="VARCHAR" property="extends2" />
+		<result column="extends_3" jdbcType="VARCHAR" property="extends3" />
+		<result column="extends_4" jdbcType="VARCHAR" property="extends4" />
+		<collection property="bizAuthorAddressInfos" select="selectBizAuthorAddressInfos" column="article_id">
+			<result column="au_authorId" jdbcType="VARCHAR" property="au_authorId" />
+			<result column="au_authroName" jdbcType="VARCHAR" property="au_authroName" />
+		</collection>
+		<collection property="articleAttachmentInfos" select="queryArticleAttachmentInfos" column="article_id"></collection>
+	</resultMap>
+	
+	
+	<select id="querySysArticleInfosList" parameterType="ArticleInfoQuery" resultMap="QuerySysResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from article_info
+		<include refid="Example_Where_Clause" />
+	</select>
+	
+	<select id="selectBizAuthorAddressInfos" resultType="BizAuthorAddressInfo">
+		select aui.id as au_id,aui.article_id as au_articleId,aui.author_name as au_authorName,aui.author_id as au_authorId,
+		aui.academic_degree as au_academicDegree,aui.birthday as au_birthday,aui.certificate_no as au_certificateNo,aui.certificate_type as au_certificateType,
+		aui.company_department as au_companyDepartment,aui.company_name as au_companyName, aui.compay_type as au_compayType,aui.degree as au_degree,aui.duties as au_duties,
+		aui.email as au_email,aui.technical_title as au_technicalTitle,aui.sex as au_sex,aui.research_area as au_researchArea,aui.isreviewer as au_isreviewer,
+		aui.isfirstauthor as au_isfirstauthor,aui.isContacter as au_isContacter,adi.address_id as ad_addressId,adi.contacter_mobile as ad_contacterMobile,
+		adi.contacter_name as ad_contacterName,adi.contacter_telephone as ad_contacterTelephone,adi.receive_address as ad_receiveAddress,adi.receive_contacter as ad_receiveContacter,
+		adi.receive_postcode as ad_receivePostcode,adi.ref_role_id as ad_refRoleId ,adi.id as ad_id
+		from author_info aui ,address_info adi where aui.author_id=adi.ref_id
+		and aui.article_id=#{articleId,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="queryArticleAttachmentInfos" resultType="ArticleAttachmentInfo">
+		select aai.article_id as articleId,aai.attachment_name as attachmentName ,aai.attachment_path as attachmentPath,aai.type as type
+		from article_attachment_info aai where aai.article_id=#{articleId,jdbcType=VARCHAR}
+	</select>
+	<!-- 主编查看系统稿件 end -->
+	
 	<sql id="Page_Query_Begin">
 		select * from(select t.*,rownum rn from(
 	</sql>

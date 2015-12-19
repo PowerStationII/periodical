@@ -27,8 +27,8 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>作者姓名:</td>
-					<td>${authorInfo.authorName}</td>
+					<td>专家姓名:</td>
+					<td>${expertInfo.expertName}</td>
 				</tr>
 				<tr>
 					<td>详细地址:</td>

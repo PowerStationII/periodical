@@ -82,9 +82,11 @@ public class ArticlePublishDealController extends EditorController{
 	@RequestMapping(value="/toPublishArticlePage",method = RequestMethod.GET)
 	public ModelAndView toPublishArticlePage(HttpServletRequest request) {
 		logger.info("待刊Page in :[]");
+		UserInfo userInfo = getUserInfo(request);
 		ModelAndView mav = new ModelAndView("editor_publishArticlePage");
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
 		reqDto.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
+		reqDto.setRoleId(userInfo.getRoleId());
 		reqDto.setExpertState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
 		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
 		mav.addObject("list", list);

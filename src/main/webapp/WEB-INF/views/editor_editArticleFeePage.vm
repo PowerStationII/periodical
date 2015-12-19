@@ -13,6 +13,49 @@
 </head>
 <script type="text/javascript">
 	$(function(){
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#editTable').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+		 		 "articleId":rows[i].articleId,  
+                 "authorPayeeId":rows[i].authorPayeeId,  
+                 "expertPayeeId":rows[i].expertPayeeId,
+                 "periodicalCnName":rows[i].periodicalCnName,  
+                 "periodicalIssueNo":rows[i].periodicalIssueNo,
+                 "sectionName":rows[i].sectionName,  
+                 "articleId2":rows[i].articleId2,  
+                 "articleCnTitle":rows[i].articleCnTitle,
+                 "authorName":rows[i].authorName,  
+                 "authorAmount":rows[i].authorAmount,
+                 "authorTaxAmount":rows[i].authorTaxAmount,  
+                 "authorRealAmount":rows[i].authorRealAmount,  
+                 "expertName":rows[i].expertName,
+                 "expertAmount":rows[i].expertAmount,  
+                 "expertTaxAmount":rows[i].expertTaxAmount,
+                 "expertRealAmount":rows[i].expertRealAmount
+             }) ; 
+		}
+        $("#editTable").datagrid("loadData", data.slice(0, 15));
+        var pager = $("#editTable").datagrid("getPager");  
+        pager.pagination({  
+            total:data.length, 
+            pageSize:15,
+            pageList: [15,20],
+            onSelectPage:function (pageNo, pageSize) {  
+                var start = (pageNo - 1) * pageSize;  
+                var end = start + pageSize;  
+                $("#editTable").datagrid("loadData", data.slice(start, end));  
+                pager.pagination('refresh', {  
+                    total:data.length,  
+                    pageNumber:pageNo
+                });  
+                var rows = $('#editTable').datagrid('getRows');
+        		for(var i=0;i<rows.length;i++) {
+        			$('#editTable').datagrid('beginEdit',i);
+        		}
+            }  
+        });  
 		var rows = $('#editTable').datagrid('getRows');
 		for(var i=0;i<rows.length;i++) {
 			$('#editTable').datagrid('beginEdit',i);
@@ -46,7 +89,7 @@
 </script>
 <body>
 	<div id="articleInfos"  style="margin-top:50px;">
-		<table  id="editTable"  class="easyui-datagrid"   data-options="singleSelect:true">
+		<table  id="editTable"  class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true,pagination:true">
 			<thead>
 				<tr>
 					<th data-options="field:'articleId',width:0">1id</th>
@@ -55,7 +98,7 @@
 					<th data-options="field:'periodicalCnName',width:120">期刊名称</th>
 					<th data-options="field:'periodicalIssueNo',width:120">期刊号</th>
 					<th data-options="field:'sectionName',width:100">栏目名称</th>
-					<th data-options="field:'articleId',width:100">稿件编号</th>
+					<th data-options="field:'articleId2',width:100">稿件编号</th>
 					<th data-options="field:'articleCnTitle',width:100">标题</th>
 					<th data-options="field:'authorName',width:60">作者</th>
 					<th data-options="field:'authorAmount',width:80,editor:'numberbox'">作者应发金额</th>
@@ -94,6 +137,7 @@
 		</table>
 		<a id="back" class="easyui-linkbutton"  style="50px;">返回</a> 
 		<a id="submit" class="easyui-linkbutton"  style="50px;">保存</a>
+		<a style="font-size:10px;color:red;">修改后请保存</a>
 	</div>
 </body>
 </html>
