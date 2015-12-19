@@ -186,7 +186,8 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 	 */
 	@RequestMapping(value="/toEnAuditAgreePage")
 	public ModelAndView toEnAuditAgreePage(HttpServletRequest request,
-			@ModelAttribute BizPeriodical reqDto) {
+			@ModelAttribute BizPeriodical reqDto,String articleId,
+			String periodicalId,String periodicalIssueNo) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("英文审刊-稿件审核:["+JSON.toJSONString(reqDto)+"]");
 		ModelAndView mav = new ModelAndView("redirect:../expert/auditPeriodicalDetailPage");
@@ -329,7 +330,10 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 				/**
 				 * 弹出窗口,稿件审核未完成,不可签发
 				 * */
-				ModelAndView mav = new ModelAndView("");
+				ModelAndView mav = new ModelAndView("../expert/auditPeriodicalDetailPage");
+				mav.addObject("articleId",pd.getArticleId());
+				mav.addObject("periodicalId",periodicalId);
+				mav.addObject("periodicalIssueNo",periodicalIssueNo);
 				return mav;
 			}else{
 				ModelAndView mav = new ModelAndView("redirect:../expert/toEnAuditePeriodicalPage");
