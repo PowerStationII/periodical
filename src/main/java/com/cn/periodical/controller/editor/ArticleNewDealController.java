@@ -122,11 +122,12 @@ public class ArticleNewDealController extends EditorController{
 	 * 稿件状态变更为已登记
 	 * 登记去新稿页 End
 	 */
-	@RequestMapping(value="/toEnlistedModify",method = RequestMethod.POST)
-	public ModelAndView toUpdateArticleState(@RequestParam("articleId") String articleId,
+	@RequestMapping(value="/toEnlistedModify")
+	@ResponseBody
+	public String toUpdateArticleState(@RequestParam("articleId") String articleId,
 			HttpServletRequest request) {
 		logger.info("稿件登记Action入参:artilceId:["+articleId+"]");
-		ModelAndView mav = new ModelAndView("redirect:/editor/toNewArticlePage");
+		//ModelAndView mav = new ModelAndView("redirect:/editor/toNewArticlePage");
 		Map<String,String> map =new HashMap<String,String>();
 		map.put("articleId", articleId);
 		map.put("userId", getUserInfo(request).getUserId());
@@ -161,7 +162,7 @@ public class ArticleNewDealController extends EditorController{
 		articleFlowsManager.updateFlows(articleFlows);
 		
 		logger.info("稿件登记Action出参:[]");
-		return mav;
+		return "true";
 	}
 	
 	/**

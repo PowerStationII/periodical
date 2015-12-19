@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -136,10 +137,11 @@ public class ArticleEnlistedDealController extends EditorController{
 	 * 稿件状态变更 End
 	 */
 	@RequestMapping(value="/toSubmitState",method = RequestMethod.POST)
-	public ModelAndView toSubmitState(@RequestParam("articleId") String articleId,String eId,
+	@ResponseBody
+	public String toSubmitModify(@RequestParam("articleId") String articleId,String eId,
 			HttpServletRequest request) {
 		logger.info("修改稿件送审入参:artilceId:["+articleId+"]&expertId:["+eId+"]");
-		ModelAndView mav = new ModelAndView("redirect:../editor/toEnlistedArticlePage");
+		//ModelAndView mav = new ModelAndView("redirect:../editor/toEnlistedArticlePage");
 		/**
 		 * 编辑送审给哪个专家
 		 * */
@@ -178,6 +180,6 @@ public class ArticleEnlistedDealController extends EditorController{
 		articleInfoManager.saveArticleInfo(articleInfo);
 		
 		logger.info("修改稿件状态出参:[]");
-		return mav;
+		return "true";
 	}
 }

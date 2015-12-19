@@ -17,7 +17,13 @@
 		
 		//点击登记按钮提交
 		$('#submit').click(function(){
-			$('form').submit();
+			//$('form').submit();
+			$.post('../editor/toEnlistedModify',{articleId:'${respDto.articleId}'},function(data){
+				if (data=="true") {
+					alert('稿件登记成功');
+					window.location.href='../editor/toNewArticlePage';
+				}
+			})
 		});
 		
 		//点击下载按钮--始发(记录流水并返回刷新)

@@ -10,24 +10,59 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
+<script>
+$(function(){
+//表格数据源  
+var data = [];  
+var rows = $('#table').datagrid('getRows');
+for(var i=0;i<rows.length;i++) {
+	 data.push({  
+ 		 "articleId":rows[i].articleId,  
+         "title":rows[i].title,  
+         "authorName":rows[i].authorName,
+         "expertState":ArticleStateEnums(rows[i].expertState),
+         "option":rows[i].option
+     }) ; 
+}
+$("#table").datagrid("loadData", data.slice(0, 15));
+var pager = $("#table").datagrid("getPager");  
+pager.pagination({  
+    total:data.length, 
+    pageSize:15,
+    pageList: [15,20],
+    onSelectPage:function (pageNo, pageSize) {  
+        var start = (pageNo - 1) * pageSize;  
+        var end = start + pageSize;  
+        $("#table").datagrid("loadData", data.slice(start, end));  
+        pager.pagination('refresh', {  
+            total:data.length,  
+            pageNumber:pageNo
+        });  
+    }  
+});  
+});
+</script>
 <body>
 	<div id="articleInfos">
-		<table style="border: 1px solid black;" rules="all">
+		<table  id="table" class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true,pagination:true">
+		<thead>
 			<tr>
-				<td>稿件编号</td>
-				<td>稿件标题</td>
-				<td>稿件作者</td>
-				<td>稿件状态</td>
-				<td>操作</td>
+				<th data-options="field:'articleId',width:45">稿件编号</th>
+				<th data-options="field:'title',width:45">稿件标题</th>
+				<th data-options="field:'authorName',width:45">稿件作者</th>
+				<th data-options="field:'expertState',width:45">稿件状态</th>
+				<th data-options="field:'option',width:45">操作</th>
 			</tr>
+		</thead>
 			#foreach($obj in ${list})   
 			<tr>
 				<td>$!{obj.articleId}</td>
 				<td>$!{obj.title}</a></td>
 				<td>$!{obj.authorName}</td>
 				<td>$!{obj.expertState}</td>
-				<td><a href="../editor/toRepairePage?articleId=${obj.articleId}">返修</a></td>
+				<td><a style="width:50px;" class="easyui-linkbutton" href="../editor/toRepairePage?articleId=${obj.articleId}">返修</a></td>
 			</tr>
 			#end
 		</table>

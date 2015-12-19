@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -122,10 +123,11 @@ public class ArticleAuditeController extends ExpertController{
 	 * 专家变更稿件状态为待刊
 	 */
 	@RequestMapping(value="/toPublishStateModify")
-	public ModelAndView toPublishStateModify(@RequestParam("articleId") String articleId,
+	@ResponseBody
+	public String toPublishStateModify(@RequestParam("articleId") String articleId,
 			HttpServletRequest request) {
 		logger.info("待刊稿件状态入参:artilceId:["+articleId+"]");
-		ModelAndView mav = new ModelAndView("redirect:/expert/toArticleAuditePage");
+		//ModelAndView mav = new ModelAndView("redirect:/expert/toArticleAuditePage");
 		
 		ArticleInfoQuery query= new ArticleInfoQuery();
 		query.setArticleId(articleId);
@@ -182,7 +184,7 @@ public class ArticleAuditeController extends ExpertController{
 		articleInfoManager.saveArticleInfo(articleInfo);
 
 		logger.info("待刊稿件状态出参:["+JSON.toJSONString(articleInfo)+"]");
-		return mav;
+		return "true";
 	}
 	
 	

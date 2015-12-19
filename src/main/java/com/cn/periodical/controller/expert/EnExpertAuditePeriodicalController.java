@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -248,6 +250,7 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 	 */
 	@RequestMapping(value="/toEnAuditDisagreePage")
 	public ModelAndView toEnAuditDisagreePage(HttpServletRequest request,
+			@RequestParam(value="files", required=true) MultipartFile up,
 			@ModelAttribute BizPeriodical reqDto) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("英文审刊-稿件审核不通过:["+JSON.toJSONString(reqDto)+"]");
@@ -257,8 +260,12 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 		 * 审核不通过
 		 * */
 		
-		
-		
+		try {
+			this.saveFile(up, request, "", reqDto.getaId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		/**
 		 * 向英文专家显示上传按钮
@@ -270,6 +277,30 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 		return mav;
 	}
 	
+	private String saveFile(@RequestParam(value="file", required=true) MultipartFile file,HttpServletRequest request,String userId,String articleId) throws Exception{  
+    	PropertiesInitManager.dataInit();
+    	String basePath = PropertiesInitManager.PROPERTIES.getProperty("filePath");
+    	StringBuffer sbPath = new StringBuffer();
+    	sbPath.append(basePath);
+    	sbPath.append(File.separator);
+    	sbPath.append(userId);
+    	sbPath.append(File.separator);
+    	sbPath.append(articleId);
+    	sbPath.append(File.separator);
+    	String filePath = sbPath.toString();
+    	File headPath = new File(filePath);//获取文件夹路径       
+    	if(!headPath.exists()){
+    	//判断文件夹是否创建，没有创建则创建新文件夹        	
+    		headPath.mkdirs();
+    	}
+    	
+    	String fileName = filePath+file.getOriginalFilename();
+    	File uploadFile = new File(fileName); 
+        // 转存文件  
+        file.transferTo(uploadFile);  
+        logger.info(uploadFile.getAbsolutePath());
+        return uploadFile.getAbsolutePath();  
+    }  
 	
 	/**
 	 * sendToIssueEditorPage

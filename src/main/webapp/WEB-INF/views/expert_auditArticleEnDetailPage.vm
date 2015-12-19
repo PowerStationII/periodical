@@ -11,6 +11,16 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
+<script type="text/javascript">
+	$(function(){
+		$('#back').click(function(){
+			window.location.href='../expert/auditPeriodicalDetailPage?periodicalId=${periodicalId}&periodicalIssueNo=${periodicalIssueNo}';
+		});
+		$('#upload').click(function(){
+			$('#formUp').submit();
+		})
+	})
+</script>
 <body>
 	<div id="articleInfos"  style="margin-top:50px;">
 		<table  id="grid" class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true">
@@ -52,10 +62,13 @@
 			</tr>
 			</tbody>
 		</table>
-		<input type="button" value="审核通过">
-		<input type="button" value="审核不通过">
-		<input type="button" value="上传稿件">
-		<input type="button" value="返回上页">
+		<input type="button" value="审核通过"  id="yes">
+		<input type="button" value="审核不通过" id="no">
+		<form id="formUp" action="../expert/toEnAuditDisagreePage" enctype="multipart/form-data">
+			<input type="file" value="上传稿件" name="up">
+		</form>
+		<input type="button" value="上传稿件"  id="upload">
+		<input type="button" value="返回上页"  id="back">
 		<!-- <form action="../expert/toEnAuditAgreePage">
 			<input type="text" name="aId" value="${dto.articleId}">
 			<input type="text" name="pId" value="${periodicalId}">

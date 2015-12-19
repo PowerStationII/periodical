@@ -18,7 +18,13 @@
 	    	window.location.href='../expert/toArticleAuditePage';
 		});
 		$('#wait').click(function(){
-			$('form').submit();
+			//$('form').submit();
+			$.post('../expert/toPublishStateModify',{articleId:'$!{respDto.articleId}'},function(data){
+				if (data=="true") {
+					alert('待刊成功');
+					window.location.href='../expert/toArticleAuditePage';
+				}
+			})
 		});
 		$('.down').click(function(){
 			window.location.href='../expert/toDownLoadArticle?isDown=true&articleId=${respDto.articleId}&expertDownload=${respDto.expertDownload}';
@@ -47,11 +53,11 @@
 	});
 	
 	function fx () {
-		window.loction.href='../expert/toExpertRepairedPage?articleId=${respDto.articleId}';
+		window.location.href='../expert/toExpertRepairedPage?articleId=${respDto.articleId}';
 	}
 	
 	function tg () {
-		window.loction.href='../expert/toExpertRefundPage?articleId=${respDto.articleId}';
+		window.location.href='../expert/toExpertRefundPage?articleId=${respDto.articleId}';
 	}
 	
 	//真正的点击下载按钮(隐藏)

@@ -20,7 +20,13 @@
 				return;
 			}
 			else {
-				$('form').submit();
+				//$('form').submit();
+				$.post('../editor/toSubmitState',{articleId:'${respDto.articleId}',eId:$("#eId").val()},function(data){
+				if (data=="true") {
+					alert('稿件已送审');
+					window.location.href='../editor/toEnlistedArticlePage';
+				}
+			})
 			}
 		});
 		

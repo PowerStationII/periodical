@@ -10,54 +10,70 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
 <script>
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
-		})
+		});
+		$('#state').text(ArticleStateEnums('$!{respDto.expertState}'));
 	})
 </script>
 <body>
 	<form action="../editor/toRefundModify" method="POST">
 		<input type="hidden" name="articleId" value="${respDto.articleId}"/>
 		<div id="articleInfos">
-			<a style="font-size: 20px; color: #0000CC;">稿件退稿</a><br>
-
-			<TABLE style="border: 1px solid black;" rules="all">
+			<TABLE style="border: 1px solid green;margin-left:300px;margin-top:50px;" rules="all">
 				<tr>
-					<td rowspan="4">稿件信息</td>
+					<td>稿件编号:</td>
+					<td>$!{respDto.articleId}</td>
 				</tr>
 				<tr>
-					<td colspan="4">稿件编号:$!{respDto.articleId}</td>
-					<td colspan="4">稿件状态:$!{respDto.expertState}</td>
+					<td>稿件状态:</td>
+					<td id="state">$!{respDto.expertState}</td>
 				</tr>
 				<tr>
-					<td colspan="4">标题:$!{respDto.title}</td>
-					<td colspan="4">拟投栏目:$!{respDto.section}</td>
+					<td>标题:</td>
+					<td>$!{respDto.title}</td>
 				</tr>
 				<tr>
-					<td colspan="2">作者:$!{respDto.authorName}</td>
-					<td colspan="2">提交日期:$!{respDto.contriTime}</td>
-					<td colspan="2">登记日期:</td>
-					<td colspan="2">返修时间:</td>
+					<td>拟投栏目:</td>
+					<td>$!{respDto.section}</td>
 				</tr>
 				<tr>
-					<td rowspan="2">审核</td>
+					<td>作者:</td>
+					<td>$!{respDto.authorName}</td>
 				</tr>
 				<tr>
-					<td colspan="4">审稿专家:</td>
-					<td colspan="4">审稿意见:展示专家的退稿意见</td>
+					<td>提交日期:</td>
+					<td>$!{respDto.contriTime}</td>
 				</tr>
 				<tr>
-					<td rowspan="2">退稿意见</td>
+					<td>登记日期:</td>
+					<td></td>
 				</tr>
 				<tr>
-					<td colspan="8"><TEXTAREA NAME="dealOpinion" ROWS="" COLS=""></TEXTAREA></td>
+					<td>返修时间:</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>审稿专家:</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>审稿意见:</td>
+					<td>展示专家的退稿意见</td>
+				</tr>
+				<tr>
+					<td>退稿意见:</td>
+					<td><TEXTAREA NAME="dealOpinion" ROWS="10" COLS="70"></TEXTAREA></td>
 				</tr>
 			</table>
-			<input type="submit" value="确认退稿">
-			<input type="button"  value="返回"  id="back"/>
+			<div style="margin-left:300px;">
+				<input type="submit" value="确认退稿">
+				<input type="button"  value="返回"  id="back"/>
+			</div>
 			<br>
 		</div>
 	</form>
