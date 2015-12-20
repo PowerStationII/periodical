@@ -10,6 +10,7 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
 <script>
 	$(function(){
@@ -19,6 +20,20 @@
 		$('#submit').click(function(){
 			$('form').submit();
 		});
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#table').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+		 		 "id":rows[i].id,  
+                 "periodicalCnName":rows[i].periodicalCnName,  
+                 "sectionName":rows[i].sectionName,
+                 "sectionSummary":rows[i].sectionSummary,  
+                 "extend1":getGGType(rows[i].extend1),
+                 "option":rows[i].option
+             }) ; 
+		}
+        $("#table").datagrid("loadData", data.slice(0, 15));
 	});
 </script>
 <body>
@@ -29,7 +44,7 @@
 		<a  id="back" class="easyui-linkbutton"  style="width:50px;">返回</a>
 	</form>
 	
-		<table class="easyui-datagrid"   data-options="singleSelect:true,fitColumns:true" >
+		<table id="table" class="easyui-datagrid"   data-options="singleSelect:true,fitColumns:true" >
 			<thead>
 				<tr>
 					<th data-options="field:'id',width:45">序号</th>

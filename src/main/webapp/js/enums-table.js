@@ -100,3 +100,14 @@ function getPeriodicalType(status){
 		return '未知';
 	}
 }
+
+//广告类型
+function getGGType(status){
+	if('N' == status){
+		return '稿件类';
+	}else if('Y' == status){
+		return '广告类';
+	}else{
+		return '未知';
+	}
+}

@@ -12,7 +12,7 @@
 		from periodical_info pi,periodical p
 		where
 		pi.periodical_id=p.periodical_id
-		and (p.periodical_state='0' or p.periodical_state='PI')
+		and (p.periodical_state='0' or p.periodical_state='PI' or p.periodical_state='ADPO')
 	</select>
 	
 	

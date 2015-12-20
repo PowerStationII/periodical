@@ -56,9 +56,9 @@
 			</tr>
 			<tr>	
 				<td>栏目类别：</td>
-				<td><select name="extend1">
-					<option value="Y">稿件类</option>
-					<option value="N">广告类</option>
+				<td><select name="state">
+					<option value="0002">稿件类</option>
+					<option value="0001">广告类</option>
 				</select></td>
 			</tr>
 			<tr>	

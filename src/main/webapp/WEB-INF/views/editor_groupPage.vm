@@ -10,18 +10,37 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
+<script>
+$(function(){
+	//表格数据源  
+	var data = [];  
+	var rows = $('#table').datagrid('getRows');
+	for(var i=0;i<rows.length;i++) {
+		 data.push({  
+	 		 "periodicalCnName":rows[i].periodicalCnName,  
+	         "periodicalYear":rows[i].periodicalYear,  
+	         "cycleNums":rows[i].cycleNums,
+	         "periodicalIssueNo":rows[i].periodicalIssueNo,  
+	         "periodicalState":getPeriodicalType(rows[i].periodicalState),
+	         "option":rows[i].option
+	     }) ; 
+	}
+	$("#table").datagrid("loadData", data);
+});
+</script>
 <body>
 	<div id="articleInfos">
 		<form action="" method="POST">
-		<table  class="easyui-datagrid"   data-options="singleSelect:true"  style="width:910px;">
+		<table  id="table" class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true"  style="width:910px;">
 		<thead>
 			<tr>
 				<th data-options="field:'periodicalCnName',width:150">期刊名称</th>
 				<th data-options="field:'periodicalYear',width:100">发行年份</th>
 				<th data-options="field:'cycleNums',width:100">发行期</th>
 				<th data-options="field:'periodicalIssueNo',width:150">期刊号</th>
-				<th data-options="field:'time',width:200">签发时间</th>
+				<th data-options="field:'time',width:100">签发时间</th>
 				<th data-options="field:'periodicalState',width:100">状态</th>
 				<th data-options="field:'option',width:100">操作</th>
 			</tr>
