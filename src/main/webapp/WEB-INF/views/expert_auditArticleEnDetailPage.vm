@@ -85,7 +85,7 @@
 				</td>
 				<td>
 					<form id="formFile" action="">
-						<input type="file" value="上传稿件" name="up" style="display:none;" id="up">
+						<input type="file" value="上传稿件" name="file" style="display:none;" id="up">
 					</form>
 				</td>
 				<td>

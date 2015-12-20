@@ -23,11 +23,12 @@
 		expertLin4.expert_real_amount as expertRealAmount,
 		expertLin4.expert_tax_amount as expertTaxAmount,
 		expertLin4.expert_amount as expertAmount,
-		expertLin4.expertPayeeId as expertPayeeId
+		expertLin4.expertPayeeId as expertPayeeId,
+		authorLin4.id as accountInfoId
 		from (
 
 			select
-		authorLin1.periodical_id,authorLin1.section_id,authorLin1.article_id,authorLin1.periodical_issue_no,
+		authorLin1.periodical_id,authorLin1.section_id,authorLin1.article_id,authorLin1.periodical_issue_no,aci.id,
 		authorLin1.article_cn_title,authorLin1.periodical_cn_name,authorLin1.author_name,authorLin1.author_id,authorLin1.section_name,
 		aci.author_amount,aci.author_real_amount,aci.author_tax_amount,aci.author_payee_id,aci.pay_time,payeeInfo.payee_Id as authorPayeeId
 		from (
@@ -43,7 +44,7 @@
 right join
 		(
 		select
-		expertLin1.periodical_id,expertLin1.section_id,expertLin1.article_id,expertLin1.periodical_issue_no,
+		expertLin1.periodical_id,expertLin1.section_id,expertLin1.article_id,expertLin1.periodical_issue_no,aci.id,
 		expertLin1.article_cn_title,expertLin1.periodical_cn_name,expertLin1.expert_name,expertLin1.expert_id,expertLin1.section_name,
 		aci.expert_amount,aci.expert_real_amount,aci.expert_tax_amount,aci.expert_payee_id,aci.pay_time,payeeInfo.payee_Id as expertPayeeId
 		from (
@@ -55,8 +56,7 @@ right join
 		pd.article_id=ai.article_id and aie.article_id=pd.article_id and
 		aie.role_id='1003' and si.section_id=pd.section_id
 		and
-		ui.user_id=aie.user_id and ei.expert_id=ui.ref_id ) as expertLin1 LEFT
-		JOIN account_info aci  on aci.article_id=expertLin1.article_id 
+		ui.user_id=aie.user_id and ei.expert_id=ui.ref_id ) as expertLin1 LEFT JOIN account_info aci  on aci.article_id=expertLin1.article_id 
 left join payee_info payeeInfo
 on payeeInfo.ref_id=expertLin1.expert_id) as
 		expertLin4

@@ -233,6 +233,8 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 			articleAttachmentInfoManager.saveArticleAttachmentInfo(copyFile);
 		}catch(Exception e){
 			logger.info("稿件复制异常!!!怎么通知系统呢?");
+			e.printStackTrace();
+			return new ModelAndView("error");
 		}
 		PeriodicalDetailsQuery query = new PeriodicalDetailsQuery();
 		query.setArticleId(reqDto.getaId());
@@ -241,7 +243,7 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 		List<PeriodicalDetails> list = periodicalDetailsManager.queryList(query);
 		PeriodicalDetails p = list.get(0);
 		p.setId(p.getId());
-		p.setExtend1("Y");
+		p.setExtend1("Y");//稿件英文审稿结束,后续签发时会检查期刊下的所有稿件是否都已经审核结束
 		periodicalDetailsManager.savePeriodicalDetails(p);
 		return mav;
 	}
@@ -253,7 +255,7 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 	 */
 	@RequestMapping(value="/toEnAuditDisagreePage")
 	public ModelAndView toEnAuditDisagreePage(HttpServletRequest request,
-			@RequestParam(value="files", required=true) MultipartFile up,
+			@RequestParam(value="file", required=true) MultipartFile file,
 			@ModelAttribute BizPeriodical reqDto) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("英文审刊-稿件审核不通过:["+JSON.toJSONString(reqDto)+"]");
@@ -264,7 +266,7 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 		 * */
 		
 		try {
-			this.saveFile(up, request, "", reqDto.getaId());
+			this.saveFile(file, request, "", reqDto.getaId());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

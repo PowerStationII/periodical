@@ -10,6 +10,7 @@ public class BizArticleFee implements Serializable {
 	private String periodicalId;
 	private String sectionId;
 	private String sectionName;
+	private String accountInfoId;
 	private String articleId;
 	private String articleCnTitle;
 	private String periodicalIssueNo;
@@ -28,6 +29,15 @@ public class BizArticleFee implements Serializable {
 	private String expertRealAmount;
 	private String expertTaxAmount;
 	
+	
+	
+	
+	public String getAccountInfoId() {
+		return accountInfoId;
+	}
+	public void setAccountInfoId(String accountInfoId) {
+		this.accountInfoId = accountInfoId;
+	}
 	public String getAuthorPayeeId() {
 		return authorPayeeId;
 	}

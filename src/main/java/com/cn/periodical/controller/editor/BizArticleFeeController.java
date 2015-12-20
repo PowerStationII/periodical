@@ -58,6 +58,7 @@ public class BizArticleFeeController extends EditorController{
 		JSONArray arr = (JSONArray) JSONArray.parse(array);
 		for(int i=0;i<arr.size();i++){
 			AccountInfo accountInfo = new AccountInfo();
+			accountInfo.setId(arr.getJSONObject(i).getLong("accountInfoId")!=null?arr.getJSONObject(i).getLong("accountInfoId"):null);
 			accountInfo.setArticleId(arr.getJSONObject(i).getString("articleId"));
 			accountInfo.setAuthorPayeeId(arr.getJSONObject(i).getString("authorPayeeId"));
 			accountInfo.setExpertPayeeId(arr.getJSONObject(i).getString("expertPayeeId"));
@@ -76,8 +77,6 @@ public class BizArticleFeeController extends EditorController{
 			
 			accountInfoManager.saveAccountInfo(accountInfo);
 		}
-		
-		
 		
 		return mav;
 	}
