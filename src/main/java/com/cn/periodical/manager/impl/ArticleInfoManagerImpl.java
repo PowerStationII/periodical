@@ -92,7 +92,6 @@ public class ArticleInfoManagerImpl implements ArticleInfoManager {
 	}
 
 
-	@Override
 	public List<ArticleInfo> querySysArticleInfosList(ArticleInfoQuery query) {
 		// TODO Auto-generated method stub
 		return articleInfoDao.querySysArticleInfosList(query);
