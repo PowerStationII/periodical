@@ -18,12 +18,34 @@
 			$('#other', window.parent.document).hide();
 			$('#area', window.parent.document).show();
 		});
-
-		$('#certificateType').combobox('select',getCtfcType('$!{authorInfo.certificateType}'));
-		$('#education').combobox('select',getEducation('$!{authorInfo.degree}'));
-		$('#academicDegree').combobox('select',getAcademicDegree('$!{authorInfo.academicDegree}'));
-		$('#compayType').combobox('select',getCompayType('$!{authorInfo.compayType}')); 
-		$('#sex').val(getSex('$!{authorInfo.sex}'));
+		
+		$('#certificateType').combobox({
+			data:getZJLXState2()
+		});
+		
+		$('#education').combobox({
+			data:getXLLXState2()
+		});
+		
+		$('#academicDegree').combobox({
+			data:getXWLXState2()
+		});
+		
+		$('#compayType').combobox({
+			data:getQYLXState2()
+		});
+		
+		$('#sex').combobox({
+			data:getXBState()
+		});
+		
+		$('#certificateType').combobox('select','$!{authorInfo.certificateType}');
+		$('#education').combobox('select','$!{authorInfo.degree}');
+		$('#academicDegree').combobox('select','$!{authorInfo.academicDegree}');
+		$('#compayType').combobox('select','$!{authorInfo.compayType}'); 
+		$('#sex').combobox('select','$!{authorInfo.sex}'); 
+		
+		
 	})
 </script>
 <body>
@@ -102,10 +124,10 @@
 						</label>
 					</td>
 					<td>
-						<select id="certificateType" class="easyui-combobox" editable="false" name="certificateType" style="width:80px;"> 
-						    <option  value="IDCARD">身份证</option> 
+						<select id="certificateType" data-options="panelHeight:'auto'" class="easyui-combobox" editable="false" name="certificateType" style="width:80px;"> 
+						   <!--  <option  value="IDCARD">身份证</option> 
 						    <option  value="PASSPORT">护照</option>   
-						    <option  value="OFFICERCARD">军警证</option>     
+						    <option  value="OFFICERCARD">军警证</option>    -->  
 						</select>
 					</td>
 				</tr>
@@ -116,9 +138,8 @@
 						</label>
 					</td>
 					<td>
-						<input maxlength="30" 
-						class="wid333 ip_input_con lightgrey" value=""
-						id="sex" name="sex">
+						<select id="sex" data-options="panelHeight:'auto'" class="easyui-combobox" editable="false" name="sex" style="width:80px;"> 
+						</select>
 					</td>
 				</tr>
 				<tr>
@@ -153,8 +174,8 @@
 						</label>
 					</td>
 					<td>
-						<select id="education" name="degree" class="easyui-combobox" editable="false" style="width:100px;"> 
-						    <option value="JUNIOR_SCHOOL">小学</option> 
+						<select id="education" data-options="panelHeight:'auto'" name="degree" class="easyui-combobox" editable="false" style="width:100px;"> 
+						    <!-- <option value="JUNIOR_SCHOOL">小学</option> 
 						    <option value="MIDDLE_SCHOOL">初中</option> 
 						    <option value="SENIOR_SCHOOL">高中</option> 
 						    <option value="POLYTECHNIC_SCHOOL">中专</option> 
@@ -162,7 +183,7 @@
 						    <option value="JUNIOR_COLLEGE">专科</option> 
 						    <option value="BACHELOR_DEGREE">本科</option> 
 						    <option value="MASTER_DEGREE">硕士研究生</option> 
-						    <option value="DOCTORAL">博士研究生</option> 
+						    <option value="DOCTORAL">博士研究生</option>  -->
 						</select>
 					</td>
 				</tr>
@@ -173,11 +194,11 @@
 						</label>
 					</td>
 					<td>
-						<select id="academicDegree" class="easyui-combobox" name="academicDegree" editable="false" style="width:100px;"> 
-						    <option value="BACHELOR">学士</option> 
+						<select id="academicDegree" data-options="panelHeight:'auto'" class="easyui-combobox" name="academicDegree" editable="false" style="width:100px;"> 
+						   <!--  <option value="BACHELOR">学士</option> 
 						    <option value="MASTER">硕士</option>   
 						    <option value="DOCTOR">博士</option>     
-						    <option value="POST">博士后</option>     
+						    <option value="POST">博士后</option>   -->   
 						</select>
 					</td>
 				</tr>
@@ -201,12 +222,12 @@
 						</label>
 					</td>
 					<td>
-						<select id="compayType" class="easyui-combobox" name="compayType"  editable="false" style="width:100px;"> 
-						    <option value="ENTERPRISES">国企</option> 
+						<select id="compayType" data-options="panelHeight:'auto'" class="easyui-combobox" name="compayType"  editable="false" style="width:100px;"> 
+						   <!--  <option value="ENTERPRISES">国企</option> 
 						    <option value="PRIVATE_ENTERPRISES">私企</option>   
 						    <option value="FOREIGN_COMPANY">外企</option>     
 						    <option value="RESEARCH_COMPANY">科研单位</option>     
-						    <option value="COMPANY_OTHERS">其他</option>  
+						    <option value="COMPANY_OTHERS">其他</option>  --> 
 						</select>
 					</td>
 				</tr>
@@ -223,7 +244,7 @@
 						name="companyDepartment">
 					</td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td>
 						<label>
 							<span class="right">是否为第一作者：</span>
@@ -235,7 +256,7 @@
 						value="$!{authorInfo.isfirstauthor}" id="isfirstauthor"
 						name="isfirstauthor">
 					</td>
-				</tr>
+				</tr> -->
 			</table>
 			<div class="attr_con">
 				 <input type="button" value="返回"  id="back" ><input type="submit" value="保存">
@@ -339,7 +360,7 @@
 		</div>
 		#elseif($!{userInfo.roleId}=='1003')
 		<div id="articleInfos">
-			<input type="hidden" value="$!{readerInfo.id}" id="id" name="id">
+			<input type="hidden" value="$!{expertInfo.id}" id="id" name="id">
 			<table style="border: 1px solid green; width: 800px;" rules="all">
 				<!-- <tr style="display:none;">
 					<td>
@@ -362,20 +383,20 @@
 					<td>
 						<input maxlength="30"
 						class="wid333 ip_input_con lightgrey"
-						value="$!{readerInfo.readerId}" id="readerId" name="readerId">
+						value="$!{expertInfo.expertId}" id="expertId" name="expertId">
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<label>
-							<span class="right">读者姓名：</span>
+							<span class="right">专家姓名：</span>
 						</label>
 					</td>
 					<td>
 						<input maxlength="30"
 						class="wid333 ip_input_con lightgrey"
-						value="$!{readerInfo.readerName}" id="readerName"
-						name="readerName">
+						value="$!{expertInfo.expertName}" id="expertName"
+						name="expertName">
 					</td>
 				</tr>
 				<tr>
@@ -386,7 +407,7 @@
 					</td>
 					<td>
 						<input maxlength="30"
-						class="wid333 ip_input_con lightgrey" value="$!{readerInfo.email}"
+						class="wid333 ip_input_con lightgrey" value="$!{expertInfo.email}"
 						id="email" name="email">
 					</td>
 				</tr>
@@ -399,7 +420,7 @@
 					<td>
 						<input maxlength="30"
 						class="wid333 ip_input_con lightgrey"
-						value="$!{readerInfo.birthday}" id="birthday" name="birthday">
+						value="$!{expertInfo.birthday}" id="birthday" name="birthday">
 					</td>
 				</tr> -->
 				<tr>
@@ -411,7 +432,7 @@
 					<td>
 						<input maxlength="30"
 						class="wid333 ip_input_con lightgrey"
-						value="$!{readerInfo.companyName}" id="companyName"
+						value="$!{expertInfo.companyName}" id="companyName"
 						name="companyName">
 					</td>
 				</tr>
@@ -424,7 +445,7 @@
 					<td>
 						<input maxlength="30"
 						class="wid333 ip_input_con lightgrey"
-						value="$!{readerInfo.companyDepartment}" id="companyDepartment"
+						value="$!{expertInfo.companyDepartment}" id="companyDepartment"
 						name="companyDepartment">
 					</td>
 				</tr>

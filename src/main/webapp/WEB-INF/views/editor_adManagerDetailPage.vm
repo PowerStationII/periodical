@@ -10,10 +10,16 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<link href="../js/uploadify/default.css" type="text/css" rel="stylesheet" />
+<link href="../js/uploadify/uploadify.css"  type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/uploadify/jquery.uploadify.js"></script>
 </head>
+<script>
+
+</script>
 <body>
 	<div id="articleInfos">
-		<form method="POST"  action="../editor/toSaveAdInfo">
+		<form method="POST"  action="../editor/toSaveAdInfo" enctype="multipart/form-data"> 
 			<input type="hidden" name="councilId" value="${c.councilId}">
 			<table style="border: 1px solid green;" rules="all">
 				<tr>
@@ -31,12 +37,14 @@
 						<option value="SPGG">审批广告</option>
 					</select></td>
 				</tr>
-				<!-- <tr>
+				<tr>
 					<td>刊登位置：</td>
 					<td><select name="adInvestPosition">
-						<option value="000">封面</option>
+						#foreach($dto in ${sectionInfos})
+						<option value="${dto.sectionId}">${dto.sectionName}</option>
+						#end
 					</select></td>
-				</tr> -->
+				</tr>
 				<tr>
 					<td>广审号：</td>
 					<td><input type="text" name="trialNo" value=""></td>
@@ -54,13 +62,10 @@
 					<td><input type="text" name="adAuditOpinion" value=""></td>
 				</tr>
 				<tr>
-					<td>广告附件名称：</td>
-					<td><input type="text" name="adAttachmentName" value=""></td>
-				</tr>
-				<tr>
-					<td>广告附件路径：</td>
-					<td><input type="text" name="adAttachmentPath" value=""></td>
-				</tr>
+					<td>上传广告：</td>
+					<td><input name="file" type="file" /></td>
+<!-- 					<a class="easyui-linkbutton"   href="javascript:$('#uploadify').uploadify('upload', '*');">文件上传</a>
+ -->				</tr>
 				<tr>
 					<td>报批日期：</td>
 					<td><input class="easyui-datebox" type="text" name="adRecordTime" value="1"></td>
@@ -73,7 +78,7 @@
 					<td>联系人电话：</td>
 					<td><input type="text" name="adContactPhone" value=""></td>
 				</tr>
-<!-- 				<tr>
+				<!-- <tr>
 					<td>刊登费：</td>
 					<td><input type="text" name="adFee" value=""></td>
 				</tr> -->	

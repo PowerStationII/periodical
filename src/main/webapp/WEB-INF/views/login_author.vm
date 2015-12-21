@@ -152,7 +152,18 @@
         <img id="u28_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u29" class="text">
-          <p><a href="toRegister?systemId=${systemId}&roleId=${roleId}" style='text-decoration:none;'><span>注册</span></a></p>
+          <form id="authorForm" action="toRegister" method="POST">
+          	<input type="hidden" name="systemId" value="${systemId}">
+          	<input type="hidden" name="roleId" value="${roleId}">
+          </form>
+          <script>
+          	$(function(){
+          		$('#authorSys').click(function(){
+          			$('#authorForm').submit();
+          		});
+          	})
+          </script>
+          <p><span id="authorSys">注册</span></p>
         </div>
       </div>
 

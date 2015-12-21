@@ -199,9 +199,9 @@ public class AdCouncilManagerController extends EditorController{
 	
 	private String saveFile(MultipartFile file,HttpServletRequest request) throws Exception{  
     	PropertiesInitManager.dataInit();
-    	String basePath = request.getSession().getServletContext().getRealPath("/") + "councilImg/";
+    	String basePath = request.getSession().getServletContext().getRealPath("/") + "councilImg" + File.separator;
+    	//String basePath = PropertiesInitManager.PROPERTIES.getProperty("councilImgPath");
     	logger.info("hhahahahahahahah--------" + basePath);
-//    	String basePath = PropertiesInitManager.PROPERTIES.getProperty("councilImgPath");
     	StringBuffer sbPath = new StringBuffer();
     	sbPath.append(basePath);
     	sbPath.append(File.separator);

@@ -1,5 +1,6 @@
 package com.cn.periodical.controller.reader;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cn.periodical.utils.UtilLoad;
 
 
 /**
@@ -31,27 +34,9 @@ public class Download extends ReaderController{
 	@ResponseBody
 	public String FileDownload(HttpServletRequest request,
 			HttpServletResponse response)  {
-		 String fileName = request.getParameter("fileName");   
-		 String filePath = request.getParameter("filePath");     
-		 //filePath=filePath.replace('\\', '/'); 
-		 response.reset();    
-		 response.setContentType("application/x-download");   
-		 response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
-		 OutputStream os;
-		 FileInputStream fis;
-		 try {  
-			  os = response.getOutputStream(); 
-			  fis = new FileInputStream(filePath + fileName);                
-			  byte[] buffer = new byte[1024 * 10];            
-			  for (int read; (read = fis.read(buffer)) != -1;) {                
-				 os.write(buffer, 0, read);            
-			  }  
-			  os.close();
-			  fis.close();
-		 } 
-		 catch (Exception e){
-			  
-		 }
+		 String fileName = "订购指南.png";   
+		 String filePath = request.getSession().getServletContext().getRealPath("/")+"template"+File.separator;     
+		 UtilLoad.fileDownload(request, response, fileName, filePath);
 		 return "";
 	}
 	

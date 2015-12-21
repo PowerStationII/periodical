@@ -69,7 +69,7 @@
 					<td><a class="easyui-linkbutton" style="width:50px;"
 					href="../expert/auditPeriodicalDetailPage?periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">审核</a>
 					<a class="easyui-linkbutton"  style="width:50px;"
-					href="../expert/sendToIssueEditorPage?periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">签发</a></td>
+					href="../expert/sendToIssueEditorPage?periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">送签发</a></td>
 				#end
 			</tr>
 			#end

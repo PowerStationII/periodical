@@ -96,10 +96,10 @@ public class UtilLoad {
 	public synchronized static Boolean fileUpload(HttpServletRequest request,
 			String filePath, String tempPath, int fileSize) {
 
-		filePath = request.getSession().getServletContext().getRealPath("/")
+		/*filePath = request.getSession().getServletContext().getRealPath("/")
 				+ filePath;
 		tempPath = request.getSession().getServletContext().getRealPath("/")
-				+ tempPath;
+				+ tempPath;*/
 		System.out.println("文件的上传路径为：" + filePath);
 		System.out.println("文件的磁盘缓存路径为：" + tempPath);
 		DiskFileItemFactory factory = new DiskFileItemFactory();

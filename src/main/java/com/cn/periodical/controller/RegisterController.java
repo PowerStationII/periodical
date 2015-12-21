@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,7 +37,7 @@ public class RegisterController {
 	/**
 	 * 跳转到注册页面
 	 */
-	@RequestMapping(value = "/toRegister", method = RequestMethod.GET)
+	@RequestMapping(value = "/toRegister", method = RequestMethod.POST)
 	public ModelAndView toRegister(@RequestParam("systemId") String systemId, 
 			@RequestParam("roleId") String roleId ,HttpServletRequest request) {
 		logger.info("跳转去注册页面systemId:[" + systemId + "]&roleId["+roleId+"]");
@@ -46,7 +47,7 @@ public class RegisterController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/toReaderRegister", method = RequestMethod.GET)
+	@RequestMapping(value = "/toReaderRegister", method = RequestMethod.POST)
 	public ModelAndView toReaderRegister(@RequestParam("systemId") String systemId, 
 			@RequestParam("roleId") String roleId ,HttpServletRequest request) {
 		logger.info("跳转去读者注册页面systemId:[" + systemId + "]&roleId["+roleId+"]");
@@ -60,7 +61,7 @@ public class RegisterController {
 	 * 注册
 	 */
 	@RequestMapping(value="/register",method = RequestMethod.POST)
-	public ModelAndView register(RegisteRequestDto registeRequestDto) {
+	public ModelAndView register(@ModelAttribute RegisteRequestDto registeRequestDto) {
 		logger.info("系统注册入参:["+JSON.toJSONString(registeRequestDto)+"]");
 		ModelAndView mav =null;
 		String systemId = registeRequestDto.getSystemId();

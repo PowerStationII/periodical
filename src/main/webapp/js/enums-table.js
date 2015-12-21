@@ -111,3 +111,32 @@ function getGGType(status){
 		return '未知';
 	}
 }
+
+//角色
+function getRoleType(status){
+	if('1001' == status){
+		return '作者';
+	}else if('1002' == status){
+		return '读者-个人';
+	}else if('1011' == status){
+		return '读者-省所/企业';
+	}else if('1003' == status){
+		return '中文专家';
+	}else if('1004' == status){
+		return '英文专家';
+	}else if('1005' == status){
+		return '主编';
+	}else if('1006' == status){
+		return '稿件编辑';
+	}else if('1007' == status){
+		return '广告编辑';
+	}else if('1008' == status){
+		return '发行编辑';
+	}else if('1009' == status){
+		return '签发人';
+	}else if('1010' == status){
+		return '系统管理员';
+	}else{
+		return '未知';
+	}
+}

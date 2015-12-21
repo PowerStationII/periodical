@@ -10,12 +10,26 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
 <script>
 	$(function(){
 		$('#submit').click(function(){
 			$('form').submit();
 		});
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#table').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+		 		 "id":rows[i].id,  
+                 "editorName":rows[i].editorName,  
+                 "logonName":rows[i].logonName,
+                 "email":rows[i].email,  
+                 "roleId":getRoleType(rows[i].roleId)
+             }) ; 
+		}
+        $("#table").datagrid("loadData", data);
 	});
 </script>
 <body>
@@ -28,7 +42,7 @@
 				<td>登录名：</td>
 				<td><input class="easyui-textbox" type="text" name="logonName" value=""></td>
 				<td>编辑类型：</td>
-				<td><select name="roleId" class="easyui-combobox" editable="false" style="width:155px;">
+				<td><select name="roleId" data-options="panelHeight:'auto'" class="easyui-combobox" editable="false" style="width:155px;">
 					<option value="" selected>全部</option>
 					<option value="1006">稿件编</option>
 					<option value="1007">广告编</option>
@@ -45,7 +59,7 @@
 		</table>
 	</form>
 	
-		<table class="easyui-datagrid"   data-options="singleSelect:true,fitColumns:true">
+		<table id="table" class="easyui-datagrid"   data-options="singleSelect:true,fitColumns:true">
 			<thead>
 				<tr>
 					<th data-options="field:'id',width:200">序号</th>

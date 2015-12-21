@@ -39,6 +39,278 @@ function getArticleState(){
 }
 
 /**
+ * 证件类型枚举下拉
+ * @returns {Array}
+ */
+function getZJLXState(){
+	var data=[{    
+	    "value":'IDCARD',
+	    "text":"身份证",
+	    "selected":true
+	},{    
+	    "value":'BOOKLET',    
+	    "text":"户口簿"   
+	},{    
+	    "value":'PASSPORT',    
+	    "text":"护照",    
+	},{    
+	    "value":'OFFICERCARD',    
+	    "text":"军官证"   
+	},{    
+	    "value":'SOLDIERCARD',    
+	    "text":"士兵证"   
+	},{    
+	    "value":'HKANDMCARD',    
+	    "text":"港澳居民来往内地通行证",    
+	},{    
+	    "value":'TAIWANCARD',    
+	    "text":"台湾同胞来往内地通行证"   
+	},{    
+	    "value":'TEMPORARYID',    
+	    "text":"临时身份证"   
+	},{    
+	    "value":'ForeignerID',    
+	    "text":"外国人居留证"   
+	}
+	,{    
+	    "value":'PoliceID',    
+	    "text":"警官证"   
+	},{    
+	    "value":'OtherCard',    
+	    "text":"其他证件"   
+	}] ;
+	return data;
+}
+
+/**
+ * 证件类型枚举下拉2
+ * @returns {Array}
+ */
+function getZJLXState2(){
+	var data=[{    
+	    "value":'0',
+	    "text":"身份证",
+	    "selected":true
+	},{    
+	    "value":'1',    
+	    "text":"户口簿"   
+	},{    
+	    "value":'2',    
+	    "text":"护照",    
+	},{    
+	    "value":'3',    
+	    "text":"军官证"   
+	},{    
+	    "value":'4',    
+	    "text":"士兵证"   
+	},{    
+	    "value":'5',    
+	    "text":"港澳居民来往内地通行证",    
+	},{    
+	    "value":'6',    
+	    "text":"台湾同胞来往内地通行证"   
+	},{    
+	    "value":'7',    
+	    "text":"临时身份证"   
+	},{    
+	    "value":'8',    
+	    "text":"外国人居留证"   
+	}
+	,{    
+	    "value":'9',    
+	    "text":"警官证"   
+	},{    
+	    "value":'X',    
+	    "text":"其他证件"   
+	}] ;
+	return data;
+}
+
+/**
+ * 学历类型枚举下拉
+ * @returns {Array}
+ */
+function getXLLXState(){
+	var data=[{    
+	    "value":'JUNIOR_SCHOOL',
+	    "text":"小学",
+	    "selected":true
+	},{    
+	    "value":'MIDDLE_SCHOOL',    
+	    "text":"初中"   
+	},{    
+	    "value":'SENIOR_SCHOOL',    
+	    "text":"高中",    
+	},{    
+	    "value":'POLYTECHNIC_SCHOOL',    
+	    "text":"中专"   
+	},{    
+	    "value":'VOCATIONAL_SCHOOL',    
+	    "text":"高职"   
+	},{    
+	    "value":'JUNIOR_COLLEGE',    
+	    "text":"专科",    
+	},{    
+	    "value":'BACHELOR_DEGREE',    
+	    "text":"本科"   
+	},{    
+	    "value":'MASTER_DEGREE',    
+	    "text":"硕士研究生"   
+	},{    
+	    "value":'DOCTORAL',    
+	    "text":"博士研究生"   
+	}] ;
+	return data;
+}
+
+/**
+ * 学历类型枚举下拉2
+ * @returns {Array}
+ */
+function getXLLXState2(){
+	var data=[{    
+	    "value":'0',
+	    "text":"小学",
+	    "selected":true
+	},{    
+	    "value":'1',    
+	    "text":"初中"   
+	},{    
+	    "value":'2',    
+	    "text":"高中",    
+	},{    
+	    "value":'3',    
+	    "text":"中专"   
+	},{    
+	    "value":'4',    
+	    "text":"高职"   
+	},{    
+	    "value":'5',    
+	    "text":"专科",    
+	},{    
+	    "value":'6',    
+	    "text":"本科"   
+	},{    
+	    "value":'7',    
+	    "text":"硕士研究生"   
+	},{    
+	    "value":'8',    
+	    "text":"博士研究生"   
+	}] ;
+	return data;
+}
+
+/**
+ * 学位类型枚举下拉
+ * @returns {Array}
+ */
+function getXWLXState(){
+	var data=[{    
+	    "value":'BACHELOR',
+	    "text":"学士",
+	    "selected":true
+	},{    
+	    "value":'MASTER',    
+	    "text":"硕士"   
+	},{    
+	    "value":'DOCTOR',    
+	    "text":"博士",    
+	},{    
+	    "value":'POST',    
+	    "text":"博士后"   
+	}] ;
+	return data;
+}
+
+/**
+ * 学位类型枚举下拉2
+ * @returns {Array}
+ */
+function getXWLXState2(){
+	var data=[{    
+	    "value":'0',
+	    "text":"学士",
+	    "selected":true
+	},{    
+	    "value":'1',    
+	    "text":"硕士"   
+	},{    
+	    "value":'2',    
+	    "text":"博士",    
+	},{    
+	    "value":'3',    
+	    "text":"博士后"   
+	}] ;
+	return data;
+}
+
+/**
+ * 企业单位类型枚举下拉
+ * @returns {Array}
+ */
+function getQYLXState(){
+	var data=[{    
+	    "value":'ENTERPRISES',
+	    "text":"国企",
+	    "selected":true
+	},{    
+	    "value":'PRIVATE_ENTERPRISES',    
+	    "text":"私企"   
+	},{    
+	    "value":'FOREIGN_COMPANY',    
+	    "text":"外企",    
+	},{    
+	    "value":'RESEARCH_COMPANY',    
+	    "text":"科研单位"   
+	},{    
+	    "value":'COMPANY_OTHERS',    
+	    "text":"其他"   
+	}] ;
+	return data;
+}
+
+/**
+ * 企业单位类型枚举下拉2
+ * @returns {Array}
+ */
+function getQYLXState2(){
+	var data=[{    
+	    "value":'0',
+	    "text":"国企",
+	    "selected":true
+	},{    
+	    "value":'1',    
+	    "text":"私企"   
+	},{    
+	    "value":'2',    
+	    "text":"外企",    
+	},{    
+	    "value":'3',    
+	    "text":"科研单位"   
+	},{    
+	    "value":'4',    
+	    "text":"其他"   
+	}] ;
+	return data;
+}
+
+/**
+ * 性别枚举下拉
+ * @returns {Array}
+ */
+function getXBState(){
+	var data=[{    
+	    "value":'male',
+	    "text":"男",
+	    "selected":true
+	},{    
+	    "value":'female',    
+	    "text":"女"   
+	}] ;
+	return data;
+}
+
+/**
  * 证件类型后台code和前段value转换
  */
 function getCtfcType(value){

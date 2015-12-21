@@ -1,6 +1,8 @@
 package com.cn.periodical.controller.editor;
 
 import java.beans.PropertyEditorSupport;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,17 +22,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.manager.AdInfoManager;
 import com.cn.periodical.manager.CouncilInfoManager;
+import com.cn.periodical.manager.SectionInfoManager;
 import com.cn.periodical.pojo.AdInfo;
 import com.cn.periodical.pojo.AdInfoQuery;
 import com.cn.periodical.pojo.BizAd;
 import com.cn.periodical.pojo.CouncilInfo;
 import com.cn.periodical.pojo.CouncilInfoQuery;
+import com.cn.periodical.pojo.SectionInfo;
+import com.cn.periodical.pojo.SectionInfoQuery;
 import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.utils.PropertiesInitManager;
 /**
  * 广告编辑-广告管理Controller
  * */
@@ -43,6 +50,8 @@ public class AdManageController extends EditorController{
 	CouncilInfoManager councilInfoManager;
 	@Autowired
 	AdInfoManager adInfoManager;
+	@Autowired
+	SectionInfoManager sectionInfoManager;
 	/**
 	 * toAdManagerPage
 	 * 广告管理
@@ -64,9 +73,24 @@ public class AdManageController extends EditorController{
 		
 		List<BizAd> bizAds = adInfoManager.selectAdsForEditor(ad);
 		mav.addObject("list", bizAds);
+		
 		logger.info("广告管理首页Page out:[]");
 		return mav;
 	}
+	
+	
+	/**
+	 * 理事会页面增加广告信息
+	 * */
+/*	@RequestMapping(value = "/toAdInfoAdd", method = RequestMethod.GET)
+	public ModelAndView toAdInfoAdd(String councilId) {
+		ModelAndView mav = new ModelAndView("editor_adManagerDetailPage");
+		CouncilInfoQuery query = new CouncilInfoQuery();
+		query.setCouncilId(councilId);
+		List<CouncilInfo> infos = councilInfoManager.queryList(query);
+		mav.addObject("c",infos.get(0));
+		return mav;
+	}*/
 	
 	/**
 	 * 理事会页面增加广告信息
@@ -78,6 +102,12 @@ public class AdManageController extends EditorController{
 		query.setCouncilId(councilId);
 		List<CouncilInfo> infos = councilInfoManager.queryList(query);
 		mav.addObject("c",infos.get(0));
+		
+		SectionInfoQuery sectionInfoQuery =  new SectionInfoQuery();
+		sectionInfoQuery.setExtend1("Y");
+		List<SectionInfo> sectionInfos = sectionInfoManager.queryList(sectionInfoQuery);
+		mav.addObject("sectionInfos", sectionInfos);
+		
 		return mav;
 	}
 	
@@ -85,12 +115,55 @@ public class AdManageController extends EditorController{
 	 * 保存广告信息
 	 */
 	@RequestMapping(value = "/toSaveAdInfo", method = { RequestMethod.POST })
-	public ModelAndView saveAdInfo(@ModelAttribute AdInfo adInfo) {
-		ModelAndView mav = new ModelAndView("redirect:../editor/toAdManagerPage");
-		logger.info("保存广告信息入参:["+JSON.toJSONString(adInfo)+"]");
+	public ModelAndView saveAdInfo(@RequestParam(value="file", required=true) MultipartFile file,
+			@ModelAttribute AdInfo adInfo,String councilId) {
+		
 		String adId= UUID.randomUUID().toString().replaceAll("-", "");
-		adInfo.setAdId(adId);
-		adInfoManager.saveAdInfo(adInfo);
+
+		ModelAndView mav = new ModelAndView("redirect:../editor/toAdManagerPage");
+		logger.info("保存广告信息入参:["+JSON.toJSONString(adInfo)+"councilId:"+councilId+"]");
+		
+		String fileName="";
+		String filePath="";
+		String absolutPath="";
+		try {
+			PropertiesInitManager.dataInit();
+	    	String basePath = PropertiesInitManager.PROPERTIES.getProperty("adUpload");
+	    	StringBuffer sbPath = new StringBuffer();
+	    	sbPath.append(basePath);
+	    	sbPath.append(File.separator);
+	    	sbPath.append(adId);
+	    	sbPath.append(File.separator);
+	    	filePath = sbPath.toString();
+	    	File headPath = new File(filePath);//获取文件夹路径       
+	    	if(!headPath.exists()){
+	    	//判断文件夹是否创建，没有创建则创建新文件夹        	
+	    		headPath.mkdirs();
+	    	}
+	    	
+	    	fileName = filePath+file.getOriginalFilename();
+	    	File uploadFile = new File(fileName); 
+	        // 转存文件  
+        
+			file.transferTo(uploadFile);
+			logger.info(uploadFile.getAbsolutePath());
+			absolutPath = uploadFile.getAbsolutePath(); 
+			
+			
+			
+			adInfo.setAdAttachmentName(file.getOriginalFilename());
+			adInfo.setAdAttachmentPath(absolutPath);
+			adInfo.setAdId(adId);
+			adInfoManager.saveAdInfo(adInfo);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}  
 		
 		return mav;
 	}

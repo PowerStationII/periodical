@@ -150,6 +150,7 @@ public class RegisterServiceImpl implements RegisterService {
 		String readerId=UUID.randomUUID().toString().replace("-", "");
 		final ReaderInfo readerInfo = new ReaderInfo();
 		readerInfo.setReaderId(readerId);
+		readerInfo.setReaderName(registeRequestDto.getRealName());
 		readerInfo.setBirthday(new DateTime(registeRequestDto.getBirthDay()).toDate());
 		readerInfo.setCertificateType(registeRequestDto.getCertifiType().getCode());
 		readerInfo.setCertificateNo(registeRequestDto.getCertifiNo());

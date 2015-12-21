@@ -10,6 +10,7 @@
  	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="js/enums-combox.js"></script>
   </head>
   <script type="text/javascript">
   		$(function(){
@@ -204,6 +205,19 @@
   			$('#back').click(function(){
   				history.go(-1) ;
   			});
+  			
+  			$('#certificates').combobox({
+  				data:getZJLXState()
+  			}); 
+  			$('#education').combobox({
+  				data:getXLLXState()
+  			});
+  			$('#academicDegree').combobox({
+  				data:getXWLXState()
+  			});
+  			$('#nature').combobox({
+  				data:getQYLXState()
+  			});
   		});
   		
   		function submitForm(){  
@@ -311,10 +325,7 @@
 				
 				<!--证件-->
 				<a class="sign"   style="margin-left:94px;">*</a><a>证件：</a>
-				<select id="certificates" class="easyui-combobox" name="certifiType" style="width:80px;"> 
-				    <option  value="IDCARD">身份证</option> 
-				    <option  value="PASSPORT">护照</option>   
-				    <option  value="OFFICERCARD">军警证</option>     
+				<select id="certificates" data-options="panelHeight:'auto'" class="easyui-combobox" name="certifiType" style="width:80px;"> 
 				</select>
 				<input id="certificate" name="certifiNo" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" /><!-- style="margin-left:154px;" -->
@@ -357,24 +368,11 @@
 			<div class="mode1">
 				<!--学历-->
 				<a class="sign"  style="margin-left:95px;">*</a><a>学历：</a>
-				<select id="education" name="degree" class="easyui-combobox" style="width:100px;"> 
-				    <option value="JUNIOR_SCHOOL">小学</option> 
-				    <option value="MIDDLE_SCHOOL">初中</option> 
-				    <option value="SENIOR_SCHOOL">高中</option> 
-				    <option value="POLYTECHNIC_SCHOOL">中专</option> 
-				    <option value="VOCATIONAL_SCHOOL">高职</option> 
-				    <option value="JUNIOR_COLLEGE">专科</option> 
-				    <option value="BACHELOR_DEGREE">本科</option> 
-				    <option value="MASTER_DEGREE">硕士研究生</option> 
-				    <option value="DOCTORAL">博士研究生</option> 
+				<select id="education" name="degree" data-options="panelHeight:'auto'" class="easyui-combobox" style="width:100px;"> 
 				</select><br><br>
 				<!--学位-->
 				<a class="sign"   style="margin-left:95px;">*</a><a>学位：</a>
-				<select id="academicDegree" class="easyui-combobox" name="academicDegree" style="width:100px;"> 
-				    <option value="BACHELOR">学士</option> 
-				    <option value="MASTER">硕士</option>   
-				    <option value="DOCTOR">博士</option>     
-				    <option value="POST">博士后</option>     
+				<select id="academicDegree" data-options="panelHeight:'auto'" class="easyui-combobox" name="academicDegree" style="width:100px;"> 
 				</select><br><br>
 			</div>
 			<div class="mode1">
@@ -385,12 +383,7 @@
 				<a class="wrong"  id="danweiW">x</a><a class="right"  id="danweiR">√</a><br><br>
 				<!--单位性质-->
 				<a class="sign"   style="margin-left:64px;">*</a><a>单位性质：</a>
-				<select id="nature" class="easyui-combobox" name="companyType" style="width:100px;"> 
-				    <option value="ENTERPRISES">国企</option> 
-				    <option value="PRIVATE_ENTERPRISES">私企</option>   
-				    <option value="FOREIGN_COMPANY">外企</option>     
-				    <option value="RESEARCH_COMPANY">科研单位</option>     
-				    <option value="COMPANY_OTHERS">其他</option>  
+				<select id="nature" data-options="panelHeight:'auto'" class="easyui-combobox" name="companyType" style="width:100px;"> 
 				</select><br><br>
 				<!--部门或院系-->
 				<a class="sign"  style="margin-left:45px;">*</a><a>部门或院系：</a>
@@ -452,10 +445,10 @@
 				<!--证件-->
 				<a class="sign"   style="margin-left:94px;">*</a><a>证件：</a>
 				<select id="certificates" class="easyui-combobox" name="certifiType" style="width:80px;"> 
-				    <option  value="IDCARD">身份证</option> 
+<!-- 				    <option  value="IDCARD">身份证</option> 
 				    <option  value="PASSPORT">护照</option>   
 				    <option  value="OFFICERCARD">军警证</option>     
-				</select>
+ -->				</select>
 				<input id="certificate" name="certifiNo" class="easyui-validatebox" 
 							data-options="required:true,missingMessage:'不允许为空'" /><!-- style="margin-left:154px;" -->
 				<a class="wrong"  id="certificateW">x</a><a class="right"   id="certificateR">√</a><br><br>  

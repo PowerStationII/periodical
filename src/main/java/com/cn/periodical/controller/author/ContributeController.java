@@ -66,11 +66,13 @@ public class ContributeController extends AuthorController{
 		List<PeriodicalInfo> periodicalInfos =periodicalInfoManager.queryList(periodicalInfoQuery);
 		mav.addObject("periodicalInfos", periodicalInfos);
 		
-//		SectionInfoQuery query = new SectionInfoQuery();
-//		query.setPeriodicalId("20ea08451ad2405f9a833ba8644de463");
-//		query.setExtend1("N");
-//		List<SectionInfo> sectionInfos = sectionInfoManager.queryList(query);
-//		mav.addObject("infos", sectionInfos);
+		String periodicalId = periodicalInfos.get(0).getPeriodicalId();
+		
+		SectionInfoQuery query = new SectionInfoQuery();
+		query.setPeriodicalId(periodicalId);
+		query.setExtend1("N");
+		List<SectionInfo> sectionInfos = sectionInfoManager.queryList(query);
+		mav.addObject("infos", sectionInfos);
 		
 		return mav;
 	}
