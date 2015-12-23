@@ -44,7 +44,16 @@ public class AuthorQueryDetail implements Serializable {
 	private String periodicalId;
 	private String periodicalIssueNo;
 	
+	private String payTime;
 	
+	
+	
+	public String getPayTime() {
+		return payTime;
+	}
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
+	}
 	public String getPeriodicalId() {
 		return periodicalId;
 	}

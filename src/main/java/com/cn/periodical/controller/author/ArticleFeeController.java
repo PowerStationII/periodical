@@ -15,10 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
-import com.cn.periodical.pojo.ArticleInfo;
+import com.cn.periodical.manager.AuthorInfoManager;
+import com.cn.periodical.manager.PeriodicalDetailsManager;
+import com.cn.periodical.manager.PeriodicalManager;
+import com.cn.periodical.pojo.AuthorInfo;
+import com.cn.periodical.pojo.AuthorInfoQuery;
 import com.cn.periodical.pojo.AuthorQueryDetail;
-import com.cn.periodical.pojo.UserInfo;
-import com.cn.periodical.response.AuthorArticleQueryRespDto;
+import com.cn.periodical.pojo.Periodical;
+import com.cn.periodical.pojo.PeriodicalDetails;
+import com.cn.periodical.pojo.PeriodicalDetailsQuery;
+import com.cn.periodical.pojo.PeriodicalQuery;
 import com.cn.periodical.service.ArticleQueryService;
 /**
  * 作者工作区-稿费查询 
@@ -29,6 +35,15 @@ public class ArticleFeeController extends AuthorController{
 	private static final Logger logger = LoggerFactory.getLogger(ArticleFeeController.class);
 	@Autowired
 	ArticleQueryService articleQueryService;
+	
+	@Autowired
+	AuthorInfoManager authorInfoManager;
+	
+	@Autowired
+	PeriodicalDetailsManager periodicalDetailsManager;
+	
+	@Autowired
+	PeriodicalManager periodicalManager;
 	/**
 	 * toArticleFeePage
 	 * 去稿费查询页面
@@ -59,6 +74,24 @@ public class ArticleFeeController extends AuthorController{
 		List<AuthorQueryDetail> authorQueryDetails= articleQueryService.queryArticleFee(authorQueryDetail);
 		AuthorQueryDetail feeDetail =authorQueryDetails.get(0);
 		mav.addObject("obj", feeDetail);
+		
+		mav.addObject("roleId", getUserInfo(request).getRoleId());
+		
+		AuthorInfoQuery query = new AuthorInfoQuery();
+		query.setArticleId(articleId);
+		query.setIsfirstauthor("Y");
+		List<AuthorInfo> authorInfos = authorInfoManager.queryList(query);
+		mav.addObject("author",authorInfos.get(0));
+		
+//		PeriodicalDetailsQuery pdQuery = new PeriodicalDetailsQuery();
+//		pdQuery.setArticleId(articleId);
+//		List<PeriodicalDetails> periodicalDetails = periodicalDetailsManager.queryList(pdQuery);
+//		
+//		PeriodicalQuery pQuery = new PeriodicalQuery();
+//		pQuery.setPeriodicalIssueNo(periodicalDetails.get(0).getPeriodicalIssueNo());
+//		List<Periodical> ps = periodicalManager.queryList(pQuery);
+//		mav.addObject("p",ps.get(0));
+		
 		logger.info("稿费明细Page out:["+JSON.toJSONString(feeDetail)+"]");
 		return mav;
 	}

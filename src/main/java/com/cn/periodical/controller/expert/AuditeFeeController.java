@@ -14,7 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.cn.periodical.manager.ExpertInfoManager;
+import com.cn.periodical.manager.PeriodicalDetailsManager;
+import com.cn.periodical.manager.PeriodicalManager;
 import com.cn.periodical.pojo.AuthorQueryDetail;
+import com.cn.periodical.pojo.ExpertInfo;
+import com.cn.periodical.pojo.ExpertInfoQuery;
+import com.cn.periodical.pojo.Periodical;
+import com.cn.periodical.pojo.PeriodicalDetails;
+import com.cn.periodical.pojo.PeriodicalDetailsQuery;
+import com.cn.periodical.pojo.PeriodicalQuery;
 import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.service.ArticleQueryService;
 
@@ -24,6 +33,16 @@ public class AuditeFeeController extends ExpertController{
 	private static final Logger logger = LoggerFactory.getLogger(AuditeFeeController.class);
 	@Autowired
 	ArticleQueryService articleQueryService;
+	
+	@Autowired
+	ExpertInfoManager expertInfoManager;
+	
+	@Autowired
+	PeriodicalDetailsManager periodicalDetailsManager;
+	
+	@Autowired
+	PeriodicalManager periodicalManager;
+	
 	/**
 	 * toArticleAuditePage
 	 * 去审稿费查询页面
@@ -51,10 +70,27 @@ public class AuditeFeeController extends ExpertController{
 		ModelAndView mav = new ModelAndView("articleFeeDetailPage");
 		AuthorQueryDetail authorQueryDetail = new AuthorQueryDetail();
 		authorQueryDetail.setUserId(getUserInfo(request).getUserId());
-		authorQueryDetail.setArticleCnKeywords(articleId);
+		authorQueryDetail.setArticleId(articleId);
 		List<AuthorQueryDetail> authorQueryDetails= articleQueryService.queryArticleFee(authorQueryDetail);
 		AuthorQueryDetail feeDetail =authorQueryDetails.get(0);
 		mav.addObject("obj", feeDetail);
+		
+		mav.addObject("roleId", getUserInfo(request).getRoleId());
+		
+		ExpertInfoQuery query = new ExpertInfoQuery();
+		query.setExpertId(getUserInfo(request).getRefId());
+		List<ExpertInfo> expertInfos = expertInfoManager.queryList(query);
+		mav.addObject("expert",expertInfos.get(0));
+		
+//		PeriodicalDetailsQuery pdQuery = new PeriodicalDetailsQuery();
+//		pdQuery.setArticleId(articleId);
+//		List<PeriodicalDetails> periodicalDetails = periodicalDetailsManager.queryList(pdQuery);
+//		
+//		PeriodicalQuery pQuery = new PeriodicalQuery();
+//		pQuery.setPeriodicalIssueNo(periodicalDetails.get(0).getPeriodicalIssueNo());
+//		List<Periodical> ps = periodicalManager.queryList(pQuery);
+//		mav.addObject("p",ps.get(0));
+		
 		logger.info("expert稿费明细Page out:["+JSON.toJSONString(feeDetail)+"]");
 		return mav;
 	}

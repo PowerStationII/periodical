@@ -328,16 +328,16 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 		while(its.hasNext()){
 			PeriodicalDetails pd = its.next();
 			logger.info(pd.getExtend1());
-			if(!"Y".equals(pd.getExtend1())){
-				/**
-				 * 弹出窗口,稿件审核未完成,不可签发
-				 * */
-				ModelAndView mav = new ModelAndView("../expert/auditPeriodicalDetailPage");
-				mav.addObject("articleId",pd.getArticleId());
-				mav.addObject("periodicalId",periodicalId);
-				mav.addObject("periodicalIssueNo",periodicalIssueNo);
-				return mav;
-			}else{
+//			if(!"Y".equals(pd.getExtend1())){
+//				/**
+//				 * 弹出窗口,稿件审核未完成,不可签发
+//				 * */
+//				ModelAndView mav = new ModelAndView("redirect:../expert/auditPeriodicalDetailPage");
+//				mav.addObject("articleId",pd.getArticleId());
+//				mav.addObject("periodicalId",periodicalId);
+//				mav.addObject("periodicalIssueNo",periodicalIssueNo);
+//				return mav;
+//			}else{
 				ModelAndView mav = new ModelAndView("redirect:../expert/toEnAuditePeriodicalPage");
 				PeriodicalQuery pQuery = new PeriodicalQuery();
 				pQuery.setPeriodicalIssueNo(periodicalIssueNo);
@@ -348,7 +348,7 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 				p.setPeriodicalState(PeriodicalStateEnums.PRE_ISSUE.getCode());
 				periodicalManager.savePeriodical(p);
 				return mav;
-			}
+//			}
 		}
 		return new ModelAndView("error");
 	}

@@ -1,6 +1,8 @@
 package com.cn.periodical.controller.editor;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.cn.periodical.manager.AccountInfoManager;
@@ -41,6 +44,8 @@ public class BizArticleFeeController extends EditorController{
 		ModelAndView mav = new ModelAndView("editor_editArticleFeePage");
 		List<BizArticleFee> list = bizArticleFeeManager.editArticleFee(null);
 		mav.addObject("list", list);
+		logger.info("-----------------");
+		logger.info(JSON.toJSONString(list));
 		return mav;
 	}
 	
@@ -74,10 +79,11 @@ public class BizArticleFeeController extends EditorController{
 			 * 
 			 * ？？？？？？
 			 */
-			
+			accountInfo.setType("out");//in:编辑社收钱(读者订购+理事会员缴费);out:编辑社付钱(读者+专家)
+			accountInfo.setPayTime(new Date());
+			accountInfo.setExtend1("N");//是否已导出excel.N否Y是
 			accountInfoManager.saveAccountInfo(accountInfo);
 		}
-		
 		return mav;
 	}
 }

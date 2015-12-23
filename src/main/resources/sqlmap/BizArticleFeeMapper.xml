@@ -3,63 +3,37 @@
 <mapper namespace="BizArticleFeeMapper">
 	<select id="editArticleFee" parameterType="BizArticleFee"
 		resultType="BizArticleFee">
-		select (case when expertLin4.periodical_id!='' then expertLin4.periodical_id else authorLin4.periodical_id end) as periodicalId,
-		(case when expertLin4.periodical_cn_name!='' then expertLin4.periodical_cn_name else authorLin4.periodical_cn_name end) as periodicalCnName,
-		(case when expertLin4.periodical_issue_no!='' then expertLin4.periodical_issue_no else authorLin4.periodical_issue_no end) as periodicalIssueNo,
-		(case when expertLin4.section_id!='' then expertLin4.section_id else authorLin4.section_id end) as sectionId,
-		(case when expertLin4.section_name!='' then expertLin4.section_name else authorLin4.section_name end) as sectionName,
-		(case when expertLin4.article_id!='' then expertLin4.article_id else authorLin4.article_id end) as articleId,
-		(case when expertLin4.article_cn_title!='' then expertLin4.article_cn_title else authorLin4.article_cn_title end) as articleCnTitle,
-		authorLin4.author_id as authorId,
-		authorLin4.author_name as authorName,
-
-		authorLin4.author_amount as authorAmount,
-		authorLin4.author_real_amount as authorRealAmount,
-		authorLin4.author_tax_amount as authorTaxAmount,
-		authorLin4.authorPayeeId as authorPayeeId,
-		expertLin4.expert_id as expertId,
-		expertLin4.expert_name as expertName,
-
-		expertLin4.expert_real_amount as expertRealAmount,
-		expertLin4.expert_tax_amount as expertTaxAmount,
-		expertLin4.expert_amount as expertAmount,
-		expertLin4.expertPayeeId as expertPayeeId,
-		authorLin4.id as accountInfoId
+		select acci.id as accountInfoId,infos.articleId as articleId,infos.articleCnTitle as articleCnTitle,
+		infos.aAuthorId as authorId,infos.aAuthorName as authorName,
+		infos.expertId as expertId,infos.expertName as expertName, infos.aPayeeId as authorPayeeId,infos.ePayeeId as expertPayeeId,
+		acci.author_amount as authorAmount,acci.author_tax_amount as authorTaxAmount,acci.author_real_amount as authorRealAmount,
+		acci.expert_amount as expertAmount,acci.expert_tax_amount as expertTaxAmount,acci.expert_real_amount as expertRealAmount ,
+		infos.authorState ,infos.editorState,infos.expertState
 		from (
-
-			select
-		authorLin1.periodical_id,authorLin1.section_id,authorLin1.article_id,authorLin1.periodical_issue_no,aci.id,
-		authorLin1.article_cn_title,authorLin1.periodical_cn_name,authorLin1.author_name,authorLin1.author_id,authorLin1.section_name,
-		aci.author_amount,aci.author_real_amount,aci.author_tax_amount,aci.author_payee_id,aci.pay_time,payeeInfo.payee_Id as authorPayeeId
-		from (
-			select pd.periodical_id,pd.section_id,pd.article_id,pd.periodical_issue_no,
-		ai.article_cn_title,pi.periodical_cn_name,aui.author_name,aui.author_id,si.section_name
-		from periodical_details pd ,article_info ai ,periodical_info
-		pi,author_info aui,section_info si
-		where
-		pd.periodical_id=pi.periodical_id and pd.article_id=ai.article_id and
-		si.section_id=pd.section_id and aui.article_id=ai.article_id and
-		aui.isfirstauthor='Y' ) as authorLin1 LEFT JOIN account_info aci  on
-		aci.article_id=authorLin1.article_id left join payee_info payeeInfo on payeeInfo.ref_id=authorLin1.author_id) as authorLin4 
-right join
-		(
-		select
-		expertLin1.periodical_id,expertLin1.section_id,expertLin1.article_id,expertLin1.periodical_issue_no,aci.id,
-		expertLin1.article_cn_title,expertLin1.periodical_cn_name,expertLin1.expert_name,expertLin1.expert_id,expertLin1.section_name,
-		aci.expert_amount,aci.expert_real_amount,aci.expert_tax_amount,aci.expert_payee_id,aci.pay_time,payeeInfo.payee_Id as expertPayeeId
-		from (
-		select pd.periodical_id,pd.section_id,pd.article_id,pd.periodical_issue_no,
-		ai.article_cn_title,pi.periodical_cn_name,ei.expert_name,ei.expert_id,si.section_name
-		from periodical_details pd ,article_info ai ,periodical_info
-		pi,article_info_extend aie,user_info ui,expert_info ei,section_info si
-		where pd.periodical_id=pi.periodical_id and
-		pd.article_id=ai.article_id and aie.article_id=pd.article_id and
-		aie.role_id='1003' and si.section_id=pd.section_id
-		and
-		ui.user_id=aie.user_id and ei.expert_id=ui.ref_id ) as expertLin1 LEFT JOIN account_info aci  on aci.article_id=expertLin1.article_id 
-left join payee_info payeeInfo
-on payeeInfo.ref_id=expertLin1.expert_id) as
-		expertLin4
-		on authorLin4.article_id=expertLin4.article_id
+			select 
+			ari.article_id as articleId,ari.article_cn_title as articleCnTitle,ari.author_state as authorState,ari.editor_state as editorState,ari.expert_state as expertState,
+			eInfos.payee_id as ePayeeId,eInfos.payee_account_no as ePayeeAccountNo,eInfos.payee_account_name as ePayeeAccountName,
+			eInfos.payee_account_open as ePayeeAccountOpen,eInfos.payee_account_address as ePayeeAccountAddress,
+			eInfos.payee_account_post as ePayeeAccountPost,eInfos.payee_account_postCode as ePayeeAccountPostCode,
+			eInfos.payee_idcard_no as ePayeeIdcardNo,eInfos.expert_id as expertId,eInfos.expert_name as expertName,eInfos.article_id as eArticleId,
+			aInfos.payee_id as aPayeeId,aInfos.payee_account_no as aPayeeAccountNo,aInfos.payee_account_name as aPayeeAccountName,
+			aInfos.payee_account_open as aPayeeAccountOpen,aInfos.payee_account_address as aPayeeAccountAddress,
+			aInfos.payee_account_post as aPayeeAccountPost,aInfos.payee_account_postCode as aPayeeAccountPostCode,
+			aInfos.payee_idcard_no as aPayeeIdcardNo,aInfos.author_id as aAuthorId,aInfos.author_name as aAuthorName,aInfos.article_id aArticleId
+			from
+			(select pi.payee_id,pi.payee_account_no,pi.payee_account_name,pi.payee_account_open,pi.payee_account_address,pi.payee_account_post,pi.payee_account_postCode,
+					payee_idcard_no,aie.article_id,ei.expert_name,ei.expert_id from article_info_extend aie,expert_info ei,user_info ui,payee_info pi 
+					where aie.role_id='1003' and ei.expert_id=ui.ref_id and aie.user_id=ui.user_id and pi.ref_id=ei.expert_id and pi.type='002'
+			
+			) as eInfos,
+			(
+					select pi.payee_id,pi.payee_account_no,pi.payee_account_name,pi.payee_account_open,pi.payee_account_address,pi.payee_account_post,pi.payee_account_postCode,
+					payee_idcard_no,ai.article_id,ai.author_name,ai.author_id
+					from author_info ai ,payee_info pi where ai.author_id=pi.ref_id and ai.isfirstauthor='Y' and pi.type='001'
+			) as aInfos,article_info ari
+			where eInfos.article_id=aInfos.article_id and ari.article_id=eInfos.article_id ) as infos left join account_info acci
+			on infos.aArticleId=acci.article_id
+			
+			where infos.expertState='0003' and infos.editorState='0008'
 	</select>
 </mapper>

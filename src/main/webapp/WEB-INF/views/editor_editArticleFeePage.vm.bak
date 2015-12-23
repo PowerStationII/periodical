@@ -18,10 +18,14 @@
         var rows = $('#editTable').datagrid('getRows');
         for(var i=0;i<rows.length;i++) {
         	 data.push({  
-		 		 "accountInfoId":rows[i].accountInfoId,  //account_info的id
+		 		 "accountInfoId":rows[i].accountInfoId,  
+		 		 "articleId":rows[i].articleId,  
                  "authorPayeeId":rows[i].authorPayeeId,  
                  "expertPayeeId":rows[i].expertPayeeId,
-                 "articleId":rows[i].articleId,  
+                 "periodicalCnName":rows[i].periodicalCnName,  
+                 "periodicalIssueNo":rows[i].periodicalIssueNo,
+                 "sectionName":rows[i].sectionName,  
+                 "articleId2":rows[i].articleId2,  
                  "articleCnTitle":rows[i].articleCnTitle,
                  "authorName":rows[i].authorName,  
                  "authorAmount":rows[i].authorAmount,
@@ -91,18 +95,23 @@
 			<thead>
 				<tr>
 					<th data-options="field:'accountInfoId',width:0">accountInfoId</th>
-					<th data-options="field:'authorPayeeId',width:80">2id</th>
-					<th data-options="field:'expertPayeeId',width:80">3id</th>
-					<th data-options="field:'articleId',width:100">稿件编号</th>
+					<th data-options="field:'articleId',width:0">1id</th>
+					<th data-options="field:'authorPayeeId',width:0">2id</th>
+					<th data-options="field:'expertPayeeId',width:0">3id</th>
+					<th data-options="field:'periodicalCnName',width:120">期刊名称</th>
+					<th data-options="field:'periodicalIssueNo',width:120">期刊号</th>
+					<th data-options="field:'sectionName',width:100">栏目名称</th>
+					<th data-options="field:'articleId2',width:100">稿件编号</th>
 					<th data-options="field:'articleCnTitle',width:100">标题</th>
 					<th data-options="field:'authorName',width:60">作者</th>
 					<th data-options="field:'authorAmount',width:80,editor:'numberbox'">作者应发金额</th>
 					<th data-options="field:'authorTaxAmount',width:80,editor:'numberbox'">作者扣税</th>
 					<th data-options="field:'authorRealAmount',width:80,editor:'numberbox'">作者实发金额</th>
+					
 					<th data-options="field:'expertName',width:60">专家</th>
 					<th data-options="field:'expertAmount',width:80,editor:'numberbox'">专家应发金额</th>
-					<th data-options="field:'expertRealAmount',width:80,editor:'numberbox'">专家扣税</th>
-					<th data-options="field:'expertTaxAmount',width:80,editor:'numberbox'">专家实发金额</th>
+					<th data-options="field:'expertTaxAmount',width:80,editor:'numberbox'">专家扣税</th>
+					<th data-options="field:'expertRealAmount',width:80,editor:'numberbox'">专家实发金额</th>
 					
 				</tr>
 			</thead>
@@ -110,8 +119,12 @@
 				#foreach($dtos in ${list}) 
 				<tr>
 					<td>$!{dtos.accountInfoId}</td>
+					<td>$!{dtos.articleId}</td>
 					<td>$!{dtos.authorPayeeId}</td>
 					<td>$!{dtos.expertPayeeId}</td>
+					<td>$!{dtos.periodicalCnName}</td>
+					<td>$!{dtos.periodicalIssueNo}</td>
+					<td>$!{dtos.sectionName}</td>
 					<td>$!{dtos.articleId}</td>
 					<td>$!{dtos.articleCnTitle}</td>
 					<td>$!{dtos.authorName}</td>
@@ -120,8 +133,8 @@
 					<td>$!{dtos.authorRealAmount}</td>
 					<td>$!{dtos.expertName}</td>
 					<td>$!{dtos.expertAmount}</td>
-					<td>$!{dtos.expertRealAmount}</td>
 					<td>$!{dtos.expertTaxAmount}</td>
+					<td>$!{dtos.expertRealAmount}</td>
 				</tr>
 				#end
 			</tbody>

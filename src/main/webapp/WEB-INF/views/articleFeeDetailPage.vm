@@ -84,18 +84,25 @@
 				<td>英文摘要：</td>
 				<td>$!{obj.articleEnSummary}</td>
 			</tr>
+			#if($!{roleId}=="1001")
 			<tr>
 				<td>作者信息</td>
-				<td>姓名:***  身份证号:***</td>
+				<td>姓名:$!{author.authorName}  身份证号:$!{author.certificateNo}</td>
 			</tr>
+			#else
+			<tr>
+				<td>专家信息</td>
+				<td>姓名:$!{expert.expertName}  身份证号:$!{expert.certificateNo}</td>
+			</tr>
+			#end
 			<tr>
 				<td>稿费</td>
-				<td>应发金额:$!{obj.aAmount} 扣税:$!{obj.aTaxAmount} 实发金额:$!{obj.aRealAmount} 汇款时间:yyyy-MM-dd</td>
+				<td>应发金额:$!{obj.aAmount} 扣税:$!{obj.aTaxAmount} 实发金额:$!{obj.aRealAmount} 汇款时间:$!{obj.payTime}</td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td>刊登日期</td>
-				<td>**年**期</td>
-			</tr>
+				<td>$!{p.periodicalYear}年$!{p.cycleNums}期</td>
+			</tr> -->
 			</tbody>
 		</table>
 	</div>

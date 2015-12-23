@@ -246,6 +246,7 @@
 		<result column="expertName" jdbcType="VARCHAR" property="expertName" />
 		<result column="cNums" jdbcType="VARCHAR" property="cNums" />
 		<result column="section" jdbcType="VARCHAR" property="section" />
+		<result column="payTime" jdbcType="VARCHAR" property="payTime" />
 	</resultMap>
 	<select id="authorQueryDetail" resultMap="AuthorQueryDetailResult"
 		parameterType="String">
@@ -281,7 +282,8 @@
 	<select id="articleFeeQuery" resultMap="AuthorQueryDetailResult"
 		parameterType="AuthorQueryDetail">
 		select aci.author_real_amount as
-		aRealAmount,aci.author_amount as
+		aRealAmount,DATE_FORMAT(aci.pay_time, '%Y-%m-%d') as
+		payTime,aci.author_amount as
 		aAmount,aci.author_tax_amount as
 		aTaxAmount,ai.article_id as
 		articleId,ai.author_state as

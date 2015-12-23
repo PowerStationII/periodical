@@ -6,6 +6,7 @@
 package com.cn.periodical.manager.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,6 +26,11 @@ public class BizArticleFeeManagerImpl implements BizArticleFeeManager {
 	public List<BizArticleFee> editArticleFee(BizArticleFee example) {
 		// TODO Auto-generated method stub
 		return bizArticleFeeDao.editArticleFee(example);
+	}
+
+	public List<Map<String, String>> editArticleFeeMap(BizArticleFee example) {
+		// TODO Auto-generated method stub
+		return bizArticleFeeDao.editArticleFeeMap(example);
 	}
 }
 
