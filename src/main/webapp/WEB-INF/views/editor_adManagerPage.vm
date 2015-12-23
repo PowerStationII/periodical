@@ -86,7 +86,7 @@
 				</tr>
 				<tr>
 					<td>合同开始时间：</td>
-					<td ><input class="easyui-datebox" type="text" name="contractStartTime" value="1"></td>
+					<td ><input class="easyui-datebox" type="text" name="contractStartTime" value="2015-01-01"></td>
 					<td>合同结束时间：</td>
 					<td><input class="easyui-datebox" type="text" name="contractEndTime" value="1"></td>
 				</tr>

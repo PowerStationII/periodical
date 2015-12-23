@@ -280,7 +280,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">会员类型</td>
-				<td colspan="2"><select class="easyui-combobox"  editable="false" name="type"  id="type"   style="width:70px;">
+				<td colspan="2"><select class="easyui-combobox" data-options="panelHeight:'auto'" editable="false" name="type"  id="type"   style="width:70px;">
 				</select></td>
 				<input type="hidden" name="logoName" value="${fileName}">
 				<input type="hidden" name="logoUrl" value="${filePath}">

@@ -455,9 +455,6 @@ function getSex(value){
  */
 function getCouncilType(){
 	var data=[{    
-	    "value":'',
-	    "text":"全部"
-	},{    
 	    "value":'DG',
 	    "text":"理事长"
 	},{    
