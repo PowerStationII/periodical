@@ -66,6 +66,9 @@ public class ArticleQueryRespDto extends ResponseDto {
 	private String expertDKSJ;
 	private String epxertDKYJ;
 	private String expertId;
+
+    private String authorAttachementName;
+    private String editorAttachementName;
 	
 	
 	
@@ -255,6 +258,20 @@ public class ArticleQueryRespDto extends ResponseDto {
 	public void setAttachPath(String attachPath) {
 		this.attachPath = attachPath;
 	}
-	
-	
+
+    public String getAuthorAttachementName() {
+        return authorAttachementName;
+    }
+
+    public void setAuthorAttachementName(String authorAttachementName) {
+        this.authorAttachementName = authorAttachementName;
+    }
+
+    public String getEditorAttachementName() {
+        return editorAttachementName;
+    }
+
+    public void setEditorAttachementName(String editorAttachementName) {
+        this.editorAttachementName = editorAttachementName;
+    }
 }

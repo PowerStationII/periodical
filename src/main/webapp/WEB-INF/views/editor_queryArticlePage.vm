@@ -113,7 +113,8 @@
 					<td>${dtos.createTime}</td>
 					<td>${dtos.expertNames}</td>
 					<td>${dtos.state}</td>
-					<td>查看稿件 <input type="button" value="催促专家审稿"></td>
+					<td>查看稿件</td>
+##					<td>查看稿件 <input type="button" value="催促专家审稿"></td>
 				</tr>
 			#end
 			</tbody>

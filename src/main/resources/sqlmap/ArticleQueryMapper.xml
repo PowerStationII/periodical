@@ -68,7 +68,7 @@
 		resultMap="ArticleInfosForEditorResultMap">
 		select ai.article_id as articleId,ai.article_cn_title as
 		title,DATE_FORMAT(ai.create_time, '%Y-%m-%d') as
-		contriTime,group_concat(aui.author_name) as authorName,
+		contriTime,aui.author_name as authorName,
 		ai.editor_state as editorState,ai.expert_state as
 		expertState,ai.author_state as authorState,ai.invest_section as section
 		from
@@ -104,7 +104,8 @@
 		</if>
 		<if test="authorName != null and ''!=authorName">
 			and #{authorName,jdbcType=VARCHAR} in (select
-			group_concat(aui.author_name))
+			aui.author_name)
+-- 			group_concat(aui.author_name))
 		</if>
 		group by
 		ai.article_id,ai.article_cn_title,DATE_FORMAT(ai.create_time,'%Y-%m-%d'),ai.editor_state,ai.expert_state,ai.invest_section
@@ -120,7 +121,8 @@
 		editorState,temp1.expert_state as expertState,temp1.invest_section as
 		section from (
 		select ai.article_id ,ai.article_cn_title
-		,ai.create_time,group_concat(aui.author_name) as authorName,
+		,ai.create_time,aui.author_name as authorName,
+-- 		,ai.create_time,group_concat(aui.author_name) as authorName,
 		ai.editor_state ,ai.expert_state ,ai.invest_section
 		from
 		article_info
@@ -194,7 +196,8 @@
 		ai.article_en_summary as
 		enSummary,aai.attachment_name as attachName,
 		aai.attachment_path as
-		attachPath,group_concat(aui.author_name) as authorName,
+		attachPath,aui.author_name as authorName,
+-- 		attachPath,group_concat(aui.author_name) as authorName,
 		DATE_FORMAT(ai.create_time , '%Y-%m-%d') as contriTime
 		,ais.editor_download as editorDownload,ais.expert_download as expertDownload
 		,si.section_name as section
@@ -330,7 +333,8 @@
 		section,auLin.create_time as createTime,auLin.authorNames as
 		authorNames,exLin.expert_name as expertNames from (
 		select
-		ari.article_id,ari.article_cn_title,ari.article_cn_keywords,ari.editor_state,ari.expert_state,ari.invest_section,ari.create_time,GROUP_CONCAT(author_name)
+		ari.article_id,ari.article_cn_title,ari.article_cn_keywords,ari.editor_state,ari.expert_state,ari.invest_section,ari.create_time,author_name
+-- 		ari.article_id,ari.article_cn_title,ari.article_cn_keywords,ari.editor_state,ari.expert_state,ari.invest_section,ari.create_time,GROUP_CONCAT(author_name)
 		as authorNames from article_info ari,author_info aui where
 		ari.article_id=aui.article_id
 		group by ari.article_id
@@ -403,8 +407,9 @@
 		select temp1.article_id as articleId,temp1.article_cn_title as title,DATE_FORMAT(temp1.create_time, '%Y-%m-%d') as contriTime, temp1.authorName as authorName,temp1.editor_state as editorState,temp1.expert_state as expertState,temp1.invest_section as section ,temp2.expertId as expertId,temp3.authorAttachementPath as authorAttachementPath,temp3.editorAttachementPath as editorAttachementPath,temp4.editorDKSJ,temp4.expertDKSJ,temp4.expertDKYJ
 
 		from ( 
-		select ai.article_id ,ai.article_cn_title ,ai.create_time,group_concat(aui.author_name) as authorName, ai.editor_state ,ai.expert_state ,ai.invest_section from article_info ai,author_info aui where ai.article_id=aui.article_id group by ai.article_id) as temp1 ,
-		
+		select ai.article_id ,ai.article_cn_title ,ai.create_time,aui.author_name as authorName, ai.editor_state ,ai.expert_state ,ai.invest_section from article_info ai,author_info aui where ai.article_id=aui.article_id group by ai.article_id) as temp1 ,
+-- 		select ai.article_id ,ai.article_cn_title ,ai.create_time,group_concat(aui.author_name) as authorName, ai.editor_state ,ai.expert_state ,ai.invest_section from article_info ai,author_info aui where ai.article_id=aui.article_id group by ai.article_id) as temp1 ,
+
 		( select aie.article_id,max(if(aie.role_id='1003',aie.user_id,'')) as expertId, max(if(aie.role_id='1006',aie.user_id,'')) as editorId, max(if(aie.role_id='1001',aie.user_id,'')) as userId from article_info_extend aie group by aie.article_id) as temp2 ,
 		
 		(select aai.article_id,max(if(aai.type='1003',aai.attachment_path,'')) as expertAttachementPath, 

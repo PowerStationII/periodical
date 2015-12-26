@@ -5,32 +5,28 @@
 
 package com.cn.periodical.controller;
 
-import java.beans.PropertyEditorSupport;
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import com.cn.periodical.enums.ArticalCodeEnums;
+import com.cn.periodical.manager.ArticalCodeManager;
 import com.cn.periodical.manager.PayeeInfoManager;
 import com.cn.periodical.manager.PeriodicalInfoManager;
 import com.cn.periodical.pojo.PayeeInfo;
 import com.cn.periodical.pojo.PeriodicalInfo;
 import com.cn.periodical.pojo.PeriodicalInfoPage;
 import com.cn.periodical.pojo.PeriodicalInfoQuery;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.beans.PropertyEditorSupport;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/params")
@@ -40,7 +36,10 @@ public class PeriodicalInfoController {
 	
 	@Autowired
 	private PayeeInfoManager payeeInfoManager;
-	
+
+    @Autowired
+    ArticalCodeManager articalCodeManager;
+
 	private static final Logger logger = LoggerFactory.getLogger(PeriodicalInfoController.class);
 	/**
 	 * 列表页面
@@ -105,7 +104,7 @@ public class PeriodicalInfoController {
 		ModelAndView mav = new ModelAndView("redirect:/params/periodicalInfoIndex");
 		
 		try {
-			String periodicalId=UUID.randomUUID().toString().replaceAll("-","");
+            String periodicalId = articalCodeManager.getCode(ArticalCodeEnums.QIKAN_CODE.getCode(),ArticalCodeEnums.QIKAN_CODE.getName()) ;
 			periodicalInfo.setPeriodicalId(periodicalId);
 			periodicalInfo.setCreateTime(new Date());
 			periodicalInfoManager.savePeriodicalInfo(periodicalInfo);

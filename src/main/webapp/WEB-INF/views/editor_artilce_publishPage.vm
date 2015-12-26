@@ -40,7 +40,7 @@
 					</tr>
 					<tr>
 						<td>稿件状态:</td>
-						<td>$!{respDto.expertState}</td>
+						<td> $!{respDto.expertState}</td>
 					</tr>
 					<tr>
 						<td>标题:</td>
@@ -48,11 +48,13 @@
 					</tr>
 					<tr>
 						<td>原稿:</td>
-						<td>$!{respDto.authorAttachementPath}</td>
+						<td>$!{respDto.authorAttachementName} &nbsp;&nbsp;
+                            <a href="../downloadAttachment?fileName=$!{respDto.authorAttachementName}&filePath=$!{respDto.authorAttachementPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
 					</tr>
 					<tr>
 						<td>审核稿:</td>
-						<td>$!{respDto.editorAttachementPath}</td>
+						<td>$!{respDto.editorAttachementName} &nbsp;&nbsp;
+                            <a href="../downloadAttachment?fileName=$!{respDto.editorAttachementName}&filePath=$!{respDto.editorAttachementPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
 					</tr>
 					<tr>
 						<td>拟投栏目:</td>

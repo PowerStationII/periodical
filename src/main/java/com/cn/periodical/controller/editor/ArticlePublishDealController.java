@@ -1,5 +1,6 @@
 package com.cn.periodical.controller.editor;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -114,8 +115,16 @@ public class ArticlePublishDealController extends EditorController{
 //		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**编辑和专家共用一个稿件目录*/
 //		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
 		ArticleQueryRespDto articleQueryRespDto = articleQueryRespDtos.get(0);
+        File temp0 =new File( articleQueryRespDto.getAuthorAttachementPath());
+        String temp1 = temp0.getName();
+        articleQueryRespDto.setAuthorAttachementName(temp1);
+        File temp2 =new File( articleQueryRespDto.getEditorAttachementPath());
+        String temp3 = temp2.getName();
+        articleQueryRespDto.setEditorAttachementName(temp3);
 		mav.addObject("respDto", articleQueryRespDto);
-		
+        if(ArticleStateEnums.PUBLISH_ARTICLE.getCode().equals(articleQueryRespDto.getExpertState())){
+            articleQueryRespDto.setExpertState("待刊");
+        }
 		String sectionId = articleQueryRespDto.getSection();
 		SectionInfoQuery query = new SectionInfoQuery();
 		query.setSectionId(sectionId);

@@ -94,7 +94,7 @@
 		pi.periodical_cn_name as pCnName,oi.order_no as orderNo,p.periodical_issue_no as pIsNo
 		from address_info addi,periodical_distribut pdis,periodical_info pi,order_info oi,periodical p
 		where pdis.address_id=addi.address_id and pdis.periodical_id=pi.periodical_id and pdis.ref_id=oi.order_no and pi.periodical_id=p.periodical_id 
-		and p.periodical_issue_no=#{pIsNo,jdbcType=VARCHAR} 
+		and p.periodical_issue_no=#{pIsNo,jdbcType=VARCHAR}
 		and oi.order_no=#{orderNo,jdbcType=VARCHAR}
 		and p.periodical_id=#{pId,jdbcType=VARCHAR}
 	</select>

@@ -7,6 +7,10 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cn.periodical.enums.ArticalCodeEnums;
+import com.cn.periodical.manager.*;
+import com.cn.periodical.pojo.*;
+import com.cn.periodical.utils.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cn.periodical.enums.ArticleStateEnums;
-import com.cn.periodical.manager.AddressInfoManager;
-import com.cn.periodical.manager.ArticleAttachmentInfoManager;
-import com.cn.periodical.manager.ArticleFlowsManager;
-import com.cn.periodical.manager.ArticleInfoExtendManager;
-import com.cn.periodical.manager.ArticleInfoManager;
-import com.cn.periodical.manager.ArticleInfoStateManager;
-import com.cn.periodical.manager.AuthorInfoManager;
-import com.cn.periodical.manager.UserInfoManager;
-import com.cn.periodical.pojo.AddressInfo;
-import com.cn.periodical.pojo.ArticleAttachmentInfo;
-import com.cn.periodical.pojo.ArticleFlows;
-import com.cn.periodical.pojo.ArticleInfo;
-import com.cn.periodical.pojo.ArticleInfoExtend;
-import com.cn.periodical.pojo.ArticleInfoState;
-import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.request.AuthorContributeReqDto;
 import com.cn.periodical.service.AuthorContributeService;
 import com.cn.periodical.utils.FileCopyUtils;
@@ -67,10 +56,13 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 	
 	
 	@Autowired
-	ArticleFlowsManager articleFlowsManager;	
-	
-	
-	public AuthorContributeServiceImpl() {
+	ArticleFlowsManager articleFlowsManager;
+
+    @Autowired
+    ArticalCodeManager articalCodeManager;
+
+
+    public AuthorContributeServiceImpl() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -88,7 +80,8 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 		 * 保存上传的附件
 		 * */
 		String[] paths =  new String[5];
-		final String articleId= UUID.randomUUID().toString().replaceAll("-", "");
+
+        final String articleId = articalCodeManager.getCode(ArticalCodeEnums.GAOJIAN_CODE.getCode(),ArticalCodeEnums.GAOJIAN_CODE.getName());
 		
 		//判断file数组不能为空并且长度大于0  
         if(files!=null&&files.length>0){  
@@ -287,5 +280,6 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
         file.transferTo(uploadFile);  
         logger.info(uploadFile.getAbsolutePath());
         return uploadFile.getAbsolutePath();  
-    }  
+    }
+
 }

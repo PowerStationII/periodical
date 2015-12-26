@@ -172,8 +172,7 @@ public class AdCouncilManagerController extends EditorController{
 			 * 保存上传的附件
 			 * */
 			String[] paths =  new String[5];
-			final String articleId= UUID.randomUUID().toString().replaceAll("-", "");
-			
+
 			//判断file数组不能为空并且长度大于0  
 	        if(files!=null&&files.length>0){  
 	            //循环获取file数组中得文件  

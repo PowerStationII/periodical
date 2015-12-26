@@ -92,6 +92,7 @@ public class SubscribePostController extends EditorController {
 		distribut.setpIsNo(periodicalIssueNo);
 		List<BizDistribut> list = addressInfoManager.exportReaderAddressInfos(distribut);
 		mav.addObject("list", list);
+		mav.addObject("distribut", distribut);
 
 		return mav;
 	}

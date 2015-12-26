@@ -124,7 +124,7 @@ public class ArticleEnlistedDealController extends EditorController{
 		 * 查询专家
 		 * */
 		ExpertInfoQuery query = new ExpertInfoQuery();
-		
+        query.setExtend1(RoleIdEnums.CN_EXPERT.getCode());
 		List<ExpertInfo> expertInfos = expertInfoManager.queryList(query);
 		
 		mav.addObject("expertInfos", expertInfos);

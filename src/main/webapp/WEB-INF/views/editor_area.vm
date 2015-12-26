@@ -437,7 +437,7 @@ a {
 			#if(${userInfo.roleId}=='1006')
 				<a style="margin-left: 400px; font-size: 20px;">工作任务一览</a><br>
 				<br>
-				<table id="grid" class="easyui-datagrid"   data-options="singleSelect:true">
+				<table id="grid" class="easyui-datagrid"   data-options="singleSelect:true" width = "60%" align = "center">
 				<thead>
 					<tr>
 						<th data-options="field:'status',width:200">稿件</th>
