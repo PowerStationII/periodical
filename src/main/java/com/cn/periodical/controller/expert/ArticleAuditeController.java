@@ -179,7 +179,7 @@ public class ArticleAuditeController extends ExpertController{
 		 * */
 		articleInfo.setId(articleInfo.getId());
 		articleInfo.setAuthorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
-		articleInfo.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());/**编辑需要确认待刊,确认返修,确认退稿,所以增加此状态.代表专家已处理完成*/
+//		articleInfo.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());/**编辑需要确认待刊,确认返修,确认退稿,所以增加此状态.代表专家已处理完成*/
 		articleInfo.setExpertState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
 		articleInfoManager.saveArticleInfo(articleInfo);
 

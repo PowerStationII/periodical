@@ -144,10 +144,10 @@
 				<td>国际定价</td>
 				<td colspan="3"><input type="text" name="outFixPrice" value=""/></td>
 			</tr>
-			<tr>
-				<td>期刊号</td>
-				<td colspan="3"><input type="text" name="issnNo" value=""/></td>
-			</tr>
+##			<tr>
+##				<td>期刊号</td>
+##				<td colspan="3"><input type="text" name="issnNo" value=""/></td>
+##			</tr>
 			<tr>
 				<td>周期</td>
 				<td colspan="3"><input type="text" name="cycle" value=""/></td>

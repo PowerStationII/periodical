@@ -10,7 +10,8 @@ package com.cn.periodical.enums;
 public enum ArticalCodeEnums {
     GAOJIAN_CODE("1","A"), // 稿件编号  article
     LISHIHUI_CODE("2","M"),// 理事会编号 members
-    QIKAN_CODE("3","P");// 理事会编号 periodical
+    QIKAN_CODE("3","P"),// 期刊编号 periodical
+    QIKAN_CONDE1("4","QK");// 期刊编号 periodical
 
     private String code;
     private String name;

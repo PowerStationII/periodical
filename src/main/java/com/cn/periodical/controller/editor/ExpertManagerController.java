@@ -105,12 +105,14 @@ public class ExpertManagerController extends EditorController {
 			addUserInfo.setRefId(expertId);
 			addUserInfo.setRoleId(roleId);
 			addUserInfo.setSystemId(SystemIdEnums.EXPERT_SYS.getCode());
+
 			userInfoManager.saveUserInfo(addUserInfo);
 			
 			/**
 			 * 2,保存expertInfo到Expert_info表
 			 * */
 			expertInfo.setExpertId(expertId);
+            expertInfo.setExtend1(roleId);
 			expertInfoManager.saveExpertInfo(expertInfo);
 		} catch (Exception e) {
 			//记录错误日志

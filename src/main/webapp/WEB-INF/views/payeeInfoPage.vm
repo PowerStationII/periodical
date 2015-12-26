@@ -63,7 +63,8 @@
 				#foreach($dtos in ${list})
 				<tr>
 					<td><input type="radio"  name="selectRadio" id="r$!{velocityCount}"></td>
-					<td>${dtos.authorName}${dtos.authorId}</td>
+					<td>${dtos.authorName}</td>
+##                    ${dtos.authorId}
 					<td><a id="a$!{velocityCount}" style="display:none;" class="easyui-linkbutton"  href="../author/toAddAuthorPayeeInfoPage?articleId=${articleInfo.articleId}&authorId=${dtos.authorId}">编辑账户信息</a></td>
 				</tr>
 				#end

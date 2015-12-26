@@ -47,7 +47,7 @@ public class ArticleInfo implements Serializable{
 	private java.lang.String isAvaliable;
 	private java.lang.Long latelyFlowsId;
 	private java.lang.String extends2;
-	private java.lang.String extends3;
+	private java.lang.String extends3;  // 应该是是否排刊组稿过 Y N
 	private java.lang.String extends4;
 	private java.util.Date createTime;
 	private java.util.Date updateTime;

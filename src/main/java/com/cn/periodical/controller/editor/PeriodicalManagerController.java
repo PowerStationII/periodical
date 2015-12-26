@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cn.periodical.enums.ArticalCodeEnums;
+import com.cn.periodical.manager.ArticalCodeManager;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +47,8 @@ public class PeriodicalManagerController extends EditorController {
 	PeriodicalManager periodicalManager;
 	@Autowired
 	PayeeInfoManager PayeeInfoManager;
+	@Autowired
+    ArticalCodeManager  aticalCodeManager;
 	private static final Logger logger = LoggerFactory.getLogger(PeriodicalManagerController.class);
 	/**
 	 * toPeriodicalManagerPage
@@ -98,7 +102,8 @@ public class PeriodicalManagerController extends EditorController {
 			/**
 			 * 1,保存PeriodicalInfo到Periodical_info表
 			 * */
-			String periodicalId = UUID.randomUUID().toString().replaceAll("-", "");
+//			String periodicalId = UUID.randomUUID().toString().replaceAll("-", "");
+            String periodicalId = aticalCodeManager.getCode(ArticalCodeEnums.QIKAN_CONDE1.getCode(),ArticalCodeEnums.QIKAN_CONDE1.getName());
 			String payeeId = UUID.randomUUID().toString().replaceAll("-", "");
 			periodicalInfo.setPeriodicalId(periodicalId);
 			periodicalInfo.setPayeeId(payeeId);
@@ -108,7 +113,8 @@ public class PeriodicalManagerController extends EditorController {
 			for(int i=1;i<=periodicalInfo.getCycle();i++){
 				Periodical periodical = new Periodical();
 				periodical.setPeriodicalId(periodicalInfo.getPeriodicalId());
-				periodical.setPeriodicalIssueNo(GenerateOrderNo.generateOrderNo());
+//				periodical.setPeriodicalIssueNo(GenerateOrderNo.generateOrderNo()); //  就用国内刊号
+				periodical.setPeriodicalIssueNo(periodicalInfo.getCnNo());
 				periodical.setPeriodicalState(PeriodicalStateEnums.NEW.getCode());
 				periodical.setCycleNums(i);
 				periodical.setPeriodicalYear(periodicalInfo.getPeriodicalYear()==null?new DateTime().toString("YYYY"):periodicalInfo.getPeriodicalYear());

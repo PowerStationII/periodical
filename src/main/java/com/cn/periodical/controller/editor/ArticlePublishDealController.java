@@ -86,7 +86,8 @@ public class ArticlePublishDealController extends EditorController{
 		UserInfo userInfo = getUserInfo(request);
 		ModelAndView mav = new ModelAndView("editor_publishArticlePage");
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
-		reqDto.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
+		reqDto.setEditorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
+//		reqDto.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
 		reqDto.setRoleId(userInfo.getRoleId());
 		reqDto.setExpertState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
 		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
@@ -170,7 +171,9 @@ public class ArticlePublishDealController extends EditorController{
 		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());
 		reqDto.setDealState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
 		reqDto.setToRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());
-		reqDto.setDealOpinion(aritcleWorkFlowReqDto.getDealOpinion());
+        if(null!=aritcleWorkFlowReqDto.getDealOpinion()){
+            reqDto.setDealOpinion(aritcleWorkFlowReqDto.getDealOpinion().replaceAll(",","")); // 这个逗号不知道在哪了，先这么搞吧
+        }
 		reqDto.setDealStartTime(new Date());
 		articleWorkFlowService.registArticleWorkFlow(reqDto);
 		
