@@ -75,10 +75,10 @@
 		    <thead>   
 		        <tr>   
 		            <th data-options="field:'id',width:150">序号</th>   
-		            <th data-options="field:'pId',width:150">pdId</th>   
-		            <th data-options="field:'aId',width:150">地址id</th>   
-		            <th data-options="field:'rAddress',width:150">详细地址</th>   
-		            <th data-options="field:'rContacter',width:150">联系人</th>   
+##		            <th data-options="field:'pId',width:150">pdId</th>
+##		            <th data-options="field:'aId',width:150">地址id</th>
+		            <th data-options="field:'rAddress',width:300">详细地址</th>
+		            <th data-options="field:'rContacter',width:300">联系人</th>
 		            <th data-options="field:'cMobile',width:150">联系电话</th>   
 		            <th data-options="field:'nums',width:160,editor:'numberbox'" >邮寄本数</th>   
 		        </tr>   
@@ -87,8 +87,8 @@
 		    	#foreach($dtos in ${list})
 				<tr>
 					<td>$!{velocityCount}</td>
-					<td>$!{dtos.distributId}</td>
-					<td>$!{dtos.addressId}</td>
+##					<td>$!{dtos.distributId}</td>
+##					<td>$!{dtos.addressId}</td>
 					<td>$!{dtos.receiveAddress}</td>
 					<td>$!{dtos.contacterName}</td>
 					<td>$!{dtos.contacterTelephone}</td>

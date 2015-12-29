@@ -54,7 +54,7 @@
 	
 	//真正的点击下载按钮(隐藏)
 	function download (a1,a2,a3) {
-		window.location.href='../editor/toDownLoadNewArticle?articleId='+a1+'&fileName='+a2+'&filePath='+a3;
+		window.location.href='../downLoadFile?articleId='+a1+'&fileName='+a2+'&filePath='+a3;
 	}
 </script>
 <body>

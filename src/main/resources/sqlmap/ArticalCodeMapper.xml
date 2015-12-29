@@ -4,7 +4,7 @@
 	<resultMap id="BaseResultMap" type="ArticalCode">
 		<id column="ID" jdbcType="DECIMAL" property="id" />
 		<result column="code" jdbcType="VARCHAR" property="code" />
-		<result column="type" jdbcType="VARCHAR" property="type" />
+		<result column="type" jdbcType="INTEGER" property="type" />
 		<result column="year" jdbcType="VARCHAR" property="year" />
 	</resultMap>
 

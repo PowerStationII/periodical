@@ -28,11 +28,11 @@ public class ArticleFlowsManagerImpl implements ArticleFlowsManager {
 	
 	
 	public void saveArticleFlows(ArticleFlows articleFlows) {
-//		if (articleFlows.getId() == null) {
+		if (articleFlows.getId() == null) {
 			articleFlowsDao.insertSelective(articleFlows);
-//		} else {
-//			articleFlowsDao.updateByPrimaryKeySelective(articleFlows);
-//		}
+		} else {
+			articleFlowsDao.updateByPrimaryKeySelective(articleFlows);
+		}
 	}
 	
 	

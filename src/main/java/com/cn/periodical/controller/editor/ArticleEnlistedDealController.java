@@ -1,10 +1,16 @@
 package com.cn.periodical.controller.editor;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cn.periodical.utils.PropertiesInitManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -142,10 +149,11 @@ public class ArticleEnlistedDealController extends EditorController{
 	public String toSubmitModify(@RequestParam("articleId") String articleId,String eId,
 			HttpServletRequest request) {
 		logger.info("修改稿件送审入参:artilceId:["+articleId+"]&expertId:["+eId+"]");
-		//ModelAndView mav = new ModelAndView("redirect:../editor/toEnlistedArticlePage");
-		/**
-		 * 编辑送审给哪个专家
-		 * */
+
+
+        /**
+         * 编辑送审给哪个专家
+         * */
 		UserQueryReqDto dto = new UserQueryReqDto();
 		dto.setRoleId(RoleIdEnums.CN_EXPERT.getCode());
 		dto.setRefId(eId.split(",")[0].trim());

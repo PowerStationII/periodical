@@ -1,11 +1,9 @@
 package com.cn.periodical.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 上传下载导入导出等公用操作类
@@ -21,6 +22,33 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  * 
  */
 public class UtilLoad {
+    private static final Logger logger = LoggerFactory.getLogger(UtilLoad.class);
+
+    public static Map<String, Object> fileUpload(MultipartFile[] files, String filePath) {
+        Map<String,Object> resMap = new HashMap<String,Object>();
+        PropertiesInitManager.dataInit();
+        String url = (String)PropertiesInitManager.PROPERTIES.get(filePath);
+        File headPath = new File(url);//获取文件夹路径
+        if(!headPath.exists()){
+            //判断文件夹是否创建，没有创建则创建新文件夹
+            headPath.mkdirs();
+        }
+        for(MultipartFile file :files){
+            String fileName = file.getOriginalFilename();
+            File uploadFile = new File(url+File.separator+fileName);
+            // 转存文件
+            try {
+                file.transferTo(uploadFile);
+                resMap.put("message","上传成功");
+            } catch (IOException e) {
+                logger.error("UploadController.uploadImg.e="+e);
+                resMap.put("message","上传失败");
+                e.printStackTrace();
+            }
+        }
+        return resMap;
+    }
+
 
 	/**
 	 * 文件下载
@@ -34,8 +62,6 @@ public class UtilLoad {
 	public static Boolean fileDownload(HttpServletRequest request,
 			HttpServletResponse response, String fileName, String filePath) {
 
-		/*filePath = request.getSession().getServletContext().getRealPath("/")
-				+ filePath;*/
 		System.out.println("文件的下载路径为：" + filePath);
 		response.reset();// 先清空之前的缓存信息
 		response.setContentType("application/x-download");// 确保文件是下载的方式而不是浏览器中直接打开

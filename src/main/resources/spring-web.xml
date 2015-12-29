@@ -84,5 +84,5 @@
     <bean id="sessionInterceptor"
         class="com.cn.periodical.controller.SessionInterceptor">
     </bean>
-    
-</beans>           
+
+</beans>

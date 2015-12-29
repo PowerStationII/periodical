@@ -39,7 +39,8 @@ public class ArticalCodeManagerImpl implements ArticalCodeManager {
         articalCode.setType(type);
         articalCode.setYear(DateUtil.getYear());
         ArticalCode articalCodeRet = this.queryArticalCodeByType(articalCode) ;
-        String temp = String.valueOf(Integer.parseInt(articalCodeRet.getCode())+1);
+        int temp = articalCodeRet.getCode()+1;
+//        String temp = String.valueOf(articalCodeRet.getCode()+1);
         String temp0 = "0000"+temp;
         final String articleId= code+articalCodeRet.getYear()+temp0.substring(temp0.length()-4,temp0.length());
         articalCode.setCode(temp);

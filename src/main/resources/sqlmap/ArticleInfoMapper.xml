@@ -762,12 +762,20 @@
 	<select id="queryArticleTotalInfos" parameterType="hashMap"
 		resultMap="EditorResultMap">
 		select status ,count(1) as total from (
-		select (case when ai.editor_state='0008' then ai.expert_state ELSE
+		select (case when ai.editor_state='0002' then ai.expert_state ELSE
 		ai.editor_state END)as status,ai.article_id
 		from article_info ai,article_info_extend aie
 		where ai.article_id=aie.article_id and ai.editor_state in
-		('0000','0008','0001')
+		('0000','0002','0001')
 		group by ai.article_id ) as lin
 		group by status
+-- 		select status ,count(1) as total from (
+-- 		select (case when ai.editor_state='0008' then ai.expert_state ELSE
+-- 		ai.editor_state END)as status,ai.article_id
+-- 		from article_info ai,article_info_extend aie
+-- 		where ai.article_id=aie.article_id and ai.editor_state in
+-- 		('0000','0008','0001')
+-- 		group by ai.article_id ) as lin
+-- 		group by status
 	</select>
 </mapper>

@@ -212,9 +212,12 @@ public class SubscribePostController extends EditorController {
 			   document.add(new Paragraph(list.get(i).getcName()));
 			   document.add(new Paragraph(list.get(i).getcMobile()));
 			   document.add(new Paragraph(String.valueOf(list.get(i).getpCnName() + ":" + list.get(i).getdNums())));
-			   document.add(new Paragraph(String.valueOf(list.get(i).getsId1() + ":" + list.get(i).getsIdNums1())));
-			   document.add(new Paragraph(String.valueOf(list.get(i).getsId2() + ":" + list.get(i).getsIdNums2())));
-			   document.add(new Paragraph(String.valueOf(list.get(i).getsId3() + ":" + list.get(i).getsIdNums3())));
+			   document.add(new Paragraph("赠刊1" + ":" + list.get(i).getsIdNums1()));
+			   document.add(new Paragraph("赠刊2" + ":" + list.get(i).getsIdNums2()));
+			   document.add(new Paragraph("赠刊3" + ":" + list.get(i).getsIdNums3()));
+//			   document.add(new Paragraph(String.valueOf(list.get(i).getsId1() + ":" + list.get(i).getsIdNums1())));
+//			   document.add(new Paragraph(String.valueOf(list.get(i).getsId2() + ":" + list.get(i).getsIdNums2())));
+//			   document.add(new Paragraph(String.valueOf(list.get(i).getsId3() + ":" + list.get(i).getsIdNums3())));
 			   document.add(new Paragraph("\n"));
 		   }
 		  document.close();

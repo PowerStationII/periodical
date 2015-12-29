@@ -113,8 +113,8 @@ public class PeriodicalManagerController extends EditorController {
 			for(int i=1;i<=periodicalInfo.getCycle();i++){
 				Periodical periodical = new Periodical();
 				periodical.setPeriodicalId(periodicalInfo.getPeriodicalId());
-//				periodical.setPeriodicalIssueNo(GenerateOrderNo.generateOrderNo()); //  就用国内刊号
-				periodical.setPeriodicalIssueNo(periodicalInfo.getCnNo());
+				periodical.setPeriodicalIssueNo(GenerateOrderNo.generateOrderNo()); //  就用国内刊号
+//				periodical.setPeriodicalIssueNo(periodicalInfo.getCnNo());
 				periodical.setPeriodicalState(PeriodicalStateEnums.NEW.getCode());
 				periodical.setCycleNums(i);
 				periodical.setPeriodicalYear(periodicalInfo.getPeriodicalYear()==null?new DateTime().toString("YYYY"):periodicalInfo.getPeriodicalYear());

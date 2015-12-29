@@ -11,23 +11,28 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="../js/enums-table.js"></script>
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="../js/fileUpload.js"></script>
 </head>
 <script>
+    var haveUploadFile = false ;
 	$(function() {
 		$('#dd').click(function() {
 			if($("#eId").val()==""){
 				alert("请选择专家");
 				return;
 			}
-			else {
-				//$('form').submit();
-				$.post('../editor/toSubmitState',{articleId:'${respDto.articleId}',eId:$("#eId").val()},function(data){
-				if (data=="true") {
-					alert('稿件已送审');
-					window.location.href='../editor/toEnlistedArticlePage';
-				}
-			})
-			}
+            if(haveUploadFile== false){
+                alert("请上传附件");
+                return;
+            }
+            $.post('../editor/toSubmitState',{articleId:'${respDto.articleId}',eId:$("#eId").val()},
+                    function(data){
+                        if (data=="true") {
+                            alert('稿件已送审');
+                            window.location.href='../editor/toEnlistedArticlePage';
+                        }
+                    })
 		});
 		
 		var data=$('#grid').datagrid('getData');
@@ -36,7 +41,7 @@
 	});
 </script>
 <body>
-	<form action="../editor/toSubmitState" method="POST">
+	<form action="../editor/toSubmitState"  method="POST">
 		<input type="hidden" name="articleId" value="${respDto.articleId}">
 		<table id="grid" class="easyui-datagrid"
 			data-options="singleSelect:true,toolbar:'#bt'">
@@ -64,7 +69,7 @@
 					<td>${respDto.section}</td>
 				</tr>
 				<tr>
-					<td>专家:</td>
+					<td>送审专家:</td>
 					<td><select id="eId" name="eId"> 
 							<option value="" selected>请选择</option>
 							#foreach($dtos in ${expertInfos})
@@ -72,6 +77,10 @@
 							#end
 					</select></td>
 				</tr>
+                <tr>
+                    <td>送审附件:</td>
+                    <td> <input type="file" id="files" name="files"/><a style="font-size:12px;color:red;">(*)</a><input type="button" value="上传" onclick="ajaxFileUpload()"/></td>
+                </tr>
 				<tr>
 					<td>送审日期:</td>
 					<td></td>

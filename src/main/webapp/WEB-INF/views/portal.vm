@@ -64,7 +64,7 @@
   		$('#u153').click(function(){
   			$('.right').hide();
   			$('iframe').remove();
-  			$('#u150').after(frame.replace('totototo','toLianXi'));
+  			$('#u150').after(frame.replace('totototo','toBianWeiHui'));
   		});
   		
   		
@@ -517,7 +517,7 @@
         <img id="u75_img" class="img " src="img/portal/transparent.gif"/>
         <!-- Unnamed () -->
         <div id="u76" class="text">
-          <p><span>主管单位：中华人民共和国</span><span>农业部</span></p><p><span>主　　编：</span><span>隋鹏飞 刘乐泉</span></p><p><span>地　　址：北京市</span><span>朝阳区麦子店街22号楼</span></p><p><span>邮政编码：</span><span>100125</span></p><p><span>电　　话：010-</span><span>65937010（编辑部）</span></p><p><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span>&nbsp; &nbsp;&nbsp; </span><span>010-</span><span>6593701</span><span>1</span><span>（</span><span>发行</span><span>部）</span></p><p><span>电子邮件：</span><span>icamaif</span><span>@agri.gov.cn</span></p><p><span>国际标准刊号：ISSN 100</span><span>2</span><span>-</span><span>5480</span></p><p><span>国内统一刊号：CN 11-</span><span>2678</span><span>/S</span></p><p><span>国内定</span><span>价：￥</span><span>10.00</span><span>元</span></p><p><span>国外定价</span><span>：</span><span>&nbsp;</span><span>$</span><span> 5.00</span><span>元</span></p>
+          <p><span>主管单位：中华人民共和国</span><span>农业部</span></p><p><span>主　　编：</span><span>魏启文</span></p><p><span>地　　址：北京市</span><span>朝阳区麦子店街22号楼</span></p><p><span>邮政编码：</span><span>100125</span></p><p><span>电　　话：010-</span><span>65937010（编辑部）</span></p><p><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span>&nbsp; &nbsp;&nbsp; </span><span>010-</span><span>6593701</span><span>1</span><span>（</span><span>发行</span><span>部）</span></p><p><span>电子邮件：</span><span>icamaif</span><span>@agri.gov.cn</span></p><p><span>国际标准刊号：ISSN 100</span><span>2</span><span>-</span><span>5480</span></p><p><span>国内统一刊号：CN 11-</span><span>2678</span><span>/S</span></p><p><span>国内定</span><span>价：￥</span><span>10.00</span><span>元</span></p><p><span>国外定价</span><span>：</span><span>&nbsp;</span><span>$</span><span> 5.00</span><span>元</span></p>
         </div>
       </div>
 
@@ -859,18 +859,18 @@
         <img id="u148_img" class="img " src="img/portal/u148.png"/>
         <!-- Unnamed () -->
         <div id="u149" class="text">
-          <p><span>2015年《农药科学与管理》理事会</span></p>
+          <p><span>《农药科学与管理》理事会</span></p>
         </div>
       </div>
 
       <!-- Unnamed (Shape) -->
       <div id="u150" class="ax_shape" style="cursor:pointer ;">
-        <img id="u150_img" class="img " src="img/portal/u148.png"/>
+##        <img id="u150_img" class="img " src="img/portal/u148.png"/>
         <!-- Unnamed () -->
         <div id="u151" class="text">
-          <p><span>理事会形象展示</span></p>
+##          <p><span>理事会形象展示</span></p>
         </div>
-      </div>
+    </div>
 
       <!-- Unnamed (Shape) -->
       <div id="u152" class="ax_paragraph">

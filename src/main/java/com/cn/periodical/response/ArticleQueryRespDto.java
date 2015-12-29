@@ -274,4 +274,5 @@ public class ArticleQueryRespDto extends ResponseDto {
     public void setEditorAttachementName(String editorAttachementName) {
         this.editorAttachementName = editorAttachementName;
     }
+
 }

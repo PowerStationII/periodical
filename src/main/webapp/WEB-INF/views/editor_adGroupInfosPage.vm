@@ -56,15 +56,15 @@
 		<div id='left'>
 			<table style="border:1px solid green;width:100%;font-size:14px;" rules="all" id='leftSelect' class='selectedTable'>
 				<tr>
-					<td>广告编号</td>
-					<td>标题</td>
-					<td>广告类型</td>
+					<td width= "20%">广告编号</td>
+					<td width= "70%">标题</td>
+					<td width= "10%">广告类型</td>
 				</tr>
 				#foreach($ad in ${list})
 				<tr class='selectAble'>
-					<td>$!{ad.adId}</td>
-					<td>$!{ad.adName}</td>
-					<td class="type">$!{ad.adType}</td>
+					<td width= "20%">$!{ad.adId}</td>
+					<td width= "70%">$!{ad.adName}</td>
+					<td class="type" width= "10%">$!{ad.adType}</td>
 				</tr>
 				#end
 			</table>
@@ -81,15 +81,15 @@
 	  <div class='sectionId' style="display:none;">$!{item.sectionId}</div>
 			<table style="border:1px solid green;width:100%;font-size:14px;" rules="all" class='selectedTable'>
 				<tr>
-					<td>广告编号</td>
-					<td>广告标题</td>
-					<td>广告类型</td>
+					<td width= "20%">广告编号</td>
+					<td width= "70%">广告标题</td>
+					<td width= "10%">广告类型</td>
 				</tr>
 				#foreach($it in ${item.listAd})
 				<tr class='selectAble'>
-					<td>$!{it.ad_id}</td>
-					<td>$!{it.ad_name}</td>
-					<td>$!{it.ad_type}</td>
+					<td width= "20%">$!{it.ad_id}</td>
+					<td width= "70%">$!{it.ad_name}</td>
+					<td width= "10%">$!{it.ad_type}</td>
 				</tr>
 				#end
 			</table>   	 

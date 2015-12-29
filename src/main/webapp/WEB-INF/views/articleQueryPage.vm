@@ -66,11 +66,11 @@
 			<thead>
 				<tr>
 					<th data-options="field:'id',width:45">序号</th>
-					<th data-options="field:'articleId',width:262">稿件编号</th>
-					<th data-options="field:'title',width:200">稿件标题</th>
+					<th data-options="field:'articleId',width:140">稿件编号</th>
+					<th data-options="field:'title',width:424">稿件标题</th>
 					<th data-options="field:'contriTime',width:185">投稿时间</th>
-					<th data-options="field:'authorState',width:185">稿件状态</th>
-					<th data-options="field:'option',width:200">备注信息</th>
+					<th data-options="field:'authorState',width:85">稿件状态</th>
+					<th data-options="field:'option',width:200">操作</th>
 				</tr>
 			</thead>
 			<tbody>

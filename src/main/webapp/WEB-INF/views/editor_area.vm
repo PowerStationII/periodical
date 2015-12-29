@@ -465,7 +465,8 @@ a {
 						#elseif($!{editorAreaInfos.status}=='0006')
 						<td><a onclick="excute('toRepaireArticlePage')" href="#" class="easyui-linkbutton" >进行处理</a></td> 
 						#else
-						<td>what?</td> #end
+						<td>等待专家审稿</td>
+                        #end
 					</tr>
 					#end
 					</tbody>

@@ -29,7 +29,7 @@ public class ArticalCodeDaoImpl extends BaseDao implements ArticalCodeDao {
             articalCodeRet = list.get(0);
         }else{
             articalCodeRet = new ArticalCode();
-            articalCodeRet.setCode("0");
+            articalCodeRet.setCode(0);
             articalCodeRet.setType(articalCode.getType());
             articalCodeRet.setYear(articalCode.getYear());
         }

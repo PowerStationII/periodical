@@ -30,7 +30,13 @@ public class TopController {
 	public String toLianXiPage() {
 		return "link/lianxiwomen";
 	}
-	
+    /**
+     * 跳转到编委会写死页面
+     */
+    @RequestMapping(value="/toBianWeiHui",method = RequestMethod.GET)
+    public String toBianWeiHui() {
+        return "link/bianweihui";
+    }
 	/**
 	 * 跳转到论文规范写死页面
 	 */
