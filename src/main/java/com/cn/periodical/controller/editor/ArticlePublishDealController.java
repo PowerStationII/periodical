@@ -1,13 +1,11 @@
 package com.cn.periodical.controller.editor;
 
 import java.io.File;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.AuthorContributeService;
 import com.cn.periodical.utils.UtilLoad;
 import org.slf4j.Logger;
@@ -28,14 +26,6 @@ import com.cn.periodical.manager.ExpertInfoManager;
 import com.cn.periodical.manager.SectionInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.manager.UserQueryManager;
-import com.cn.periodical.pojo.ArticleInfo;
-import com.cn.periodical.pojo.ArticleInfoQuery;
-import com.cn.periodical.pojo.ExpertInfo;
-import com.cn.periodical.pojo.ExpertInfoQuery;
-import com.cn.periodical.pojo.SectionInfo;
-import com.cn.periodical.pojo.SectionInfoQuery;
-import com.cn.periodical.pojo.UserInfo;
-import com.cn.periodical.pojo.UserInfoQuery;
 import com.cn.periodical.request.AritcleWorkFlowReqDto;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
@@ -80,6 +70,7 @@ public class ArticlePublishDealController extends EditorController{
 
     @Autowired
     AuthorContributeService authorContributeService ;
+
 
 	/**
 	 * toPublishArticlePage
@@ -146,6 +137,13 @@ public class ArticlePublishDealController extends EditorController{
 		expertInfoQuery.setExpertId(user.getRefId());
 		List<ExpertInfo> expertInfos = expertInfoManager.queryList(expertInfoQuery);
 		mav.addObject("expertInfo", expertInfos.get(0));
+
+        Set<String> set = new HashSet<String>();// 设置可以下载谁的稿件
+        set.add(RoleIdEnums.AUTHOR_ATTR.getCode());
+        set.add(RoleIdEnums.ARTICLE_EDITOR_ATTR.getCode());
+        set.add(RoleIdEnums.CN_EXPERT_ATTR.getCode());
+        List<ArticleAttachmentInfo> listAttr = articleQueryService.queryAttByArtcicle(articleId, set);
+        mav.addObject("listAttr", listAttr);
 		logger.info("待刊Page out :["+JSON.toJSONString(mav)+"]");
 		return mav;
 	}

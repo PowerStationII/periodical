@@ -51,9 +51,9 @@
 			<thead>
 			<tr>
                 <th data-options="field:'articleId',width:140">稿件编号</th>
-                <th data-options="field:'title',width:650">稿件标题</th>
+                <th data-options="field:'title',width:550">稿件标题</th>
                 <th data-options="field:'authorName',width:150">稿件作者</th>
-##                <th data-options="field:'contriTime',width:200">投稿时间</th>
+                <th data-options="field:'contriTime',width:100">投稿时间</th>
                 <th data-options="field:'option',width:100">操作</th>
 			</tr>
 			</thead>
@@ -61,9 +61,9 @@
 			#foreach($obj in ${list})   
 			<tr>
 				<td>$!{obj.articleId}</td>
-				<td>$!{obj.title}</a></td>
+				<td><a href="../author/toArticleQueryDetailPageNew?articleId=${obj.articleId}">$!{obj.title}</a></td>
 				<td>$!{obj.authorName}</td>
-##				<td>$!{obj.contriTime}</td>
+				<td>$!{obj.contriTime}</td>
 				<td><a class="easyui-linkbutton"   style="width:50px;" href="../editor/toPublishPage?articleId=${obj.articleId}">待刊</a></td>
 			</tr>
 			#end

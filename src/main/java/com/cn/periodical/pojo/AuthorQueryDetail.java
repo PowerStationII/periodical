@@ -45,9 +45,24 @@ public class AuthorQueryDetail implements Serializable {
 	private String periodicalIssueNo;
 	
 	private String payTime;
-	
-	
-	
+
+    private String isfund ;
+
+    private String totalPages ;
+
+    private String totalPics ;
+
+    private String totalTabs ;
+
+    private String remark ;
+
+    private String referenceDoc ;
+
+    private String editorState ;
+
+
+
+
 	public String getPayTime() {
 		return payTime;
 	}
@@ -192,7 +207,60 @@ public class AuthorQueryDetail implements Serializable {
 	public void setExpertName(String expertName) {
 		this.expertName = expertName;
 	}
-	
-	
-	
+
+    public String getIsfund() {
+        return isfund;
+    }
+
+    public void setIsfund(String isfund) {
+        this.isfund = isfund;
+    }
+
+    public String getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(String totalPages) {
+        this.totalPages = totalPages;
+    }
+
+    public String getTotalPics() {
+        return totalPics;
+    }
+
+    public void setTotalPics(String totalPics) {
+        this.totalPics = totalPics;
+    }
+
+    public String getTotalTabs() {
+        return totalTabs;
+    }
+
+    public void setTotalTabs(String totalTabs) {
+        this.totalTabs = totalTabs;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getReferenceDoc() {
+        return referenceDoc;
+    }
+
+    public void setReferenceDoc(String referenceDoc) {
+        this.referenceDoc = referenceDoc;
+    }
+
+    public String getEditorState() {
+        return editorState;
+    }
+
+    public void setEditorState(String editorState) {
+        this.editorState = editorState;
+    }
 }

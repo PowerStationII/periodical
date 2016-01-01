@@ -44,8 +44,28 @@ public enum RoleIdEnums {
 	/**
 	 * 系统管理员
 	 * */
-	ADMIN("1010","ADMIN");
-	
+	ADMIN("1010","ADMIN"),
+
+
+    //===================================
+
+    /**
+     * 作者
+     * */
+    AUTHOR_ATTR("1001","原稿下载"),
+    /**
+     * 中文(稿件)专家
+     * */
+    CN_EXPERT_ATTR("1003","中文专家稿件下载"),
+    /**
+     * 英文专家
+     * */
+    EN_EXPERT_ATTR("1004","英文专家稿件下载"),
+    /**
+     * 稿件编辑
+     * */
+    ARTICLE_EDITOR_ATTR("1006","编辑稿件下载");
+
 	private String code;
 	private String name;
 	RoleIdEnums(String code,String name){

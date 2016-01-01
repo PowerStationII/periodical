@@ -1,7 +1,13 @@
 package com.cn.periodical.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import com.cn.periodical.enums.RoleIdEnums;
+import com.cn.periodical.manager.ArticleAttachmentInfoManager;
+import com.cn.periodical.pojo.ArticleAttachmentInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +25,8 @@ public class ArticleQueryServiceImpl implements ArticleQueryService {
 
 	@Autowired
 	ArticleQueryManager articleQueryManager;
+    @Autowired
+    ArticleAttachmentInfoManager articleAttachmentInfoManager ;
 	
 	public ArticleQueryServiceImpl() {
 		// TODO Auto-generated constructor stub
@@ -53,5 +61,30 @@ public class ArticleQueryServiceImpl implements ArticleQueryService {
 		// TODO Auto-generated method stub
 		return articleQueryManager.expertQryArticleInfos(reqDto);
 	}
+
+
+    /**
+     * 查询文章的附件
+     * @param article
+     * @param set 需要过滤附件的类型
+     * @return
+     */
+    public List<ArticleAttachmentInfo>  queryAttByArtcicle(String article,Set<String> set){
+        List<ArticleAttachmentInfo> temp_list = articleAttachmentInfoManager.queryAttByArtcicle(article);
+        List<ArticleAttachmentInfo> list = new ArrayList<ArticleAttachmentInfo>();
+        for(ArticleAttachmentInfo articleAttachmentInfo : temp_list){
+             if(set.contains(articleAttachmentInfo.getType())){
+                 if(RoleIdEnums.AUTHOR.getCode().equals(articleAttachmentInfo.getType())){//
+                     articleAttachmentInfo.setExtend1(RoleIdEnums.AUTHOR_ATTR.getName());
+                 } else if(RoleIdEnums.ARTICLE_EDITOR.getCode().equals(articleAttachmentInfo.getType())){
+                     articleAttachmentInfo.setExtend1(RoleIdEnums.ARTICLE_EDITOR_ATTR.getName());
+                 } else if(RoleIdEnums.CN_EXPERT_ATTR.getCode().equals(articleAttachmentInfo.getType())){
+                     articleAttachmentInfo.setExtend1(RoleIdEnums.CN_EXPERT_ATTR.getName());
+                 }
+                 list.add(articleAttachmentInfo);
+             }
+        }
+        return list ;
+    }
 
 }

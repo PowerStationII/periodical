@@ -66,5 +66,9 @@ public class ArticleAttachmentInfoDaoImpl extends BaseDao implements ArticleAtta
 	public int updateByPrimaryKey(ArticleAttachmentInfo record) {
 		return super.getSqlSession().update("ArticleAttachmentInfoMapper.updateByPrimaryKey", record);
 	}
+
+    public List<ArticleAttachmentInfo>  queryAttByArtcicle(String article){
+        return super.getSqlSession().selectList("ArticleAttachmentInfoMapper.queryAttByArtcicle",article) ;
+    }
 	
 }

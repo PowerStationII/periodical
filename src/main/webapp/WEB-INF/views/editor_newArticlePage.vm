@@ -59,7 +59,7 @@
 			#foreach($obj in ${list})   
 			<tr>
 				<td>$!{obj.articleId}</td>
-				<td><a href="../editor/toNewArticleDetailPage?artilceId=${obj.articleId}">$!{obj.title}</a></td>
+				<td><a href="../author/toArticleQueryDetailPageNew?articleId=${obj.articleId}">$!{obj.title}</a></td>
 				<td>$!{obj.authorName}</td>
 				<td>$!{obj.contriTime}</td>
 				<td><a class="easyui-linkbutton"  href="../editor/toEnlistedPage?articleId=${obj.articleId}"  style="width:50px;">登记</a></td>

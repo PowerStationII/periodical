@@ -30,4 +30,6 @@ public interface ArticleAttachmentInfoDao {
 	int updateByPrimaryKeySelective(ArticleAttachmentInfo record);
 	
 	int updateByPrimaryKey(ArticleAttachmentInfo record);
+
+    public List<ArticleAttachmentInfo>  queryAttByArtcicle(String article);
 }

@@ -69,5 +69,9 @@ public class ArticleAttachmentInfoManagerImpl implements ArticleAttachmentInfoMa
 		articleAttachmentInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
 		return articleAttachmentInfoPage;
 	}
+
+    public List<ArticleAttachmentInfo>  queryAttByArtcicle(String article){
+        return articleAttachmentInfoDao.queryAttByArtcicle(article);
+    }
 }
 

@@ -79,20 +79,13 @@
 						<td>$!{respDto.title}</td>
 					</tr>
 					<tr>
-						<td>原稿:</td>
-						<td>$!{respDto.authorAttachementName} &nbsp;&nbsp;
-                            <a href="../downloadAttachment?fileName=$!{respDto.authorAttachementName}&filePath=$!{respDto.authorAttachementPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
+						<td>稿件下载:</td>
+						<td>
+                            #foreach($obj in ${listAttr})
+                                <a href="../downloadAttachment?fileName=$!{obj.attachmentName}&filePath=$!{obj.attachmentPath}" class="easyui-linkbutton" data-options="width:120">$!{obj.extend1}</a> &nbsp;&nbsp;
+                            #end
+                        </td>
 					</tr>
-					<tr>
-						<td>编辑审核稿:</td>
-						<td>$!{respDto.editorAttachementName} &nbsp;&nbsp;
-                            <a href="../downloadAttachment?fileName=$!{respDto.editorAttachementName}&filePath=$!{respDto.editorAttachementPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
-					</tr>
-                    <tr>
-                        <td>专家审核稿:</td>
-                        <td>$!{respDto.editorAttachementName} &nbsp;&nbsp;
-                            <a href="../downloadAttachment?fileName=$!{respDto.editorAttachementName}&filePath=$!{respDto.editorAttachementPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
-                    </tr>
 					<tr>
 						<td>拟投栏目:</td>
 						<td>$!{sectionInfo.sectionName}</td>

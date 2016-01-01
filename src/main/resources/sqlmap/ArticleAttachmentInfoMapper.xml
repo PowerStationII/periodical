@@ -428,4 +428,15 @@
     <!-- order by CREATE_DATE -->
     <include refid="Page_Query_End" />
   </select>
+
+  <select id="queryAttByArtcicle" parameterType="String" resultMap="BaseResultMap">
+    select
+      <trim suffixOverrides=",">
+          <include refid="Base_Column_List" />
+      </trim>
+    from article_attachment_info
+    where
+      article_id = #{articleId,jdbcType=VARCHAR}
+
+  </select>
 </mapper>

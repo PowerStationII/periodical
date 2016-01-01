@@ -35,7 +35,7 @@
 </script>
 <body>
 	<div>
-		<table class="easyui-datagrid"   data-options="singleSelect:true,height:455" >
+		<table class="easyui-datagrid"   data-options="singleSelect:true,height:600" >
 		<thead>
 			<tr>
 				<th data-options="field:'name',width:200"></th>
@@ -44,9 +44,13 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>稿件状态：</td>
+				<td>稿件编号：</td>
 				<td>$!{detail.articleId}</td>
 			</tr>
+            <tr>
+                <td>中国分类号：</td>
+                <td>$!{detail.cNums}</td>
+            </tr>
 			<tr>
 				<td>中文标题：</td>
 				<td>$!{detail.articleCnTitle}</td>
@@ -54,14 +58,6 @@
 			<tr>
 				<td>英文标题：</td>
 				<td>$!{detail.articleEnTile}</td>
-			</tr>
-			<tr>
-				<td>中国分类号：</td>
-				<td>$!{detail.cNums}</td>
-			</tr>
-			<tr>
-				<td>拟投栏目：</td>
-				<td>$!{detail.section}</td>
 			</tr>
 			<tr>
 				<td>中文关键词：</td>
@@ -79,11 +75,43 @@
 				<td>英文摘要：</td>
 				<td><textarea readonly="readonly" style="height:100px;width:600px;">$!{detail.articleEnSummary}</textarea></td>
 			</tr>
-			<tr>
-				<td>审批稿件下载：</td>
-				<!-- $!{detail.attachmentPath}  $!{detail.attachmentName}-->
-				<td><a href="../downloadAttachment?fileName=$!{detail.attachmentName}&filePath=$!{detail.attachmentPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
-			</tr>
+            <tr>
+                <td>拟投栏目：</td>
+                <td>$!{detail.section}</td>
+            </tr>
+            <tr>
+                <td>基金项目：</td>
+                <td>$!{detail.isfund}</td>
+            </tr>
+            <tr>
+                <td>页数：</td>
+                <td>$!{detail.totalPages}</td>
+            </tr>
+            <tr>
+                <td>图片：</td>
+                <td>$!{detail.totalPics}</td>
+            </tr>
+            <tr>
+                <td>表格：</td>
+                <td>$!{detail.totalTabs}</td>
+            </tr>
+            <tr>
+                <td>备注：</td>
+                <td>$!{detail.remark}</td>
+            </tr>
+            <tr>
+                <td>稿件下载：</td>
+                <td>
+                    #foreach($dtos in ${listAttr})
+                        <a href="../downloadAttachment?fileName=$!{dtos.attachmentName}&filePath=$!{dtos.attachmentPath}" class="easyui-linkbutton" data-options="width:120">$!{dtos.extend1}</a>
+                        &nbsp;&nbsp;&nbsp;
+                    #end
+                </td>
+            </tr>
+            <tr>
+                <td>备注论文：</td>
+                <td>$!{detail.referenceDoc}</td>
+            </tr>
 			<!-- tr>
 				<td>专家审稿：</td>
 				<td>审稿专家:$!{detail.expertName} 送审时间:$!{detail.dealStartTime} <a onclick="yijian('$!{detail.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>

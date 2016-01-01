@@ -23,4 +23,6 @@ public interface ArticleAttachmentInfoManager {
 	void deleteArticleAttachmentInfo(ArticleAttachmentInfoQuery query);
 	
 	ArticleAttachmentInfoPage queryPageList(ArticleAttachmentInfoQuery query);
+
+    public List<ArticleAttachmentInfo>  queryAttByArtcicle(String article);
 }

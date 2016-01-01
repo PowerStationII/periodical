@@ -1,13 +1,13 @@
 package com.cn.periodical.controller.author;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cn.periodical.enums.ArticleStateEnums;
+import com.cn.periodical.enums.RoleIdEnums;
+import com.cn.periodical.pojo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +24,6 @@ import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.manager.ArticleInfoManager;
 import com.cn.periodical.manager.AuthorInfoManager;
 import com.cn.periodical.manager.PayeeInfoManager;
-import com.cn.periodical.pojo.ArticleInfo;
-import com.cn.periodical.pojo.AuthorInfo;
-import com.cn.periodical.pojo.AuthorInfoQuery;
-import com.cn.periodical.pojo.AuthorQueryDetail;
-import com.cn.periodical.pojo.Opinion;
-import com.cn.periodical.pojo.PayeeInfo;
-import com.cn.periodical.pojo.PayeeInfoQuery;
-import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
 import com.cn.periodical.service.ArticleQueryService;
@@ -76,14 +68,21 @@ public class ArticleQueryController extends AuthorController{
 	
 	/**
 	 * toArticleQueryDetailPage
-	 * 去稿件明细页面
+	 * 作者去稿件明细页面
 	 */
 	@RequestMapping(value="/toArticleQueryDetailPage",method = RequestMethod.GET)
 	public ModelAndView toArticleQueryDetailPage(@RequestParam("articleId") String articleId) {
 		logger.info("稿件明细Page:["+articleId+"]");
 		ModelAndView mav = new ModelAndView("articleQueryDetailPage");
 		AuthorQueryDetail detail = articleQueryService.queryAuthorQueryDetail(articleId);
+        Set<String> set = new HashSet<String>();
+        set.add(RoleIdEnums.AUTHOR_ATTR.getCode());
+        if(ArticleStateEnums.END_ARTICLE.getCode().equals(detail.getEditorState())){ // 稿件处理完成了， 作者才可以看审核之后的附件
+            set.add(RoleIdEnums.ARTICLE_EDITOR_ATTR.getCode());
+        }
+        List<ArticleAttachmentInfo> listAttr = articleQueryService.queryAttByArtcicle(articleId, set);
 		mav.addObject("detail", detail);
+		mav.addObject("listAttr", listAttr);
 		logger.info("稿件明细出参:["+JSON.toJSONString(detail)+"]");
 		return mav;
 	}
@@ -191,4 +190,45 @@ public class ArticleQueryController extends AuthorController{
 		authorInfoManager.saveAuthorInfo(authorInfo);
 		return mav;
 	}
+
+
+    // ===============以下是非作者这的模块==================
+
+    /**
+     * toArticleQueryDetailPage
+     * 编辑初投稿去稿件明细页面
+     */
+    @RequestMapping(value="/toArticleQueryDetailPageNew",method = RequestMethod.GET)
+    public ModelAndView toArticleQueryDetailPageNew(@RequestParam("articleId") String articleId) {
+        logger.info("稿件明细Page:["+articleId+"]");
+        ModelAndView mav = new ModelAndView("articleQueryDetailPage");
+        AuthorQueryDetail detail = articleQueryService.queryAuthorQueryDetail(articleId);
+        Set<String> set = new HashSet<String>();// 设置可以下载谁的稿件
+        set.add(RoleIdEnums.AUTHOR_ATTR.getCode());
+        set.add(RoleIdEnums.ARTICLE_EDITOR_ATTR.getCode());
+        set.add(RoleIdEnums.CN_EXPERT_ATTR.getCode());
+        List<ArticleAttachmentInfo> listAttr = articleQueryService.queryAttByArtcicle(articleId, set);
+        mav.addObject("detail", detail);
+        mav.addObject("listAttr", listAttr);
+        logger.info("稿件明细出参:["+JSON.toJSONString(detail)+"]");
+        return mav;
+    }
+    /**
+     * toArticleQueryDetailPage
+     * 专家审核去稿件明细页面
+     */
+    @RequestMapping(value="/toArticleQueryDetailPageZhuanJiaShenHe",method = RequestMethod.GET)
+    public ModelAndView toArticleQueryDetailPageZhuanJiaShenHe(@RequestParam("articleId") String articleId) {
+        logger.info("稿件明细Page:["+articleId+"]");
+        ModelAndView mav = new ModelAndView("articleQueryDetailPage");
+        AuthorQueryDetail detail = articleQueryService.queryAuthorQueryDetail(articleId);
+        Set<String> set = new HashSet<String>();// 设置可以下载谁的稿件
+        set.add(RoleIdEnums.ARTICLE_EDITOR_ATTR.getCode());
+        set.add(RoleIdEnums.CN_EXPERT_ATTR.getCode());
+        List<ArticleAttachmentInfo> listAttr = articleQueryService.queryAttByArtcicle(articleId, set);
+        mav.addObject("detail", detail);
+        mav.addObject("listAttr", listAttr);
+        logger.info("稿件明细出参:["+JSON.toJSONString(detail)+"]");
+        return mav;
+    }
 }

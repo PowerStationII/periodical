@@ -254,28 +254,41 @@
 	<select id="authorQueryDetail" resultMap="AuthorQueryDetailResult"
 		parameterType="String">
 		select
-		ai.article_id as articleId,ai.author_state as
-		authorState,ai.article_cn_title as articleCnTitle,
-		ai.article_en_tile
-		as articleEnTile,ai.classification_nums as classificationNums,
-		ai.article_cn_keywords as articleCnKeywords,ai.article_en_keywords as
-		articleEnKeywords,
-		ai.article_cn_summary as
-		articleCnSummary,ai.classification_nums
-		as cNums,
-		ai.article_en_summary as articleEnSummary,aai.attachment_name
-		as attachmentName,aai.attachment_path as attachmentPath,
-		af.ref_id as
-		refId,DATE_FORMAT(af.deal_start_time, '%Y-%m-%d') as
-		dealStartTime,ei.expert_name as expertName,si.section_name as section
-		from article_info
-		ai,article_attachment_info aai,article_flows
-		af,expert_info
-		ei,user_info ui,section_info si
+		ai.article_id as articleId,
+		ai.author_state as authorState,
+		ai.article_cn_title as articleCnTitle,
+		ai.article_en_tile	as articleEnTile,
+		ai.classification_nums as classificationNums,
+		ai.article_cn_keywords as articleCnKeywords,
+		ai.article_en_keywords as articleEnKeywords,
+		ai.article_cn_summary as articleCnSummary,
+		ai.classification_nums as cNums,
+		ai.article_en_summary as articleEnSummary,
+		ai.classification_nums as cNums,
+		ai.article_en_summary as articleEnSummary,
+		ai.isfund as isfund,
+		ai.total_pages as totalPages,
+		ai.total_pics as totalPics,
+		ai.total_tabs as totalTabs,
+		ai.remark as remark,
+		ai.reference_doc as referenceDoc,
+		ai.editor_state as editorState,
+-- 		aai.attachment_name as attachmentName,
+-- 		aai.attachment_path as attachmentPath,
+		af.ref_id as refId,
+		DATE_FORMAT(af.deal_start_time, '%Y-%m-%d') as dealStartTime,
+		ei.expert_name as expertName,
+		si.section_name as section
+		from article_info ai,
+-- 		article_attachment_info aai,
+		article_flows af,
+		expert_info ei,
+		user_info ui,
+		section_info si
 		where af.ref_id=ui.user_id and
 		ui.ref_id=ei.expert_id
 		and si.section_id=ai.invest_section and
-		ai.article_id=aai.article_id and
+-- 		ai.article_id=aai.article_id and
 		ai.article_id=#{articleId,jdbcType=VARCHAR} 
 		group by ai.article_id
 	</select>

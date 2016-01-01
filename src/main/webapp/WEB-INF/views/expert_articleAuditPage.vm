@@ -92,7 +92,7 @@
 			#foreach($respDto in ${list})   
 				<tr>
 					<td>$!{respDto.articleId}</td>
-					<td>$!{respDto.title}</td>
+					<td><a href="../author/toArticleQueryDetailPageZhuanJiaShenHe?articleId=${respDto.articleId}">$!{respDto.title}</a></td>
 					<td>$!{respDto.contriTime}</td>
 					<td>$!{respDto.expertState}</td>
 					<td>$!{respDto.authorName}</td>

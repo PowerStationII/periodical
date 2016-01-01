@@ -1,7 +1,9 @@
 package com.cn.periodical.service;
 
 import java.util.List;
+import java.util.Set;
 
+import com.cn.periodical.pojo.ArticleAttachmentInfo;
 import com.cn.periodical.pojo.AuthorQueryDetail;
 import com.cn.periodical.pojo.EditorQueryArtilces;
 import com.cn.periodical.pojo.UserInfo;
@@ -22,5 +24,7 @@ public interface ArticleQueryService {
 	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail);
 	
 	public List<EditorQueryArtilces> editorQueryArticles(EditorQueryArtilces reqDto);
+
+    public List<ArticleAttachmentInfo>  queryAttByArtcicle(String article,Set<String> set);
 	
 }

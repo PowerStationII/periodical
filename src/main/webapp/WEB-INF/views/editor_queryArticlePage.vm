@@ -75,13 +75,13 @@
 					<td><select name="state"  id="state" class="easyui-combobox"  editable="false" style="width:155px;">
 						</select>
 					</td>
-					<td>稿件栏目：</td>
-					<td><select name="section"   class="easyui-combobox"   style="width:155px;">
-							<option value="" selected>全部</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-						</select></td>
+##					<td>稿件栏目：</td>
+##					<td><select name="section"   class="easyui-combobox"   style="width:155px;">
+##							<option value="" selected>全部</option>
+##							<option value="1">1</option>
+##							<option value="2">2</option>
+##							<option value="3">3</option>
+##						</select></td>
 					<td>中文关键字：</td>
 					<td><input type="text" class="easyui-textbox" name="cnKeywords" value=""></td>
 					<td>投稿时间：</td>
@@ -96,24 +96,22 @@
 			<thead>
 				<tr>
 					<th data-options="field:'articleId',width:140">稿件编号</th>
-					<th data-options="field:'cnTitle',width:400">标题</th>
+					<th data-options="field:'cnTitle',width:500">标题</th>
 					<th data-options="field:'authorNames',width:100">投稿作者</th>
 					<th data-options="field:'createTime',width:100">投稿时间</th>
 					<th data-options="field:'expertNames',width:100">审稿专家</th>
 					<th data-options="field:'state',width:100">稿件状态</th>
-					<th data-options="field:'option',width:100">操作</th>
 				</tr>
 			</thead>
 			<tbody>
 			#foreach($dtos in ${list})   
 				<tr>
 					<td>${dtos.articleId}</td>
-					<td>${dtos.cnTitle}</td>
+					<td><a href="../author/toArticleQueryDetailPageNew?articleId=${dtos.articleId}">$!{dtos.cnTitle}</a></td>
 					<td>${dtos.authorNames}</td>
 					<td>${dtos.createTime}</td>
 					<td>${dtos.expertNames}</td>
 					<td>${dtos.state}</td>
-					<td>查看稿件</td>
 ##					<td>查看稿件 <input type="button" value="催促专家审稿"></td>
 				</tr>
 			#end
