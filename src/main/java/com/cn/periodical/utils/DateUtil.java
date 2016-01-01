@@ -22,4 +22,14 @@ public class DateUtil {
         String dateString = formatter.format(currentTime);
         return dateString ;
     }
+    /**
+     * 获得当前年月日时 2015010100
+     * @return
+     */
+    public static String getYearMonthDayHour(){
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHH");
+        String dateString = formatter.format(currentTime);
+        return dateString ;
+    }
 }

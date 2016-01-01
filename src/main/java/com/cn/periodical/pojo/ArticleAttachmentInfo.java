@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * ArticleAttachmentInfo
  * @author code-generator
- *
+ *文章附件，存放的是作者上传的文章和附件
  */
 public class ArticleAttachmentInfo implements Serializable{
 	private static final long serialVersionUID = 1L;

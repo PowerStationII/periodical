@@ -322,10 +322,10 @@
 	<insert id="insertSelective" parameterType="ArticleFlows">
 		insert into article_flows
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<include refid="Selective_Column_List" />
+			<include refid="Base_Column_List" />
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<include refid="Selective_Value_List" />
+			<include refid="Base_Value_List" />
 		</trim>
 	</insert>
 	<select id="countByExample" parameterType="ArticleFlowsQuery"

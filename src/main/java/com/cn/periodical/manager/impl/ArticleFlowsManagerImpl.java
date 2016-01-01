@@ -25,8 +25,11 @@ public class ArticleFlowsManagerImpl implements ArticleFlowsManager {
 	@Autowired
 	@Qualifier("articleFlowsDao")
 	private ArticleFlowsDao articleFlowsDao;
-	
-	
+
+    public void saveArticleFlowsNew(ArticleFlows articleFlows) {
+        articleFlowsDao.insertSelective(articleFlows);
+    }
+
 	public void saveArticleFlows(ArticleFlows articleFlows) {
 		if (articleFlows.getId() == null) {
 			articleFlowsDao.insertSelective(articleFlows);

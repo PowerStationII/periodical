@@ -1,12 +1,11 @@
 package com.cn.periodical.controller.expert;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cn.periodical.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -41,10 +41,6 @@ import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.AritcleWorkFlowReqDto;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
-import com.cn.periodical.service.ArticleQueryService;
-import com.cn.periodical.service.ArticleWorkFlowService;
-import com.cn.periodical.service.EditorArticleDealService;
-import com.cn.periodical.service.ExpertArticleAuditeService;
 import com.cn.periodical.utils.UtilLoad;
 
 @Controller
@@ -82,6 +78,9 @@ public class ArticleAuditeController extends ExpertController{
 	
 	@Autowired
 	ArticleInfoStateManager articleInfoStateManager;
+
+    @Autowired
+    AuthorContributeService authorContributeService ;
 	
 	/**
 	 * toArticleAuditePage
@@ -124,11 +123,13 @@ public class ArticleAuditeController extends ExpertController{
 	 */
 	@RequestMapping(value="/toPublishStateModify")
 	@ResponseBody
-	public String toPublishStateModify(@RequestParam("articleId") String articleId,
+	public Map<String , Object> toPublishStateModify(@RequestParam("articleId") String articleId,@RequestParam("dealOption") String dealOption,
+                                                     @RequestParam(value="files", required=true) MultipartFile[] files,
 			HttpServletRequest request) {
 		logger.info("待刊稿件状态入参:artilceId:["+articleId+"]");
 		//ModelAndView mav = new ModelAndView("redirect:/expert/toArticleAuditePage");
-		
+		Map<String , Object> map = new HashMap<String , Object>();
+
 		ArticleInfoQuery query= new ArticleInfoQuery();
 		query.setArticleId(articleId);
 		List<ArticleInfo> articleInfos = articleInfoManager.queryList(query);
@@ -169,7 +170,7 @@ public class ArticleAuditeController extends ExpertController{
 		articleNowFlows.setRefId(getUserInfo(request).getUserId());
 		articleNowFlows.setUserId(articleLastFlows.getRefId());
 		articleNowFlows.setDealState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
-		articleNowFlows.setDealOpinion("");
+		articleNowFlows.setDealOpinion(dealOption);
 		articleNowFlows.setDealEndTime(new Date());
 		articleFlowsManager.updateExpertFlows(articleNowFlows);
 		logger.info("稿件本次流水变更后:["+JSON.toJSONString(articleNowFlows)+"]");
@@ -183,8 +184,22 @@ public class ArticleAuditeController extends ExpertController{
 		articleInfo.setExpertState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
 		articleInfoManager.saveArticleInfo(articleInfo);
 
+
+        //  ==========================
+
+        Map<String, Object> resMap = UtilLoad.fileUpload(files, "zhongwenZhuanJia", articleId);
+        String filePathRet = (String) resMap.get("filePath");
+        if(null!=filePathRet){
+            String  type = RoleIdEnums.CN_EXPERT.getCode();
+            try {
+                authorContributeService.saveAtricalAtt(articleId ,  files[0].getOriginalFilename() ,  filePathRet,type );
+            } catch (Exception e) {
+            }
+        }
+
+        map.put("message" , super.success) ;
 		logger.info("待刊稿件状态出参:["+JSON.toJSONString(articleInfo)+"]");
-		return "true";
+		return map;
 	}
 	
 	

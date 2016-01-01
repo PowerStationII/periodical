@@ -10,20 +10,52 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
 </head>
 <script>
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
 		});
-		$('#submit').click(function(){
-			$('form').submit();
-		});
+//		$('#submit').click(function(){
+//			$('form').submit();
+//		});
+        $('#submit').click(function() {
+            var articleId =  $("#articleId").val() ;
+            var dealOpinion = $("#dealOpinion").val() ;
+
+
+            if($("#files").val()== ""){
+                alert("请上传附件");
+                return ;
+            }
+            if(dealOpinion== ""){
+                alert("请输入待刊意见");
+                return ;
+            }
+
+            $.ajaxFileUpload({
+                url:'../editor/toPublishModify',            //需要链接到服务器地址
+                secureuri:false,
+                fileElementId:'files',                  //文件选择框的id属性
+                dataType: 'json',                      //服务器返回的格式，可以是json, xml
+                data:{dealOpinion:dealOpinion,articleId:articleId},
+                success: function (data, status){     //相当于java中try语句块的用法
+                    if (data.message == "success") {
+                        alert('稿件已待刊');
+                        window.location.href='../editor/toPublishArticlePage';
+                    }
+                },
+                error: function (data, status, e){  //相当于java中catch语句块的用法
+                    alert(data);
+                }
+            });
 	});
+});
 </script>
 <body>
-	<form action="../editor/toPublishModify" method="POST">
-	<input type="hidden" name="articleId" value="${respDto.articleId}"/>
+	<form action="../editor/toPublishModify" id="form_id"  method="POST">
+	<input type="hidden" name="articleId" id="articleId"  value="${respDto.articleId}"/>
 		<div id="articleInfos">
 			<div id="bt">稿件待刊</div>
 			<table class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt'">
@@ -52,10 +84,15 @@
                             <a href="../downloadAttachment?fileName=$!{respDto.authorAttachementName}&filePath=$!{respDto.authorAttachementPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
 					</tr>
 					<tr>
-						<td>审核稿:</td>
+						<td>编辑审核稿:</td>
 						<td>$!{respDto.editorAttachementName} &nbsp;&nbsp;
                             <a href="../downloadAttachment?fileName=$!{respDto.editorAttachementName}&filePath=$!{respDto.editorAttachementPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
 					</tr>
+                    <tr>
+                        <td>专家审核稿:</td>
+                        <td>$!{respDto.editorAttachementName} &nbsp;&nbsp;
+                            <a href="../downloadAttachment?fileName=$!{respDto.editorAttachementName}&filePath=$!{respDto.editorAttachementPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
+                    </tr>
 					<tr>
 						<td>拟投栏目:</td>
 						<td>$!{sectionInfo.sectionName}</td>
@@ -84,9 +121,13 @@
 						<td>审稿意见:</td>
 						<td>$!{respDto.epxertDKYJ}</td>
 					</tr>
+                    <tr>
+                        <td>送审附件:</td>
+                        <td> <input type="file" id="files" name="files"/><a style="font-size:12px;color:red;">(*)</a></td>
+                    </tr>
 					<tr>
 						<td>编辑意见:</td>
-						<td><textarea name="dealOpinion"  style="width:800px;height:100px;" rows="" cols=""></textarea></td>
+						<td><textarea name="dealOpinion" id="dealOpinion"  style="width:800px;height:100px;" rows="" cols=""></textarea></td>
 					</tr>
 					</tbody>
 				</table>

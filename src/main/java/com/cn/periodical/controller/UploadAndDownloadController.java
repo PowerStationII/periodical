@@ -1,8 +1,11 @@
 package com.cn.periodical.controller;
 
+import com.cn.periodical.enums.RoleIdEnums;
+import com.cn.periodical.service.AuthorContributeService;
 import com.cn.periodical.utils.UtilLoad;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +29,8 @@ import java.util.Map;
 public class UploadAndDownloadController {
     private static final Logger logger = LoggerFactory.getLogger(UploadAndDownloadController.class);
 
+    @Autowired
+    AuthorContributeService authorContributeService ;
     /**
      * 文件上传
      * @param request
@@ -35,9 +40,20 @@ public class UploadAndDownloadController {
      */
     @RequestMapping(value="/upLoadFile" , method= RequestMethod.POST )
     public @ResponseBody
-    Object upLoadFile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files , @RequestParam("filePath")String filePath){
+    Object upLoadFile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files , @RequestParam("filePath")String filePath , @RequestParam("articleId")String articleId ){
         logger.info("UploadAndDownloadController.uploadImg.filePath="+filePath);
-        Map<String, Object> resMap = UtilLoad.fileUpload(files, filePath);
+        Map<String, Object> resMap = UtilLoad.fileUpload(files, filePath,articleId);
+        String filePathRet = (String) resMap.get("filePath");
+        if(null!=filePathRet){
+            String type = "" ;
+            if("editorPath".equals(filePath)){
+                type = RoleIdEnums.ARTICLE_EDITOR.getCode();
+            }
+            try {
+                authorContributeService.saveAtricalAtt(articleId ,  files[0].getOriginalFilename() ,  filePathRet,type );
+            } catch (Exception e) {
+            }
+        }
         return resMap;
     }
 

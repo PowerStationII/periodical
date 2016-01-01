@@ -2,18 +2,20 @@ package com.cn.periodical.controller.editor;
 
 import java.io.File;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cn.periodical.service.AuthorContributeService;
+import com.cn.periodical.utils.UtilLoad;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -75,6 +77,9 @@ public class ArticlePublishDealController extends EditorController{
 	
 	@Autowired 
 	UserQueryManager userQueryManager;
+
+    @Autowired
+    AuthorContributeService authorContributeService ;
 
 	/**
 	 * toPublishArticlePage
@@ -144,64 +149,145 @@ public class ArticlePublishDealController extends EditorController{
 		logger.info("待刊Page out :["+JSON.toJSONString(mav)+"]");
 		return mav;
 	}
-	
-	
-	/**
-	 * toPublishModify
-	 * 待刊-Action
-	 */
-	@RequestMapping(value="/toPublishModify")
-	public ModelAndView toPublishArticleDetailPage(@RequestParam("articleId") String articleId,
-			HttpServletRequest request,@ModelAttribute AritcleWorkFlowReqDto aritcleWorkFlowReqDto) {
-		logger.info("待刊Action in:articleId:["+articleId+"]&aritcleWorkFlowReqDto:["+JSON.toJSONString(aritcleWorkFlowReqDto)+"]");
-		ModelAndView mav = new ModelAndView("redirect:../editor/toPublishArticlePage");
 
-		ArticleInfoQuery query= new ArticleInfoQuery();
-		query.setArticleId(articleId);
-		List<ArticleInfo> articleInfos = articleInfoManager.queryList(query);
-		ArticleInfo	articleInfo = articleInfos.get(0);
-		
-		/**
-		 * 记录稿件开始处理流水
-		 * refId谁把articleId稿件送给dtoResult.getUserId审
-		 * */
-		AritcleWorkFlowReqDto reqDto = new AritcleWorkFlowReqDto();
-		reqDto.setUserId(getUserInfo(request).getUserId());
-		reqDto.setArticleId(articleId);
-		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());
-		reqDto.setDealState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
-		reqDto.setToRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());
-        if(null!=aritcleWorkFlowReqDto.getDealOpinion()){
-            reqDto.setDealOpinion(aritcleWorkFlowReqDto.getDealOpinion().replaceAll(",","")); // 这个逗号不知道在哪了，先这么搞吧
+    /**
+     * toPublishModify
+     * 待刊-Action
+     */
+    @RequestMapping(value="/toPublishModify")
+    public @ResponseBody
+    Object toPublishArticleDetailPage(@RequestParam("articleId") String articleId,
+                                                   HttpServletRequest request,@RequestParam("dealOpinion") String dealOpinion ,@RequestParam(value="files", required=true) MultipartFile[] files) {
+        logger.info("待刊Action in:articleId:["+articleId+"]&aritcleWorkFlowReqDto:["+dealOpinion+"]");
+
+        Map<String , Object> map = new HashMap<String ,Object>();
+
+        ArticleInfoQuery query= new ArticleInfoQuery();
+        query.setArticleId(articleId);
+        List<ArticleInfo> articleInfos = articleInfoManager.queryList(query);
+        ArticleInfo	articleInfo = articleInfos.get(0);
+
+        /**
+         * 记录稿件开始处理流水
+         * refId谁把articleId稿件送给dtoResult.getUserId审
+         * */
+        AritcleWorkFlowReqDto reqDto = new AritcleWorkFlowReqDto();
+        reqDto.setUserId(getUserInfo(request).getUserId());
+        reqDto.setArticleId(articleId);
+        reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());
+        reqDto.setDealState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
+        reqDto.setToRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());
+        reqDto.setDealOpinion(dealOpinion);
+        reqDto.setDealStartTime(new Date());
+        articleWorkFlowService.registArticleWorkFlow(reqDto);
+
+        /**
+         * 变更稿件状态
+         * */
+        articleInfo.setId(articleInfo.getId());
+        articleInfo.setAuthorState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
+        articleInfo.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
+        articleInfoManager.saveArticleInfo(articleInfo);
+
+
+        //  ==========================
+
+        Map<String, Object> resMap = UtilLoad.fileUpload(files, "editorPath", articleId);
+        String filePathRet = (String) resMap.get("filePath");
+        if(null!=filePathRet){
+            String type = RoleIdEnums.ARTICLE_EDITOR.getCode();
+            try {
+                authorContributeService.saveAtricalAtt(articleId ,  files[0].getOriginalFilename() ,  filePathRet,type );
+            } catch (Exception e) {
+            }
         }
-		reqDto.setDealStartTime(new Date());
-		articleWorkFlowService.registArticleWorkFlow(reqDto);
-		
-		/**
-		 * 变更稿件状态
-		 * */
-		articleInfo.setId(articleInfo.getId());
-		articleInfo.setAuthorState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
-		articleInfo.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
-		articleInfoManager.saveArticleInfo(articleInfo);
-		
-		/**
-		 * 向读者发送待刊确认邮件
-		 * 
-		 * ${作者名}，您好：
-			您向${期刊名称}期刊投递的稿件${稿件名称}已被本刊采用.
-			如不同意发表请点击不同意,否则视为同意发表!
-			此致
-			敬礼
-			${编辑社名称}
-			年月日
-		 * */
-		
-		
-		
-		
-		
-		logger.info("待刊Action out:["+JSON.toJSONString(articleInfo)+"]");
-		return mav;
-	}
+        /**
+         * 向读者发送待刊确认邮件
+         *
+         * ${作者名}，您好：
+         您向${期刊名称}期刊投递的稿件${稿件名称}已被本刊采用.
+         如不同意发表请点击不同意,否则视为同意发表!
+         此致
+         敬礼
+         ${编辑社名称}
+         年月日
+         * */
+
+        map.put("message",super.success);
+
+
+
+        logger.info("待刊Action out:["+JSON.toJSONString(articleInfo)+"]");
+        return map;
+    }
+//	/**
+//	 * toPublishModify
+//	 * 待刊-Action
+//	 */
+//	@RequestMapping(value="/toPublishModify")
+//	public ModelAndView toPublishArticleDetailPage(@RequestParam("articleId") String articleId,
+////			HttpServletRequest request,@ModelAttribute AritcleWorkFlowReqDto aritcleWorkFlowReqDto,@RequestParam(value="files", required=true) MultipartFile[] files) {
+//			HttpServletRequest request,@RequestParam("form") String form ,@RequestParam(value="files", required=true) MultipartFile[] files) {
+//		logger.info("待刊Action in:articleId:["+articleId+"]&aritcleWorkFlowReqDto:["+form+"]");
+////		logger.info("待刊Action in:articleId:["+articleId+"]&aritcleWorkFlowReqDto:["+JSON.toJSONString(aritcleWorkFlowReqDto)+"]");
+////		ModelAndView mav = new ModelAndView("redirect:../editor/toPublishArticlePage");
+//
+//		ArticleInfoQuery query= new ArticleInfoQuery();
+//		query.setArticleId(articleId);
+//		List<ArticleInfo> articleInfos = articleInfoManager.queryList(query);
+//		ArticleInfo	articleInfo = articleInfos.get(0);
+//
+//		/**
+//		 * 记录稿件开始处理流水
+//		 * refId谁把articleId稿件送给dtoResult.getUserId审
+//		 * */
+//		AritcleWorkFlowReqDto reqDto = new AritcleWorkFlowReqDto();
+//		reqDto.setUserId(getUserInfo(request).getUserId());
+//		reqDto.setArticleId(articleId);
+//		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());
+//		reqDto.setDealState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
+//		reqDto.setToRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());
+//        reqDto.setDealOpinion(aritcleWorkFlowReqDto.getDealOpinion());
+//		reqDto.setDealStartTime(new Date());
+//		articleWorkFlowService.registArticleWorkFlow(reqDto);
+//
+//		/**
+//		 * 变更稿件状态
+//		 * */
+//		articleInfo.setId(articleInfo.getId());
+//		articleInfo.setAuthorState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
+//		articleInfo.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
+//		articleInfoManager.saveArticleInfo(articleInfo);
+//
+//
+//        //  ==========================
+//
+//        Map<String, Object> resMap = UtilLoad.fileUpload(files, "editorPath", articleId);
+//        String filePathRet = (String) resMap.get("filePath");
+//        if(null!=filePathRet){
+//            String type = RoleIdEnums.ARTICLE_EDITOR.getCode();
+//            try {
+//                authorContributeService.saveAtricalAtt(articleId ,  files[0].getOriginalFilename() ,  filePathRet,type );
+//            } catch (Exception e) {
+//            }
+//        }
+//		/**
+//		 * 向读者发送待刊确认邮件
+//		 *
+//		 * ${作者名}，您好：
+//			您向${期刊名称}期刊投递的稿件${稿件名称}已被本刊采用.
+//			如不同意发表请点击不同意,否则视为同意发表!
+//			此致
+//			敬礼
+//			${编辑社名称}
+//			年月日
+//		 * */
+//
+//
+//
+//
+//
+//		logger.info("待刊Action out:["+JSON.toJSONString(articleInfo)+"]");
+//		return mav;
+//	}
 }

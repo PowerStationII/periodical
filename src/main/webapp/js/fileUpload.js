@@ -6,13 +6,13 @@
  * To change this template use File | Settings | File Templates.
  */
 
-function ajaxFileUpload(){
+function ajaxFileUpload(filePath,articleId){
     $.ajaxFileUpload({
             url:'../upLoadFile',            //需要链接到服务器地址
             secureuri:false,
             fileElementId:'files',                  //文件选择框的id属性
             dataType: 'json',                      //服务器返回的格式，可以是json, xml
-            data:{filePath:"filePath"},
+            data:{filePath:filePath,articleId:articleId},
             success: function (data, status){     //相当于java中try语句块的用法
                 haveUploadFile = true ;
                 alert(data.message);

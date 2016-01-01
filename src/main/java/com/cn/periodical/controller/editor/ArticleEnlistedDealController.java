@@ -10,7 +10,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cn.periodical.service.AuthorContributeService;
 import com.cn.periodical.utils.PropertiesInitManager;
+import com.cn.periodical.utils.UtilLoad;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +75,9 @@ public class ArticleEnlistedDealController extends EditorController{
 	UserQueryManager userQueryManager;
 	@Autowired 
 	ExpertInfoManager expertInfoManager;
+
+    @Autowired
+    AuthorContributeService authorContributeService ;
 	
 	/**
 	 * toEnlistedArticlePage
@@ -146,10 +151,11 @@ public class ArticleEnlistedDealController extends EditorController{
 	 */
 	@RequestMapping(value="/toSubmitState",method = RequestMethod.POST)
 	@ResponseBody
-	public String toSubmitModify(@RequestParam("articleId") String articleId,String eId,
-			HttpServletRequest request) {
+	public Object toSubmitModify(@RequestParam("articleId") String articleId,String eId,
+			HttpServletRequest request,@RequestParam(value="files", required=true) MultipartFile[] files) {
 		logger.info("修改稿件送审入参:artilceId:["+articleId+"]&expertId:["+eId+"]");
 
+        Map<String , Object> map = new HashMap<String , Object>();
 
         /**
          * 编辑送审给哪个专家
@@ -187,8 +193,24 @@ public class ArticleEnlistedDealController extends EditorController{
 		articleInfo.setEditorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
 		articleInfo.setExpertState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
 		articleInfoManager.saveArticleInfo(articleInfo);
+
+
+        //  ==========================
+
+        Map<String, Object> resMap = UtilLoad.fileUpload(files, "editorPath", articleId);
+        String filePathRet = (String) resMap.get("filePath");
+        if(null!=filePathRet){
+            String type = RoleIdEnums.ARTICLE_EDITOR.getCode();
+            try {
+                authorContributeService.saveAtricalAtt(articleId ,  files[0].getOriginalFilename() ,  filePathRet,type );
+            } catch (Exception e) {
+            }
+        }
+        map.put("message" , "success");
 		
 		logger.info("修改稿件状态出参:[]");
-		return "true";
+		return map;
 	}
+
+
 }

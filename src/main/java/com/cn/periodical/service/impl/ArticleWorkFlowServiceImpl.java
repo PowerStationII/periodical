@@ -61,8 +61,8 @@ public class ArticleWorkFlowServiceImpl implements ArticleWorkFlowService {
 		articleFlows.setExtend2("Y");/**为了审批意见是否作者可见而改,这里暂时弄成Y吧，因为还没有设置是否可见的功能*/
 		/**专家操作三个按钮时,需要将流水的userId和refId互换,所以设立此字段,记录专家的userId,更新流水时作为其中一个唯一条件*/
 		articleFlows.setExtend1(reqDto.getExtend());
-		articleFlowsManager.saveArticleFlows(articleFlows);
-		
+		articleFlowsManager.saveArticleFlowsNew(articleFlows); //   你在这里给id赋值 ， 后面id！=null 还不让插入数据，有病吧 yuguodong
+
 		ArticleInfoQuery articleInfoQuery=new ArticleInfoQuery();
 		articleInfoQuery.setArticleId(reqDto.getArticleId());
 		List<ArticleInfo> articleInfos = articleInfoManager.queryList(articleInfoQuery);

@@ -170,9 +170,8 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 			public Object doInTransaction(TransactionStatus status) {
 				try {
 					for(int i=0;i<authorInfos.size();i++){
-						String authorId= UUID.randomUUID().toString().replaceAll("-", "");
-						String addressId= UUID.randomUUID().toString().replaceAll("-", "");
-						
+						String authorId= UUID.randomUUID().toString().replaceAll("-", "");    // article's author
+						String addressId= UUID.randomUUID().toString().replaceAll("-", "");   // articel's author's address
 						AuthorInfo authorInfo = authorInfos.get(i);
 						AddressInfo addressInfo = addressInfos.get(i);
 						
@@ -182,7 +181,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 						addressInfo.setRefId(authorId);
 						addressInfo.setAddressId(addressId);
 						addressInfo.setRefRoleId(contributeRequestDto.getRoleId());
-						authorInfoManager.saveAuthorInfo(authorInfo);
+						authorInfoManager.saveAuthorInfo(authorInfo);// 这个表里放了注册作者的信息，投稿作者的信息
 						addressInfoManager.saveAddressInfo(addressInfo);
 					}
 					articleInfoStateManager.saveArticleInfoState(articleInfoState);
@@ -203,8 +202,8 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 			 * 登记稿件流水
 			 * */
 			ArticleFlows articleFlows = new ArticleFlows();
-			articleFlows.setId(1L);
-			articleFlows.setPid(0L);
+			articleFlows.setId(1L); // why give value for id ?
+			articleFlows.setPid(0L);// what is the pid ? yuguodong
 			articleFlows.setUserId(contributeRequestDto.getUserId());
 			articleFlows.setCreateTime(new Date());
 			articleFlows.setRoleId(contributeRequestDto.getRoleId());
@@ -213,47 +212,48 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 			articleFlows.setDealStartTime(new Date());
 			articleFlows.setDealEndTime(new Date());
 			articleFlows.setExtend2("N");/**为了审批意见是否作者可见而改*/
-			articleFlowsManager.saveArticleFlows(articleFlows);
+			articleFlowsManager.saveArticleFlowsNew(articleFlows);
 		}
-		
-		/**
-		 * 复制一份稿件信息到编辑目录
-		 * */
-		String path = (String)PropertiesInitManager.PROPERTIES.get("editorPath");
-		String oldPath = articleAttachmentInfo.getAttachmentPath();
-		String oldName = articleAttachmentInfo.getAttachmentName();
-		StringBuffer newPath= new StringBuffer();
-		newPath.append(path);
-		newPath.append(File.separator);
-		newPath.append(articleInfo.getArticleId());
-		newPath.append(File.separator);
-		
-		try{
-			FileCopyUtils.copyFile(oldPath, "", newPath.toString(), oldName);
-			
-			ArticleAttachmentInfo copyFile = new ArticleAttachmentInfo();
-			copyFile.setArticleId(articleId);
-			copyFile.setAttachmentName(oldName);
-			copyFile.setAttachmentPath(newPath.toString()+oldName);
-			copyFile.setBdjcbgAttachmentName("");
-			copyFile.setBdjcbgAttachmentPath("");
-			copyFile.setCxcnsAttachmentName("");
-			copyFile.setCxcnsAttachmentPath("");
-			copyFile.setEditTimes(0);
-			copyFile.setSjtztsjAttachmentName("");
-			copyFile.setSjtztsjAttachmentPath("");
-			copyFile.setYjspzpAttachmentName("");
-			copyFile.setYjspzpAttachmentPath("");
-			copyFile.setType("1006");
-			copyFile.setStatus("Y");
-			copyFile.setCreateTime(new Date());
-			copyFile.setUpdateTime(new Date());
-			
-			articleAttachmentInfoManager.saveArticleAttachmentInfo(copyFile);
-		}catch(Exception e){
-			logger.info("稿件复制异常!!!怎么通知系统呢?");
-			throw new Exception("复制稿件到编辑目录出错!!"+e.getMessage()); 
-		}
+
+
+//        try{
+//            /**
+//             * 复制一份稿件信息到编辑目录
+//             * */
+//            String path = (String)PropertiesInitManager.PROPERTIES.get("editorPath");
+//            String oldPath = articleAttachmentInfo.getAttachmentPath();
+//            String oldName = articleAttachmentInfo.getAttachmentName();
+//            StringBuffer newPath= new StringBuffer();
+//            newPath.append(path);
+//            newPath.append(File.separator);
+//            newPath.append(articleInfo.getArticleId());
+//            newPath.append(File.separator);
+//
+//            FileCopyUtils.copyFile(oldPath, "", newPath.toString(), oldName);
+//
+//			ArticleAttachmentInfo copyFile = new ArticleAttachmentInfo();
+//			copyFile.setArticleId(articleId);
+//			copyFile.setAttachmentName(oldName);
+//			copyFile.setAttachmentPath(newPath.toString()+oldName);
+//			copyFile.setBdjcbgAttachmentName("");
+//			copyFile.setBdjcbgAttachmentPath("");
+//			copyFile.setCxcnsAttachmentName("");
+//			copyFile.setCxcnsAttachmentPath("");
+//			copyFile.setEditTimes(0);
+//			copyFile.setSjtztsjAttachmentName("");
+//			copyFile.setSjtztsjAttachmentPath("");
+//			copyFile.setYjspzpAttachmentName("");
+//			copyFile.setYjspzpAttachmentPath("");
+//			copyFile.setType("1006");
+//			copyFile.setStatus("Y");
+//			copyFile.setCreateTime(new Date());
+//			copyFile.setUpdateTime(new Date());
+//
+//			articleAttachmentInfoManager.saveArticleAttachmentInfo(copyFile);
+//		}catch(Exception e){
+//			logger.info("稿件复制异常!!!怎么通知系统呢?");
+//			throw new Exception("复制稿件到编辑目录出错!!"+e.getMessage());
+//		}
 	}
 	
 	
@@ -282,4 +282,38 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
         return uploadFile.getAbsolutePath();  
     }
 
+
+    public void saveAtricalAtt(String articleId , String attName , String attPath , String type) throws Exception {
+        try{
+            ArticleAttachmentInfoQuery articleAttachmentInfoQuery = new ArticleAttachmentInfoQuery();
+            articleAttachmentInfoQuery.setArticleId(articleId);
+            articleAttachmentInfoQuery.setType(type);
+            List<ArticleAttachmentInfo> list = articleAttachmentInfoManager.queryList(articleAttachmentInfoQuery);
+            ArticleAttachmentInfo copyFile = new ArticleAttachmentInfo();
+            if(null!=list && !list.isEmpty()){
+                copyFile.setId(list.get(0).getId());
+            }
+            copyFile.setArticleId(articleId);
+            copyFile.setAttachmentName(attName);
+            copyFile.setAttachmentPath(attPath+File.separator+attName);
+            copyFile.setBdjcbgAttachmentName("");
+            copyFile.setBdjcbgAttachmentPath("");
+            copyFile.setCxcnsAttachmentName("");
+            copyFile.setCxcnsAttachmentPath("");
+            copyFile.setEditTimes(0);
+            copyFile.setSjtztsjAttachmentName("");
+            copyFile.setSjtztsjAttachmentPath("");
+            copyFile.setYjspzpAttachmentName("");
+            copyFile.setYjspzpAttachmentPath("");
+            copyFile.setType(type);// 1006
+            copyFile.setStatus("Y");
+            copyFile.setCreateTime(new Date());
+            copyFile.setUpdateTime(new Date());
+
+            articleAttachmentInfoManager.saveArticleAttachmentInfo(copyFile);
+        }catch(Exception e){
+            logger.info("稿件复制异常!!!怎么通知系统呢?");
+            throw new Exception("复制稿件到编辑目录出错!!"+e.getMessage());
+        }
+    }
 }

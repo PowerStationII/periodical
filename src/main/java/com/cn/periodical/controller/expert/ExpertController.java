@@ -11,7 +11,9 @@ import com.cn.periodical.pojo.UserInfo;
 @RequestMapping("/expert")
 public class ExpertController {
 	public UserInfo userInfo=null;
-	
+
+    public String success = "success" ;
+
 	public UserInfo getUserInfo(HttpServletRequest request){
 		userInfo = (UserInfo)request.getSession().getAttribute("userInfo");
 		return userInfo;

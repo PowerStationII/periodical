@@ -11,6 +11,7 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="../js/enums-table.js"></script>
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
 </head>
 <script>
 	$(function(){
@@ -18,13 +19,38 @@
 	    	window.location.href='../expert/toArticleAuditePage';
 		});
 		$('#wait').click(function(){
+            var daikanyijian = $("#daikanyijian_id").val();
+            if(daikanyijian== ""){
+                alert("请输入意见");
+                return;
+            }
+            if($("#files").val()== ""){
+                alert("请上传附件");
+                return;
+            }
+            $.ajaxFileUpload({
+                url:'../expert/toPublishStateModify',            //需要链接到服务器地址
+                secureuri:false,
+                fileElementId:'files',                  //文件选择框的id属性
+                dataType: 'json',                      //服务器返回的格式，可以是json, xml
+                data:{filePath:"editorPath",articleId:'$!{respDto.articleId}',dealOption:daikanyijian},
+                success: function (data, status){     //相当于java中try语句块的用法
+                    if (data.message == "success") {
+                        alert('待刊成功');
+                        window.location.href='../expert/toArticleAuditePage';
+                    }
+                },
+                error: function (data, status, e){  //相当于java中catch语句块的用法
+                    alert(data);
+                }
+            });
 			//$('form').submit();
-			$.post('../expert/toPublishStateModify',{articleId:'$!{respDto.articleId}'},function(data){
-				if (data=="true") {
-					alert('待刊成功');
-					window.location.href='../expert/toArticleAuditePage';
-				}
-			})
+##			$.post('../expert/toPublishStateModify',{articleId:'$!{respDto.articleId}'},function(data){
+##				if (data=="true") {
+##					alert('待刊成功');
+##					window.location.href='../expert/toArticleAuditePage';
+##				}
+##			})
 		});
 		$('.down').click(function(){
 			window.location.href='../expert/toDownLoadArticle?isDown=true&articleId=${respDto.articleId}&expertDownload=${respDto.expertDownload}';
@@ -118,9 +144,18 @@
 				<td>$!{respDto.enSummary}</td>
 			</tr>
 			<tr>
-				<td>下载原稿件:</td>
+				<td>稿件:</td>
 				<td>$!{respDto.attachName}</td>
 			</tr>
+			<tr>
+                <td>待刊文章:</td>
+                <td> <input type="file" id="files" name="files"/><a style="font-size:12px;color:red;">(*)</a><input type="button" value="上传"  onclick="ajaxFileUpload('editorPath','$!{respDto.articleId}')"/></td>
+			</tr>
+			<tr>
+                <td>待刊意见:</td>
+                <td> <textarea rows="10" cols="50" id="daikanyijian_id" ></textarea></td>
+			</tr>
+
 			</tbody>
 		</table>
 	</div>

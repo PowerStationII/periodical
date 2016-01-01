@@ -24,10 +24,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class UtilLoad {
     private static final Logger logger = LoggerFactory.getLogger(UtilLoad.class);
 
-    public static Map<String, Object> fileUpload(MultipartFile[] files, String filePath) {
+    public static Map<String, Object> fileUpload(MultipartFile[] files, String filePath,String  aritcalNo) {
         Map<String,Object> resMap = new HashMap<String,Object>();
         PropertiesInitManager.dataInit();
-        String url = (String)PropertiesInitManager.PROPERTIES.get(filePath);
+        String url = String.valueOf(PropertiesInitManager.PROPERTIES.get(filePath))+File.separator+aritcalNo;
         File headPath = new File(url);//获取文件夹路径
         if(!headPath.exists()){
             //判断文件夹是否创建，没有创建则创建新文件夹
@@ -39,6 +39,7 @@ public class UtilLoad {
             // 转存文件
             try {
                 file.transferTo(uploadFile);
+                resMap.put("filePath",url);
                 resMap.put("message","上传成功");
             } catch (IOException e) {
                 logger.error("UploadController.uploadImg.e="+e);

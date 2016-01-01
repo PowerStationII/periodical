@@ -13,6 +13,9 @@ import com.cn.periodical.pojo.ArticleFlowsQuery;
 import com.cn.periodical.pojo.Opinion;
 
 public interface ArticleFlowsManager {
+
+    public void saveArticleFlowsNew(ArticleFlows articleFlows);
+
 	void saveArticleFlows(ArticleFlows articleFlows);
 
 	ArticleFlows findArticleFlowsById(Long id);
