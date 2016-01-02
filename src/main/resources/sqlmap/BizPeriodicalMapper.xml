@@ -12,7 +12,8 @@
 		from periodical_info pi,periodical p
 		where
 		pi.periodical_id=p.periodical_id
-		and (p.periodical_state='0' or p.periodical_state='PI' or p.periodical_state='ADPO')
+		and (p.periodical_state='0' or p.periodical_state='PI' or p.periodical_state='FI' or  p.extend_2='PI' or p.extend_2='FI')
+-- 		and (p.periodical_state='0' or p.periodical_state='PI' or p.periodical_state='ADPO')
 	</select>
 	
 	

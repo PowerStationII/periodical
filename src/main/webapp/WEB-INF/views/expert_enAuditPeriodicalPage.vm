@@ -41,11 +41,36 @@
                     pageNumber:pageNo
                 });  
             }  
-        });  
+        });
 	});
+
+    function songQianFa(periodicalIssueNo ,periodicalId){
+        $.ajax({
+            type:"POST",
+            url:"../expert/sendToIssueEditorPage",
+            data:{periodicalIssueNo:periodicalIssueNo,periodicalId:periodicalId},
+            datatype: "json",
+            beforeSend:function(){},
+            success:function(data){
+                if(data.message = "success"){
+                    alert("送签发成功");
+                }else{
+                    alert("请把全部稿件审核完毕后再送签发");
+                }
+            }   ,
+            complete: function(XMLHttpRequest, textStatus){
+            },
+            error: function(data){
+                alert(data.message);
+            }
+        });
+
+    }
 </script>
 <body>
 	<div id="articleInfos" style="margin-top: 50px;">
+        <input id="periodicalIssueNo" value="${dtos.pIsNo}" type="hidden">
+        <input id="periodicalId" value="${dtos.pId}" type="hidden">
 		<table   id="table"  class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true,pagination:true">
 		<thead>
 			<tr>
@@ -69,7 +94,7 @@
 					<td><a class="easyui-linkbutton" style="width:50px;"
 					href="../expert/auditPeriodicalDetailPage?periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">审核</a>
 					<a class="easyui-linkbutton"  style="width:50px;"
-					href="../expert/sendToIssueEditorPage?periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">送签发</a></td>
+					href="javascript:songQianFa('${dtos.pIsNo}','${dtos.pId}')">送签发</a></td>
 				#end
 			</tr>
 			#end

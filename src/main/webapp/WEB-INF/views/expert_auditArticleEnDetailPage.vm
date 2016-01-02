@@ -1,107 +1,124 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
-<link href="../css/icon.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
-<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+    <link href="../css/icon.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../js/ajaxfileupload.js"></script>
 </head>
 <script type="text/javascript">
-	$(function(){
-		$('#back').click(function(){
-			window.location.href='../expert/auditPeriodicalDetailPage?periodicalId=${periodicalId}&periodicalIssueNo=${periodicalIssueNo}';
-		});
-		$('#no').click(function(){
-			if(confirm('确定修改吗')==true) {
-				$('#ok').show();
-				$('#up').show();
-				$('#no').hide();
-				$('#yes').hide();
-			}
-			else {
-				return;
-			}
-		});
-		$('#yes').click(function(){
-			window.location.href='../expert/toEnAuditAgreePage?articleId=${dto.articleId}&periodicalId=${periodicalId}&periodicalIssueNo=${periodicalIssueNo}';
-		});
-		$('#ok').click(function(){
-			$('#formFile').submit();
-		});
-	})
+    $(function(){
+        $('#back').click(function(){
+            window.location.href='../expert/auditPeriodicalDetailPage?periodicalId=${periodicalId}&periodicalIssueNo=${periodicalIssueNo}';
+        });
+##        $('#yes').click(function(){
+##            window.location.href='../expert/toEnAuditAgreePage?articleId=${dto.articleId}&periodicalId=${periodicalId}&periodicalIssueNo=${periodicalIssueNo}';
+##        });
+//		$('#ok').click(function(){
+//			$('#formFile').submit();
+//		});
+        $('#ok').click(function() {
+            var dealOpinion =  $("#dealOpinion").val() ;
+            var articleId =  $("#articleId").val() ;
+            var periodicalId =  $("#periodicalId").val() ;
+            var periodicalIssueNo =  $("#periodicalIssueNo").val() ;
+
+            if($("#files").val()== ""){
+                alert("请上传附件");
+                return ;
+            }
+            if(dealOpinion== ""){
+                alert("请输入意见");
+                return ;
+            }
+
+            $.ajaxFileUpload({
+                url:'../expert/toEnAuditAgreePage',            //需要链接到服务器地址
+                secureuri:false,
+                fileElementId:'files',                  //文件选择框的id属性
+                dataType: 'json',                      //服务器返回的格式，可以是json, xml
+                data:{dealOpinion:dealOpinion,articleId:articleId,periodicalId:periodicalId,periodicalIssueNo:periodicalIssueNo},
+                success: function (data, status){     //相当于java中try语句块的用法
+                    if (data.message == "success") {
+                        alert('审核完成');
+                        window.location.href='../expert/auditPeriodicalDetailPage?periodicalId='+data.periodicalId+'&periodicalIssueNo='+data.periodicalIssueNo;
+                    }
+                },
+                error: function (data, status, e){  //相当于java中catch语句块的用法
+                    alert(data);
+                }
+            });
+        });
+    })
 </script>
 <body>
-	<div id="articleInfos"  style="margin-top:50px;">
-		<table  id="grid" class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true">
-			<thead>
-				<tr>
-					<th data-options="field:'name',width:200"></th>
-					<th data-options="field:'value',width:800"></th>
-				</tr>
-			</thead>
-			<tbody>
-			<tr>
-				<td>中文标题：</td>
-				<td>$!{dto.articleCnTitle}</td>
-			</tr>
-			<tr>
-				<td>英文标题：</td>
-				<td>$!{dto.articleEnTile}</td>
-			</tr>
-			<tr>
-				<td>中文关键词：</td>
-				<td>$!{dto.articleCnKeywords}</td>
-			</tr>
-			<tr>
-				<td>英文关键词：</td>
-				<td>$!{dto.articleEnKeywords}</td>
-			</tr>
-			<tr>
-				<td>中文摘要：</td>
-				<td>$!{dto.articleCnSummary}</td>
-			</tr>
-			<tr>
-				<td>英文摘要：</td>
-				<td>$!{dto.articleEnSummary}</td>
-			</tr>
-			<tr>
-				<td>审批稿件下载：</td>
-				<!-- $!{detail.attachmentPath}  $!{detail.attachmentName}-->
-				<td><a href="../expert/toDownLoadArticlePage?fileName=$!{dto.attachmentName}&filePath=$!{dto.attachmentPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
-			</tr>
-			</tbody>
-		</table>
-		<table>
-			<tr>
-				<td>
-					<input type="button" value="通过"  id="yes">
-					<input type="button" value="英文修改" id="no">
-					<input type="button" value="通过" style="display:none;" id="ok">
-				</td>
-				<td>
-					<form id="formFile" action="">
-						<input type="file" value="上传稿件" name="file" style="display:none;" id="up">
-					</form>
-				</td>
-				<td>
-					<input type="button" value="返回上页"  id="back">
-				</td>
-			</tr>
-		</table>
-		<!-- <form action="../expert/toEnAuditAgreePage">
-			<input type="text" name="aId" value="${dto.articleId}">
-			<input type="text" name="pId" value="${periodicalId}">
-			<input type="text" name="isNo" value="${periodicalIssueNo}">
-			<input type="text" name="attachmentName" value="${dto.attachmentName}">
-			<input type="text" name="attachmentPath" value="${dto.attachmentPath}">
-			<input type="submit" value="审核通过">
-		</form> -->
-		<br>
-	</div>
+<div id="articleInfos"  style="margin-top:50px;">
+    <input type="hidden" id="articleId" value="${dto.articleId}">
+    <input type="hidden" id="periodicalId" value="${periodicalId}">
+    <input type="hidden" id="periodicalIssueNo" value="${periodicalIssueNo}">
+    <table  id="grid" class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true">
+        <thead>
+        <tr>
+            <th data-options="field:'name',width:200"></th>
+            <th data-options="field:'value',width:800"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>中文标题：</td>
+            <td>$!{dto.articleCnTitle}</td>
+        </tr>
+        <tr>
+            <td>英文标题：</td>
+            <td>$!{dto.articleEnTile}</td>
+        </tr>
+        <tr>
+            <td>中文关键词：</td>
+            <td>$!{dto.articleCnKeywords}</td>
+        </tr>
+        <tr>
+            <td>英文关键词：</td>
+            <td>$!{dto.articleEnKeywords}</td>
+        </tr>
+        <tr>
+            <td>中文摘要：</td>
+            <td>$!{dto.articleCnSummary}</td>
+        </tr>
+        <tr>
+            <td>英文摘要：</td>
+            <td>$!{dto.articleEnSummary}</td>
+        </tr>
+        <tr>
+            <td>稿件上传：</td>
+            <td> <input type="file" id="files" name="files"/><a style="font-size:12px;color:red;">(*)</a></td>
+        </tr>
+        <tr>
+            <td>审核意见：</td>
+            <td> <textarea cols="20" rows="10"  id="dealOpinion" name="">$!{dto.articleEnSummary}</textarea></td>
+        </tr>
+        <tr>
+            <td>审批稿件下载：</td>
+            <td><a href="../expert/toDownLoadArticlePage?fileName=$!{dto.attachmentName}&filePath=$!{dto.attachmentPath}" class="easyui-linkbutton" data-options="width:50">下载</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <input type="button" value="保存"  id="ok">
+            </td>
+            <td>
+                <input type="button" value="返回"  id="back">
+            </td>
+        </tr>
+    </table>
+    <br>
+</div>
 </body>
 </html>

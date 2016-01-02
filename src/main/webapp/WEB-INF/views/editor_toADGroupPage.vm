@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+    <link href="../css/icon.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../js/enums-table.js"></script>
+    <style>
+        #left, #right {
+            /* border: 1px solid green; */
+            float: left;
+            width: 40%;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        #center {
+            float: left;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        .box {
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .selected {
+            border: 3px solid red;
+        }
+
+        .selectedTr {
+            background-color: #349000;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function(){
+            var temp = $('.type');
+            $.each(temp,function(i){
+                temp.eq(i).text(getAdsType(temp.eq(i).text()));
+            })
+        })
+    </script>
+</head>
+<body>
+<!-- ../editor/toSaveAdGroup -->
+<form id="sub2" action="" method="POST">
+    <input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}">
+    <input type="hidden" name="periodicalId" value="${periodicalId}"> <br />
+
+        #foreach($item in ${sList})
+            <div class='box'>
+                <div>$!{item.sectionName}</div>
+                <div class='sectionId' style="display:none;">$!{item.sectionId}</div>
+                <table style="border:1px solid green;width:100%;font-size:14px;" rules="all" class='selectedTable'>
+                    <tr>
+                        <td width= "20%">广告编号</td>
+                        <td width= "70%">广告标题</td>
+                        <td width= "10%">广告类型</td>
+                    </tr>
+                    #foreach($it in ${item.listAd})
+                        <tr class='selectAble'>
+                            <td width= "20%">$!{it.ad_id}</td>
+                            <td width= "70%">$!{it.ad_name}</td>
+                            <td width= "10%">$!{it.ad_type}</td>
+                        </tr>
+                    #end
+                </table>
+            </div>
+        #end
+</form>
+</body>
+<SCRIPT LANGUAGE="JavaScript">
+
+</SCRIPT>
+</html>

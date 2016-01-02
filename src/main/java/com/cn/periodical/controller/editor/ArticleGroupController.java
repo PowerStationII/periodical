@@ -271,4 +271,29 @@ public class ArticleGroupController extends EditorController{
         periodicalManager.savePeriodical(p);
         return map ;
     }
+
+
+    /**
+     * toArticleGroupDetailPage
+     * 刊文章页列表面
+     */
+    @RequestMapping(value="/toArticleGroupDPage",method = RequestMethod.GET)
+    public ModelAndView toArticleGroupDPage(
+            @RequestParam("periodicalId") String periodicalId,
+            @RequestParam("periodicalIssueNo") String periodicalIssueNo,
+            HttpServletRequest request) {
+        logger.info("组稿左右Page:[ "+periodicalId+"]&["+periodicalIssueNo+"]");
+        ModelAndView mav = new ModelAndView("editor_toArticleGroupPage");
+
+        SectionInfoQuery query =new SectionInfoQuery();
+        query.setPeriodicalId(periodicalId);
+        query.setPeriodicalIssueNo(periodicalIssueNo);
+        query.setExtend1("N");
+        List<SectionInfo> sectionInfos = sectionInfoManager.queryListForGroupAticle(query);
+        mav.addObject("sList", sectionInfos);
+
+        mav.addObject("periodicalIssueNo", periodicalIssueNo);
+        mav.addObject("periodicalId", periodicalId);
+        return mav;
+    }
 }

@@ -207,6 +207,7 @@ public class ArticleQueryController extends AuthorController{
         set.add(RoleIdEnums.AUTHOR_ATTR.getCode());
         set.add(RoleIdEnums.ARTICLE_EDITOR_ATTR.getCode());
         set.add(RoleIdEnums.CN_EXPERT_ATTR.getCode());
+        set.add(RoleIdEnums.EN_EXPERT_ATTR.getCode());
         List<ArticleAttachmentInfo> listAttr = articleQueryService.queryAttByArtcicle(articleId, set);
         mav.addObject("detail", detail);
         mav.addObject("listAttr", listAttr);

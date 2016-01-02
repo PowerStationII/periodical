@@ -45,6 +45,28 @@
             }  
         });  
 	});
+    function songQianFa(periodicalIssueNo ,periodicalId){
+        $.ajax({
+            type:"POST",
+            url:"../expert/editSendToIssueGuangGao",
+            data:{periodicalIssueNo:periodicalIssueNo,periodicalId:periodicalId},
+            datatype: "json",
+            beforeSend:function(){},
+            success:function(data){
+                if(data.message = "success"){
+                    alert("送签发成功");
+                    $("#span_qianfa").html("重新送签发");
+                    $("#span_state").html("待签发");
+                }
+            }   ,
+            complete: function(XMLHttpRequest, textStatus){
+            },
+            error: function(data){
+                alert(data.message);
+            }
+        });
+
+    }
 </script>
 <body>
 	<div id="articleInfos">
@@ -55,10 +77,10 @@
 					<th data-options="field:'periodicalCnName',width:200">期刊名称</th>
 					<th data-options="field:'periodicalIssueNo',width:200">期刊编号</th>
 					<th data-options="field:'periodicalYear',width:100">发行年份</th>
-					<th data-options="field:'cycleNums',width:100">发行期</th>
+					<th data-options="field:'cycleNums',width:70">发行期</th>
 					<th data-options="field:'time',width:200">签发时间</th>
 					<th data-options="field:'periodicalState',width:100">状态</th>
-					<th data-options="field:'option',width:165">操作</th>
+					<th data-options="field:'option',width:195">操作</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -69,13 +91,23 @@
 				<td>${periodical.periodicalYear}</td>
 				<td>${periodical.cycleNums}</td>
 				<td>${periodical.cycleNums}</td>
-				<td>${periodical.periodicalState}</td>
-				#if(${periodical.periodicalState}=='APO'||${periodical.periodicalState}=='ADPD')
-				<td><a class="easyui-linkbutton" href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">刊登广告</a></td>
-				#elseif(${periodical.periodicalState}=='ADPO')
-				<td>期刊已制作完成</td>
-				#else
-				<td>组稿中..</td>
+				<td><span id="span_state">${periodical.extend2}</span></td>
+				#if(${periodical.extend2}==''||   ${periodical.extend2}=='N' || ${periodical.extend2}=='ADPD')
+				    <td><a class="easyui-linkbutton" href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">刊登广告</a></td>
+				#elseif(${periodical.extend2}=='ADPO')
+				    <td>
+                        <a class="easyui-linkbutton" href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">重新刊登广告</a>
+                        <a class="easyui-linkbutton" href="javascript:songQianFa('${periodical.periodicalIssueNo}','${periodical.periodicalId}')"><span id="span_qianfa">送签发</span></a>
+                    </td>
+                #elseif(${periodical.extend2}=='PI')
+                    <td>
+                        <a class="easyui-linkbutton" href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">重新刊登广告</a>
+                        <a class="easyui-linkbutton" href="javascript:songQianFa('${periodical.periodicalIssueNo}','${periodical.periodicalId}')">重新送签发</a>
+                    </td>
+                #else
+                    <td>
+                              签发完成
+                    </td>
 				#end
 			</tr>
 			#end

@@ -13,6 +13,7 @@ public class ExpertController {
 	public UserInfo userInfo=null;
 
     public String success = "success" ;
+    public String error = "error" ;
 
 	public UserInfo getUserInfo(HttpServletRequest request){
 		userInfo = (UserInfo)request.getSession().getAttribute("userInfo");

@@ -98,6 +98,8 @@ function getPeriodicalType(status){
 		return '已签发';
 	}else if('YINGWEN' == status){
         return '已送英文专家';
+    }else if('PIBIANJI' == status){
+        return '英文专家已审核';
     }else{
 		return '未知';
 	}

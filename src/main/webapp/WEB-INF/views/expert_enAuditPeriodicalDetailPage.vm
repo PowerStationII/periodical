@@ -51,10 +51,11 @@
 			<tr>
 				<th  data-options="field:'pCnName',width:45">期刊名称</th>
 				<th  data-options="field:'pIsNo',width:45">期刊号</th>
-				<th  data-options="field:'cNums',width:45">期号</th>
+				<th  data-options="field:'cNums',width:25">期号</th>
 				<th  data-options="field:'aCnTitle',width:45">稿件名称</th>
 				<th  data-options="field:'section',width:45">栏目名称</th>
-				<th  data-options="field:'option',width:45">操作</th>
+				<th  data-options="field:'section',width:20">状态</th>
+				<th  data-options="field:'option',width:25">操作</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -65,12 +66,19 @@
 				<td>第$!{dtos.cNums}期</td>
 				<td>$!{dtos.aCnTitle}</td>
 				<td>$!{dtos.section}</td>
-				
+                #if(${dtos.extend1}=='Y')
+                    <td>审核完成</td>
+                #else
+                    <td>未审核</td>
+                #end
 				#if(${dtos.extend1}=='Y')
-				<td></td>
+                <td>
+                    <a	class="easyui-linkbutton" href="../expert/auditArticleEnDetailPage?articleId=${dtos.aId}&periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">重新审核</a>
+				</td>
 				#else
-				<td><a
-					class="easyui-linkbutton" href="../expert/auditArticleEnDetailPage?articleId=${dtos.aId}&periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">审核稿件</a></td>
+				<td>
+                    <a	class="easyui-linkbutton" href="../expert/auditArticleEnDetailPage?articleId=${dtos.aId}&periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">审核稿件</a>
+                </td>
 				#end
 			</tr>
 			#end

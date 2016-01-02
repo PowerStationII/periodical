@@ -1,13 +1,13 @@
 package com.cn.periodical.controller.expert;
 
 import java.io.File;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cn.periodical.enums.RoleIdEnums;
+import com.cn.periodical.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +38,6 @@ import com.cn.periodical.pojo.PeriodicalDetails;
 import com.cn.periodical.pojo.PeriodicalDetailsQuery;
 import com.cn.periodical.pojo.PeriodicalQuery;
 import com.cn.periodical.pojo.UserInfo;
-import com.cn.periodical.service.ArticleQueryService;
-import com.cn.periodical.service.ArticleWorkFlowService;
-import com.cn.periodical.service.EditorArticleDealService;
-import com.cn.periodical.service.ExpertArticleAuditeService;
 import com.cn.periodical.utils.FileCopyUtils;
 import com.cn.periodical.utils.PropertiesInitManager;
 import com.cn.periodical.utils.UtilLoad;
@@ -88,6 +84,8 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 	PeriodicalDetailsManager periodicalDetailsManager;
 	@Autowired
 	PeriodicalManager periodicalManager;
+    @Autowired
+    AuthorContributeService authorContributeService ;
 	
 	/**
 	 * toEnAuditePeriodicalPage
@@ -185,69 +183,107 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 	 * 审核通过
 	 */
 	@RequestMapping(value="/toEnAuditAgreePage")
-	public ModelAndView toEnAuditAgreePage(HttpServletRequest request,
+	public @ResponseBody Object toEnAuditAgreePage(HttpServletRequest request,
 			@ModelAttribute BizPeriodical reqDto,String articleId,
-			String periodicalId,String periodicalIssueNo) {
+			String periodicalId,String periodicalIssueNo,@RequestParam(value="files", required=true) MultipartFile[] files,String dealOpinion ) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("英文审刊-稿件审核:["+JSON.toJSONString(reqDto)+"]");
-		ModelAndView mav = new ModelAndView("redirect:../expert/auditPeriodicalDetailPage");
-		mav.addObject("articleId", reqDto.getaId());
-		mav.addObject("periodicalId", reqDto.getpId());
-		mav.addObject("periodicalIssueNo", reqDto.getIsNo());
+		Map<String,Object>  map = new HashMap<String ,Object>();
+        map.put("articleId", articleId);
+        map.put("periodicalId", periodicalId);
+        map.put("periodicalIssueNo", periodicalIssueNo);
 		logger.info(JSON.toJSONString(reqDto));
-		/**
-		 * 审核通过
-		 * 复制一份稿件信息到英文审稿目录
-		 * */
-		PropertiesInitManager.dataInit();
-		String path = (String)PropertiesInitManager.PROPERTIES.get("enExpertPath");
-		String oldPath = reqDto.getAttachmentPath();
-		String oldName = reqDto.getAttachmentName();
-		StringBuffer newPath= new StringBuffer();
-		newPath.append(path);
-		newPath.append(File.separator);
-		newPath.append(reqDto.getaId());
-		newPath.append(File.separator);
-		
-		try{
-			FileCopyUtils.copyFile(oldPath, "", newPath.toString(), oldName);
-			
-			ArticleAttachmentInfo copyFile = new ArticleAttachmentInfo();
-			copyFile.setArticleId(reqDto.getaId());
-			copyFile.setAttachmentName(oldName);
-			copyFile.setAttachmentPath(newPath.toString()+oldName);
-			copyFile.setBdjcbgAttachmentName("");
-			copyFile.setBdjcbgAttachmentPath("");
-			copyFile.setCxcnsAttachmentName("");
-			copyFile.setCxcnsAttachmentPath("");
-			copyFile.setEditTimes(0);
-			copyFile.setSjtztsjAttachmentName("");
-			copyFile.setSjtztsjAttachmentPath("");
-			copyFile.setYjspzpAttachmentName("");
-			copyFile.setYjspzpAttachmentPath("");
-			copyFile.setType("1004");
-			copyFile.setStatus("Y");
-			copyFile.setCreateTime(new Date());
-			copyFile.setUpdateTime(new Date());
-			
-			articleAttachmentInfoManager.saveArticleAttachmentInfo(copyFile);
-		}catch(Exception e){
-			logger.info("稿件复制异常!!!怎么通知系统呢?");
-			e.printStackTrace();
-			return new ModelAndView("error");
-		}
+
+        Map<String, Object> resMap = UtilLoad.fileUpload(files, "enExpertPath", articleId);
+        String filePathRet = (String) resMap.get("filePath");
+        if(null!=filePathRet){
+            String type = RoleIdEnums.EN_EXPERT.getCode();
+            try {
+                authorContributeService.saveAtricalAtt(articleId ,  files[0].getOriginalFilename() ,  filePathRet,type );
+            } catch (Exception e) {
+            }
+        }
+
 		PeriodicalDetailsQuery query = new PeriodicalDetailsQuery();
-		query.setArticleId(reqDto.getaId());
-		query.setPeriodicalId(reqDto.getpId());
-		query.setPeriodicalIssueNo(reqDto.getIsNo());
+		query.setArticleId(articleId);
+		query.setPeriodicalId(periodicalId);
+		query.setPeriodicalIssueNo(periodicalIssueNo);
 		List<PeriodicalDetails> list = periodicalDetailsManager.queryList(query);
 		PeriodicalDetails p = list.get(0);
 		p.setId(p.getId());
 		p.setExtend1("Y");//稿件英文审稿结束,后续签发时会检查期刊下的所有稿件是否都已经审核结束
 		periodicalDetailsManager.savePeriodicalDetails(p);
-		return mav;
+        map.put("message",super.success);
+		return map;
 	}
-	
+//	/**
+//	 * toEnAuditAgreePage
+//	 * 审核通过
+//	 */
+//	@RequestMapping(value="/toEnAuditAgreePage")
+//	public ModelAndView toEnAuditAgreePage(HttpServletRequest request,
+//			@ModelAttribute BizPeriodical reqDto,String articleId,
+//			String periodicalId,String periodicalIssueNo) {
+//		UserInfo userInfo = getUserInfo(request);
+//		logger.info("英文审刊-稿件审核:["+JSON.toJSONString(reqDto)+"]");
+//		ModelAndView mav = new ModelAndView("redirect:../expert/auditPeriodicalDetailPage");
+//		mav.addObject("articleId", reqDto.getaId());
+//		mav.addObject("periodicalId", reqDto.getpId());
+//		mav.addObject("periodicalIssueNo", reqDto.getIsNo());
+//		logger.info(JSON.toJSONString(reqDto));
+//		/**
+//		 * 审核通过
+//		 * 复制一份稿件信息到英文审稿目录
+//		 * */
+//		PropertiesInitManager.dataInit();
+//		String path = (String)PropertiesInitManager.PROPERTIES.get("enExpertPath");
+//		String oldPath = reqDto.getAttachmentPath();
+//		String oldName = reqDto.getAttachmentName();
+//		StringBuffer newPath= new StringBuffer();
+//		newPath.append(path);
+//		newPath.append(File.separator);
+//		newPath.append(reqDto.getaId());
+//		newPath.append(File.separator);
+//
+//		try{
+//			FileCopyUtils.copyFile(oldPath, "", newPath.toString(), oldName);
+//
+//			ArticleAttachmentInfo copyFile = new ArticleAttachmentInfo();
+//			copyFile.setArticleId(reqDto.getaId());
+//			copyFile.setAttachmentName(oldName);
+//			copyFile.setAttachmentPath(newPath.toString()+oldName);
+//			copyFile.setBdjcbgAttachmentName("");
+//			copyFile.setBdjcbgAttachmentPath("");
+//			copyFile.setCxcnsAttachmentName("");
+//			copyFile.setCxcnsAttachmentPath("");
+//			copyFile.setEditTimes(0);
+//			copyFile.setSjtztsjAttachmentName("");
+//			copyFile.setSjtztsjAttachmentPath("");
+//			copyFile.setYjspzpAttachmentName("");
+//			copyFile.setYjspzpAttachmentPath("");
+//			copyFile.setType("1004");
+//			copyFile.setStatus("Y");
+//			copyFile.setCreateTime(new Date());
+//			copyFile.setUpdateTime(new Date());
+//
+//			articleAttachmentInfoManager.saveArticleAttachmentInfo(copyFile);
+//		}catch(Exception e){
+//			logger.info("稿件复制异常!!!怎么通知系统呢?");
+//			e.printStackTrace();
+//			return new ModelAndView("error");
+//		}
+//		PeriodicalDetailsQuery query = new PeriodicalDetailsQuery();
+//		query.setArticleId(reqDto.getaId());
+//		query.setPeriodicalId(reqDto.getpId());
+//		query.setPeriodicalIssueNo(reqDto.getIsNo());
+//		List<PeriodicalDetails> list = periodicalDetailsManager.queryList(query);
+//		PeriodicalDetails p = list.get(0);
+//		p.setId(p.getId());
+//		p.setExtend1("Y");//稿件英文审稿结束,后续签发时会检查期刊下的所有稿件是否都已经审核结束
+//		periodicalDetailsManager.savePeriodicalDetails(p);
+//		return mav;
+//	}
+
 	
 	/**
 	 * toEnAuditDisagreePage
@@ -312,8 +348,9 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 	 * 期刊审核结束,送去签发编辑
 	 */
 	@RequestMapping(value="/sendToIssueEditorPage")
-	public ModelAndView sendToIssueEditorPage(HttpServletRequest request,
+	public @ResponseBody Object sendToIssueEditorPage(HttpServletRequest request,
 			String periodicalIssueNo,String periodicalId) {
+        Map<String,Object> map = new HashMap<String , Object>();
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("期刊审核审核完成,送去签发编辑:["+periodicalIssueNo+"]["+periodicalId+"]");
 		/**
@@ -324,32 +361,72 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 		query.setPeriodicalIssueNo(periodicalIssueNo);
 		query.setType("0000");
 		List<PeriodicalDetails> pds =periodicalDetailsManager.queryList(query);
-		Iterator<PeriodicalDetails> its =pds.iterator();
-		while(its.hasNext()){
-			PeriodicalDetails pd = its.next();
-			logger.info(pd.getExtend1());
-//			if(!"Y".equals(pd.getExtend1())){
-//				/**
-//				 * 弹出窗口,稿件审核未完成,不可签发
-//				 * */
-//				ModelAndView mav = new ModelAndView("redirect:../expert/auditPeriodicalDetailPage");
-//				mav.addObject("articleId",pd.getArticleId());
-//				mav.addObject("periodicalId",periodicalId);
-//				mav.addObject("periodicalIssueNo",periodicalIssueNo);
-//				return mav;
-//			}else{
-				ModelAndView mav = new ModelAndView("redirect:../expert/toEnAuditePeriodicalPage");
-				PeriodicalQuery pQuery = new PeriodicalQuery();
-				pQuery.setPeriodicalIssueNo(periodicalIssueNo);
-				pQuery.setPeriodicalId(periodicalId);
-				List<Periodical> ps = periodicalManager.queryList(pQuery);
-				Periodical p =ps.get(0);
-				p.setId(p.getId());
-				p.setPeriodicalState(PeriodicalStateEnums.PRE_ISSUE.getCode());
-				periodicalManager.savePeriodical(p);
-				return mav;
-//			}
-		}
-		return new ModelAndView("error");
+        boolean flag = false ;
+        for(PeriodicalDetails periodicalDetails : pds){
+             if((!"Y".equals(periodicalDetails.getExtend1()))){
+                 flag = true ;
+                 break ;
+             }
+        }
+
+        if(flag){
+            map.put("message",super.error);
+        }else{
+            PeriodicalQuery pQuery = new PeriodicalQuery();
+            pQuery.setPeriodicalIssueNo(periodicalIssueNo);
+            pQuery.setPeriodicalId(periodicalId);
+            List<Periodical> ps = periodicalManager.queryList(pQuery);
+            Periodical p =ps.get(0);
+            p.setId(p.getId());
+            p.setPeriodicalState(PeriodicalStateEnums.EN_TOBIANJI.getCode());
+            periodicalManager.savePeriodical(p);
+            map.put("message",super.error);
+        }
+        return map ;
 	}
+
+
+    /**
+     * sendToIssueEditorPage
+     * 期刊审核结束,送去签发编辑
+     */
+    @RequestMapping(value="/editSendToIssue")
+    public @ResponseBody Object  editSendToIssue(HttpServletRequest request,
+                                                      String periodicalIssueNo,String periodicalId) {
+        Map<String,Object> map = new HashMap<String , Object>();
+        UserInfo userInfo = getUserInfo(request);
+        logger.info("期刊审核审核完成,送去签发编辑:["+periodicalIssueNo+"]["+periodicalId+"]");
+        PeriodicalQuery pQuery = new PeriodicalQuery();
+        pQuery.setPeriodicalIssueNo(periodicalIssueNo);
+        pQuery.setPeriodicalId(periodicalId);
+        List<Periodical> ps = periodicalManager.queryList(pQuery);
+        Periodical p =ps.get(0);
+        p.setId(p.getId());
+        p.setPeriodicalState(PeriodicalStateEnums.PRE_ISSUE.getCode());
+        periodicalManager.savePeriodical(p);
+        map.put("message",super.success);
+        return map ;
+    }
+    /**
+     * sendToIssueEditorPage
+     * 期刊审核结束,送去签发编辑
+     */
+    @RequestMapping(value="/editSendToIssueGuangGao")
+    public @ResponseBody Object  editSendToIssueGuangGao(HttpServletRequest request,
+                                                 String periodicalIssueNo,String periodicalId) {
+        Map<String,Object> map = new HashMap<String , Object>();
+        UserInfo userInfo = getUserInfo(request);
+        logger.info("期刊审核审核完成,送去签发编辑:["+periodicalIssueNo+"]["+periodicalId+"]");
+        PeriodicalQuery pQuery = new PeriodicalQuery();
+        pQuery.setPeriodicalIssueNo(periodicalIssueNo);
+        pQuery.setPeriodicalId(periodicalId);
+        List<Periodical> ps = periodicalManager.queryList(pQuery);
+        Periodical p =ps.get(0);
+        p.setId(p.getId());
+        p.setExtend2(PeriodicalStateEnums.PRE_ISSUE.getCode());
+        periodicalManager.savePeriodical(p);
+        map.put("message",super.success);
+        return map ;
+    }
+
 }

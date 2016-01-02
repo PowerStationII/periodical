@@ -32,7 +32,11 @@ public enum PeriodicalStateEnums {
 	/**
 	 * 送英文专家
 	 * */
-	SONG_YINGEN("YINGWEN","SONG_YINGEN");
+	SONG_YINGEN("YINGWEN","SONG_YINGEN"),
+    /**
+     * 英文给编辑
+     * */
+    EN_TOBIANJI("PIBIANJI","PIBIANJI");
 
 	private String code;
 	private String name;

@@ -186,19 +186,57 @@ public class AdGroupController extends EditorController{
 				 * */
 			}
 		}
-        // 广告组稿不需要更改期刊的状态
-//		PeriodicalQuery query =new PeriodicalQuery();
-//		query.setPeriodicalId(periodicalId);
-//		query.setPeriodicalIssueNo(periodicalIssueNo);
-//		List<Periodical> pList = periodicalManager.queryList(query);
-//		Periodical p = pList.get(0);
-//		p.setId(p.getId());
-//		if("Y".equals(type)){
-//			p.setPeriodicalState(PeriodicalStateEnums.AD_PART_OVER.getCode());
-//		}else{
-//			p.setPeriodicalState(PeriodicalStateEnums.AD_PART_DEALING.getCode());
-//		}
-//		periodicalManager.savePeriodical(p);
+        // 广告期刊的状态用extends2表示
+		PeriodicalQuery query =new PeriodicalQuery();
+		query.setPeriodicalId(periodicalId);
+		query.setPeriodicalIssueNo(periodicalIssueNo);
+		List<Periodical> pList = periodicalManager.queryList(query);
+		Periodical p = pList.get(0);
+		p.setId(p.getId());
+		if("Y".equals(type)){
+			p.setExtend2(PeriodicalStateEnums.AD_PART_OVER.getCode());
+		}else{
+			p.setExtend2(PeriodicalStateEnums.AD_PART_DEALING.getCode());
+		}
+		periodicalManager.savePeriodical(p);
 		return mav;
 	}
+
+
+    /**
+     * editor_toADGroupPage
+     * 广告刊登详情页
+     */
+    @RequestMapping(value="/editor_toADGroupPage")
+    public ModelAndView editor_toADGroupPage(
+            @RequestParam("periodicalId") String periodicalId,
+            @RequestParam("periodicalIssueNo") String periodicalIssueNo,
+            HttpServletRequest request) {
+        logger.info("广告组刊左右Page:[ "+periodicalId+"]&["+periodicalIssueNo+"]");
+        ModelAndView mav = new ModelAndView("editor_toADGroupPage");
+        /**
+         * 查询广告信息
+         * */
+        List<AdInfo> adInfos = adInfoManager.queryList(null);
+        mav.addObject("list", adInfos);
+
+        /**
+         * 循环广告可以刊登的位置
+         * 等同于栏目信息
+         * */
+        SectionInfoQuery query =new SectionInfoQuery();
+        query.setPeriodicalId(periodicalId);
+        query.setPeriodicalIssueNo(periodicalIssueNo);
+        query.setExtend1("Y");
+        List<SectionInfo> sectionInfos = sectionInfoManager.selectByExampleForAd(query);
+        logger.info("+++++++++++++++");
+        logger.info(JSON.toJSONString(sectionInfos));
+        logger.info("+++++++++++++++");
+        mav.addObject("sList", sectionInfos);
+
+        mav.addObject("periodicalIssueNo", periodicalIssueNo);
+        mav.addObject("periodicalId", periodicalId);
+        return mav;
+
+    }
 }

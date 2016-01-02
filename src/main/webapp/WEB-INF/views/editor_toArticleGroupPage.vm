@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+    <link href="../css/icon.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../js/ajaxfileupload.js"></script>
+</head>
+<script>
+    $(function(){
+        $('#back').click(function(){
+            history.go(-1);
+        });
+    })
+</script>
+<body>
+<form id="sub2" action="" method="POST">
+    <input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}">
+    <input type="hidden" name="periodicalId" value="${periodicalId}"> <br />
+    <div >
+        <div ><input type='button' value='返回' id='back' /></div>
+        #foreach($item in ${sList})
+            <div class='box'>
+                <div>${item.sectionName}</div>
+                <div class='sectionId' style="display:none;">${item.sectionId}</div>
+                <table style="border:1px solid green;width:100%;font-size:14px;" rules="all" class='selectedTable'>
+                    <tr>
+                        <td width = "30%">稿件编号</td>
+                        <td width = "70%">标题</td>
+                    #foreach($it in ${item.list})
+                        <tr class='selectAble'>
+                            <td>${it.article_id}</td>
+                            <td><a href="../author/toArticleQueryDetailPageNew?articleId=$!{it.article_id}">${it.article_cn_title}</a></td>
+                        </tr>
+                    #end
+                </table>
+            </div>
+        #end
+    </div>
+</body>
+</html>

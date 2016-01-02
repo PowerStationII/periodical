@@ -10,18 +10,42 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script >
+          $(function(){
+          });
+          function qianfa(periodicalId,periodicalIsNo){
+              if(confirm("签发之后将不可以取消签发，您确定要签发么?")) {
+                  $.ajax({
+                      type:"post",
+                      url:"../editor/toIssue",
+                      data:{periodicalId:periodicalId,periodicalIsNo:periodicalIsNo},
+                      dataType:"json",
+                      beforeSend:function(){},
+                      success:function(data){
+                          if(data.message=="success"){
+                              alert("签发成功");
+                          }else{
+                              alert(data.message);
+                          }
+                      },
+                      complete: function(XMLHttpRequest, textStatus){},
+                      error:function(data){}
+                  });
+              }
+          }
+    </script>
 </head>
 <body>
 	<div id="articleInfos">
 		<table  class="easyui-datagrid"   data-options="singleSelect:true">
 		<thead>
 			<tr>
-				<th data-options="field:'pId',width:200">期刊id</th>
+				<th data-options="field:'pId',width:150">期刊id</th>
 				<th data-options="field:'pCnName',width:200">期刊名称</th>
 				<th data-options="field:'pIsNo',width:200">期刊编号</th>
-				<th data-options="field:'cNums',width:200">期数</th>
-				<th data-options="field:'isTime',width:200">签发时间</th>
-				<th data-options="field:'option',width:70">操作</th>
+				<th data-options="field:'cNums',width:90">期数</th>
+				<th data-options="field:'isTime',width:190">签发时间</th>
+				<th data-options="field:'option',width:240">操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,7 +56,13 @@
 				<td>$!{dtos.pIsNo}</td>
 				<td>第$!{dtos.cNums}期</td>
 				<td>$!{dtos.isTime}</td>
-				<td><a href="../editor/toIssue?periodicalId=${dtos.pId}&periodicalIsNo=${dtos.pIsNo}">签发</a></td>
+				<td>
+                    <a href="javascript:qianfa('${dtos.pId}','${dtos.pIsNo}')" id="qianfa_id" >签发</a>
+                    &nbsp;
+                    <a href="../editor/toArticleGroupDPage?periodicalId=${dtos.pId}&periodicalIssueNo=${dtos.pIsNo}">刊稿件明细</a>
+                    &nbsp;
+                    <a href="../editor/editor_toADGroupPage?periodicalId=${dtos.pId}&periodicalIssueNo=${dtos.pIsNo}">刊广告明细</a>
+                </td>
 			</tr>
 			#end
 		</tbody>	
