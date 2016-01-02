@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="../js/fileUpload.js"></script>
+</head>
+<script>
+	$(function() {
+		$('#songshen').click(function() {
+            var eId = $("#eId").val();
+            var periodicalId = $("#periodicalId").val();
+            var extend1 = $("#extend1").val();
+            $.ajax({
+                type:"POST",     //提交数据的类型 POST GET
+                url:"../editor/toYingWen",   //提交的网址
+                data:{periodicalId:periodicalId,periodicalIssueNo:extend1,eId:eId},   //提交的数据
+                datatype: "json",//"xml", "html", "script", "json", "jsonp", "text".   //返回数据的格式
+                //在请求之前调用的函数
+                beforeSend:function(){
+                    if(eId==""){
+                        alert("请选择专家");
+                        return;
+                    }
+                },
+                //成功返回之后调用的函数
+                success:function(data){
+                    if (data.message == "success") {
+                        alert('期刊已送英文专家');
+                        window.location.href='../editor/toGroupPage?periodicalId='+data.periodicalId;
+                    }
+                }   ,
+                //调用执行后调用的函数
+                complete: function(XMLHttpRequest, textStatus){
+                    //HideLoading();
+                },
+                //调用出错执行的函数
+                error: function(){
+                    //请求出错处理
+                }
+            });
+
+		});
+
+
+##		var data=$('#grid').datagrid('getData');
+##	    data.rows[1].value=ArticleStateEnums('$!{respDto.editorState}');
+##	    $("#grid").datagrid("loadData", data);
+	});
+
+</script>
+<body>
+	<form   method="POST">
+        <input type="hidden" id="periodicalId" value="$!{periodicalInfoQuery.periodicalId}" >
+        <input type="hidden" id="extend1" value="$!{periodicalInfoQuery.extend1}" >
+		<table id="grid" class="easyui-datagrid"
+			data-options="singleSelect:true,toolbar:'#bt'">
+			<thead>
+				<tr>
+					<th data-options="field:'name',width:200"></th>
+					<th data-options="field:'value',width:800"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>期刊编号:</td>
+					<td>$!{periodicalInfoQuery.periodicalId}</td>
+				</tr>
+				<tr>
+					<td>期刊名称:</td>
+                    <td>$!{periodicalInfoQuery.periodicalCnName}</td>
+				</tr>
+				<tr>
+					<td>期刊年份:</td>
+					<td>${periodicalInfoQuery.periodicalYear}&nbsp;年</td>
+				</tr>
+				<tr>
+					<td>期刊期数:</td>
+					<td>第 &nbsp;${periodicalInfoQuery.cycle}&nbsp;期</td>
+				</tr>
+				<tr>
+					<td>送审专家:</td>
+					<td><select id="eId" name="eId"> 
+							<option value="" selected>请选择</option>
+							#foreach($dtos in ${expertInfos})
+							<option value="$!{dtos.expertId}">$!{dtos.expertName}</option>
+							#end
+					</select></td>
+				</tr>
+			</tbody>
+		</table>
+		<a id="songshen" class="easyui-linkbutton" style="width: 50px;">送审</a> <br>
+	</form>
+</body>
+</html>

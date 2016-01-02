@@ -96,7 +96,9 @@ function getPeriodicalType(status){
 		return '待签发';
 	}else if('FI' == status){
 		return '已签发';
-	}else{
+	}else if('YINGWEN' == status){
+        return '已送英文专家';
+    }else{
 		return '未知';
 	}
 }

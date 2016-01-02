@@ -28,8 +28,12 @@ public enum PeriodicalStateEnums {
 	/**
 	 * 已签发
 	 * */
-	FINISH_ISSUE("FI","FINISH_ISSUE");
-	
+	FINISH_ISSUE("FI","FINISH_ISSUE"),
+	/**
+	 * 送英文专家
+	 * */
+	SONG_YINGEN("YINGWEN","SONG_YINGEN");
+
 	private String code;
 	private String name;
 	PeriodicalStateEnums(String code,String name){

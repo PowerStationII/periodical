@@ -382,4 +382,26 @@
     <!-- order by CREATE_DATE -->
     <include refid="Page_Query_End" />
   </select>
+
+    <resultMap id="PeriodicalInfoQueryResultMap" type="PeriodicalInfoQuery">
+        <result column="periodicalCnName" jdbcType="VARCHAR" property="periodicalCnName" />
+        <result column="periodicalId" jdbcType="VARCHAR" property="periodicalId" />
+        <result column="cycle" jdbcType="INTEGER" property="cycle" />
+        <result column="periodicalYear" jdbcType="VARCHAR" property="periodicalYear" />
+        <result column="extend1" jdbcType="VARCHAR" property="extend1" />
+    </resultMap>
+
+    <select id="selectPeridicalByperiodicalId" parameterType="Periodical"
+            resultMap="PeriodicalInfoQueryResultMap">
+        select
+        pi.periodical_cn_name as periodicalCnName ,
+        pi.periodical_id as periodicalId ,
+        p.cycle_nums as cycle ,
+        p.periodical_issue_no as extend1 ,
+        p.periodical_year as periodicalYear
+        from periodical_info as pi , periodical as p
+         where pi.periodical_id = p.periodical_id
+         and p.periodical_id = #{periodicalId,jdbcType=VARCHAR}
+         and p.periodical_issue_no =  #{periodicalIssueNo,jdbcType=VARCHAR}
+    </select>
 </mapper>

@@ -27,9 +27,10 @@
 		from periodical_info pi,periodical p
 		where
 		pi.periodical_id=p.periodical_id
-		and p.periodical_state='ADPO'
+-- 		and (p.periodical_state='ADPO')
+		and p.periodical_state='YINGWEN'
 	</select>
-	
+
 	<select id="queryPeriodicalInfosForEnExpertDetail" parameterType="BizPeriodical"
 		resultType="BizPeriodical">
 		select ai.article_id as aId,pi.periodical_cn_name as pCnName,si.section_name as section,

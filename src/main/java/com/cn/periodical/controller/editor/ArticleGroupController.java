@@ -9,6 +9,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cn.periodical.enums.RoleIdEnums;
+import com.cn.periodical.manager.*;
+import com.cn.periodical.pojo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,30 +19,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.enums.PeriodicalStateEnums;
-import com.cn.periodical.manager.ArticleInfoManager;
-import com.cn.periodical.manager.AuthorInfoManager;
-import com.cn.periodical.manager.PeriodicalDetailsManager;
-import com.cn.periodical.manager.PeriodicalInfoManager;
-import com.cn.periodical.manager.PeriodicalManager;
-import com.cn.periodical.manager.SectionInfoManager;
-import com.cn.periodical.pojo.ArticleInfo;
-import com.cn.periodical.pojo.ArticleInfoQuery;
-import com.cn.periodical.pojo.AuthorInfo;
-import com.cn.periodical.pojo.AuthorInfoQuery;
-import com.cn.periodical.pojo.Periodical;
-import com.cn.periodical.pojo.PeriodicalDetails;
-import com.cn.periodical.pojo.PeriodicalDetailsQuery;
-import com.cn.periodical.pojo.PeriodicalInfo;
-import com.cn.periodical.pojo.PeriodicalQuery;
-import com.cn.periodical.pojo.SectionInfo;
-import com.cn.periodical.pojo.SectionInfoQuery;
-import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.EditorArticleDealService;
 /**
@@ -67,6 +53,8 @@ public class ArticleGroupController extends EditorController{
 	ArticleInfoManager articleInfoManager;
 	@Autowired
 	AuthorInfoManager authorInfoManager;
+    @Autowired
+    ExpertInfoManager expertInfoManager;
 	
 	/**
 	 * toArticleGroupPage
@@ -234,4 +222,53 @@ public class ArticleGroupController extends EditorController{
 		periodicalManager.savePeriodical(p);
 		return mav;
 	}
+
+    /**
+     *
+     * @param periodicalIssueNo   期号
+     * @param periodicalId    刊号
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="/toArticleToYingWenPage")
+    public ModelAndView toArticleToYingWen(@RequestParam("periodicalIssueNo") String periodicalIssueNo,String periodicalId,HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("editor_toYingWenPage");
+
+        /**
+         * 查询期刊
+         */
+        Periodical periodical = new Periodical () ;
+        periodical.setPeriodicalId(periodicalId);
+        periodical.setPeriodicalIssueNo(periodicalIssueNo);
+        PeriodicalInfoQuery periodicalInfoQuery = periodicalManager.selectPeridicalByperiodicalId(periodical) ;
+
+        /**
+         * 查询专家
+         * */
+        ExpertInfoQuery query = new ExpertInfoQuery();
+        query.setExtend1(RoleIdEnums.EN_EXPERT.getCode());
+        List<ExpertInfo> expertInfos = expertInfoManager.queryList(query);
+
+        mav.addObject("periodicalInfoQuery",periodicalInfoQuery);
+        mav.addObject("expertInfos",expertInfos);
+        return mav ;
+    }
+    @RequestMapping(value="/toYingWen")
+    public @ResponseBody
+    Object toYingWen( @RequestParam("periodicalIssueNo")String periodicalIssueNo,@RequestParam("periodicalId")String periodicalId,
+                                   @RequestParam("eId")String eId ,HttpServletRequest request) {
+        Map<String,Object> map = new HashMap<String , Object>();
+        map.put("periodicalId", periodicalId);
+        map.put("message", super.success);
+        PeriodicalQuery query =new PeriodicalQuery();
+        query.setPeriodicalId(periodicalId);
+        query.setPeriodicalIssueNo(periodicalIssueNo);
+        List<Periodical> pList = periodicalManager.queryList(query);
+        Periodical p = pList.get(0);
+        p.setId(p.getId());
+        p.setExtend1(eId);
+        p.setPeriodicalState(PeriodicalStateEnums.SONG_YINGEN.getCode());
+        periodicalManager.savePeriodical(p);
+        return map ;
+    }
 }

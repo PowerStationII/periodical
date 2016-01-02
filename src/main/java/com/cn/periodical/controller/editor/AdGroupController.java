@@ -186,18 +186,19 @@ public class AdGroupController extends EditorController{
 				 * */
 			}
 		}
-		PeriodicalQuery query =new PeriodicalQuery();
-		query.setPeriodicalId(periodicalId);
-		query.setPeriodicalIssueNo(periodicalIssueNo);
-		List<Periodical> pList = periodicalManager.queryList(query);
-		Periodical p = pList.get(0);
-		p.setId(p.getId());
-		if("Y".equals(type)){
-			p.setPeriodicalState(PeriodicalStateEnums.AD_PART_OVER.getCode());
-		}else{
-			p.setPeriodicalState(PeriodicalStateEnums.AD_PART_DEALING.getCode());
-		}
-		periodicalManager.savePeriodical(p);
+        // 广告组稿不需要更改期刊的状态
+//		PeriodicalQuery query =new PeriodicalQuery();
+//		query.setPeriodicalId(periodicalId);
+//		query.setPeriodicalIssueNo(periodicalIssueNo);
+//		List<Periodical> pList = periodicalManager.queryList(query);
+//		Periodical p = pList.get(0);
+//		p.setId(p.getId());
+//		if("Y".equals(type)){
+//			p.setPeriodicalState(PeriodicalStateEnums.AD_PART_OVER.getCode());
+//		}else{
+//			p.setPeriodicalState(PeriodicalStateEnums.AD_PART_DEALING.getCode());
+//		}
+//		periodicalManager.savePeriodical(p);
 		return mav;
 	}
 }

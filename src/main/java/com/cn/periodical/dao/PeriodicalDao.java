@@ -6,8 +6,10 @@
 package com.cn.periodical.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cn.periodical.pojo.Periodical;
+import com.cn.periodical.pojo.PeriodicalInfoQuery;
 import com.cn.periodical.pojo.PeriodicalQuery;
 
 public interface PeriodicalDao {
@@ -30,4 +32,6 @@ public interface PeriodicalDao {
 	int updateByPrimaryKeySelective(Periodical record);
 	
 	int updateByPrimaryKey(Periodical record);
+
+    public PeriodicalInfoQuery selectPeridicalByperiodicalId(Periodical periodicalInfoQuery) ;
 }

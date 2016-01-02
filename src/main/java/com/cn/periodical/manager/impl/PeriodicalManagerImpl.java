@@ -7,6 +7,7 @@ package com.cn.periodical.manager.impl;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.PeriodicalInfoQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -69,5 +70,10 @@ public class PeriodicalManagerImpl implements PeriodicalManager {
 		periodicalPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
 		return periodicalPage;
 	}
+
+    public PeriodicalInfoQuery selectPeridicalByperiodicalId(Periodical periodicalInfoQuery){
+        return periodicalDao.selectPeridicalByperiodicalId(periodicalInfoQuery);
+    }
+
 }
 

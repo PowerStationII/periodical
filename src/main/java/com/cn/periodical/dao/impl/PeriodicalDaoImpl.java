@@ -7,6 +7,7 @@ package com.cn.periodical.dao.impl;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.PeriodicalInfoQuery;
 import org.springframework.stereotype.Repository;
 
 import com.cn.periodical.dao.PeriodicalDao;
@@ -66,5 +67,10 @@ public class PeriodicalDaoImpl extends BaseDao implements PeriodicalDao {
 	public int updateByPrimaryKey(Periodical record) {
 		return super.getSqlSession().update("PeriodicalMapper.updateByPrimaryKey", record);
 	}
+
+    public PeriodicalInfoQuery selectPeridicalByperiodicalId(Periodical periodicalInfoQuery){
+        return super.getSqlSession().selectOne("PeriodicalMapper.selectPeridicalByperiodicalId", periodicalInfoQuery);
+    }
+
 	
 }
