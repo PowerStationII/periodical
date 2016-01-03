@@ -1,27 +1,18 @@
 package com.cn.periodical.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.beans.Transient;
+import java.util.*;
 
+import com.cn.periodical.manager.*;
+import com.cn.periodical.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cn.periodical.manager.ArticleAttachmentInfoManager;
-import com.cn.periodical.manager.ArticleFlowsManager;
-import com.cn.periodical.manager.ArticleInfoExtendManager;
-import com.cn.periodical.manager.ArticleInfoManager;
-import com.cn.periodical.manager.AuthorInfoManager;
-import com.cn.periodical.pojo.ArticleFlows;
-import com.cn.periodical.pojo.ArticleInfo;
-import com.cn.periodical.pojo.ArticleInfoExtend;
-import com.cn.periodical.pojo.ArticleInfoQuery;
-import com.cn.periodical.pojo.AuthorInfo;
-import com.cn.periodical.pojo.AuthorInfoQuery;
 import com.cn.periodical.request.EditorArticleDealReqDto;
 import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.EditorArticleDealService;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -44,6 +35,11 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 	
 	@Autowired
 	ArticleInfoExtendManager articleInfoExtendManager;
+
+    @Autowired
+    AddressInfoManager addressInfoManager;
+    @Autowired
+    PeriodicalDistributManager periodicalDistributManager;
 	
 	
 	
@@ -154,5 +150,32 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 //		
 		return 0;
 	}
+
+
+    @Transactional(propagation= Propagation.REQUIRED)
+    public void toUploadAddressPage( String orderNo , String periodicalId, List<AddressInfo> list){
+        for(AddressInfo addressInfo:list){
+           this.toUploadAddressPageOne(addressInfo, orderNo , periodicalId);
+        }
+    }
+    @Transactional(propagation= Propagation.REQUIRED)
+    public void toUploadAddressPageOne(AddressInfo addressInfo, String orderNo , String periodicalId){
+            addressInfo.setExtend1(orderNo);
+            addressInfo.setExtend2("");//excel名称
+            addressInfo.setExtend3("");//excel全路径
+            addressInfo.setAddressId(UUID.randomUUID().toString().replaceAll("-", ""));
+            addressInfo.setCreateTime(new Date());
+            addressInfoManager.saveAddressInfo(addressInfo);
+
+            PeriodicalDistribut p = new PeriodicalDistribut();
+            p.setPeriodicalId(periodicalId);
+            p.setRefId(orderNo);
+
+            p.setAddressId(addressInfo.getAddressId());
+
+            p.setDistributeNums(addressInfo.getSubscribeNums());
+            periodicalDistributManager.savePeriodicalDistribut(p);
+
+    }
 
 }

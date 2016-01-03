@@ -1,10 +1,7 @@
 package com.cn.periodical.controller.editor;
 
 import java.awt.Color;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -12,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.lowagie.text.rtf.RtfWriter2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +39,6 @@ import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.Table;
 import com.lowagie.text.pdf.BaseFont;
-import com.lowagie.text.rtf.RtfWriter2;
 
 /**
  * 发行编辑-期刊邮寄Controller
@@ -208,18 +205,98 @@ public class SubscribePostController extends EditorController {
 		   logger.info(JSON.toJSONString(list));
 		   //表格内容，可从数据库取数据导出
 		   for (int i = 0; i < list.size(); i++) {
-			   document.add(new Paragraph(list.get(i).getrAddress()));
-			   document.add(new Paragraph(list.get(i).getcName()));
-			   document.add(new Paragraph(list.get(i).getcMobile()));
-			   document.add(new Paragraph(String.valueOf(list.get(i).getpCnName() + ":" + list.get(i).getdNums())));
-			   document.add(new Paragraph("赠刊1" + ":" + list.get(i).getsIdNums1()));
-			   document.add(new Paragraph("赠刊2" + ":" + list.get(i).getsIdNums2()));
-			   document.add(new Paragraph("赠刊3" + ":" + list.get(i).getsIdNums3()));
-//			   document.add(new Paragraph(String.valueOf(list.get(i).getsId1() + ":" + list.get(i).getsIdNums1())));
-//			   document.add(new Paragraph(String.valueOf(list.get(i).getsId2() + ":" + list.get(i).getsIdNums2())));
-//			   document.add(new Paragraph(String.valueOf(list.get(i).getsId3() + ":" + list.get(i).getsIdNums3())));
+               document.add(new Paragraph("邮编"+list.get(i).getrPostCode()));//邮编
+			   document.add(new Paragraph("地址"+list.get(i).getrAddress()));// 地址
+			   document.add(new Paragraph("单位"+list.get(i).getcName()));   // 单位
+			   document.add(new Paragraph("联系人"+list.get(i).getcName()));   // 联系人
+			   document.add(new Paragraph("电话"+list.get(i).getcMobile())); // 电话
+			   document.add(new Paragraph("科")); // 期刊名称
+			   document.add(new Paragraph(list.get(i).getdNums())); // 份数
+			   document.add(new Paragraph("第"+list.get(i).getdNums()+"期")); // 第几期
+			   document.add(new Paragraph("北京朝阳区麦子店街22号")); // 邮寄地址
+			   document.add(new Paragraph("农业部农药检定所信息处")); // 邮寄单位
+			   document.add(new Paragraph("邮政编码：100125")); // 邮寄邮编
+
 			   document.add(new Paragraph("\n"));
 		   }
 		  document.close();
-		  }
+    }
+    public static void createDocContext(String file,String contextString)throws DocumentException, IOException{
+        //设置纸张大小
+        Document document = new Document(PageSize.A4);
+        //建立一个书写器，与document对象关联
+        RtfWriter2.getInstance(document, new FileOutputStream(file));
+        document.open();
+        //设置中文字体
+//        BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+        //标题字体风格
+//        Font titleFont = new Font(bfChinese,12,Font.BOLD);
+//        //正文字体风格
+//        Font contextFont = new Font(bfChinese,10,Font.NORMAL);
+        Paragraph title = new Paragraph("标题");
+        //设置标题格式对齐方式
+        document.add(title);
+        Paragraph context = new Paragraph();
+        context.setAlignment(Element.ALIGN_LEFT);
+//        context.setFont(contextFont);
+        //段间距
+        context.setSpacingBefore(3);
+        //设置第一行空的列数
+        context.setFirstLineIndent(20);
+        document.add(context);
+
+
+        for(int i = 0  ; i<10 ; i++){
+            //设置Table表格,创建一个三列的表格
+            Table table = new Table(3);
+            int width[] = {50,5,50};//设置每列宽度比例
+            table.setWidths(width);
+            table.setWidth(90);//占页面宽度比例
+            table.setAlignment(Element.ALIGN_CENTER);//居中
+            table.setAlignment(Element.ALIGN_MIDDLE);//垂直居中
+            table.setAutoFillEmptyCells(true);//自动填满
+            table.setBorderWidth(1);//边框宽度
+            //设置表头
+            StringBuffer strb = new StringBuffer();
+            strb.append("010010                             印刷品");
+            strb.append("\r\n");
+            strb.append("黑龙江省牡丹江市");
+            strb.append("\r\n");
+            strb.append("市政府  ");
+            strb.append("\r\n");
+            strb.append("于国栋  13488855723");
+            strb.append("\r\n");
+            strb.append("   科               北京朝阳区麦子店街22号");
+            strb.append("\r\n");
+            strb.append("   5                农业部农药检定所信息处");
+            strb.append("\r\n");
+            strb.append("     第 1 期        邮政编码：100125");
+
+            Paragraph paragraph = new Paragraph(String.valueOf(strb));
+            Cell cell1 = new Cell(paragraph);
+            cell1.setVerticalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell1);
+            table.addCell(new Cell(""));
+            table.addCell(cell1);
+            document.add(table);
+            document.add(new Paragraph());
+
+        }
+
+
+
+        document.close();
+
+    }
+    public static void main(String[] args){
+        String file = "d:\\test.doc";
+        try {
+            SubscribePostController.createDocContext(file, "测试iText导出Word文档");
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

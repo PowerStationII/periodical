@@ -11,6 +11,7 @@ import com.cn.periodical.pojo.UserInfo;
 @RequestMapping("/reader")
 public class ReaderController {
 public UserInfo userInfo=null;
+    public String success = "success" ;
 	
 	public UserInfo getUserInfo(HttpServletRequest request){
 		userInfo = (UserInfo)request.getSession().getAttribute("userInfo");

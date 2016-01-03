@@ -15,7 +15,8 @@
 		oi.user_id,oi.order_no,oi.periodical_id,oi.subscribe_nums,oi.order_status,ai.address_id,
 		ai.contacter_name,ai.contacter_telephone,ai.receive_address,ai.receive_postcode
 		from order_info oi,address_info ai,user_info ui
-		where oi.user_id=ui.user_id and ui.ref_id=ai.ref_id ) as lin left join
+		where  ui.ref_id=ai.ref_id and ai.extend_1 = oi.order_no ) as lin left join
+-- 		where oi.user_id=ui.user_id and ui.ref_id=ai.ref_id and ai.extend_1 = oi.order_no ) as lin left join
 		periodical_distribut pd on lin.address_id=pd.address_id and
 		lin.order_no=pd.ref_id
 		where lin.order_no=#{orderNo,jdbcType=VARCHAR}

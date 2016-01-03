@@ -61,6 +61,7 @@
 				$('#editTable').datagrid('endEdit',i);
 				var json={};
 				json.aId = data.rows[i].aId;
+				json.dNums = data.rows[i].dNums;
 				json.sIdNums1 = data.rows[i].sIdNums1;
 				json.sIdNums2 = data.rows[i].sIdNums2;
 				json.sIdNums3 = data.rows[i].sIdNums3;
@@ -71,6 +72,9 @@
 		$('#back').click(function(){
 			history.go(-1);
 		});
+        $('#add').click(function(){
+
+        });
 	});
 </script>
 <body>
@@ -83,10 +87,10 @@
 		            <th data-options="field:'rAddress',width:200">详细地址</th>   
 		            <th data-options="field:'rContacter',width:100">联系人</th>   
 		            <th data-options="field:'cMobile',width:100">联系电话</th>   
-		            <th data-options="field:'dNums',width:100" >邮寄本数</th> 
-		            <th data-options="field:'sIdNums1',width:100,editor:'numberbox'" >增刊1</th> 
-		            <th data-options="field:'sIdNums2',width:100,editor:'numberbox'" >增刊2</th> 
-		            <th data-options="field:'sIdNums3',width:100,editor:'numberbox'" >增刊3</th> 
+		            <th data-options="field:'dNums',width:100 ,editor:'numberbox'" >邮寄本数</th>
+		            <th data-options="field:'sIdNums1',width:100,editor:'numberbox'" hidden="true">增刊1</th>
+		            <th data-options="field:'sIdNums2',width:100,editor:'numberbox'" hidden="true">增刊2</th>
+		            <th data-options="field:'sIdNums3',width:100,editor:'numberbox'" hidden="true">增刊3</th>
 		        </tr>   
 		    </thead>   
 		    <tbody>   
@@ -98,16 +102,17 @@
 					<td>$!{dtos.rContacter}</td>
 					<td>$!{dtos.cMobile}</td>
 					<td>$!{dtos.dNums}</td>
-					<td>$!{dtos.sIdNums1}</td>
-					<td>$!{dtos.sIdNums2}</td>
-					<td>$!{dtos.sIdNums3}</td>
+					<td hidden="true">$!{dtos.sIdNums1}</td>
+					<td hidden="true">$!{dtos.sIdNums2}</td>
+					<td hidden="true">$!{dtos.sIdNums3}</td>
 				</tr>
 				#end
 		    </tbody>   
 		</table>
 		<a id="back" class="easyui-linkbutton"  style="50px;">返回</a> 
 		<a id="submit" class="easyui-linkbutton"  style="50px;">保存</a> 
-		<a style="font-size:10px;color:red;">修改后请保存</a>
+		<a id="add" class="easyui-linkbutton"  style="50px;" href="../reader/inToUploadAddressPageOne?orderNo=$!{orderNo}&periodicalId=$!{pId}">新增邮寄信息</a>
+		<span style="font-size:10px;color:red;">修改后请保存 </span>
 	</div>
 </body>
 </html>

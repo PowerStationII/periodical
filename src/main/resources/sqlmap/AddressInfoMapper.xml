@@ -78,7 +78,7 @@
 		oi.amount as amount,oi.order_no as orderNo,oi.order_status as oStatus,oi.subscribe_nums as nums,oi.user_id as userId
 		from periodical_distribut pdis,periodical_info pi,order_info oi,address_info addi
 		where oi.order_no=pdis.ref_id and  pdis.periodical_id=pi.periodical_id and addi.address_id=pdis.address_id
-		and oi.order_no=#{orderNo,jdbcType=VARCHAR}
+		and oi.order_no=#{orderNo,jdbcType=VARCHAR}  order by addi.update_time
 	</select>
 
 

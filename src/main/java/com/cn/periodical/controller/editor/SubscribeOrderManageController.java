@@ -104,6 +104,7 @@ public class SubscribeOrderManageController extends EditorController{
 		orderInfo.setId(orderInfo.getId());
 		orderInfo.setExtend1(opinion);
 		orderInfo.setAuditTime(new Date());
+        orderInfo.setOrderStatus("Y");
 		orderInfoManager.saveOrderInfo(orderInfo);
 		return mav;
 	}
@@ -125,7 +126,10 @@ public class SubscribeOrderManageController extends EditorController{
 		List<BizDistribut> list = addressInfoManager.queryAddressListForSubEditor(distribut);
 		mav.addObject("list", list);
 		mav.addObject("orderNo", orderNo);
-		
+        if(null!=list && !list.isEmpty()){
+            mav.addObject("pId",list.get(0).getpId()) ;
+        }
+
 		return mav;
 	}
 	
@@ -151,6 +155,7 @@ public class SubscribeOrderManageController extends EditorController{
 			logger.info(pds.size()+"");
 			PeriodicalDistribut pd = pds.get(0);
 			pd.setId(pd.getId());
+			pd.setDistributeNums(Integer.valueOf(arr.getJSONObject(i).getString("dNums")));
 			pd.setSupplementId1("111");
 			pd.setSupplementId1Nums(Integer.valueOf(arr.getJSONObject(i).getString("sIdNums1")));
 			pd.setSupplementId2("222");

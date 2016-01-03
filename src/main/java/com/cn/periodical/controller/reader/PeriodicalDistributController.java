@@ -7,29 +7,26 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cn.periodical.manager.PeriodicalDistributManager;
+import com.cn.periodical.pojo.*;
+import com.cn.periodical.service.EditorArticleDealService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
-import com.cn.periodical.pojo.AddressInfo;
-import com.cn.periodical.pojo.AddressInfoQuery;
-import com.cn.periodical.pojo.BizDistribut;
-import com.cn.periodical.pojo.UserInfo;
-import com.cn.periodical.pojo.UserInfoQuery;
 import com.cn.periodical.utils.ReadExcel;
 /**
  * 读者工作区-邮寄地址管理Controller
@@ -41,7 +38,11 @@ public class PeriodicalDistributController extends ReaderController{
 	AddressInfoManager addressInfoManager;
 	@Autowired
 	UserInfoManager userInfoManager;
-	
+    @Autowired
+    PeriodicalDistributManager periodicalDistributManager;
+    @Autowired
+    EditorArticleDealService editorArticleDealService;
+
 	private static final Logger logger = LoggerFactory.getLogger(PeriodicalDistributController.class);
 	/**
 	 * toDistributPage
@@ -59,47 +60,43 @@ public class PeriodicalDistributController extends ReaderController{
 		mav.addObject("list", list);
 		return mav;
 	}
+
+    /**
+     * toUploadAddressPage
+     * 上传地址
+     */
+    @RequestMapping(value="/toUploadAddressPage")
+    public @ResponseBody Object toUploadAddressPage(@RequestParam(value="files", required=true) MultipartFile files,HttpServletRequest request
+            ,String periodicalId,String orderNo) {
+        UserInfo userInfo = getUserInfo(request);
+        logger.info("上传邮寄地址信息 Page in:["+userInfo.getUserId()+"]");
+        Map<String,Object> map = new HashMap<String,Object>();
+
+        UserInfoQuery query= new UserInfoQuery();
+        query.setUserId(userInfo.getUserId());
+        query.setRoleId(userInfo.getRoleId());
+        /**
+         * 如果多余一条或没有报异常
+         * */
+        List<UserInfo> userInfos = userInfoManager.queryList(query);
+
+        /**
+         * 解析excel地址 保存到address_info
+         * */
+        try{
+            InputStream is = files.getInputStream();
+            ReadExcel readExcel = new ReadExcel("","",userInfo.getRoleId(),userInfos.get(0).getRefId(),is);
+            List<AddressInfo> list = readExcel.readXls();
+            editorArticleDealService.toUploadAddressPage(orderNo , periodicalId, list);
+        }catch(Exception e){
+            logger.info("地址上传错误");
+            e.printStackTrace();
+        }
+        map.put("message",super.success);
+        return map;
+    }
 	
-	
-	/**
-	 * toUploadAddressPage
-	 * 上传地址
-	 */
-	@RequestMapping(value="/toUploadAddressPage")
-	public ModelAndView toUploadAddressPage(@RequestParam(value="file", required=true) MultipartFile file,HttpServletRequest request) {
-		UserInfo userInfo = getUserInfo(request);
-		logger.info("上传邮寄地址信息 Page in:["+userInfo.getUserId()+"]");
-		ModelAndView mav = new ModelAndView("redirect:../reader/toDistributPage");
-		
-		UserInfoQuery query= new UserInfoQuery();
-		query.setUserId(userInfo.getUserId());
-		query.setRoleId(userInfo.getRoleId());
-		/**
-		 * 如果多余一条或没有报异常
-		 * */
-		List<UserInfo> userInfos = userInfoManager.queryList(query); 
-		
-		/**
-		 * 解析excel地址 保存到address_info
-		 * */
-		try{
-			InputStream is = file.getInputStream();
-	        ReadExcel readExcel = new ReadExcel("","",userInfo.getRoleId(),userInfos.get(0).getRefId(),is);
-	        List<AddressInfo> list = readExcel.readXls();
-	        for(AddressInfo addressInfo:list){
-	        	addressInfo.setExtend2("");//excel名称
-	        	addressInfo.setExtend3("");//excel全路径
-	        	addressInfo.setAddressId(UUID.randomUUID().toString().replaceAll("-", ""));
-	        	addressInfo.setCreateTime(new Date());
-	        	addressInfoManager.saveAddressInfo(addressInfo);
-	        }
-		}catch(Exception e){
-			logger.info("地址上传错误");
-			e.printStackTrace();
-		}
-		return mav;
-	}
-	
+
 	
 	
 	/**
@@ -168,5 +165,52 @@ public class PeriodicalDistributController extends ReaderController{
 		} 
 		return mav;
 	}
-	
+
+    @RequestMapping(value="/toUploadAddressPageOne")
+    public ModelAndView toUploadAddressPageOne(HttpServletRequest request,String receivePostcode ,String receiveAddress ,String contacterName , String extend2,
+                                              String contacterTelephone ,String subscribeNums , String orderNo , String periodicalId){
+        UserInfo userInfo = getUserInfo(request);
+        logger.info("上传邮寄地址信息 Page in:["+userInfo.getUserId()+"]");
+        Map<String,Object> map = new HashMap<String,Object>();
+
+        UserInfoQuery query= new UserInfoQuery();
+        query.setUserId(userInfo.getUserId());
+        query.setRoleId(userInfo.getRoleId());
+        /**
+         * 如果多余一条或没有报异常
+         * */
+        List<UserInfo> userInfos = userInfoManager.queryList(query);
+
+
+        AddressInfo addressInfo =  new AddressInfo ();
+
+        // 邮编
+            addressInfo.setReceivePostcode(receivePostcode);
+        // 通讯地址
+            addressInfo.setReceiveAddress(receiveAddress);
+        // 单位名称
+            addressInfo.setContacterName(contacterName);
+        // 联系人
+            addressInfo.setExtend2(extend2);
+        // 联系电话
+            addressInfo.setContacterTelephone(contacterTelephone);
+            addressInfo.setContacterMobile(contacterTelephone);
+            addressInfo.setSubscribeNums(Integer.parseInt(subscribeNums));
+        addressInfo.setRefRoleId(userInfo.getRoleId());
+        addressInfo.setRefId(userInfos.get(0).getRefId());
+
+
+        editorArticleDealService.toUploadAddressPageOne( addressInfo,  orderNo ,  periodicalId) ;
+        ModelAndView mav = new ModelAndView("redirect:../editor/toSubSupplementManagePage");
+        mav.addObject("orderNo",orderNo);
+        return mav ;
+    }
+
+    @RequestMapping(value="/inToUploadAddressPageOne")
+    public ModelAndView inToUploadAddressPageOne(String orderNo , String periodicalId){
+        ModelAndView mav = new ModelAndView("editor_newAddressPage");
+        mav.addObject("orderNo",orderNo);
+        mav.addObject("periodicalId",periodicalId);
+        return mav ;
+    }
 }

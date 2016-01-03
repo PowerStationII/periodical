@@ -10,6 +10,7 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
 </head>
 <script type="text/javascript">
 	$(function(){
@@ -52,17 +53,24 @@
 			$('#editTable').datagrid('beginEdit',i);
 		}
 		$('#submit').click(function(){
-			var array=[];
-			var data = $('#editTable').datagrid('getData');
-			for(var i=0;i<data.rows.length;i++) {
-				$('#editTable').datagrid('endEdit',i);
-				var json={};
-				json.pId = data.rows[i].pId;
-				json.aId = data.rows[i].aId;
-				json.nums = data.rows[i].nums;
-				array.push(JSON.stringify(json));
-			}
-			window.location.href='../reader/toDistribution?array=['+array+']&periodicalId=$!{orderInfo.periodicalId}&orderNo=$!{orderInfo.orderNo}';
+            var orderNo = $("#orderNo").val();
+            var periodicalId = $("#periodicalId").val();
+            $.ajaxFileUpload({
+                url:'../reader/toUploadAddressPage',            //需要链接到服务器地址
+                secureuri:false,
+                fileElementId:'files',                  //文件选择框的id属性
+                dataType: 'json',                      //服务器返回的格式，可以是json, xml
+                data:{orderNo:orderNo,periodicalId:periodicalId},
+                success: function (data, status){     //相当于java中try语句块的用法
+                    if (data.message == "success") {
+                        alert('上传成功');
+                        window.location.href='../reader/toDistributionPage?orderNo='+orderNo;
+                    }
+                },
+                error: function (data, status, e){  //相当于java中catch语句块的用法
+                    alert(data);
+                }
+            });
 		});
 		$('#back').click(function(){
 			history.go(-1);
@@ -71,24 +79,31 @@
 </script>
 <body>
 	<div>
-		 <table id="editTable" class="easyui-datagrid" data-options="singleSelect:true,pagination:true">   
+        <input type="hidden" value="$!{orderInfo.periodicalId}" id="periodicalId">
+        <input type="hidden" value="$!{orderInfo.orderNo}" id="orderNo">
+		 <table id="editTable" class="easyui-datagrid" data-options="singleSelect:true,pagination:true">
 		    <thead>   
 		        <tr>   
 		            <th data-options="field:'id',width:150">序号</th>   
-##		            <th data-options="field:'pId',width:150">pdId</th>
-##		            <th data-options="field:'aId',width:150">地址id</th>
+		            <th data-options="field:'pId',width:150" hidden="true">pdId</th>
+		            <th data-options="field:'aId',width:150" hidden="true">地址id</th>
 		            <th data-options="field:'rAddress',width:300">详细地址</th>
 		            <th data-options="field:'rContacter',width:300">联系人</th>
-		            <th data-options="field:'cMobile',width:150">联系电话</th>   
-		            <th data-options="field:'nums',width:160,editor:'numberbox'" >邮寄本数</th>   
+		            <th data-options="field:'cMobile',width:150">联系电话</th>
+                    #if($!{orderInfo.orderStatus}=="Y")
+                        <th data-options="field:'nums',width:160" >邮寄本数</th>
+                    #else
+                        <th data-options="field:'nums',width:160,editor:'numberbox'" >邮寄本数</th>
+                    #end
+
 		        </tr>   
 		    </thead>   
 		    <tbody>   
 		    	#foreach($dtos in ${list})
 				<tr>
 					<td>$!{velocityCount}</td>
-##					<td>$!{dtos.distributId}</td>
-##					<td>$!{dtos.addressId}</td>
+					<td hidden="true">$!{dtos.distributId}</td>
+					<td hidden="true">$!{dtos.addressId}</td>
 					<td>$!{dtos.receiveAddress}</td>
 					<td>$!{dtos.contacterName}</td>
 					<td>$!{dtos.contacterTelephone}</td>
@@ -97,9 +112,13 @@
 				#end
 		    </tbody>   
 		</table>
-		<a id="back" class="easyui-linkbutton"  style="50px;">返回</a> 
-		<a id="submit" class="easyui-linkbutton"  style="50px;">保存</a> 
-		<a style="font-size:10px;color:red;">修改后请保存</a>
+        #if($!{orderInfo.orderStatus}!="Y")
+            <input type="file" name="files" id="files"  value="">
+            <a id="submit" class="easyui-linkbutton"  style="50px;">保存</a>
+        #end
+
+        <a id="back" class="easyui-linkbutton"  style="50px;">返回</a>
+        <a style="font-size:10px;color:red;">修改后请保存</a>
 	</div>
 </body>
 </html>

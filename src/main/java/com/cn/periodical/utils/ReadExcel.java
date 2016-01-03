@@ -98,9 +98,9 @@ public class ReadExcel {
 				// 联系人
 				Cell hssfCell3 = hssfRow.getCell(3);
 				if (hssfCell3 == null || "".equals(hssfCell3)) {
-					addressInfo.setContacterName("");
+					addressInfo.setExtend2("");
 				} else {
-					addressInfo.setContacterName(getValue(hssfCell3));
+					addressInfo.setExtend2(getValue(hssfCell3));
 				}
 				// 联系电话
 				Cell hssfCell4 = hssfRow.getCell(4);
@@ -112,16 +112,13 @@ public class ReadExcel {
 					addressInfo.setContacterMobile(getValue(hssfCell4));
 				}
 //				// 订阅数量
-//				HSSFCell hssfCell5 = hssfRow.getCell(5);
-//				if (hssfCell5 == null || "".equals(hssfCell5)) {
-//					addressInfo.setSubscribeNums(0);
-//				} else {
-//					String value = getValue(hssfCell5);
-//					if ("".equals(value)) {
-//						value = "0";
-//					}
-//					addressInfo.setSubscribeNums(Integer.parseInt(value));
-//				}
+				Cell hssfCell5 = hssfRow.getCell(5);
+				if (hssfCell5 == null || "".equals(hssfCell5)) {
+					addressInfo.setSubscribeNums(0);
+				} else {
+                    String value = getValue(hssfCell5);
+					addressInfo.setSubscribeNums(getIntVal(value));
+				}
 				addressInfo.setRefRoleId(this.refRoleId);
 				addressInfo.setRefId(this.refId);
 				if ("".equals(addressInfo.getReceivePostcode()) && "".equals(addressInfo.getReceiveAddress())
@@ -139,6 +136,14 @@ public class ReadExcel {
 		}
 	}
 
+    private int getIntVal(String val){
+        if(val.matches("[0-9]+")){
+            return Integer.parseInt(val) ;
+        } else{
+            return 0 ;
+        }
+
+    }
 	@SuppressWarnings("static-access")
 	private String getValue(Cell hssfCell) {
 		if (hssfCell.getCellType() == hssfCell.CELL_TYPE_BOOLEAN) {
