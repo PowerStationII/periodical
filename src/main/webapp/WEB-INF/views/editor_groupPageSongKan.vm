@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
+</head>
+<script>
+$(function(){
+	//表格数据源  
+	var data = [];  
+	var rows = $('#table').datagrid('getRows');
+	for(var i=0;i<rows.length;i++) {
+		 data.push({  
+	 		 "periodicalCnName":rows[i].periodicalCnName,  
+	         "periodicalYear":rows[i].periodicalYear,  
+	         "cycleNums":rows[i].cycleNums,
+	         "periodicalIssueNo":rows[i].periodicalIssueNo,  
+	         "periodicalState":getPeriodicalType(rows[i].periodicalState),
+	         "option":rows[i].option
+	     }) ; 
+	}
+	$("#table").datagrid("loadData", data);
+});
+
+function songQianFa(periodicalIssueNo ,periodicalId){
+    $.ajax({
+        type:"POST",
+        url:"../expert/editSendToIssue",
+        data:{periodicalIssueNo:periodicalIssueNo,periodicalId:periodicalId},
+        datatype: "json",
+        beforeSend:function(){},
+        success:function(data){
+            if(data.message = "success"){
+                alert("送签发成功");
+                $("#span_songjiafa").html("重新送签发");
+                $("#span_state").html("待签发");
+            }
+        }   ,
+        complete: function(XMLHttpRequest, textStatus){
+        },
+        error: function(data){
+            alert(data.message);
+        }
+    });
+
+}
+</script>
+<body>
+	<div id="articleInfos">
+		<form action="" method="POST">
+		<table  id="table" class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true"  style="width:960px;">
+		<thead>
+			<tr>
+				<th data-options="field:'periodicalCnName',width:150">期刊名称</th>
+				<th data-options="field:'periodicalYear',width:100">发行年份</th>
+				<th data-options="field:'cycleNums',width:100">发行期</th>
+				<th data-options="field:'periodicalIssueNo',width:150">期刊号</th>
+				<th data-options="field:'time',width:100">签发时间</th>
+				<th data-options="field:'periodicalState',width:120">状态</th>
+				<th data-options="field:'option',width:140">操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			#foreach($periodical in ${list})   
+			<tr>
+				<td>${p.periodicalCnName}</td>
+				<td>${periodical.periodicalYear}</td>
+				<td>第${periodical.cycleNums}期</td>
+				<td>${periodical.periodicalIssueNo}</td>
+				<td></td>
+				<td><span id="span_state">${periodical.periodicalState}</span></td>
+				<td><a class="easyui-linkbutton" href="../editor/toArticleGroupDetailPageSongKan?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}&qishu=${periodical.cycleNums}">登记送刊</a></td>
+			</tr>
+			#end
+			</tbody>
+		</table>
+		<br>
+		</form>
+	</div>
+</body>
+</html>

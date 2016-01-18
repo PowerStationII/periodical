@@ -43,7 +43,8 @@ public class SectionInfo implements Serializable{
 
 	private List<Map<String,Object>> list;
 	private List<Map<String,Object>> listAd;
-	
+	private List<Map<String,Object>> listAuthor; // 作者
+
 	
 	
 	
@@ -211,4 +212,12 @@ public class SectionInfo implements Serializable{
 	public java.util.Date getUpdateTime() {
 		return this.updateTime;
 	}
+
+    public List<Map<String, Object>> getListAuthor() {
+        return listAuthor;
+    }
+
+    public void setListAuthor(List<Map<String, Object>> listAuthor) {
+        this.listAuthor = listAuthor;
+    }
 }

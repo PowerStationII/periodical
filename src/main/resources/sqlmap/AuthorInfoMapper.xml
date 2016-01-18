@@ -526,4 +526,21 @@
     <!-- order by CREATE_DATE -->
     <include refid="Page_Query_End" />
   </select>
+
+    <resultMap id="SelectByArticleMap" type="Map">
+        <result column="author_name" jdbcType="VARCHAR" property="authorName" />
+        <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+        <result column="contacter_mobile" jdbcType="VARCHAR" property="contacterMobile" />
+        <result column="receive_address" jdbcType="VARCHAR" property="receiveAddress" />
+        <result column="receive_postcode" jdbcType="VARCHAR" property="receivePostcode" />
+    </resultMap>
+    <select id="selectAuthorByArticl" parameterType="java.lang.String" resultMap="SelectByArticleMap">
+        SELECT aui.author_name AS author_name ,aui.company_name AS company_name,
+                 adi.contacter_mobile AS contacter_mobile, adi.receive_address AS receive_address,
+                 adi.receive_postcode  AS receive_postcode
+        FROM author_info aui  LEFT JOIN address_info adi
+		ON aui.author_id = adi.ref_id
+        WHERE  aui.article_id = #{articleId,jdbcType=VARCHAR} AND aui.isContacter = 'Y'
+    </select>
+
 </mapper>

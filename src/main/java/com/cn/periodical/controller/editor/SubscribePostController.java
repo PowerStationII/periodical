@@ -112,7 +112,8 @@ public class SubscribePostController extends EditorController {
 		List<BizDistribut> list = addressInfoManager.exportReaderAddressInfos(distribut);
 		
 		try {
-			createWord(list);
+//			createWord(list);
+            createDocContext("",list);
 			UtilLoad.fileDownload(request, response, "邮寄地址信息.doc", PropertiesInitManager.PROPERTIES.getProperty("postAddressPath"));
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
@@ -221,7 +222,8 @@ public class SubscribePostController extends EditorController {
 		   }
 		  document.close();
     }
-    public static void createDocContext(String file,String contextString)throws DocumentException, IOException{
+    public static void createDocContext(String file,List<BizDistribut> list)throws DocumentException, IOException{
+        file = PropertiesInitManager.PROPERTIES.getProperty("postAddressPath") + "邮寄地址信息.doc"; //word路径设置
         //设置纸张大小
         Document document = new Document(PageSize.A4);
         //建立一个书写器，与document对象关联
@@ -233,54 +235,98 @@ public class SubscribePostController extends EditorController {
 //        Font titleFont = new Font(bfChinese,12,Font.BOLD);
 //        //正文字体风格
 //        Font contextFont = new Font(bfChinese,10,Font.NORMAL);
-        Paragraph title = new Paragraph("标题");
+//        Paragraph title = new Paragraph("标题");
         //设置标题格式对齐方式
-        document.add(title);
+//        document.add(title);
         Paragraph context = new Paragraph();
         context.setAlignment(Element.ALIGN_LEFT);
 //        context.setFont(contextFont);
         //段间距
-        context.setSpacingBefore(3);
+        context.setSpacingBefore(1);
         //设置第一行空的列数
         context.setFirstLineIndent(20);
         document.add(context);
 
 
-        for(int i = 0  ; i<10 ; i++){
+        for(int i = 0  ; i<list.size() ; i=i+2){
+
             //设置Table表格,创建一个三列的表格
             Table table = new Table(3);
-            int width[] = {50,5,50};//设置每列宽度比例
+            int width[] = {50,1,50};//设置每列宽度比例
             table.setWidths(width);
-            table.setWidth(90);//占页面宽度比例
+            table.setWidth(100);//占页面宽度比例
             table.setAlignment(Element.ALIGN_CENTER);//居中
             table.setAlignment(Element.ALIGN_MIDDLE);//垂直居中
             table.setAutoFillEmptyCells(true);//自动填满
             table.setBorderWidth(1);//边框宽度
-            //设置表头
-            StringBuffer strb = new StringBuffer();
-            strb.append("010010                             印刷品");
-            strb.append("\r\n");
-            strb.append("黑龙江省牡丹江市");
-            strb.append("\r\n");
-            strb.append("市政府  ");
-            strb.append("\r\n");
-            strb.append("于国栋  13488855723");
-            strb.append("\r\n");
-            strb.append("   科               北京朝阳区麦子店街22号");
-            strb.append("\r\n");
-            strb.append("   5                农业部农药检定所信息处");
-            strb.append("\r\n");
-            strb.append("     第 1 期        邮政编码：100125");
-
-            Paragraph paragraph = new Paragraph(String.valueOf(strb));
-            Cell cell1 = new Cell(paragraph);
-            cell1.setVerticalAlignment(Element.ALIGN_LEFT);
-            table.addCell(cell1);
-            table.addCell(new Cell(""));
-            table.addCell(cell1);
-            document.add(table);
-            document.add(new Paragraph());
-
+            /**
+             *
+             */
+            if(list.size()>i){
+                BizDistribut bizDistribut = list.get(i);
+                //设置表头
+                StringBuffer strb = new StringBuffer();
+                strb.append(bizDistribut.getrPostCode()); // 邮编
+                strb.append("                                   印刷品");
+                strb.append("\r\n");
+                strb.append(bizDistribut.getrAddress()); // 地址
+                strb.append("\r\n");
+                strb.append(bizDistribut.getcName()); // 单位
+                strb.append("\r\n");
+                strb.append(bizDistribut.getcName());// 联系人
+                strb.append("        "+bizDistribut.getcMobile());
+                strb.append("\r\n");
+                strb.append("\r\n");
+                strb.append("   科               北京朝阳区麦子店街22号");
+                strb.append("\r\n");
+                strb.append("   ");
+                strb.append(bizDistribut.getdNums()); // 份数
+                strb.append("                农业部农药检定所信息处");
+                strb.append("\r\n");
+                strb.append("     ");
+                strb.append("     第 "+bizDistribut.getNums()+" 期");// 第几期
+                strb.append("        邮政编码：100125");
+                Paragraph paragraph = new Paragraph(String.valueOf(strb));
+                Cell cell1 = new Cell(paragraph);
+                cell1.setVerticalAlignment(Element.ALIGN_LEFT);
+                table.addCell(cell1);
+                table.addCell(new Cell(""));
+            }
+            /**
+             *
+             */
+            if(list.size()>i+1){
+                BizDistribut bizDistribut2 = list.get(i+1);
+                //设置表头
+                StringBuffer strb2 = new StringBuffer();
+                strb2.append(bizDistribut2.getrPostCode()); // 邮编
+                strb2.append("                                   印刷品");
+                strb2.append("\r\n");
+                strb2.append(bizDistribut2.getrAddress()); // 地址
+                strb2.append("\r\n");
+                strb2.append(bizDistribut2.getcName()); // 单位
+                strb2.append("\r\n");
+                strb2.append(bizDistribut2.getcName());// 联系人
+                strb2.append("        "+bizDistribut2.getcMobile());
+                strb2.append("\r\n");
+                strb2.append("\r\n");
+                strb2.append("   科               北京朝阳区麦子店街22号");
+                strb2.append("\r\n");
+                strb2.append("   ");
+                strb2.append(bizDistribut2.getdNums()); // 份数
+                strb2.append("                农业部农药检定所信息处");
+                strb2.append("\r\n");
+                strb2.append("     ");
+                strb2.append("     第 "+bizDistribut2.getNums()+" 期");// 第几期
+                strb2.append("        邮政编码：100125");
+                Paragraph paragraph2 = new Paragraph(String.valueOf(strb2));
+                Cell cell2 = new Cell(paragraph2);
+                cell2.setVerticalAlignment(Element.ALIGN_LEFT);
+                table.addCell(cell2);
+            }
+            if(list.size()>i){
+                document.add(table);
+            }
         }
 
 
@@ -288,10 +334,78 @@ public class SubscribePostController extends EditorController {
         document.close();
 
     }
+//    public static void createDocContext(String file,String contextString)throws DocumentException, IOException{
+//        //设置纸张大小
+//        Document document = new Document(PageSize.A4);
+//        //建立一个书写器，与document对象关联
+//        RtfWriter2.getInstance(document, new FileOutputStream(file));
+//        document.open();
+//        //设置中文字体
+////        BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+//        //标题字体风格
+////        Font titleFont = new Font(bfChinese,12,Font.BOLD);
+////        //正文字体风格
+////        Font contextFont = new Font(bfChinese,10,Font.NORMAL);
+////        Paragraph title = new Paragraph("标题");
+//        //设置标题格式对齐方式
+////        document.add(title);
+//        Paragraph context = new Paragraph();
+//        context.setAlignment(Element.ALIGN_LEFT);
+////        context.setFont(contextFont);
+//        //段间距
+//        context.setSpacingBefore(1);
+//        //设置第一行空的列数
+//        context.setFirstLineIndent(20);
+//        document.add(context);
+//
+//
+//        for(int i = 0  ; i<100 ; i++){
+//            //设置Table表格,创建一个三列的表格
+//            Table table = new Table(3);
+//            int width[] = {50,1,50};//设置每列宽度比例
+//            table.setWidths(width);
+//            table.setWidth(100);//占页面宽度比例
+//            table.setAlignment(Element.ALIGN_CENTER);//居中
+//            table.setAlignment(Element.ALIGN_MIDDLE);//垂直居中
+//            table.setAutoFillEmptyCells(true);//自动填满
+//            table.setBorderWidth(1);//边框宽度
+//            //设置表头
+//            StringBuffer strb = new StringBuffer();
+//            strb.append("010010");
+//            strb.append("                                   印刷品");
+//            strb.append("\r\n");
+//            strb.append("黑龙江省牡丹江市");
+//            strb.append("\r\n");
+//            strb.append("市政府  ");
+//            strb.append("\r\n");
+//            strb.append("于国栋");
+//            strb.append("        13488855723");
+//            strb.append("\r\n");
+//            strb.append("\r\n");
+//            strb.append("   科               北京朝阳区麦子店街22号");
+//            strb.append("\r\n");
+//            strb.append("   5                农业部农药检定所信息处");
+//            strb.append("\r\n");
+//            strb.append("     第 1 期        邮政编码：100125");
+//
+//            Paragraph paragraph = new Paragraph(String.valueOf(strb));
+//            Cell cell1 = new Cell(paragraph);
+//            cell1.setVerticalAlignment(Element.ALIGN_LEFT);
+//            table.addCell(cell1);
+//            table.addCell(new Cell(""));
+//            table.addCell(cell1);
+//            document.add(table);
+//        }
+//
+//
+//
+//        document.close();
+//
+//    }
     public static void main(String[] args){
         String file = "d:\\test.doc";
         try {
-            SubscribePostController.createDocContext(file, "测试iText导出Word文档");
+            SubscribePostController.createDocContext(file,null);
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (IOException e) {

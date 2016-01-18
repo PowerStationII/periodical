@@ -69,5 +69,7 @@
 		<mapper resource="sqlmap/BizArticleFeeMapper.xml"/><!-- 稿费查询 -->
 		<mapper resource="sqlmap/BizOrderMapper.xml"/><!-- 读者编辑订单 -->
 		<mapper resource="sqlmap/ArticalCodeMapper.xml"/><!-- 序号 -->
+		<mapper resource="sqlmap/SongKanDetailMapper.xml"/><!-- 送刊 -->
+		<mapper resource="sqlmap/SongKanInfoMapper.xml"/><!-- 送刊 -->
 	</mappers>
 </configuration>

@@ -88,18 +88,18 @@
 	<select id="queryListForGroupAticle" parameterType="SectionInfoQuery"
 		resultMap="SectionBaseResultMap">
 		select
-		si.id as id,
-		si.periodical_id as periodicalId,
-		si.section_id as sectionId,
-		si.section_name as sectionName,
-		si.section_summary as sectionSummary,
-		si.state as state,
-		si.extend_1 as extend1,
-		si.extend_2 as extend2,
-		p.periodical_issue_no as periodicalIssueNo
-		from section_info si ,periodical_info pi,periodical p
-		where si.periodical_id=pi.periodical_id and
-		p.periodical_id=pi.periodical_id
+        si.id as id,
+        si.periodical_id as periodicalId,
+        si.section_id as sectionId,
+        si.section_name as sectionName,
+        si.section_summary as sectionSummary,
+        si.state as state,
+        si.extend_1 as extend1,
+        si.extend_2 as extend2,
+        p.periodical_issue_no as periodicalIssueNo
+        from section_info si ,periodical_info pi,periodical p
+        where si.periodical_id=pi.periodical_id and
+        p.periodical_id=pi.periodical_id
 		<if test="periodicalId != null and ''!=periodicalId">
 			and si.periodical_id = #{periodicalId,jdbcType=VARCHAR}
 		</if>

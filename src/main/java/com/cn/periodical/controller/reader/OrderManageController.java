@@ -1,10 +1,11 @@
 package com.cn.periodical.controller.reader;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cn.periodical.pojo.*;
+import com.cn.periodical.service.SongKanInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +28,6 @@ import com.cn.periodical.manager.PayeeInfoManager;
 import com.cn.periodical.manager.PeriodicalDistributManager;
 import com.cn.periodical.manager.PeriodicalInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
-import com.cn.periodical.pojo.AddressInfo;
-import com.cn.periodical.pojo.AddressInfoQuery;
-import com.cn.periodical.pojo.BizOrder;
-import com.cn.periodical.pojo.OrderInfo;
-import com.cn.periodical.pojo.OrderInfoQuery;
-import com.cn.periodical.pojo.PayeeInfo;
-import com.cn.periodical.pojo.PayeeInfoQuery;
-import com.cn.periodical.pojo.PeriodicalDistribut;
-import com.cn.periodical.pojo.PeriodicalInfo;
-import com.cn.periodical.pojo.PeriodicalInfoQuery;
-import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.service.OrderInfoService;
 import com.cn.periodical.utils.GenerateOrderNo;
 
@@ -70,6 +60,8 @@ public class OrderManageController extends ReaderController{
     UserInfoManager userInfoManager;
     @Autowired
     PeriodicalDistributManager periodicalDistributManager;
+    @Autowired
+    SongKanInfoService songKanInfoService;
 	/**
 	 * toOrderManagePage
 	 * 订单管理页面
@@ -84,22 +76,7 @@ public class OrderManageController extends ReaderController{
 		mav.addObject("list", list);
 		return mav;
 	}
-	
-//	/**
-//	 * 创建完订单跳转至此页面
-//	 * */
-//	@RequestMapping(value="/toOrderListManagePage",method =  { RequestMethod.POST ,RequestMethod.GET})
-//	public ModelAndView toOrderListManagePage(@RequestParam("userId") String userId) {
-//		logger.info("订单管理Page:["+userId+"]");
-//		OrderInfoQuery orderInfoQuery = new OrderInfoQuery();
-//		orderInfoQuery.setUserId(userId);
-//		List<OrderInfo> orderInfos = orderInfoManager.queryList(orderInfoQuery);
-//		ModelAndView mav = new ModelAndView("reader_orderListManagePage");
-//		mav.addObject("userId", userId);
-//		mav.addObject("list", orderInfos);
-//		return mav;
-//	}
-	
+
 	
 	/**
 	 * toCreatOrderPage
@@ -145,6 +122,44 @@ public class OrderManageController extends ReaderController{
 		orderInfoManager.saveOrderInfo(orderInfo);
 		return mav;
 	}
+
+    /**
+     * toCreatOrder
+     * 送刊保存
+     */
+    @RequestMapping(value="/toCreatOrderSongKan",method ={ RequestMethod.POST ,RequestMethod.GET})
+    public  @ResponseBody Map<String,Object> toCreatOrderSongKan(HttpServletRequest request,String periodicalId,String periodicalIssueNo,String qishu,String array) {
+        UserInfo userInfo = getUserInfo(request);
+        logger.info("保存送刊Page:["+userInfo.getUserId()+"]&["+periodicalId+"]");
+        Map<String,Object> map_ret = new HashMap<String,Object>();
+        List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+        JSONArray arr = (JSONArray) JSONArray.parse(array);
+        int zengSongNums = 0 ;
+        for(int i=0;i<arr.size();i++){
+            Map<String,Object> map = new HashMap<String,Object>();
+            String articleId = arr.getJSONObject(i).getString("articleId");
+            int nums = Integer.parseInt(arr.getJSONObject(i).getString("nums"));
+            zengSongNums = zengSongNums+  nums ;
+            map.put("articleId",articleId);
+            map.put("nums",nums);
+            list.add(map);
+        }
+        SongKanInfo songKanInfo =new SongKanInfo();
+        songKanInfo.setPeriodicalId(periodicalId);
+        songKanInfo.setPeriodicalIssueNo(periodicalIssueNo);
+        songKanInfo.setZengSonNums(zengSongNums);
+        songKanInfo.setCycleNums(Integer.parseInt(qishu));
+        songKanInfo.setOrderNo(periodicalId); // 订单号生成
+
+        int r = songKanInfoService.insert(songKanInfo,list);
+        if(1==r){
+            map_ret.put("message","保存成功");
+        } else{
+            map_ret.put("message","保存失败");
+        }
+        return map_ret;
+    }
+
 	/**
 	 * 去订单编辑页
 	 * 只能修改订阅数等信息

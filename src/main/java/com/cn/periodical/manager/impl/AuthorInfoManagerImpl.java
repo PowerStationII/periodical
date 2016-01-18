@@ -69,5 +69,9 @@ public class AuthorInfoManagerImpl implements AuthorInfoManager {
 		authorInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
 		return authorInfoPage;
 	}
+
+    public List<Object> selectAuthorByArticl(String atricleId){
+        return authorInfoDao.selectAuthorByArticl(atricleId);
+    }
 }
 

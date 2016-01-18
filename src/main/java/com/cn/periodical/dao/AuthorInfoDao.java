@@ -6,6 +6,7 @@
 package com.cn.periodical.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.pojo.AuthorInfoQuery;
@@ -30,4 +31,6 @@ public interface AuthorInfoDao {
 	int updateByPrimaryKeySelective(AuthorInfo record);
 	
 	int updateByPrimaryKey(AuthorInfo record);
+
+	public List<Object> selectAuthorByArticl(String articleId);
 }

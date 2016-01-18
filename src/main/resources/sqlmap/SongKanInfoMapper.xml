@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SongKanInfoMapper">
+	<resultMap id="BaseResultMap" type="SongKanInfo">
+		<id column="ID" jdbcType="DECIMAL" property="id" />
+		<result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
+		<result column="periodical_issue_no" jdbcType="VARCHAR" property="periodicalIssueNo" />
+		<result column="cycle_nums" jdbcType="INTEGER" property="cycleNums" />
+		<result column="zengSon_nums" jdbcType="INTEGER" property="zengSonNums" />
+		<result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+	</resultMap>
+
+    <sql id="Base_Column_List">
+		periodical_id,
+		periodical_issue_no,
+		cycle_nums,
+		zengSon_nums,
+		order_no,
+	</sql>
+	<sql id="Selective_Column_List">
+		<!-- ID, -->
+		<if test="periodicalId != null">
+            periodical_id,
+		</if>
+		<if test="periodicalIssueNo != null">
+            periodical_issue_no,
+		</if>
+		<if test="cycleNums != null">
+            cycle_nums,
+		</if>
+		<if test="zengSon_nums != null">
+            zengSonNums,
+		</if>
+		<if test="order_no != null">
+            orderNo,
+		</if>
+	</sql>
+	<sql id="Base_Value_List">
+		#{periodicalId,jdbcType=VARCHAR},
+		#{periodicalIssueNo,jdbcType=VARCHAR},
+		#{cycleNums,jdbcType=INTEGER},
+		#{zengSonNums,jdbcType=INTEGER},
+		#{orderNo,jdbcType=VARCHAR},
+	</sql>
+    <sql id="Selective_Value_List">
+        <!-- ID, -->
+        <if test="periodicalId != null">
+            #{periodicalId,jdbcType=VARCHAR},
+        </if>
+        <if test="periodicalIssueNo != null">
+            #{periodicalIssueNo,jdbcType=VARCHAR},
+        </if>
+        <if test="cycleNums != null">
+            #{cycleNums,jdbcType=INTEGER},
+        </if>
+        <if test="zengSon_nums != null">
+            #{zengSonNums,jdbcType=INTEGER},
+        </if>
+        <if test="order_no != null">
+            #{orderNo,jdbcType=VARCHAR},
+        </if>
+    </sql>
+
+	<insert id="insert" parameterType="SongKanInfo" keyProperty="id">
+		insert into songKan_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Base_Value_List" />
+		</trim>
+	</insert>
+
+</mapper>

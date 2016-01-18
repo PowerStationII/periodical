@@ -55,7 +55,9 @@ public class ArticleGroupController extends EditorController{
 	AuthorInfoManager authorInfoManager;
     @Autowired
     ExpertInfoManager expertInfoManager;
-	
+    @Autowired
+    SongKanDetailManager songKanDetailManager;
+
 	/**
 	 * toArticleGroupPage
 	 * 排刊
@@ -64,6 +66,18 @@ public class ArticleGroupController extends EditorController{
 	public ModelAndView toArticleGroupPage(HttpServletRequest request) {
 		logger.info("排刊组稿Page:[ ]");
 		ModelAndView mav = new ModelAndView("editor_articleGroupPage");
+		List<PeriodicalInfo> periodicalInfos = periodicalInfoManager.queryList(null);
+		mav.addObject("list", periodicalInfos);
+		return mav;
+	}
+	/**
+	 * toArticleGroupPage
+	 * 送刊
+	 */
+	@RequestMapping(value="/toArticleGroupPageSongKan",method = RequestMethod.GET)
+	public ModelAndView toArticleGroupPageSongKan(HttpServletRequest request) {
+		logger.info("排刊组稿PageSongKan:[ ]");
+		ModelAndView mav = new ModelAndView("editor_articleGroupPageSongKan");
 		List<PeriodicalInfo> periodicalInfos = periodicalInfoManager.queryList(null);
 		mav.addObject("list", periodicalInfos);
 		return mav;
@@ -85,7 +99,24 @@ public class ArticleGroupController extends EditorController{
 		mav.addObject("p", periodicalInfo);
 		return mav;
 	}
-	
+	/**
+	 * toGroupPage
+	 * 送刊
+	 */
+	@RequestMapping(value="/toGroupPageSongKan")
+	public ModelAndView toGroupPageSongKan(HttpServletRequest request,String periodicalId,String periodicalIssueNo) {
+		logger.info("组稿Page:[ "+periodicalId+" ]");
+		ModelAndView mav = new ModelAndView("editor_groupPageSongKan");
+		PeriodicalInfo periodicalInfo = periodicalInfoManager.selectByPeriodicalId(periodicalId);
+		PeriodicalQuery query = new PeriodicalQuery();
+		query.setPeriodicalId(periodicalId);
+		query.setPeriodicalIssueNo(periodicalIssueNo);
+		List<Periodical> periodicals = periodicalManager.queryList(query);
+		mav.addObject("list", periodicals);
+		mav.addObject("p", periodicalInfo);
+		return mav;
+	}
+
 	
 	/**
 	 * toArticleGroupDetailPage
@@ -135,7 +166,49 @@ public class ArticleGroupController extends EditorController{
 		mav.addObject("periodicalId", periodicalId);
 		return mav;
 	}
-	
+	/**
+	 * toArticleGroupDetailPage
+	 * 送刊详情页
+	 */
+	@RequestMapping(value="/toArticleGroupDetailPageSongKan",method = RequestMethod.GET)
+	public ModelAndView toArticleGroupDetailPageSongKan(
+			@RequestParam("periodicalId") String periodicalId,
+			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
+            String qishu ,
+			HttpServletRequest request) {
+		logger.info("送刊左右Page:[ "+periodicalId+"]&["+periodicalIssueNo+"]");
+		ModelAndView mav = new ModelAndView("editor_articleGroupDetailPageSongKan");
+
+		SectionInfoQuery query =new SectionInfoQuery();
+		query.setPeriodicalId(periodicalId);
+		query.setPeriodicalIssueNo(periodicalIssueNo);
+		query.setExtend1("N");
+		List<SectionInfo> sectionInfos = sectionInfoManager.queryListForGroupAticle(query);
+        for(SectionInfo sectionInfo : sectionInfos){
+            List<Map<String, Object>> list = sectionInfo.getList();
+            for(Map<String, Object> map : list){
+                  String article_id = (String)map.get("article_id");// 文章id
+                AuthorInfoQuery authorInfoQuery = new AuthorInfoQuery();
+                authorInfoQuery.setArticleId(article_id);
+                List<AuthorInfo> authorInfos = authorInfoManager.queryList(authorInfoQuery);
+                SongKanDetail songKanDetail = songKanDetailManager.selectArticle(article_id);
+                StringBuilder strb_aurhor = new StringBuilder();
+                for(AuthorInfo authorInfo : authorInfos){
+                    strb_aurhor.append(","+authorInfo.getAuthorName());
+                }
+                map.put("author",String.valueOf(strb_aurhor).replaceFirst(",",""));
+                map.put("authroCount",authorInfos.size());
+                map.put("nums",songKanDetail.getZengSonNum());
+            }
+        }
+		mav.addObject("sList", sectionInfos);
+
+		mav.addObject("periodicalIssueNo", periodicalIssueNo);
+		mav.addObject("periodicalId", periodicalId);
+		mav.addObject("qishu", qishu);
+		return mav;
+	}
+
 	
 	/**
 	 * toArticleGroup

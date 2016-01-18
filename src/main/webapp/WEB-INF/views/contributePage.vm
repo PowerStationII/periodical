@@ -493,7 +493,7 @@
   					<tr>
   						<td>邮编</td>
   						<td>
-  							<input  type="text" name="addressInfos[0].receivePostcode"/>
+  							<input  type="text" name="addressInfos[0].extend"/>
   						</td>
   					</tr>
   					<tr>

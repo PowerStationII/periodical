@@ -6,6 +6,7 @@
 package com.cn.periodical.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -66,5 +67,9 @@ public class AuthorInfoDaoImpl extends BaseDao implements AuthorInfoDao {
 	public int updateByPrimaryKey(AuthorInfo record) {
 		return super.getSqlSession().update("AuthorInfoMapper.updateByPrimaryKey", record);
 	}
+
+    public List<Object> selectAuthorByArticl(String articleId){
+        return super.getSqlSession().selectList("AuthorInfoMapper.selectAuthorByArticl", articleId);
+    }
 	
 }

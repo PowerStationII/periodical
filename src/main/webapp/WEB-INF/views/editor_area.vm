@@ -72,6 +72,15 @@
 									.append(
 											'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toArticleGroupPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
 						});
+        $('#bianjisongkan')
+                .click(
+                function() {
+                    $('#area').hide();
+                    $('#other').remove();
+                    $('.right')
+                            .append(
+                                    '<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toArticleGroupPageSongKan"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+                });
 		$('#chaxungaojian')
 				.click(
 						function() {
@@ -156,6 +165,15 @@
 									.append(
 											'<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubscribePostPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
 						});
+        $('#zengKanYouJi')
+                .click(
+                function() {
+                    $('#area').hide();
+                    $('#other').remove();
+                    $('.right')
+                            .append(
+                                    '<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubscribePostPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+                });
 		//<!-- 发行编辑 end-->
 		//<!-- 签发人 start-->
 		$('#qianfa')
@@ -367,7 +385,8 @@ a {
 				</div>
 				<div class="mode_name">排刊组稿</div>
 				<div style="padding: 10px;">
-					<div class="li6" id="paikanzugao">排刊组稿</div>
+					<div class="li1" id="paikanzugao">排刊组稿</div>
+					<div class="li5" id="bianjisongkan">编辑送刊</div>
 				</div>
 				<div class="mode_name">稿件查询</div>
 				<div style="padding: 10px;">
@@ -391,7 +410,8 @@ a {
 				<div class="mode_name">期刊管理</div>
 				<div style="padding: 10px;">
 					<div class="li14" id="dingdanguanli">订单管理</div>
-					<div class="li15" id="qikanyouji">期刊邮寄</div>
+					<div class="li14" id="qikanyouji">期刊邮寄</div>
+					<div class="li14" id="zengKanYouJi">送刊邮寄</div>
 				</div>
 			</div>
 			#elseif(${userInfo.roleId}=='1009')

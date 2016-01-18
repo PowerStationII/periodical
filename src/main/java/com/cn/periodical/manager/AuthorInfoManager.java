@@ -6,6 +6,7 @@
 package com.cn.periodical.manager;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cn.periodical.pojo.AuthorInfo;
 import com.cn.periodical.pojo.AuthorInfoPage;
@@ -23,4 +24,6 @@ public interface AuthorInfoManager {
 	void deleteAuthorInfo(AuthorInfoQuery query);
 	
 	AuthorInfoPage queryPageList(AuthorInfoQuery query);
+
+    public List<Object> selectAuthorByArticl(String atricleId);
 }

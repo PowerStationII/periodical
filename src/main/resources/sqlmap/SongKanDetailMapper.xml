@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SongKanDetailMapper">
+	<resultMap id="BaseResultMap" type="SongKanDetail">
+		<id column="ID" jdbcType="DECIMAL" property="id" />
+		<result column="periodical_id" jdbcType="VARCHAR" property="periodicalId" />
+		<result column="periodical_issue_no" jdbcType="VARCHAR" property="periodicalIssueNo" />
+		<result column="cycle_nums" jdbcType="INTEGER" property="cycleNums" />
+		<result column="article_id" jdbcType="VARCHAR" property="articleId" />
+		<result column="zengSon_num" jdbcType="INTEGER" property="zengSonNum" />
+		<result column="youbian" jdbcType="VARCHAR" property="youbian" />
+		<result column="dizhi" jdbcType="VARCHAR" property="dizhi" />
+		<result column="danwei" jdbcType="VARCHAR" property="danwei" />
+		<result column="xingming" jdbcType="VARCHAR" property="xingming" />
+		<result column="dianhua" jdbcType="VARCHAR" property="dianhua" />
+	</resultMap>
+
+    <sql id="Base_Column_List">
+		periodical_id,
+		periodical_issue_no,
+		article_id,
+		cycle_nums,
+		zengSon_num,
+		youbian,
+		dizhi,
+		danwei,
+		xingming,
+		dianhua,
+	</sql>
+	<sql id="Selective_Column_List">
+		<!-- ID, -->
+		<if test="periodicalId != null">
+            periodical_id,
+		</if>
+		<if test="periodicalIssueNo != null">
+            periodical_issue_no,
+		</if>
+		<if test="cycleNums != null">
+            cycle_nums,
+		</if>
+        <if test="articleId != null">
+            article_id,
+        </if>
+		<if test="zengSon_num != null">
+            zengSonNum,
+		</if>
+		<if test="youbian != null">
+            youbian,
+		</if>
+        <if test="dizhi != null">
+            dizhi,
+        </if>
+        <if test="danwei != null">
+            danwei,
+        </if>
+        <if test="xingming != null">
+            xingming,
+        </if>
+        <if test="dianhua != null">
+            dianhua,
+        </if>
+	</sql>
+	<sql id="Base_Value_List">
+		#{periodicalId,jdbcType=VARCHAR},
+		#{periodicalIssueNo,jdbcType=VARCHAR},
+		#{articleId,jdbcType=VARCHAR},
+		#{cycleNums,jdbcType=INTEGER},
+		#{zengSonNum,jdbcType=INTEGER},
+		#{youbian,jdbcType=VARCHAR},
+		#{dizhi,jdbcType=VARCHAR},
+		#{danwei,jdbcType=VARCHAR},
+		#{xingming,jdbcType=VARCHAR},
+		#{dianhua,jdbcType=VARCHAR},
+	</sql>
+    <sql id="Selective_Value_List">
+        <!-- ID, -->
+        <if test="periodicalId != null">
+            #{periodicalId,jdbcType=VARCHAR},
+        </if>
+        <if test="periodicalIssueNo != null">
+            #{periodicalIssueNo,jdbcType=VARCHAR},
+        </if>
+        <if test="articleId != null">
+            #{articleId,jdbcType=VARCHAR},
+        </if>
+        <if test="cycleNums != null">
+            #{cycleNums,jdbcType=INTEGER},
+        </if>
+        <if test="zengSon_nums != null">
+            #{zengSonNums,jdbcType=INTEGER},
+        </if>
+        <if test="youbian != null">
+            #{youbian,jdbcType=VARCHAR},
+        </if>
+        <if test="dizhi != null">
+            #{dizhi,jdbcType=VARCHAR},
+        </if>
+        <if test="danwei != null">
+            #{danwei,jdbcType=VARCHAR},
+        </if>
+        <if test="xingming != null">
+            #{xingming,jdbcType=VARCHAR},
+        </if>
+        <if test="dianhua != null">
+            #{dianhua,jdbcType=VARCHAR},
+        </if>
+    </sql>
+
+	<insert id="insert" parameterType="SongKanDetail"  keyProperty="id">
+		insert into songKan_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Base_Value_List" />
+		</trim>
+	</insert>
+
+    <select id="selectArticle" parameterType="String" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            <include refid="Base_Column_List" />
+        </trim>
+        from songKan_detail
+        where article_id =  #{articleId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>
