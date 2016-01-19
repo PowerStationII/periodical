@@ -51,6 +51,7 @@ public class SongKanInfoServiceImpl implements SongKanInfoService {
             songKanDetail.setCycleNums(songKanInfo.getCycleNums());
             songKanDetail.setArticleId(articleid);
             songKanDetail.setZengSonNum(zengSonNums);
+            songKanDetail.setOrderNo(songKanInfo.getOrderNo());
             if(null!=list_temp0 && !list_temp0.isEmpty()){
                 Map<String,String> map_temp0 = (Map<String, String>) list_temp0.get(0);
                 songKanDetail.setYoubian(map_temp0.get("receive_postcode"));
@@ -88,6 +89,16 @@ public class SongKanInfoServiceImpl implements SongKanInfoService {
             }
         });
         return k ;
+    }
+
+    @Override
+    public List<SongKanInfo> selectByCondition(SongKanInfo songKanInfo) {
+        return songKanInfoManager.selectByCondition(songKanInfo);
+    }
+
+    @Override
+    public List<SongKanDetail> selectByOrderNo(String orderNo) {
+        return songKanDetailManager.selectByOrderNo(orderNo);
     }
 
 

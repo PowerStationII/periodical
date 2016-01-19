@@ -3,12 +3,15 @@ package com.cn.periodical.controller.editor;
 import java.awt.Color;
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.cn.periodical.pojo.SongKanDetail;
+import com.cn.periodical.service.SongKanInfoService;
 import com.lowagie.text.rtf.RtfWriter2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,6 +58,8 @@ public class SubscribePostController extends EditorController {
 	OrderInfoManager orderInfoManager;
 	@Autowired
 	BizOrderManager bizOrderManager;
+	@Autowired
+    SongKanInfoService songKanInfoService;
 
 	/**
 	 * toSubscribePostPage 邮寄管理
@@ -100,7 +105,7 @@ public class SubscribePostController extends EditorController {
 	@RequestMapping(value = "/toExportReaderAddressInfo")
 	@ResponseBody
 	public void toExportReaderAddressInfo(HttpServletRequest request,HttpServletResponse response,
-			String orderNo,String periodicalId,String periodicalIssueNo) {
+			String orderNo,String periodicalId,String periodicalIssueNo,String flag) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("发行编辑-导出读者订阅地址信息Page:[" + userInfo.getUserId() + "]");
 		//ModelAndView mav = new ModelAndView("editor_subscribePostPage");
@@ -113,6 +118,21 @@ public class SubscribePostController extends EditorController {
 		
 		try {
 //			createWord(list);
+            if("songKan".equals(flag)){
+                list = new ArrayList<BizDistribut>();
+                List<SongKanDetail>  list_temp0 = songKanInfoService.selectByOrderNo(orderNo);
+                for(SongKanDetail songKanDetail : list_temp0){
+                    BizDistribut bizDistribut = new BizDistribut();
+                    bizDistribut.setrPostCode(songKanDetail.getYoubian()); // 邮编
+                    bizDistribut.setrAddress(songKanDetail.getDizhi()); // 地址
+                    bizDistribut.setcName(songKanDetail.getDanwei()); // 单位
+                    bizDistribut.setcName(songKanDetail.getXingming());// 联系人
+                    bizDistribut.setcMobile(songKanDetail.getDianhua());
+                    bizDistribut.setdNums(songKanDetail.getZengSonNum()); // 份数
+                    bizDistribut.setNums(songKanDetail.getCycleNums());// 第几期
+                    list.add(bizDistribut);
+                }
+            }
             createDocContext("",list);
 			UtilLoad.fileDownload(request, response, "邮寄地址信息.doc", PropertiesInitManager.PROPERTIES.getProperty("postAddressPath"));
 		} catch (DocumentException e) {

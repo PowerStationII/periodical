@@ -5,6 +5,8 @@ import com.cn.periodical.dao.SongKanInfoDao;
 import com.cn.periodical.pojo.SongKanInfo;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: yuguodong
@@ -17,5 +19,10 @@ public class SongKanInfoDaoImpl extends BaseDao implements SongKanInfoDao{
     @Override
     public int insert(SongKanInfo songKanInfo) {
         return super.getSqlSession().insert("SongKanInfoMapper.insert", songKanInfo);
+    }
+
+    @Override
+    public List<SongKanInfo> selectByCondition(SongKanInfo songKanInfo) {
+        return super.getSqlSession().selectList("SongKanInfoMapper.selectByCondition",songKanInfo );
     }
 }

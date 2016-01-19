@@ -13,6 +13,7 @@
 		<result column="danwei" jdbcType="VARCHAR" property="danwei" />
 		<result column="xingming" jdbcType="VARCHAR" property="xingming" />
 		<result column="dianhua" jdbcType="VARCHAR" property="dianhua" />
+		<result column="orderNo" jdbcType="VARCHAR" property="orderNo" />
 	</resultMap>
 
     <sql id="Base_Column_List">
@@ -26,6 +27,7 @@
 		danwei,
 		xingming,
 		dianhua,
+		orderNo,
 	</sql>
 	<sql id="Selective_Column_List">
 		<!-- ID, -->
@@ -71,6 +73,7 @@
 		#{danwei,jdbcType=VARCHAR},
 		#{xingming,jdbcType=VARCHAR},
 		#{dianhua,jdbcType=VARCHAR},
+		#{orderNo,jdbcType=VARCHAR},
 	</sql>
     <sql id="Selective_Value_List">
         <!-- ID, -->
@@ -123,6 +126,14 @@
         </trim>
         from songKan_detail
         where article_id =  #{articleId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByOrderNo" parameterType="String" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            <include refid="Base_Column_List" />
+        </trim>
+        from songKan_detail
+        where orderNo =  #{orderNo,jdbcType=VARCHAR}
     </select>
 
 </mapper>

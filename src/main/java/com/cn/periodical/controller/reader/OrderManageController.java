@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cn.periodical.enums.ArticalCodeEnums;
+import com.cn.periodical.manager.*;
 import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.SongKanInfoService;
 import org.slf4j.Logger;
@@ -21,13 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.cn.periodical.enums.OrderStatusEnums;
-import com.cn.periodical.manager.AddressInfoManager;
-import com.cn.periodical.manager.BizOrderManager;
-import com.cn.periodical.manager.OrderInfoManager;
-import com.cn.periodical.manager.PayeeInfoManager;
-import com.cn.periodical.manager.PeriodicalDistributManager;
-import com.cn.periodical.manager.PeriodicalInfoManager;
-import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.service.OrderInfoService;
 import com.cn.periodical.utils.GenerateOrderNo;
 
@@ -62,6 +57,8 @@ public class OrderManageController extends ReaderController{
     PeriodicalDistributManager periodicalDistributManager;
     @Autowired
     SongKanInfoService songKanInfoService;
+    @Autowired
+    ArticalCodeManager articalCodeManager;
 	/**
 	 * toOrderManagePage
 	 * 订单管理页面
@@ -128,7 +125,8 @@ public class OrderManageController extends ReaderController{
      * 送刊保存
      */
     @RequestMapping(value="/toCreatOrderSongKan",method ={ RequestMethod.POST ,RequestMethod.GET})
-    public  @ResponseBody Map<String,Object> toCreatOrderSongKan(HttpServletRequest request,String periodicalId,String periodicalIssueNo,String qishu,String array) {
+    public  @ResponseBody Map<String,Object> toCreatOrderSongKan(HttpServletRequest request,String periodicalId,String periodicalIssueNo,String qishu,
+                                                                 String array , String year) {
         UserInfo userInfo = getUserInfo(request);
         logger.info("保存送刊Page:["+userInfo.getUserId()+"]&["+periodicalId+"]");
         Map<String,Object> map_ret = new HashMap<String,Object>();
@@ -149,7 +147,9 @@ public class OrderManageController extends ReaderController{
         songKanInfo.setPeriodicalIssueNo(periodicalIssueNo);
         songKanInfo.setZengSonNums(zengSongNums);
         songKanInfo.setCycleNums(Integer.parseInt(qishu));
-        songKanInfo.setOrderNo(periodicalId); // 订单号生成
+        songKanInfo.setYear(year);
+        String orderNo = articalCodeManager.getCode(ArticalCodeEnums.SONGKAN_CONDE.getCode(),ArticalCodeEnums.SONGKAN_CONDE.getName()) ;   // 订单号生成
+        songKanInfo.setOrderNo(orderNo);
 
         int r = songKanInfoService.insert(songKanInfo,list);
         if(1==r){
@@ -159,7 +159,43 @@ public class OrderManageController extends ReaderController{
         }
         return map_ret;
     }
+    /**
+     * toSubscribePostPage 邮寄管理
+     */
+    @RequestMapping(value = "/toSongKanYouJiPage", method = RequestMethod.GET)
+    public ModelAndView toSubscribePostPage(HttpServletRequest request) {
+        UserInfo userInfo = getUserInfo(request);
+        logger.info("发行编辑-送刊邮寄管理Page:[" + userInfo.getUserId() + "]");
+        ModelAndView mav = new ModelAndView("editor_songKanYouJiPage");
+        /**
+         * 订单信息
+         */
+        SongKanInfo songKanInfo = new SongKanInfo();
+        List<SongKanInfo> list = songKanInfoService.selectByCondition(songKanInfo);
+        mav.addObject("list", list);
+        return mav;
+    }
+    /**
+     * toReaderAddressInfoDetails 读者订阅地址及信息明细
+     */
+    @RequestMapping(value = "/toSongKanYouJiDetailsPage")
+    public ModelAndView toSongKanYouJiDetailsPage(HttpServletRequest request, String orderNo, String periodicalId,
+                                                   String periodicalIssueNo) {
+        UserInfo userInfo = getUserInfo(request);
+        logger.info("送刊-查看读者订阅地址信息Page:[" + userInfo.getUserId() + "]orderNo:[" + orderNo + "]" + "periodicalId:["
+                + periodicalId + "]" + "periodicalIssueNo:[" + periodicalIssueNo + "]");
+        ModelAndView mav = new ModelAndView("editor_songKanDetailPage");
 
+        BizDistribut distribut = new BizDistribut();
+        distribut.setOrderNo(orderNo);
+        distribut.setpId(periodicalId);
+        distribut.setpIsNo(periodicalIssueNo);
+        List<SongKanDetail> list = songKanInfoService.selectByOrderNo(orderNo);
+        mav.addObject("list", list);
+        mav.addObject("distribut", distribut);
+
+        return mav;
+    }
 	/**
 	 * 去订单编辑页
 	 * 只能修改订阅数等信息

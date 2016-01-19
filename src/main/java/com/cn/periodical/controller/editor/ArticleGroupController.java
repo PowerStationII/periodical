@@ -174,7 +174,7 @@ public class ArticleGroupController extends EditorController{
 	public ModelAndView toArticleGroupDetailPageSongKan(
 			@RequestParam("periodicalId") String periodicalId,
 			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
-            String qishu ,
+            String qishu ,  String year ,
 			HttpServletRequest request) {
 		logger.info("送刊左右Page:[ "+periodicalId+"]&["+periodicalIssueNo+"]");
 		ModelAndView mav = new ModelAndView("editor_articleGroupDetailPageSongKan");
@@ -206,6 +206,7 @@ public class ArticleGroupController extends EditorController{
 		mav.addObject("periodicalIssueNo", periodicalIssueNo);
 		mav.addObject("periodicalId", periodicalId);
 		mav.addObject("qishu", qishu);
+		mav.addObject("year", year);
 		return mav;
 	}
 

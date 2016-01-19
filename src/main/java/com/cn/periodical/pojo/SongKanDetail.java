@@ -22,6 +22,7 @@ public class SongKanDetail implements Serializable {
     private String danwei ;
     private String xingming ;
     private String dianhua ;
+    private String orderNo ;
 
     public int getId() {
         return id;
@@ -110,5 +111,13 @@ public class SongKanDetail implements Serializable {
 
     public void setZengSonNum(int zengSonNum) {
         this.zengSonNum = zengSonNum;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
     }
 }

@@ -17,6 +17,7 @@ public class SongKanInfo implements Serializable {
     private int cycleNums ;
     private int zengSonNums ;
     private String orderNo ;
+    private String year ;
 
     public int getId() {
         return id;
@@ -64,5 +65,13 @@ public class SongKanInfo implements Serializable {
 
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 }

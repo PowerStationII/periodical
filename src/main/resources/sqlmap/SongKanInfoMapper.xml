@@ -8,6 +8,7 @@
 		<result column="cycle_nums" jdbcType="INTEGER" property="cycleNums" />
 		<result column="zengSon_nums" jdbcType="INTEGER" property="zengSonNums" />
 		<result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+		<result column="year" jdbcType="VARCHAR" property="year" />
 	</resultMap>
 
     <sql id="Base_Column_List">
@@ -16,6 +17,16 @@
 		cycle_nums,
 		zengSon_nums,
 		order_no,
+		year,
+	</sql>
+    <sql id="Base_Search_Column_List">
+        id,
+		periodical_id,
+		periodical_issue_no,
+		cycle_nums,
+		zengSon_nums,
+		order_no,
+		year,
 	</sql>
 	<sql id="Selective_Column_List">
 		<!-- ID, -->
@@ -29,7 +40,7 @@
             cycle_nums,
 		</if>
 		<if test="zengSon_nums != null">
-            zengSonNums,
+            zengSon_Nums,
 		</if>
 		<if test="order_no != null">
             orderNo,
@@ -41,9 +52,12 @@
 		#{cycleNums,jdbcType=INTEGER},
 		#{zengSonNums,jdbcType=INTEGER},
 		#{orderNo,jdbcType=VARCHAR},
+		#{year,jdbcType=VARCHAR},
 	</sql>
     <sql id="Selective_Value_List">
-        <!-- ID, -->
+        <if test="id != null">
+            #{id,jdbcType=DECIMAL},
+        </if>
         <if test="periodicalId != null">
             #{periodicalId,jdbcType=VARCHAR},
         </if>
@@ -53,12 +67,43 @@
         <if test="cycleNums != null">
             #{cycleNums,jdbcType=INTEGER},
         </if>
-        <if test="zengSon_nums != null">
+        <if test="zengSonNums != null">
             #{zengSonNums,jdbcType=INTEGER},
         </if>
-        <if test="order_no != null">
+        <if test="orderNo != null">
             #{orderNo,jdbcType=VARCHAR},
         </if>
+        <if test="order_no != null">
+            #{year,jdbcType=VARCHAR},
+        </if>
+    </sql>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+                <if test="id != null and id!=0">
+                   and id =  #{id,jdbcType=DECIMAL}
+                </if>
+                <if test="periodicalId != null">
+                   and periodical_id =  #{periodicalId,jdbcType=VARCHAR}
+                </if>
+                <if test="periodicalIssueNo != null">
+                   and periodical_issue_no =  #{periodicalIssueNo,jdbcType=VARCHAR}
+                </if>
+                <if test="cycleNums != null and cycleNums!=0">
+                   and  cycle_nums = #{cycleNums,jdbcType=INTEGER}
+                </if>
+                <if test="zengSonNums != null and zengSonNums!=0">
+                    and zengSon_nums = #{zengSonNums,jdbcType=INTEGER}
+                </if>
+                <if test="orderNo != null">
+                    and order_no =  #{orderNo,jdbcType=VARCHAR}
+                </if>
+                <if test="year != null">
+                    and year =  #{year,jdbcType=VARCHAR}
+                </if>
+            </trim>
+        </where>
     </sql>
 
 	<insert id="insert" parameterType="SongKanInfo" keyProperty="id">
@@ -70,5 +115,14 @@
 			<include refid="Base_Value_List" />
 		</trim>
 	</insert>
+
+    <select id="selectByCondition" parameterType="SongKanInfo" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            <include refid="Base_Search_Column_List" />
+        </trim>
+        from songKan_info
+        <include refid="Example_Where_Clause" />
+    </select>
 
 </mapper>

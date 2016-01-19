@@ -6,6 +6,8 @@ import com.cn.periodical.pojo.SongKanDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: yuguodong
@@ -26,6 +28,11 @@ public class SongKanDetailMangerImpl implements SongKanDetailManager {
     @Override
     public SongKanDetail selectArticle(String articleId) {
         return songKanDetailDao.selectArticle(articleId);
+    }
+
+    @Override
+    public List<SongKanDetail> selectByOrderNo(String orderNo) {
+        return songKanDetailDao.selectByOrderNo(orderNo);
     }
 
     public SongKanDetailDao getSongKanDetailDao() {

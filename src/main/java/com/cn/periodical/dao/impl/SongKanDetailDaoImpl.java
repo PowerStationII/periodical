@@ -5,6 +5,8 @@ import com.cn.periodical.dao.SongKanDetailDao;
 import com.cn.periodical.pojo.SongKanDetail;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: yuguodong
@@ -22,6 +24,11 @@ public class SongKanDetailDaoImpl extends BaseDao implements SongKanDetailDao {
     @Override
     public SongKanDetail selectArticle(String articleId) {
         return super.getSqlSession().selectOne("SongKanDetailMapper.selectArticle", articleId);
+    }
+
+    @Override
+    public List<SongKanDetail> selectByOrderNo(String orderNo) {
+        return super.getSqlSession().selectList("SongKanDetailMapper.selectByOrderNo", orderNo);
     }
 
 

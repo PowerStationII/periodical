@@ -2,6 +2,8 @@ package com.cn.periodical.dao;
 
 import com.cn.periodical.pojo.SongKanInfo;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: yuguodong
@@ -11,4 +13,6 @@ import com.cn.periodical.pojo.SongKanInfo;
  */
 public interface SongKanInfoDao {
     public int insert(SongKanInfo songKanInfo);
+
+    public List<SongKanInfo> selectByCondition(SongKanInfo songKanInfo);
 }

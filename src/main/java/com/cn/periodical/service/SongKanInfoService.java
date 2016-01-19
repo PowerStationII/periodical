@@ -15,4 +15,8 @@ import java.util.Map;
  */
 public interface SongKanInfoService {
     public int insert(SongKanInfo songKanInfo , List<Map<String,Object>> articleId);
+
+    public List<SongKanInfo> selectByCondition(SongKanInfo songKanInfo);
+
+    public List<SongKanDetail> selectByOrderNo(String orderNo);
 }

@@ -172,7 +172,7 @@
                     $('#other').remove();
                     $('.right')
                             .append(
-                                    '<div id="other"><iframe  width ="100%"   height = "530" src= "editor/toSubscribePostPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+                                    '<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toSongKanYouJiPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
                 });
 		//<!-- 发行编辑 end-->
 		//<!-- 签发人 start-->
@@ -411,7 +411,7 @@ a {
 				<div style="padding: 10px;">
 					<div class="li14" id="dingdanguanli">订单管理</div>
 					<div class="li14" id="qikanyouji">期刊邮寄</div>
-					<div class="li14" id="zengKanYouJi">送刊邮寄</div>
+					<div class="li15" id="zengKanYouJi">送刊邮寄</div>
 				</div>
 			</div>
 			#elseif(${userInfo.roleId}=='1009')

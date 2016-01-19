@@ -2,6 +2,8 @@ package com.cn.periodical.dao;
 
 import com.cn.periodical.pojo.SongKanDetail;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: yuguodong
@@ -13,4 +15,5 @@ public interface SongKanDetailDao {
     public int insert(SongKanDetail songKanDetail);
 
     public SongKanDetail selectArticle(String articleId);
+    public List<SongKanDetail> selectByOrderNo(String orderNo);
 }

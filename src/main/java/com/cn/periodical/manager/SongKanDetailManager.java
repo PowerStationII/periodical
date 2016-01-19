@@ -2,6 +2,8 @@ package com.cn.periodical.manager;
 
 import com.cn.periodical.pojo.SongKanDetail;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: yuguodong
@@ -13,4 +15,6 @@ public interface SongKanDetailManager {
     public int insert(SongKanDetail songKanDetail);
 
     public SongKanDetail selectArticle(String articleId);
+
+    public List<SongKanDetail> selectByOrderNo(String orderNo);
 }
