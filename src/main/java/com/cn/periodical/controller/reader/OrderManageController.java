@@ -8,6 +8,7 @@ import com.cn.periodical.enums.ArticalCodeEnums;
 import com.cn.periodical.manager.*;
 import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.SongKanInfoService;
+import com.cn.periodical.service.Zeng4KanInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,8 @@ public class OrderManageController extends ReaderController{
     PeriodicalDistributManager periodicalDistributManager;
     @Autowired
     SongKanInfoService songKanInfoService;
+    @Autowired
+    Zeng4KanInfoService zeng4KanInfoService;
     @Autowired
     ArticalCodeManager articalCodeManager;
 	/**
@@ -176,6 +179,22 @@ public class OrderManageController extends ReaderController{
         return mav;
     }
     /**
+     * toSubscribePostPage 邮寄管理
+     */
+    @RequestMapping(value = "/toZeng4KanYouJiPage", method = RequestMethod.GET)
+    public ModelAndView toZeng4KanYouJiPage(HttpServletRequest request) {
+        UserInfo userInfo = getUserInfo(request);
+        logger.info("发行编辑-赠刊邮寄管理Page:[" + userInfo.getUserId() + "]");
+        ModelAndView mav = new ModelAndView("editor_zeng4KanYouJiPage");
+        /**
+         * 订单信息
+         */
+        Zeng4KanInfo songKanInfo = new Zeng4KanInfo();
+        List<Zeng4KanInfo> list = zeng4KanInfoService.selectByCondition(songKanInfo);
+        mav.addObject("list", list);
+        return mav;
+    }
+    /**
      * toReaderAddressInfoDetails 读者订阅地址及信息明细
      */
     @RequestMapping(value = "/toSongKanYouJiDetailsPage")
@@ -191,6 +210,28 @@ public class OrderManageController extends ReaderController{
         distribut.setpId(periodicalId);
         distribut.setpIsNo(periodicalIssueNo);
         List<SongKanDetail> list = songKanInfoService.selectByOrderNo(orderNo);
+        mav.addObject("list", list);
+        mav.addObject("distribut", distribut);
+
+        return mav;
+    }
+    /**
+     * toReaderAddressInfoDetails 读者订阅地址及信息明细
+     */
+    @RequestMapping(value = "/toZeng4KanYouJiDetailsPage")
+    public ModelAndView toZeng4KanYouJiDetailsPage(HttpServletRequest request, String orderNo, String periodicalId,
+                                                  String periodicalIssueNo,String cycleNums) {
+        UserInfo userInfo = getUserInfo(request);
+        logger.info("赠刊-查看读者订阅地址信息Page:[" + userInfo.getUserId() + "]orderNo:[" + orderNo + "]" + "periodicalId:["
+                + periodicalId + "]" + "periodicalIssueNo:[" + periodicalIssueNo + "]");
+        ModelAndView mav = new ModelAndView("editor_zeng4KanDetailPage");
+
+        BizDistribut distribut = new BizDistribut();
+        distribut.setOrderNo(orderNo);
+        distribut.setpId(periodicalId);
+        distribut.setpIsNo(periodicalIssueNo);
+        distribut.setAmount(cycleNums);// 期数
+        List<Zeng4KanDetail> list = zeng4KanInfoService.selectByOrderNo(orderNo);
         mav.addObject("list", list);
         mav.addObject("distribut", distribut);
 

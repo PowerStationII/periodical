@@ -71,5 +71,7 @@
 		<mapper resource="sqlmap/ArticalCodeMapper.xml"/><!-- 序号 -->
 		<mapper resource="sqlmap/SongKanDetailMapper.xml"/><!-- 送刊 -->
 		<mapper resource="sqlmap/SongKanInfoMapper.xml"/><!-- 送刊 -->
+		<mapper resource="sqlmap/Zeng4KanDetailMapper.xml"/><!-- 赠刊 -->
+		<mapper resource="sqlmap/Zeng4KanInfoMapper.xml"/><!-- 赠刊 -->
 	</mappers>
 </configuration>

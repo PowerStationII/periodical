@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
+</head>
+<script type="text/javascript">
+	$(function(){
+		$('#back').click(function(){
+			history.go(-1);
+		});
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#editTable').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+                 "id":rows[i].id,  
+                 "rAddress":rows[i].rAddress,
+                 "cName":rows[i].cName,
+                 "cMobile":rows[i].cMobile,
+                 "dNums":rows[i].dNums
+             }) ; 
+		}
+        $("#editTable").datagrid("loadData", data.slice(0, 15));
+        var pager = $("#editTable").datagrid("getPager");  
+        pager.pagination({  
+            total:data.length, 
+            pageSize:15,
+            pageList: [15,20],
+            onSelectPage:function (pageNo, pageSize) {  
+                var start = (pageNo - 1) * pageSize;  
+                var end = start + pageSize;  
+                $("#editTable").datagrid("loadData", data.slice(start, end));  
+                pager.pagination('refresh', {  
+                    total:data.length,  
+                    pageNumber:pageNo
+                });  
+            }  
+        });
+
+        $('#submit').click(function(){
+            var orderNo = $("#orderNo").val();
+            var periodicalId = $("#periodicalId").val();
+            var periodicalIssueNo = $("#periodicalIssueNo").val();
+            var amount = $("#amount").val();
+            $.ajaxFileUpload({
+                url:'../reader/toUploadZeng4KanPage',            //需要链接到服务器地址
+                secureuri:false,
+                fileElementId:'files',                  //文件选择框的id属性
+                dataType: 'json',                      //服务器返回的格式，可以是json, xml
+                data:{orderNo:orderNo,periodicalId:periodicalId,periodicalIssueNo:periodicalIssueNo,cycleNums:amount},
+                success: function (data, status){     //相当于java中try语句块的用法
+                    if (data.message == "success") {
+                        alert('上传成功');
+                        window.location.href='../reader/toZeng4KanYouJiDetailsPage?orderNo='+orderNo+"&periodicalId="+periodicalId+"&periodicalIssueNo="+periodicalIssueNo+"&cycleNums="+amount;
+                    }
+                },
+                error: function (data, status, e){  //相当于java中catch语句块的用法
+                    alert(data);
+                }
+            });
+        });
+	});
+</script>
+<body>
+	<div>
+        <input type="hidden" value="$!{distribut.orderNo}" id="orderNo" >
+        <input type="hidden" value="$!{distribut.pId}" id="periodicalId" >
+        <input type="hidden" value="$!{distribut.pIsNo}" id="periodicalIssueNo" >
+        <input type="hidden" value="$!{distribut.amount}" id="amount" >
+		 <table id="editTable" class="easyui-datagrid" data-options="fitColumns:true,singleSelect:true,pagination:true">
+		    <thead>   
+		        <tr>   
+		            <th data-options="field:'id',width:50">序号</th>   
+		            <th data-options="field:'aId',width:200" hidden="true">地址id</th>
+		            <th data-options="field:'rAddress',width:200 ">详细地址</th>
+		            <th data-options="field:'cName',width:100">联系人</th>
+		            <th data-options="field:'cMobile',width:100 ">联系电话</th>
+		            <th data-options="field:'dNums',width:100,editor:'numberbox'" >赠送本数</th>
+##		            <th data-options="field:'sIdNums1',width:100" >增刊1</th>
+##		            <th data-options="field:'sIdNums2',width:100" >增刊2</th>
+##		            <th data-options="field:'sIdNums3',width:100" >增刊3</th>
+		        </tr>   
+		    </thead>   
+		    <tbody>   
+		    	#foreach($dtos in ${list})
+				<tr>
+					<td>$!{velocityCount}</td>
+					<td hidden="true">$!{dtos.id}</td>
+					<td>$!{dtos.dizhi}</td>
+					<td>$!{dtos.xingming}</td>
+					<td>$!{dtos.dianhua}</td>
+					<td>$!{dtos.zengSonNum}</td>
+##					<td>$!{dtos.sIdNums1}</td>
+##					<td>$!{dtos.sIdNums2}</td>
+##					<td>$!{dtos.sIdNums3}</td>
+				</tr>
+				#end
+		    </tbody>   
+		</table>
+        <input type="file" name="files" id="files"  value="">
+		<a id="back" class="easyui-linkbutton"  style="50px;">返回</a>
+        <a id="submit" class="easyui-linkbutton"  style="50px;">保存</a>
+        <a class="easyui-linkbutton" href="../editor/toExportReaderAddressInfo?orderNo=$!{distribut.orderNo}&periodicalId=$!{distribut.pId}&periodicalIssueNo=$!{distribut.pIsNo}&flag=zeng4Kan">导出邮寄地址信息</a>
+		<!-- <a class="easyui-linkbutton" href="../editor/toExportAuthorAddressInfo">导出作者地址信息</a>  -->
+	</div>
+</body>
+</html>

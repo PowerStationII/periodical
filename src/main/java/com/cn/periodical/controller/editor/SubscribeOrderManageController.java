@@ -166,7 +166,40 @@ public class SubscribeOrderManageController extends EditorController{
 		}
 		return mav;
 	}
-	
+
+    /**
+     * toSubSupplement
+     * 保存赠刊信息
+     */
+    @RequestMapping(value="/toSaveZeng4Kan")
+    public ModelAndView toSaveZeng4Kan(HttpServletRequest request,String array,String orderNo) {
+        logger.info("---------------" + "array:" + array + "------orderNo:" + orderNo);
+        ModelAndView mav = new ModelAndView("redirect:../editor/toSubOrderManagePage");
+        /**
+         * 编辑读者订单的赠刊信息,编辑信息保存至
+         * periodical_distribute表
+         * */
+        JSONArray arr = (JSONArray) JSONArray.parse(array);
+        for(int i=0;i<arr.size();i++){
+            PeriodicalDistributQuery query = new PeriodicalDistributQuery();
+            query.setRefId(orderNo);
+            query.setAddressId(arr.getJSONObject(i).getString("aId"));
+            List<PeriodicalDistribut> pds = periodicalDistributManager.queryList(query);
+            logger.info(pds.size()+"");
+            PeriodicalDistribut pd = pds.get(0);
+            pd.setId(pd.getId());
+            pd.setDistributeNums(Integer.valueOf(arr.getJSONObject(i).getString("dNums")));
+            pd.setSupplementId1("111");
+            pd.setSupplementId1Nums(Integer.valueOf(arr.getJSONObject(i).getString("sIdNums1")));
+            pd.setSupplementId2("222");
+            pd.setSupplementId2Nums(Integer.valueOf(arr.getJSONObject(i).getString("sIdNums2")));
+            pd.setSupplementId3("333");
+            pd.setSupplementId3Nums(Integer.valueOf(arr.getJSONObject(i).getString("sIdNums3")));
+            periodicalDistributManager.savePeriodicalDistribut(pd);
+        }
+        return mav;
+    }
+
 	/**
 	 * toPzDownloadPage
 	 * 发行编辑编辑订单赠刊信息

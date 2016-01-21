@@ -12,7 +12,8 @@ public enum ArticalCodeEnums {
     LISHIHUI_CODE("2","M"),// 理事会编号 members
     QIKAN_CODE("3","P"),// 期刊编号 periodical
     QIKAN_CONDE1("4","QK"),// 期刊编号 periodical
-    SONGKAN_CONDE("5","SK");// 送刊生成的订单编号
+    SONGKAN_CONDE("5","SK"),// 送刊生成的订单编号
+    ZENGKAN_CONDE("6","ZK");// 赠刊生成的订单编号
 
     private String code;
     private String name;

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.cn.periodical.manager.PeriodicalDistributManager;
 import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.EditorArticleDealService;
+import com.cn.periodical.service.Zeng4KanInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,8 @@ public class PeriodicalDistributController extends ReaderController{
     PeriodicalDistributManager periodicalDistributManager;
     @Autowired
     EditorArticleDealService editorArticleDealService;
+    @Autowired
+    Zeng4KanInfoService zeng4KanInfoService;
 
 	private static final Logger logger = LoggerFactory.getLogger(PeriodicalDistributController.class);
 	/**
@@ -95,7 +98,38 @@ public class PeriodicalDistributController extends ReaderController{
         map.put("message",super.success);
         return map;
     }
-	
+
+    /**
+     * toUploadAddressPage
+     * 上传地址
+     */
+    @RequestMapping(value="/toUploadZeng4KanPage")
+    public @ResponseBody Object toUploadZeng4KanPage(@RequestParam(value="files", required=true) MultipartFile files,HttpServletRequest request
+            ,String periodicalId,String orderNo,String periodicalIssueNo,String cycleNums) {
+        UserInfo userInfo = getUserInfo(request);
+        logger.info("上传邮寄地址信息 Page in:["+userInfo.getUserId()+"]");
+        Map<String,Object> map = new HashMap<String,Object>();
+
+        /**
+         * 根据orderNo 在info 表查询 到 期刊号、刊号、第几期
+         */
+
+        /**
+         * 解析excel地址 保存到 detail表
+         * */
+        try{
+            InputStream is = files.getInputStream();
+            ReadExcel readExcel = new ReadExcel("","",is,orderNo,periodicalId,periodicalIssueNo,cycleNums);
+            List<Zeng4KanDetail> list = readExcel.readXlsZeng4Kan();
+            // 然后循环保存
+            zeng4KanInfoService.insertZeng4KanDetail(list);
+        }catch(Exception e){
+            logger.info("地址上传错误");
+            e.printStackTrace();
+        }
+        map.put("message",super.success);
+        return map;
+    }
 
 	
 	
@@ -212,5 +246,11 @@ public class PeriodicalDistributController extends ReaderController{
         mav.addObject("orderNo",orderNo);
         mav.addObject("periodicalId",periodicalId);
         return mav ;
+    }
+
+    @RequestMapping(value="/inToZeng4KanPageOne")
+    public @ResponseBody Object inToZeng4KanPageOne(){
+
+        return null ;
     }
 }

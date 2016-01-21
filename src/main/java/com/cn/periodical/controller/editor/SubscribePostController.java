@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.cn.periodical.pojo.SongKanDetail;
+import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.SongKanInfoService;
+import com.cn.periodical.service.Zeng4KanInfoService;
 import com.lowagie.text.rtf.RtfWriter2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,9 +28,6 @@ import com.alibaba.fastjson.JSON;
 import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.manager.BizOrderManager;
 import com.cn.periodical.manager.OrderInfoManager;
-import com.cn.periodical.pojo.BizDistribut;
-import com.cn.periodical.pojo.BizOrder;
-import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.utils.PropertiesInitManager;
 import com.cn.periodical.utils.UtilLoad;
 import com.lowagie.text.Cell;
@@ -60,6 +58,8 @@ public class SubscribePostController extends EditorController {
 	BizOrderManager bizOrderManager;
 	@Autowired
     SongKanInfoService songKanInfoService;
+	@Autowired
+    Zeng4KanInfoService zeng4KanInfoService;
 
 	/**
 	 * toSubscribePostPage 邮寄管理
@@ -122,6 +122,20 @@ public class SubscribePostController extends EditorController {
                 list = new ArrayList<BizDistribut>();
                 List<SongKanDetail>  list_temp0 = songKanInfoService.selectByOrderNo(orderNo);
                 for(SongKanDetail songKanDetail : list_temp0){
+                    BizDistribut bizDistribut = new BizDistribut();
+                    bizDistribut.setrPostCode(songKanDetail.getYoubian()); // 邮编
+                    bizDistribut.setrAddress(songKanDetail.getDizhi()); // 地址
+                    bizDistribut.setcName(songKanDetail.getDanwei()); // 单位
+                    bizDistribut.setcName(songKanDetail.getXingming());// 联系人
+                    bizDistribut.setcMobile(songKanDetail.getDianhua());
+                    bizDistribut.setdNums(songKanDetail.getZengSonNum()); // 份数
+                    bizDistribut.setNums(songKanDetail.getCycleNums());// 第几期
+                    list.add(bizDistribut);
+                }
+            }else if("zeng4Kan".equals(flag)){
+                list = new ArrayList<BizDistribut>();
+                List<Zeng4KanDetail>  list_temp0 = zeng4KanInfoService.selectByOrderNo(orderNo);
+                for(Zeng4KanDetail songKanDetail : list_temp0){
                     BizDistribut bizDistribut = new BizDistribut();
                     bizDistribut.setrPostCode(songKanDetail.getYoubian()); // 邮编
                     bizDistribut.setrAddress(songKanDetail.getDizhi()); // 地址
