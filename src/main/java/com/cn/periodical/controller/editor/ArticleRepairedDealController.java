@@ -91,13 +91,17 @@ public class ArticleRepairedDealController extends EditorController{
 	 * 返修-Page
 	 */
 	@RequestMapping(value="/toRepairePage")
-	public ModelAndView toRepairedPage(@RequestParam("articleId") String articleId,HttpServletRequest request) {
+	public ModelAndView toRepairedPage(@RequestParam("articleId") String articleId,String flag ,HttpServletRequest request) {
 		logger.info("返修Page in :["+articleId+"]");
 		ModelAndView mav = new ModelAndView("editor_artilce_repairedPage");
 		
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
 		reqDto.setArticleId(articleId);
-		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**编辑和专家共用一个稿件目录*/
+        if("gaoJian".equals(flag)){
+            reqDto.setRoleId(RoleIdEnums.AUTHOR.getCode());
+        }else{
+            reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**编辑和专家共用一个稿件目录*/
+        }
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
 		mav.addObject("respDto", articleQueryRespDto);
 		

@@ -85,19 +85,26 @@ public class ArticleRefundDealController extends EditorController{
 		logger.info("退稿PageList out:["+JSON.toJSONString(list)+"]");
 		return mav;
 	}
-	
-	/**
-	 * toRefundPage
-	 * 退稿-Page
-	 */
+
+    /**
+     * 退稿
+     * @param articleId
+     * @param flag 区分是作者直接退稿还是专家退稿
+     * @param request
+     * @return
+     */
 	@RequestMapping(value="/toRefundPage")
-	public ModelAndView toRefundPage(@RequestParam("articleId") String articleId,HttpServletRequest request) {
+	public ModelAndView toRefundPage(@RequestParam("articleId") String articleId,String flag ,HttpServletRequest request) {
 		logger.info("退稿Page in :["+articleId+"]");
 		ModelAndView mav = new ModelAndView("editor_artilce_refundedPage");
 		
 		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
 		reqDto.setArticleId(articleId);
-		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**编辑和专家共用一个稿件目录*/
+        if("gaoJian".equals(flag)){
+            reqDto.setRoleId(RoleIdEnums.AUTHOR.getCode());
+        }else{
+            reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**编辑和专家共用一个稿件目录*/
+        }
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
 		mav.addObject("respDto", articleQueryRespDto);
 		

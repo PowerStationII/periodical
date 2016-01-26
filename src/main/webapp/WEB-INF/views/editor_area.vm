@@ -183,6 +183,15 @@
                             .append(
                                     '<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toZeng4KanYouJiPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
                 });
+        $('#zeng1KanYouJi')
+                .click(
+                function() {
+                    $('#area').hide();
+                    $('#other').remove();
+                    $('.right')
+                            .append(
+                                    '<div id="other"><iframe  width ="100%"   height = "530" src= "reader/toZeng1KanYouJiPage"   frameborder="no" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="yes" ></iframe></div>');
+                });
 		//<!-- 发行编辑 end-->
 		//<!-- 签发人 start-->
 		$('#qianfa')
@@ -416,11 +425,15 @@ a {
 			</div>
 			#elseif(${userInfo.roleId}=='1008')
 			<div id="1008" class="cLeft">
-				<div class="mode_name">期刊管理</div>
+				<div class="mode_name">客单管理</div>
 				<div style="padding: 10px;">
 					<div class="li14" id="dingdanguanli">订单管理</div>
-					<div class="li14" id="qikanyouji">期刊邮寄</div>
+					<div class="li15" id="qikanyouji">期刊邮寄</div>
+				</div>
+				<div class="mode_name">非客单管理</div>
+				<div style="padding: 10px;">
 					<div class="li14" id="songKanYouJi">送刊邮寄</div>
+					<div class="li14" id="zeng1KanYouJi">增刊邮寄</div>
 					<div class="li15" id="zeng4KanYouJi">赠刊邮寄</div>
 				</div>
 			</div>

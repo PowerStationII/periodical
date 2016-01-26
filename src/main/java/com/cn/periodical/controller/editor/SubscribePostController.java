@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.SongKanInfoService;
+import com.cn.periodical.service.Zeng1KanInfoService;
 import com.cn.periodical.service.Zeng4KanInfoService;
 import com.lowagie.text.rtf.RtfWriter2;
 import org.slf4j.Logger;
@@ -60,6 +61,8 @@ public class SubscribePostController extends EditorController {
     SongKanInfoService songKanInfoService;
 	@Autowired
     Zeng4KanInfoService zeng4KanInfoService;
+	@Autowired
+    Zeng1KanInfoService zeng1KanInfoService;
 
 	/**
 	 * toSubscribePostPage 邮寄管理
@@ -146,7 +149,22 @@ public class SubscribePostController extends EditorController {
                     bizDistribut.setNums(songKanDetail.getCycleNums());// 第几期
                     list.add(bizDistribut);
                 }
+            }else if("zeng1Kan".equals(flag)){
+                list = new ArrayList<BizDistribut>();
+                List<Zeng1KanDetail>  list_temp0 = zeng1KanInfoService.selectByOrderNo(orderNo);
+                for(Zeng1KanDetail songKanDetail : list_temp0){
+                    BizDistribut bizDistribut = new BizDistribut();
+                    bizDistribut.setrPostCode(songKanDetail.getYoubian()); // 邮编
+                    bizDistribut.setrAddress(songKanDetail.getDizhi()); // 地址
+                    bizDistribut.setcName(songKanDetail.getDanwei()); // 单位
+                    bizDistribut.setcName(songKanDetail.getXingming());// 联系人
+                    bizDistribut.setcMobile(songKanDetail.getDianhua());
+                    bizDistribut.setdNums(songKanDetail.getZengSonNum()); // 份数
+                    bizDistribut.setNums(songKanDetail.getCycleNums());// 第几期
+                    list.add(bizDistribut);
+                }
             }
+
             createDocContext("",list);
 			UtilLoad.fileDownload(request, response, "邮寄地址信息.doc", PropertiesInitManager.PROPERTIES.getProperty("postAddressPath"));
 		} catch (DocumentException e) {

@@ -86,7 +86,27 @@ public class ArticleQueryController extends AuthorController{
 		logger.info("稿件明细出参:["+JSON.toJSONString(detail)+"]");
 		return mav;
 	}
-	
+	/**
+	 * toArticleQueryDetailPage
+	 * 作者去稿件重投页面
+	 */
+	@RequestMapping(value="/toArticleQueryChongTouPage",method = RequestMethod.GET)
+	public ModelAndView toArticleQueryChongTouPage(@RequestParam("articleId") String articleId) {
+		logger.info("稿件明细Page:["+articleId+"]");
+		ModelAndView mav = new ModelAndView("articleQueryChongTouPage");
+		AuthorQueryDetail detail = articleQueryService.queryAuthorQueryDetail(articleId);
+        Set<String> set = new HashSet<String>();
+        set.add(RoleIdEnums.AUTHOR_ATTR.getCode());
+        if(ArticleStateEnums.END_ARTICLE.getCode().equals(detail.getEditorState())){ // 稿件处理完成了， 作者才可以看审核之后的附件
+            set.add(RoleIdEnums.ARTICLE_EDITOR_ATTR.getCode());
+        }
+        List<ArticleAttachmentInfo> listAttr = articleQueryService.queryAttByArtcicle(articleId, set);
+		mav.addObject("detail", detail);
+		mav.addObject("listAttr", listAttr);
+		logger.info("稿件明细出参:["+JSON.toJSONString(detail)+"]");
+		return mav;
+	}
+
 	
 	/**
 	 * toOpinionQueryPage
