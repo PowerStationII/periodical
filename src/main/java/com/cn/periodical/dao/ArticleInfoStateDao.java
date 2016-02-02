@@ -26,8 +26,10 @@ public interface ArticleInfoStateDao {
 	List<ArticleInfoState> selectPageByExample(ArticleInfoStateQuery example);
 	
 	ArticleInfoState selectByPrimaryKey(Long id);
-	
-	int updateByPrimaryKeySelective(ArticleInfoState record);
+
+    public ArticleInfoState selectByArticleIdKey(String articleId);
+
+    int updateByPrimaryKeySelective(ArticleInfoState record);
 	
 	int updateByPrimaryKey(ArticleInfoState record);
 }

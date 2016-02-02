@@ -17,6 +17,8 @@ public interface AddressInfoManager {
 	void saveAddressInfo(AddressInfo addressInfo);
 
 	AddressInfo findAddressInfoById(Long id);
+
+    public AddressInfo selectByArticleIdKey(AddressInfoQuery example);
 	
 	List<AddressInfo> queryList(AddressInfoQuery query);
 	

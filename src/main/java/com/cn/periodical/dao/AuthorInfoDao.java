@@ -27,8 +27,10 @@ public interface AuthorInfoDao {
 	List<AuthorInfo> selectPageByExample(AuthorInfoQuery example);
 	
 	AuthorInfo selectByPrimaryKey(Long id);
-	
-	int updateByPrimaryKeySelective(AuthorInfo record);
+
+    public List<AuthorInfo> selectByArticleIdKey(String articleId);
+
+    int updateByPrimaryKeySelective(AuthorInfo record);
 	
 	int updateByPrimaryKey(AuthorInfo record);
 

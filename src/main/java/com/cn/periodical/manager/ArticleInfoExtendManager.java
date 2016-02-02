@@ -15,6 +15,8 @@ public interface ArticleInfoExtendManager {
 	void saveArticleInfoExtend(ArticleInfoExtend articleInfoExtend);
 
 	ArticleInfoExtend findArticleInfoExtendById(Long id);
+
+    public ArticleInfoExtend selectByArticleIdKey(ArticleInfoExtendQuery example);
 	
 	List<ArticleInfoExtend> queryList(ArticleInfoExtendQuery query);
 	

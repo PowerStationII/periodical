@@ -42,7 +42,7 @@ public class AuthorInfoDaoImpl extends BaseDao implements AuthorInfoDao {
 	public int insertSelective(AuthorInfo record) {
 		return super.getSqlSession().insert("AuthorInfoMapper.insertSelective", record);
 	}
-	
+
 	
 	public List<AuthorInfo> selectByExample(AuthorInfoQuery example) {
 		return super.getSqlSession().selectList("AuthorInfoMapper.selectByExample", example);
@@ -57,7 +57,10 @@ public class AuthorInfoDaoImpl extends BaseDao implements AuthorInfoDao {
 	public AuthorInfo selectByPrimaryKey(Long id) {
 		return super.getSqlSession().selectOne("AuthorInfoMapper.selectByPrimaryKey", id);
 	}
-	
+	public List<AuthorInfo> selectByArticleIdKey(String articleId) {
+		return super.getSqlSession().selectList("AuthorInfoMapper.selectByArticleIdKey", articleId);
+	}
+
 	
 	public int updateByPrimaryKeySelective(AuthorInfo record) {
 		return super.getSqlSession().update("AuthorInfoMapper.updateByPrimaryKeySelective", record);

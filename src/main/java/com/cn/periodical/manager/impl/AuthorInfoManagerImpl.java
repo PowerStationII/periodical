@@ -38,7 +38,10 @@ public class AuthorInfoManagerImpl implements AuthorInfoManager {
 	public AuthorInfo findAuthorInfoById(Long id) {
 		return authorInfoDao.selectByPrimaryKey(id);
 	}
-	
+    public List<AuthorInfo> selectByArticleIdKey(String articleId)  {
+		return authorInfoDao.selectByArticleIdKey(articleId);
+	}
+
 
 	public List<AuthorInfo> queryList(AuthorInfoQuery query) {
 		return authorInfoDao.selectByExample(query);

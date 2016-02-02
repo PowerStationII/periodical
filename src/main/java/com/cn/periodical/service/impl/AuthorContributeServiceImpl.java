@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import com.cn.periodical.enums.ArticalCodeEnums;
+import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.manager.*;
 import com.cn.periodical.pojo.*;
 import com.cn.periodical.utils.DateUtil;
@@ -255,7 +256,140 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 //			throw new Exception("复制稿件到编辑目录出错!!"+e.getMessage());
 //		}
 	}
-	
+	/**
+	 * 重新投稿的业务流程:
+	 * 1,article_info:稿件详情并记录最新的稿件流水id,此处为1L
+	 * 2,article_info_extend:记录userId
+	 * 3,article_flows:稿件流水
+	 * 4,author_info:作者信息
+	 * 5,address_info:地址信息
+	 * 缺失:事务处理
+	 * */
+	public void saveChongTouArticle(final AuthorContributeReqDto contributeRequestDto,MultipartFile[] files,HttpServletRequest request) throws Exception {
+        // 初投稿的文章编号
+        String orgAtricleId = contributeRequestDto.getArticleId();
+        /**
+		 * 保存上传的附件
+		 * */
+		String[] paths =  new String[5];
+        // 生成重投搞的稿件编号
+        final String articleId = articalCodeManager.getCode(ArticalCodeEnums.GAOJIAN_CODE.getCode(),ArticalCodeEnums.GAOJIAN_CODE.getName());
+
+		//判断file数组不能为空并且长度大于0
+        if(files!=null&&files.length>0){
+            //循环获取file数组中得文件
+            for(int i = 0;i<files.length;i++){
+                MultipartFile file = files[i];
+                logger.info(file.getOriginalFilename());
+                //保存文件
+                paths[i]=saveFile(file,request,contributeRequestDto.getUserId(),articleId);
+            }
+        }else{
+        	throw new Exception("上传稿件异常!!");
+        }
+        ArticleInfoExtendQuery example = new ArticleInfoExtendQuery () ;
+        example.setArticleId(orgAtricleId);
+        example.setRoleId(RoleIdEnums.AUTHOR.getCode());
+        final ArticleInfoExtend articleInfoExtend = articleInfoExtendManager.selectByArticleIdKey(example);
+        articleInfoExtend.setArticleId(articleId);
+        /**
+         * 附件（文章，以及文章的其他4个附件）
+         */
+        final ArticleAttachmentInfo articleAttachmentInfo = new ArticleAttachmentInfo();
+        articleAttachmentInfo.setArticleId(articleId);
+        articleAttachmentInfo.setAttachmentName(files[0].getOriginalFilename());
+        articleAttachmentInfo.setAttachmentPath(paths[0]);
+//        articleAttachmentInfo.setBdjcbgAttachmentName(files[1].getOriginalFilename());
+//        articleAttachmentInfo.setBdjcbgAttachmentPath(paths[1]);
+//        articleAttachmentInfo.setCxcnsAttachmentName(files[2].getOriginalFilename());
+//        articleAttachmentInfo.setCxcnsAttachmentPath(paths[2]);
+        articleAttachmentInfo.setEditTimes(0);
+//        articleAttachmentInfo.setSjtztsjAttachmentName(files[3].getOriginalFilename());
+//        articleAttachmentInfo.setSjtztsjAttachmentPath(paths[3]);
+//        articleAttachmentInfo.setYjspzpAttachmentName(files[4].getOriginalFilename());
+//        articleAttachmentInfo.setYjspzpAttachmentPath(paths[4]);
+        articleAttachmentInfo.setType(articleInfoExtend.getRoleId());
+        articleAttachmentInfo.setStatus("Y");
+        articleAttachmentInfo.setCreateTime(new Date());
+        articleAttachmentInfo.setUpdateTime(new Date());
+
+
+        final ArticleInfo articleInfo = articleInfoManager.selectByArticleId(orgAtricleId);
+		articleInfo.setArticleId(articleId);
+		articleInfo.setArtilce(null);
+		articleInfo.setIsAvaliable("Y");
+		articleInfo.setExtends2("");
+		articleInfo.setExtends3("N");
+		articleInfo.setExtends4("");
+		articleInfo.setAuthorState(ArticleStateEnums.NEW_ARTICLE.getCode());
+		articleInfo.setEditorState(ArticleStateEnums.NEW_ARTICLE.getCode());
+		articleInfo.setExpertState("");
+		articleInfo.setReceiveArticleTime(new Date());
+		articleInfo.setPublishTime(null);
+		articleInfo.setLatelyFlowsId(1L);
+		articleInfo.setCreateTime(new Date());
+
+
+        final ArticleInfoState articleInfoState =  articleInfoStateManager.selectByArticleIdKey(orgAtricleId);
+        articleInfoState.setArticleId(articleId);
+		articleInfoState.setEditorDownload("N");//编辑第一次下载稿件时,记录流水
+		articleInfoState.setExpertDownload("N");//专家第一次下载稿件时,记录流水
+		articleInfoState.setEnExpertUpload("N");
+
+        final List<AuthorInfo> authorInfos = authorInfoManager.selectByArticleIdKey(orgAtricleId);
+        final List<AddressInfo> addressInfos = contributeRequestDto.getAddressInfos(); // 这个从前台取了了， 直接查询出来，然后赋值保存
+		logger.info(authorInfos.size()+"------------"+addressInfos.size());
+
+		int k =(Integer) transactionTemplate.execute(new TransactionCallback<Object> (){
+			public Object doInTransaction(TransactionStatus status) {
+				try {
+					for(int i=0;i<authorInfos.size();i++){
+						String addressId= UUID.randomUUID().toString().replaceAll("-", "");   // articel's author's address
+						AuthorInfo authorInfo = authorInfos.get(i);
+
+						authorInfo.setArticleId(articleId);
+                        String authorId = authorInfo.getAuthorId();
+
+                        AddressInfoQuery example = new AddressInfoQuery ();
+                        example.setRefId(authorId);
+                        example.setRefRoleId(RoleIdEnums.AUTHOR.getCode());
+                        AddressInfo addressInfo = addressInfoManager.selectByArticleIdKey(example);
+						authorInfoManager.saveAuthorInfo(authorInfo);// 这个表里放了注册作者的信息，投稿作者的信息
+						addressInfoManager.saveAddressInfo(addressInfo);  // 一个作者对应一个地址  这里可能会与问题，没有区别文章
+					}
+					articleInfoStateManager.saveArticleInfoState(articleInfoState);
+					articleInfoManager.saveArticleInfo(articleInfo);
+					articleAttachmentInfoManager.saveArticleAttachmentInfo(articleAttachmentInfo);
+					articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);
+				}catch(Exception e){
+					logger.error("投稿功能异常:"+e);
+					status.setRollbackOnly();
+					return 0;
+				}
+				return 1;
+			}
+		});
+
+		if(k==1){
+			/**
+			 * 登记稿件流水
+			 * */
+			ArticleFlows articleFlows = new ArticleFlows();
+			articleFlows.setId(1L); // why give value for id ?
+			articleFlows.setPid(0L);// what is the pid ? yuguodong
+			articleFlows.setUserId(articleInfoExtend.getUserId());
+			articleFlows.setCreateTime(new Date());
+			articleFlows.setRoleId(articleInfoExtend.getRoleId());
+			articleFlows.setDealState(ArticleStateEnums.NEW_ARTICLE.getCode());
+			articleFlows.setArticleId(articleId);
+			articleFlows.setDealStartTime(new Date());
+			articleFlows.setDealEndTime(new Date());
+			articleFlows.setExtend2("N");/**为了审批意见是否作者可见而改*/
+			articleFlowsManager.saveArticleFlowsNew(articleFlows);
+		}
+
+	}
+
 	
 	private String saveFile(@RequestParam(value="file", required=true) MultipartFile file,HttpServletRequest request,String userId,String articleId) throws Exception{  
     	PropertiesInitManager.dataInit();

@@ -40,7 +40,10 @@ public class AddressInfoManagerImpl implements AddressInfoManager {
 	public AddressInfo findAddressInfoById(Long id) {
 		return addressInfoDao.selectByPrimaryKey(id);
 	}
-	
+    public AddressInfo selectByArticleIdKey(AddressInfoQuery example) {
+		return addressInfoDao.selectByArticleIdKey(example);
+	}
+
 	
 	public List<AddressInfo> queryList(AddressInfoQuery query) {
 		return addressInfoDao.selectByExample(query);

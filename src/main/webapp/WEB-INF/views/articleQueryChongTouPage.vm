@@ -10,12 +10,42 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
 </head>
 <script>
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
 		});
+
+        $('#chongtou').click(function() {
+            var articleId =  $("#articleId").val() ;
+
+            if($("#files").val()== ""){
+                alert("请上传附件");
+                return ;
+            }
+
+            $.ajaxFileUpload({
+                url:'../author/toChongTou',            //需要链接到服务器地址
+                secureuri:false,
+                fileElementId:'files',                  //文件选择框的id属性
+                dataType: 'json',                      //服务器返回的格式，可以是json, xml
+                data:{articleId:articleId},
+                success: function (data, status){     //相当于java中try语句块的用法
+                    if (data.message == "success") {
+                        alert('重投成功');
+                        window.location.href='../author/toArticleQueryPage';
+                    } else{
+                        alert('重投失败');
+                    }
+
+                },
+                error: function (data, status, e){  //相当于java中catch语句块的用法
+                    alert(data);
+                }
+            });
+        });
 	});
 	function yijian(value) {
 		$.ajax({
@@ -34,6 +64,7 @@
 	}
 </script>
 <body>
+    <input type="hidden" value="$!{detail.articleId}" id="articleId">
 	<div>
 		<table class="easyui-datagrid"   data-options="singleSelect:true,height:600" >
 		<thead>
@@ -116,12 +147,17 @@
 				<td>专家审稿：</td>
 				<td>审稿专家:$!{detail.expertName} 送审时间:$!{detail.dealStartTime} <a onclick="yijian('$!{detail.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
 			</tr-->
+
+            <tr>
+                <td>重投稿件：</td>
+                <td><input type="file" id="files" name="files"/><a style="font-size:12px;color:red;">(*)</a></td>
+            </tr>
 			</tbody>
 		</table>
 	</div>
 	<div class="attr_con">
 		<a id="back" class="easyui-linkbutton" data-options="width:50">返回</a>
-		<!-- <a id="back" href="#" class="easyui-linkbutton" data-options="width:50">重投</a> --><!-- 如果稿件状态是返修,此按钮需要显示 -->
+		<a id="chongtou" href="#" class="easyui-linkbutton" data-options="width:50">重投</a>
 	</div>
 </body>
 </html>

@@ -40,7 +40,10 @@ public class ArticleInfoManagerImpl implements ArticleInfoManager {
 	public ArticleInfo findArticleInfoById(Long id) {
 		return articleInfoDao.selectByPrimaryKey(id);
 	}
-	
+    public ArticleInfo selectByArticleId(String articleId) {
+		return articleInfoDao.selectByArticleId(articleId);
+	}
+
 	
 	public List<ArticleInfo> queryList(ArticleInfoQuery query) {
 		return articleInfoDao.selectByExample(query);

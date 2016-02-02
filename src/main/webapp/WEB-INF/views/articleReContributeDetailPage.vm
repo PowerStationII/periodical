@@ -111,7 +111,6 @@
 	</div>
 	<div class="attr_con">
 		<input type="button"  value="返回"  id="back"/>
-		<input type="button"  value="重投"  id="back"/><!-- 如果稿件状态是返修,此按钮需要显示 -->
 	</div>
 </body>
 </html>

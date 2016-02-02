@@ -56,7 +56,10 @@ public class ArticleInfoStateDaoImpl extends BaseDao implements ArticleInfoState
 	public ArticleInfoState selectByPrimaryKey(Long id) {
 		return super.getSqlSession().selectOne("ArticleInfoStateMapper.selectByPrimaryKey", id);
 	}
-	
+	public ArticleInfoState selectByArticleIdKey(String articleId) {
+		return super.getSqlSession().selectOne("ArticleInfoStateMapper.selectByArticleIdKey", articleId);
+	}
+
 	
 	public int updateByPrimaryKeySelective(ArticleInfoState record) {
 		return super.getSqlSession().update("ArticleInfoStateMapper.updateByPrimaryKeySelective", record);

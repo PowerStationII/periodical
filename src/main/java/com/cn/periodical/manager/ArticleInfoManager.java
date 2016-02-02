@@ -17,6 +17,8 @@ public interface ArticleInfoManager {
 	void saveArticleInfo(ArticleInfo articleInfo);
 
 	ArticleInfo findArticleInfoById(Long id);
+
+    public ArticleInfo selectByArticleId(String articleId);
 	
 	List<ArticleInfo> queryList(ArticleInfoQuery query);
 	/**

@@ -121,7 +121,6 @@
 	</div>
 	<div class="attr_con">
 		<a id="back" class="easyui-linkbutton" data-options="width:50">返回</a>
-		<!-- <a id="back" href="#" class="easyui-linkbutton" data-options="width:50">重投</a> --><!-- 如果稿件状态是返修,此按钮需要显示 -->
 	</div>
 </body>
 </html>

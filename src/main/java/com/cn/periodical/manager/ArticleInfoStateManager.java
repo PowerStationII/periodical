@@ -15,8 +15,10 @@ public interface ArticleInfoStateManager {
 	void saveArticleInfoState(ArticleInfoState articleInfoState);
 
 	ArticleInfoState findArticleInfoStateById(Long id);
-	
-	List<ArticleInfoState> queryList(ArticleInfoStateQuery query);
+
+    public ArticleInfoState selectByArticleIdKey(String articleId);
+
+    List<ArticleInfoState> queryList(ArticleInfoStateQuery query);
 	
 	void deleteArticleInfoStateById(Long id);
 	

@@ -26,6 +26,8 @@ public interface ArticleInfoExtendDao {
 	List<ArticleInfoExtend> selectPageByExample(ArticleInfoExtendQuery example);
 	
 	ArticleInfoExtend selectByPrimaryKey(Long id);
+
+    public ArticleInfoExtend selectByArticleIdKey(ArticleInfoExtendQuery example);
 	
 	int updateByPrimaryKeySelective(ArticleInfoExtend record);
 	

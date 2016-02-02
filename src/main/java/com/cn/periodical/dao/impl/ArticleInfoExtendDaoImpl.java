@@ -56,7 +56,10 @@ public class ArticleInfoExtendDaoImpl extends BaseDao implements ArticleInfoExte
 	public ArticleInfoExtend selectByPrimaryKey(Long id) {
 		return super.getSqlSession().selectOne("ArticleInfoExtendMapper.selectByPrimaryKey", id);
 	}
-	
+	public ArticleInfoExtend selectByArticleIdKey(ArticleInfoExtendQuery example) {
+		return super.getSqlSession().selectOne("ArticleInfoExtendMapper.selectByArticleIdKey", example);
+	}
+
 	
 	public int updateByPrimaryKeySelective(ArticleInfoExtend record) {
 		return super.getSqlSession().update("ArticleInfoExtendMapper.updateByPrimaryKeySelective", record);

@@ -38,7 +38,10 @@ public class ArticleInfoStateManagerImpl implements ArticleInfoStateManager {
 	public ArticleInfoState findArticleInfoStateById(Long id) {
 		return articleInfoStateDao.selectByPrimaryKey(id);
 	}
-	
+    public ArticleInfoState selectByArticleIdKey(String articleId)  {
+		return articleInfoStateDao.selectByArticleIdKey(articleId);
+	}
+
 	
 	public List<ArticleInfoState> queryList(ArticleInfoStateQuery query) {
 		return articleInfoStateDao.selectByExample(query);

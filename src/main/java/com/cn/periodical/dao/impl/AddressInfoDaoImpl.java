@@ -57,7 +57,11 @@ public class AddressInfoDaoImpl extends BaseDao implements AddressInfoDao {
 		return super.getSqlSession().selectOne("AddressInfoMapper.selectByPrimaryKey", id);
 	}
 	
-	
+	public AddressInfo selectByArticleIdKey(AddressInfoQuery example) {
+		return super.getSqlSession().selectOne("AddressInfoMapper.selectByArticleIdKey", example);
+	}
+
+
 	public int updateByPrimaryKeySelective(AddressInfo record) {
 		return super.getSqlSession().update("AddressInfoMapper.updateByPrimaryKeySelective", record);
 	}

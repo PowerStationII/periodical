@@ -28,7 +28,9 @@ public interface ArticleInfoDao {
 	List<ArticleInfo> selectPageByExample(ArticleInfoQuery example);
 	
 	ArticleInfo selectByPrimaryKey(Long id);
-	
+
+    public ArticleInfo selectByArticleId(String articleId);
+
 	int updateByPrimaryKeySelective(ArticleInfo record);
 	
 	int updateByPrimaryKey(ArticleInfo record);

@@ -16,6 +16,8 @@ public interface AuthorInfoManager {
 	void saveAuthorInfo(AuthorInfo authorInfo);
 
 	AuthorInfo findAuthorInfoById(Long id);
+
+    public List<AuthorInfo> selectByArticleIdKey(String articleId);
 	
 	List<AuthorInfo> queryList(AuthorInfoQuery query);
 	

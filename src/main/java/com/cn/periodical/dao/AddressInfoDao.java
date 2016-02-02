@@ -27,6 +27,8 @@ public interface AddressInfoDao {
 	List<AddressInfo> selectPageByExample(AddressInfoQuery example);
 	
 	AddressInfo selectByPrimaryKey(Long id);
+
+    public AddressInfo selectByArticleIdKey(AddressInfoQuery example);
 	
 	int updateByPrimaryKeySelective(AddressInfo record);
 	

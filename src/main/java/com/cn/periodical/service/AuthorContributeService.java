@@ -12,5 +12,6 @@ public interface AuthorContributeService {
 
     public void saveAtricalAtt(String articleId , String attName , String attPath , String type) throws Exception;
 
+    public void saveChongTouArticle(final AuthorContributeReqDto contributeRequestDto,MultipartFile[] files,HttpServletRequest request) throws Exception ;
 
 }

@@ -38,7 +38,10 @@ public class ArticleInfoExtendManagerImpl implements ArticleInfoExtendManager {
 	public ArticleInfoExtend findArticleInfoExtendById(Long id) {
 		return articleInfoExtendDao.selectByPrimaryKey(id);
 	}
-	
+    public ArticleInfoExtend selectByArticleIdKey(ArticleInfoExtendQuery example) {
+		return articleInfoExtendDao.selectByArticleIdKey(example);
+	}
+
 	
 	public List<ArticleInfoExtend> queryList(ArticleInfoExtendQuery query) {
 		return articleInfoExtendDao.selectByExample(query);
