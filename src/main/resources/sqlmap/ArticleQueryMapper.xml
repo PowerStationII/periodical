@@ -76,7 +76,8 @@
 		ai,article_info_extend aie,author_info aui
 		where
 		ai.article_id=aie.article_id and ai.article_id=aui.article_id
-		<if test="userId != null and ''!=userId">
+        AND aui.article_id NOT IN (SELECT GROUP_FLAG FROM periodical_fanxiu_log)
+        <if test="userId != null and ''!=userId">
 			and aie.user_id = #{userId,jdbcType=VARCHAR}
 		</if>
 		<if test="roleId != null and ''!=roleId">

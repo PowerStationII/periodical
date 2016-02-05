@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PeriodicalChongtouLogMapper">
+	<resultMap id="BaseResultMap" type="PeriodicalChongtouLog">
+		<id column="ID" jdbcType="DECIMAL" property="id" />
+		<result column="ORIARTICLE_NO" jdbcType="VARCHAR" property="oriarticleNo" />
+		<result column="ARTICLE_NO" jdbcType="VARCHAR" property="articleNo" />
+		<result column="GROUP_FLAG" jdbcType="VARCHAR" property="groupFlag" />
+		<result column="FANXIU_COUNT" jdbcType="INTEGER" property="fanxiuCount" />
+	</resultMap>
+
+    <sql id="Base_Column_List">
+		ORIARTICLE_NO,
+		ARTICLE_NO,
+		GROUP_FLAG,
+		FANXIU_COUNT,
+	</sql>
+    <sql id="Base_Search_Column_List">
+        id,
+		ORIARTICLE_NO,
+		ARTICLE_NO,
+		GROUP_FLAG,
+		FANXIU_COUNT,
+	</sql>
+	<sql id="Selective_Column_List">
+		<!-- ID, -->
+		<if test="oriarticleNo != null">
+            ORIARTICLE_NO,
+		</if>
+		<if test="articleNo != null">
+            ARTICLE_NO,
+		</if>
+		<if test="groupFlag != null">
+            GROUP_FLAG,
+		</if>
+		<if test="fanxiuCount != null">
+            FANXIU_COUNT,
+		</if>
+	</sql>
+	<sql id="Base_Value_List">
+		#{oriarticleNo,jdbcType=VARCHAR},
+		#{articleNo,jdbcType=VARCHAR},
+		#{groupFlag,jdbcType=INTEGER},
+		#{fanxiuCount,jdbcType=INTEGER},
+	</sql>
+    <sql id="Selective_Value_List">
+        <if test="id != null">
+            #{id,jdbcType=DECIMAL},
+        </if>
+        <if test="oriarticleNo != null">
+            #{oriarticleNo,jdbcType=VARCHAR},
+        </if>
+        <if test="articleNo != null">
+            #{articleNo,jdbcType=VARCHAR},
+        </if>
+        <if test="groupFlag != null">
+            #{groupFlag,jdbcType=INTEGER},
+        </if>
+        <if test="fanxiuCount != null">
+            #{fanxiuCount,jdbcType=INTEGER},
+        </if>
+    </sql>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+                <if test="id != null and id!=0">
+                   and id =  #{id,jdbcType=DECIMAL}
+                </if>
+                <if test="oriarticleNo != null">
+                   and ORIARTICLE_NO =  #{oriarticleNo,jdbcType=VARCHAR}
+                </if>
+                <if test="articleNo != null">
+                   and ARTICLE_NO =  #{articleNo,jdbcType=VARCHAR}
+                </if>
+                <if test="groupFlag != null and groupFlag!=0">
+                   and  GROUP_FLAG = #{groupFlag,jdbcType=INTEGER}
+                </if>
+                <if test="fanxiuCount != null and fanxiuCount!=0">
+                    and FANXIU_COUNT = #{fanxiuCount,jdbcType=INTEGER}
+                </if>
+            </trim>
+        </where>
+    </sql>
+
+	<insert id="insert" parameterType="PeriodicalChongtouLog" keyProperty="id">
+		insert into periodical_fanxiu_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Base_Value_List" />
+		</trim>
+	</insert>
+
+    <select id="selectByCondition" parameterType="PeriodicalChongtouLog" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            <include refid="Base_Search_Column_List" />
+        </trim>
+        from periodical_fanxiu_log
+        <include refid="Example_Where_Clause" />
+        order by   FANXIU_COUNT desc
+    </select>
+
+</mapper>

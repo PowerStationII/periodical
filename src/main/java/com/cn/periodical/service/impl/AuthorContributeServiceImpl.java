@@ -62,6 +62,9 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
     @Autowired
     ArticalCodeManager articalCodeManager;
 
+    @Autowired
+    PeriodicalChongtouLogManager periodicalChongtouLogManager;
+
 
     public AuthorContributeServiceImpl() {
 		// TODO Auto-generated constructor stub
@@ -267,7 +270,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 	 * */
 	public void saveChongTouArticle(final AuthorContributeReqDto contributeRequestDto,MultipartFile[] files,HttpServletRequest request) throws Exception {
         // 初投稿的文章编号
-        String orgAtricleId = contributeRequestDto.getArticleId();
+        final String  orgAtricleId = contributeRequestDto.getArticleId();
         /**
 		 * 保存上传的附件
 		 * */
@@ -291,6 +294,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
         example.setArticleId(orgAtricleId);
         example.setRoleId(RoleIdEnums.AUTHOR.getCode());
         final ArticleInfoExtend articleInfoExtend = articleInfoExtendManager.selectByArticleIdKey(example);
+        articleInfoExtend.setId(null);
         articleInfoExtend.setArticleId(articleId);
         /**
          * 附件（文章，以及文章的其他4个附件）
@@ -299,15 +303,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
         articleAttachmentInfo.setArticleId(articleId);
         articleAttachmentInfo.setAttachmentName(files[0].getOriginalFilename());
         articleAttachmentInfo.setAttachmentPath(paths[0]);
-//        articleAttachmentInfo.setBdjcbgAttachmentName(files[1].getOriginalFilename());
-//        articleAttachmentInfo.setBdjcbgAttachmentPath(paths[1]);
-//        articleAttachmentInfo.setCxcnsAttachmentName(files[2].getOriginalFilename());
-//        articleAttachmentInfo.setCxcnsAttachmentPath(paths[2]);
         articleAttachmentInfo.setEditTimes(0);
-//        articleAttachmentInfo.setSjtztsjAttachmentName(files[3].getOriginalFilename());
-//        articleAttachmentInfo.setSjtztsjAttachmentPath(paths[3]);
-//        articleAttachmentInfo.setYjspzpAttachmentName(files[4].getOriginalFilename());
-//        articleAttachmentInfo.setYjspzpAttachmentPath(paths[4]);
         articleAttachmentInfo.setType(articleInfoExtend.getRoleId());
         articleAttachmentInfo.setStatus("Y");
         articleAttachmentInfo.setCreateTime(new Date());
@@ -315,6 +311,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 
 
         final ArticleInfo articleInfo = articleInfoManager.selectByArticleId(orgAtricleId);
+        articleInfo.setId(null);
 		articleInfo.setArticleId(articleId);
 		articleInfo.setArtilce(null);
 		articleInfo.setIsAvaliable("Y");
@@ -331,22 +328,22 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 
 
         final ArticleInfoState articleInfoState =  articleInfoStateManager.selectByArticleIdKey(orgAtricleId);
+        articleInfoState.setId(null);
         articleInfoState.setArticleId(articleId);
 		articleInfoState.setEditorDownload("N");//编辑第一次下载稿件时,记录流水
 		articleInfoState.setExpertDownload("N");//专家第一次下载稿件时,记录流水
 		articleInfoState.setEnExpertUpload("N");
 
         final List<AuthorInfo> authorInfos = authorInfoManager.selectByArticleIdKey(orgAtricleId);
-        final List<AddressInfo> addressInfos = contributeRequestDto.getAddressInfos(); // 这个从前台取了了， 直接查询出来，然后赋值保存
+        final List<AddressInfo> addressInfos = contributeRequestDto.getAddressInfos(); // 这个不从前台取了， 直接查询出来，然后赋值保存
 		logger.info(authorInfos.size()+"------------"+addressInfos.size());
 
 		int k =(Integer) transactionTemplate.execute(new TransactionCallback<Object> (){
 			public Object doInTransaction(TransactionStatus status) {
 				try {
 					for(int i=0;i<authorInfos.size();i++){
-						String addressId= UUID.randomUUID().toString().replaceAll("-", "");   // articel's author's address
 						AuthorInfo authorInfo = authorInfos.get(i);
-
+                        authorInfo.setId(null);
 						authorInfo.setArticleId(articleId);
                         String authorId = authorInfo.getAuthorId();
 
@@ -354,6 +351,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
                         example.setRefId(authorId);
                         example.setRefRoleId(RoleIdEnums.AUTHOR.getCode());
                         AddressInfo addressInfo = addressInfoManager.selectByArticleIdKey(example);
+                        addressInfo.setId(null);
 						authorInfoManager.saveAuthorInfo(authorInfo);// 这个表里放了注册作者的信息，投稿作者的信息
 						addressInfoManager.saveAddressInfo(addressInfo);  // 一个作者对应一个地址  这里可能会与问题，没有区别文章
 					}
@@ -361,6 +359,43 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 					articleInfoManager.saveArticleInfo(articleInfo);
 					articleAttachmentInfoManager.saveArticleAttachmentInfo(articleAttachmentInfo);
 					articleInfoExtendManager.saveArticleInfoExtend(articleInfoExtend);
+
+                    /**
+                     * 登记稿件流水
+                     * */
+                    ArticleFlows articleFlows = new ArticleFlows();
+                    articleFlows.setId(1L); // why give value for id ?
+                    articleFlows.setPid(0L);// what is the pid ? yuguodong
+                    articleFlows.setUserId(articleInfoExtend.getUserId());
+                    articleFlows.setCreateTime(new Date());
+                    articleFlows.setRoleId(articleInfoExtend.getRoleId());
+                    articleFlows.setDealState(ArticleStateEnums.NEW_ARTICLE.getCode());
+                    articleFlows.setArticleId(articleId);
+                    articleFlows.setDealStartTime(new Date());
+                    articleFlows.setDealEndTime(new Date());
+                    articleFlows.setExtend2("N");/**为了审批意见是否作者可见而改*/
+                    articleFlowsManager.saveArticleFlowsNew(articleFlows);
+
+                    /**
+                     * 记录重投流水
+                     */
+                    PeriodicalChongtouLog periodicalChongtouLog = new PeriodicalChongtouLog () ;
+                    periodicalChongtouLog.setArticleNo(articleId);
+                    List<PeriodicalChongtouLog> listFanxiu = periodicalChongtouLogManager.selectByCondition(periodicalChongtouLog);
+                    if(null!= listFanxiu  && !listFanxiu.isEmpty()){
+                        PeriodicalChongtouLog periodicalChongtouLog_temp = listFanxiu.get(0);
+                        periodicalChongtouLog.setOriarticleNo(orgAtricleId);
+                        periodicalChongtouLog.setArticleNo(articleId);
+                        periodicalChongtouLog.setGroupFlag(periodicalChongtouLog_temp.getGroupFlag());
+                        periodicalChongtouLog.setFanxiuCount(periodicalChongtouLog_temp.getFanxiuCount()+1);
+
+                    }else{
+                        periodicalChongtouLog.setOriarticleNo(orgAtricleId);
+                        periodicalChongtouLog.setArticleNo(articleId);
+                        periodicalChongtouLog.setGroupFlag(orgAtricleId);
+                        periodicalChongtouLog.setFanxiuCount(1);
+                    }
+                    periodicalChongtouLogManager.insert(periodicalChongtouLog);
 				}catch(Exception e){
 					logger.error("投稿功能异常:"+e);
 					status.setRollbackOnly();
@@ -369,24 +404,6 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
 				return 1;
 			}
 		});
-
-		if(k==1){
-			/**
-			 * 登记稿件流水
-			 * */
-			ArticleFlows articleFlows = new ArticleFlows();
-			articleFlows.setId(1L); // why give value for id ?
-			articleFlows.setPid(0L);// what is the pid ? yuguodong
-			articleFlows.setUserId(articleInfoExtend.getUserId());
-			articleFlows.setCreateTime(new Date());
-			articleFlows.setRoleId(articleInfoExtend.getRoleId());
-			articleFlows.setDealState(ArticleStateEnums.NEW_ARTICLE.getCode());
-			articleFlows.setArticleId(articleId);
-			articleFlows.setDealStartTime(new Date());
-			articleFlows.setDealEndTime(new Date());
-			articleFlows.setExtend2("N");/**为了审批意见是否作者可见而改*/
-			articleFlowsManager.saveArticleFlowsNew(articleFlows);
-		}
 
 	}
 

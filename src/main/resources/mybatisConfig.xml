@@ -75,5 +75,6 @@
 		<mapper resource="sqlmap/Zeng4KanInfoMapper.xml"/><!-- 赠刊 -->
 		<mapper resource="sqlmap/Zeng1KanDetailMapper.xml"/><!-- 增刊 -->
 		<mapper resource="sqlmap/Zeng1KanInfoMapper.xml"/><!-- 增刊 -->
+		<mapper resource="sqlmap/PeriodicalChongtouLogMapper.xml"/><!-- 重投日志 -->
 	</mappers>
 </configuration>
