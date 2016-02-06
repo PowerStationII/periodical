@@ -55,6 +55,15 @@
 		$('#submit').click(function(){
             var orderNo = $("#orderNo").val();
             var periodicalId = $("#periodicalId").val();
+            var files = $("#files").val();
+            if(files== ""){
+                alert("请上传附件");
+                return ;
+            }
+            if(!checkFile(files)){
+                return ;
+            }
+
             $.ajaxFileUpload({
                 url:'../reader/toUploadAddressPage',            //需要链接到服务器地址
                 secureuri:false,

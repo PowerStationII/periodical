@@ -219,3 +219,16 @@ jQuery.extend({
     }
 })
 
+function checkFile(file_name){
+    var temp = file_name.toLowerCase();
+    var results =/\.[^\.]+/.exec(temp);
+    var result = results[0];
+    if(result==".xlsx" || result==".xls" || result==".docx" || result==".doc" || result==".jpg" || result==".png"
+        || result==".gif"){
+        return true ;
+    }else{
+        alert("请上传合法文件") ;
+        return false ;
+    }
+}
+

@@ -10,7 +10,6 @@
     <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
-    <script type="text/javascript" src="../js/ajaxfileupload.js"></script>
 </head>
 <script>
     $(function(){

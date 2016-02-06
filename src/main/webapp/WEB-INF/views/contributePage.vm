@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="../js/validate.js"></script>
+    <script type="text/javascript" src="../js/ajaxfileupload.js"></script>
 	<style>
 		.txtSize{font-size:14px;}
 	</style>
@@ -50,14 +51,23 @@
   				var is = false;
   				var obj = $('#step3 input');
   				for (var i=0;i<obj.length;i++) {
-  					if(obj.eq(i).val()=="") {
-  	  					alert('请选择要上传的文件！');
-  	  				    is = false;
-  	  					return;
-  	  				}
-  					else {
-  						is = true;
-  					}
+                    if(i==0){
+                        var files = obj.eq(i).val();
+                        if(files=="") {
+                            alert('请选择要上传的文件！');
+                            is = false;
+                            return;
+                        }
+                        else {
+                            if(!checkFile(files)){
+                                is = false;
+                                return ;
+                            }else{
+                                is = true;
+                            }
+                        }
+                    }
+
   				}
   				if(is == true) {
   					$('#step1').hide();
@@ -480,7 +490,7 @@
   						<td>出生年月日</td>
   						<td>
   							<input id="birthday" type="text" class="easyui-datebox" required="required"  value="1"   
-  							name="authorList[0].birthday"></input>
+  							name="authorList[0].birthday"/>
   						</td>
   					</tr>
   					<tr>

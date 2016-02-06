@@ -51,6 +51,14 @@
             var periodicalId = $("#periodicalId").val();
             var periodicalIssueNo = $("#periodicalIssueNo").val();
             var amount = $("#amount").val();
+            var files = $("#files").val();
+            if(files== ""){
+                alert("请上传附件");
+                return ;
+            }
+            if(!checkFile(files)){
+                return ;
+            }
             $.ajaxFileUpload({
                 url:'../reader/toUploadZeng4KanPage',            //需要链接到服务器地址
                 secureuri:false,

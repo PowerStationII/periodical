@@ -25,8 +25,12 @@
             var dealOpinion = $("#dealOpinion").val() ;
 
 
-            if($("#files").val()== ""){
+            var files = $("#files").val();
+            if(files== ""){
                 alert("请上传附件");
+                return ;
+            }
+            if(!checkFile(files)){
                 return ;
             }
             if(dealOpinion== ""){

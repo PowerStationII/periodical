@@ -91,11 +91,13 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
         if(files!=null&&files.length>0){  
             //循环获取file数组中得文件  
             for(int i = 0;i<files.length;i++){  
-                MultipartFile file = files[i];  
-                logger.info(file.getOriginalFilename());
-                //保存文件  
-                paths[i]=saveFile(file,request,contributeRequestDto.getUserId(),articleId);  
-            }  
+                MultipartFile file = files[i];
+                if(!"".equals(file.getOriginalFilename())){
+                    logger.info(file.getOriginalFilename());
+                    //保存文件
+                    paths[i]=saveFile(file,request,contributeRequestDto.getUserId(),articleId);
+                }
+            }
         }else{
         	throw new Exception("上传稿件异常!!");
         }
@@ -104,15 +106,23 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
         articleAttachmentInfo.setArticleId(articleId);
         articleAttachmentInfo.setAttachmentName(files[0].getOriginalFilename());
         articleAttachmentInfo.setAttachmentPath(paths[0]);
-        articleAttachmentInfo.setBdjcbgAttachmentName(files[1].getOriginalFilename());
-        articleAttachmentInfo.setBdjcbgAttachmentPath(paths[1]);
-        articleAttachmentInfo.setCxcnsAttachmentName(files[2].getOriginalFilename());
-        articleAttachmentInfo.setCxcnsAttachmentPath(paths[2]);
+        if(null!=files[1] && !"".equals(files[1].getOriginalFilename())){
+            articleAttachmentInfo.setBdjcbgAttachmentName(files[1].getOriginalFilename());
+            articleAttachmentInfo.setBdjcbgAttachmentPath(paths[1]);
+        }
+        if(null!=files[2] && !"".equals(files[2].getOriginalFilename())){
+            articleAttachmentInfo.setCxcnsAttachmentName(files[2].getOriginalFilename());
+            articleAttachmentInfo.setCxcnsAttachmentPath(paths[2]);
+        }
         articleAttachmentInfo.setEditTimes(0);
-        articleAttachmentInfo.setSjtztsjAttachmentName(files[3].getOriginalFilename());
-        articleAttachmentInfo.setSjtztsjAttachmentPath(paths[3]);
-        articleAttachmentInfo.setYjspzpAttachmentName(files[4].getOriginalFilename());
-        articleAttachmentInfo.setYjspzpAttachmentPath(paths[4]);
+        if(null!=files[3] && !"".equals(files[3].getOriginalFilename())){
+            articleAttachmentInfo.setSjtztsjAttachmentName(files[3].getOriginalFilename());
+            articleAttachmentInfo.setSjtztsjAttachmentPath(paths[3]);
+        }
+        if(null!=files[4] && !"".equals(files[4].getOriginalFilename())){
+            articleAttachmentInfo.setYjspzpAttachmentName(files[4].getOriginalFilename());
+            articleAttachmentInfo.setYjspzpAttachmentPath(paths[4]);
+        }
         articleAttachmentInfo.setType(contributeRequestDto.getRoleId());
         articleAttachmentInfo.setStatus("Y");
         articleAttachmentInfo.setCreateTime(new Date());

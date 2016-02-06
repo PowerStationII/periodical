@@ -24,9 +24,13 @@
                 alert("请输入意见");
                 return;
             }
-            if($("#files").val()== ""){
+            var files = $("#files").val();
+            if(files== ""){
                 alert("请上传附件");
-                return;
+                return ;
+            }
+            if(!checkFile(files)){
+                return ;
             }
             $.ajaxFileUpload({
                 url:'../expert/toPublishStateModify',            //需要链接到服务器地址

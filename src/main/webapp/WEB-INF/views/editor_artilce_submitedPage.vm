@@ -22,9 +22,13 @@
 				alert("请选择专家");
 				return;
 			}
-            if($("#files").val()== ""){
+            var files = $("#files").val();
+            if(files== ""){
                 alert("请上传附件");
-                return;
+                return ;
+            }
+            if(!checkFile(files)){
+                return ;
             }
             var articleId =  $("#articleId").val() ;
             $.ajaxFileUpload({

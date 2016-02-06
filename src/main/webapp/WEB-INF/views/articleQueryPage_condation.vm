@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+<link href="../css/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
+</head>
+<script type="text/javascript">
+	$(function(){
+		// 表格数据源  
+        var data = [];  
+        var rows = $('#table').datagrid('getRows');
+        for(var i=0;i<rows.length;i++) {
+        	 data.push({  
+		 		 "id":rows[i].id,  
+                 "articleId":rows[i].articleId,  
+                 "title":rows[i].title,
+                 "contriTime":rows[i].contriTime,  
+                 "authorState":ArticleStateEnums(rows[i].authorState),
+                 "option":rows[i].option
+             }) ; 
+		}
+        $("#table").datagrid("loadData", data.slice(0, 15));
+        var pager = $("#table").datagrid("getPager");  
+        pager.pagination({  
+            total:data.length, 
+            pageSize:15,
+            pageList: [15,20],
+            onSelectPage:function (pageNo, pageSize) {  
+                var start = (pageNo - 1) * pageSize;  
+                var end = start + pageSize;  
+                $("#table").datagrid("loadData", data.slice(start, end));  
+                pager.pagination('refresh', {  
+                    total:data.length,  
+                    pageNumber:pageNo
+                });  
+            }  
+        });  
+	});
+	function yijian(value) {
+		$.ajax({
+				url:'../author/toOpinionQueryPage',
+				data:{articleId:value},
+				type:'POST',
+				success:function(res){
+					if (res=='null') {
+						$.messager.alert('审稿意见','无');    
+					}
+					else {
+						$.messager.alert('审稿意见',eval('(' + res + ')').opinion); 
+					}
+				}	
+		});
+	}
+</script>
+<body>
+	<div id="articleInfos">
+		<table  id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
+			<thead>
+				<tr>
+					<th data-options="field:'id',width:45">序号</th>
+					<th data-options="field:'articleId',width:140">稿件编号</th>
+					<th data-options="field:'title',width:424">稿件标题</th>
+					<th data-options="field:'contriTime',width:185">投稿时间</th>
+					<th data-options="field:'authorState',width:85">稿件状态</th>
+					<th data-options="field:'option',width:200">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($dtos in ${list})   
+				<tr>
+					<td>$!{velocityCount}</td>
+					<td>$!{dtos.articleId}</td>
+					<td><a href="../author/toArticleQueryDetailPage?articleId=${dtos.articleId}">$!{dtos.title}</a></td>
+					<td>$!{dtos.contriTime}</td>
+					<td>$!{dtos.authorState}</td>
+					#if($!{dtos.authorState}=='0003')
+					<td><a href="../author/toEditAuthorPayeeInfoPage?articleId=${dtos.articleId}" class="easyui-linkbutton" >账户信息</a><a onclick="yijian('${dtos.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
+					#elseif($!{dtos.authorState}=='0000')
+					<td><!-- <a href="" class="easyui-linkbutton" >修改</a> --></td>
+					#elseif($!{dtos.authorState}=='0006')
+					<td><a href="../author/toArticleQueryChongTouPage?articleId=${dtos.articleId}">重投</a> &nbsp;
+                        <a onclick="yijian('${dtos.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a>
+                    </td>
+					#else
+					<td><a onclick="yijian('${dtos.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
+					#end 
+				</tr>
+				#end
+			</tbody>
+		</table>
+		<br>
+	</div>
+</body>
+</html>
