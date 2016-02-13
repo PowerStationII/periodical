@@ -17,6 +17,8 @@ import com.cn.periodical.response.ArticleQueryRespDto;
 
 public interface ArticleQueryManager {
 	public List<ArticleQueryRespDto> queryArticleInfos(ArticleQueryReqDto reqDto);
+	public List<ArticleQueryRespDto> queryArticleInfosPage(ArticleQueryReqDto reqDto);
+	public int queryArticleInfosPageCount(ArticleQueryReqDto reqDto);
 	public List<ArticleQueryRespDto> expertQryArticleInfos(ArticleQueryReqDto reqDto);
 	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto);
 	public AuthorQueryDetail queryAuthorQueryDetail(String articleId);

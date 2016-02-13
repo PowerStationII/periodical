@@ -7,14 +7,12 @@ import java.util.Set;
 
 import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.manager.ArticleAttachmentInfoManager;
-import com.cn.periodical.pojo.ArticleAttachmentInfo;
+import com.cn.periodical.pojo.*;
+import com.cn.periodical.utils.Pagenation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cn.periodical.manager.ArticleQueryManager;
-import com.cn.periodical.pojo.AuthorQueryDetail;
-import com.cn.periodical.pojo.EditorQueryArtilces;
-import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
 import com.cn.periodical.service.ArticleQueryService;
@@ -35,6 +33,22 @@ public class ArticleQueryServiceImpl implements ArticleQueryService {
 	public List<ArticleQueryRespDto> queryArticleInfos(ArticleQueryReqDto reqDto) {
 		// TODO Auto-generated method stub
 		return articleQueryManager.queryArticleInfos(reqDto);
+	}
+	public ZuoZheGaoJianPage queryArticleInfos(ArticleQueryReqDto query , int itemCount) {
+        ZuoZheGaoJianPage bizAdPage = new ZuoZheGaoJianPage();
+        query.setItemCount(itemCount);
+
+        if (itemCount == 0) {
+            bizAdPage.setValues(null);
+        } else {
+            bizAdPage.setValues(articleQueryManager.queryArticleInfosPage(query));
+        }
+
+        bizAdPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
+        return bizAdPage;
+	}
+	public int queryArticleInfosCount(ArticleQueryReqDto query) {
+        return articleQueryManager.queryArticleInfosPageCount(query);
 	}
 
 	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto) {

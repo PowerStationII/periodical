@@ -10,47 +10,66 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-combox.js"></script>
 <script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
 <script type="text/javascript">
-	$(function(){
-		// 表格数据源  
-        var data = [];  
-        var rows = $('#table').datagrid('getRows');
-        for(var i=0;i<rows.length;i++) {
-        	 data.push({  
-		 		 "id":rows[i].id,  
-                 "articleId":rows[i].articleId,  
-                 "title":rows[i].title,
-                 "contriTime":rows[i].contriTime,  
-                 "authorState":ArticleStateEnums(rows[i].authorState),
-                 "option":rows[i].option
-             }) ; 
-		}
-        $("#table").datagrid("loadData", data.slice(0, 3));
-        var pager = $("#table").datagrid("getPager");  
-        pager.pagination({  
-            total:data.length, 
-            pageSize:3,
-            pageList: [3,15,20],
-            onSelectPage:function (pageNo, pageSize) {  
-                var start = (pageNo - 1) * pageSize;  
-                var end = start + pageSize;  
-                $("#table").datagrid("loadData", data.slice(start, end));  
-                pager.pagination('refresh', {  
-                    total:data.length,  
-                    pageNumber:pageNo
-                });  
-            }  
+    $(function(){
+        $('#submit').click(function(){
+            $('#table').datagrid({queryParams:getUrl()});
         });
 
-        $("#serch").click(function(){
+        $('#table').datagrid({
+            url:'../author/toArticleQueryPageSet',
+            queryParams:getUrl(),
+            pageSize:10,
+            pageList: [10,15,20],
+            onLoadSuccess:function(){
+                var rows = $('#table').datagrid('getRows');
+                for(var i=0;i<rows.length;i++) {
+                    rows[i].authorState=ArticleStateEnums(rows[i].authorState);
 
+                    #if($!{dtos.authorState}=='0003')
+                    rows[i].option='<a href="../author/toEditAuthorPayeeInfoPage?articleId=${dtos.articleId}" class="easyui-linkbutton" >账户信息</a>&nbsp;' +
+                        '<a onclick="yijian(\'${dtos.articleId}\')" href="#" class="easyui-linkbutton" >查看审稿意见</a>';
+                    #elseif($!{dtos.authorState}=='0006')
+                        rows[i].option=' <a href="../author/toArticleQueryChongTouPage?articleId=${dtos.articleId}">重投</a>&nbsp;' +
+                        ' <a onclick="yijian(\'${dtos.articleId}\')" href="#" class="easyui-linkbutton" >查看审稿意见</a>'  ;
+
+                    #else
+                        rows[i].option='<a onclick="yijian(\'${dtos.articleId}\')" href="#" class="easyui-linkbutton" >查看审稿意见</a>' ;
+                    #end
+
+                $('#table').datagrid('refreshRow',i);
+                }
+            }
         });
 
 
 
-	});
+
+        $('#adType').combobox({
+            data:getAdType(),
+            editable:false
+        });
+
+        $('#councilType').combobox({
+            data:getCouncilType(),
+            editable:false
+        });
+
+
+        function getUrl() {
+            var url = {
+                'articleId':$('input[name="articleId"]').val(),
+                'articleCnTitle':$('input[name="title"]').val(),
+                'creatTime':$('input[name="contriTime"]').val()
+            };
+            return url;
+        }
+    });
+
+
 	function yijian(value) {
 		$.ajax({
 				url:'../author/toOpinionQueryPage',
@@ -69,10 +88,26 @@
 </script>
 <body>
 	<div id="articleInfos">
+        <form action="../author/toArticleQueryPageSet" method="POST">
+            <table>
+                <tr>
+                    <td>稿件编号：</td>
+                    <td><input class="easyui-textbox" type="text" name="articleId" value=""></td>
+                    <td>稿件标题：</td>
+                    <td><input class="easyui-textbox" type="text" name="title" value=""></td>
+                    <td>投稿时间：</td>
+                    <td ><input class="easyui-datebox" type="text" name="contriTime" value=""></td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        <a  class="easyui-linkbutton"   style="width:50px;" href="#"  id="submit">查询</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
 		<table  id="table"  class="easyui-datagrid"   data-options="singleSelect:true,toolbar:'#bt',pagination:true">
 			<thead>
 				<tr>
-					<th data-options="field:'id',width:45">序号</th>
 					<th data-options="field:'articleId',width:140">稿件编号</th>
 					<th data-options="field:'title',width:424">稿件标题</th>
 					<th data-options="field:'contriTime',width:185">投稿时间</th>
@@ -80,28 +115,6 @@
 					<th data-options="field:'option',width:200">操作</th>
 				</tr>
 			</thead>
-			<tbody>
-				#foreach($dtos in ${list})   
-				<tr>
-					<td>$!{velocityCount}</td>
-					<td>$!{dtos.articleId}</td>
-					<td><a href="../author/toArticleQueryDetailPage?articleId=${dtos.articleId}">$!{dtos.title}</a></td>
-					<td>$!{dtos.contriTime}</td>
-					<td>$!{dtos.authorState}</td>
-					#if($!{dtos.authorState}=='0003')
-					<td><a href="../author/toEditAuthorPayeeInfoPage?articleId=${dtos.articleId}" class="easyui-linkbutton" >账户信息</a><a onclick="yijian('${dtos.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
-					#elseif($!{dtos.authorState}=='0000')
-					<td><!-- <a href="" class="easyui-linkbutton" >修改</a> --></td>
-					#elseif($!{dtos.authorState}=='0006')
-					<td><a href="../author/toArticleQueryChongTouPage?articleId=${dtos.articleId}">重投</a> &nbsp;
-                        <a onclick="yijian('${dtos.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a>
-                    </td>
-					#else
-					<td><a onclick="yijian('${dtos.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
-					#end 
-				</tr>
-				#end
-			</tbody>
 		</table>
 		<br>
 	</div>

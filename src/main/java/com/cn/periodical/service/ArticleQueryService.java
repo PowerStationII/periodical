@@ -3,10 +3,7 @@ package com.cn.periodical.service;
 import java.util.List;
 import java.util.Set;
 
-import com.cn.periodical.pojo.ArticleAttachmentInfo;
-import com.cn.periodical.pojo.AuthorQueryDetail;
-import com.cn.periodical.pojo.EditorQueryArtilces;
-import com.cn.periodical.pojo.UserInfo;
+import com.cn.periodical.pojo.*;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
 
@@ -15,6 +12,8 @@ import com.cn.periodical.response.ArticleQueryRespDto;
  * */
 public interface ArticleQueryService {
 	public List<ArticleQueryRespDto> queryArticleInfos(ArticleQueryReqDto reqDto);
+	public ZuoZheGaoJianPage queryArticleInfos(ArticleQueryReqDto reqDto , int count);
+	public int queryArticleInfosCount(ArticleQueryReqDto reqDto );
 	public List<ArticleQueryRespDto> expertQryArticleInfos(ArticleQueryReqDto reqDto);
 	
 	

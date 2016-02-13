@@ -22,6 +22,19 @@ public class ArticleQueryDaoImpl extends BaseDao implements ArticleQueryDao {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectList("ArticleQueryMapper.selectArticleInfosForEditor", reqDto);
 	}
+	public List<ArticleQueryRespDto> queryArticleInfosPage(ArticleQueryReqDto reqDto) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("ArticleQueryMapper.selectArticleInfosForEditorPage", reqDto);
+	}
+	public int queryArticleInfosPageCount(ArticleQueryReqDto reqDto) {
+        int count = 0 ;
+        try{
+            count = super.getSqlSession().selectList("ArticleQueryMapper.selectArticleInfosForEditorPageCount", reqDto).size();
+        }catch (Exception e){
+             e.printStackTrace();
+        }
+		return count ;
+	}
 
 	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto) {
 		// TODO Auto-generated method stub

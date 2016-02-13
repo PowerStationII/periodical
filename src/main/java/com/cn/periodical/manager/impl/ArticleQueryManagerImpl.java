@@ -27,6 +27,14 @@ public class ArticleQueryManagerImpl implements ArticleQueryManager {
 		// TODO Auto-generated method stub
 		return articleQueryDao.queryArticleInfos(reqDto);
 	}
+	public List<ArticleQueryRespDto> queryArticleInfosPage(ArticleQueryReqDto reqDto) {
+		// TODO Auto-generated method stub
+		return articleQueryDao.queryArticleInfosPage(reqDto);
+	}
+	public int queryArticleInfosPageCount(ArticleQueryReqDto reqDto) {
+		// TODO Auto-generated method stub
+		return articleQueryDao.queryArticleInfosPageCount(reqDto);
+	}
 
 	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto) {
 		// TODO Auto-generated method stub

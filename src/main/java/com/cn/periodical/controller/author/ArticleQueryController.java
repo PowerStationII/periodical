@@ -5,6 +5,7 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.pojo.*;
@@ -48,23 +49,70 @@ public class ArticleQueryController extends AuthorController{
 	@Autowired
 	PayeeInfoManager payeeInfoManager;
 	
+//	/**
+//	 * toArticleQueryPage
+//	 * author/toArticleQueryPage
+//	 * 去稿件查询页面
+//	 */
+//	@RequestMapping(value="/toArticleQueryPage")
+//	public ModelAndView toArticleQueryPage(HttpServletRequest request,HttpServletResponse response) {
+//		logger.info("稿件查询Page:[]");
+//		ModelAndView mav = new ModelAndView("articleQueryPage");
+//		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
+//		reqDto.setUserId(getUserInfo(request).getUserId());
+//		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
+//		mav.addObject("list", list);
+//		logger.info("稿件查询出参:["+JSON.toJSONString(list)+"]");
+//		return mav;
+//	}
+
+    /**
+     * toArticleQueryPage
+     * author/toArticleQueryPage
+     * 去稿件查询页面
+     */
+    @RequestMapping(value="/toArticleQueryPage")
+    public ModelAndView toArticleQueryPage() {
+        ModelAndView mav = new ModelAndView("articleQueryPage");
+        return mav;
+    }
 	/**
 	 * toArticleQueryPage
 	 * author/toArticleQueryPage
-	 * 去稿件查询页面
+	 * 稿件分页查询
 	 */
-	@RequestMapping(value="/toArticleQueryPage")
-	public ModelAndView toArticleQueryPage(HttpServletRequest request,HttpServletResponse response) {
-		logger.info("稿件查询Page:[]");
-		ModelAndView mav = new ModelAndView("articleQueryPage");		
-		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
-		reqDto.setUserId(getUserInfo(request).getUserId());
-		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
-		mav.addObject("list", list);
-		logger.info("稿件查询出参:["+JSON.toJSONString(list)+"]");
-		return mav;
+	@RequestMapping(value="/toArticleQueryPageSet")
+    @ResponseBody
+    public JSONObject toArticleQueryPage(HttpServletRequest request,HttpServletResponse response,
+                                           @ModelAttribute ArticleQueryReqDto query,
+                                           @RequestParam(required = false, value = "page", defaultValue = "1") int page,
+                                           @RequestParam(required = false, value = "rows", defaultValue = "10") int rows) {
+		logger.info("稿分页件查询Page:[]");
+        // 返回给页面的一个json
+        JSONObject json = new JSONObject();
+        query.setUserId(getUserInfo(request).getUserId());
+        /**
+         * 查询总数
+         */
+        int count = articleQueryService.queryArticleInfosCount(query);
+        json.put("total", count);
+        logger.info("+++++++++"+count);
+
+        query.setPageSize((page-1)*rows);//开始
+        query.setPageNo(rows);//截止
+
+        logger.info("稿分页件查询首页*****Page in:["+JSON.toJSONString(query)+"]");
+        ZuoZheGaoJianPage zuoZheGaoJianPage =articleQueryService.queryArticleInfos(query,count);
+        json.put("rows", zuoZheGaoJianPage.getValues());
+
+        logger.info("稿分页件查询Page out:[]");
+        return json;
+
+
+
+
 	}
-	
+
 	
 	/**
 	 * toArticleQueryDetailPage

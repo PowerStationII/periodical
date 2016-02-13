@@ -1,13 +1,19 @@
 package com.cn.periodical.request;
+
+import com.cn.periodical.utils.PagingQuery;
+
 /**
  * 稿件查询接口入参
  * */
-public class ArticleQueryReqDto extends RequestDto{
+public class ArticleQueryReqDto extends PagingQuery {
 
 	public ArticleQueryReqDto() {
-		// TODO Auto-generated constructor stub
+        super(1, 10);
 	}
-	
+
+    public  ArticleQueryReqDto(int pageNo, int pageSize){
+        super(pageNo, pageSize);
+    }
 	private String id;
 	private String articleId;
 	private String authorName;
@@ -19,7 +25,12 @@ public class ArticleQueryReqDto extends RequestDto{
 	private String roleId;
 	private String userId;
 	private String section;
-	
+
+    private String title ;
+    private String contriTime ;
+
+    private String systemId;
+
 	public String getSection() {
 		return section;
 	}
@@ -88,4 +99,28 @@ public class ArticleQueryReqDto extends RequestDto{
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
+    public String getSystemId() {
+        return systemId;
+    }
+
+    public void setSystemId(String systemId) {
+        this.systemId = systemId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContriTime() {
+        return contriTime;
+    }
+
+    public void setContriTime(String contriTime) {
+        this.contriTime = contriTime;
+    }
 }
