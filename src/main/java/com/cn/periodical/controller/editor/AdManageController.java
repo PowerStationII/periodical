@@ -22,16 +22,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.cn.periodical.manager.AdInfoManager;
 import com.cn.periodical.manager.CouncilInfoManager;
 import com.cn.periodical.manager.SectionInfoManager;
 import com.cn.periodical.pojo.AdInfo;
 import com.cn.periodical.pojo.AdInfoQuery;
-import com.cn.periodical.pojo.BizAd;
+import com.cn.periodical.pojo.BizAdPage;
+import com.cn.periodical.pojo.BizAdQuery;
 import com.cn.periodical.pojo.CouncilInfo;
 import com.cn.periodical.pojo.CouncilInfoQuery;
 import com.cn.periodical.pojo.SectionInfo;
@@ -57,41 +60,41 @@ public class AdManageController extends EditorController{
 	 * 广告管理
 	 */
 	@RequestMapping(value="/toAdManagerPage")
-	public ModelAndView toAdManagerPage(HttpServletRequest request,@ModelAttribute BizAd ad) {
-		UserInfo userInfo = getUserInfo(request);
-		logger.info("广告管理首页Page in:[]");
+	public ModelAndView toAdManagerPage() {
 		ModelAndView mav = new ModelAndView("editor_adManagerPage");
-		/**
-		 * 广告首页查询
-		 * 查询条件:
-		 * adName=广告名称;concilName=理事会名称;concilType=理事会类型
-		 * registTime=注册时间;adType=广告类型;trialNo=广审号
-		 * contractStartTime=合同开始日期;contractEndTime=合同结束日期
-		 * 
-		 * 查询一个list列表,页面展示用
-		 * */
-		
-		List<BizAd> bizAds = adInfoManager.selectAdsForEditor(ad);
-		mav.addObject("list", bizAds);
-		
-		logger.info("广告管理首页Page out:[]");
 		return mav;
 	}
 	
-	
 	/**
-	 * 理事会页面增加广告信息
-	 * */
-/*	@RequestMapping(value = "/toAdInfoAdd", method = RequestMethod.GET)
-	public ModelAndView toAdInfoAdd(String councilId) {
-		ModelAndView mav = new ModelAndView("editor_adManagerDetailPage");
-		CouncilInfoQuery query = new CouncilInfoQuery();
-		query.setCouncilId(councilId);
-		List<CouncilInfo> infos = councilInfoManager.queryList(query);
-		mav.addObject("c",infos.get(0));
-		return mav;
-	}*/
-	
+	 * toAdManagerPage
+	 * 广告管理分页
+	 */
+	@RequestMapping(value="/toAdManagerPageSet")
+	@ResponseBody
+	public JSONObject toAdManagerPageSet(HttpServletRequest request,@ModelAttribute BizAdQuery query,@RequestParam(required = false, value = "page", defaultValue = "1") int page,
+			@RequestParam(required = false, value = "rows", defaultValue = "10") int rows) {
+		UserInfo userInfo = getUserInfo(request);
+		logger.info("广告管理首页Page in:["+JSON.toJSONString(query)+"]");
+        // 返回给页面的一个json
+		JSONObject json = new JSONObject();
+        /**
+         * 查询总数
+          */
+        int count = adInfoManager.queryBizAdCount(query);
+		json.put("total", count);
+		logger.info("+++++++++"+count);
+		
+		query.setPageSize((page-1)*rows);//开始
+		query.setPageNo(rows);//截止
+		
+		logger.info("广告管理首页*****Page in:["+JSON.toJSONString(query)+"]");
+		BizAdPage bizAdPage = adInfoManager.queryBizAdPageList(query);
+		json.put("rows", bizAdPage.getValues());
+		
+		logger.info("广告管理首页Page out:[]");
+		return json;
+	}	
+
 	/**
 	 * 理事会页面增加广告信息
 	 * */

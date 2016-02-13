@@ -17,50 +17,52 @@
 
 	$(function(){
 		$('#submit').click(function(){
-			$('form').submit();
+			$('#table').datagrid({queryParams:getUrl()});
 		});
-		
-		// 表格数据源  
-        var data = [];  
-        var rows = $('#table').datagrid('getRows');
-        for(var i=0;i<rows.length;i++) {
-        	 data.push({  
-                 "councilName":rows[i].councilName,  
-                 "adName":rows[i].adName,
-                 "trialNo":rows[i].trialNo,  
-                 "adType":getAdsType(rows[i].adType),
-                 "createTime":rows[i].createTime,
-                 "startTime":rows[i].startTime,  
-                 "endTime":rows[i].endTime,
-                 "option":rows[i].option
-             }) ; 
-		}
-        $("#table").datagrid("loadData", data.slice(0, 5));
-        var pager = $("#table").datagrid("getPager");  
-        pager.pagination({  
-            total:data.length, 
-            pageSize:5,
-            pageList: [5,10,15,20],
-            onSelectPage:function (pageNo, pageSize) {  
-                var start = (pageNo - 1) * pageSize;  
-                var end = start + pageSize;  
-                $("#table").datagrid("loadData", data.slice(start, end));  
-                pager.pagination('refresh', {  
-                    total:data.length,  
-                    pageNumber:pageNo
-                });  
-            }  
-        }); 
-        
+			
+		$('#table').datagrid({
+			url:'../editor/toAdManagerPageSet',
+			queryParams:getUrl(),
+			pageSize:10,
+			pageList: [10,15,20],
+			onLoadSuccess:function(){
+				var rows = $('#table').datagrid('getRows');
+		        for(var i=0;i<rows.length;i++) { 
+		        	rows[i].adType=getAdsType(rows[i].adType);
+		        	$('#table').datagrid('refreshRow',i);
+				}
+			}
+		});
+
+
+        /**
+         * 广告类型下拉框
+         */
         $('#adType').combobox({
         	data:getAdType(),
         	editable:false
         });
-        
-        $('#concilType').combobox({
+        /**
+         * 理事会类型下拉框
+         */
+        $('#councilType').combobox({
         	data:getCouncilType(),
         	editable:false
         });
+        
+        
+        function getUrl() {
+        	var url = {
+        			'adName':$('input[name="adName"]').val(),
+        			'councilName':$('input[name="councilName"]').val(),
+        			'councilType':$('#councilType').combobox('getValue'),
+        			'adType':$('#adType').combobox('getValue'),
+        			'trialNo':$('input[name="trialNo"]').val(),
+        			'contractStartTime':$('input[name="contractStartTime"]').val(),
+        			'contractEndTime':$('input[name="contractEndTime"]').val()
+        			};
+        	return url;
+        }
 	});
 
 </script>
@@ -72,9 +74,9 @@
 					<td>广告名称：</td>
 					<td><input class="easyui-textbox" type="text" name="adName" value=""></td>
 					<td>理事会名称：</td>
-					<td><input class="easyui-textbox" type="text" name="concilName" value=""></td>
+					<td><input class="easyui-textbox" type="text" name="councilName" value=""></td>
 					<td>理事会类型：</td>
-					<td><select id="concilType" data-options="panelHeight:'auto'" name="councilType"  class="easyui-combobox"  style="width:155px;">
+					<td><select id="councilType" data-options="panelHeight:'auto'" name="councilType"  class="easyui-combobox"  style="width:155px;">
 					</select></td>
 				</tr>
 				<tr>
@@ -110,20 +112,6 @@
 					<!-- <th data-options="field:'option',width:100">操作</th> -->
 				</tr>
 			</thead>
-			<tbody>
-			#foreach($dtos in ${list})   
-				<tr>
-					<td>$!{dtos.councilName}</td>
-					<td>$!{dtos.adName}</td>
-					<td>$!{dtos.trialNo}</td>
-					<td>$!{dtos.adType}</td>
-					<td>$!{dtos.createTime}</td>
-					<td>$!{dtos.startTime}</td>
-					<td>$!{dtos.endTime}</td>
-					<td><!-- <a class="easyui-linkbutton"  style="width:50px;" href="../editor/toQrySingleAdInfo?adId=111">编辑</a> --></td>
-				</tr>
-			#end
-			</tbody>
 		</table>
 		<br>
 	</div>

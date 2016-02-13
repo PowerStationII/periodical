@@ -13,6 +13,7 @@ import com.cn.periodical.dao.AdInfoDao;
 import com.cn.periodical.pojo.AdInfo;
 import com.cn.periodical.pojo.AdInfoQuery;
 import com.cn.periodical.pojo.BizAd;
+import com.cn.periodical.pojo.BizAdQuery;
 import com.cn.periodical.dao.BaseDao;
 
 @Repository("adInfoDao")
@@ -72,6 +73,17 @@ public class AdInfoDaoImpl extends BaseDao implements AdInfoDao {
 	public List<BizAd> selectAdsForEditor(BizAd bizAd) {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectList("AdInfoMapper.selectAdsForEditor", bizAd);
+	}
+
+
+	public int countByBizAd(BizAdQuery example) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectOne("AdInfoMapper.countByBizAd", example);
+	}
+
+	public List<BizAd> selectPageByBizAd(BizAdQuery example) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("AdInfoMapper.selectPageByBizAd", example);
 	}
 	
 }

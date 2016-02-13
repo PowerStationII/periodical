@@ -17,6 +17,8 @@ import com.cn.periodical.pojo.AdInfo;
 import com.cn.periodical.pojo.AdInfoPage;
 import com.cn.periodical.pojo.AdInfoQuery;
 import com.cn.periodical.pojo.BizAd;
+import com.cn.periodical.pojo.BizAdPage;
+import com.cn.periodical.pojo.BizAdQuery;
 import com.cn.periodical.utils.Pagenation;
 
 @Component("adInfoManager")
@@ -75,6 +77,27 @@ public class AdInfoManagerImpl implements AdInfoManager {
 	public List<BizAd> selectAdsForEditor(BizAd bizAd) {
 		// TODO Auto-generated method stub
 		return adInfoDao.selectAdsForEditor(bizAd);
+	}
+	
+	
+	public BizAdPage queryBizAdPageList(BizAdQuery query) {
+		BizAdPage bizAdPage = new BizAdPage();
+		Integer itemCount = adInfoDao.countByBizAd(query);
+		query.setItemCount(itemCount);
+		
+		if (itemCount == 0) {
+			bizAdPage.setValues(null);
+		} else {
+			bizAdPage.setValues(adInfoDao.selectPageByBizAd(query));
+		}
+		
+		bizAdPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
+		return bizAdPage;
+	}
+	
+	public int queryBizAdCount(BizAdQuery query){
+		int itemCount = adInfoDao.countByBizAd(query);
+		return itemCount;
 	}
 }
 
