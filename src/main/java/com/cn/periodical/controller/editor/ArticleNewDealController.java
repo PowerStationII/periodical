@@ -9,14 +9,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cn.periodical.pojo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -25,12 +24,6 @@ import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.manager.ArticleFlowsManager;
 import com.cn.periodical.manager.ArticleInfoManager;
 import com.cn.periodical.manager.ArticleInfoStateManager;
-import com.cn.periodical.pojo.ArticleFlows;
-import com.cn.periodical.pojo.ArticleFlowsQuery;
-import com.cn.periodical.pojo.ArticleInfo;
-import com.cn.periodical.pojo.ArticleInfoState;
-import com.cn.periodical.pojo.ArticleInfoStateQuery;
-import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.AritcleWorkFlowReqDto;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
@@ -63,23 +56,69 @@ public class ArticleNewDealController extends EditorController{
 	@Autowired
 	ArticleInfoStateManager articleInfoStateManager;
 	
+//	/**
+//	 * toNewArticlePage
+//	 * 新稿 End
+//	 */
+//	@RequestMapping(value="/toNewArticlePage")
+//	public ModelAndView toNewArticlePage(HttpServletRequest request,HttpServletResponse response) {
+//		UserInfo userInfo = (UserInfo)request.getSession().getAttribute("userInfo");
+//		logger.info("新稿Page入参:["+JSON.toJSONString(userInfo)+"]");
+//		ModelAndView mav = new ModelAndView("editor_newArticlePage");
+//		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
+//		reqDto.setEditorState(ArticleStateEnums.NEW_ARTICLE.getCode());
+//		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
+//		mav.addObject("list", list);
+//		logger.info("新稿Page出参:["+JSON.toJSONString(list)+"]");
+//		return mav;
+//	}
 	/**
 	 * toNewArticlePage
 	 * 新稿 End
 	 */
 	@RequestMapping(value="/toNewArticlePage")
 	public ModelAndView toNewArticlePage(HttpServletRequest request,HttpServletResponse response) {
-		UserInfo userInfo = (UserInfo)request.getSession().getAttribute("userInfo");
 		logger.info("新稿Page入参:["+JSON.toJSONString(userInfo)+"]");
 		ModelAndView mav = new ModelAndView("editor_newArticlePage");
-		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
-		reqDto.setEditorState(ArticleStateEnums.NEW_ARTICLE.getCode());
-		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
-		mav.addObject("list", list);
-		logger.info("新稿Page出参:["+JSON.toJSONString(list)+"]");
 		return mav;
 	}
-	
+
+    /**
+     * toNewArticlePage
+     * 新稿 End
+     */
+    @RequestMapping(value="/toNewArticlePageSet")
+    @ResponseBody
+    public JSONObject  toNewArticlePageSet(HttpServletRequest request,HttpServletResponse response,
+                                            @ModelAttribute ArticleQueryReqDto query,
+                                            @RequestParam(required = false, value = "page", defaultValue = "1") int page,
+                                            @RequestParam(required = false, value = "rows", defaultValue = "10") int rows) {
+        UserInfo userInfo = (UserInfo)request.getSession().getAttribute("userInfo");
+        logger.info("新稿Page入参:["+JSON.toJSONString(userInfo)+"]");
+
+
+
+        // 返回给页面的一个json
+        JSONObject json = new JSONObject();
+        query.setEditorState(ArticleStateEnums.NEW_ARTICLE.getCode());
+        /**
+         * 查询总数
+         */
+        int count = articleQueryService.queryArticleInfosCount(query);
+        json.put("total", count);
+        logger.info("+++++++++"+count);
+
+        query.setPageSize((page-1)*rows);//开始
+        query.setPageNo(rows);//截止
+
+        logger.info("稿分页件查询首页*****Page in:["+JSON.toJSONString(query)+"]");
+        ZuoZheGaoJianPage zuoZheGaoJianPage =articleQueryService.queryArticleInfos(query,count);
+        json.put("rows", zuoZheGaoJianPage.getValues());
+
+        logger.info("稿分页件查询Page out:[]");
+        return json;
+    }
+
 	/**
 	 * toNewArticleDetailPage
 	 * 新稿-详情页 End

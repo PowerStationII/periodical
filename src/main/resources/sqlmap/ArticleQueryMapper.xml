@@ -377,7 +377,7 @@
 		ai.editor_state as editorState,
 -- 		aai.attachment_name as attachmentName,
 -- 		aai.attachment_path as attachmentPath,
-		af.ref_id as refId,
+-- 		af.ref_id as refId,
 		DATE_FORMAT(af.deal_start_time, '%Y-%m-%d') as dealStartTime,
 		ei.expert_name as expertName,
 		si.section_name as section
@@ -387,7 +387,8 @@
 		expert_info ei,
 		user_info ui,
 		section_info si
-		where af.ref_id=ui.user_id and
+		where
+-- 		af.ref_id=ui.user_id and
 		ui.ref_id=ei.expert_id
 		and si.section_id=ai.invest_section and
 -- 		ai.article_id=aai.article_id and

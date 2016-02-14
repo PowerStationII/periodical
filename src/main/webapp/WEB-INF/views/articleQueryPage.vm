@@ -27,37 +27,21 @@
             onLoadSuccess:function(){
                 var rows = $('#table').datagrid('getRows');
                 for(var i=0;i<rows.length;i++) {
+                    rows[i].articleId = '<a href="../author/toArticleQueryDetailPage?articleId='+rows[i].articleId+'">'+rows[i].articleId+'</a>' ;
+                    if(rows[i].authorState =='0003'){
+                        rows[i].option='<a href="../author/toEditAuthorPayeeInfoPage?articleId='+rows[i].articleId+'" class="easyui-linkbutton" >账户信息</a>&nbsp;' ;
+//                                '<a onclick="yijian('+rows[i].articleId+')" href="#" class="easyui-linkbutton" >查看审稿意见</a>';
+                    }else if(rows[i].authorState=='0006'){
+                        rows[i].option=' <a href="../author/toArticleQueryChongTouPage?articleId='+rows[i].articleId+'">重投</a>&nbsp;' ;
+//                                ' <a onclick="yijian('+\'rows[i].articleId\'+')" href="#" class="easyui-linkbutton" >查看审稿意见</a>'  ;
+                    }else{
+//                        rows[i].option='<a onclick="yijian('+rows[i].articleId+')" href="#" class="easyui-linkbutton" >查看审稿意见</a>' ;
+                    }
                     rows[i].authorState=ArticleStateEnums(rows[i].authorState);
-
-                    #if($!{dtos.authorState}=='0003')
-                    rows[i].option='<a href="../author/toEditAuthorPayeeInfoPage?articleId=${dtos.articleId}" class="easyui-linkbutton" >账户信息</a>&nbsp;' +
-                        '<a onclick="yijian(\'${dtos.articleId}\')" href="#" class="easyui-linkbutton" >查看审稿意见</a>';
-                    #elseif($!{dtos.authorState}=='0006')
-                        rows[i].option=' <a href="../author/toArticleQueryChongTouPage?articleId=${dtos.articleId}">重投</a>&nbsp;' +
-                        ' <a onclick="yijian(\'${dtos.articleId}\')" href="#" class="easyui-linkbutton" >查看审稿意见</a>'  ;
-
-                    #else
-                        rows[i].option='<a onclick="yijian(\'${dtos.articleId}\')" href="#" class="easyui-linkbutton" >查看审稿意见</a>' ;
-                    #end
-
                 $('#table').datagrid('refreshRow',i);
                 }
             }
         });
-
-
-
-
-        $('#adType').combobox({
-            data:getAdType(),
-            editable:false
-        });
-
-        $('#councilType').combobox({
-            data:getCouncilType(),
-            editable:false
-        });
-
 
         function getUrl() {
             var url = {
