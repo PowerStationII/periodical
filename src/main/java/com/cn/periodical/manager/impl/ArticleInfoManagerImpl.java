@@ -48,7 +48,10 @@ public class ArticleInfoManagerImpl implements ArticleInfoManager {
 	public List<ArticleInfo> queryList(ArticleInfoQuery query) {
 		return articleInfoDao.selectByExample(query);
 	}
-	
+	public List<ArticleInfo> queryListZuGao(ArticleInfoQuery query) {
+		return articleInfoDao.selectByExampleZuGao(query);
+	}
+
 	
 	public void deleteArticleInfoById(Long id) {
 		articleInfoDao.deleteByPrimaryKey(id);

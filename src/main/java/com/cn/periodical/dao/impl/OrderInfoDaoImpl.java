@@ -7,6 +7,7 @@ package com.cn.periodical.dao.impl;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.BizOrderQuery;
 import org.springframework.stereotype.Repository;
 
 import com.cn.periodical.dao.OrderInfoDao;
@@ -91,5 +92,12 @@ public class OrderInfoDaoImpl extends BaseDao implements OrderInfoDao {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectList("OrderInfoMapper.editorQueryOrderInfos", bizOrder);
 	}
-	
+	public List<BizOrder> editorQryOrderInfosPage(BizOrderQuery bizOrder) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("OrderInfoMapper.editorQueryOrderInfosPage", bizOrder);
+	}
+	public int editorQryOrderInfosPageCount(BizOrderQuery bizOrder) {
+		return super.getSqlSession().selectOne("OrderInfoMapper.editorQueryOrderInfosPageCount", bizOrder);
+	}
+
 }

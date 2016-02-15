@@ -29,7 +29,7 @@ public class ArticleQueryDaoImpl extends BaseDao implements ArticleQueryDao {
 	public int queryArticleInfosPageCount(ArticleQueryReqDto reqDto) {
         int count = 0 ;
         try{
-            count = super.getSqlSession().selectList("ArticleQueryMapper.selectArticleInfosForEditorPageCount", reqDto).size();
+            count = super.getSqlSession().selectOne("ArticleQueryMapper.selectArticleInfosForEditorPageCount", reqDto);
         }catch (Exception e){
              e.printStackTrace();
         }
@@ -55,10 +55,32 @@ public class ArticleQueryDaoImpl extends BaseDao implements ArticleQueryDao {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectList("ArticleQueryMapper.editorQueryArticles", reqDto);
 	}
+	public List<EditorQueryArtilces> editorQueryArticlesPage(EditorQueryArtilces reqDto) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("ArticleQueryMapper.editorQueryArticlesPage", reqDto);
+	}
+
+	public int editorQueryArticlesPageCount(EditorQueryArtilces reqDto) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectOne("ArticleQueryMapper.editorQueryArticlesPageCount", reqDto);
+	}
 
 	public List<ArticleQueryRespDto> expertQryArticleInfos(ArticleQueryReqDto reqDto) {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectList("ArticleQueryMapper.selectArticleInfosForExpert", reqDto);
+	}
+	public List<ArticleQueryRespDto> expertQryArticleInfosPage(ArticleQueryReqDto reqDto) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("ArticleQueryMapper.selectArticleInfosForExpertPage", reqDto);
+	}
+	public int expertQryArticleInfosPageCount(ArticleQueryReqDto reqDto) {
+		int count = 0 ;
+        try {
+            count = super.getSqlSession().selectOne("ArticleQueryMapper.selectArticleInfosForExpertPageCount", reqDto);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return count ;
 	}
 
 	public AuthorQueryDetail articleDetailForEnExpert(AuthorQueryDetail articleId) {

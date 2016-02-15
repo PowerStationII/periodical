@@ -55,10 +55,26 @@ public class ArticleQueryManagerImpl implements ArticleQueryManager {
 		// TODO Auto-generated method stub
 		return articleQueryDao.editorQueryArticles(reqDto);
 	}
+	public List<EditorQueryArtilces> editorQueryArticlesPage(EditorQueryArtilces reqDto) {
+		// TODO Auto-generated method stub
+		return articleQueryDao.editorQueryArticlesPage(reqDto);
+	}
+	public int editorQueryArticlesPageCount(EditorQueryArtilces reqDto) {
+		// TODO Auto-generated method stub
+		return articleQueryDao.editorQueryArticlesPageCount(reqDto);
+	}
 
 	public List<ArticleQueryRespDto> expertQryArticleInfos(ArticleQueryReqDto reqDto) {
 		// TODO Auto-generated method stub
 		return articleQueryDao.expertQryArticleInfos(reqDto);
+	}
+	public List<ArticleQueryRespDto> expertQryArticleInfosPage(ArticleQueryReqDto reqDto) {
+		// TODO Auto-generated method stub
+		return articleQueryDao.expertQryArticleInfosPage(reqDto);
+	}
+	public int expertQryArticleInfosPageCount(ArticleQueryReqDto reqDto) {
+		// TODO Auto-generated method stub
+		return articleQueryDao.expertQryArticleInfosPageCount(reqDto);
 	}
 
 	public AuthorQueryDetail articleDetailForEnExpert(AuthorQueryDetail articleId) {

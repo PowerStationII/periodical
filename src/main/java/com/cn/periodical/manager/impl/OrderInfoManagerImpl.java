@@ -7,16 +7,13 @@ package com.cn.periodical.manager.impl;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.cn.periodical.dao.OrderInfoDao;
 import com.cn.periodical.manager.OrderInfoManager;
-import com.cn.periodical.pojo.BizOrder;
-import com.cn.periodical.pojo.OrderInfo;
-import com.cn.periodical.pojo.OrderInfoPage;
-import com.cn.periodical.pojo.OrderInfoQuery;
 import com.cn.periodical.utils.Pagenation;
 
 @Component("orderInfoManager")
@@ -93,6 +90,22 @@ public class OrderInfoManagerImpl implements OrderInfoManager {
 	public List<BizOrder> editorQryOrderInfos(BizOrder bizOrder) {
 		// TODO Auto-generated method stub
 		return orderInfoDao.editorQryOrderInfos(bizOrder);
+	}
+	public FaXingOrderPage editorQryOrderInfosPage(BizOrderQuery query , int itemCount) {
+        FaXingOrderPage faXingOrderPage = new FaXingOrderPage();
+        query.setItemCount(itemCount);
+
+        if (itemCount == 0) {
+            faXingOrderPage.setValues(null);
+        } else {
+            faXingOrderPage.setValues(orderInfoDao.editorQryOrderInfosPage(query));
+        }
+
+        faXingOrderPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
+        return faXingOrderPage;
+	}
+	public int editorQryOrderInfosPageCount(BizOrderQuery query) {
+        return  orderInfoDao.editorQryOrderInfosPageCount(query);
 	}
 }
 

@@ -20,10 +20,14 @@ public interface ArticleQueryManager {
 	public List<ArticleQueryRespDto> queryArticleInfosPage(ArticleQueryReqDto reqDto);
 	public int queryArticleInfosPageCount(ArticleQueryReqDto reqDto);
 	public List<ArticleQueryRespDto> expertQryArticleInfos(ArticleQueryReqDto reqDto);
+	public List<ArticleQueryRespDto> expertQryArticleInfosPage(ArticleQueryReqDto reqDto);
+	public int expertQryArticleInfosPageCount(ArticleQueryReqDto reqDto);
 	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto);
 	public AuthorQueryDetail queryAuthorQueryDetail(String articleId);
 	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail);
 	public List<EditorQueryArtilces> editorQueryArticles(EditorQueryArtilces reqDto);
+	public List<EditorQueryArtilces> editorQueryArticlesPage(EditorQueryArtilces reqDto);
+	public int editorQueryArticlesPageCount(EditorQueryArtilces reqDto);
 	public AuthorQueryDetail articleDetailForEnExpert(AuthorQueryDetail articleId);
 	
 	/**

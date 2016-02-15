@@ -8,6 +8,7 @@ package com.cn.periodical.dao;
 import java.util.List;
 
 import com.cn.periodical.pojo.BizOrder;
+import com.cn.periodical.pojo.BizOrderQuery;
 import com.cn.periodical.pojo.OrderInfo;
 import com.cn.periodical.pojo.OrderInfoQuery;
 
@@ -35,5 +36,7 @@ public interface OrderInfoDao {
 	
 	List<BizOrder> queryPayInfoLists(BizOrder bizOrder);
 	List<BizOrder> editorQryOrderInfos(BizOrder bizOrder);
+	List<BizOrder> editorQryOrderInfosPage(BizOrderQuery bizOrder);
+	int editorQryOrderInfosPageCount(BizOrderQuery bizOrder);
 	BizOrder queryOrderInfoDetail(BizOrder bizOrder);
 }

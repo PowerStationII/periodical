@@ -84,7 +84,7 @@ function songQianFa(periodicalIssueNo ,periodicalId){
                     <a class="easyui-linkbutton" href="../editor/toArticleToYingWenPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">送英文专家</a>
                 </td>
 				#else
-				<td><a class="easyui-linkbutton" href="../editor/toArticleGroupDetailPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">组稿</a>
+				<td><a class="easyui-linkbutton" href="../editor/toArticleGroupDetailPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}&articleId=&title=">组稿</a>
                 &nbsp;
                     #if(${periodical.periodicalState}=='PIBIANJI')
                         <a class="easyui-linkbutton" href="javascript:songQianFa('${periodical.periodicalIssueNo}','${periodical.periodicalId}')">

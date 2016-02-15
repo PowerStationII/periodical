@@ -17,6 +17,8 @@ public interface ArticleQueryDao {
 	public List<ArticleQueryRespDto> queryArticleInfosPage(ArticleQueryReqDto reqDto);
 	public int queryArticleInfosPageCount(ArticleQueryReqDto reqDto);
 	public List<ArticleQueryRespDto> expertQryArticleInfos(ArticleQueryReqDto reqDto);
+	public List<ArticleQueryRespDto> expertQryArticleInfosPage(ArticleQueryReqDto reqDto);
+	public int expertQryArticleInfosPageCount(ArticleQueryReqDto reqDto);
 	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto);
 	public AuthorQueryDetail queryAuthorQueryDetail(String articleId);
 	public AuthorQueryDetail articleDetailForEnExpert(AuthorQueryDetail articleId);
@@ -25,7 +27,9 @@ public interface ArticleQueryDao {
 	 * 稿件编辑-稿件查询
 	 * */
 	public List<EditorQueryArtilces> editorQueryArticles(EditorQueryArtilces reqDto);
-	
+	public List<EditorQueryArtilces> editorQueryArticlesPage(EditorQueryArtilces reqDto);
+	public int editorQueryArticlesPageCount(EditorQueryArtilces reqDto);
+
 	/**
 	 * 编辑人员,待刊明细页查询
 	 * */

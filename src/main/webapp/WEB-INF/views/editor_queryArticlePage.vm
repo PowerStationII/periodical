@@ -10,55 +10,49 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="../js/enums-table.js"></script>
 <script type="text/javascript" src="../js/enums-combox.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
 <script type="text/javascript">
-	$(function(){
-		// 表格数据源  
-        var data = [];  
-        var rows = $('#table').datagrid('getRows');
-        for(var i=0;i<rows.length;i++) {
-        	 data.push({  
-                 "articleId":rows[i].articleId,  
-                 "cnTitle":rows[i].cnTitle,
-                 "authorNames":rows[i].authorNames,  
-                 "createTime":rows[i].createTime,
-                 "expertNames":rows[i].expertNames,
-                 "state":ArticleStateEnums(rows[i].state),
-                 "option":rows[i].option
-             }) ; 
-		}
-        $("#table").datagrid("loadData", data.slice(0, 5));
-        var pager = $("#table").datagrid("getPager");  
-        pager.pagination({  
-            total:data.length, 
-            pageSize:5,
-            pageList: [5,10,15,20],
-            onSelectPage:function (pageNo, pageSize) {  
-                var start = (pageNo - 1) * pageSize;  
-                var end = start + pageSize;  
-                $("#table").datagrid("loadData", data.slice(start, end));  
-                pager.pagination('refresh', {  
-                    total:data.length,  
-                    pageNumber:pageNo
-                });  
-            }  
-        });  
-        
+    $(function(){
         $('#submit').click(function(){
-        	$('form').submit();
+            $('#table').datagrid({queryParams:getUrl()});
         });
-        
-         $('#state').combobox({
-        	data:getArticleState()
-        }); 
-	});
-	
+
+        $('#table').datagrid({
+            url:'../editor/toQueryArticlePageSet',
+            queryParams:getUrl(),
+            pageSize:10,
+            pageList: [10,15,20],
+            onLoadSuccess:function(){
+                var rows = $('#table').datagrid('getRows');
+                for(var i=0;i<rows.length;i++) {
+                    rows[i].option='<a class="easyui-linkbutton"   style="width:50px;" href="../editor/toPublishPage?articleId='+rows[i].articleId+'">待刊</a>';
+                    rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].articleId+'">'+rows[i].articleId+'</a>';
+                    rows[i].state =  ArticleStateEnums(rows[i].state);
+                    $('#table').datagrid('refreshRow',i);
+                }
+            }
+        });
+        $('#state').combobox({
+            data:getArticleState()
+        });
+        function getUrl() {
+            var url = {
+                'cnTitle':$('input[name="cnTitle"]').val(),
+                'authorNames':$('input[name="authorNames"]').val(),
+                'articleId':$('input[name="articleId"]').val(),
+                'expertNames':$('input[name="expertNames"]').val(),
+                'state':$('#state').combobox('getValue'),
+                'createTime':$('input[name="createTime"]').val()
+            };
+            return url;
+        }
+    });
 </script>
 <body>
 	<div id="articleInfos">
-		<form action="../editor/toQueryArticlePage">
+		<form action="../editor/toQueryArticlePageSet">
 			<table style="text-align:right;font-size:14px;">
 				<tr>
 					<td>稿件标题：</td>
@@ -82,8 +76,8 @@
 ##							<option value="2">2</option>
 ##							<option value="3">3</option>
 ##						</select></td>
-					<td>中文关键字：</td>
-					<td><input type="text" class="easyui-textbox" name="cnKeywords" value=""></td>
+##					<td>中文关键字：</td>
+##					<td><input type="text" class="easyui-textbox" name="cnKeywords" value=""></td>
 					<td>投稿时间：</td>
 					<td><input type="text"  class="easyui-textbox" name="createTime" value=""></td>
 				</tr>			
@@ -103,19 +97,6 @@
 					<th data-options="field:'state',width:100">稿件状态</th>
 				</tr>
 			</thead>
-			<tbody>
-			#foreach($dtos in ${list})   
-				<tr>
-					<td>${dtos.articleId}</td>
-					<td><a href="../author/toArticleQueryDetailPageNew?articleId=${dtos.articleId}">$!{dtos.cnTitle}</a></td>
-					<td>${dtos.authorNames}</td>
-					<td>${dtos.createTime}</td>
-					<td>${dtos.expertNames}</td>
-					<td>${dtos.state}</td>
-##					<td>查看稿件 <input type="button" value="催促专家审稿"></td>
-				</tr>
-			#end
-			</tbody>
 		</table>
 		<br>
 	</div>

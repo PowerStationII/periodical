@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.AuthorContributeService;
 import com.cn.periodical.utils.PropertiesInitManager;
 import com.cn.periodical.utils.UtilLoad;
@@ -17,10 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,11 +32,6 @@ import com.cn.periodical.manager.ArticleInfoManager;
 import com.cn.periodical.manager.ExpertInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.manager.UserQueryManager;
-import com.cn.periodical.pojo.ArticleInfo;
-import com.cn.periodical.pojo.ArticleInfoQuery;
-import com.cn.periodical.pojo.ExpertInfo;
-import com.cn.periodical.pojo.ExpertInfoQuery;
-import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.AritcleWorkFlowReqDto;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.request.UserQueryReqDto;
@@ -79,25 +73,70 @@ public class ArticleEnlistedDealController extends EditorController{
     @Autowired
     AuthorContributeService authorContributeService ;
 	
+//	/**
+//	 * toEnlistedArticlePage
+//	 * 已登记 End
+//	 */
+//	@RequestMapping(value="/toEnlistedArticlePage",method = RequestMethod.GET)
+//	public ModelAndView toEnlistedArticlePage(HttpServletRequest request) {
+//		UserInfo userInfo = getUserInfo(request);
+//		logger.info("已登记Page入参:["+JSON.toJSONString(userInfo)+"]");
+//		ModelAndView mav = new ModelAndView("editor_enlistedArticlePage");
+//		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
+//		reqDto.setEditorState(ArticleStateEnums.ENLISTED_ARTICLE.getCode());
+//		reqDto.setRoleId(userInfo.getRoleId());
+//		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
+//		mav.addObject("list", list);
+//		logger.info("已登记Page出参:["+JSON.toJSONString(list)+"]");
+//		return mav;
+//
+//	}
 	/**
 	 * toEnlistedArticlePage
 	 * 已登记 End
 	 */
 	@RequestMapping(value="/toEnlistedArticlePage",method = RequestMethod.GET)
 	public ModelAndView toEnlistedArticlePage(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("editor_enlistedArticlePage");
+		return mav;
+
+	}
+	/**
+	 * toEnlistedArticlePage
+	 * 已登记 End
+	 */
+	@RequestMapping(value="/toEnlistedArticlePageSet")
+    @ResponseBody
+    public JSONObject   toEnlistedArticlePageSet(HttpServletRequest request,HttpServletResponse response,
+                                                 @ModelAttribute ArticleQueryReqDto query,
+                                                 @RequestParam(required = false, value = "page", defaultValue = "1") int page,
+                                                 @RequestParam(required = false, value = "rows", defaultValue = "10") int rows) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("已登记Page入参:["+JSON.toJSONString(userInfo)+"]");
-		ModelAndView mav = new ModelAndView("editor_enlistedArticlePage");
-		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
-		reqDto.setEditorState(ArticleStateEnums.ENLISTED_ARTICLE.getCode());
-		reqDto.setRoleId(userInfo.getRoleId());
-		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
-		mav.addObject("list", list);
-		logger.info("已登记Page出参:["+JSON.toJSONString(list)+"]");
-		return mav;
-		
+
+        // 返回给页面的一个json
+        JSONObject json = new JSONObject();
+        query.setEditorState(ArticleStateEnums.ENLISTED_ARTICLE.getCode());
+        query.setRoleId(userInfo.getRoleId());
+        /**
+         * 查询总数
+         */
+        int count = articleQueryService.queryArticleInfosCount(query);
+        json.put("total", count);
+        logger.info("+++++++++"+count);
+
+        query.setPageSize((page-1)*rows);//开始
+        query.setPageNo(rows);//截止
+
+        logger.info("已登记Page出参 in:["+JSON.toJSONString(query)+"]");
+        ZuoZheGaoJianPage zuoZheGaoJianPage =articleQueryService.queryArticleInfos(query,count);
+        json.put("rows", zuoZheGaoJianPage.getValues());
+
+        logger.info("已登记Page出参 out:[]");
+        return json;
+
 	}
-	
+
 	/**
 	 * toEnlistedArticleDetailPage
 	 * 已登记-详情页 End

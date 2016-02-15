@@ -21,6 +21,7 @@ public interface ArticleInfoManager {
     public ArticleInfo selectByArticleId(String articleId);
 	
 	List<ArticleInfo> queryList(ArticleInfoQuery query);
+	List<ArticleInfo> queryListZuGao(ArticleInfoQuery query);
 	/**
 	 * 主编查看系统稿件信息
 	 * */

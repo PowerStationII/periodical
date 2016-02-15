@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
 <head>
 <title></title>
@@ -10,6 +10,8 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-combox.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 <style>
 #left, #right {
 	/* border: 1px solid green; */
@@ -41,24 +43,34 @@
 
 </head>
 <body>
- <div><input type='button' value='保存' id='btnPreSubmit' /><span style="color:red;font-size:12px;">*保存后,期刊稿件部分可修改</span></div>
-  	<input type='button' value='提交' id='btnSubmit' /><span style="color:red;font-size:12px;">*提交后,期刊稿件部分不可修改</span></div>
-	<form id="sub2" action="../editor/toArticleGroup" method="POST">
+ <div>
+	<form id="sub2" action="../editor/toArticleGroupDetailPage" method="POST">
 		<input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}"> 
-		<input type="hidden" name="periodicalId" value="${periodicalId}"> <br />
+		<input type="hidden" name="periodicalId" value="${periodicalId}">
+        <table style="text-align:right;font-size:14px;">
+            <tr>
+                <td>稿件编号：</td>
+                <td><input class="easyui-textbox" type="text" name="articleId" value="$!{articleId}"></td>
+                <td>稿件标题：</td>
+                <td><input class="easyui-textbox" type="text" name="title" value="$!{title}"></td>
+            </tr>
+            <tr>
+                <td  style="text-align:left;" colspan =2><a id="search"  class="easyui-linkbutton"  style="width:50px;" href="#" >查询</a></td>
+                <td><input type='button' value='保存' id='btnPreSubmit' /></td>
+                <td><input type='button' value='提交' id='btnSubmit' /></td>
+            </tr>
+        </table>
 		<div id='left'>
 			<table style="border:1px solid green;width:100%;font-size:14px;" id='leftSelect' rules="all" class='selectedTable'>
 				<tr>
 					<td width = "30%">稿件编号</td>
 					<td width = "70%">标题</td>
-<!-- 					<td>稿件状态</td>
- -->				</tr>
+				</tr>
 				#foreach($articleQueryRespDto in ${list})
 				<tr class='selectAble'>
 					<td>${articleQueryRespDto.articleInfo.articleId}</td>
 					<td>${articleQueryRespDto.articleInfo.articleCnTitle}</td>
-<!-- 					<td>${articleQueryRespDto.articleInfo.expertState}[已待刊]</td>
- -->				</tr>
+				</tr>
 				#end
 			</table>
 		</div>
@@ -76,13 +88,11 @@
 				<tr>
 					<td width = "30%">稿件编号</td>
 					<td width = "70%">标题</td>
-<!-- 					<td>稿件状态</td>
- -->				</tr>
+				</tr>
 				#foreach($it in ${item.list})
 				<tr class='selectAble'>
 					<td>${it.article_id}</td>
 					<td>${it.article_cn_title}</td>
-					<!-- <td>${it.expert_state}[已待刊]</td> -->
 				</tr>
 				#end
 			</table>   	 
@@ -166,6 +176,11 @@ $('#btnPreSubmit').click(function(){
 				window.location.href='../editor/toGroupPage?periodicalId=${periodicalId}';
 			}
 		});  
+});
+$('#search').click(function(){
+    if(confirm("查询前请先保存已经组刊文章")){
+        $("#sub2").submit();
+    }
 });
 </SCRIPT>
 </html>

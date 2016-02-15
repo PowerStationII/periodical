@@ -48,7 +48,10 @@ public class ArticleInfoDaoImpl extends BaseDao implements ArticleInfoDao {
 	public List<ArticleInfo> selectByExample(ArticleInfoQuery example) {
 		return super.getSqlSession().selectList("ArticleInfoMapper.selectByExample", example);
 	}
-	
+	public List<ArticleInfo> selectByExampleZuGao(ArticleInfoQuery example) {
+		return super.getSqlSession().selectList("ArticleInfoMapper.selectByExampleZuGao", example);
+	}
+
 	
 	public List<ArticleInfo> selectPageByExample(ArticleInfoQuery example) {
 		return super.getSqlSession().selectList("ArticleInfoMapper.selectPageByExample", example);

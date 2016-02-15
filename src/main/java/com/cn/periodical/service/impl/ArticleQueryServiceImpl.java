@@ -70,10 +70,47 @@ public class ArticleQueryServiceImpl implements ArticleQueryService {
 		// TODO Auto-generated method stub
 		return articleQueryManager.editorQueryArticles(reqDto);
 	}
+	public ZuoZheGaoJianPageChaxun editorQueryArticlesPage(EditorQueryArtilces query , int itemCount) {
+        ZuoZheGaoJianPageChaxun bizAdPage = new ZuoZheGaoJianPageChaxun();
+        query.setItemCount(itemCount);
+
+        if (itemCount == 0) {
+            bizAdPage.setValues(null);
+        } else {
+            bizAdPage.setValues(articleQueryManager.editorQueryArticlesPage(query));
+        }
+
+        bizAdPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
+        return bizAdPage;
+
+
+	}
+	public int editorQueryArticlesPageCount(EditorQueryArtilces reqDto ) {
+		// TODO Auto-generated method stub
+		return articleQueryManager.editorQueryArticlesPageCount(reqDto);
+	}
 
 	public List<ArticleQueryRespDto> expertQryArticleInfos(ArticleQueryReqDto reqDto) {
 		// TODO Auto-generated method stub
 		return articleQueryManager.expertQryArticleInfos(reqDto);
+	}
+	public ZuoZheGaoJianPage expertQryArticleInfos(ArticleQueryReqDto query,int itemCount) {
+        ZuoZheGaoJianPage bizAdPage = new ZuoZheGaoJianPage();
+        query.setItemCount(itemCount);
+
+        if (itemCount == 0) {
+            bizAdPage.setValues(null);
+        } else {
+            bizAdPage.setValues(articleQueryManager.expertQryArticleInfosPage(query));
+        }
+
+        bizAdPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
+        return bizAdPage;
+
+	}
+	public int expertQryArticleInfosPageCount(ArticleQueryReqDto query) {
+		// TODO Auto-generated method stub
+		return articleQueryManager.expertQryArticleInfosPageCount(query);
 	}
 
 

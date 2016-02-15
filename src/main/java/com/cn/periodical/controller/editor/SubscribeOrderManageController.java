@@ -6,14 +6,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cn.periodical.enums.ArticleStateEnums;
+import com.cn.periodical.pojo.*;
+import com.cn.periodical.request.ArticleQueryReqDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -22,14 +23,6 @@ import com.cn.periodical.manager.AddressInfoManager;
 import com.cn.periodical.manager.OrderInfoManager;
 import com.cn.periodical.manager.PayerInfoManager;
 import com.cn.periodical.manager.PeriodicalDistributManager;
-import com.cn.periodical.pojo.BizDistribut;
-import com.cn.periodical.pojo.BizOrder;
-import com.cn.periodical.pojo.OrderInfo;
-import com.cn.periodical.pojo.OrderInfoQuery;
-import com.cn.periodical.pojo.PayerInfo;
-import com.cn.periodical.pojo.PayerInfoQuery;
-import com.cn.periodical.pojo.PeriodicalDistribut;
-import com.cn.periodical.pojo.PeriodicalDistributQuery;
 import com.cn.periodical.utils.UtilLoad;
 /**
  * 发行编辑-订单管理Controller
@@ -48,6 +41,21 @@ public class SubscribeOrderManageController extends EditorController{
 	PeriodicalDistributManager periodicalDistributManager;
 	
 	
+//	/**
+//	 * toSubOrderManagePage
+//	 * 订单管理
+//	 */
+//	@RequestMapping(value="/toSubOrderManagePage",method = RequestMethod.GET)
+//	public ModelAndView toSubOrderManagePage(HttpServletRequest request) {
+//		logger.info("发行编辑-订单管理Page:[ ]");
+//		ModelAndView mav = new ModelAndView("editor_subOrderManagePage");
+//		/**
+//		 * 发行编辑是不是只能审核已付清金额的订单
+//		 * */
+//		List<BizOrder> list = orderInfoManager.editorQryOrderInfos(null);
+//		mav.addObject("list", list);
+//		return mav;
+//	}
 	/**
 	 * toSubOrderManagePage
 	 * 订单管理
@@ -56,14 +64,44 @@ public class SubscribeOrderManageController extends EditorController{
 	public ModelAndView toSubOrderManagePage(HttpServletRequest request) {
 		logger.info("发行编辑-订单管理Page:[ ]");
 		ModelAndView mav = new ModelAndView("editor_subOrderManagePage");
-		/**
-		 * 发行编辑是不是只能审核已付清金额的订单
-		 * */
-		List<BizOrder> list = orderInfoManager.editorQryOrderInfos(null);
-		mav.addObject("list", list);
 		return mav;
 	}
-	
+	/**
+	 * toSubOrderManagePage
+	 * 订单管理
+	 */
+	@RequestMapping(value="/toSubOrderManagePageSet")
+    @ResponseBody
+    public JSONObject toSubOrderManagePageSet(HttpServletRequest request,HttpServletResponse response,
+                                              @ModelAttribute BizOrderQuery query,
+                                              @RequestParam(required = false, value = "page", defaultValue = "1") int page,
+                                              @RequestParam(required = false, value = "rows", defaultValue = "10") int rows) {
+		logger.info("发行编辑-订单管理Page:[ ]");
+
+
+        // 返回给页面的一个json
+        JSONObject json = new JSONObject();
+        /**
+         * 查询总数
+         */
+        int count = orderInfoManager.editorQryOrderInfosPageCount(query);
+        json.put("total", count);
+        logger.info("+++++++++"+count);
+
+        query.setPageSize((page-1)*rows);//开始
+        query.setPageNo(rows);//截止
+
+        logger.info("已登记Page出参 in:["+JSON.toJSONString(query)+"]");
+        /**
+         * 发行编辑是不是只能审核已付清金额的订单
+         * */
+        FaXingOrderPage faXingOrderPage = orderInfoManager.editorQryOrderInfosPage(query,count);
+        json.put("rows", faXingOrderPage.getValues());
+
+        logger.info("已登记Page出参 out:[]");
+        return json;
+	}
+
 	/**
 	 * toAuditOrderManagePage
 	 * 订单审核

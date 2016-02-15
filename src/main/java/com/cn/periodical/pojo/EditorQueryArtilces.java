@@ -1,12 +1,18 @@
 package com.cn.periodical.pojo;
 
+import com.cn.periodical.utils.PagingQuery;
+
 import java.io.Serializable;
 
-public class EditorQueryArtilces implements Serializable {
+public class EditorQueryArtilces extends PagingQuery {
 
-	public EditorQueryArtilces() {
-		// TODO Auto-generated constructor stub
-	}
+    public EditorQueryArtilces() {
+        super(1, 10);
+    }
+
+    public  EditorQueryArtilces(int pageNo, int pageSize){
+        super(pageNo, pageSize);
+    }
 	
 	private String articleId;
 	private String cnTitle;

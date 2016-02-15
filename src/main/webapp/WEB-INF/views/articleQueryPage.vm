@@ -27,7 +27,7 @@
             onLoadSuccess:function(){
                 var rows = $('#table').datagrid('getRows');
                 for(var i=0;i<rows.length;i++) {
-                    rows[i].articleId = '<a href="../author/toArticleQueryDetailPage?articleId='+rows[i].articleId+'">'+rows[i].articleId+'</a>' ;
+
                     if(rows[i].authorState =='0003'){
                         rows[i].option='<a href="../author/toEditAuthorPayeeInfoPage?articleId='+rows[i].articleId+'" class="easyui-linkbutton" >账户信息</a>&nbsp;' ;
 //                                '<a onclick="yijian('+rows[i].articleId+')" href="#" class="easyui-linkbutton" >查看审稿意见</a>';
@@ -37,6 +37,7 @@
                     }else{
 //                        rows[i].option='<a onclick="yijian('+rows[i].articleId+')" href="#" class="easyui-linkbutton" >查看审稿意见</a>' ;
                     }
+                    rows[i].articleId = '<a href="../author/toArticleQueryDetailPage?articleId='+rows[i].articleId+'">'+rows[i].articleId+'</a>' ;
                     rows[i].authorState=ArticleStateEnums(rows[i].authorState);
                 $('#table').datagrid('refreshRow',i);
                 }

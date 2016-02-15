@@ -24,7 +24,8 @@ public interface ArticleInfoDao {
 	int insertSelective(ArticleInfo record);
 	
 	List<ArticleInfo> selectByExample(ArticleInfoQuery example);
-	
+	List<ArticleInfo> selectByExampleZuGao(ArticleInfoQuery example);
+
 	List<ArticleInfo> selectPageByExample(ArticleInfoQuery example);
 	
 	ArticleInfo selectByPrimaryKey(Long id);

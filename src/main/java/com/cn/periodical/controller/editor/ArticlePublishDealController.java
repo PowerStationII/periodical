@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.AuthorContributeService;
 import com.cn.periodical.utils.UtilLoad;
@@ -73,25 +75,71 @@ public class ArticlePublishDealController extends EditorController{
 
 
 	/**
+//	 * toPublishArticlePage
+//	 * 待刊
+//	 */
+//	@RequestMapping(value="/toPublishArticlePage",method = RequestMethod.GET)
+//	public ModelAndView toPublishArticlePage(HttpServletRequest request) {
+//		logger.info("待刊Page in :[]");
+//		UserInfo userInfo = getUserInfo(request);
+//		ModelAndView mav = new ModelAndView("editor_publishArticlePage");
+//		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
+//		reqDto.setEditorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
+////		reqDto.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
+//		reqDto.setRoleId(userInfo.getRoleId());
+//		reqDto.setExpertState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
+//		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
+//		mav.addObject("list", list);
+//		logger.info("待刊Page out :["+JSON.toJSONString(list)+"]");
+//		return mav;
+//	}
+	/**
 	 * toPublishArticlePage
 	 * 待刊
 	 */
 	@RequestMapping(value="/toPublishArticlePage",method = RequestMethod.GET)
 	public ModelAndView toPublishArticlePage(HttpServletRequest request) {
 		logger.info("待刊Page in :[]");
-		UserInfo userInfo = getUserInfo(request);
 		ModelAndView mav = new ModelAndView("editor_publishArticlePage");
-		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
-		reqDto.setEditorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
-//		reqDto.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
-		reqDto.setRoleId(userInfo.getRoleId());
-		reqDto.setExpertState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
-		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
-		mav.addObject("list", list);
-		logger.info("待刊Page out :["+JSON.toJSONString(list)+"]");
 		return mav;
 	}
-	
+	/**
+	 * toPublishArticlePage
+	 * 待刊
+	 */
+	@RequestMapping(value="/toPublishArticlePageSet")
+    @ResponseBody
+    public JSONObject toPublishArticlePageSet(HttpServletRequest request,HttpServletResponse response,
+                                                @ModelAttribute ArticleQueryReqDto query,
+                                                @RequestParam(required = false, value = "page", defaultValue = "1") int page,
+                                                @RequestParam(required = false, value = "rows", defaultValue = "10") int rows) {
+		logger.info("待刊Page in :[]");
+		UserInfo userInfo = getUserInfo(request);
+
+        JSONObject json = new JSONObject();
+        query.setEditorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
+//		reqDto.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
+        query.setRoleId(userInfo.getRoleId());
+        query.setExpertState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
+        /**
+         * 查询总数
+         */
+        int count = articleQueryService.queryArticleInfosCount(query);
+        json.put("total", count);
+        logger.info("+++++++++"+count);
+
+        query.setPageSize((page-1)*rows);//开始
+        query.setPageNo(rows);//截止
+
+        logger.info("已登记Page出参 in:["+JSON.toJSONString(query)+"]");
+
+        ZuoZheGaoJianPage zuoZheGaoJianPage =articleQueryService.queryArticleInfos(query,count);
+        json.put("rows", zuoZheGaoJianPage.getValues());
+
+        logger.info("已登记Page出参 out:[]");
+        return json;
+	}
+
 	
 	/**
 	 * toPublishPage

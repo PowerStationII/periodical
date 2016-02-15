@@ -15,7 +15,9 @@ public interface ArticleQueryService {
 	public ZuoZheGaoJianPage queryArticleInfos(ArticleQueryReqDto reqDto , int count);
 	public int queryArticleInfosCount(ArticleQueryReqDto reqDto );
 	public List<ArticleQueryRespDto> expertQryArticleInfos(ArticleQueryReqDto reqDto);
-	
+	public ZuoZheGaoJianPage expertQryArticleInfos(ArticleQueryReqDto reqDto,int count);
+	public int expertQryArticleInfosPageCount(ArticleQueryReqDto reqDto);
+
 	
 	public ArticleQueryRespDto queryArticleInfoDetail(ArticleQueryReqDto reqDto);
 	
@@ -23,6 +25,8 @@ public interface ArticleQueryService {
 	public List<AuthorQueryDetail> queryArticleFee(AuthorQueryDetail authorQueryDetail);
 	
 	public List<EditorQueryArtilces> editorQueryArticles(EditorQueryArtilces reqDto);
+	public ZuoZheGaoJianPageChaxun editorQueryArticlesPage(EditorQueryArtilces reqDto,int count);
+	public int editorQueryArticlesPageCount(EditorQueryArtilces reqDto);
 
     public List<ArticleAttachmentInfo>  queryAttByArtcicle(String article,Set<String> set);
 	

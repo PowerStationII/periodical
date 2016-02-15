@@ -58,8 +58,47 @@
 			and oi.order_no = #{orderNo,jdbcType=VARCHAR}
 		</if>
 	</select>
-	
-	
+	<select id="editorQueryOrderInfosPage" parameterType="BizOrder"
+		resultType="BizOrder">
+		select oi.order_no as orderNo,oi.already_pay_amount as
+		aPayAmount,DATE_FORMAT(oi.create_time, '%Y-%m-%d') as create_time,oi.order_status as oStatus,
+		oi.periodical_year as pYear,oi.subscribe_nums as subNums,oi.user_id as
+		userId,pi.periodical_cn_name as pCnName, DATE_FORMAT(oi.audit_time, '%Y-%m-%d') as auditTime,
+		pi.cycle as cycle,pi.in_fix_price as iFprice,oi.amount as
+		oAmount,ri.reader_name as readerName,pi.in_fix_price as iFprice
+		from order_info oi,periodical_info pi,user_info ui,reader_info ri where
+		oi.periodical_id=pi.periodical_id
+		and oi.user_id=ui.user_id and ui.ref_id=ri.reader_id
+		<if test="orderNo != null and ''!=orderNo">
+			and oi.order_no = #{orderNo,jdbcType=VARCHAR}
+		</if>
+		<if test="readerName != null and ''!=readerName">
+			and ri.reader_name like  CONCAT( '%', #{readerName,jdbcType=VARCHAR} ,'%')
+		</if>
+		<if test="pYear != null and ''!=pYear">
+			and oi.periodical_year = #{pYear,jdbcType=VARCHAR}
+		</if>
+        limit #{pageSize},#{pageNo}
+	</select>
+
+	<select id="editorQueryOrderInfosPageCount" parameterType="BizOrder"
+		resultType="java.lang.Integer">
+		select count(1)
+		from order_info oi,periodical_info pi,user_info ui,reader_info ri where
+		oi.periodical_id=pi.periodical_id
+		and oi.user_id=ui.user_id and ui.ref_id=ri.reader_id
+		<if test="orderNo != null and ''!=orderNo">
+			and oi.order_no = #{orderNo,jdbcType=VARCHAR}
+		</if>
+        <if test="readerName != null and ''!=readerName">
+            and ri.reader_name like  CONCAT( '%', #{readerName,jdbcType=VARCHAR} ,'%')
+        </if>
+        <if test="pYear != null and ''!=pYear">
+            and oi.periodical_year = #{pYear,jdbcType=VARCHAR}
+        </if>
+	</select>
+
+
 
 
 	<select id="queryOrderAndPayList" parameterType="BizOrder"

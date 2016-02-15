@@ -5,6 +5,8 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,17 +29,6 @@ import com.cn.periodical.manager.ExpertInfoManager;
 import com.cn.periodical.manager.PayeeInfoManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.manager.UserQueryManager;
-import com.cn.periodical.pojo.ArticleFlows;
-import com.cn.periodical.pojo.ArticleFlowsQuery;
-import com.cn.periodical.pojo.ArticleInfo;
-import com.cn.periodical.pojo.ArticleInfoQuery;
-import com.cn.periodical.pojo.ArticleInfoState;
-import com.cn.periodical.pojo.ArticleInfoStateQuery;
-import com.cn.periodical.pojo.ExpertInfo;
-import com.cn.periodical.pojo.ExpertInfoQuery;
-import com.cn.periodical.pojo.PayeeInfo;
-import com.cn.periodical.pojo.PayeeInfoQuery;
-import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.request.AritcleWorkFlowReqDto;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
@@ -82,23 +73,66 @@ public class ArticleAuditeController extends ExpertController{
     @Autowired
     AuthorContributeService authorContributeService ;
 	
+//	/**
+//	 * toArticleAuditePage
+//	 * 去审稿页面
+//	 */
+//	@RequestMapping(value="/toArticleAuditePage")
+//	public ModelAndView toArticleAuditePage(HttpServletRequest request,@ModelAttribute ArticleQueryReqDto reqDto) {
+//		UserInfo userInfo = getUserInfo(request);
+//		logger.info("审稿Page:["+JSON.toJSONString(reqDto)+"]");
+//		ModelAndView mav = new ModelAndView("expert_articleAuditPage");
+//		reqDto.setUserId(userInfo.getUserId());
+//		logger.info("***********************");
+//		logger.info(JSON.toJSONString(reqDto));
+//		List<ArticleQueryRespDto> list =articleQueryService.expertQryArticleInfos(reqDto);
+//		mav.addObject("list", list);
+//		return mav;
+//	}
 	/**
 	 * toArticleAuditePage
 	 * 去审稿页面
 	 */
 	@RequestMapping(value="/toArticleAuditePage")
 	public ModelAndView toArticleAuditePage(HttpServletRequest request,@ModelAttribute ArticleQueryReqDto reqDto) {
-		UserInfo userInfo = getUserInfo(request);
-		logger.info("审稿Page:["+JSON.toJSONString(reqDto)+"]");
 		ModelAndView mav = new ModelAndView("expert_articleAuditPage");
-		reqDto.setUserId(userInfo.getUserId());
-		logger.info("***********************");
-		logger.info(JSON.toJSONString(reqDto));
-		List<ArticleQueryRespDto> list =articleQueryService.expertQryArticleInfos(reqDto);
-		mav.addObject("list", list);
 		return mav;
 	}
-	
+	/**
+	 * toArticleAuditePage
+	 * 去审稿页面
+	 */
+	@RequestMapping(value="/toArticleAuditePageSet")
+    @ResponseBody
+    public JSONObject toArticleAuditePageSet(HttpServletRequest request,HttpServletResponse response,
+                                               @ModelAttribute ArticleQueryReqDto query,
+                                               @RequestParam(required = false, value = "page", defaultValue = "1") int page,
+                                               @RequestParam(required = false, value = "rows", defaultValue = "10") int rows) {
+		UserInfo userInfo = getUserInfo(request);
+		logger.info("审稿Page:["+JSON.toJSONString(query)+"]");
+
+        // 返回给页面的一个json
+        JSONObject json = new JSONObject();
+        query.setUserId(userInfo.getUserId());
+        /**
+         * 查询总数
+         */
+        int count = articleQueryService.expertQryArticleInfosPageCount(query);
+        json.put("total", count);
+        logger.info("+++++++++"+count);
+
+        query.setPageSize((page-1)*rows);//开始
+        query.setPageNo(rows);//截止
+
+        logger.info("已登记Page出参 in:["+JSON.toJSONString(query)+"]");
+
+        ZuoZheGaoJianPage zuoZheGaoJianPage =articleQueryService.expertQryArticleInfos(query,count);
+        json.put("rows", zuoZheGaoJianPage.getValues());
+
+        logger.info("已登记Page出参 out:[]");
+        return json;
+	}
+
 	/**
 	 * toAuditeDetailPage
 	 * 去审稿明细页面
@@ -283,7 +317,7 @@ public class ArticleAuditeController extends ExpertController{
 		 * */
 		articleInfo.setId(articleInfo.getId());
 		articleInfo.setAuthorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
-		articleInfo.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());/**编辑需要确认待刊,确认返修,确认退稿,所以增加此状态.代表专家已处理完成*/
+//		articleInfo.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());/**编辑需要确认待刊,确认返修,确认退稿,所以增加此状态.代表专家已处理完成*/
 		articleInfo.setExpertState(ArticleStateEnums.REPAIR_ARTICLE.getCode());
 		articleInfoManager.saveArticleInfo(articleInfo);
 
@@ -371,7 +405,7 @@ public class ArticleAuditeController extends ExpertController{
 		 * */
 		articleInfo.setId(articleInfo.getId());
 		articleInfo.setAuthorState(ArticleStateEnums.SUBMITED_ARTICLE.getCode());
-		articleInfo.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());/**编辑需要确认待刊,确认返修,确认退稿,所以增加此状态.代表专家已处理完成*/
+//		articleInfo.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());/**编辑需要确认待刊,确认返修,确认退稿,所以增加此状态.代表专家已处理完成*/
 		articleInfo.setExpertState(ArticleStateEnums.RETURNED_ARTICLE.getCode());
 		articleInfoManager.saveArticleInfo(articleInfo);
 		

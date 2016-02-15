@@ -122,14 +122,16 @@ public class ArticleGroupController extends EditorController{
 	 * toArticleGroupDetailPage
 	 * 组稿详情页
 	 */
-	@RequestMapping(value="/toArticleGroupDetailPage",method = RequestMethod.GET)
+	@RequestMapping(value="/toArticleGroupDetailPage")
 	public ModelAndView toArticleGroupDetailPage(
-			@RequestParam("periodicalId") String periodicalId,
-			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
+            @RequestParam("periodicalId") String periodicalId,
+            @RequestParam("periodicalIssueNo") String periodicalIssueNo,
+            @RequestParam("articleId") String articleId,
+            @RequestParam("title") String title,
 			HttpServletRequest request) {
 		logger.info("组稿左右Page:[ "+periodicalId+"]&["+periodicalIssueNo+"]");
 		ModelAndView mav = new ModelAndView("editor_articleGroupDetailPage");
-		
+
 		List<EditorArticleDealRespDto> list = new ArrayList<EditorArticleDealRespDto>();
 		ArticleInfoQuery articleInfoQuery = new ArticleInfoQuery();
 		/**
@@ -137,8 +139,10 @@ public class ArticleGroupController extends EditorController{
 		 * */
 		articleInfoQuery.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
 		articleInfoQuery.setExpertState(ArticleStateEnums.PUBLISH_ARTICLE.getCode());
+        articleInfoQuery.setArticleId(articleId);
+        articleInfoQuery.setArticleCnTitle(title);
 		articleInfoQuery.setExtends3("N");
-		List<ArticleInfo> articleInfos = articleInfoManager.queryList(articleInfoQuery);
+		List<ArticleInfo> articleInfos = articleInfoManager.queryListZuGao(articleInfoQuery);
 		Iterator<ArticleInfo> iters = articleInfos.iterator();
 		while(iters.hasNext()){
 			EditorArticleDealRespDto editorArticleDealRespDto = new EditorArticleDealRespDto();
@@ -151,10 +155,10 @@ public class ArticleGroupController extends EditorController{
 //			editorArticleDealRespDto.setArticleAttachmentInfo(articleAttachmentInfo);
 			list.add(editorArticleDealRespDto);
 		}
-		
+
 		mav.addObject("list", list);
-		
-		
+
+
 		SectionInfoQuery query =new SectionInfoQuery();
 		query.setPeriodicalId(periodicalId);
 		query.setPeriodicalIssueNo(periodicalIssueNo);
@@ -164,6 +168,8 @@ public class ArticleGroupController extends EditorController{
 
 		mav.addObject("periodicalIssueNo", periodicalIssueNo);
 		mav.addObject("periodicalId", periodicalId);
+		mav.addObject("articleId", articleId);
+		mav.addObject("title", title);
 		return mav;
 	}
 	/**
