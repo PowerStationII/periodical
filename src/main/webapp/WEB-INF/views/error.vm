@@ -9,8 +9,14 @@
     <link href="css/data_styles.css" type="text/css" rel="stylesheet"/>
     <link href="css/login_styles.css" type="text/css" rel="stylesheet"/>
 	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+      <script>
+          function goBack(){
+              history.go(-1);
+          }
+
+      </script>
   </head>
   <body>
-    	${message}
+    	$!{message}  &nbsp; <a href ="javasctipt:goBack()">返回</a>
   </body>
 </html>

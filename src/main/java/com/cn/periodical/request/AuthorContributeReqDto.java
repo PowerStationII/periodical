@@ -111,15 +111,15 @@ public class AuthorContributeReqDto extends RequestDto {
 		this.articleId = articleId;
 	}
 
-	public ArticleTypeEnums getArticleType() {
-		return articleType;
-	}
+    public ArticleTypeEnums getArticleType() {
+        return articleType;
+    }
 
-	public void setArticleType(ArticleTypeEnums articleType) {
-		this.articleType = articleType;
-	}
+    public void setArticleType(ArticleTypeEnums articleType) {
+        this.articleType = articleType;
+    }
 
-	public java.lang.String getArticleCnTitle() {
+    public java.lang.String getArticleCnTitle() {
 		return articleCnTitle;
 	}
 

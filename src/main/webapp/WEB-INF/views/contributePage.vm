@@ -17,6 +17,8 @@
 	</style>
   </head>
   <script type="text/javascript">
+        var textLength50 = 50 ;
+        var textLength500 = 500 ;
   		var count = 0;
   		$(function(){
   			$('#step1').show();
@@ -165,7 +167,37 @@
   				else if ($("#investSection").combobox("getText")=="") {
   					alert('请选择拟投栏目');
   				}
-  				else {
+                else if ($("input[name='classificationNums']").val().length>textLength50) {
+                    alert('中国分类号长度不能超过50');
+                }
+                else if ($("input[name='articleCnTitle']").val().length>textLength50) {
+                    alert('中文标题的长度不能超过50');
+                }
+                else if ($("textarea[name='articleCnSummary']").val().length>textLength500) {
+                    alert('中文摘要的长度不能超过500');
+                }
+                else if ($("input[name='articleCnKeywords']").val().length>textLength50) {
+                    alert('中文关键词的长度不能超过50');
+                }
+                else if ($("input[name='articleEnTile']").val().length>textLength50) {
+                    alert('英文标题的长度不能超过50');
+                }
+                else if ($("textarea[name='articleEnSummary']").val().length>textLength500) {
+                    alert('英文摘要的长度不能超过500');
+                }
+                else if ($("input[name='articleEnKeywords']").val().length>textLength50) {
+                    alert('英文关键词的长度不能超过50');
+                }
+                else if ($("textarea[name='remark']").val().length>textLength500) {
+                    alert('论文用途及期刊要求备注的长度不能超过500');
+                }
+                else if ($("textarea[name='inovationPoint']").val().length>textLength500) {
+                    alert('论文查新点、学术（产业或生态）价值长度不能超过500');
+                }
+                else if ($("textarea[name='referenceDoc']").val().length>textLength500) {
+                    alert('参考信息的长度不能超过500');
+                }
+                else {
   					/* var email = $("input[name^='authorList[].email']");
   				    for (var i=0;i<email.length;i++){
   						if (intNotZeroCheck(email.eq(i))) {
@@ -174,6 +206,26 @@
   						}
   					}  */
   					$("form").submit();
+//                    var jsonuserinfo = $('#form').serializeObject();
+//                    $.ajaxFileUpload({
+//                        url:'../author/toChongTou',            //需要链接到服务器地址
+//                        secureuri:false,
+//                        fileElementId:'files',                  //文件选择框的id属性
+//                        dataType: 'json',                      //服务器返回的格式，可以是json, xml
+//                        data:{articleId:articleId},
+//                        success: function (data, status){     //相当于java中try语句块的用法
+//                            if (data.message == "success") {
+//                                alert('重投成功');
+//                                window.location.href='../author/toArticleQueryPage';
+//                            } else{
+//                                alert('重投失败');
+//                            }
+//
+//                        },
+//                        error: function (data, status, e){  //相当于java中catch语句块的用法
+//                            alert(data);
+//                        }
+//                    });
   				}
   			});
 
@@ -305,19 +357,19 @@
 	  			</tr>
 	  			<tr>
 	  				<td>论文著作权转让协议与论文学术诚信承诺书</td>
-	  				<td><input type="file"  id="uploadi" name="files"><a style="font-size:12px;color:red;">(*)</a><br><a class="txtSize">【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
+	  				<td><input type="file"  id="uploadi" name="files"><br><a class="txtSize">【全体作者同意并在“论文著作权转让声明”和“论文学术诚信承诺书”上签字是向编辑部投稿的前提条件之一。】</a></td>
 	  			</tr>
 	  			<tr>
 	  				<td>文中数据图的作图数据（表）</td>
-	  				<td><input type="file"  id="sub_upload" name="files"><a style="font-size:12px;color:red;">(*)</a><br><a class="txtSize">【稿件中通过数据、软件生成的数据图，需上传这些数据图对应的（作图）数据表并在表上注明作图软件、版本号。图片图不需要单独上传】</a></td>
+	  				<td><input type="file"  id="sub_upload" name="files"><br><a class="txtSize">【稿件中通过数据、软件生成的数据图，需上传这些数据图对应的（作图）数据表并在表上注明作图软件、版本号。图片图不需要单独上传】</a></td>
 	  			</tr>
 	  			<tr>
 	  				<td>论文相关的研究视频、照片等</td>
-	  				<td><input type="file"  id="sub_upload" name="files"><a style="font-size:12px;color:red;">(*)</a><br><a class="txtSize">【有助于责编、审稿专家、读者更好理解论文的研究视频、照片等附件，请（打包后）在此上传。】</a></td>
+	  				<td><input type="file"  id="sub_upload" name="files"><br><a class="txtSize">【有助于责编、审稿专家、读者更好理解论文的研究视频、照片等附件，请（打包后）在此上传。】</a></td>
 	  			</tr>
 	  			<tr>
 	  				<td>论文学术不端全文检测报告</td>
-	  				<td><input type="file"  id="sub_upload" name="files"><a style="font-size:12px;color:red;">(*)</a><br><a class="txtSize">【论文的同方、万方等第三方（全文）学术不端检测报告，请（打包后）在此上传】</a></td>
+	  				<td><input type="file"  id="sub_upload" name="files"><br><a class="txtSize">【论文的同方、万方等第三方（全文）学术不端检测报告，请（打包后）在此上传】</a></td>
 	  			</tr>
 	  			<tr  style="display:none;">
 	  				<td><input type="button"  id="add"  value="添加其他附件"></td>
@@ -469,14 +521,14 @@
   					<tr>
   						<td>是通讯作者？</td>
   						<td>
-  							<input type="radio" value="Y" name="authorList[0].isContacter"/>是 
-							<input type="radio" value="N"  checked="checked" name="authorList[0].isContacter"/>否   提示:若第一作者不是通讯作者请选择其他作者为通讯作者或点击"添加更多作者".
+  							<input type="radio" value="Y" checked="checked" name="authorList[0].isContacter"/>是
+							<input type="radio" value="N"   name="authorList[0].isContacter"/>否   提示:若第一作者不是通讯作者请选择其他作者为通讯作者或点击"添加更多作者".
   						</td>
   					</tr>
   					<tr>
   						<td>真实姓名</td>
   						<td>
-  							<input  type="text"   name="authorList[0].authorName" value="$!{authorInfo.authorName}"/>
+  							<input  type="text"   name="authorList[0].authorName" value="$!{authorInfo.authorName}" maxlength="50" />
   						</td>
   					</tr>
   					<tr>
@@ -489,60 +541,60 @@
   					<tr>
   						<td>出生年月日</td>
   						<td>
-  							<input id="birthday" type="text" class="easyui-datebox" required="required"  value="1"   
-  							name="authorList[0].birthday"/>
+  							<input id="birthday" type="text" class="easyui-datebox" required="required"  value="1"
+  							name="authorList[0].birthday" maxlength="50"/>
   						</td>
   					</tr>
   					<tr>
   						<td>单位</td>
   						<td>
-  							<input  type="text"   name="authorList[0].companyName"/><br>
+  							<input  type="text"   name="authorList[0].companyName" maxlength="50"/><br>
 							<a class="txtSize">【如“城市、邮编”被系统从文档中提取出来并跟在单位后面，请将其去掉。几个单位任（兼）职或在职学习者，请填写稿件编审期间正常收取信函的单位；大学须具体到院系、教研室】</a>
   						</td>
   					</tr>
   					<tr>
   						<td>邮编</td>
   						<td>
-  							<input  type="text" name="addressInfos[0].extend"/>
+  							<input  type="text" name="addressInfos[0].extend" maxlength="50"/>
   						</td>
   					</tr>
   					<tr>
   						<td>通信地址</td>
   						<td>
-  							<input  type="text"   name="addressInfos[0].receiveAddress"/><br>
+  							<input  type="text"   name="addressInfos[0].receiveAddress" maxlength="50"/><br>
 							<a class="txtSize">【系统将调用此地址给您邮寄发票、期刊，请完整填写单位所在的省（市）区（县）街道和门牌号，并确保准确无误】</a>
   						</td>
   					</tr>
   					<tr>
   						<td>职称</td>
   						<td>
-  							<input  type="text"   name="authorList[0].technicalTitle"/>
+  							<input  type="text"   name="authorList[0].technicalTitle" maxlength="50"/>
   						</td>
   					</tr>
   					<tr>
   						<td>职务</td>
   						<td>
-  							<input  type="text"   name="authorList[0].duties"/>
+  							<input  type="text"   name="authorList[0].duties" maxlength="50"/>
   						</td>
   					</tr>
   					<tr>
   						<td>手机</td>
   						<td>
-  							<input  type="text"   name="addressInfos[0].contacterMobile"/><br>
+  							<input  type="text"   name="addressInfos[0].contacterMobile" maxlength="50"/><br>
 							<a class="txtSize">【非常重要！！审稿、费用通知、发票样刊邮寄、联系作者时系统均会短信提示，防止邮件收不到或查看不及时。请确保准确无误】</a>
   						</td>
   					</tr>
   					<tr>
   						<td>Email</td>
   						<td>
-  							<input  type="text"   name="authorList[0].email"/><br>
+  							<input  type="text"   name="authorList[0].email" maxlength="50"/><br>
 							<a class="txtSize">【非常重要！！稿件审理、费用通知、发票样刊邮寄等均通过Email通知提醒。推荐填写经常check、并与手机关联的qq邮箱确，以便在第一时间收到编辑部稿件处理等相关信息并作出回应。请确保准确无误！！】</a>
   						</td>
   					</tr>
   					<tr>
   						<td>身份证号</td>
   						<td>
-  							<input  type="text"   name="authorList[0].certificateNo"/><br>
+  							<input  type="text"   name="authorList[0].certificateNo" maxlength="50"/><br>
 							<a class="txtSize">【发放、领取论文稿酬时需要，请确保准确无误；无需稿酬者可不用填写】</a>
   						</td>
   					</tr>
@@ -558,8 +610,8 @@
 					[5]陈先茂,彭春瑞,关贤交,等.红壤旱地不同轮作模式的效益及其对土壤质量的影响[J].江西农业学报,2009,21(6):75-77.
 					[6]魏守辉,强胜,马波,等.不同作物轮作制度对土壤杂草种子库特征的影响[J].生态学杂志,2005,24(4):385-389.
 					2.或用<br>分隔开每条参考文献
-					张玉先,王孟雪.麦-玉-豆轮作制度下施肥措施对土壤养分的影响[J].中国油料作物学报,2009,31(3):339-343. 
-					刘冬碧,余延丰,范先鹏,等.湖北潮土区不同轮作制度下土壤养分平衡状况与评价[J].土壤,2009,41(6):912-916. 
+					张玉先,王孟雪.麦-玉-豆轮作制度下施肥措施对土壤养分的影响[J].中国油料作物学报,2009,31(3):339-343.
+					刘冬碧,余延丰,范先鹏,等.湖北潮土区不同轮作制度下土壤养分平衡状况与评价[J].土壤,2009,41(6):912-916.
 				</a>
   			</div><br>
   			<div>

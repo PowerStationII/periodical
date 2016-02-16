@@ -1,6 +1,7 @@
 package com.cn.periodical.controller.author;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.cn.periodical.manager.AuthorInfoManager;
 import com.cn.periodical.manager.PeriodicalInfoManager;
 import com.cn.periodical.manager.SectionInfoManager;
@@ -85,7 +86,7 @@ public class ContributeController extends AuthorController{
 			contributeRequestDto.setUserId(getUserInfo(request).getUserId());
 			contributeRequestDto.setRoleId(getUserInfo(request).getRoleId());
 			/**
-			 * 	保存投稿信息 
+			 * 	保存投稿信息
 			 * */
 			logger.info("保存新稿信息.....Start");
 			contributeService.saveArticle(contributeRequestDto,files,request);
@@ -94,11 +95,48 @@ public class ContributeController extends AuthorController{
 		}catch(Exception e){
 			logger.info("投稿功能异常!!!!!!",e);
 			mav=new ModelAndView("error");
+            mav.addObject("message",e.getMessage());
 			return mav;
 		}
-		
-	}
 
+	}
+//	/**
+//	 * 投稿按钮
+//	 * HttpServletRequest request
+//	 * ,@RequestParam(value="files", required=true) MultipartFile[] files
+//	 * ,HttpServletRequest request
+//	 */
+//	@RequestMapping(value="/toContribute",method = RequestMethod.POST)
+//    public @ResponseBody
+//    Object toContribute(String contributeRequestDto,
+//                        String articleType ,String classificationNums ,String articleCnTitle ,String articleCnSummary ,String articleCnKeywords ,
+//                        String articleEnTile ,String articleEnSummary ,String articleEnKeywords ,String isfund ,String fundTitle ,String periodicalId ,
+//                        String investSection ,String totalPages ,String totalPics ,String totalTabs ,String remark ,String inovationPoint ,
+//                        String referenceDoc ,
+//                        String[] isfirstauthor ,String[] isContacter ,String[] authorName ,String[] sex ,String[] birthday ,  String[] companyName,
+//                        String[] technicalTitle,String[] duties,String[] email,String[] certificateNo
+//                        ,String[] extend,String[] receiveAddress,String[] contacterMobile,
+//                        @RequestParam(value="files", required=true) MultipartFile[] files,HttpServletRequest request) {
+//		logger.info("提交投稿信息入参:["+JSON.toJSONString(contributeRequestDto)+"]&上传附件数量["+files.length+"]");
+//        Map<String,String> map = new HashMap<String,String>();
+//		try{
+//
+////            AuthorContributeReqDto authorContributeReqDto = JSON.parseObject(str,AuthorContributeReqDto.class) ;
+////			contributeRequestDto.setUserId(getUserInfo(request).getUserId());
+////			contributeRequestDto.setRoleId(getUserInfo(request).getRoleId());
+//			/**
+//			 * 	保存投稿信息
+//			 * */
+//			logger.info("保存新稿信息.....Start");
+////			contributeService.saveArticle(contributeRequestDto,files,request);
+//			logger.info("保存新稿信息.....end");
+//			return map;
+//		}catch(Exception e){
+//			logger.info("投稿功能异常!!!!!!", e);
+//			return map;
+//		}
+//
+//	}
     /**
      * 稿件重投按钮触发的函数
      * @param contributeRequestDto
