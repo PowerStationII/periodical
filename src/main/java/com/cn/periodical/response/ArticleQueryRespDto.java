@@ -69,6 +69,8 @@ public class ArticleQueryRespDto extends ResponseDto {
 
     private String authorAttachementName;
     private String editorAttachementName;
+
+    private String expertTGYJ ;
 	
 	
 	
@@ -275,4 +277,11 @@ public class ArticleQueryRespDto extends ResponseDto {
         this.editorAttachementName = editorAttachementName;
     }
 
+    public String getExpertTGYJ() {
+        return expertTGYJ;
+    }
+
+    public void setExpertTGYJ(String expertTGYJ) {
+        this.expertTGYJ = expertTGYJ;
+    }
 }

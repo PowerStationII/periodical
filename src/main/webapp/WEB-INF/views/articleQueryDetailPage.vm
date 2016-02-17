@@ -81,7 +81,13 @@
             </tr>
             <tr>
                 <td>基金项目：</td>
-                <td>$!{detail.isfund}</td>
+                <td>
+                    #if($!{detail.isfund}=='Y')
+                        是
+                    #elseif($!{detail.isfund}=='N')
+                        否
+                    #end
+                </td>
             </tr>
             <tr>
                 <td>页数：</td>

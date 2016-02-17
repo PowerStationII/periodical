@@ -116,7 +116,7 @@
 					</tr>
 					<tr>
 						<td>审稿意见:</td>
-						<td>$!{respDto.epxertDKYJ}</td>
+						<td>$!{respDto.expertTGYJ}</td>
 					</tr>
                     <tr>
                         <td>送审附件:</td>

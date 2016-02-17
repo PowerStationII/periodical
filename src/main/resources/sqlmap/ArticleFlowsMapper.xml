@@ -405,9 +405,13 @@
 		<result column="opinion" jdbcType="VARCHAR" property="opinion" />
 	</resultMap>
 	<select id="selectOpinion" parameterType="String" resultMap="OpinionMap">
--- 		select article_id,extend_2,deal_opinion as opinion from
-		select article_id,extend_2,group_concat(deal_opinion) as opinion from
+		select article_id,extend_2,deal_opinion as opinion from
 		article_flows where article_id=#{articleId,jdbcType=VARCHAR} and extend_2='Y'
-		group by article_id,extend_2;
+		and role_id = '1006' AND deal_state = '0003';
 	</select>
+	<!--<select id="selectOpinion" parameterType="String" resultMap="OpinionMap">-->
+		<!--select article_id,extend_2,group_concat(deal_opinion) as opinion from-->
+		<!--article_flows where article_id=#{articleId,jdbcType=VARCHAR} and extend_2='Y'-->
+		<!--group by article_id,extend_2;-->
+	<!--</select>-->
 </mapper>

@@ -718,7 +718,8 @@
 	<!-- 编辑待刊明细页 -->
 	<select id="EditorDKMXPage" resultType="ArticleQueryRespDto"
 		parameterType="ArticleQueryReqDto">
-		select temp1.article_id as articleId,temp1.article_cn_title as title,DATE_FORMAT(temp1.create_time, '%Y-%m-%d') as contriTime, temp1.authorName as authorName,temp1.editor_state as editorState,temp1.expert_state as expertState,temp1.invest_section as section ,temp2.expertId as expertId,temp3.authorAttachementPath as authorAttachementPath,temp3.editorAttachementPath as editorAttachementPath,temp4.editorDKSJ,temp4.expertDKSJ,temp4.expertDKYJ
+		select temp1.article_id as articleId,temp1.article_cn_title as title,DATE_FORMAT(temp1.create_time, '%Y-%m-%d') as contriTime, temp1.authorName as authorName,temp1.editor_state as editorState,temp1.expert_state as expertState,temp1.invest_section as section ,temp2.expertId as expertId,temp3.authorAttachementPath as authorAttachementPath,temp3.editorAttachementPath as editorAttachementPath,
+        temp4.editorDKSJ,temp4.expertDKSJ,temp4.expertDKYJ ,temp4.expertTGYJ
 
 		from ( 
 		select ai.article_id ,ai.article_cn_title ,ai.create_time,aui.author_name as authorName, ai.editor_state ,ai.expert_state ,ai.invest_section from article_info ai,author_info aui where ai.article_id=aui.article_id group by ai.article_id) as temp1 ,

@@ -27,9 +27,8 @@
             onLoadSuccess:function(){
                 var rows = $('#table').datagrid('getRows');
                 for(var i=0;i<rows.length;i++) {
-                    rows[i].option='<a class="easyui-linkbutton"   style="width:50px;" href="../editor/toPublishPage?articleId='+rows[i].articleId+'">待刊</a>';
                     rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].articleId+'">'+rows[i].articleId+'</a>';
-                    rows[i].state =  ArticleStateEnums(rows[i].state);
+                    rows[i].state =  ArticleStateEnumsEdit(rows[i].state,rows[i].expertState);
                     $('#table').datagrid('refreshRow',i);
                 }
             }
@@ -94,7 +93,7 @@
 					<th data-options="field:'authorNames',width:100">投稿作者</th>
 					<th data-options="field:'createTime',width:100">投稿时间</th>
 					<th data-options="field:'expertNames',width:100">审稿专家</th>
-					<th data-options="field:'state',width:100">稿件状态</th>
+					<th data-options="field:'state',width:120">稿件状态</th>
 				</tr>
 			</thead>
 		</table>

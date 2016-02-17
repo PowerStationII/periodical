@@ -27,7 +27,9 @@
             onLoadSuccess:function(){
                 var rows = $('#table').datagrid('getRows');
                 for(var i=0;i<rows.length;i++) {
-                    rows[i].remark='<a id="btn" href="../expert/toAuditeDetailPage?articleId='+rows[i].articleId+'&downloadState=N" class="easyui-linkbutton" data-options="width:50">审核</a>';
+                    if('0002' == rows[i].expertState){
+                        rows[i].remark='<a id="btn" href="../expert/toAuditeDetailPage?articleId='+rows[i].articleId+'&downloadState=N" class="easyui-linkbutton" data-options="width:50">审核</a>';
+                    }
                     rows[i].articleId='<a href="../author/toArticleQueryDetailPageZhuanJiaShenHe?articleId='+rows[i].articleId+'">'+rows[i].articleId+'</a>';
                     rows[i].expertState=ArticleStateEnums(rows[i].expertState)
                     $('#table').datagrid('refreshRow',i);
@@ -75,7 +77,7 @@
 		            <th data-options="field:'contriTime',width:180">投稿时间</th>
 		            <th data-options="field:'expertState',width:180">稿件状态</th>   
 		            <th data-options="field:'authorName',width:180">作者</th>   
-		            <th data-options="field:'remark',width:100,align:'center'"'>操作</th>
+		            <th data-options="field:'remark',width:140,align:'center'"'>操作</th>
 		        </tr>   
 		    </thead> 
 		</table>
