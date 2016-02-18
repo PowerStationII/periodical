@@ -147,7 +147,7 @@ $('#btnSubmit').click(function(){
 			url:'../editor/toArticleGroup',
 			data:{leftArray:leftArray.toString(),periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',str:JSON.stringify(sections),type:'Y'},
 			success:function(d){
-				window.location.href='../editor/toGroupPage?periodicalId=${periodicalId}';
+                alert(d.message);
 			}
 		});  
 	 }
@@ -173,7 +173,7 @@ $('#btnPreSubmit').click(function(){
 			url:'../editor/toArticleGroup',
 			data:{leftArray:leftArray.toString(),periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',str:JSON.stringify(sections),type:''},
 			success:function(d){
-				window.location.href='../editor/toGroupPage?periodicalId=${periodicalId}';
+                alert(d.message);
 			}
 		});  
 });

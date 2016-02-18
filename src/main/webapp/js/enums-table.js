@@ -109,28 +109,51 @@ function getZJType(status){
 
 //期刊类型
 function getPeriodicalType(status){
-	if('N' == status){
+	if("N" == status){
 		return '新刊';
-	}else if('APD' == status){
+	}else if("APD" == status){
 		return '稿件部分组刊中';
-	}else if('APO' == status){
+	}else if("APO" == status){
 		return '稿件部分组刊完成';
-	}else if('ADPD' == status){
+	}else if("ADPD" == status){
 		return '广告组刊中';
-	}else if('ADPO' == status){
+	}else if("ADPO" == status){
 		return '广告组刊完成';
-	}else if('PI' == status){
+	}else if("PI" == status){
 		return '待签发';
-	}else if('FI' == status){
+	}else if("FI" == status){
 		return '已签发';
-	}else if('YINGWEN' == status){
+	}else if("YINGWEN" == status){
         return '已送英文专家';
-    }else if('PIBIANJI' == status){
+    }else if("PIBIANJI" == status){
         return '英文专家已审核';
     }else{
 		return '未知';
 	}
 }
+//function getPeriodicalType(status){
+//	if('N' == status){
+//		return '新刊';
+//	}else if('APD' == status){
+//		return '稿件部分组刊中';
+//	}else if('APO' == status){
+//		return '稿件部分组刊完成';
+//	}else if('ADPD' == status){
+//		return '广告组刊中';
+//	}else if('ADPO' == status){
+//		return '广告组刊完成';
+//	}else if('PI' == status){
+//		return '待签发';
+//	}else if('FI' == status){
+//		return '已签发';
+//	}else if('YINGWEN' == status){
+//        return '已送英文专家';
+//    }else if('PIBIANJI' == status){
+//        return '英文专家已审核';
+//    }else{
+//		return '未知';
+//	}
+//}
 
 //广告类型
 function getGGType(status){

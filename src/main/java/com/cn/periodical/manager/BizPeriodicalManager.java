@@ -7,14 +7,12 @@ package com.cn.periodical.manager;
 
 import java.util.List;
 
-import com.cn.periodical.pojo.AdInfo;
-import com.cn.periodical.pojo.AdInfoPage;
-import com.cn.periodical.pojo.AdInfoQuery;
-import com.cn.periodical.pojo.BizPeriodical;
+import com.cn.periodical.pojo.*;
 
 public interface BizPeriodicalManager {
 	public List<BizPeriodical> queryPeriodicalInfosForIssueEditor(BizPeriodical reqDto);
-	public List<BizPeriodical> queryPeriodicalInfosForEnExpert(BizPeriodical reqDto);
+	public BizPeriodicalPage queryPeriodicalInfosForEnExpert(BizPeriodicalQuery reqDto,int count);
+	public int queryPeriodicalInfosForEnExpertCount(BizPeriodicalQuery reqDto);
 	public List<BizPeriodical> queryPeriodicalInfosForEnExpertDetail(BizPeriodical reqDto);
 
 }

@@ -6,7 +6,9 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cn.periodical.enums.RoleIdEnums;
+import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,14 +32,6 @@ import com.cn.periodical.manager.PeriodicalDetailsManager;
 import com.cn.periodical.manager.PeriodicalManager;
 import com.cn.periodical.manager.UserInfoManager;
 import com.cn.periodical.manager.UserQueryManager;
-import com.cn.periodical.pojo.ArticleAttachmentInfo;
-import com.cn.periodical.pojo.AuthorQueryDetail;
-import com.cn.periodical.pojo.BizPeriodical;
-import com.cn.periodical.pojo.Periodical;
-import com.cn.periodical.pojo.PeriodicalDetails;
-import com.cn.periodical.pojo.PeriodicalDetailsQuery;
-import com.cn.periodical.pojo.PeriodicalQuery;
-import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.utils.FileCopyUtils;
 import com.cn.periodical.utils.PropertiesInitManager;
 import com.cn.periodical.utils.UtilLoad;
@@ -91,21 +85,60 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 	 * toEnAuditePeriodicalPage
 	 * 去英文审刊页面
 	 */
+//	@RequestMapping(value="/toEnAuditePeriodicalPage")
+//	public ModelAndView toEnAuditePeriodicalPage(HttpServletRequest request,
+//			@ModelAttribute BizPeriodical reqDto) {
+//		UserInfo userInfo = getUserInfo(request);
+//		logger.info("英文审刊Page:["+JSON.toJSONString(reqDto)+"]");
+//		ModelAndView mav = new ModelAndView("expert_enAuditPeriodicalPage");
+//		logger.info(JSON.toJSONString(reqDto));
+//		/**
+//		 *
+//		 * */
+//		List<BizPeriodical> list = bizPeriodicalManager.queryPeriodicalInfosForEnExpert(null);
+//		mav.addObject("list", list);
+//		return mav;
+//	}
+	/**
+	 * toEnAuditePeriodicalPage
+	 * 去英文审刊页面
+	 */
 	@RequestMapping(value="/toEnAuditePeriodicalPage")
 	public ModelAndView toEnAuditePeriodicalPage(HttpServletRequest request,
 			@ModelAttribute BizPeriodical reqDto) {
-		UserInfo userInfo = getUserInfo(request);
 		logger.info("英文审刊Page:["+JSON.toJSONString(reqDto)+"]");
 		ModelAndView mav = new ModelAndView("expert_enAuditPeriodicalPage");
-		logger.info(JSON.toJSONString(reqDto));
-		/**
-		 * 
-		 * */
-		List<BizPeriodical> list = bizPeriodicalManager.queryPeriodicalInfosForEnExpert(null);
-		mav.addObject("list", list);
 		return mav;
 	}
-	
+	/**
+	 * toEnAuditePeriodicalPage
+	 * 去英文审刊页面
+	 */
+	@RequestMapping(value="/toEnAuditePeriodicalPageSet")
+    @ResponseBody
+    public JSONObject toEnAuditePeriodicalPageSet(HttpServletRequest request,
+			@ModelAttribute BizPeriodicalQuery query,
+            @RequestParam(required = false, value = "page", defaultValue = "1") int page,
+            @RequestParam(required = false, value = "rows", defaultValue = "10") int rows) {
+		UserInfo userInfo = getUserInfo(request);
+		logger.info("英文审刊Page:["+JSON.toJSONString(query)+"]");
+		logger.info(JSON.toJSONString(query));
+
+        JSONObject json = new JSONObject();
+        int count = bizPeriodicalManager.queryPeriodicalInfosForEnExpertCount(query);
+        json.put("total", count);
+
+        query.setPageSize((page-1)*rows);//开始
+        query.setPageNo(rows);//截止
+
+        logger.info("广告管理首页*****Page in:["+JSON.toJSONString(query)+"]");
+
+        BizPeriodicalPage bizPeriodicalPage = bizPeriodicalManager.queryPeriodicalInfosForEnExpert(query,count);
+        json.put("rows", bizPeriodicalPage.getValues());
+
+        return json ;
+	}
+
 	
 	
 	

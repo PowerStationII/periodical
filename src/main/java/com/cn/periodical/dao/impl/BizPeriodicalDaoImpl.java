@@ -2,6 +2,7 @@ package com.cn.periodical.dao.impl;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.BizPeriodicalQuery;
 import org.springframework.stereotype.Repository;
 
 import com.cn.periodical.dao.ArticleQueryDao;
@@ -25,9 +26,13 @@ public class BizPeriodicalDaoImpl extends BaseDao implements BizPeriodicalDao {
 		return super.getSqlSession().selectList("BizPeriodicalMapper.queryPeriodicalInfosForIssueEditor", reqDto);
 	}
 
-	public List<BizPeriodical> queryPeriodicalInfosForEnExpert(BizPeriodical reqDto) {
+	public List<BizPeriodical> queryPeriodicalInfosForEnExpert(BizPeriodicalQuery reqDto) {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectList("BizPeriodicalMapper.queryPeriodicalInfosForEnExpert", reqDto);
+	}
+	public int queryPeriodicalInfosForEnExpertCount(BizPeriodicalQuery reqDto) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectOne("BizPeriodicalMapper.queryPeriodicalInfosForEnExpertCount", reqDto);
 	}
 
 	public List<BizPeriodical> queryPeriodicalInfosForEnExpertDetail(BizPeriodical reqDto) {

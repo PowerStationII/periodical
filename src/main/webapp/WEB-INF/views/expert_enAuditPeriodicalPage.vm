@@ -13,36 +13,42 @@
 <script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
 <script type="text/javascript">
-	$(function(){
-		// 表格数据源  
-        var data = [];  
-        var rows = $('#table').datagrid('getRows');
-        for(var i=0;i<rows.length;i++) {
-        	 data.push({  
-		 		 "pCnName":rows[i].pCnName,  
-                 "pIsNo":rows[i].pIsNo,  
-                 "cNums":rows[i].cNums,
-                 "pState":getPeriodicalType(rows[i].pState),
-                 "option":rows[i].option
-             }) ; 
-		}
-        $("#table").datagrid("loadData", data.slice(0, 15));
-        var pager = $("#table").datagrid("getPager");  
-        pager.pagination({  
-            total:data.length, 
-            pageSize:15,
-            pageList: [15,20],
-            onSelectPage:function (pageNo, pageSize) {  
-                var start = (pageNo - 1) * pageSize;  
-                var end = start + pageSize;  
-                $("#table").datagrid("loadData", data.slice(start, end));  
-                pager.pagination('refresh', {  
-                    total:data.length,  
-                    pageNumber:pageNo
-                });  
-            }  
+    $(function(){
+        $('#submit').click(function(){
+            $('#table').datagrid({queryParams:getUrl()});
         });
-	});
+
+        $('#table').datagrid({
+            url:'../expert/toEnAuditePeriodicalPageSet',
+            queryParams:getUrl(),
+            pageSize:10,
+            pageList: [10,15,20],
+            onLoadSuccess:function(){
+                var rows = $('#table').datagrid('getRows');
+                for(var i=0;i<rows.length;i++) {
+
+                    if(rows[i].pState =='PI'){
+                        rows[i].option= getPeriodicalType(rows[i].pState);
+                    }else {
+                        rows[i].option='<a class="easyui-linkbutton" style="width:50px;" href="../expert/auditPeriodicalDetailPage?periodicalIssueNo='+rows[i].pIsNo+'&periodicalId='+rows[i].pId+'">审核</a>&nbsp;'+
+                        '<a class="easyui-linkbutton"  style="width:50px;" href="javascript:songQianFa(\''+rows[i].pIsNo+'\',\''+rows[i].pId+'\')">送签发</a>';
+                    }
+                    rows[i].pState=getPeriodicalType(rows[i].pState);
+                    rows[i].cNums="第"+rows[i].cNums+"期";
+                    $('#table').datagrid('refreshRow',i);
+                }
+            }
+        });
+
+        function getUrl() {
+            var url = {
+                'articleId':$('input[name="articleId"]').val(),
+                'articleCnTitle':$('input[name="title"]').val(),
+                'creatTime':$('input[name="contriTime"]').val()
+            };
+            return url;
+        }
+    });
 
     function songQianFa(periodicalIssueNo ,periodicalId){
         $.ajax({
@@ -71,6 +77,23 @@
 	<div id="articleInfos" style="margin-top: 50px;">
         <input id="periodicalIssueNo" value="${dtos.pIsNo}" type="hidden">
         <input id="periodicalId" value="${dtos.pId}" type="hidden">
+        <form action="../expert/toEnAuditePeriodicalPageSet" method="POST">
+            <table>
+                <tr>
+                    <td>稿件编号：</td>
+                    <td><input class="easyui-textbox" type="text" name="articleId" value=""></td>
+                    <td>稿件标题：</td>
+                    <td><input class="easyui-textbox" type="text" name="title" value=""></td>
+                    <td>投稿时间：</td>
+                    <td ><input class="easyui-datebox" type="text" name="contriTime" value=""></td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        <a  class="easyui-linkbutton"   style="width:50px;" href="#"  id="submit">查询</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
 		<table   id="table"  class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true,pagination:true">
 		<thead>
 			<tr>
@@ -81,24 +104,6 @@
 				<th data-options="field:'option',width:45">操作</th>
 			</tr>
 		</thead>
-		<tbody>
-			#foreach($dtos in ${list})
-			<tr>
-				<td>$!{dtos.pCnName}</td>
-				<td>$!{dtos.pIsNo}</td>
-				<td>第$!{dtos.cNums}期</td>
-				<td>$!{dtos.pState}</td>
-				#if($!{dtos.pState}=='PI')
-					<td>已完成</td>
-				#else
-					<td><a class="easyui-linkbutton" style="width:50px;"
-					href="../expert/auditPeriodicalDetailPage?periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">审核</a>
-					<a class="easyui-linkbutton"  style="width:50px;"
-					href="javascript:songQianFa('${dtos.pIsNo}','${dtos.pId}')">送签发</a></td>
-				#end
-			</tr>
-			#end
-		</tbody>
 		</table>
 		<br>
 	</div>

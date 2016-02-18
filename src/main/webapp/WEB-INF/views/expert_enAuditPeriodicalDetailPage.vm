@@ -23,6 +23,7 @@
                  "cNums":rows[i].cNums,
                  "aCnTitle":rows[i].aCnTitle,  
                  "section":rows[i].section,
+                 "extend1":rows[i].extend1,
                  "option":rows[i].option
              }) ; 
 		}
@@ -54,7 +55,7 @@
 				<th  data-options="field:'cNums',width:25">期号</th>
 				<th  data-options="field:'aCnTitle',width:45">稿件名称</th>
 				<th  data-options="field:'section',width:45">栏目名称</th>
-				<th  data-options="field:'section',width:20">状态</th>
+				<th  data-options="field:'extend1',width:20">状态</th>
 				<th  data-options="field:'option',width:25">操作</th>
 			</tr>
 			</thead>

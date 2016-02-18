@@ -17,7 +17,7 @@
 	</select>
 	
 	
-	<select id="queryPeriodicalInfosForEnExpert" parameterType="BizPeriodical"
+	<select id="queryPeriodicalInfosForEnExpert" parameterType="BizPeriodicalQuery"
 		resultType="BizPeriodical">
 		select pi.periodical_id as pId,pi.periodical_cn_name as
 		pCnName,pi.host_organization as hOrgan,pi.cycle as cycle,pi.press as
@@ -25,6 +25,16 @@
 		p.cycle_nums as cNums,p.periodical_issue_no as pIsNo,p.periodical_state as
 		pState,p.periodical_year as pYear,p.issue_opinion as
 		isOpinion,p.issue_time as isTime
+		from periodical_info pi,periodical p
+		where
+		pi.periodical_id=p.periodical_id
+-- 		and (p.periodical_state='ADPO')
+		and p.periodical_state='YINGWEN'
+		limit #{pageSize},#{pageNo}
+	</select>
+	<select id="queryPeriodicalInfosForEnExpertCount" parameterType="BizPeriodicalQuery"
+		resultType="java.lang.Integer">
+		select count(1)
 		from periodical_info pi,periodical p
 		where
 		pi.periodical_id=p.periodical_id
