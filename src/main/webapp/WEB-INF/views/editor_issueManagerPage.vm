@@ -49,7 +49,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			#foreach($dtos in ${list})   
+			#foreach($dtos in ${list})
 			<tr>
 				<td>$!{dtos.pId}</td>
 				<td>$!{dtos.pCnName}</td>
@@ -65,7 +65,7 @@
                 </td>
 			</tr>
 			#end
-		</tbody>	
+		</tbody>
 		</table>
 		<br>
 	</div>

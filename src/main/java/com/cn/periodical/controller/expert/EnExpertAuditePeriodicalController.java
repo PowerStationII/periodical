@@ -413,7 +413,7 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
             p.setId(p.getId());
             p.setPeriodicalState(PeriodicalStateEnums.EN_TOBIANJI.getCode());
             periodicalManager.savePeriodical(p);
-            map.put("message",super.error);
+            map.put("message",super.success);
         }
         return map ;
 	}

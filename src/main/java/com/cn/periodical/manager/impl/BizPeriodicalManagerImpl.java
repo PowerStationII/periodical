@@ -29,6 +29,21 @@ public class BizPeriodicalManagerImpl implements BizPeriodicalManager {
 		// TODO Auto-generated method stub
 		return bizPeriodicalDao.queryPeriodicalInfosForIssueEditor(reqDto);
 	}
+	public BizPeriodicalPage queryPeriodicalInfosForIssueEditorPage(BizPeriodicalQuery query,int itemCount) {
+        BizPeriodicalPage adInfoPage = new BizPeriodicalPage();
+        if (itemCount == 0) {
+            adInfoPage.setValues(null);
+        } else {
+            adInfoPage.setValues(bizPeriodicalDao.queryPeriodicalInfosForIssueEditorPage(query));
+        }
+
+        adInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
+        return adInfoPage;
+	}
+	public int queryPeriodicalInfosForIssueEditorPageCount(BizPeriodicalQuery reqDto) {
+		// TODO Auto-generated method stub
+		return bizPeriodicalDao.queryPeriodicalInfosForIssueEditorPageCount(reqDto);
+	}
 
 	public BizPeriodicalPage queryPeriodicalInfosForEnExpert(BizPeriodicalQuery query,int itemCount) {
         BizPeriodicalPage bizAdPage = new BizPeriodicalPage();

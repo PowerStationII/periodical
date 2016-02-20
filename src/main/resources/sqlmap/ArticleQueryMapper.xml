@@ -696,7 +696,7 @@
 		ai.article_cn_summary as articleCnSummary,
         ai.article_cn_keywords as articleCnKeywords,
 		ai.article_en_keywords as articleEnKeywords,
-        ai.article_en_summary   as sarticleEnSummary ,
+        ai.article_en_summary   as articleEnSummary ,
         ai.article_en_tile as articleEnTile,
 		aai.attachment_name as attachmentName,
         aai.attachment_path as attachmentPath
