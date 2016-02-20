@@ -24,6 +24,10 @@ public class SongKanInfoManagerImpl implements SongKanInfoManager {
     public int insert(SongKanInfo songKanInfo) {
         return songKanInfoDao.insert(songKanInfo);
     }
+    @Override
+    public int update(SongKanInfo songKanInfo) {
+        return songKanInfoDao.update(songKanInfo);
+    }
 
     @Override
     public List<SongKanInfo> selectByCondition(SongKanInfo songKanInfo) {

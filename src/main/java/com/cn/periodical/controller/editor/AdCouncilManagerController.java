@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cn.periodical.pojo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.manager.CouncilContractFlowsManager;
 import com.cn.periodical.manager.CouncilInfoManager;
-import com.cn.periodical.pojo.BizCouncil;
-import com.cn.periodical.pojo.CouncilContractFlows;
-import com.cn.periodical.pojo.CouncilInfo;
-import com.cn.periodical.pojo.CouncilInfoQuery;
 import com.cn.periodical.request.AdCouncilManagerReqDto;
 import com.cn.periodical.service.AdCouncilManagerService;
 import com.cn.periodical.utils.PropertiesInitManager;
@@ -46,16 +44,53 @@ public class AdCouncilManagerController extends EditorController{
 	 * toCouncilManagerPage
 	 * 会员管理 End
 	 */
+//	@RequestMapping(value="/toCouncilManagerPage")
+//	public ModelAndView toCouncilManagerPage(@ModelAttribute BizCouncil reqDto) {
+//		logger.info("会员管理Page in:["+JSON.toJSONString(reqDto)+"]");
+//		ModelAndView mav = new ModelAndView("editor_councilManagerPage");
+//		List<BizCouncil> list = adCouncilManagerService.queryCouncilInfo(reqDto);
+//		mav.addObject("list", list);
+//		logger.info("会员管理Page out:["+JSON.toJSONString(list)+"]");
+//		return mav;
+//	}
+	/**
+	 * toCouncilManagerPage
+	 * 会员管理 End
+	 */
 	@RequestMapping(value="/toCouncilManagerPage")
 	public ModelAndView toCouncilManagerPage(@ModelAttribute BizCouncil reqDto) {
 		logger.info("会员管理Page in:["+JSON.toJSONString(reqDto)+"]");
 		ModelAndView mav = new ModelAndView("editor_councilManagerPage");
-		List<BizCouncil> list = adCouncilManagerService.queryCouncilInfo(reqDto);
-		mav.addObject("list", list);
-		logger.info("会员管理Page out:["+JSON.toJSONString(list)+"]");
 		return mav;
 	}
-	
+	/**
+	 * toCouncilManagerPage
+	 * 会员管理 End
+	 */
+	@RequestMapping(value="/toCouncilManagerPageSet")
+    @ResponseBody
+    public JSONObject toCouncilManagerPageSet(HttpServletRequest request,@ModelAttribute BizCouncilQuery query ,
+                                              @RequestParam(required = false, value = "page", defaultValue = "1") int page,
+                                              @RequestParam(required = false, value = "rows", defaultValue = "10") int rows) {
+		logger.info("会员管理Page in:["+JSON.toJSONString(query)+"]");
+
+
+        UserInfo userInfo = getUserInfo(request);
+        JSONObject json = new JSONObject();
+        int count = adCouncilManagerService.queryCouncilInfoPageCount(query);
+        json.put("total", count);
+
+        query.setPageSize((page-1)*rows);//开始
+        query.setPageNo(rows);//截止
+
+        logger.info("广告管理首页*****Page in:["+JSON.toJSONString(query)+"]");
+        BizCouncilPage bizAdPage = adCouncilManagerService.queryCouncilInfoPage(query,count);
+        json.put("rows", bizAdPage.getValues());
+
+        logger.info("广告管理首页Page out:[]");
+        return json;
+	}
+
 	@RequestMapping(value = "/toCouncilInfoAdd", method = RequestMethod.GET)
 	public ModelAndView toCouncilInfoAdd() {
 		ModelAndView mav = new ModelAndView("editor_councilManagerDetailPage");

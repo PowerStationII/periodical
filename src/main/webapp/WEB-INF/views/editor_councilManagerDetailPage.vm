@@ -257,17 +257,17 @@
 </script>
 <body>
 
-	<table style="border: 1px solid green;" rules="all">
-		<tr>
-			<td colspan="2">上传文件&nbsp;&nbsp;</td>
-			<td style="width:448px;">
-				<form id="fileUpload" enctype="multipart/form-data" action="../editor/uploadLogo" method="POST">
-				<input id="submit2" type="button" value="上传logo"><input type="file" name="files" value="">
-				<img style="width:100px;height:105px;" alt="" id="logoImg" width="100%" height="100%" src="../councilImg/${fileName}">
-				</form>
-			</td>
-		</tr>
-	</table>
+##	<table style="border: 1px solid green;" rules="all">
+##		<tr>
+##			<td colspan="2">上传文件&nbsp;&nbsp;</td>
+##			<td style="width:448px;">
+##				<form id="fileUpload" enctype="multipart/form-data" action="../editor/uploadLogo" method="POST">
+##				<input id="submit2" type="button" value="上传logo"><input type="file" name="files" value="">
+##				<img style="width:100px;height:105px;" alt="" id="logoImg" width="100%" height="100%" src="../councilImg/${fileName}">
+##				</form>
+##			</td>
+##		</tr>
+##	</table>
 	
 		
 

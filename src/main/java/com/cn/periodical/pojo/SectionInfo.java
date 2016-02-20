@@ -41,7 +41,7 @@ public class SectionInfo implements Serializable{
 		this.periodicalIssueNo = periodicalIssueNo;
 	}
 
-	private List<Map<String,Object>> list;
+	private List<Map<String,Object>> list; // 文章列表
 	private List<Map<String,Object>> listAd;
 	private List<Map<String,Object>> listAuthor; // 作者
 

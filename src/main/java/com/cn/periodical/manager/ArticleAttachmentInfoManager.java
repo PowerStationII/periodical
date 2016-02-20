@@ -25,4 +25,5 @@ public interface ArticleAttachmentInfoManager {
 	ArticleAttachmentInfoPage queryPageList(ArticleAttachmentInfoQuery query);
 
     public List<ArticleAttachmentInfo>  queryAttByArtcicle(String article);
+    public List<ArticleAttachmentInfo>  queryAttByArtcicleIds(List<String> list);
 }

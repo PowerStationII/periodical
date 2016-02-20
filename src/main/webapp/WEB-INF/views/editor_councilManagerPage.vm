@@ -14,59 +14,58 @@
 <script type="text/javascript" src="../js/enums-combox.js"></script>
 </head>
 <script>
-	$(function(){
-		$('#submit').click(function(){
-			$('form').submit();
-		});
-		
-		// 表格数据源  
-        var data = [];  
-        var rows = $('#table').datagrid('getRows');
-        for(var i=0;i<rows.length;i++) {
-        	 data.push({  
-                 "councilId":rows[i].councilId,  
-                 "councilCompanyName":rows[i].councilCompanyName,
-                 "type":CouncilType(rows[i].type),  
-                 "contractStartTime":rows[i].contractStartTime,
-                 "contractEndTime":rows[i].contractEndTime,
-                 "amount":rows[i].amount,
-                 "invoiceNo":rows[i].invoiceNo,  
-                 "option":rows[i].option
-             }) ; 
-		}
-        $("#table").datagrid("loadData", data.slice(0, 5));
-        var pager = $("#table").datagrid("getPager");  
-        pager.pagination({  
-            total:data.length, 
-            pageSize:5,
-            pageList: [5,10,15,20],
-            onSelectPage:function (pageNo, pageSize) {  
-                var start = (pageNo - 1) * pageSize;  
-                var end = start + pageSize;  
-                $("#table").datagrid("loadData", data.slice(start, end));  
-                pager.pagination('refresh', {  
-                    total:data.length,  
-                    pageNumber:pageNo
-                });  
-            }  
-        });  
-        
+
+    $(function(){
+        $('#submit').click(function(){
+            $('#table').datagrid({queryParams:getUrl()});
+        });
+
+        $('#table').datagrid({
+            url:'../editor/toCouncilManagerPageSet',
+            queryParams:getUrl(),
+            pageSize:10,
+            pageList: [10,15,20],
+            onLoadSuccess:function(){
+                var rows = $('#table').datagrid('getRows');
+                for(var i=0;i<rows.length;i++) {
+                    rows[i].type=CouncilType(rows[i].type);
+                    rows[i].option='<a class="easyui-linkbutton" style="width:50px;" href="../editor/toQrySingleCouncilInfo?councilId='+rows[i].councilId+'">编辑</a> &nbsp;'+
+                    '<a class="easyui-linkbutton" style="width:50px;" href="../editor/toRenewPage?councilId='+rows[i].councilId+'">续费</a>&nbsp;'+
+                    '<a class="easyui-linkbutton"  href="../editor/toAdInfoAdd?councilId='+rows[i].councilId+'">添加广告</a>';
+                    $('#table').datagrid('refreshRow',i);
+                }
+            }
+        });
+
+
         $("#typeCombobox").combobox({
-        	data:getCouncilType(),
-        	onLoadSuccess: function () { //数据加载完毕事件
+            data:getCouncilType(),
+            onLoadSuccess: function () { //数据加载完毕事件
                 var data = $('#typeCombobox').combobox('getData');
                 if (data.length > 0) {
                     $("#typeCombobox").combobox('select', data[0].value);
                 }
             }
         })
-	});
+
+        function getUrl() {
+            var url = {
+                'councilId':$('input[name="councilId"]').val(),
+                'councilCompanyName':$('input[name="councilCompanyName"]').val(),
+                'adType':$('#typeCombobox').combobox('getValue'),
+                'invoiceNo':$('input[name="invoiceNo"]').val(),
+                'contractStartTime':$('input[name="contractStartTime"]').val(),
+                'contractEndTime':$('input[name="contractEndTime"]').val()
+            };
+            return url;
+        }
+    });
 	
 </script>
 <body>
 	<div id="councileInfos">
 		
-		<form action="../editor/toCouncilManagerPage" method="POST">
+		<form action="../editor/toCouncilManagerPageSet" method="POST">
 			<table>
 				<tr>
 					<td>会员类型：</td>
@@ -106,22 +105,6 @@
 					<th data-options="field:'option',width:210">操作</th>
 				</tr>
 			</thead>
-			<tbody>	
-			#foreach($dtos in ${list})   
-				<tr>
-					<td>${dtos.councilId}</td>
-					<td>${dtos.councilCompanyName}</td>
-					<td>${dtos.type}</td>
-					<td>${dtos.contractStartTime}</td>
-					<td>${dtos.contractEndTime}</td>
-					<td>${dtos.amount}</td>
-					<td>${dtos.invoiceNo}</td>
-					<td><a class="easyui-linkbutton" style="width:50px;" href="../editor/toQrySingleCouncilInfo?councilId=${dtos.councilId}">编辑</a>
-					<a class="easyui-linkbutton" style="width:50px;" href="../editor/toRenewPage?councilId=${dtos.councilId}">续费</a>
-					<a class="easyui-linkbutton"  href="../editor/toAdInfoAdd?councilId=${dtos.councilId}">添加广告</a></td>
-				</tr>
-			#end
-			</tbody>
 		</table>
 	</div>
 </body>

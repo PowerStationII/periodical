@@ -7,6 +7,7 @@ package com.cn.periodical.dao.impl;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.BizCouncilQuery;
 import org.springframework.stereotype.Repository;
 
 import com.cn.periodical.dao.CouncilInfoDao;
@@ -73,5 +74,13 @@ public class CouncilInfoDaoImpl extends BaseDao implements CouncilInfoDao {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectList("CouncilInfoMapper.qryBizCouncil", reqDto);
 	}
-	
+	public List<BizCouncil> queryBizCouncilPage(BizCouncilQuery reqDto) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("CouncilInfoMapper.qryBizCouncilPage", reqDto);
+	}
+	public int queryBizCouncilPageCount(BizCouncilQuery reqDto) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectOne("CouncilInfoMapper.qryBizCouncilPageCount", reqDto);
+	}
+
 }

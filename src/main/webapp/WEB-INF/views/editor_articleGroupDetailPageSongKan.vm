@@ -63,6 +63,7 @@
             var periodicalId = $("#periodicalId").val();
             var qishu = $("#qishu").val();
             var year = $("#year").val();
+            var orderNo = $("#orderNo").val();
 
             var array=[];
             var data = $('#editTable').datagrid('getData');
@@ -78,7 +79,7 @@
                 type:"post",
                 url:"../reader/toCreatOrderSongKan" ,
                 dataType:"json",
-                data:{periodicalIssueNo:periodicalIssueNo,periodicalId:periodicalId,array:d,qishu:qishu,year:year},
+                data:{periodicalIssueNo:periodicalIssueNo,periodicalId:periodicalId,array:d,qishu:qishu,year:year,orderNo:orderNo},
                 beforeSend:function(){},
                 success:function(data){
                     alert(data.message);
@@ -101,6 +102,7 @@
 		<input type="hidden" name="periodicalId" id="periodicalId" value="${periodicalId}">
         <input type="hidden" name="qishu"  id="qishu" value="${qishu}">
         <input type="hidden" name="year"  id="year" value="${year}">
+        <input type="hidden" name="orderNo"  id="orderNo" value="$!{orderNo}">
         <div>
             <table id="editTable" class="easyui-datagrid" data-options="singleSelect:true,pagination:true" >
                 <thead>

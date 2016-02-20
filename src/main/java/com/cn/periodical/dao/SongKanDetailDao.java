@@ -15,5 +15,6 @@ public interface SongKanDetailDao {
     public int insert(SongKanDetail songKanDetail);
 
     public SongKanDetail selectArticle(String articleId);
+    public int delete(String articleId);
     public List<SongKanDetail> selectByOrderNo(String orderNo);
 }

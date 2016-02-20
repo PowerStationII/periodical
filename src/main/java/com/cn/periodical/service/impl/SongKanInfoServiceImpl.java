@@ -70,10 +70,23 @@ public class SongKanInfoServiceImpl implements SongKanInfoService {
         int k =(Integer) transactionTemplate.execute(new TransactionCallback<Object>(){
             public Object doInTransaction(TransactionStatus status) {
                 try{
-                    int temp0 = songKanInfoManager.insert(songKanInfo);
-                    if(1!=temp0){
-                        throw new RuntimeException("songKanInfo保存失败");
+                    SongKanInfo songKanInfoQuery = new SongKanInfo() ;
+                    songKanInfoQuery.setOrderNo(songKanInfo.getOrderNo());
+                    List<SongKanInfo> list = songKanInfoManager.selectByCondition(songKanInfoQuery);
+                    if(null!=list && !list.isEmpty()){
+                        // 更新
+                        songKanInfoQuery.setZengSonNums(songKanInfo.getZengSonNums());
+                        int temp0 = songKanInfoManager.update(songKanInfoQuery);
+                        if(1!=temp0){
+                            throw new RuntimeException("songKanInfo保存失败");
+                        }
+                    }else{
+                        int temp0 = songKanInfoManager.insert(songKanInfo);
+                        if(1!=temp0){
+                            throw new RuntimeException("songKanInfo保存失败");
+                        }
                     }
+                    songKanDetailManager.delete(songKanInfo.getOrderNo());
                     for(SongKanDetail songKanDetail : songKanDetails){
                         int temp1 = songKanDetailManager.insert(songKanDetail);
                         if(1!=temp1){
@@ -81,6 +94,7 @@ public class SongKanInfoServiceImpl implements SongKanInfoService {
                         }
                     }
                     return 1 ;
+
                 }catch (Exception e){
                     status.setRollbackOnly();
                     return 0 ;

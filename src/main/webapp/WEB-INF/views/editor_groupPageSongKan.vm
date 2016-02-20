@@ -76,7 +76,7 @@ function songQianFa(periodicalIssueNo ,periodicalId){
 				<td>第${periodical.cycleNums}期</td>
 				<td>${periodical.periodicalIssueNo}</td>
 				<td></td>
-				<td><span id="span_state">${periodical.periodicalState}</span></td>
+				<td>${periodical.periodicalState}</td>
 				<td><a class="easyui-linkbutton" href="../editor/toArticleGroupDetailPageSongKan?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}&qishu=${periodical.cycleNums}&year=${periodical.periodicalYear}">登记送刊</a></td>
 			</tr>
 			#end

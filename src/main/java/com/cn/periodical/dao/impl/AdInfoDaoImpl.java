@@ -85,5 +85,9 @@ public class AdInfoDaoImpl extends BaseDao implements AdInfoDao {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectList("AdInfoMapper.selectPageByBizAd", example);
 	}
-	
+	public List<AdInfo> selectByadids(List<String> list) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("AdInfoMapper.selectByadids", list);
+	}
+
 }

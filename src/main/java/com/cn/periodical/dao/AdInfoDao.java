@@ -38,5 +38,6 @@ public interface AdInfoDao {
 	int countByBizAd(BizAdQuery example);
 	
 	List<BizAd> selectPageByBizAd(BizAdQuery example);
+	List<AdInfo> selectByadids(List<String> list);
 
 }

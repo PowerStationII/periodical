@@ -4,15 +4,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.cn.periodical.pojo.*;
+import com.cn.periodical.utils.Pagenation;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cn.periodical.manager.CouncilContractFlowsManager;
 import com.cn.periodical.manager.CouncilInfoManager;
-import com.cn.periodical.pojo.BizCouncil;
-import com.cn.periodical.pojo.CouncilContractFlows;
-import com.cn.periodical.pojo.CouncilInfo;
 import com.cn.periodical.request.AdCouncilManagerReqDto;
 import com.cn.periodical.service.AdCouncilManagerService;
 
@@ -89,6 +88,20 @@ public class AdCouncilManagerServiceImpl implements AdCouncilManagerService {
 	public List<BizCouncil> queryCouncilInfo(BizCouncil reqDto) {
 		List<BizCouncil> list = councilInfoManager.queryBizCouncil(reqDto);
 		return list;
+	}
+	public BizCouncilPage queryCouncilInfoPage(BizCouncilQuery query,int itemCount) {
+        BizCouncilPage adInfoPage = new BizCouncilPage();
+        if (itemCount == 0) {
+            adInfoPage.setValues(null);
+        } else {
+            adInfoPage.setValues(councilInfoManager.queryBizCouncilPage(query));
+        }
+        adInfoPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
+        return adInfoPage;
+	}
+	public int queryCouncilInfoPageCount(BizCouncilQuery reqDto) {
+		int count = councilInfoManager.queryBizCouncilPageCount(reqDto);
+		return count;
 	}
 
 	public AdCouncilManagerReqDto queryAdCouncilInfoDetail(String councilId) {

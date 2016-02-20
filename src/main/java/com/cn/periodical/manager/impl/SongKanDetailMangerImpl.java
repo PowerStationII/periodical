@@ -29,6 +29,10 @@ public class SongKanDetailMangerImpl implements SongKanDetailManager {
     public SongKanDetail selectArticle(String articleId) {
         return songKanDetailDao.selectArticle(articleId);
     }
+    @Override
+    public int delete(String articleId) {
+        return songKanDetailDao.delete(articleId);
+    }
 
     @Override
     public List<SongKanDetail> selectByOrderNo(String orderNo) {

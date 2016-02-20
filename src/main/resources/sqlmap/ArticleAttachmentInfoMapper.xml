@@ -439,4 +439,19 @@
       article_id = #{articleId,jdbcType=VARCHAR}
 
   </select>
+
+
+  <select id="queryAttByArtcicleIds" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            <include refid="Base_Column_List" />
+        </trim>
+        from article_attachment_info
+        where
+          article_id in
+          <foreach collection="list" item="classIdList"  open="(" separator="," close=")">
+              #{classIdList,jdbcType=VARCHAR}
+          </foreach>
+          and TYPE = '1004'
+    </select>
 </mapper>

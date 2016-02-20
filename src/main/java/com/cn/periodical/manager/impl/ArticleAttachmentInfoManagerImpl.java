@@ -73,5 +73,8 @@ public class ArticleAttachmentInfoManagerImpl implements ArticleAttachmentInfoMa
     public List<ArticleAttachmentInfo>  queryAttByArtcicle(String article){
         return articleAttachmentInfoDao.queryAttByArtcicle(article);
     }
+    public List<ArticleAttachmentInfo>  queryAttByArtcicleIds(List<String> list){
+        return articleAttachmentInfoDao.queryAttByArtcicleIds(list);
+    }
 }
 

@@ -94,7 +94,11 @@ public class AdInfoManagerImpl implements AdInfoManager {
 		bizAdPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
 		return bizAdPage;
 	}
-	
+	public List<AdInfo> selectByadids(List<String> list) {
+        List<AdInfo> listr =adInfoDao.selectByadids(list);
+		return listr;
+	}
+
 	public int queryBizAdCount(BizAdQuery query){
 		int itemCount = adInfoDao.countByBizAd(query);
 		return itemCount;

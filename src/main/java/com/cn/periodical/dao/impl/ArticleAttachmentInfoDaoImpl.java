@@ -70,5 +70,8 @@ public class ArticleAttachmentInfoDaoImpl extends BaseDao implements ArticleAtta
     public List<ArticleAttachmentInfo>  queryAttByArtcicle(String article){
         return super.getSqlSession().selectList("ArticleAttachmentInfoMapper.queryAttByArtcicle",article) ;
     }
-	
+    public List<ArticleAttachmentInfo>  queryAttByArtcicleIds(List<String> list){
+        return super.getSqlSession().selectList("ArticleAttachmentInfoMapper.queryAttByArtcicleIds",list) ;
+    }
+
 }

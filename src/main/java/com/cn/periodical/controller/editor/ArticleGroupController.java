@@ -238,7 +238,7 @@ public class ArticleGroupController extends EditorController{
 			HttpServletRequest request) {
 		logger.info("送刊左右Page:[ "+periodicalId+"]&["+periodicalIssueNo+"]");
 		ModelAndView mav = new ModelAndView("editor_articleGroupDetailPageSongKan");
-
+        String orderNo = "" ;
 		SectionInfoQuery query =new SectionInfoQuery();
 		query.setPeriodicalId(periodicalId);
 		query.setPeriodicalIssueNo(periodicalIssueNo);
@@ -258,7 +258,12 @@ public class ArticleGroupController extends EditorController{
                 }
                 map.put("author",String.valueOf(strb_aurhor).replaceFirst(",",""));
                 map.put("authroCount",authorInfos.size());
-                map.put("nums",songKanDetail.getZengSonNum());
+                if(null==songKanDetail){
+                    map.put("nums",0);
+                } else{
+                    map.put("nums",songKanDetail.getZengSonNum());
+                    orderNo =  songKanDetail.getOrderNo() ;
+                }
             }
         }
 		mav.addObject("sList", sectionInfos);
@@ -267,6 +272,7 @@ public class ArticleGroupController extends EditorController{
 		mav.addObject("periodicalId", periodicalId);
 		mav.addObject("qishu", qishu);
 		mav.addObject("year", year);
+		mav.addObject("orderNo", orderNo);
 		return mav;
 	}
 

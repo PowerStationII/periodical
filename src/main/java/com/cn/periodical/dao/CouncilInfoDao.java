@@ -8,6 +8,7 @@ package com.cn.periodical.dao;
 import java.util.List;
 
 import com.cn.periodical.pojo.BizCouncil;
+import com.cn.periodical.pojo.BizCouncilQuery;
 import com.cn.periodical.pojo.CouncilInfo;
 import com.cn.periodical.pojo.CouncilInfoQuery;
 
@@ -33,4 +34,6 @@ public interface CouncilInfoDao {
 	int updateByPrimaryKey(CouncilInfo record);
 	
 	public List<BizCouncil> queryBizCouncil(BizCouncil reqDto);
+	public List<BizCouncil> queryBizCouncilPage(BizCouncilQuery reqDto);
+	public int queryBizCouncilPageCount(BizCouncilQuery reqDto);
 }

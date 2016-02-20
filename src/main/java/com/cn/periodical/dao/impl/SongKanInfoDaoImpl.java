@@ -20,6 +20,10 @@ public class SongKanInfoDaoImpl extends BaseDao implements SongKanInfoDao{
     public int insert(SongKanInfo songKanInfo) {
         return super.getSqlSession().insert("SongKanInfoMapper.insert", songKanInfo);
     }
+    @Override
+    public int update(SongKanInfo songKanInfo) {
+        return super.getSqlSession().update("SongKanInfoMapper.update", songKanInfo);
+    }
 
     @Override
     public List<SongKanInfo> selectByCondition(SongKanInfo songKanInfo) {

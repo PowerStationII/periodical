@@ -7,10 +7,7 @@ package com.cn.periodical.manager;
 
 import java.util.List;
 
-import com.cn.periodical.pojo.BizCouncil;
-import com.cn.periodical.pojo.CouncilInfo;
-import com.cn.periodical.pojo.CouncilInfoPage;
-import com.cn.periodical.pojo.CouncilInfoQuery;
+import com.cn.periodical.pojo.*;
 
 public interface CouncilInfoManager {
 	void saveCouncilInfo(CouncilInfo councilInfo);
@@ -26,5 +23,7 @@ public interface CouncilInfoManager {
 	CouncilInfoPage queryPageList(CouncilInfoQuery query);
 	
 	public List<BizCouncil> queryBizCouncil(BizCouncil reqDto);
-	
+	public List<BizCouncil> queryBizCouncilPage(BizCouncilQuery reqDto);
+	public int queryBizCouncilPageCount(BizCouncilQuery reqDto);
+
 }

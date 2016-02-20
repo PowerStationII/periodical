@@ -14,6 +14,7 @@ import java.util.List;
 public interface SongKanInfoManager {
 
     public int insert(SongKanInfo songKanInfo);
+    public int update(SongKanInfo songKanInfo);
 
     public List<SongKanInfo> selectByCondition(SongKanInfo songKanInfo);
 

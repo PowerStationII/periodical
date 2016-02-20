@@ -579,4 +579,17 @@
     <!-- order by CREATE_DATE -->
     <include refid="Page_Query_End" />
   </select>
+
+    <select id="selectByadids" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            <include refid="Base_Column_List" />
+        </trim>
+        from ad_info
+        where
+        ad_id in
+        <foreach collection="list" item="classIdList"  open="(" separator="," close=")">
+            #{classIdList,jdbcType=VARCHAR}
+        </foreach>
+    </select>
 </mapper>

@@ -131,8 +131,9 @@ public class OrderManageController extends ReaderController{
      * 送刊保存
      */
     @RequestMapping(value="/toCreatOrderSongKan",method ={ RequestMethod.POST ,RequestMethod.GET})
-    public  @ResponseBody Map<String,Object> toCreatOrderSongKan(HttpServletRequest request,String periodicalId,String periodicalIssueNo,String qishu,
-                                                                 String array , String year) {
+    public  @ResponseBody Map<String,Object> toCreatOrderSongKan(HttpServletRequest request,
+                                                                 String periodicalId,String periodicalIssueNo,String qishu,
+                                                                 String array , String year,String orderNo) {
         UserInfo userInfo = getUserInfo(request);
         logger.info("保存送刊Page:["+userInfo.getUserId()+"]&["+periodicalId+"]");
         Map<String,Object> map_ret = new HashMap<String,Object>();
@@ -154,7 +155,9 @@ public class OrderManageController extends ReaderController{
         songKanInfo.setZengSonNums(zengSongNums);
         songKanInfo.setCycleNums(Integer.parseInt(qishu));
         songKanInfo.setYear(year);
-        String orderNo = articalCodeManager.getCode(ArticalCodeEnums.SONGKAN_CONDE.getCode(),ArticalCodeEnums.SONGKAN_CONDE.getName()) ;   // 订单号生成
+        if(null==orderNo || "".equals(orderNo)){
+            orderNo = articalCodeManager.getCode(ArticalCodeEnums.SONGKAN_CONDE.getCode(),ArticalCodeEnums.SONGKAN_CONDE.getName()) ;   // 订单号生成
+        }
         songKanInfo.setOrderNo(orderNo);
 
         int r = songKanInfoService.insert(songKanInfo,list);

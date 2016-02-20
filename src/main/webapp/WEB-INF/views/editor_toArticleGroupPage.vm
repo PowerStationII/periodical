@@ -16,14 +16,39 @@
         $('#back').click(function(){
             history.go(-1);
         });
+        $("#download").click(function(){
+            var periodicalId = $("#periodicalId").val();
+            var periodicalIssueNo_id = $("#periodicalIssueNo_id").val();
+            $.ajax({
+                type:"post",
+                url:"../editor/downloadAllPeriodical" ,
+                dataType:"json",
+                data:{periodicalId:periodicalId,periodicalIsNo:periodicalIssueNo_id},
+                beforeSend:function(){},
+                success:function(data){
+                   alert(data.message);
+                },
+                complete:function(){
+
+                },
+                error:function(data){
+                    alert(data.message);
+                }
+
+            })
+        });
     })
 </script>
 <body>
 <form id="sub2" action="" method="POST">
-    <input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}">
-    <input type="hidden" name="periodicalId" value="${periodicalId}"> <br />
+    <input type="hidden" name="periodicalIssueNo" id="periodicalIssueNo_id" value="${periodicalIssueNo}">
+    <input type="hidden" name="periodicalId" id="periodicalId" value="${periodicalId}"> <br />
     <div >
-        <div ><input type='button' value='返回' id='back' /></div>
+        <div >
+            <input type='button' value='返回' id='back' />
+            &nbsp;
+            <a href="../editor/downloadAllPeriodical?periodicalId=$!{periodicalId}&periodicalIsNo=$!{periodicalIssueNo}" class="easyui-linkbutton" data-options="width:120">稿件下载</a>
+        </div>
         #foreach($item in ${sList})
             <div class='box'>
                 <div>${item.sectionName}</div>

@@ -11,40 +11,11 @@
     <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="../js/enums-table.js"></script>
-    <style>
-        #left, #right {
-            /* border: 1px solid green; */
-            float: left;
-            width: 40%;
-            padding: 5px;
-            margin: 5px;
-        }
-
-        #center {
-            float: left;
-            padding: 5px;
-            margin: 5px;
-        }
-
-        .box {
-            margin: 5px;
-            padding: 5px;
-        }
-
-        .selected {
-            border: 3px solid red;
-        }
-
-        .selectedTr {
-            background-color: #349000;
-        }
-    </style>
     <script type="text/javascript">
         $(function(){
-            var temp = $('.type');
-            $.each(temp,function(i){
-                temp.eq(i).text(getAdsType(temp.eq(i).text()));
-            })
+            $('#fanhui').click(function(){
+                history.go(-1);
+            });
         })
     </script>
 </head>
@@ -54,6 +25,9 @@
     <input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}">
     <input type="hidden" name="periodicalId" value="${periodicalId}"> <br />
 
+        <input type="button" id="fanhui" value="返回">
+        &nbsp;
+        <a href="../editor/downloadAllGuanGao?periodicalId=${periodicalId}&periodicalIsNo=${periodicalIssueNo}" class="easyui-linkbutton" data-options="width:120">广告下载</a>
         #foreach($item in ${sList})
             <div class='box'>
                 <div>$!{item.sectionName}</div>

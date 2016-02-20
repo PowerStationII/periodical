@@ -25,6 +25,10 @@ public class SongKanDetailDaoImpl extends BaseDao implements SongKanDetailDao {
     public SongKanDetail selectArticle(String articleId) {
         return super.getSqlSession().selectOne("SongKanDetailMapper.selectArticle", articleId);
     }
+    @Override
+    public int delete(String articleId) {
+        return super.getSqlSession().delete("SongKanDetailMapper.delete", articleId);
+    }
 
     @Override
     public List<SongKanDetail> selectByOrderNo(String orderNo) {

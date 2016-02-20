@@ -30,6 +30,8 @@ public interface AdInfoManager {
 	List<BizAd> selectAdsForEditor(BizAd bizAd);
 	
 	public BizAdPage queryBizAdPageList(BizAdQuery query);
+
+    public List<AdInfo> selectByadids(List<String> query);
 	
 	public int queryBizAdCount(BizAdQuery query);
 }

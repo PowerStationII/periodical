@@ -25,20 +25,5 @@ public class DownloadController {
 		response.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
 
         UtilLoad.fileDownload(request, response, fileName, filePath.replace(fileName, ""));
-//		try {
-//			File file = new File(filePath);
-//			InputStream inputStream = new FileInputStream(file);
-//			OutputStream os = response.getOutputStream();
-//			byte[] b = new byte[1024*10];
-//			int length;
-//			while ((length = inputStream.read(b)) > 0) {
-//				os.write(b, 0, length);
-//			}
-//			inputStream.close();
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 	}
 }

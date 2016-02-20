@@ -1,12 +1,16 @@
 package com.cn.periodical.controller.editor;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.cn.periodical.pojo.*;
+import com.cn.periodical.utils.PropertiesInitManager;
+import com.cn.periodical.utils.UtilLoad;
+import org.codehaus.plexus.archiver.zip.ZipEntry;
+import org.codehaus.plexus.archiver.zip.ZipOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +30,6 @@ import com.cn.periodical.manager.PeriodicalDetailsManager;
 import com.cn.periodical.manager.PeriodicalInfoManager;
 import com.cn.periodical.manager.PeriodicalManager;
 import com.cn.periodical.manager.SectionInfoManager;
-import com.cn.periodical.pojo.AdInfo;
-import com.cn.periodical.pojo.ArticleInfo;
-import com.cn.periodical.pojo.Periodical;
-import com.cn.periodical.pojo.PeriodicalDetails;
-import com.cn.periodical.pojo.PeriodicalDetailsQuery;
-import com.cn.periodical.pojo.PeriodicalInfo;
-import com.cn.periodical.pojo.PeriodicalQuery;
-import com.cn.periodical.pojo.SectionInfo;
-import com.cn.periodical.pojo.SectionInfoQuery;
-import com.cn.periodical.pojo.UserInfo;
 import com.cn.periodical.service.EditorArticleDealService;
 /**
  * 广告-组刊Controller
@@ -238,5 +232,10 @@ public class AdGroupController extends EditorController{
         mav.addObject("periodicalId", periodicalId);
         return mav;
 
+
+
     }
+
+
+
 }

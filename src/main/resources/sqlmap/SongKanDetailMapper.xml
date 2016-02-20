@@ -118,6 +118,10 @@
 			<include refid="Base_Value_List" />
 		</trim>
 	</insert>
+	<delete id="delete" parameterType="String"  >
+		delete from  songKan_detail
+		where orderNo =  #{orderNo,jdbcType=VARCHAR}
+	</delete>
 
     <select id="selectArticle" parameterType="String" resultMap="BaseResultMap">
         select

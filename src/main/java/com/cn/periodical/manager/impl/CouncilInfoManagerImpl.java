@@ -7,16 +7,13 @@ package com.cn.periodical.manager.impl;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.cn.periodical.dao.CouncilInfoDao;
 import com.cn.periodical.manager.CouncilInfoManager;
-import com.cn.periodical.pojo.BizCouncil;
-import com.cn.periodical.pojo.CouncilInfo;
-import com.cn.periodical.pojo.CouncilInfoPage;
-import com.cn.periodical.pojo.CouncilInfoQuery;
 import com.cn.periodical.utils.Pagenation;
 
 @Component("councilInfoManager")
@@ -75,6 +72,14 @@ public class CouncilInfoManagerImpl implements CouncilInfoManager {
 	public List<BizCouncil> queryBizCouncil(BizCouncil reqDto) {
 		// TODO Auto-generated method stub
 		return councilInfoDao.queryBizCouncil(reqDto);
+	}
+	public List<BizCouncil> queryBizCouncilPage(BizCouncilQuery reqDto) {
+		// TODO Auto-generated method stub
+		return councilInfoDao.queryBizCouncilPage(reqDto);
+	}
+	public int queryBizCouncilPageCount(BizCouncilQuery reqDto) {
+		// TODO Auto-generated method stub
+		return councilInfoDao.queryBizCouncilPageCount(reqDto);
 	}
 }
 

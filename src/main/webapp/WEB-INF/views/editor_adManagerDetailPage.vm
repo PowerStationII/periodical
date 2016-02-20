@@ -15,7 +15,9 @@
 <script type="text/javascript" src="../js/uploadify/jquery.uploadify.js"></script>
 </head>
 <script>
-
+    function fanhui(){
+        window.history.go(-1);
+    }
 </script>
 <body>
 	<div id="articleInfos">
@@ -83,7 +85,7 @@
 					<td><input type="text" name="adFee" value=""></td>
 				</tr> -->	
 				<tr>
-					<td><input type="button" value="返回"></td>
+					<td><input type="button" value="返回" onclick="javascript:fanhui()"></td>
 					<td><input type="submit" value="提交"></td>
 				</tr>
 			</table>

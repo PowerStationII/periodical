@@ -115,7 +115,11 @@
 			<include refid="Base_Value_List" />
 		</trim>
 	</insert>
-
+    <update id="update" parameterType="SongKanInfo" >
+        update songKan_info
+        set   zengSon_nums = #{zengSonNums,jdbcType=INTEGER}
+        where order_no =  #{orderNo,jdbcType=VARCHAR}
+    </update>
     <select id="selectByCondition" parameterType="SongKanInfo" resultMap="BaseResultMap">
         select
         <trim suffixOverrides=",">

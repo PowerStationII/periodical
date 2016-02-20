@@ -419,7 +419,7 @@ a {
 				</div>
 				<div class="mode_name">广告管理</div>
 				<div style="padding: 10px;">
-					<div class="li17" id="adguanli">广告管理</div>
+					<div class="li17" id="adguanli">广告查询</div>
 					<div class="li18" id="adzukan">广告组刊</div>
 				</div>
 			</div>

@@ -131,6 +131,8 @@ public class ArticleQueryServiceImpl implements ArticleQueryService {
                      articleAttachmentInfo.setExtend1(RoleIdEnums.ARTICLE_EDITOR_ATTR.getName());
                  } else if(RoleIdEnums.CN_EXPERT_ATTR.getCode().equals(articleAttachmentInfo.getType())){
                      articleAttachmentInfo.setExtend1(RoleIdEnums.CN_EXPERT_ATTR.getName());
+                 } else if(RoleIdEnums.EN_EXPERT_ATTR.getCode().equals(articleAttachmentInfo.getType())){
+                     articleAttachmentInfo.setExtend1(RoleIdEnums.EN_EXPERT_ATTR.getName());
                  }
                  list.add(articleAttachmentInfo);
              }
