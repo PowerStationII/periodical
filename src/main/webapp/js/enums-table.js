@@ -33,18 +33,16 @@ function ArticleStateEnumsEdit(status,zhuanJiaStatus){
         return '已送审(专家已审核)';
     }else if('0002' == status & '0002'==zhuanJiaStatus){
         return '已送审(专家未审核)';
-    }else if('0003' == status){
-        return '已待刊';
-    }else if('0004' == status){
-        return '处理中';
-    }else if('0005' == status){
-        return '作废';
+    }else if('0002' == status & '0006'==zhuanJiaStatus){
+        return '已送审(专家已返修)';
+    }else if('0002' == status & '0007'==zhuanJiaStatus){
+        return '已送审(专家已退稿)';
     }else if('0006' == status){
-        return '返修';
+        return '已返修';
     }else if('0007' == status){
-        return '退稿';
+        return '已退稿';
     }else if('0008' == status){
-        return '处理完成';
+        return '已待刊';
     }else{
         return '未知';
     }

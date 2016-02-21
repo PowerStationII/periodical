@@ -93,15 +93,15 @@
 				<td>${periodical.cycleNums}</td>
 				<td>${periodical.periodicalState}</td>
 				#if(${periodical.periodicalState}==''||   ${periodical.periodicalState}=='N' || ${periodical.periodicalState}=='ADPD')
-				    <td><a class="easyui-linkbutton" href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">刊登广告</a></td>
+				    <td><a class="easyui-linkbutton" href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}&articleId=&title=&adType=">刊登广告</a></td>
 				#elseif(${periodical.periodicalState}=='ADPO')
 				    <td>
-                        <a class="easyui-linkbutton" href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">重新刊登广告</a>
+                        <a class="easyui-linkbutton" href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}&articleId=&title=&adType=">重新刊登广告</a>
                         <a class="easyui-linkbutton" href="javascript:songQianFa('${periodical.periodicalIssueNo}','${periodical.periodicalId}')"><span id="span_qianfa">送签发</span></a>
                     </td>
                 #elseif(${periodical.periodicalState}=='PI')
                     <td>
-                        <a class="easyui-linkbutton" href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}">重新刊登广告</a>
+                        <a class="easyui-linkbutton" href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}&articleId=&title=&adType=">重新刊登广告</a>
                         <a class="easyui-linkbutton" href="javascript:songQianFa('${periodical.periodicalIssueNo}','${periodical.periodicalId}')">重新送签发</a>
                     </td>
                 #else

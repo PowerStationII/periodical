@@ -593,11 +593,10 @@
 		select auLin.article_id as articleId,auLin.article_cn_title as
 		cnTitle,auLin.expert_state as expertState,auLin.article_cn_keywords as
 		cnKeywords,auLin.editor_state as state,auLin.invest_section as
-		section,auLin.create_time as createTime,auLin.authorNames as
+		section,DATE_FORMAT(auLin.create_time,'%Y-%m-%d') as createTime,auLin.authorNames as
 		authorNames,exLin.expert_name as expertNames from (
 		select
 		ari.article_id,ari.article_cn_title,ari.article_cn_keywords,ari.editor_state,ari.expert_state,ari.invest_section,ari.create_time,author_name
--- 		ari.article_id,ari.article_cn_title,ari.article_cn_keywords,ari.editor_state,ari.expert_state,ari.invest_section,ari.create_time,GROUP_CONCAT(author_name)
 		as authorNames from article_info ari,author_info aui where
 		ari.article_id=aui.article_id
 		group by ari.article_id

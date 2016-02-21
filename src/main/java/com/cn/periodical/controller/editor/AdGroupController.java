@@ -96,15 +96,25 @@ public class AdGroupController extends EditorController{
 	public ModelAndView toAdGroupInfosPage(
 			@RequestParam("periodicalId") String periodicalId,
 			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
+			@RequestParam("articleId") String articleId,
+			@RequestParam("title") String title,
+			@RequestParam("adType") String adType,
 			HttpServletRequest request) {
 		logger.info("广告组刊左右Page:[ "+periodicalId+"]&["+periodicalIssueNo+"]");
 		ModelAndView mav = new ModelAndView("editor_adGroupInfosPage");
 		/**
 		 * 查询广告信息
 		 * */
-		List<AdInfo> adInfos = adInfoManager.queryList(null);
+        AdInfoQuery adInfoQuery = new AdInfoQuery () ;
+        adInfoQuery.setAdName(title);
+        adInfoQuery.setAdId(articleId);
+        adInfoQuery.setAdType(adType);
+ 		List<AdInfo> adInfos = adInfoManager.queryList(adInfoQuery);
 		mav.addObject("list", adInfos);
-		
+		mav.addObject("articleId", articleId);
+		mav.addObject("title", title);
+		mav.addObject("adTye", adType);
+
 		/**
 		 * 循环广告可以刊登的位置
 		 * 等同于栏目信息
@@ -141,58 +151,63 @@ public class AdGroupController extends EditorController{
 				+ "&periodicalIssueNo:["+periodicalIssueNo+"]"
 						+ "&str["+str+"]&periodicalId:["+periodicalId+"]");
 		ModelAndView mav = new ModelAndView("redirect:../editor/toAdGroupDetailPage");
-		mav.addObject("periodicalId", periodicalId);
-		
-		
-		UserInfo userInfo = getUserInfo(request);
+        try{
+            mav.addObject("periodicalId", periodicalId);
+
+
+            UserInfo userInfo = getUserInfo(request);
 		/*
 		 * 每点击一次提交periodical_details,表中的数据会根据条件删除
 		 * periodical_details根据periodicalId&periodicalIssueNo&sectionId先删后插入
 		 * */
-		PeriodicalDetailsQuery dQuery = new PeriodicalDetailsQuery();
-		dQuery.setPeriodicalId(periodicalId);
-		dQuery.setPeriodicalIssueNo(periodicalIssueNo);
-		dQuery.setType("0001");
-		logger.info("删除details表中已存在的数据......"+JSON.toJSONString(dQuery));
-		periodicalDetailsManager.deletePeriodicalDetails(dQuery);
-		logger.info("删除details表中已存在的数据......");
-		
-		JSONArray array = (JSONArray) JSONArray.parse(str);
-		for(int i=0;i<array.size();i++){
-			System.out.println(array.getJSONObject(i));
-			PeriodicalDetails periodicalDetails = new PeriodicalDetails();
-			periodicalDetails.setPeriodicalId(periodicalId);
-			periodicalDetails.setRefId(array.getJSONObject(i).getString("id"));
-			periodicalDetails.setType("0001");//0000是稿件的意思
-			periodicalDetails.setCreateTime(new Date());
-			periodicalDetails.setPeriodicalIssueNo(periodicalIssueNo);
-			periodicalDetails.setUserId(userInfo.getUserId());
-			periodicalDetails.setSectionId(array.getJSONObject(i).getString("id"));
-			JSONArray jsonArray = array.getJSONObject(i).getJSONArray("data");
-			
-			for(int k=0;k<jsonArray.size();k++){
-				periodicalDetails.setAdId(jsonArray.getString(k));
-				periodicalDetailsManager.savePeriodicalDetails(periodicalDetails);
-				/**
-				 * 将已经在栏目下的稿件artcileInfo.extend_3字段变更为Y
-				 * 如果广告在这一期已经存在,实际是不应该查出来的
-				 * 为了让左边不在查出这条数据
-				 * */
-			}
-		}
-        // 广告期刊的状态用extends2表示
-		PeriodicalQuery query =new PeriodicalQuery();
-		query.setPeriodicalId(periodicalId);
-		query.setPeriodicalIssueNo(periodicalIssueNo);
-		List<Periodical> pList = periodicalManager.queryList(query);
-		Periodical p = pList.get(0);
-		p.setId(p.getId());
-		if("Y".equals(type)){
-			p.setExtend2(PeriodicalStateEnums.AD_PART_OVER.getCode());
-		}else{
-			p.setExtend2(PeriodicalStateEnums.AD_PART_DEALING.getCode());
-		}
-		periodicalManager.savePeriodical(p);
+            PeriodicalDetailsQuery dQuery = new PeriodicalDetailsQuery();
+            dQuery.setPeriodicalId(periodicalId);
+            dQuery.setPeriodicalIssueNo(periodicalIssueNo);
+            dQuery.setType("0001");
+            logger.info("删除details表中已存在的数据......"+JSON.toJSONString(dQuery));
+            periodicalDetailsManager.deletePeriodicalDetails(dQuery);
+            logger.info("删除details表中已存在的数据......");
+
+            JSONArray array = (JSONArray) JSONArray.parse(str);
+            for(int i=0;i<array.size();i++){
+                System.out.println(array.getJSONObject(i));
+                PeriodicalDetails periodicalDetails = new PeriodicalDetails();
+                periodicalDetails.setPeriodicalId(periodicalId);
+                periodicalDetails.setRefId(array.getJSONObject(i).getString("id"));
+                periodicalDetails.setType("0001");//0000是稿件的意思
+                periodicalDetails.setCreateTime(new Date());
+                periodicalDetails.setPeriodicalIssueNo(periodicalIssueNo);
+                periodicalDetails.setUserId(userInfo.getUserId());
+                periodicalDetails.setSectionId(array.getJSONObject(i).getString("id"));
+                JSONArray jsonArray = array.getJSONObject(i).getJSONArray("data");
+
+                for(int k=0;k<jsonArray.size();k++){
+                    periodicalDetails.setAdId(jsonArray.getString(k));
+                    periodicalDetailsManager.savePeriodicalDetails(periodicalDetails);
+                    /**
+                     * 将已经在栏目下的稿件artcileInfo.extend_3字段变更为Y
+                     * 如果广告在这一期已经存在,实际是不应该查出来的
+                     * 为了让左边不在查出这条数据
+                     * */
+                }
+            }
+            // 广告期刊的状态用extends2表示
+            PeriodicalQuery query =new PeriodicalQuery();
+            query.setPeriodicalId(periodicalId);
+            query.setPeriodicalIssueNo(periodicalIssueNo);
+            List<Periodical> pList = periodicalManager.queryList(query);
+            Periodical p = pList.get(0);
+            p.setId(p.getId());
+            if("Y".equals(type)){
+                p.setExtend2(PeriodicalStateEnums.AD_PART_OVER.getCode());
+            }else{
+                p.setExtend2(PeriodicalStateEnums.AD_PART_DEALING.getCode());
+            }
+            periodicalManager.savePeriodical(p);
+            mav.addObject("message", "保存成功");
+        }catch (Exception e){
+            mav.addObject("message", e.getMessage());
+        }
 		return mav;
 	}
 

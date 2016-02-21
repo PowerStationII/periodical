@@ -397,9 +397,9 @@ a {
 				<div style="overflow: auto; padding: 10px;">
 					<div class="li1" id="xingao">新稿</div>
 					<div class="li2" id="yidengji">已登记</div>
-                    <div class="li3" id="daikan">专家待刊</div>
-                    <div class="li4" id="fanxiu">专家返修</div>
-                    <div class="li5" id="tuigao">专家退稿</div>
+                    <div class="li3" id="daikan">专家已待刊</div>
+                    <div class="li4" id="fanxiu">专家已返修</div>
+                    <div class="li5" id="tuigao">专家已退稿</div>
 				</div>
 				<div class="mode_name">排刊组稿</div>
 				<div style="padding: 10px;">

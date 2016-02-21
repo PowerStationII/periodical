@@ -10,6 +10,7 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-combox.js"></script>
 <script type="text/javascript" src="../js/enums-table.js"></script>
 <style>
 #left, #right {
@@ -44,27 +45,53 @@
 		var temp = $('.type');
 		$.each(temp,function(i){
 			temp.eq(i).text(getAdsType(temp.eq(i).text()));
-		})
+		}) ;
+        /**
+         * 广告类型下拉框
+         */
+        $('#adType').combobox({
+            data:getAdType(),
+            editable:false
+        });
 	})
 </script>
 </head>
 <body>
 <!-- ../editor/toSaveAdGroup -->
-	<form id="sub2" action="" method="POST">
+	<form id="sub2" action="../editor/toAdGroupInfosPage" method="POST">
 		<input type="hidden" name="periodicalIssueNo" value="${periodicalIssueNo}"> 
 		<input type="hidden" name="periodicalId" value="${periodicalId}"> <br />
+		<input type="hidden" name="adType" id="adTypeSearch" value="${adType}"> <br />
+
+
+        <table style="text-align:right;font-size:14px;">
+            <tr>
+                <td>广告编号：</td>
+                <td><input class="easyui-textbox" type="text" name="articleId" value="$!{articleId}"></td>
+                <td>广告标题：</td>
+                <td><input class="easyui-textbox" type="text" name="title" value="$!{title}"></td>
+                <td>广告类型：</td>
+                <td><select id="adType" name=""  data-options="panelHeight:'auto'" class="easyui-combobox"  style="width:155px;">
+                </select></td>
+            </tr>
+            <tr>
+                <td  style="text-align:left;" colspan =4><a id="search"  class="easyui-linkbutton"  style="width:50px;" href="#" >查询</a></td>
+                <td><input type='button' value='保存' id='btnPreSubmit' /></td>
+                <td><input type='button' value='提交' id='btnSubmit' /></td>
+            </tr>
+        </table>
 		<div id='left'>
 			<table style="border:1px solid green;width:100%;font-size:14px;" rules="all" id='leftSelect' class='selectedTable'>
 				<tr>
 					<td width= "20%">广告编号</td>
-					<td width= "70%">标题</td>
-					<td width= "10%">广告类型</td>
+					<td width= "60%">标题</td>
+					<td width= "20%">广告类型</td>
 				</tr>
 				#foreach($ad in ${list})
 				<tr class='selectAble'>
 					<td width= "20%">$!{ad.adId}</td>
-					<td width= "70%">$!{ad.adName}</td>
-					<td class="type" width= "10%">$!{ad.adType}</td>
+					<td width= "60%">$!{ad.adName}</td>
+					<td class="type" width= "20%">$!{ad.adType}</td>
 				</tr>
 				#end
 			</table>
@@ -82,23 +109,21 @@
 			<table style="border:1px solid green;width:100%;font-size:14px;" rules="all" class='selectedTable'>
 				<tr>
 					<td width= "20%">广告编号</td>
-					<td width= "70%">广告标题</td>
-					<td width= "10%">广告类型</td>
+					<td width= "60%">广告标题</td>
+					<td width= "20%">广告类型</td>
 				</tr>
 				#foreach($it in ${item.listAd})
 				<tr class='selectAble'>
 					<td width= "20%">$!{it.ad_id}</td>
-					<td width= "70%">$!{it.ad_name}</td>
-					<td width= "10%">$!{it.ad_type}</td>
+					<td width= "57%">$!{it.ad_name}</td>
+					<td class="type" width= "23%">$!{it.ad_type}</td>
 				</tr>
 				#end
 			</table>   	 
 		</div>
 	  	#end
   </div>
-  <input type='button' value='保存' id='btnPreSubmit' />
-  <input type='button' value='提交' id='btnSubmit' />
-    </form>  
+    </form>
   </body>  
 <SCRIPT LANGUAGE="JavaScript">
 $('.selectedTable tr').filter('.selectAble').click(function(){
@@ -141,7 +166,8 @@ $('#btnSubmit').click(function(){
 			url:'../editor/toSaveAdGroup',
 			data:{leftArray:leftArray.toString(),periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',str:JSON.stringify(sections),type:'Y'},
 			success:function(d){
-				window.location.href='../editor/toAdGroupDetailPage?periodicalId=${periodicalId}';
+##				window.location.href='../editor/toAdGroupDetailPage?periodicalId=${periodicalId}';
+                alert(d.message);
 			}
 		});  
 	 }
@@ -168,9 +194,16 @@ $('#btnPreSubmit').click(function(){
 			url:'../editor/toSaveAdGroup',
 			data:{leftArray:leftArray.toString(),periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',str:JSON.stringify(sections),type:''},
 			success:function(d){
-				window.location.href='../editor/toAdGroupDetailPage?periodicalId=${periodicalId}';
+##				window.location.href='../editor/toAdGroupDetailPage?periodicalId=${periodicalId}';
+                alert(d.message);
 			}
 		});  
+});
+$('#search').click(function(){
+    if(confirm("查询前请先保存已经组刊文章")){
+        $("#adTypeSearch").val($('#adType').combobox('getValue'))
+        $("#sub2").submit();
+    }
 });
 </SCRIPT>
 </html>
