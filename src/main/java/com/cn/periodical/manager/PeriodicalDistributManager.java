@@ -19,7 +19,8 @@ public interface PeriodicalDistributManager {
 	List<PeriodicalDistribut> queryList(PeriodicalDistributQuery query);
 	
 	void deletePeriodicalDistributById(Long id);
-	
+    public void deletePeriodicalDistributByOrderNo(String orderNo);
+
 	void deletePeriodicalDistribut(PeriodicalDistributQuery query);
 	
 	PeriodicalDistributPage queryPageList(PeriodicalDistributQuery query);

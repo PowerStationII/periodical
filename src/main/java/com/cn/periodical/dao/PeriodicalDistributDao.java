@@ -16,7 +16,8 @@ public interface PeriodicalDistributDao {
 	int deleteByExample(PeriodicalDistributQuery example);
 	
 	int deleteByPrimaryKey(Long id);
-	
+	int deletePeriodicalDistributByOrderNo(String orderNo);
+
 	int insert(PeriodicalDistribut record);
 	
 	int insertSelective(PeriodicalDistribut record);

@@ -619,6 +619,10 @@
 		delete from address_info
 		where ID = #{id,jdbcType=DECIMAL}
 	</delete>
+	<delete id="deleteByOrderNo" parameterType="java.lang.String">
+		delete from address_info
+		where extend_1 = #{orderNO,jdbcType=VARCHAR}
+	</delete>
 	<delete id="deleteByExample" parameterType="AddressInfoQuery">
 		delete from address_info
 		<include refid="Example_Where_Clause" />

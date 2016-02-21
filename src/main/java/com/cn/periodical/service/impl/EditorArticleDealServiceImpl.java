@@ -154,6 +154,15 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 
     @Transactional(propagation= Propagation.REQUIRED)
     public void toUploadAddressPage( String orderNo , String periodicalId, List<AddressInfo> list){
+        /**
+         * 导入之前首先删除 ，都是按照订单号  orderNo
+         * periodical_distribut  address_info
+         * delete FROM periodical_distribut WHERE ref_id = 'orderNo'
+         * delete FROM address_info WHERE extend_1 = 'orderNo'
+          */
+        addressInfoManager.deleteByOrderNo(orderNo);
+        periodicalDistributManager.deletePeriodicalDistributByOrderNo(orderNo);
+
         for(AddressInfo addressInfo:list){
            this.toUploadAddressPageOne(addressInfo, orderNo , periodicalId);
         }

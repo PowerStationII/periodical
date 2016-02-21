@@ -205,27 +205,48 @@
   							return;
   						}
   					}  */
+                    var tempCount = count+1 ;
+                    var isContacterCount = 0 ;
+  				    for (var i=0;i<tempCount;i++){
+                        var authorName = $("input[name='authorList["+i+"].authorName']");
+                        var authorNamev =  authorName[0].value.trim() ;
+
+                        var extend = $("input[name='addressInfos["+i+"].extend']");
+                        var extendv =  extend[0].value.trim() ;
+
+                        var receiveAddress = $("input[name='addressInfos["+i+"].receiveAddress']");
+                        var receiveAddressv =  receiveAddress[0].value.trim() ;
+
+                        var contacterMobile = $("input[name='addressInfos["+i+"].contacterMobile']");
+                        var contacterMobilev =  contacterMobile[0].value.trim() ;
+
+                        var isContacterv = $("input[name='authorList["+i+"].isContacter']:checked").val();
+//                        var isContacterv =  isContacter.value ;
+  						if ("Y"==isContacterv) {
+                            isContacterCount=isContacterCount+1 ;
+                            if(isContacterCount!=1){
+                                alert('通讯作者只能有一个');
+                                return;
+                            }
+  						}
+  						if (""==authorNamev) {
+  							alert('第'+(i+1)+'个作者姓名不能为空');
+  							return;
+  						}
+                        if (""==extendv) {
+                            alert('第'+(i+1)+'个作者邮编不能为空');
+                            return;
+                        }
+                        if (""==receiveAddressv) {
+                            alert('第'+(i+1)+'个作者通讯地址不能为空');
+                            return;
+                        }
+                        if (""==contacterMobilev) {
+                            alert('第'+(i+1)+'个作者通手机不能为空');
+                            return;
+                        }
+  					}
   					$("form").submit();
-//                    var jsonuserinfo = $('#form').serializeObject();
-//                    $.ajaxFileUpload({
-//                        url:'../author/toChongTou',            //需要链接到服务器地址
-//                        secureuri:false,
-//                        fileElementId:'files',                  //文件选择框的id属性
-//                        dataType: 'json',                      //服务器返回的格式，可以是json, xml
-//                        data:{articleId:articleId},
-//                        success: function (data, status){     //相当于java中try语句块的用法
-//                            if (data.message == "success") {
-//                                alert('重投成功');
-//                                window.location.href='../author/toArticleQueryPage';
-//                            } else{
-//                                alert('重投失败');
-//                            }
-//
-//                        },
-//                        error: function (data, status, e){  //相当于java中catch语句块的用法
-//                            alert(data);
-//                        }
-//                    });
   				}
   			});
 

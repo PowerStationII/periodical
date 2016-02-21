@@ -48,7 +48,10 @@ public class PeriodicalDistributManagerImpl implements PeriodicalDistributManage
 	public void deletePeriodicalDistributById(Long id) {
 		periodicalDistributDao.deleteByPrimaryKey(id);
 	}
-	
+	public void deletePeriodicalDistributByOrderNo(String orderNo) {
+		periodicalDistributDao.deletePeriodicalDistributByOrderNo(orderNo);
+	}
+
 	
 	public void deletePeriodicalDistribut(PeriodicalDistributQuery query) {
 		periodicalDistributDao.deleteByExample(query);

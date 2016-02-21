@@ -17,7 +17,8 @@ public interface AddressInfoDao {
 	int deleteByExample(AddressInfoQuery example);
 	
 	int deleteByPrimaryKey(Long id);
-	
+    public int deleteByOrderNo(String orderNo);
+
 	int insert(AddressInfo record);
 	
 	int insertSelective(AddressInfo record);

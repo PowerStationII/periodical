@@ -23,7 +23,8 @@ public interface AddressInfoManager {
 	List<AddressInfo> queryList(AddressInfoQuery query);
 	
 	void deleteAddressInfoById(Long id);
-	
+    public void deleteByOrderNo(String orderNo);
+
 	void deleteAddressInfo(AddressInfoQuery query);
 	
 	AddressInfoPage queryPageList(AddressInfoQuery query);

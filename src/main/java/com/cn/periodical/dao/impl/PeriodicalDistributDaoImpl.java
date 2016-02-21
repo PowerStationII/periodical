@@ -31,7 +31,10 @@ public class PeriodicalDistributDaoImpl extends BaseDao implements PeriodicalDis
 	public int deleteByPrimaryKey(Long id) {
 		return super.getSqlSession().delete("PeriodicalDistributMapper.deleteByPrimaryKey", id);
 	}
-	
+	public int deletePeriodicalDistributByOrderNo(String orderNo) {
+		return super.getSqlSession().delete("PeriodicalDistributMapper.deletePeriodicalDistributByOrderNo", orderNo);
+	}
+
 	
 	public int insert(PeriodicalDistribut record) {
 		return super.getSqlSession().insert("PeriodicalDistributMapper.insert", record);

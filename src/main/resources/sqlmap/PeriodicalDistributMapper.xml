@@ -446,6 +446,10 @@
     delete from periodical_distribut
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
+  <delete id="deletePeriodicalDistributByOrderNo" parameterType="java.lang.String">
+    delete from periodical_distribut
+    where ref_id = #{orderNo,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="PeriodicalDistributQuery">
     delete from periodical_distribut
     <include refid="Example_Where_Clause" />

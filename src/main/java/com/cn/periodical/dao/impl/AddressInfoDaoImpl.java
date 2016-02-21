@@ -31,7 +31,10 @@ public class AddressInfoDaoImpl extends BaseDao implements AddressInfoDao {
 	public int deleteByPrimaryKey(Long id) {
 		return super.getSqlSession().delete("AddressInfoMapper.deleteByPrimaryKey", id);
 	}
-	
+	public int deleteByOrderNo(String orderNo) {
+		return super.getSqlSession().delete("AddressInfoMapper.deleteByOrderNo", orderNo);
+	}
+
 	
 	public int insert(AddressInfo record) {
 		return super.getSqlSession().insert("AddressInfoMapper.insert", record);

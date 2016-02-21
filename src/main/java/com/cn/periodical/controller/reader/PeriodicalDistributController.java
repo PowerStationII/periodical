@@ -94,11 +94,12 @@ public class PeriodicalDistributController extends ReaderController{
             ReadExcel readExcel = new ReadExcel("","",userInfo.getRoleId(),userInfos.get(0).getRefId(),is);
             List<AddressInfo> list = readExcel.readXls();
             editorArticleDealService.toUploadAddressPage(orderNo , periodicalId, list);
+            map.put("message",super.success);
         }catch(Exception e){
             logger.info("地址上传错误");
             e.printStackTrace();
+            map.put("message","请按照模板上传地址");
         }
-        map.put("message",super.success);
         return map;
     }
 

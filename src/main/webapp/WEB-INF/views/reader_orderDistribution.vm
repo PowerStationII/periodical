@@ -74,6 +74,8 @@
                     if (data.message == "success") {
                         alert('上传成功');
                         window.location.href='../reader/toDistributionPage?orderNo='+orderNo;
+                    }else{
+                        alert(data.message);
                     }
                 },
                 error: function (data, status, e){  //相当于java中catch语句块的用法
@@ -125,11 +127,13 @@
             <input type="file" name="files" id="files"  value="">
             <a id="submit" class="easyui-linkbutton"  style="50px;">保存</a>
         #end
+
+        <a id="back" class="easyui-linkbutton"  style="50px;">返回</a>
+        <a style="font-size:10px;color:red;">修改后请保存</a>
+
         <form action="../reader/toDownloadAddressPage" method="POST">
             <input type="submit" value="下载地址模板">
         </form>
-        <a id="back" class="easyui-linkbutton"  style="50px;">返回</a>
-        <a style="font-size:10px;color:red;">修改后请保存</a>
 	</div>
 </body>
 </html>

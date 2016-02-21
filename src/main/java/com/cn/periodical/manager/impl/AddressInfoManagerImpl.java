@@ -53,7 +53,10 @@ public class AddressInfoManagerImpl implements AddressInfoManager {
 	public void deleteAddressInfoById(Long id) {
 		addressInfoDao.deleteByPrimaryKey(id);
 	}
-	
+    public void deleteByOrderNo(String orderNo) {
+		addressInfoDao.deleteByOrderNo(orderNo);
+	}
+
 	
 	public void deleteAddressInfo(AddressInfoQuery query) {
 		addressInfoDao.deleteByExample(query);
