@@ -17,8 +17,9 @@
 		
 		$('#orderNums').blur(function(){
 			if(!isNaN($('#orderNums').val())){
-			    var price = ${periodicalInfo.inFixPrice} * parseInt($('#orderNums').val());
-				$('#price').text('金额：'+price); 
+##			    var price = ${periodicalInfo.inFixPrice} * parseInt($('#orderNums').val());
+			    var price = priceAllYear * parseInt($('#orderNums').val());
+				$('#price').text('金额：'+price);
 			}
 			else {
 				alert('请输入正确数字');

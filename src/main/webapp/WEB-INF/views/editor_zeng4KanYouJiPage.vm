@@ -29,8 +29,8 @@
         var pager = $("#table").datagrid("getPager");  
         pager.pagination({  
             total:data.length, 
-            pageSize:5,
-            pageList: [5,10,15,20],
+            pageSize:15,
+            pageList: [15,20],
             onSelectPage:function (pageNo, pageSize) {  
                 var start = (pageNo - 1) * pageSize;  
                 var end = start + pageSize;  
@@ -68,7 +68,7 @@
 			#end
 			</tbody>
 		</table>
-        <a id="add" class="easyui-linkbutton"  style="50px;" href="../reader/inToZeng4KanPageOne">新增赠刊信息</a>
+##        <a id="add" class="easyui-linkbutton"  style="50px;" href="../reader/inToZeng4KanPageOne">新增赠刊信息</a>
 		<br>
 	</div>
 </body>

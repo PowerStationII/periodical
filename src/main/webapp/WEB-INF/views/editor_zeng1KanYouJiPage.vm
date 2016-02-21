@@ -68,7 +68,7 @@
 			#end
 			</tbody>
 		</table>
-        <a id="add" class="easyui-linkbutton"  style="50px;" href="../reader/inToZeng1KanPageOne">新增增刊信息</a>
+##        <a id="add" class="easyui-linkbutton"  style="50px;" href="../reader/inToZeng1KanPageOne">新增增刊信息</a>
 		<br>
 	</div>
 </body>

@@ -185,8 +185,8 @@ a {
 			<div class="cLeft">
 				<div class="mode_name">期刊征订</div>
 				<!-- <div  class="li1"  id="jiansuo">关键词检索</div> -->
-				<div class="li2" style="margin-top: 10px;" id="dingdanguanli">订单管理</div>
-				<div class="li3" id="youjidizhiguanli">邮寄地址管理</div>
+				<div class="li3" style="margin-top: 10px;" id="dingdanguanli">订单管理</div>
+##				<div class="li3" id="youjidizhiguanli">邮寄地址管理</div>
 				<div class="mode_name" style="margin-top: 10px;">个人信息设置</div>
 				<div class="li2" style="margin-top: 10px;" id="xiugaixinxi">修改个人信息</div>
 				<div class="li3" id="xiugaimima">修改密码</div>
