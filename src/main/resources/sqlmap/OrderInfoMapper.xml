@@ -69,6 +69,9 @@
 		from order_info oi,periodical_info pi,user_info ui,reader_info ri where
 		oi.periodical_id=pi.periodical_id
 		and oi.user_id=ui.user_id and ui.ref_id=ri.reader_id
+		<if test="extend4 != null and ''!=extend4">
+            and ri.extend_4 =  #{extend4,jdbcType=VARCHAR}
+		</if>
 		<if test="orderNo != null and ''!=orderNo">
 			and oi.order_no = #{orderNo,jdbcType=VARCHAR}
 		</if>
@@ -87,6 +90,9 @@
 		from order_info oi,periodical_info pi,user_info ui,reader_info ri where
 		oi.periodical_id=pi.periodical_id
 		and oi.user_id=ui.user_id and ui.ref_id=ri.reader_id
+        <if test="extend4 != null and ''!=extend4">
+            and ri.extend_4 =  #{extend4,jdbcType=VARCHAR}
+        </if>
 		<if test="orderNo != null and ''!=orderNo">
 			and oi.order_no = #{orderNo,jdbcType=VARCHAR}
 		</if>

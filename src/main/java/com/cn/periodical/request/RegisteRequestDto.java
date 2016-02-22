@@ -87,6 +87,10 @@ public class RegisteRequestDto extends RequestDto {
 	 * 是否希望成为审稿专家
 	 * */
 	private String isreviewer;
+    /**
+     * 读者类型，1是个人 ； 2是企业
+     */
+    private String readType ;
 	
 	public String getEmail() {
 		return email;
@@ -196,12 +200,12 @@ public class RegisteRequestDto extends RequestDto {
 	public void setIsreviewer(String isreviewer) {
 		this.isreviewer = isreviewer;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+    public String getReadType() {
+        return readType;
+    }
+
+    public void setReadType(String readType) {
+        this.readType = readType;
+    }
 }

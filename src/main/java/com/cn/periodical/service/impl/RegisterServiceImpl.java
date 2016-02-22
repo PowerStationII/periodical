@@ -159,7 +159,7 @@ public class RegisterServiceImpl implements RegisterService {
 		readerInfo.setExtend1("");
 		readerInfo.setExtend2("");
 		readerInfo.setExtend3("");
-		readerInfo.setExtend4("");
+		readerInfo.setExtend4(registeRequestDto.getReadType());
 		readerInfo.setCreateTime(new Date());
 		readerInfo.setUpdateTime(new Date());
 		
@@ -176,7 +176,7 @@ public class RegisterServiceImpl implements RegisterService {
 		userInfo.setExtend1("");
 		userInfo.setExtend2("");
 		userInfo.setExtend3("");
-		userInfo.setExtend4("");
+		userInfo.setExtend4(registeRequestDto.getReadType());
 		userInfo.setCreateTime(new Date());
 		userInfo.setUpdateTime(new Date());
 		

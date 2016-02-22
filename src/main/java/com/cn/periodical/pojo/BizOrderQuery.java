@@ -42,6 +42,8 @@ public class BizOrderQuery extends PagingQuery {
 	private String distributNum;
 	private String distributId;
 	private String pIsNo;
+	private String extend4;
+
 	
 	public String getpIsNo() {
 		return pIsNo;
@@ -229,4 +231,12 @@ public class BizOrderQuery extends PagingQuery {
 	public void seteAccountName(String eAccountName) {
 		this.eAccountName = eAccountName;
 	}
+
+    public String getExtend4() {
+        return extend4;
+    }
+
+    public void setExtend4(String extend4) {
+        this.extend4 = extend4;
+    }
 }

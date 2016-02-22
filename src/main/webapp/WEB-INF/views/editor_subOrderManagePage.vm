@@ -36,11 +36,15 @@
         $('#pYear').combobox({
             data:getYear()
         });
+        $('#extend4').combobox({
+            data:getReadTye()
+        });
         function getUrl() {
             var url = {
                 'orderNo':$('input[name="orderNo"]').val(),
                 'readerName':$('input[name="readerName"]').val(),
-                'pYear':$('#pYear').combobox('getValue')
+                'pYear':$('#pYear').combobox('getValue'),
+                'extend4':$('#extend4').combobox('getValue')
             };
             return url;
         }
@@ -57,6 +61,8 @@
                     <td><input class="easyui-textbox" type="text" name="readerName" value=""></td>
                     <td>期刊年份：</td>
                     <td><input class="easyui-combobox" type="text" name="pYear" editable="false" id = "pYear" value=""></td>
+                    <td>读者类型：</td>
+                    <td><input class="easyui-combobox" type="text" name="extend4" editable="false" id = "extend4" value=""></td>
                     <td style="text-align:left;"><a id="submit"  class="easyui-linkbutton"  style="width:50px;" href="#">查询</a></td>
                 </tr>
             </table>

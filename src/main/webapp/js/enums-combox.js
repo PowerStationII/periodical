@@ -547,4 +547,21 @@ function getYear(){
         }] ;
     return data;
 }
+
+function getReadTye(){
+    var data=[{
+        "value":'',
+        "text":"请选择",
+        "selected":true
+    }, {
+        "value":'1011',
+        "text":"企业读者"
+    },
+        {
+            "value":'1002',
+            "text":"个人读者"
+        }
+        ] ;
+    return data;
+}
  

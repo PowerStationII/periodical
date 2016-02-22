@@ -35,17 +35,36 @@ public class RegisterController {
 	RegisterService registerService;
 	
 	/**
-	 * 跳转到注册页面
-	 */
-	@RequestMapping(value = "/toRegister", method = RequestMethod.POST)
-	public ModelAndView toRegister(@RequestParam("systemId") String systemId, 
-			@RequestParam("roleId") String roleId ,HttpServletRequest request) {
-		logger.info("跳转去注册页面systemId:[" + systemId + "]&roleId["+roleId+"]");
-		ModelAndView mav = new ModelAndView("registered");
-		mav.addObject("systemId", systemId);
-		mav.addObject("roleId", roleId);
-		return mav;
-	}
+     * 跳转到注册页面
+     */
+    @RequestMapping(value = "/toRegister", method = RequestMethod.POST)
+    public ModelAndView toRegister(@RequestParam("systemId") String systemId,
+                                   @RequestParam("roleId") String roleId ,HttpServletRequest request) {
+        logger.info("跳转去注册页面systemId:[" + systemId + "]&roleId["+roleId+"]");
+        ModelAndView mav = new ModelAndView("registered");
+        mav.addObject("systemId", systemId);
+        mav.addObject("roleId", roleId);
+        return mav;
+    }
+
+    /**
+     * 跳转到注册页面
+     */
+    @RequestMapping(value = "/toRegisterReadQiYe")
+    public ModelAndView toRegisterReadQiYe(@RequestParam("systemId") String systemId,
+                                   @RequestParam("roleId") String roleId , @RequestParam("message") String message ,
+                                   HttpServletRequest request) {
+        logger.info("跳转去注册页面systemId:[" + systemId + "]&roleId["+roleId+"]");
+        ModelAndView mav = new ModelAndView("registeredReadQiYe");
+        mav.addObject("systemId", systemId);
+        mav.addObject("roleId", roleId);
+        mav.addObject("roleId", roleId);
+        if("success".equals(message)){
+            message = "注册成功" ;
+        }
+        mav.addObject("message", message);
+        return mav;
+    }
 	
 	@RequestMapping(value = "/toReaderRegister", method = RequestMethod.POST)
 	public ModelAndView toReaderRegister(@RequestParam("systemId") String systemId, 
@@ -116,6 +135,7 @@ public class RegisterController {
 			 * 需区分省所/个人登录
 			 * */
 			if(RoleIdEnums.READER_P.getCode().equals(roleId)){
+                registeRequestDto.setReadType(RoleIdEnums.READER_P.getCode());
 				int i = registerService.addReader(registeRequestDto);
 				logger.info(i+"");
 				if(i==0){
@@ -127,15 +147,24 @@ public class RegisterController {
 				mav.addObject("password",registeRequestDto.getPassword());
 				return mav;
 			}else if(RoleIdEnums.READER_E.getCode().equals(roleId)){
-				int i = registerService.addAuthor(registeRequestDto);
-				logger.info(i+"");
-				if(i==0){
-					mav = new ModelAndView("error");
-					return mav;
-				}
-				mav = new ModelAndView("forward:/toLogin");
-				mav.addObject("email",registeRequestDto.getEmail());
-				mav.addObject("password",registeRequestDto.getPassword());
+//				int i = registerService.addAuthor(registeRequestDto);
+//				logger.info(i+"");
+//				if(i==0){
+//					mav = new ModelAndView("error");
+//					return mav;
+//				}
+//				mav = new ModelAndView("forward:/toLogin");
+//				mav.addObject("email",registeRequestDto.getEmail());
+//				mav.addObject("password",registeRequestDto.getPassword());
+
+                registeRequestDto.setReadType(RoleIdEnums.READER_E.getCode());
+                int i = registerService.addReader(registeRequestDto);
+                logger.info(i+"");
+                if(i==0){
+                    mav = new ModelAndView("error");
+                    return mav;
+                }
+                mav = new ModelAndView("forward:/toRegisterReadQiYe?systemId=444&roleId=1011&message=success");
 				return mav;
 			}
 		}else{

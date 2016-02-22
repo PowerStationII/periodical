@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="css/easyui.css" type="text/css" rel="stylesheet"/>
+    <link href="css/icon.css" type="text/css" rel="stylesheet"/>
+ 	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="js/enums-combox.js"></script>
+  </head>
+  <script type="text/javascript">
+  		$(function(){
+  			$.extend($.fn.validatebox.defaults.rules, {  //校验
+  			    equals: { //判断密码是否相同
+  			        validator: function(value,param){    
+  			            return value == $(param[0]).val();   
+  			        },    
+  			        message: '密码不同.'   
+  			    },
+  			  	zip: {
+  		          validator: function (value, param) {
+  		            return /^[0-9]\d{5}$/.test(value);
+  		          },
+  		          message: '邮政编码不存在'
+  		        },
+  		      	mobileAndTel: {//手机和固话
+  		          validator: function (value, param) {
+  		            return /(^([0\+]\d{2,3})\d{3,4}\-\d{3,8}$)|(^([0\+]\d{2,3})\d{3,4}\d{3,8}$)|(^([0\+]\d{2,3}){0,1}13\d{9}$)|(^\d{3,4}\d{3,8}$)|(^\d{3,4}\-\d{3,8}$)/.test(value);
+  		          },
+  		          message: '请正确输入电话号码'
+  		        },
+  		      	idCode:{
+  		          validator:function(value,param){
+  		            return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value);
+  		          },
+  		          message: '请输入正确的身份证号'
+  		        },
+  		      	english:{// 验证英语
+  	              validator : function(value) {
+  	                  return /^[A-Za-z]+$/i.test(value);
+  	              },
+  	              message : '请输入拼音'
+  	          	},
+  	          	maxLength:{
+	  	            validator:function(value,param){
+	  	              return value.length<=param[0]
+	  	            },
+	  	            message:'最多{0}个字'
+  	          	},
+  	          	minLength:{
+	  	            validator:function(value,param){
+	  	              return value.length >=param[0]
+	  	            },
+	  	            message:'至少输入{0}个字'
+  	          }
+  			});  
+  			
+  			$('#birthday').datebox({editable:false }); //日期禁止编辑
+  					
+  			$('#registered').click(function(){
+  				//Email邮箱
+  				if($('#email').validatebox('isValid')==true){
+						$('#emailR').show();
+						$('#emailW').hide();
+				}
+				else {
+					$('#emailW').show();
+					$('#emailR').hide();
+				}
+  				
+  				//密码
+  				if($('#pwd').validatebox('isValid')==true){
+					$('#pwdR').show();
+					$('#pwdW').hide();
+				}
+				else {
+					$('#pwdW').show();
+					$('#pwdR').hide();
+				}
+  				
+  				//确认密码
+  				if($('#rpwd').validatebox('isValid')==true){
+					$('#rpwdR').show();
+					$('#rpwdW').hide();
+				}
+				else {
+					$('#rpwdW').show();
+					$('#rpwdR').hide();
+				}
+  				
+  				//姓名
+  				if($('#name').validatebox('isValid')==true){
+					$('#nameR').show();
+					$('#nameW').hide();
+				}
+				else {
+					$('#nameW').show();
+					$('#nameR').hide();
+				}
+  				
+  				//汉语拼音
+  				if($('#pinyin').validatebox('isValid')==true){
+					$('#pinyinR').show();
+					$('#pinyinW').hide();
+				}
+				else {
+					$('#pinyinW').show();
+					$('#pinyinR').hide();
+				}
+  				
+  				//证件
+  				if($('#certificate').validatebox('isValid')==true){
+					$('#certificateR').show();
+					$('#certificateW').hide();
+				}
+				else {
+					$('#certificateW').show();
+					$('#certificateR').hide();
+				}
+  				if($roleId=='1001'){
+  				//联系电话
+  				if($('#phone').validatebox('isValid')==true){
+					$('#phoneR').show();
+					$('#phoneW').hide();
+				}
+				else {
+					$('#phoneW').show();
+					$('#phoneR').hide();
+				}
+  				
+  				//邮寄地址
+  				if($('#address').validatebox('isValid')==true){
+					$('#addressR').show();
+					$('#addressW').hide();
+				}
+				else {
+					$('#addressW').show();
+					$('#addressR').hide();
+				}
+  			
+  				//邮政编码
+  				if($('#postNum').validatebox('isValid')==true){
+					$('#postNumR').show();
+					$('#postNumW').hide();
+				}
+				else {
+					$('#postNumW').show();
+					$('#postNumR').hide();
+				}
+  			
+  				//研究领域
+  				if($('#area').validatebox('isValid')==true){
+					$('#areaR').show();
+					$('#areaW').hide();
+				}
+				else {
+					$('#areaW').show();
+					$('#areaR').hide();
+				}
+  			
+  				//单位名称
+  				if($('#danwei').validatebox('isValid')==true){
+					$('#danweiR').show();
+					$('#danweiW').hide();
+				}
+				else {
+					$('#danweiW').show();
+					$('#danweiR').hide();
+				}
+  			
+  				//部门或院系
+  				if($('#department').validatebox('isValid')==true){
+					$('#departmentR').show();
+					$('#departmentW').hide();
+				}
+				else {
+					$('#departmentW').show();
+					$('#departmentR').hide();
+				}
+  				}
+  			    
+  				//验证
+  				$.ajax({
+   					url:'toVerifyLoginName',
+   					data:{loginName:+$('#email').val()},
+   					success:function(res){
+   						if (res==true){
+   		   					alert("该邮箱已存在!");
+   		   					return;
+   		   				}
+   						if ($('.wrong').is(':visible')) {
+   		  					alert("请正确添加注册相关信息!");
+   		  				}
+   		  				else {
+   		  					submitForm();
+   		  				}	
+   					}	
+   				});
+  			});
+  			
+  			$('#back').click(function(){
+  				history.go(-1) ;
+  			});
+  			
+  			$('#certificates').combobox({
+  				data:getZJLXState()
+  			}); 
+  			$('#education').combobox({
+  				data:getXLLXState()
+  			});
+  			$('#academicDegree').combobox({
+  				data:getXWLXState()
+  			});
+  			$('#nature').combobox({
+  				data:getQYLXState()
+  			});
+  		});
+  		
+  		function submitForm(){  
+				$('#form').submit();
+			} 
+  </script>
+  <style>
+ 	    .top{width:70%;height:86px;background-image:url("img/portal/u0.png");line-height:86px;margin-left:auto;margin-right:auto;}
+  		.all{width:90%;height:100%;}
+  		.mode1{margin-left:200px;background-color:#ffffff;width:935px;}
+  		.sign{color:red;}
+  		.wrong{color:red;}
+  		.right{color:green;}
+  		.tip{font-size:12px;margin-left:70px;}
+  		.titles{float:left;border:1px solid;width:100px;height:40px;line-height:40px;margin-top:25px;margin-left:10px;text-align:center;border-radius:5px;background:#ffffff;}
+  		.wrong,.right{display:none;}
+  		#u60 {
+		  position:absolute;
+		  left:240px;
+		  top:0px;
+		  width:260px;
+		  height:10px;
+		  line-height:10px;
+		}
+		#u60_img {
+		  position:absolute;
+		  left:0px;
+		  top:0px;
+		  width:260px;
+		  height:40px;
+		}
+		#u61 {
+		  position:absolute;
+		  left:0px;
+		  top:0px;
+		  width:260px;
+		  white-space:nowrap;
+		  font-family:'黑体 Bold', '黑体';
+		  font-weight:500;
+		  font-style:normal;
+		  font-size:35px;
+		}
+  </style>
+  <body style="background-color:#fdfdfd;margin-top:0px;">
+
+    <div class="all">
+    	<form action="register" id="form" method="POST">
+    		<input type="hidden" name="systemId" value="${systemId}">
+    		<input type="hidden" name="roleId" value="${roleId}">
+            <span style="color: red">$!{message}</span>
+			<div class="mode1">
+				<!--Email-->
+				<a class="sign"  style="margin-left:89px;margin-top:10px;">*</a><a  style="margin-top:10px;">Email：</a>
+				<input id="email"  name="email"   class="easyui-validatebox" 
+							data-options="required:true,validType:'email',
+													missingMessage:'不允许为空',
+													invalidMessage:'请输入正确的Email格式'"   style="margin-top:10px;"/>
+				<a class="wrong"  id="emailW"   style="margin-top:10px;">x</a><a class="right"  id="emailR" style="margin-top:10px;">√</a><br>
+				<a class="tip"  style="margin-left:154px;">邮箱地址只能包含字母、数字、句点 (.)、连字符 (-) 或下划线 (_)。</a><br><br>
+				
+				<!--密码--> 
+				<a class="sign"  style="margin-left:95px;">*</a><a>密码：</a>
+				<input id="pwd" name="password" type="password" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'"   validType="minLength[6]" />
+				<a class="wrong"  id="pwdW">x</a><a class="right"  id="pwdR">√</a><br>
+				<a class="tip"  style="margin-left:154px;">密码至少6个字符，请不要和登录名相同。</a><br><br>
+				
+				<!--确认密码-->
+				<a class="sign"  style="margin-left:64px;">*</a><a>确认密码：</a>
+				<input id="rpwd" name="rpwd" type="password" class="easyui-validatebox"  
+							data-options="missingMessage:'不允许为空',"    
+				    		required="required"  validType="equals['#pwd']" />
+				<a class="wrong"  id="rpwdW">x</a><a class="right"  id="rpwdW">√</a><br><br>
+				
+				<!--姓名-->
+				<a class="sign" style="margin-left:94px;">*</a><a>姓名：</a>
+				<input id="name" name="realName" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'" />
+				<a class="wrong"  id="nameW">x</a><a class="right"  id="nameR">√</a><br><br>
+				
+				<!--汉语拼音-->
+				<a class="sign"  style="margin-left:64px;">*</a><a>汉语拼音：</a>
+				<input id="pinyin" name="nameSpell" class="easyui-validatebox" 
+							data-options="required:true,missingMessage:'不允许为空'"   validType="english[]" />
+				<a class="wrong"  id="pinyinW">x</a><a class="right"  id="pinyinR">√</a><br><br>
+				
+				<!--证件-->
+				<a class="sign"   style="margin-left:94px;">*</a><a>证件：</a>
+				<select id="certificates" class="easyui-combobox" name="certifiType" style="width:80px;"> 
+<!-- 				    <option  value="IDCARD">身份证</option>
+				    <option  value="PASSPORT">护照</option>
+				    <option  value="OFFICERCARD">军警证</option>
+ -->				</select>
+				<input id="certificate" name="certifiNo" class="easyui-validatebox"
+							data-options="required:true,missingMessage:'不允许为空'" /><!-- style="margin-left:154px;" -->
+				<a class="wrong"  id="certificateW">x</a><a class="right"   id="certificateR">√</a><br><br>  
+				
+				<!--性别-->
+				<a class="sign"   style="margin-left:90px;">*</a><a> 性别：</a>
+				<input type="radio" value="male" checked="checked" name="sex"/>男 
+				<input type="radio" value="female" name="sex"/>女<br><br>
+				
+				<!--出生日期-->
+				<a class="sign"  style="margin-left:64px;">*</a><a>出生日期：</a>
+				<input id="birthday" type="text"  name="birthDay" class="easyui-datebox" required="required"  value="1"></input>
+				<br><br>
+			</div>
+			<div class="mode1">
+				<!--提交按钮-->
+				<input type="button"  value="注册"  id="registered"   style="font-size:18px;width:70px;height:30px;margin-left:100px;">
+<!-- 				<a href="javascript:;" onclick="submitForm(this)">注册</a>
+ -->				<input type="button"  value="返回"   id="back"  style="font-size:18px;width:70px;height:30px;">
+			</div>
+		</form>
+    </div>
+  </body>
+</html>
