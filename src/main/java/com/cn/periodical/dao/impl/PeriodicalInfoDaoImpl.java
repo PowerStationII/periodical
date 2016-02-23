@@ -56,8 +56,8 @@ public class PeriodicalInfoDaoImpl extends BaseDao implements PeriodicalInfoDao 
 	public PeriodicalInfo selectByPrimaryKey(Long id) {
 		return super.getSqlSession().selectOne("PeriodicalInfoMapper.selectByPrimaryKey", id);
 	}
-	public PeriodicalInfo selectByPeriodicalId(String periodicalId) {
-		return super.getSqlSession().selectOne("PeriodicalInfoMapper.selectByPeriodicalId", periodicalId);
+	public PeriodicalInfo selectByPeriodicalId(PeriodicalInfoQuery periodicalInfoQuery) {
+		return super.getSqlSession().selectOne("PeriodicalInfoMapper.selectByPeriodicalId", periodicalInfoQuery);
 	}
 	
 	

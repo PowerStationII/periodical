@@ -555,7 +555,7 @@
 
 
 	<!-- 查询期刊明细 -->
-	<select id="selectByPeriodicalId" parameterType="String"
+	<select id="selectByPeriodicalId" parameterType="PeriodicalInfoQuery"
 		resultMap="BaseResultMap">
 		select
 		<trim suffixOverrides=",">
@@ -563,6 +563,9 @@
 		</trim>
 		from periodical_info
 		where periodical_id = #{periodicalId,jdbcType=VARCHAR}
+        <if test="periodicalYear != null">
+            #{periodicalYear,jdbcType=VARCHAR}
+        </if>
 	</select>
 
 

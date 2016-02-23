@@ -77,7 +77,10 @@ public class AdGroupController extends EditorController{
 	public ModelAndView toAdGroupDetailPage(HttpServletRequest request,String periodicalId,String periodicalIssueNo) {
 		logger.info("广告组刊Page:[ "+periodicalId+" ]");
 		ModelAndView mav = new ModelAndView("editor_adGroupDetailPage");
-		PeriodicalInfo periodicalInfo = periodicalInfoManager.selectByPeriodicalId(periodicalId);
+        PeriodicalInfoQuery periodicalInfoQuery = new PeriodicalInfoQuery ();
+        periodicalInfoQuery.setPeriodicalId(periodicalId);
+        periodicalInfoQuery.setPeriodicalYear("");
+		PeriodicalInfo periodicalInfo = periodicalInfoManager.selectByPeriodicalId(periodicalInfoQuery);
 		PeriodicalQuery query = new PeriodicalQuery();
 		query.setPeriodicalId(periodicalId);
 		query.setPeriodicalIssueNo(periodicalIssueNo);

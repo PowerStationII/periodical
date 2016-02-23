@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.manager.*;
 import com.cn.periodical.pojo.*;
+import com.cn.periodical.utils.GenerateOrderNo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,14 +88,33 @@ public class ArticleGroupController extends EditorController{
 	 * 组稿
 	 */
 	@RequestMapping(value="/toGroupPage")
-	public ModelAndView toGroupPage(HttpServletRequest request,String periodicalId,String periodicalIssueNo) {
+	public ModelAndView toGroupPage(HttpServletRequest request,String periodicalId,String periodicalIssueNo,String periodicalYear) {
 		logger.info("组稿Page:[ "+periodicalId+" ]");
 		ModelAndView mav = new ModelAndView("editor_groupPage");
-		PeriodicalInfo periodicalInfo = periodicalInfoManager.selectByPeriodicalId(periodicalId);
+        PeriodicalInfoQuery periodicalInfoQuery = new PeriodicalInfoQuery ();
+        periodicalInfoQuery.setPeriodicalId(periodicalId);
+        periodicalInfoQuery.setPeriodicalYear("");
+		PeriodicalInfo periodicalInfo = periodicalInfoManager.selectByPeriodicalId(periodicalInfoQuery);
 		PeriodicalQuery query = new PeriodicalQuery();
 		query.setPeriodicalId(periodicalId);
 		query.setPeriodicalIssueNo(periodicalIssueNo);
+        query.setPeriodicalYear(periodicalYear);
 		List<Periodical> periodicals = periodicalManager.queryList(query);
+        if(null==periodicals || periodicals.isEmpty()){
+            for(int i=1;i<=periodicalInfo.getCycle();i++){
+                Periodical periodical = new Periodical();
+                periodical.setPeriodicalId(periodicalInfo.getPeriodicalId());
+                periodical.setPeriodicalIssueNo(GenerateOrderNo.generateOrderNo()); //  就用国内刊号
+//				periodical.setPeriodicalIssueNo(periodicalInfo.getCnNo());
+                periodical.setPeriodicalState(PeriodicalStateEnums.NEW.getCode());
+                periodical.setCycleNums(i);
+                periodical.setPeriodicalYear(periodicalYear);
+//				periodical.setPublishNums(periodicalInfo.getPublishNums()==null?10000:periodicalInfo.get);
+                periodical.setCreateTime(new Date());
+                periodicalManager.savePeriodical(periodical);
+            }
+            periodicals = periodicalManager.queryList(query);
+        }
 		mav.addObject("list", periodicals);
 		mav.addObject("p", periodicalInfo);
 		return mav;
@@ -107,7 +127,10 @@ public class ArticleGroupController extends EditorController{
 	public ModelAndView toGroupPageSongKan(HttpServletRequest request,String periodicalId,String periodicalIssueNo) {
 		logger.info("组稿Page:[ "+periodicalId+" ]");
 		ModelAndView mav = new ModelAndView("editor_groupPageSongKan");
-		PeriodicalInfo periodicalInfo = periodicalInfoManager.selectByPeriodicalId(periodicalId);
+        PeriodicalInfoQuery periodicalInfoQuery = new PeriodicalInfoQuery ();
+        periodicalInfoQuery.setPeriodicalId(periodicalId);
+        periodicalInfoQuery.setPeriodicalYear("");
+		PeriodicalInfo periodicalInfo = periodicalInfoManager.selectByPeriodicalId(periodicalInfoQuery);
 		PeriodicalQuery query = new PeriodicalQuery();
 		query.setPeriodicalId(periodicalId);
 		query.setPeriodicalIssueNo(periodicalIssueNo);

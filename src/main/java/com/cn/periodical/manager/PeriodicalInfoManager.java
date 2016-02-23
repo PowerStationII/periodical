@@ -23,5 +23,5 @@ public interface PeriodicalInfoManager {
 	void deletePeriodicalInfo(PeriodicalInfoQuery query);
 	
 	PeriodicalInfoPage queryPageList(PeriodicalInfoQuery query);
-	public PeriodicalInfo selectByPeriodicalId(String periodicalId);
+	public PeriodicalInfo selectByPeriodicalId(PeriodicalInfoQuery periodicalInfoQuery);
 }

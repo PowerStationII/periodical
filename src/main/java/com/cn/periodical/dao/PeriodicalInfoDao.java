@@ -31,5 +31,5 @@ public interface PeriodicalInfoDao {
 	
 	int updateByPrimaryKey(PeriodicalInfo record);
 	
-	public PeriodicalInfo selectByPeriodicalId(String periodicalId);
+	public PeriodicalInfo selectByPeriodicalId(PeriodicalInfoQuery periodicalInfoQuery);
 }

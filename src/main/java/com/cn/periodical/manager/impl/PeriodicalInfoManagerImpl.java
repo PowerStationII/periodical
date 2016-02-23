@@ -71,9 +71,9 @@ public class PeriodicalInfoManagerImpl implements PeriodicalInfoManager {
 	}
 
 
-	public PeriodicalInfo selectByPeriodicalId(String periodicalId) {
+	public PeriodicalInfo selectByPeriodicalId(PeriodicalInfoQuery periodicalInfoQuery) {
 		// TODO Auto-generated method stub
-		return periodicalInfoDao.selectByPeriodicalId(periodicalId);
+		return periodicalInfoDao.selectByPeriodicalId(periodicalInfoQuery);
 	}
 }
 

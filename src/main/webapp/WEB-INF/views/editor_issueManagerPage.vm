@@ -40,9 +40,10 @@
 		<table  class="easyui-datagrid"   data-options="singleSelect:true">
 		<thead>
 			<tr>
-				<th data-options="field:'pId',width:150">期刊id</th>
+				<th data-options="field:'pId',width:100">期刊id</th>
 				<th data-options="field:'pCnName',width:200">期刊名称</th>
-				<th data-options="field:'pIsNo',width:200">期刊编号</th>
+				<th data-options="field:'pIsNo',width:180">期刊编号</th>
+				<th data-options="field:'pYear',width:70">期刊年份</th>
 				<th data-options="field:'cNums',width:90">期数</th>
 				<th data-options="field:'isTime',width:190">签发时间</th>
 				<th data-options="field:'option',width:240">操作</th>
@@ -54,6 +55,7 @@
 				<td>$!{dtos.pId}</td>
 				<td>$!{dtos.pCnName}</td>
 				<td>$!{dtos.pIsNo}</td>
+				<td>$!{dtos.pYear}</td>
 				<td>第$!{dtos.cNums}期</td>
 				<td>$!{dtos.isTime}</td>
 				<td>
