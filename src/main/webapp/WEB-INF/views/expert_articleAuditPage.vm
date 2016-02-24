@@ -42,10 +42,14 @@
                 'articleId':$('input[name="articleId"]').val(),
                 'articleCnTitle':$('input[name="title"]').val(),
                 'authorName':$('input[name="authorName"]').val(),
-                'creatTime':$('input[name="contriTime"]').val()
+                'creatTime':$('input[name="contriTime"]').val(),
+                'expertState':$('#state').combobox('getValue')
             };
             return url;
-        }
+        } ;
+        $('#state').combobox({
+            data:getExportState()
+        });
     });
 </script>
 <body>
@@ -63,7 +67,10 @@
                 <tr>
                     <td>投稿时间：</td>
                     <td ><input class="easyui-datebox" type="text" name="contriTime" value=""></td>
-                    <td colspan="4">
+                    <td>稿件状态：</td>
+                    <td ><select name="expertState"  id="state" class="easyui-combobox"  editable="false" style="width:155px;">
+                    </select></td>
+                    <td colspan="2">
                         <a  class="easyui-linkbutton"   style="width:50px;" href="#"  id="submit">查询</a>
                     </td>
                 </tr>

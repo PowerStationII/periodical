@@ -10,6 +10,17 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script>
+        function paikan(periodicalId){
+            var periodicalYear = $('#periodicalYear').val() ;
+            if(""==periodicalYear){
+                alert("请选择期刊年份");
+            }else{
+                window.location.href='../editor/toGroupPageSongKan?periodicalId='+periodicalId+'&periodicalYear='+periodicalYear;
+            }
+        }
+
+    </script>
 </head>
 <body>
 	<div id="articleInfos">
@@ -19,6 +30,7 @@
 			<tr>
 				<th data-options="field:'periodicalCnName',width:300">期刊名称</th>
 				<th data-options="field:'cycle',width:300">发行期</th>
+                <th data-options="field:'periodicalYear',width:170">发行年</th>
 				<th data-options="field:'option',width:300">操作</th>
 			</tr>
 			</thead>
@@ -27,7 +39,23 @@
 			<tr>
 				<td>${periodicalInfo.periodicalCnName}</td>
 				<td>${periodicalInfo.cycle}</td>
-				<td><a class="easyui-linkbutton" style="width: 50px;" href="../editor/toGroupPageSongKan?periodicalId=${periodicalInfo.periodicalId}">送刊</a></td>
+                <td>
+                    <select name="periodicalYear" id="periodicalYear">
+                        <option value="">请选择</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                    </select>
+                </td>
+                <td>
+                    <a class="easyui-linkbutton" style="width: 50px;" href="javascript:paikan('${periodicalInfo.periodicalId}')">送刊</a>
+                </td>
 			</tr>
 			#end
 			</tbody>

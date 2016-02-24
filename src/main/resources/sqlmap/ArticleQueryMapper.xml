@@ -314,6 +314,7 @@
 			and  INSTR(temp1.authorName,#{authorName,jdbcType=VARCHAR})
 		</if>
 		group by temp1.article_id
+        order by  temp1.article_id desc
         limit #{pageSize},#{pageNo}
 	</select>
 	<select id="selectArticleInfosForExpertPageCount" parameterType="ArticleQueryReqDto"

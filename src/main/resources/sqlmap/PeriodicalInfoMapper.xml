@@ -563,8 +563,8 @@
 		</trim>
 		from periodical_info
 		where periodical_id = #{periodicalId,jdbcType=VARCHAR}
-        <if test="periodicalYear != null">
-            #{periodicalYear,jdbcType=VARCHAR}
+        <if test="periodicalYear != null and periodicalYear!='' ">
+            and periodical_year = #{periodicalYear,jdbcType=VARCHAR}
         </if>
 	</select>
 

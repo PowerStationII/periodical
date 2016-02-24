@@ -59,7 +59,17 @@ function getArticleState(){
 //	}] ;
 //	return data;
 //}
-
+function getExportState(){
+    var data=[{
+        "value":'',
+        "text":"全部",
+        "selected":true
+    },{
+        "value":'0002',
+        "text":"未审核"
+    }] ;
+    return data;
+}
 /**
  * 证件类型枚举下拉
  * @returns {Array}

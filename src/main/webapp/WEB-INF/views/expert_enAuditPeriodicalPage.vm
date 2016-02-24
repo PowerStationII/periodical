@@ -49,32 +49,31 @@
             return url;
         }
 
-        function songQianFa(periodicalIssueNo ,periodicalId){
-            $.ajax({
-                type:"POST",
-                url:"../expert/sendToIssueEditorPage",
-                data:{periodicalIssueNo:periodicalIssueNo,periodicalId:periodicalId},
-                datatype: "json",
-                beforeSend:function(){},
-                success:function(data){
-                    if(data.message == "success"){
-                        alert("送编辑提交成功");
-                        $('#table').datagrid({queryParams:getUrl()});
-                    }else{
-                        alert("请把全部稿件审核完毕后再送编辑");
-                    }
-                }   ,
-                complete: function(XMLHttpRequest, textStatus){
-                },
-                error: function(data){
-                    alert(data.message);
-                }
-            });
-
-        }
     });
 
+    function songQianFa(periodicalIssueNo ,periodicalId){
+        $.ajax({
+            type:"POST",
+            url:"../expert/sendToIssueEditorPage",
+            data:{periodicalIssueNo:periodicalIssueNo,periodicalId:periodicalId},
+            datatype: "json",
+            beforeSend:function(){},
+            success:function(data){
+                if(data.message == "success"){
+                    alert("送编辑提交成功");
+                    $('#table').datagrid({queryParams:getUrl()});
+                }else{
+                    alert("请把全部稿件审核完毕后再送编辑");
+                }
+            }   ,
+            complete: function(XMLHttpRequest, textStatus){
+            },
+            error: function(data){
+                alert(data.message);
+            }
+        });
 
+    }
 </script>
 <body>
 	<div id="articleInfos" style="margin-top: 50px;">

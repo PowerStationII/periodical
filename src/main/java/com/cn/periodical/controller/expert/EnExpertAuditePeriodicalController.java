@@ -218,7 +218,8 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 	@RequestMapping(value="/toEnAuditAgreePage")
 	public @ResponseBody Object toEnAuditAgreePage(HttpServletRequest request,
 			@ModelAttribute BizPeriodical reqDto,String articleId,
-			String periodicalId,String periodicalIssueNo,@RequestParam(value="files", required=true) MultipartFile[] files,String dealOpinion ) {
+			String periodicalId,String periodicalIssueNo,@RequestParam(value="files", required=true) MultipartFile[] files,
+            String dealOpinion ) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("英文审刊-稿件审核:["+JSON.toJSONString(reqDto)+"]");
 		Map<String,Object>  map = new HashMap<String ,Object>();

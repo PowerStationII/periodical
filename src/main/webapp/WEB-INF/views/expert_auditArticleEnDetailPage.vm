@@ -104,7 +104,7 @@
         </tr>
         <tr>
             <td>审核意见：</td>
-            <td> <textarea cols="20" rows="10"  id="dealOpinion" name="">$!{dto.articleEnSummary}</textarea></td>
+            <td> <textarea cols="20" rows="10"  id="dealOpinion" name=""></textarea></td>
         </tr>
         <tr>
             <td>审批稿件下载：</td>

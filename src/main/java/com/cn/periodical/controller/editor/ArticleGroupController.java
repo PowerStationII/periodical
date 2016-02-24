@@ -124,16 +124,18 @@ public class ArticleGroupController extends EditorController{
 	 * 送刊
 	 */
 	@RequestMapping(value="/toGroupPageSongKan")
-	public ModelAndView toGroupPageSongKan(HttpServletRequest request,String periodicalId,String periodicalIssueNo) {
+	public ModelAndView toGroupPageSongKan(HttpServletRequest request,String periodicalId,String periodicalIssueNo
+    ,String periodicalYear) {
 		logger.info("组稿Page:[ "+periodicalId+" ]");
 		ModelAndView mav = new ModelAndView("editor_groupPageSongKan");
         PeriodicalInfoQuery periodicalInfoQuery = new PeriodicalInfoQuery ();
         periodicalInfoQuery.setPeriodicalId(periodicalId);
-        periodicalInfoQuery.setPeriodicalYear("");
+//        periodicalInfoQuery.setPeriodicalYear(periodicalYear);
 		PeriodicalInfo periodicalInfo = periodicalInfoManager.selectByPeriodicalId(periodicalInfoQuery);
 		PeriodicalQuery query = new PeriodicalQuery();
 		query.setPeriodicalId(periodicalId);
 		query.setPeriodicalIssueNo(periodicalIssueNo);
+		query.setPeriodicalYear(periodicalYear);
 		List<Periodical> periodicals = periodicalManager.queryList(query);
 		mav.addObject("list", periodicals);
 		mav.addObject("p", periodicalInfo);
@@ -402,7 +404,8 @@ public class ArticleGroupController extends EditorController{
      * @return
      */
     @RequestMapping(value="/toArticleToYingWenPage")
-    public ModelAndView toArticleToYingWen(@RequestParam("periodicalIssueNo") String periodicalIssueNo,String periodicalId,HttpServletRequest request) {
+    public ModelAndView toArticleToYingWen(@RequestParam("periodicalIssueNo") String periodicalIssueNo,
+                                           String periodicalId,HttpServletRequest request,String periodicalYear) {
         ModelAndView mav = new ModelAndView("editor_toYingWenPage");
 
         /**
@@ -422,6 +425,7 @@ public class ArticleGroupController extends EditorController{
 
         mav.addObject("periodicalInfoQuery",periodicalInfoQuery);
         mav.addObject("expertInfos",expertInfos);
+        mav.addObject("periodicalYear",periodicalYear);
         return mav ;
     }
     @RequestMapping(value="/toYingWen")

@@ -20,10 +20,11 @@
             var eId = $("#eId").val();
             var periodicalId = $("#periodicalId").val();
             var extend1 = $("#extend1").val();
+            var periodicalYear = $("#periodicalYear").val();
             $.ajax({
                 type:"POST",     //提交数据的类型 POST GET
                 url:"../editor/toYingWen",   //提交的网址
-                data:{periodicalId:periodicalId,periodicalIssueNo:extend1,eId:eId},   //提交的数据
+                data:{periodicalId:periodicalId,periodicalIssueNo:extend1,eId:eId,periodicalYear:periodicalYear},   //提交的数据
                 datatype: "json",//"xml", "html", "script", "json", "jsonp", "text".   //返回数据的格式
                 //在请求之前调用的函数
                 beforeSend:function(){
@@ -36,7 +37,7 @@
                 success:function(data){
                     if (data.message == "success") {
                         alert('期刊已送英文专家');
-                        window.location.href='../editor/toGroupPage?periodicalId='+data.periodicalId;
+                        window.location.href='../editor/toGroupPage?periodicalId='+data.periodicalId+'&periodicalYear='+periodicalYear;
                     }
                 }   ,
                 //调用执行后调用的函数
@@ -62,6 +63,7 @@
 	<form   method="POST">
         <input type="hidden" id="periodicalId" value="$!{periodicalInfoQuery.periodicalId}" >
         <input type="hidden" id="extend1" value="$!{periodicalInfoQuery.extend1}" >
+        <input type="hidden" id="periodicalYear" value="$!{periodicalYear}" >
 		<table id="grid" class="easyui-datagrid"
 			data-options="singleSelect:true,toolbar:'#bt'">
 			<thead>
