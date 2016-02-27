@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.SongKanInfoService;
 import com.cn.periodical.service.Zeng1KanInfoService;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -64,20 +66,54 @@ public class SubscribePostController extends EditorController {
 	@Autowired
     Zeng1KanInfoService zeng1KanInfoService;
 
+//	/**
+//	 * toSubscribePostPage 邮寄管理
+//	 */
+//	@RequestMapping(value = "/toSubscribePostPage", method = RequestMethod.GET)
+//	public ModelAndView toSubscribePostPage(HttpServletRequest request) {
+//		UserInfo userInfo = getUserInfo(request);
+//		logger.info("发行编辑-邮寄管理Page:[" + userInfo.getUserId() + "]");
+//		ModelAndView mav = new ModelAndView("editor_subscribePostPage");
+//		/**
+//		 * 订单信息
+//		 */
+//		List<BizOrder> list = bizOrderManager.queryOrderInfosForSubEditor(null);
+//		mav.addObject("list", list);
+//		return mav;
+//	}
 	/**
 	 * toSubscribePostPage 邮寄管理
 	 */
-	@RequestMapping(value = "/toSubscribePostPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/toSubscribePostPage")
 	public ModelAndView toSubscribePostPage(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("editor_subscribePostPage");
+		return mav;
+	}
+	/**
+	 * toSubscribePostPage 邮寄管理
+	 */
+	@RequestMapping(value = "/toSubscribePostPageSet")
+    @ResponseBody
+    public JSONObject toSubscribePostPageSet(HttpServletRequest request,BizOrderQuery query,
+                                               @RequestParam(required = false, value = "page", defaultValue = "1") int page,
+                                               @RequestParam(required = false, value = "rows", defaultValue = "10") int rows) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("发行编辑-邮寄管理Page:[" + userInfo.getUserId() + "]");
-		ModelAndView mav = new ModelAndView("editor_subscribePostPage");
 		/**
 		 * 订单信息
 		 */
-		List<BizOrder> list = bizOrderManager.queryOrderInfosForSubEditor(null);
-		mav.addObject("list", list);
-		return mav;
+
+        JSONObject json = new JSONObject();
+        int count = bizOrderManager.queryOrderInfosForSubEditorPageCount(query);
+        json.put("total", count);
+
+        query.setPageSize((page-1)*rows);//开始
+        query.setPageNo(rows);//截止
+
+        BizOrderPage bizAdPage = bizOrderManager.queryOrderInfosForSubEditorPage(query,count);
+        json.put("rows", bizAdPage.getValues());
+
+        return json;
 	}
 
 	/**

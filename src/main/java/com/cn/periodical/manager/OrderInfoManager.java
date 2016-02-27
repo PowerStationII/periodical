@@ -23,6 +23,9 @@ public interface OrderInfoManager {
 	OrderInfoPage queryPageList(OrderInfoQuery query);
 	
 	List<BizOrder> queryOrderList(BizOrder bizOrder);
+
+    public int queryOrderListQueryCount(BizOrderQuery bizOrder);
+    public BizOrderPage queryOrderListQuery(BizOrderQuery query , int itemCount);
 	
 	
 	List<BizOrder> queryPayInfoLists(BizOrder bizOrder);

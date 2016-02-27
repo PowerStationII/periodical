@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cn.periodical.enums.ArticalCodeEnums;
 import com.cn.periodical.manager.*;
 import com.cn.periodical.pojo.*;
@@ -69,15 +70,47 @@ public class OrderManageController extends ReaderController{
 	 * toOrderManagePage
 	 * 订单管理页面
 	 */
+//	@RequestMapping(value="/toOrderManagePage")
+//	public ModelAndView toOrderManagePage(HttpServletRequest request,BizOrder bizOrder) {
+//		UserInfo userInfo = getUserInfo(request);
+//		logger.info("订单管理Page:[ ]");
+//		bizOrder.setUserId(userInfo.getUserId());
+//		List<BizOrder> list = orderInfoManager.queryOrderList(bizOrder);
+//		ModelAndView mav = new ModelAndView("reader_orderManagePage");
+//		mav.addObject("list", list);
+//		return mav;
+//	}
+	/**
+	 * toOrderManagePage
+	 * 订单管理页面
+	 */
 	@RequestMapping(value="/toOrderManagePage")
 	public ModelAndView toOrderManagePage(HttpServletRequest request,BizOrder bizOrder) {
-		UserInfo userInfo = getUserInfo(request);
-		logger.info("订单管理Page:[ ]");
-		bizOrder.setUserId(userInfo.getUserId());
-		List<BizOrder> list = orderInfoManager.queryOrderList(bizOrder);
 		ModelAndView mav = new ModelAndView("reader_orderManagePage");
-		mav.addObject("list", list);
 		return mav;
+	}
+	/**
+	 * toOrderManagePage
+	 * 订单管理页面
+	 */
+	@RequestMapping(value="/toOrderManagePageSet")
+    @ResponseBody
+    public JSONObject toOrderManagePageSet(HttpServletRequest request,BizOrderQuery query
+                                            ,@RequestParam(required = false, value = "page", defaultValue = "1") int page,
+                                             @RequestParam(required = false, value = "rows", defaultValue = "10") int rows) {
+
+        JSONObject json = new JSONObject();
+        int count = orderInfoManager.queryOrderListQueryCount(query);
+        json.put("total", count);
+
+        query.setPageSize((page-1)*rows);//开始
+        query.setPageNo(rows);//截止
+
+        BizOrderPage bizAdPage = orderInfoManager.queryOrderListQuery(query,count);
+        json.put("rows", bizAdPage.getValues());
+
+        logger.info("广告管理首页Page out:[]");
+        return json;
 	}
 
 	

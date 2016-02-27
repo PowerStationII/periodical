@@ -159,6 +159,38 @@
 		and oi.order_no=#{orderNo,jdbcType=VARCHAR}
 		</if>
 	</select>
+	<select id="queryOrderListQueryCount" parameterType="BizOrderQuery" resultType="java.lang.Integer">
+		select count(1)
+		from order_info oi
+		where 1=1
+		<if test="userId != null and ''!=userId">
+		and oi.user_id=#{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="orderNo != null and ''!=orderNo">
+		and oi.order_no=#{orderNo,jdbcType=VARCHAR}
+		</if>
+		<if test="pYear != null and ''!=pYear">
+		and oi.periodical_year=#{pYear,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="queryOrderListQuery" parameterType="BizOrderQuery" resultType="BizOrder">
+		select oi.order_no as orderNo,oi.periodical_year as pYear,
+		oi.subscribe_nums as subNums,oi.amount as amount,
+		DATE_FORMAT(oi.create_time, '%Y-%m-%d') as
+		submitTime,DATE_FORMAT(oi.audit_time, '%Y-%m-%d') as auditTime
+		from order_info oi
+		where 1=1
+		<if test="userId != null and ''!=userId">
+		and oi.user_id=#{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="orderNo != null and ''!=orderNo">
+		and oi.order_no=#{orderNo,jdbcType=VARCHAR}
+		</if>
+        <if test="pYear != null and ''!=pYear">
+            and oi.periodical_year=#{pYear,jdbcType=VARCHAR}
+        </if>
+        limit #{pageSize},#{pageNo}
+	</select>
 
 	<select id="queryOrderDetail" parameterType="BizOrder"
 		resultType="BizOrder">

@@ -73,6 +73,24 @@ public class OrderInfoManagerImpl implements OrderInfoManager {
 		// TODO Auto-generated method stub
 		return orderInfoDao.queryOrderList(bizOrder);
 	}
+	public int queryOrderListQueryCount(BizOrderQuery bizOrder) {
+		// TODO Auto-generated method stub
+		return orderInfoDao.queryOrderListQueryCount(bizOrder);
+	}
+	public BizOrderPage queryOrderListQuery(BizOrderQuery query , int itemCount) {
+
+        BizOrderPage bizAdPage = new BizOrderPage();
+        query.setItemCount(itemCount);
+
+        if (itemCount == 0) {
+            bizAdPage.setValues(null);
+        } else {
+            bizAdPage.setValues(orderInfoDao.queryOrderListQuery(query));
+        }
+
+        bizAdPage.setPagenation(new Pagenation(query.getPageNo(),query.getPageSize(),query.getItemCount()));
+        return bizAdPage;
+	}
 
 
 	public List<BizOrder> queryPayInfoLists(BizOrder bizOrder) {

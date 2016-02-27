@@ -7,6 +7,7 @@ package com.cn.periodical.dao.impl;
 
 import java.util.List;
 
+import com.cn.periodical.pojo.BizOrderQuery;
 import org.springframework.stereotype.Repository;
 
 import com.cn.periodical.dao.BaseDao;
@@ -25,6 +26,14 @@ public class BizOrderDaoImpl extends BaseDao implements BizOrderDao {
 	public List<BizOrder> queryOrderInfosForSubEditor(BizOrder example) {
 		// TODO Auto-generated method stub
 		return super.getSqlSession().selectList("BizOrderMapper.queryOrderInfosForSubEditor", example);
+	}
+	public List<BizOrder> queryOrderInfosForSubEditorPage(BizOrderQuery example) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectList("BizOrderMapper.queryOrderInfosForSubEditorQuery", example);
+	}
+	public int queryOrderInfosForSubEditorPageCount(BizOrderQuery example) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectOne("BizOrderMapper.queryOrderInfosForSubEditorQueryCount", example);
 	}
 
 	public List<BizOrder> queryOrderInfosForSubEditorDetails(BizOrder example) {

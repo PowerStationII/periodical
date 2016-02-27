@@ -39,6 +39,54 @@
 				and p.periodical_state='FI'
 		
 	</select>
+	<select id="queryOrderInfosForSubEditorQuery" parameterType="BizOrderQuery"
+		resultType="BizOrder">
+		select oi.order_no as orderNo,oi.already_pay_amount as
+		aPayAmount,DATE_FORMAT(oi.create_time, '%Y-%m-%d') as submitTime,oi.order_status as oStatus,
+		oi.periodical_year as pYear,oi.subscribe_nums as subNums,oi.user_id as
+		userId,pi.periodical_cn_name as pCnName, DATE_FORMAT(oi.audit_time, '%Y-%m-%d') as auditTime,
+		pi.cycle as cycle,pi.in_fix_price as iFprice,oi.amount as
+		oAmount,ri.reader_name as readerName,pi.in_fix_price as iFprice,p.periodical_issue_no as pIsNo,
+		p.periodical_state as pState,p.periodical_id as periodicalId
+		from order_info oi,periodical_info pi,user_info ui,reader_info ri ,periodical p
+		where oi.periodical_id=pi.periodical_id
+				and oi.user_id=ui.user_id and ui.ref_id=ri.reader_id and p.periodical_id=pi.periodical_id
+				and p.periodical_state='FI'
+        <if test="orderNo != null and ''!=orderNo">
+            and oi.order_no = #{orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="pYear != null and ''!=pYear">
+            and oi.periodical_year = #{pYear,jdbcType=VARCHAR}
+        </if>
+        <if test="readerName != null and ''!=readerName">
+            and ri.reader_name = #{readerName,jdbcType=VARCHAR}
+        </if>
+        <if test="extend4 != null and ''!=extend4">
+            and ri.extend_4 = #{extend4,jdbcType=VARCHAR}
+        </if>
+
+	</select>
+	<select id="queryOrderInfosForSubEditorQueryCount" parameterType="BizOrderQuery"
+		resultType="java.lang.Integer">
+		select count(1)
+		from order_info oi,periodical_info pi,user_info ui,reader_info ri ,periodical p
+		where oi.periodical_id=pi.periodical_id
+				and oi.user_id=ui.user_id and ui.ref_id=ri.reader_id and p.periodical_id=pi.periodical_id
+				and p.periodical_state='FI'
+        <if test="orderNo != null and ''!=orderNo">
+            and oi.order_no = #{orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="pYear != null and ''!=pYear">
+            and oi.periodical_year = #{pYear,jdbcType=VARCHAR}
+        </if>
+        <if test="readerName != null and ''!=readerName">
+            and ri.reader_name = #{readerName,jdbcType=VARCHAR}
+        </if>
+        <if test="extend4 != null and ''!=extend4">
+            and ri.extend_4 = #{extend4,jdbcType=VARCHAR}
+        </if>
+
+	</select>
 	<!-- 期刊邮寄管理明细页 -->
 		
 		<select id="queryOrderInfosForSubEditorDetails" parameterType="BizOrder"

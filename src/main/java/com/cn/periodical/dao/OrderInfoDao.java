@@ -27,6 +27,9 @@ public interface OrderInfoDao {
 	
 	List<OrderInfo> selectPageByExample(OrderInfoQuery example);
 	List<BizOrder> queryOrderList(BizOrder bizOrder);
+
+    public int queryOrderListQueryCount(BizOrderQuery bizOrder) ;
+    public List<BizOrder> queryOrderListQuery(BizOrderQuery bizOrder) ;
 	
 	OrderInfo selectByPrimaryKey(Long id);
 	

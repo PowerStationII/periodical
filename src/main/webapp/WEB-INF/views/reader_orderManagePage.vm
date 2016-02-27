@@ -10,69 +10,77 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/enums-combox.js"></script>
+<script type="text/javascript" src="../js/enums-table.js"></script>
 </head>
 <script type="text/javascript">
-	$(function(){
-		// 表格数据源  
-        var data = [];  
-        var rows = $('#order').datagrid('getRows');
-        for(var i=0;i<rows.length;i++) {
-        	 data.push({  
-                 "orderNo":rows[i].orderNo,  
-                 "pYear":rows[i].pYear,
-                 "subNums":rows[i].subNums,  
-                 "amount":rows[i].amount,
-                 "submitTime":rows[i].submitTime,  
-                 "auditTime":rows[i].auditTime, 
-                 "option":rows[i].option
-             }) ; 
-		}
-        $("#order").datagrid("loadData", data.slice(0, 5));
-        var pager = $("#order").datagrid("getPager");  
-        pager.pagination({  
-            total:data.length, 
-            pageSize:5,
-            pageList: [5,10,15,20],
-            onSelectPage:function (pageNo, pageSize) {  
-                var start = (pageNo - 1) * pageSize;  
-                var end = start + pageSize;  
-                $("#order").datagrid("loadData", data.slice(start, end));  
-                pager.pagination('refresh', {  
-                    total:data.length,  
-                    pageNumber:pageNo
-                });  
-            }  
-        });  
-	});
-	function yijian(value) {
-		$.ajax({
-				url:'../reader/queryOpinion',
-				data:{orderNo:value},
-				type:'POST',
-				success:function(res){
-					if (res=='null' || res=='') {
-						alert('无');
-					}
-					else {
-						alert(res);
-						//alert(eval('(' + res + ')').opinion);
-					}
-				}	
-		});
-	}
-	//文件下载
-	 function import_download () {
-		 var fileName = 'dinggouzhinan.png';//文件名称
-		 var filePath = "E:\\temp\\";//文件路径
-	   	 var htmlUrl = "../reader/download?fileName="+fileName+"&filePath="+filePath;
-		 $("#saveImg").attr("src",htmlUrl);
-	 }
-	
+    $(function(){
+        $('#submit').click(function(){
+            $('#table').datagrid({queryParams:getUrl()});
+        });
+
+        $('#table').datagrid({
+            url:'../reader/toOrderManagePageSet',
+            queryParams:getUrl(),
+            pageSize:10,
+            pageList: [10,15,20],
+            onLoadSuccess:function(){
+                var rows = $('#table').datagrid('getRows');
+                for(var i=0;i<rows.length;i++) {
+                    rows[i].option='<a href="../reader/toOrderPayPage?orderNo='+rows[i].orderNo+'" class="easyui-linkbutton" data-options="">订费登记</a>&nbsp;'+
+                    '<a href="../reader/toDistributionPage?orderNo='+rows[i].orderNo+'"  class="easyui-linkbutton" data-options="">编辑订单</a>&nbsp;'+
+                    '<a onclick="yijian(\''+rows[i].orderNo+'\')" href="#" class="easyui-linkbutton" >查看审稿意见</a>';
+                    $('#table').datagrid('refreshRow',i);
+                }
+            }
+        });
+
+        $('#orderYear').combobox({
+            data:getYear(),
+            editable:false
+        });
+
+        function getUrl() {
+            var url = {
+                'orderNo':$('input[name="orderNoSearche"]').val(),
+                'pYear':$('#orderYear').combobox('getValue')
+            };
+            return url;
+        }
+    });
+    function yijian(value) {
+        $.ajax({
+            url:'../reader/queryOpinion',
+            data:{orderNo:value},
+            type:'POST',
+            success:function(res){
+                if (res=='null' || res=='') {
+                    alert('无');
+                }
+                else {
+                    alert(res);
+                    //alert(eval('(' + res + ')').opinion);
+                }
+            }
+        });
+    }
 </script>
 <body>
 	<div id="articleInfos">
 		<div id="bt"  style="height:30px;line-height:30px;">订单管理</div>
-		<table id="order" class="easyui-datagrid" data-options="fitColumns:true,singleSelect:true,toolbar:'#bt',pagination:true">
+        <form action="../reader/toOrderManagePageSet" method="POST">
+            <table>
+                <tr>
+                    <td>订购年份：</td>
+                    <td><select id="orderYear" name="orderYear"  data-options="panelHeight:'auto'" class="easyui-combobox"  style="width:155px;">
+                    </select></td>
+                    <td>订单编号：</td>
+                    <td><input class="easyui-textbox" type="text" name="orderNoSearche" value=""></td>
+                    <td><a  class="easyui-linkbutton"   style="width:50px;" href="#"  id="submit">查询</a></td>
+                </tr>
+            </table>
+        </form>
+		<table id="table" class="easyui-datagrid" data-options="fitColumns:true,singleSelect:true,toolbar:'#bt',pagination:true">
 			<thead> 
 				<tr>
 					<th data-options="field:'orderNo',width:200">订单编号</th>
@@ -84,23 +92,6 @@
 	                <th data-options="field:'option',width:220">操作</th>
 				</tr>
 			</thead>
-			<tbody>
-            #foreach($dtos in ${list})
-                <tr>
-                    <td>$!{dtos.orderNo}</td>
-                    <td>$!{dtos.pYear}</td>
-                    <td>$!{dtos.subNums}</td>
-                    <td>$!{dtos.amount}</td>
-                    <td>$!{dtos.submitTime}</td>
-                    <td>$!{dtos.auditTime}</td>
-                    <td>
-                    	<a href="../reader/toOrderPayPage?orderNo=$!{dtos.orderNo}" class="easyui-linkbutton" data-options="">订费登记</a> 
-                    	<a href="../reader/toDistributionPage?orderNo=$!{dtos.orderNo}"  class="easyui-linkbutton" data-options="">编辑订单</a>
-                    	<a href="#"  onclick="yijian('$!{dtos.orderNo}')" class="easyui-linkbutton" data-options="">查看审核信息</a> 
-                    </td>
-                </tr>
-            #end
-            </tbody>
 		</table>
 		<!-- <a href="../reader/toCreatOrderPage"  class="easyui-linkbutton" data-options="">新建订单</a>  -->
 		<!--  <a href="#"  onclick="import_download()" class="easyui-linkbutton" data-options="">下载订购指南</a>  --> 

@@ -21,12 +21,16 @@
 			if ($('input[name=file]').val()=='') {
 				alert('请选择上传文件');
 				return;
-			}
-			else {
+			} else if(isNaN($('#payAmount').val())){
+                alert('请输入正确的汇款金额');
+                $('#payAmount').val('0');
+                return ;
+            }else {
 				$('form').submit();
 			}
 		});
-		
+
+
 	})
 </script>
 <body>
@@ -62,49 +66,49 @@
 				<td><label>
 						<span class="right">汇票号：</span>
 				</label></td>
-				<td><input type="text" name="payNo" value=""></td>
+				<td><input type="text" name="payNo" value="" maxlength="50"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">汇款人姓名：</span>
 				</label></td>
-				<td><input type="text" name="payerName" value=""></td>
+				<td><input type="text" name="payerName" value="" maxlength="50"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">汇款金额：</span>
 				</label></td>
-				<td><input type="text" name="payAmount" value=""></td>
+				<td><input type="text" name="payAmount" id="payAmount" value="" maxlength="50"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">汇款地址：</span>
 				</label></td>
-				<td><input type="text" name="payAddress" value=""></td>
+				<td><input type="text" name="payAddress" value="" maxlength="50"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">汇款人联系电话：</span>
 				</label></td>
-				<td><input type="text" name="payPhone" value=""></td>
+				<td><input type="text" name="payPhone" value="" maxlength="50"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">汇款人账号：</span>
 				</label></td>
-				<td><input type="text" name="payerAccount" value=""></td>
+				<td><input type="text" name="payerAccount" value="" maxlength="50"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">汇款人附言：</span>
 				</label></td>
-				<td><input type="text" name="payRemark" value=""></td>
+				<td><input type="text" name="payRemark" value="" maxlength="50"></td>
 			</tr>
 			<tr>
 				<td><label>
 						<span class="right">发票抬头：</span>
 				</label></td>
-				<td><input type="text" name="invoiceTile" value=""></td>
+				<td><input type="text" name="invoiceTile" value="" maxlength="50"></td>
 			</tr>
 			<tr>
 				<td>上传汇款凭证</td>
