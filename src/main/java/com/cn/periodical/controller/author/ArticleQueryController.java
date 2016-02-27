@@ -162,12 +162,19 @@ public class ArticleQueryController extends AuthorController{
 	 */
 	@RequestMapping(value="/toOpinionQueryPage",produces = "application/text; charset=utf-8")
 	@ResponseBody
-	public String toOpinionQueryPage(@RequestParam("articleId") String articleId,HttpServletRequest request,
+	public String toOpinionQueryPage(@RequestParam("articleId") String articleId,
+                                     HttpServletRequest request, String status,
 			HttpServletResponse response) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("查询审稿意见Page in:["+JSON.toJSONString(userInfo)+"]");
 		//ModelAndView mav = new ModelAndView("redirect:../author/toArticleQueryPage");
-		Opinion opinion = articleFlowsManager.queryOpinion(articleId);
+        Opinion opinionQuery = new Opinion () ;
+        opinionQuery.setArticleId(articleId);
+        if("".equals(status) || null==status){
+            status = "0003" ;
+        }
+        opinionQuery.setStatus(status);
+		Opinion opinion = articleFlowsManager.queryOpinion(opinionQuery);
 		logger.info("查询审稿意见Page out:["+JSON.toJSONString(opinion)+"]");
 		return JSON.toJSONString(opinion);
 	}

@@ -11,79 +11,95 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="../js/enums-table.js"></script>
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
 </head>
 <script>
 	$(function(){
 		$('#back').click(function(){
 			history.go(-1);
 		});
-		$('#state').text(ArticleStateEnums('$!{respDto.expertState}'));
+        $('#submit').click(function() {
+            var articleId =  $("#articleId").val() ;
+            var dealOpinion = $("#dealOpinion").val() ;
+
+
+            var files = $("#files").val();
+            if(files== ""){
+                alert("请上传附件");
+                return ;
+            }
+            if(!checkFile(files)){
+                return ;
+            }
+            if(dealOpinion== ""){
+                alert("请输入待刊意见");
+                return ;
+            }
+
+            $.ajaxFileUpload({
+                url:'../editor/toRepaireModify',            //需要链接到服务器地址
+                secureuri:false,
+                fileElementId:'files',                  //文件选择框的id属性
+                dataType: 'json',                      //服务器返回的格式，可以是json, xml
+                data:{dealOpinion:dealOpinion,articleId:articleId},
+                success: function (data, status){     //相当于java中try语句块的用法
+                    if (data.message == "success") {
+                        alert('稿件已返修');
+                        window.location.href='../editor/toRepaireArticlePage';
+                    }
+                },
+                error: function (data, status, e){  //相当于java中catch语句块的用法
+                    alert(data);
+                }
+            });
+        });
+		$('#state').text(ArticleStateEnums('$!{respDto.editorState}'));
 	});	
 </script>
 <body>
 	<form action="../editor/toRepaireModify" method="POST">
 	<input type="hidden" name="articleId" value="${respDto.articleId}">
 		<div id="articleInfos">
-			<TABLE style="border: 1px solid green;margin-left:300px;margin-top:50px;" rules="all">
+			<TABLE style="border: 1px solid green;margin-left:300px;margin-top:50px; " rules="all">
 				<tr>
-					<td>稿件编号:</td>
+					<td width = "">稿件编号:</td>
 					<td>$!{respDto.articleId}</td>
 				</tr>
 				<tr>
-					<td>稿件状态:</td>
-					<td id="state">$!{respDto.expertState}</td>
+					<td width = "">稿件状态:</td>
+					<td id="state">$!{respDto.editorState}</td>
 				</tr>
 				<tr>
-					<td>标题:</td>
+					<td width = "">标题:</td>
 					<td>$!{respDto.title}</td>
 				</tr>
 				<tr>
-					<td>原稿:</td>
-					<td><a class="easyui-linkbutton">下载原稿</a></td>
-				</tr>
-				<tr>
-					<td>审核稿:</td>
-					<td><a class="easyui-linkbutton">下载审核稿件</a></td>
-				</tr>
-				<tr>
-					<td>拟投栏目:</td>
+					<td width = "">拟投栏目:</td>
 					<td>$!{respDto.section}</td>
 				</tr>
 				<tr>
-					<td>作者:</td>
+					<td width = "">作者:</td>
 					<td>$!{respDto.authorName}</td>
 				</tr>
 				<tr>
-					<td>提交日期:</td>
+					<td width = "">提交日期:</td>
 					<td>$!{respDto.contriTime}</td>
 				</tr>
 				<tr>
-					<td>登记日期:</td>
-					<td></td>
+					<td width = "">专家返修意见:</td>
+					<td>$!{opinion.opinion}</td>
 				</tr>
-				<tr>
-					<td>返修时间:</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>审稿专家:</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>审稿意见:</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>返修意见:</td>
-					<td><TEXTAREA NAME="dealOpinion" ROWS="10" COLS="70"></TEXTAREA></td>
-				</tr>
-				<tr>
-					<td>第一次返修：</td>
-					<td></td>
-				</tr>
+                <tr>
+                    <td>上传附件:</td>
+                    <td> <input type="file" id="files" name="files"/><a style="font-size:12px;color:red;">(*)</a></td>
+                </tr>
+                <tr>
+                    <td width = "">返修意见:</td>
+                    <td><TEXTAREA NAME="dealOpinion" ROWS="10" COLS="70"></TEXTAREA></td>
+                </tr>
 			</table>
 			<div style="margin-left:300px;">
-				<input type="submit" value="确认返修">
+                <a id="submit" class="easyui-linkbutton"  href="#">确认返修</a>
 				<input type="button"  value="返回"  id="back"/>
 			</div>
 			<br>

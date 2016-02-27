@@ -97,9 +97,28 @@ public class ArticleFlowsManagerImpl implements ArticleFlowsManager {
 	}
 
 
-	public Opinion queryOpinion(String articleId) {
+	public Opinion queryOpinion(Opinion opinion) {
 		// TODO Auto-generated method stub
-		return articleFlowsDao.queryOpinion(articleId);
+		return articleFlowsDao.queryOpinion(opinion);
+	}
+
+    /**
+     * 稿件看专家的返修
+     * @param articleId
+     * @return
+     */
+	public Opinion queryOpinion1(String articleId) {
+		// TODO Auto-generated method stub
+		return articleFlowsDao.queryOpinion1(articleId);
+	}
+    /**
+     * 稿件看专家的退稿
+     * @param articleId
+     * @return
+     */
+	public Opinion queryOpinion2(String articleId) {
+		// TODO Auto-generated method stub
+		return articleFlowsDao.queryOpinion2(articleId);
 	}
 }
 

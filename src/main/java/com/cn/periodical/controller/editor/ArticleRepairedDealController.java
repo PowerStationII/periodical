@@ -10,11 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cn.periodical.pojo.*;
+import com.cn.periodical.service.AuthorContributeService;
+import com.cn.periodical.utils.UtilLoad;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -61,6 +64,9 @@ public class ArticleRepairedDealController extends EditorController{
 	
 	@Autowired 
 	UserQueryManager userQueryManager;
+
+    @Autowired
+    AuthorContributeService authorContributeService ;
 	
 //	/**
 //	 * toRepairedArticlePage
@@ -145,8 +151,10 @@ public class ArticleRepairedDealController extends EditorController{
             reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**编辑和专家共用一个稿件目录*/
         }
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
+        Opinion  opinion = articleFlowsManager.queryOpinion1(articleId);
 		mav.addObject("respDto", articleQueryRespDto);
-		
+		mav.addObject("opinion", opinion);
+
 		logger.info("返修Page out :["+JSON.toJSONString(articleQueryRespDto)+"]");
 		return mav;
 	}
@@ -157,11 +165,13 @@ public class ArticleRepairedDealController extends EditorController{
 	 * 返修-Action
 	 */
 	@RequestMapping(value="/toRepaireModify")
-	public ModelAndView toPublishArticleDetailPage(@RequestParam("articleId") String articleId,
-			HttpServletRequest request,@ModelAttribute AritcleWorkFlowReqDto aritcleWorkFlowReqDto) {
+    public @ResponseBody
+    Object toPublishArticleDetailPage(@RequestParam("articleId") String articleId,
+			HttpServletRequest request,@ModelAttribute AritcleWorkFlowReqDto aritcleWorkFlowReqDto
+            ,@RequestParam(value="files", required=true) MultipartFile[] files) {
 		logger.info("返修Action in:articleId:["+articleId+"]&aritcleWorkFlowReqDto:["+JSON.toJSONString(aritcleWorkFlowReqDto)+"]");
-		ModelAndView mav = new ModelAndView("redirect:../editor/toRepaireArticlePage");
-
+//		ModelAndView mav = new ModelAndView("redirect:../editor/toRepaireArticlePage");
+        Map<String , Object> map = new HashMap<String ,Object>();
 		ArticleInfoQuery query= new ArticleInfoQuery();
 		query.setArticleId(articleId);
 		List<ArticleInfo> articleInfos = articleInfoManager.queryList(query);
@@ -189,8 +199,18 @@ public class ArticleRepairedDealController extends EditorController{
 		articleInfo.setAuthorState(ArticleStateEnums.REPAIR_ARTICLE.getCode());
 		articleInfo.setEditorState(ArticleStateEnums.REPAIR_ARTICLE.getCode());
 		articleInfoManager.saveArticleInfo(articleInfo);
-		
+
+        Map<String, Object> resMap = UtilLoad.fileUpload(files, "editorPath", articleId);
+        String filePathRet = (String) resMap.get("filePath");
+        if(null!=filePathRet){
+            String type = RoleIdEnums.ARTICLE_EDITOR.getCode();
+            try {
+                authorContributeService.saveAtricalAtt(articleId ,  files[0].getOriginalFilename() ,  filePathRet,type );
+            } catch (Exception e) {
+            }
+        }
+        map.put("message",super.success);
 		logger.info("返修Action out:["+JSON.toJSONString(articleInfo)+"]");
-		return mav;
+		return map;
 	}
 }

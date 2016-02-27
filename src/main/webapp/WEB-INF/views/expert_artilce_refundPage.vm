@@ -51,14 +51,6 @@
 					<td>${respDto.contriTime}</td>
 				</tr>
 				<tr>
-					<td>登记日期:</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>返修时间:</td>
-					<td></td>
-				</tr>
-				<tr>
 					<td>退稿意见:</td>
 					<td><TEXTAREA NAME="dealOpinion" ROWS="10" COLS="70"></TEXTAREA></td>
 				</tr>

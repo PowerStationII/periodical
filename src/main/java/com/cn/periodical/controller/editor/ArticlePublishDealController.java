@@ -203,7 +203,8 @@ public class ArticlePublishDealController extends EditorController{
     @RequestMapping(value="/toPublishModify")
     public @ResponseBody
     Object toPublishArticleDetailPage(@RequestParam("articleId") String articleId,
-                                                   HttpServletRequest request,@RequestParam("dealOpinion") String dealOpinion ,@RequestParam(value="files", required=true) MultipartFile[] files) {
+                                                   HttpServletRequest request,@RequestParam("dealOpinion") String dealOpinion
+            ,@RequestParam(value="files", required=true) MultipartFile[] files) {
         logger.info("待刊Action in:articleId:["+articleId+"]&aritcleWorkFlowReqDto:["+dealOpinion+"]");
 
         Map<String , Object> map = new HashMap<String ,Object>();

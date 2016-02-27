@@ -30,12 +30,12 @@
 
                     if(rows[i].authorState =='0003'){
                         rows[i].option='<a href="../author/toEditAuthorPayeeInfoPage?articleId='+rows[i].articleId+'" class="easyui-linkbutton" >编辑账户信息</a>&nbsp;' +
-                                '<a onclick="yijian(\''+rows[i].articleId+'\')" href="#" class="easyui-linkbutton" >查看审稿意见</a>';
+                                '<a onclick="yijian(\''+rows[i].articleId+'\',\''+rows[i].authorState+'\')" href="#" class="easyui-linkbutton" >查看审稿意见</a>';
                     }else if(rows[i].authorState=='0006'){
                         rows[i].option=' <a href="../author/toArticleQueryChongTouPage?articleId='+rows[i].articleId+'">重投</a>&nbsp;' +
-                                ' <a onclick="yijian(\''+rows[i].articleId+'\')" href="#" class="easyui-linkbutton" >查看审稿意见</a>'  ;
+                                ' <a onclick="yijian(\''+rows[i].articleId+'\',\''+rows[i].authorState+'\')" href="#" class="easyui-linkbutton" >查看审稿意见</a>'  ;
                     }else if(rows[i].authorState=='0007'){
-                        rows[i].option='<a onclick="yijian(\''+rows[i].articleId+'\')" href="#" class="easyui-linkbutton" >查看审稿意见</a>' ;
+                        rows[i].option='<a onclick="yijian(\''+rows[i].articleId+'\',\''+rows[i].authorState+'\')" href="#" class="easyui-linkbutton" >查看审稿意见</a>' ;
                     }
                     rows[i].articleId = '<a href="../author/toArticleQueryDetailPage?articleId='+rows[i].articleId+'">'+rows[i].articleId+'</a>' ;
                     rows[i].authorState=ArticleStateEnums(rows[i].authorState);
@@ -55,10 +55,10 @@
     });
 
 
-	function yijian(value) {
+	function yijian(value,status) {
 		$.ajax({
 				url:'../author/toOpinionQueryPage',
-				data:{articleId:value},
+				data:{articleId:value,status:status},
 				type:'POST',
 				success:function(res){
 					if (res=='null') {

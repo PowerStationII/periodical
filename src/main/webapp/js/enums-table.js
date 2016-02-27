@@ -1,7 +1,7 @@
 //稿件状态枚举
 function ArticleStateEnums(status){
 	if('0000' == status){
-		return '初投稿';
+		return '新稿件';
 	}else if('0001' == status){
 		return '已登记';
 	}else if('0002' == status){
@@ -26,7 +26,7 @@ function ArticleStateEnums(status){
 //稿件状态枚举
 function ArticleStateEnumsEdit(status,zhuanJiaStatus){
     if('0000' == status){
-        return '初投稿';
+        return '新稿件';
     }else if('0001' == status){
         return '已登记';
     }else if('0002' == status & '0003'==zhuanJiaStatus){

@@ -9,6 +9,7 @@ public class Opinion implements Serializable {
 	}
 	private String articleId;
 	private String opinion;
+	private String status;
 	public String getArticleId() {
 		return articleId;
 	}
@@ -21,7 +22,12 @@ public class Opinion implements Serializable {
 	public void setOpinion(String opinion) {
 		this.opinion = opinion;
 	}
-	
-	
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

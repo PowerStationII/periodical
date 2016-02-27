@@ -36,7 +36,9 @@ public interface ArticleFlowsDao {
 	
 	long selectMaxId(String articleId);
 	ArticleFlows queryFlowsDetail(ArticleFlowsQuery query);
-	Opinion queryOpinion(String articleId);
-	
+	Opinion queryOpinion(Opinion opinion);
+	Opinion queryOpinion1(String articleId);
+	Opinion queryOpinion2(String articleId);
+
 	
 }

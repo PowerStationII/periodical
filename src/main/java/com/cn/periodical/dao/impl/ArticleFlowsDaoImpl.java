@@ -96,9 +96,17 @@ public class ArticleFlowsDaoImpl extends BaseDao implements ArticleFlowsDao {
 	}
 
 
-	public Opinion queryOpinion(String articleId) {
+	public Opinion queryOpinion(Opinion opinion) {
 		// TODO Auto-generated method stub
-		return super.getSqlSession().selectOne("ArticleFlowsMapper.selectOpinion", articleId);
+		return super.getSqlSession().selectOne("ArticleFlowsMapper.selectOpinion", opinion);
 	}
-	
+	public Opinion queryOpinion1(String articleId) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectOne("ArticleFlowsMapper.selectOpinion1", articleId);
+	}
+	public Opinion queryOpinion2(String articleId) {
+		// TODO Auto-generated method stub
+		return super.getSqlSession().selectOne("ArticleFlowsMapper.selectOpinion2", articleId);
+	}
+
 }

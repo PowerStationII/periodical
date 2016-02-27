@@ -147,8 +147,10 @@ public class ArticleRefundDealController extends EditorController{
             reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**编辑和专家共用一个稿件目录*/
         }
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
+        Opinion opinion = articleFlowsManager.queryOpinion2(articleId);
 		mav.addObject("respDto", articleQueryRespDto);
-		
+		mav.addObject("opinion", opinion);
+
 		logger.info("退稿Page out :["+JSON.toJSONString(articleQueryRespDto)+"]");
 		return mav;
 	}

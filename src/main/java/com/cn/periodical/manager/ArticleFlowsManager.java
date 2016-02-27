@@ -33,5 +33,7 @@ public interface ArticleFlowsManager {
 	int updateFlows(ArticleFlows record);
 	int updateExpertFlows(ArticleFlows record);
 	
-	public Opinion queryOpinion(String articleId);
+	public Opinion queryOpinion(Opinion opinion);
+	public Opinion queryOpinion1(String articleId);
+	public Opinion queryOpinion2(String articleId);
 }

@@ -149,9 +149,9 @@
   				else if ($("textarea[name='remark']").val()=='') {
   					alert('论文用途及期刊要求备注不允许为空');
   				}
-  				else if ($("textarea[name='inovationPoint']").val()=='') {
-  					alert('论文查新点、学术（产业或生态）价值不允许为空');
-  				}
+//  				else if ($("textarea[name='inovationPoint']").val()=='') {
+//  					alert('论文查新点、学术（产业或生态）价值不允许为空');
+//  				}
   				else if ($("textarea[name='referenceDoc']").val()=='') {
   					alert('参考信息不允许为空');
   				}
@@ -191,9 +191,9 @@
                 else if ($("textarea[name='remark']").val().length>textLength500) {
                     alert('论文用途及期刊要求备注的长度不能超过500');
                 }
-                else if ($("textarea[name='inovationPoint']").val().length>textLength500) {
-                    alert('论文查新点、学术（产业或生态）价值长度不能超过500');
-                }
+//                else if ($("textarea[name='inovationPoint']").val().length>textLength500) {
+//                    alert('论文查新点、学术（产业或生态）价值长度不能超过500');
+//                }
                 else if ($("textarea[name='referenceDoc']").val().length>textLength500) {
                     alert('参考信息的长度不能超过500');
                 }
@@ -446,7 +446,7 @@
   						<td>英文标题</td>
   						<td>
   							<input  type="text"  size="58"   name="articleEnTile"/><br>
-							<a class="txtSize">【英文标题最多只能输入250个英文字母，空格按一个英文字母计算】</a>
+							<a class="txtSize">【英文标题最多只能输入50个英文字母，空格按一个英文字母计算】</a>
   						</td>
   					</tr>
   					<tr>
@@ -460,7 +460,7 @@
   						<td>英文关键词</td>
   						<td>
   							<input  type="text"  size="58"   name="articleEnKeywords"/><br>
-							<a class="txtSize">【英文标题最多只能输入250个英文字母，空格按一个英文字母计算】</a>
+							<a class="txtSize">【英文标题最多只能输入50个英文字母，空格按一个英文字母计算】</a>
   						</td>
   					</tr>
   					<tr>
@@ -523,13 +523,13 @@
 								<a class="txtSize">【请准确填写，以便编辑部了解您的需求：毕业（保研、评奖学金）/评职称/项目结题（验收）/学术交流……，需在**年**月前见刊（逾越加急程度的刊期要求编辑部无法满足）】</a>
   						</td>
   					</tr>
-  					<tr>
-  						<td>论文查新点、学术（产业或生态）价值（300字以内）</td>
-  						<td>
-  							<textarea style="height:100px;width:900px;" name="inovationPoint"></textarea><br>
-  							<a class="txtSize">【审稿时的重要参考！！请认真填写】</a>
-  						</td>
-  					</tr>
+##  					<tr>
+##  						<td>论文查新点、学术（产业或生态）价值（300字以内）</td>
+##  						<td>
+##  							<textarea style="height:100px;width:900px;" name="inovationPoint"></textarea><br>
+##  							<a class="txtSize">【审稿时的重要参考！！请认真填写】</a>
+##  						</td>
+##  					</tr>
   				</table>
   			</div><br><br>
   			<div   id="author1">

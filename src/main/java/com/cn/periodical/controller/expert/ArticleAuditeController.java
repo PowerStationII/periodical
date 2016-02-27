@@ -157,7 +157,8 @@ public class ArticleAuditeController extends ExpertController{
 	 */
 	@RequestMapping(value="/toPublishStateModify")
 	@ResponseBody
-	public Map<String , Object> toPublishStateModify(@RequestParam("articleId") String articleId,@RequestParam("dealOption") String dealOption,
+	public Map<String , Object> toPublishStateModify(@RequestParam("articleId") String articleId,
+                                                     @RequestParam("dealOption") String dealOption,
                                                      @RequestParam(value="files", required=true) MultipartFile[] files,
 			HttpServletRequest request) {
 		logger.info("待刊稿件状态入参:artilceId:["+articleId+"]");
@@ -262,11 +263,13 @@ public class ArticleAuditeController extends ExpertController{
 	 * 专家返修
 	 */
 	@RequestMapping(value="/toExpertRepairedModify")
-	public ModelAndView toExpertRepairedModify(@RequestParam("articleId") String articleId,
-			@ModelAttribute AritcleWorkFlowReqDto aritcleWorkFlowReqDto,HttpServletRequest request) {
+    @ResponseBody
+    public Map<String , Object> toExpertRepairedModify(@RequestParam("articleId") String articleId,
+			@ModelAttribute AritcleWorkFlowReqDto aritcleWorkFlowReqDto,HttpServletRequest request
+    ,@RequestParam(value="files", required=true) MultipartFile[] files) {
 		logger.info("专家返修Action:["+articleId+"]&aritcleWorkFlowReqDto:["+JSON.toJSONString(aritcleWorkFlowReqDto)+"]");
-		ModelAndView mav = new ModelAndView("redirect:/expert/toArticleAuditePage");
-		
+//		ModelAndView mav = new ModelAndView("redirect:/expert/toArticleAuditePage");
+        Map<String , Object> map = new HashMap<String , Object>();
 		ArticleInfoQuery query= new ArticleInfoQuery();
 		query.setArticleId(articleId);
 		List<ArticleInfo> articleInfos = articleInfoManager.queryList(query);
@@ -321,8 +324,20 @@ public class ArticleAuditeController extends ExpertController{
 		articleInfo.setExpertState(ArticleStateEnums.REPAIR_ARTICLE.getCode());
 		articleInfoManager.saveArticleInfo(articleInfo);
 
+        //  ==========================
+
+        Map<String, Object> resMap = UtilLoad.fileUpload(files, "zhongwenZhuanJia", articleId);
+        String filePathRet = (String) resMap.get("filePath");
+        if(null!=filePathRet){
+            String  type = RoleIdEnums.CN_EXPERT.getCode();
+            try {
+                authorContributeService.saveAtricalAtt(articleId ,  files[0].getOriginalFilename() ,  filePathRet,type );
+            } catch (Exception e) {
+            }
+        }
+        map.put("message",success) ;
 		logger.info("专家返修Action:["+JSON.toJSONString(articleInfo)+"]");
-		return mav;
+		return map;
 	}
 	
 	/**

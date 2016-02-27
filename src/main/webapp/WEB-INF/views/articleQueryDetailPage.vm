@@ -83,7 +83,7 @@
                 <td>基金项目：</td>
                 <td>
                     #if($!{detail.isfund}=='Y')
-                        是
+                        是 ($!{detail.fundTitle})
                     #elseif($!{detail.isfund}=='N')
                         否
                     #end
@@ -102,8 +102,8 @@
                 <td>$!{detail.totalTabs}</td>
             </tr>
             <tr>
-                <td>备注：</td>
-                <td>$!{detail.remark}</td>
+                <td>论文用途：</td>
+                <td><textarea readonly="readonly" style="height:100px;width:600px;">$!{detail.remark}</textarea></td>
             </tr>
             <tr>
                 <td>稿件下载：</td>
@@ -115,8 +115,8 @@
                 </td>
             </tr>
             <tr>
-                <td>备注论文：</td>
-                <td>$!{detail.referenceDoc}</td>
+                <td>参考信息：</td>
+                <td><textarea readonly="readonly" style="height:100px;width:600px;">$!{detail.referenceDoc}</textarea></td>
             </tr>
 			<!-- tr>
 				<td>专家审稿：</td>

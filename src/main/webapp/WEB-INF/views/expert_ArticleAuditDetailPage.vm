@@ -152,7 +152,7 @@
 				<td>$!{respDto.attachName}</td>
 			</tr>
 			<tr>
-                <td>待刊文章:</td>
+                <td>上传附件:</td>
                 <td> <input type="file" id="files" name="files"/><a style="font-size:12px;color:red;">(*)</a></td>
 			</tr>
 			<tr>

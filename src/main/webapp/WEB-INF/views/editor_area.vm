@@ -414,7 +414,7 @@ a {
 				<div class="mode_name">排刊组稿</div>
 				<div style="padding: 10px;">
 					<div class="li1" id="paikanzugao">排刊组稿</div>
-					<div class="li5" id="bianjisongkan">编辑送刊</div>
+					<div class="li5" id="bianjisongkan">作者送刊</div>
 				</div>
 				<div class="mode_name">稿件查询</div>
 				<div style="padding: 10px;">
