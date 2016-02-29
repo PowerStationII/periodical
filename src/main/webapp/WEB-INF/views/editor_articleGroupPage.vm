@@ -14,14 +14,11 @@
 <script type="text/javascript" src="../js/enums-table.js"></script>
     <script>
         $(function(){
-
-//            $('#periodicalYear').combobox({
-//                data:getYear()
-//            });
-
         }) ;
-        function paikan(periodicalId){
-            var periodicalYear = $('#periodicalYear').val() ;
+        function paikan(periodicalId,i){
+            var temp = "periodicalYear"+i ;
+            var periodicalYear = $("#"+temp).val();
+
             if(""==periodicalYear){
                 alert("请选择期刊年份");
             }else{
@@ -49,7 +46,7 @@
 				<td>${periodicalInfo.periodicalCnName}</td>
 				<td>${periodicalInfo.cycle}</td>
 				<td>
-                    <select name="periodicalYear" id="periodicalYear">
+                    <select name="periodicalYear" id="periodicalYear$!{velocityCount}">
                         <option value="">请选择</option>
                         <option value="2015">2015</option>
                         <option value="2016">2016</option>
@@ -63,7 +60,7 @@
                     </select>
                 </td>
 				<td>
-                    <a class="easyui-linkbutton" style="width: 50px;" href="javascript:paikan('${periodicalInfo.periodicalId}')">排刊</a>
+                    <a class="easyui-linkbutton" style="width: 50px;" href="javascript:paikan('${periodicalInfo.periodicalId}','$!{velocityCount}')">排刊</a>
                 </td>
 			</tr>
 			#end

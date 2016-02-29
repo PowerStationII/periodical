@@ -54,11 +54,11 @@ public class SongKanInfoServiceImpl implements SongKanInfoService {
             songKanDetail.setOrderNo(songKanInfo.getOrderNo());
             if(null!=list_temp0 && !list_temp0.isEmpty()){
                 Map<String,String> map_temp0 = (Map<String, String>) list_temp0.get(0);
-                songKanDetail.setYoubian(map_temp0.get("receive_postcode"));
-                songKanDetail.setDizhi(map_temp0.get("receive_address"));
-                songKanDetail.setDanwei(map_temp0.get("company_name"));
-                songKanDetail.setXingming(map_temp0.get("author_name"));
-                songKanDetail.setDianhua(map_temp0.get("contacter_mobile")) ;
+                songKanDetail.setYoubian(map_temp0.get("receivePostcode"));
+                songKanDetail.setDizhi(map_temp0.get("receiveAddress"));
+                songKanDetail.setDanwei(map_temp0.get("companyName"));
+                songKanDetail.setXingming(map_temp0.get("authorName"));
+                songKanDetail.setDianhua(map_temp0.get("contacterMobile")) ;
             }
             songKanDetails.add(songKanDetail);
 

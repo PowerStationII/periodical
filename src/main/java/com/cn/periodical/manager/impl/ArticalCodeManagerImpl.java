@@ -47,5 +47,19 @@ public class ArticalCodeManagerImpl implements ArticalCodeManager {
         this.insert(articalCode);
         return articleId;
     }
+    @Override
+    public String getCode(String type , String code,String flag) {
+        ArticalCode articalCode = new ArticalCode();
+        articalCode.setType(type);
+        articalCode.setYear(DateUtil.getYear());
+        ArticalCode articalCodeRet = this.queryArticalCodeByType(articalCode) ;
+        int temp = articalCodeRet.getCode()+1;
+//        String temp = String.valueOf(articalCodeRet.getCode()+1);
+        String temp0 = "0000"+temp;
+        final String articleId= code+temp0.substring(temp0.length()-4,temp0.length());
+        articalCode.setCode(temp);
+        this.insert(articalCode);
+        return articleId;
+    }
 
 }

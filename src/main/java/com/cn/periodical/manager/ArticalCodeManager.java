@@ -14,5 +14,6 @@ public interface ArticalCodeManager {
     ArticalCode queryArticalCodeByType(ArticalCode articalCode);
 
     String getCode (String type , String code);
+    String getCode (String type , String code,String flag);
 
 }

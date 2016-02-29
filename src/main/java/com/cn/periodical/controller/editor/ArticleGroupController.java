@@ -99,12 +99,18 @@ public class ArticleGroupController extends EditorController{
 		query.setPeriodicalId(periodicalId);
 		query.setPeriodicalIssueNo(periodicalIssueNo);
         query.setPeriodicalYear(periodicalYear);
+        String periodicalYear1 = periodicalYear.substring(2,4);
 		List<Periodical> periodicals = periodicalManager.queryList(query);
         if(null==periodicals || periodicals.isEmpty()){
             for(int i=1;i<=periodicalInfo.getCycle();i++){
                 Periodical periodical = new Periodical();
                 periodical.setPeriodicalId(periodicalInfo.getPeriodicalId());
-                periodical.setPeriodicalIssueNo(GenerateOrderNo.generateOrderNo()); //  就用国内刊号
+//                periodical.setPeriodicalIssueNo(GenerateOrderNo.generateOrderNo()); //  就用国内刊号
+                if(i<10){
+                    periodical.setPeriodicalIssueNo(periodicalInfo.getPeriodicalId()+"-"+periodicalYear1+"0"+i);
+                }else{
+                    periodical.setPeriodicalIssueNo(periodicalInfo.getPeriodicalId()+"-"+periodicalYear1+i);
+                }
 //				periodical.setPeriodicalIssueNo(periodicalInfo.getCnNo());
                 periodical.setPeriodicalState(PeriodicalStateEnums.NEW.getCode());
                 periodical.setCycleNums(i);
