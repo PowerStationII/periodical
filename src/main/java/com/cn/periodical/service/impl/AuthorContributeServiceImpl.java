@@ -362,7 +362,7 @@ public class AuthorContributeServiceImpl implements AuthorContributeService {
                      * 记录重投流水
                      */
                     PeriodicalChongtouLog periodicalChongtouLog = new PeriodicalChongtouLog () ;
-                    periodicalChongtouLog.setArticleNo(articleId);
+                    periodicalChongtouLog.setArticleNo(orgAtricleId);
                     List<PeriodicalChongtouLog> listFanxiu = periodicalChongtouLogManager.selectByCondition(periodicalChongtouLog);
                     if(null!= listFanxiu  && !listFanxiu.isEmpty()){
                         PeriodicalChongtouLog periodicalChongtouLog_temp = listFanxiu.get(0);

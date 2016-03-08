@@ -140,8 +140,8 @@ public class IssueController extends EditorController{
                 // 一个栏目下所有的文章
                 List<Map<String, Object>> articleList = sectionInfo.getList();
                 for(Map<String, Object> article : articleList){
-                    articleTitleInfo.append("\r\n      "+article.get("article_cn_title"));
-                    articleId_list.add(String.valueOf(article.get("article_id")));
+                    articleTitleInfo.append("\r\n      文章标题："+article.get("article_cn_title")+"；      文章编号："+article.get("articleId"));
+                    articleId_list.add(String.valueOf(article.get("oriArticleId")));
                 }
             }
 

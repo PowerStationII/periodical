@@ -68,6 +68,7 @@
 				</tr>
 				#foreach($articleQueryRespDto in ${list})
 				<tr class='selectAble'>
+					<td style="display:none">${articleQueryRespDto.articleInfo.oriArticleId}</td>
 					<td>${articleQueryRespDto.articleInfo.articleId}</td>
 					<td>${articleQueryRespDto.articleInfo.articleCnTitle}</td>
 				</tr>
@@ -91,7 +92,8 @@
 				</tr>
 				#foreach($it in ${item.list})
 				<tr class='selectAble'>
-					<td>${it.article_id}</td>
+					<td style="display:none">${it.oriArticleId}</td>
+					<td>${it.articleId}</td>
 					<td>${it.article_cn_title}</td>
 				</tr>
 				#end
@@ -145,7 +147,8 @@ $('#btnSubmit').click(function(){
 		});
 	 	$.ajax({
 			url:'../editor/toArticleGroup',
-			data:{leftArray:leftArray.toString(),periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',str:JSON.stringify(sections),type:'Y'},
+			data:{leftArray:leftArray.toString(),periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',
+                str:JSON.stringify(sections),type:'Y'},
 			success:function(d){
                 alert(d.message);
 			}

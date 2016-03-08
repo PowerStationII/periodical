@@ -77,8 +77,11 @@
 			column="{sectionId=sectionId,periodicalIssueNo=periodicalIssueNo,periodicalId=periodicalId}"></collection>
 	</resultMap>
 	<select id="selectArticles" resultType="hashmap">
-		select ai.article_id,ai.article_cn_title,ai.editor_state,ai.expert_state from
-		periodical_details pd,article_info ai where
+		select ai.article_id as oriArticleId,ai.article_cn_title,ai.editor_state,ai.expert_state
+		 ,(SELECT group_flag FROM periodical_fanxiu_log WHERE article_no = oriArticleId ) AS articleId
+		from
+		periodical_details pd,article_info ai
+		where
 		ai.article_id=pd.article_id
 		and pd.section_id=#{sectionId,jdbcType=VARCHAR}
 		and pd.periodical_issue_no=#{periodicalIssueNo,jdbcType=VARCHAR}

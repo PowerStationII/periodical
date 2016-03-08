@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cn.periodical.manager.PeriodicalChongtouLogManager;
 import com.cn.periodical.pojo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,23 +56,9 @@ public class ArticleNewDealController extends EditorController{
 	ArticleFlowsManager articleFlowsManager;
 	@Autowired
 	ArticleInfoStateManager articleInfoStateManager;
+    @Autowired
+    PeriodicalChongtouLogManager periodicalChongtouLogManager;
 	
-//	/**
-//	 * toNewArticlePage
-//	 * 新稿 End
-//	 */
-//	@RequestMapping(value="/toNewArticlePage")
-//	public ModelAndView toNewArticlePage(HttpServletRequest request,HttpServletResponse response) {
-//		UserInfo userInfo = (UserInfo)request.getSession().getAttribute("userInfo");
-//		logger.info("新稿Page入参:["+JSON.toJSONString(userInfo)+"]");
-//		ModelAndView mav = new ModelAndView("editor_newArticlePage");
-//		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
-//		reqDto.setEditorState(ArticleStateEnums.NEW_ARTICLE.getCode());
-//		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
-//		mav.addObject("list", list);
-//		logger.info("新稿Page出参:["+JSON.toJSONString(list)+"]");
-//		return mav;
-//	}
 	/**
 	 * toNewArticlePage
 	 * 新稿 End
@@ -150,7 +137,16 @@ public class ArticleNewDealController extends EditorController{
 		reqDto.setArticleId(articleId);
 		reqDto.setRoleId(RoleIdEnums.AUTHOR.getCode());/**编辑下载作者的稿件*/
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
-		mav.addObject("respDto", articleQueryRespDto);
+        PeriodicalChongtouLog periodicalChongtouLog = new PeriodicalChongtouLog () ;
+        periodicalChongtouLog.setArticleNo(articleId);
+        List<PeriodicalChongtouLog> listFanxiu = periodicalChongtouLogManager.selectByCondition(periodicalChongtouLog);
+        articleQueryRespDto.setOriArticleId(articleId);
+        if(null!=listFanxiu && !listFanxiu.isEmpty()){
+            articleQueryRespDto.setArticleId(listFanxiu.get(0).getGroupFlag());
+        } else{
+            articleQueryRespDto.setArticleId(articleId);
+        }
+        mav.addObject("respDto", articleQueryRespDto);
 		mav.addObject("isDown", isDown);
 		logger.info("稿件登记Page出参:["+JSON.toJSONString(articleQueryRespDto)+"]");
 		return mav;

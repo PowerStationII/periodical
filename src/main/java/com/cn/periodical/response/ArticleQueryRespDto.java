@@ -71,7 +71,9 @@ public class ArticleQueryRespDto extends ResponseDto {
     private String editorAttachementName;
 
     private String expertTGYJ ;
-	
+    private String oriArticleId ;
+    private String fanXiuCount ;
+
 	
 	
 	public String getExpertId() {
@@ -283,5 +285,21 @@ public class ArticleQueryRespDto extends ResponseDto {
 
     public void setExpertTGYJ(String expertTGYJ) {
         this.expertTGYJ = expertTGYJ;
+    }
+
+    public String getOriArticleId() {
+        return oriArticleId;
+    }
+
+    public void setOriArticleId(String oriArticleId) {
+        this.oriArticleId = oriArticleId;
+    }
+
+    public String getFanXiuCount() {
+        return fanXiuCount;
+    }
+
+    public void setFanXiuCount(String fanXiuCount) {
+        this.fanXiuCount = fanXiuCount;
     }
 }

@@ -149,6 +149,8 @@ public class LoginController {
 					return mav;
 				} else if (RoleIdEnums.READER_E.getCode().equals(roleId)) {
 					mav = new ModelAndView("reader_area");
+                    List<PeriodicalInfo> infos = loginService.queryPeriodicalInfos();
+                    mav.addObject("list", infos);
 					return mav;
 				}
 			}

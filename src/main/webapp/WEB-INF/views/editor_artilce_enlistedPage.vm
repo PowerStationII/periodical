@@ -18,7 +18,7 @@
 		//点击登记按钮提交
 		$('#submit').click(function(){
 			//$('form').submit();
-			$.post('../editor/toEnlistedModify',{articleId:'${respDto.articleId}'},function(data){
+			$.post('../editor/toEnlistedModify',{articleId:'${respDto.oriArticleId}'},function(data){
 				if (data=="true") {
 					alert('稿件登记成功');
 					window.location.href='../editor/toNewArticlePage';
@@ -28,7 +28,7 @@
 		
 		//点击下载按钮--始发(记录流水并返回刷新)
 		$('.down').click(function(){
-			window.location.href='../editor/toDownLoadArticle?isDown=true&articleId=${respDto.articleId}&editorDownload=${respDto.editorDownload}';
+			window.location.href='../editor/toDownLoadArticle?isDown=true&articleId=${respDto.oriArticleId}&editorDownload=${respDto.editorDownload}';
 		});
 		
 		$('#back').click(function(){
@@ -59,7 +59,7 @@
 </script>
 <body>
 	<form action="../editor/toEnlistedModify" method="POST">
-	<input type="hidden" name="articleId" value="${respDto.articleId}">
+	<input type="hidden" name="articleId" value="${respDto.oriArticleId}">
 		<div id="articleInfos">
 			<a style="font-size: 20px; color: #0000CC;">稿件登记</a><br>
 			<table id="grid" class="easyui-datagrid"   data-options="singleSelect:true" >
@@ -111,6 +111,6 @@
 	#set($d=$!{respDto.attachPath})
 	<input type="button" id="back" value="返回">
 	<input type="button" class="down" value="下载原稿">#set($d=$d.replace("\","\\"))
-	<input type="button" onclick="download('${respDto.articleId}','$!{respDto.attachName}','$d')" value="隐藏" id="hid" style="display:none;">
+	<input type="button" onclick="download('${respDto.oriArticleId}','$!{respDto.attachName}','$d')" value="隐藏" id="hid" style="display:none;">
 </body>
 </html>

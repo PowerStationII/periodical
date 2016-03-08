@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cn.periodical.enums.RoleIdEnums;
+import com.cn.periodical.manager.*;
 import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.*;
 import org.slf4j.Logger;
@@ -23,15 +24,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.PeriodicalStateEnums;
-import com.cn.periodical.manager.ArticleAttachmentInfoManager;
-import com.cn.periodical.manager.ArticleFlowsManager;
-import com.cn.periodical.manager.ArticleInfoManager;
-import com.cn.periodical.manager.ArticleQueryManager;
-import com.cn.periodical.manager.BizPeriodicalManager;
-import com.cn.periodical.manager.PeriodicalDetailsManager;
-import com.cn.periodical.manager.PeriodicalManager;
-import com.cn.periodical.manager.UserInfoManager;
-import com.cn.periodical.manager.UserQueryManager;
 import com.cn.periodical.utils.FileCopyUtils;
 import com.cn.periodical.utils.PropertiesInitManager;
 import com.cn.periodical.utils.UtilLoad;
@@ -80,25 +72,9 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 	PeriodicalManager periodicalManager;
     @Autowired
     AuthorContributeService authorContributeService ;
-	
-	/**
-	 * toEnAuditePeriodicalPage
-	 * 去英文审刊页面
-	 */
-//	@RequestMapping(value="/toEnAuditePeriodicalPage")
-//	public ModelAndView toEnAuditePeriodicalPage(HttpServletRequest request,
-//			@ModelAttribute BizPeriodical reqDto) {
-//		UserInfo userInfo = getUserInfo(request);
-//		logger.info("英文审刊Page:["+JSON.toJSONString(reqDto)+"]");
-//		ModelAndView mav = new ModelAndView("expert_enAuditPeriodicalPage");
-//		logger.info(JSON.toJSONString(reqDto));
-//		/**
-//		 *
-//		 * */
-//		List<BizPeriodical> list = bizPeriodicalManager.queryPeriodicalInfosForEnExpert(null);
-//		mav.addObject("list", list);
-//		return mav;
-//	}
+    @Autowired
+    PeriodicalChongtouLogManager periodicalChongtouLogManager ;
+
 	/**
 	 * toEnAuditePeriodicalPage
 	 * 去英文审刊页面
@@ -185,6 +161,17 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 		aqd.setPeriodicalId(periodicalId);
 		aqd.setPeriodicalIssueNo(periodicalIssueNo);
 		AuthorQueryDetail dto = articleQueryManager.articleDetailForEnExpert(aqd);
+
+        PeriodicalChongtouLog periodicalChongtouLog = new PeriodicalChongtouLog () ;
+        periodicalChongtouLog.setArticleNo(articleId);
+        List<PeriodicalChongtouLog> listFanxiu = periodicalChongtouLogManager.selectByCondition(periodicalChongtouLog);
+        if(null!=listFanxiu && !listFanxiu.isEmpty()){
+            dto.setOriArticleId(articleId);
+            dto.setArticleId(listFanxiu.get(0).getGroupFlag());
+        }else{
+            dto.setOriArticleId(articleId);
+            dto.setArticleId(articleId);
+        }
 		mav.addObject("dto", dto);
 		mav.addObject("periodicalId", periodicalId);
 		mav.addObject("periodicalIssueNo", periodicalIssueNo);
@@ -201,7 +188,6 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
 			@ModelAttribute BizPeriodical reqDto,HttpServletResponse response,String fileName,String filePath) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("英文审刊-稿件审核:["+JSON.toJSONString(reqDto)+"]");
-		//ModelAndView mav = new ModelAndView("redirect:../expert/auditArticleEnDetailPage");
 		logger.info(JSON.toJSONString(reqDto));
 		/**
 		 * 下载编辑&专家文件夹下稿件
@@ -250,73 +236,6 @@ public class EnExpertAuditePeriodicalController extends ExpertController{
         map.put("message",super.success);
 		return map;
 	}
-//	/**
-//	 * toEnAuditAgreePage
-//	 * 审核通过
-//	 */
-//	@RequestMapping(value="/toEnAuditAgreePage")
-//	public ModelAndView toEnAuditAgreePage(HttpServletRequest request,
-//			@ModelAttribute BizPeriodical reqDto,String articleId,
-//			String periodicalId,String periodicalIssueNo) {
-//		UserInfo userInfo = getUserInfo(request);
-//		logger.info("英文审刊-稿件审核:["+JSON.toJSONString(reqDto)+"]");
-//		ModelAndView mav = new ModelAndView("redirect:../expert/auditPeriodicalDetailPage");
-//		mav.addObject("articleId", reqDto.getaId());
-//		mav.addObject("periodicalId", reqDto.getpId());
-//		mav.addObject("periodicalIssueNo", reqDto.getIsNo());
-//		logger.info(JSON.toJSONString(reqDto));
-//		/**
-//		 * 审核通过
-//		 * 复制一份稿件信息到英文审稿目录
-//		 * */
-//		PropertiesInitManager.dataInit();
-//		String path = (String)PropertiesInitManager.PROPERTIES.get("enExpertPath");
-//		String oldPath = reqDto.getAttachmentPath();
-//		String oldName = reqDto.getAttachmentName();
-//		StringBuffer newPath= new StringBuffer();
-//		newPath.append(path);
-//		newPath.append(File.separator);
-//		newPath.append(reqDto.getaId());
-//		newPath.append(File.separator);
-//
-//		try{
-//			FileCopyUtils.copyFile(oldPath, "", newPath.toString(), oldName);
-//
-//			ArticleAttachmentInfo copyFile = new ArticleAttachmentInfo();
-//			copyFile.setArticleId(reqDto.getaId());
-//			copyFile.setAttachmentName(oldName);
-//			copyFile.setAttachmentPath(newPath.toString()+oldName);
-//			copyFile.setBdjcbgAttachmentName("");
-//			copyFile.setBdjcbgAttachmentPath("");
-//			copyFile.setCxcnsAttachmentName("");
-//			copyFile.setCxcnsAttachmentPath("");
-//			copyFile.setEditTimes(0);
-//			copyFile.setSjtztsjAttachmentName("");
-//			copyFile.setSjtztsjAttachmentPath("");
-//			copyFile.setYjspzpAttachmentName("");
-//			copyFile.setYjspzpAttachmentPath("");
-//			copyFile.setType("1004");
-//			copyFile.setStatus("Y");
-//			copyFile.setCreateTime(new Date());
-//			copyFile.setUpdateTime(new Date());
-//
-//			articleAttachmentInfoManager.saveArticleAttachmentInfo(copyFile);
-//		}catch(Exception e){
-//			logger.info("稿件复制异常!!!怎么通知系统呢?");
-//			e.printStackTrace();
-//			return new ModelAndView("error");
-//		}
-//		PeriodicalDetailsQuery query = new PeriodicalDetailsQuery();
-//		query.setArticleId(reqDto.getaId());
-//		query.setPeriodicalId(reqDto.getpId());
-//		query.setPeriodicalIssueNo(reqDto.getIsNo());
-//		List<PeriodicalDetails> list = periodicalDetailsManager.queryList(query);
-//		PeriodicalDetails p = list.get(0);
-//		p.setId(p.getId());
-//		p.setExtend1("Y");//稿件英文审稿结束,后续签发时会检查期刊下的所有稿件是否都已经审核结束
-//		periodicalDetailsManager.savePeriodicalDetails(p);
-//		return mav;
-//	}
 
 	
 	/**

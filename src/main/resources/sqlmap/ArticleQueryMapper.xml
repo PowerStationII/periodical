@@ -3,6 +3,7 @@
 <mapper namespace="ArticleQueryMapper">
 	<resultMap id="ArticleInfosForEditorResultMap" type="ArticleQueryRespDto">
 		<result column="articleId" jdbcType="VARCHAR" property="articleId" />
+        <result column="oriArticleId" jdbcType="VARCHAR" property="oriArticleId" />
 		<result column="title" jdbcType="VARCHAR" property="title" />
 		<result column="authorName" jdbcType="VARCHAR" property="authorName" />
 		<result column="contriTime" jdbcType="VARCHAR" property="contriTime" />
@@ -10,6 +11,7 @@
 		<result column="expertState" jdbcType="VARCHAR" property="expertState" />
 		<result column="authorState" jdbcType="VARCHAR" property="authorState" />
 		<result column="section" jdbcType="VARCHAR" property="section" />
+		<result column="fanXiuCount" jdbcType="VARCHAR" property="fanXiuCount" />
 		<collection property="bizAuthorAddressInfos" select="selectBizAuthorAddressInfos" column="articleId}">
 		</collection>
 	</resultMap>
@@ -40,7 +42,7 @@
 		ai,article_info_extend aie,author_info aui
 		where
 		ai.article_id=aie.article_id and ai.article_id=aui.article_id
-        AND aui.article_id NOT IN (SELECT GROUP_FLAG FROM periodical_fanxiu_log)
+        AND aui.article_id NOT IN (SELECT ORIARTICLE_NO FROM periodical_fanxiu_log)
         <if test="userId != null and ''!=userId">
 			and aie.user_id = #{userId,jdbcType=VARCHAR}
 		</if>
@@ -70,7 +72,6 @@
 		<if test="authorName != null and ''!=authorName">
 			and #{authorName,jdbcType=VARCHAR} in (select
 			aui.author_name)
--- 			group_concat(aui.author_name))
 		</if>
 		group by
 		ai.article_id,ai.article_cn_title,DATE_FORMAT(ai.create_time,'%Y-%m-%d'),ai.editor_state,ai.expert_state,ai.invest_section
@@ -80,17 +81,19 @@
 
     <select id="selectArticleInfosForEditorPage" parameterType="ArticleQueryReqDto"
             resultMap="ArticleInfosForEditorResultMap">
-        select ai.article_id as articleId,ai.article_cn_title as
+        select ai.article_id as oriArticleId,ai.article_cn_title as
         title,DATE_FORMAT(ai.create_time, '%Y-%m-%d') as
         contriTime,aui.author_name as authorName,
         ai.editor_state as editorState,ai.expert_state as
         expertState,ai.author_state as authorState,ai.invest_section as section
+        , (SELECT group_flag FROM periodical_fanxiu_log WHERE article_no = ai.article_id ) AS articleId
+        ,(SELECT COUNT(1) FROM periodical_fanxiu_log WHERE group_flag = articleId ) as fanXiuCount
         from
         article_info
         ai,article_info_extend aie,author_info aui
         where
         ai.article_id=aie.article_id and ai.article_id=aui.article_id
-        AND aui.article_id NOT IN (SELECT GROUP_FLAG FROM periodical_fanxiu_log)
+        AND aui.article_id NOT IN (SELECT ORIARTICLE_NO FROM periodical_fanxiu_log)
         <if test="userId != null and ''!=userId">
             and aie.user_id = #{userId,jdbcType=VARCHAR}
         </if>
@@ -133,7 +136,7 @@
         ai,article_info_extend aie,author_info aui
         where
         ai.article_id=aie.article_id and ai.article_id=aui.article_id
-        AND aui.article_id NOT IN (SELECT GROUP_FLAG FROM periodical_fanxiu_log)
+        AND aui.article_id NOT IN (SELECT ORIARTICLE_NO FROM periodical_fanxiu_log)
         <if test="userId != null and ''!=userId">
             and aie.user_id = #{userId,jdbcType=VARCHAR}
         </if>
@@ -163,56 +166,7 @@
             and #{authorName,jdbcType=VARCHAR} in (select
             aui.author_name)
         </if>
---         group by
---         ai.article_id,ai.article_cn_title,DATE_FORMAT(ai.create_time,'%Y-%m-%d'),ai.editor_state,ai.expert_state,ai.invest_section
     </select>
-	<!--<select id="selectArticleInfosForEditor" parameterType="ArticleQueryReqDto"-->
-		<!--resultMap="ArticleInfosForEditorResultMap">-->
-		<!--select ai.article_id as articleId,ai.article_cn_title as-->
-		<!--title,DATE_FORMAT(ai.create_time, '%Y-%m-%d') as-->
-		<!--contriTime,aui.author_name as authorName,-->
-		<!--ai.editor_state as editorState,ai.expert_state as-->
-		<!--expertState,ai.author_state as authorState,ai.invest_section as section-->
-		<!--from-->
-		<!--article_info-->
-		<!--ai,article_info_extend aie,author_info aui-->
-		<!--where-->
-		<!--ai.article_id=aie.article_id and ai.article_id=aui.article_id-->
-        <!--AND aui.article_id NOT IN (SELECT GROUP_FLAG FROM periodical_fanxiu_log)-->
-        <!--<if test="userId != null and ''!=userId">-->
-			<!--and aie.user_id = #{userId,jdbcType=VARCHAR}-->
-		<!--</if>-->
-		<!--<if test="roleId != null and ''!=roleId">-->
-			<!--and aie.role_id = #{roleId,jdbcType=VARCHAR}-->
-		<!--</if>-->
-		<!--<if test="editorState != null and ''!=editorState">-->
-			<!--and ai.editor_state = #{editorState,jdbcType=VARCHAR}-->
-		<!--</if>-->
-		<!--<if test="expertState != null and ''!=expertState">-->
-			<!--and ai.expert_state = #{expertState,jdbcType=VARCHAR}-->
-		<!--</if>-->
-		<!--<if test="articleId != null and ''!=articleId">-->
-			<!--and ai.article_id = #{articleId,jdbcType=VARCHAR}-->
-		<!--</if>-->
-		<!--<if test="articleCnTitle != null and ''!=articleCnTitle">-->
-			<!--and ai.article_cn_title =-->
-			<!--#{articleCnTitle,jdbcType=VARCHAR}-->
-		<!--</if>-->
-		<!--<if test="section != null and ''!=section">-->
-			<!--and ai.invest_section = #{section,jdbcType=VARCHAR}-->
-		<!--</if>-->
-		<!--<if test="creatTime != null and ''!=creatTime">-->
-			<!--and DATE_FORMAT(ai.create_time, '%Y-%m-%d') =-->
-			<!--#{creatTime,jdbcType=VARCHAR}-->
-		<!--</if>-->
-		<!--<if test="authorName != null and ''!=authorName">-->
-			<!--and #{authorName,jdbcType=VARCHAR} in (select-->
-			<!--aui.author_name)-->
-		<!--</if>-->
-		<!--group by-->
-		<!--ai.article_id,ai.article_cn_title,DATE_FORMAT(ai.create_time,'%Y-%m-%d'),ai.editor_state,ai.expert_state,ai.invest_section-->
-		<!--order by ai.create_time desc-->
-	<!--</select>-->
 
 	
 	<select id="selectArticleInfosForExpert" parameterType="ArticleQueryReqDto"
@@ -224,7 +178,6 @@
 		section from (
 		select ai.article_id ,ai.article_cn_title
 		,ai.create_time,aui.author_name as authorName,
--- 		,ai.create_time,group_concat(aui.author_name) as authorName,
 		ai.editor_state ,ai.expert_state ,ai.invest_section
 		from
 		article_info
@@ -267,14 +220,17 @@
 	</select>
 	<select id="selectArticleInfosForExpertPage" parameterType="ArticleQueryReqDto"
 		resultMap="ArticleInfosForEditorResultMap">
-		select temp1.article_id as articleId,temp1.article_cn_title as
+		select temp1.article_id as oriArticleId,temp1.article_cn_title as
 		title,DATE_FORMAT(temp1.create_time, '%Y-%m-%d') as contriTime,
 		temp1.authorName as authorName,temp1.editor_state as
 		editorState,temp1.expert_state as expertState,temp1.invest_section as
-		section from (
+		section
+        , (SELECT group_flag FROM periodical_fanxiu_log WHERE article_no = temp1.article_id ) AS articleId
+        ,(SELECT COUNT(1) FROM periodical_fanxiu_log WHERE group_flag = articleId ) as fanXiuCount
+
+        from (
 		select ai.article_id ,ai.article_cn_title
 		,ai.create_time,aui.author_name as authorName,
--- 		,ai.create_time,group_concat(aui.author_name) as authorName,
 		ai.editor_state ,ai.expert_state ,ai.invest_section
 		from
 		article_info
@@ -287,7 +243,8 @@
 		article_info_extend aie
 		group by aie.article_id) as temp2
 		where temp1.article_id=temp2.article_id
-		<if test="userId != null and ''!=userId">
+        AND temp2.article_id NOT IN (SELECT ORIARTICLE_NO FROM periodical_fanxiu_log)
+        <if test="userId != null and ''!=userId">
 			and temp2.expertId = #{userId,jdbcType=VARCHAR}
 		</if>
 		<if test="editorState != null and ''!=editorState">
@@ -334,7 +291,8 @@
 		article_info_extend aie
 		group by aie.article_id) as temp2
 		where temp1.article_id=temp2.article_id
-		<if test="userId != null and ''!=userId">
+        AND temp2.article_id NOT IN (SELECT ORIARTICLE_NO FROM periodical_fanxiu_log)
+        <if test="userId != null and ''!=userId">
 			and temp2.expertId = #{userId,jdbcType=VARCHAR}
 		</if>
 		<if test="editorState != null and ''!=editorState">
@@ -360,28 +318,8 @@
 		<if test="authorName != null and ''!=authorName">
 			and  INSTR(temp1.authorName,#{authorName,jdbcType=VARCHAR})
 		</if>
--- 		group by temp1.article_id
 	</select>
 
-	<!-- <resultMap id="ArticleInfoDetailResultMap" type="ArticleQueryRespDto">
-		<result column="articleId" jdbcType="VARCHAR" property="articleId" />
-		<result column="title" jdbcType="VARCHAR" property="title" />
-		<result column="editorState" jdbcType="VARCHAR" property="editorState" />
-		<result column="expertState" jdbcType="VARCHAR" property="expertState" />
-		<result column="authorState" jdbcType="VARCHAR" property="authorState" />
-		<result column="enTitle" jdbcType="VARCHAR" property="enTitle" />
-		<result column="fNums" jdbcType="VARCHAR" property="fNums" />
-		<result column="section" jdbcType="VARCHAR" property="section" />
-		<result column="cnKeywords" jdbcType="VARCHAR" property="cnKeywords" />
-		<result column="enKeywords" jdbcType="VARCHAR" property="enKeywords" />
-		<result column="cnSummary" jdbcType="VARCHAR" property="cnSummary" />
-		<result column="enSummary" jdbcType="VARCHAR" property="enSummary" />
-		<result column="attachName" jdbcType="VARCHAR" property="attachName" />
-		<result column="attachPath" jdbcType="VARCHAR" property="attachPath" />
-		<result column="authorName" jdbcType="VARCHAR" property="authorName" />
-		<result column="expertDownload" jdbcType="VARCHAR" property="expertDownload" />
-		<result column="editorDownload" jdbcType="VARCHAR" property="editorDownload" />
-	</resultMap> -->
 	<select id="selectArticleInfoDetail" parameterType="ArticleQueryReqDto"
 		resultType="ArticleQueryRespDto">
 		select ai.article_id as articleId,ai.article_cn_title as title,
@@ -486,8 +424,6 @@
 		ai.article_id=#{articleId,jdbcType=VARCHAR}
 		group by ai.article_id
 	</select>
-	<!-- and aai.type='1006' -->
-	<!-- and af.article_id=ai.article_id and af.role_id='1003' -->
 
 	<select id="articleFeeQuery" resultMap="AuthorQueryDetailResult"
 		parameterType="AuthorQueryDetail">
@@ -520,17 +456,6 @@
 		</if>
 	</select>
 
-<!-- 	<resultMap type="EditorQueryArtilces" id="EditorQueryDetailResult">
-		<result column="articleId" jdbcType="VARCHAR" property="articleId" />
-		<result column="cnTitle" jdbcType="VARCHAR" property="cnTitle" />
-		<result column="expertState" jdbcType="VARCHAR" property="expertState" />
-		<result column="cnKeywords" jdbcType="VARCHAR" property="cnKeywords" />
-		<result column="state" jdbcType="VARCHAR" property="state" />
-		<result column="section" jdbcType="VARCHAR" property="section" />
-		<result column="createTime" jdbcType="VARCHAR" property="createTime" />
-		<result column="authorNames" jdbcType="VARCHAR" property="authorNames" />
-		<result column="expertNames" jdbcType="VARCHAR" property="expertNames" />
-	</resultMap> -->
 	<!-- 编辑-稿件查询 -->
 	<select id="editorQueryArticles" resultType="EditorQueryArtilces"
 		parameterType="EditorQueryArtilces">
@@ -541,7 +466,6 @@
 		authorNames,exLin.expert_name as expertNames from (
 		select
 		ari.article_id,ari.article_cn_title,ari.article_cn_keywords,ari.editor_state,ari.expert_state,ari.invest_section,ari.create_time,author_name
--- 		ari.article_id,ari.article_cn_title,ari.article_cn_keywords,ari.editor_state,ari.expert_state,ari.invest_section,ari.create_time,GROUP_CONCAT(author_name)
 		as authorNames from article_info ari,author_info aui where
 		ari.article_id=aui.article_id
 		group by ari.article_id
@@ -585,11 +509,14 @@
 	<!-- 编辑-稿件查询 -->
 	<select id="editorQueryArticlesPage" resultType="EditorQueryArtilces"
 		parameterType="EditorQueryArtilces">
-		select auLin.article_id as articleId,auLin.article_cn_title as
+		select auLin.article_id as oriArticleId,auLin.article_cn_title as
 		cnTitle,auLin.expert_state as expertState,auLin.article_cn_keywords as
 		cnKeywords,auLin.editor_state as state,auLin.invest_section as
 		section,DATE_FORMAT(auLin.create_time,'%Y-%m-%d') as createTime,auLin.authorNames as
-		authorNames,exLin.expert_name as expertNames from (
+		authorNames,exLin.expert_name as expertNames
+        , (SELECT group_flag FROM periodical_fanxiu_log WHERE article_no = auLin.article_id ) AS articleId
+        ,(SELECT COUNT(1) FROM periodical_fanxiu_log WHERE group_flag = articleId ) as fanXiuCount
+        from (
 		select
 		ari.article_id,ari.article_cn_title,ari.article_cn_keywords,ari.editor_state,ari.expert_state,ari.invest_section,ari.create_time,author_name
 		as authorNames from article_info ari,author_info aui where
@@ -601,7 +528,9 @@
 		from user_info usi,expert_info exi,article_info_extend
 		aie,article_info ari
 		where usi.ref_id=exi.expert_id and aie.user_id=usi.user_id and
-		ari.article_id=aie.article_id) as exLin
+		ari.article_id=aie.article_id
+        AND aie.article_id NOT IN (SELECT oriarticle_no FROM periodical_fanxiu_log)
+        ) as exLin
 		where auLin.article_id=exLin.article_id
 		<if test="section != null and ''!= section">
 			and auLin.invest_section= #{section,jdbcType=VARCHAR}
@@ -638,7 +567,6 @@
 		select count(1) from (
 		select
 		ari.article_id,ari.article_cn_title,ari.article_cn_keywords,ari.editor_state,ari.expert_state,ari.invest_section,ari.create_time,author_name
--- 		ari.article_id,ari.article_cn_title,ari.article_cn_keywords,ari.editor_state,ari.expert_state,ari.invest_section,ari.create_time,GROUP_CONCAT(author_name)
 		as authorNames from article_info ari,author_info aui where
 		ari.article_id=aui.article_id
 		group by ari.article_id
@@ -648,7 +576,9 @@
 		from user_info usi,expert_info exi,article_info_extend
 		aie,article_info ari
 		where usi.ref_id=exi.expert_id and aie.user_id=usi.user_id and
-		ari.article_id=aie.article_id) as exLin
+		ari.article_id=aie.article_id
+        AND aie.article_id NOT IN (SELECT oriarticle_no FROM periodical_fanxiu_log)
+        ) as exLin
 		where auLin.article_id=exLin.article_id
 		<if test="section != null and ''!= section">
 			and auLin.invest_section= #{section,jdbcType=VARCHAR}
@@ -717,7 +647,6 @@
 
 		from ( 
 		select ai.article_id ,ai.article_cn_title ,ai.create_time,aui.author_name as authorName, ai.editor_state ,ai.expert_state ,ai.invest_section from article_info ai,author_info aui where ai.article_id=aui.article_id group by ai.article_id) as temp1 ,
--- 		select ai.article_id ,ai.article_cn_title ,ai.create_time,group_concat(aui.author_name) as authorName, ai.editor_state ,ai.expert_state ,ai.invest_section from article_info ai,author_info aui where ai.article_id=aui.article_id group by ai.article_id) as temp1 ,
 
 		( select aie.article_id,max(if(aie.role_id='1003',aie.user_id,'')) as expertId, max(if(aie.role_id='1006',aie.user_id,'')) as editorId, max(if(aie.role_id='1001',aie.user_id,'')) as userId from article_info_extend aie group by aie.article_id) as temp2 ,
 		

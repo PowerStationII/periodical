@@ -43,6 +43,49 @@
 		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
 	</resultMap>
+    <resultMap id="BaseResultMap1" type="ArticleInfo">
+        <id column="ID" jdbcType="DECIMAL" property="id" />
+        <result column="article_name" jdbcType="VARCHAR" property="articleName" />
+        <result column="articleId" jdbcType="VARCHAR" property="articleId" />
+        <result column="oriArticleId" jdbcType="VARCHAR" property="oriArticleId" />
+        <result column="article_type" jdbcType="VARCHAR" property="articleType" />
+        <result column="article_cn_title" jdbcType="VARCHAR" property="articleCnTitle" />
+        <result column="article_en_tile" jdbcType="VARCHAR" property="articleEnTile" />
+        <result column="article_cn_summary" jdbcType="VARCHAR"
+                property="articleCnSummary" />
+        <result column="article_en_summary" jdbcType="VARCHAR"
+                property="articleEnSummary" />
+        <result column="artilce" jdbcType="LONGVARBINARY" property="artilce" />
+        <result column="article_cn_keywords" jdbcType="VARCHAR"
+                property="articleCnKeywords" />
+        <result column="article_en_keywords" jdbcType="VARCHAR"
+                property="articleEnKeywords" />
+        <result column="isfund" jdbcType="VARCHAR" property="isfund" />
+        <result column="invest_section" jdbcType="VARCHAR" property="investSection" />
+        <result column="classification_nums" jdbcType="VARCHAR"
+                property="classificationNums" />
+        <result column="document_code" jdbcType="VARCHAR" property="documentCode" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="inovation_point" jdbcType="VARCHAR" property="inovationPoint" />
+        <result column="reference_doc" jdbcType="VARCHAR" property="referenceDoc" />
+        <result column="receive_article_time" jdbcType="TIMESTAMP"
+                property="receiveArticleTime" />
+        <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+        <result column="total_pics" jdbcType="INTEGER" property="totalPics" />
+        <result column="total_tabs" jdbcType="INTEGER" property="totalTabs" />
+        <result column="total_pages" jdbcType="INTEGER" property="totalPages" />
+        <result column="fund_title" jdbcType="VARCHAR" property="fundTitle" />
+        <result column="editor_state" jdbcType="VARCHAR" property="editorState" />
+        <result column="expert_state" jdbcType="VARCHAR" property="expertState" />
+        <result column="author_state" jdbcType="VARCHAR" property="authorState" />
+        <result column="isAvaliable" jdbcType="VARCHAR" property="isAvaliable" />
+        <result column="lately_flows_id" jdbcType="BIGINT" property="latelyFlowsId" />
+        <result column="extends_2" jdbcType="VARCHAR" property="extends2" />
+        <result column="extends_3" jdbcType="VARCHAR" property="extends3" />
+        <result column="extends_4" jdbcType="VARCHAR" property="extends4" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
 	<!-- 主编查看系统稿件 start -->
 	
 	<resultMap id="QuerySysResultMap" type="ArticleInfo">
@@ -365,6 +408,43 @@
 		create_time,
 		update_time,
 	</sql>
+	<sql id="Base_Column_List1">
+		id,
+		article_name,
+		article_id as oriArticleId,
+		article_type,
+		article_cn_title,
+		article_en_tile,
+		article_cn_summary,
+		article_en_summary,
+		artilce,
+		article_cn_keywords,
+		article_en_keywords,
+		isfund,
+		invest_section,
+		classification_nums,
+		document_code,
+		remark,
+		inovation_point,
+		reference_doc,
+		receive_article_time,
+		publish_time,
+		total_pics,
+		total_tabs,
+		total_pages,
+		fund_title,
+		editor_state,
+		expert_state,
+		author_state,
+		isAvaliable,
+		lately_flows_id,
+		extends_2,
+		extends_3,
+		extends_4,
+		create_time,
+		update_time,
+		(SELECT group_flag FROM periodical_fanxiu_log WHERE article_no = oriArticleId ) AS articleId
+	</sql>
 	<sql id="Base_Set_Clause">
 		<set>
 			<trim suffixOverrides=",">
@@ -653,15 +733,13 @@
 		</trim>
 		from article_info
 		<include refid="Example_Where_Clause" />
-<!-- 		and article_id not in (select article_id from periodical_details)
- -->
 	</select>
 
     <select id="selectByExampleZuGao" parameterType="ArticleInfoQuery"
-            resultMap="BaseResultMap">
+            resultMap="BaseResultMap1">
         select
         <trim suffixOverrides=",">
-            <include refid="Base_Column_List" />
+            <include refid="Base_Column_List1" />
         </trim>
         from article_info
         <where>
@@ -891,13 +969,5 @@
 		('0000','0002','0001')
 		group by ai.article_id ) as lin
 		group by status
--- 		select status ,count(1) as total from (
--- 		select (case when ai.editor_state='0008' then ai.expert_state ELSE
--- 		ai.editor_state END)as status,ai.article_id
--- 		from article_info ai,article_info_extend aie
--- 		where ai.article_id=aie.article_id and ai.editor_state in
--- 		('0000','0008','0001')
--- 		group by ai.article_id ) as lin
--- 		group by status
 	</select>
 </mapper>

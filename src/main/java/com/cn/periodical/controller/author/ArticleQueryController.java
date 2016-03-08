@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONObject;
 import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.enums.RoleIdEnums;
+import com.cn.periodical.manager.*;
 import com.cn.periodical.pojo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
-import com.cn.periodical.manager.ArticleFlowsManager;
-import com.cn.periodical.manager.ArticleInfoManager;
-import com.cn.periodical.manager.AuthorInfoManager;
-import com.cn.periodical.manager.PayeeInfoManager;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
 import com.cn.periodical.service.ArticleQueryService;
@@ -47,24 +44,10 @@ public class ArticleQueryController extends AuthorController{
 	@Autowired
 	ArticleInfoManager articleInfoManager;
 	@Autowired
-	PayeeInfoManager payeeInfoManager;
-	
-//	/**
-//	 * toArticleQueryPage
-//	 * author/toArticleQueryPage
-//	 * 去稿件查询页面
-//	 */
-//	@RequestMapping(value="/toArticleQueryPage")
-//	public ModelAndView toArticleQueryPage(HttpServletRequest request,HttpServletResponse response) {
-//		logger.info("稿件查询Page:[]");
-//		ModelAndView mav = new ModelAndView("articleQueryPage");
-//		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
-//		reqDto.setUserId(getUserInfo(request).getUserId());
-//		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
-//		mav.addObject("list", list);
-//		logger.info("稿件查询出参:["+JSON.toJSONString(list)+"]");
-//		return mav;
-//	}
+    PayeeInfoManager payeeInfoManager;
+	@Autowired
+    PeriodicalChongtouLogManager periodicalChongtouLogManager;
+
 
     /**
      * toArticleQueryPage
@@ -123,6 +106,15 @@ public class ArticleQueryController extends AuthorController{
 		logger.info("稿件明细Page:["+articleId+"]");
 		ModelAndView mav = new ModelAndView("articleQueryDetailPage");
 		AuthorQueryDetail detail = articleQueryService.queryAuthorQueryDetail(articleId);
+        PeriodicalChongtouLog periodicalChongtouLog = new PeriodicalChongtouLog () ;
+        periodicalChongtouLog.setArticleNo(articleId);
+        List<PeriodicalChongtouLog> listFanxiu = periodicalChongtouLogManager.selectByCondition(periodicalChongtouLog);
+        if(null!=listFanxiu && !listFanxiu.isEmpty()){
+            detail.setOriArticleId(listFanxiu.get(0).getGroupFlag());
+        }else{
+            detail.setOriArticleId(articleId);
+        }
+
         Set<String> set = new HashSet<String>();
         set.add(RoleIdEnums.AUTHOR_ATTR.getCode());
         if(ArticleStateEnums.END_ARTICLE.getCode().equals(detail.getEditorState())){ // 稿件处理完成了， 作者才可以看审核之后的附件
@@ -143,9 +135,21 @@ public class ArticleQueryController extends AuthorController{
 		logger.info("稿件明细Page:["+articleId+"]");
 		ModelAndView mav = new ModelAndView("articleQueryChongTouPage");
 		AuthorQueryDetail detail = articleQueryService.queryAuthorQueryDetail(articleId);
+        PeriodicalChongtouLog periodicalChongtouLog = new PeriodicalChongtouLog () ;
+        periodicalChongtouLog.setArticleNo(articleId);
+        List<PeriodicalChongtouLog> listFanxiu = periodicalChongtouLogManager.selectByCondition(periodicalChongtouLog);
+        if(null!=listFanxiu && !listFanxiu.isEmpty()){
+            detail.setOriArticleId(articleId);
+            detail.setArticleId(listFanxiu.get(0).getGroupFlag());
+        }else{
+            detail.setOriArticleId(articleId);
+            detail.setArticleId(articleId);
+        }
+
+
         Set<String> set = new HashSet<String>();
         set.add(RoleIdEnums.AUTHOR_ATTR.getCode());
-        if(ArticleStateEnums.END_ARTICLE.getCode().equals(detail.getEditorState())){ // 稿件处理完成了， 作者才可以看审核之后的附件
+        if(ArticleStateEnums.REPAIR_ARTICLE.getCode().equals(detail.getEditorState())){ // 稿件处理完成了， 作者才可以看审核之后的附件,返修了也是处理完了
             set.add(RoleIdEnums.ARTICLE_EDITOR_ATTR.getCode());
         }
         List<ArticleAttachmentInfo> listAttr = articleQueryService.queryAttByArtcicle(articleId, set);
@@ -278,6 +282,13 @@ public class ArticleQueryController extends AuthorController{
         logger.info("稿件明细Page:["+articleId+"]");
         ModelAndView mav = new ModelAndView("articleQueryDetailPage");
         AuthorQueryDetail detail = articleQueryService.queryAuthorQueryDetail(articleId);
+        PeriodicalChongtouLog periodicalChongtouLog = new PeriodicalChongtouLog () ;
+        periodicalChongtouLog.setArticleNo(articleId);
+        List<PeriodicalChongtouLog> listFanxiu = periodicalChongtouLogManager.selectByCondition(periodicalChongtouLog);
+        if(null!=listFanxiu && !listFanxiu.isEmpty()){
+            detail.setArticleId(listFanxiu.get(0).getGroupFlag());
+        }
+
         Set<String> set = new HashSet<String>();// 设置可以下载谁的稿件
         set.add(RoleIdEnums.AUTHOR_ATTR.getCode());
         set.add(RoleIdEnums.ARTICLE_EDITOR_ATTR.getCode());
@@ -298,6 +309,17 @@ public class ArticleQueryController extends AuthorController{
         logger.info("稿件明细Page:["+articleId+"]");
         ModelAndView mav = new ModelAndView("articleQueryDetailPage");
         AuthorQueryDetail detail = articleQueryService.queryAuthorQueryDetail(articleId);
+
+        PeriodicalChongtouLog periodicalChongtouLog = new PeriodicalChongtouLog () ;
+        periodicalChongtouLog.setArticleNo(articleId);
+        List<PeriodicalChongtouLog> listFanxiu = periodicalChongtouLogManager.selectByCondition(periodicalChongtouLog);
+        if(null!=listFanxiu && !listFanxiu.isEmpty()){
+            detail.setArticleId(listFanxiu.get(0).getGroupFlag());
+        }else{
+            detail.setArticleId(articleId);
+        }
+        detail.setOriArticleId(articleId);
+
         Set<String> set = new HashSet<String>();// 设置可以下载谁的稿件
         set.add(RoleIdEnums.ARTICLE_EDITOR_ATTR.getCode());
         set.add(RoleIdEnums.CN_EXPERT_ATTR.getCode());

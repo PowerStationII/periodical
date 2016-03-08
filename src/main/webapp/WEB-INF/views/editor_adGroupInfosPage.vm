@@ -164,7 +164,8 @@ $('#btnSubmit').click(function(){
 		});
 	 	$.ajax({
 			url:'../editor/toSaveAdGroup',
-			data:{leftArray:leftArray.toString(),periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',str:JSON.stringify(sections),type:'Y'},
+			data:{leftArray:leftArray.toString(),periodicalId:'${periodicalId}',periodicalIssueNo:'${periodicalIssueNo}',
+                str:JSON.stringify(sections),type:'Y'},
 			success:function(d){
 ##				window.location.href='../editor/toAdGroupDetailPage?periodicalId=${periodicalId}';
                 alert(d.message);

@@ -66,6 +66,8 @@ public class OrderManageController extends ReaderController{
     Zeng1KanInfoService zeng1KanInfoService;
     @Autowired
     ArticalCodeManager articalCodeManager;
+    @Autowired
+    ArticalCodeManager  aticalCodeManager;
 	/**
 	 * toOrderManagePage
 	 * 订单管理页面
@@ -142,18 +144,22 @@ public class OrderManageController extends ReaderController{
 	 * 订阅
 	 */
 	@RequestMapping(value="/toCreatOrder",method ={ RequestMethod.POST ,RequestMethod.GET})
-	public ModelAndView toCreatOrder(HttpServletRequest request,String periodicalId,String singlPrice,String periodicalYear,int orderNums) {
+	public ModelAndView toCreatOrder(HttpServletRequest request,String periodicalId,String singlPrice
+            ,String periodicalYear,int orderNums,int cycle) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("新建读者订单Page:["+userInfo.getUserId()+"]&["+periodicalId+"]");
 		ModelAndView mav = new ModelAndView("redirect:../reader/toOrderManagePage");
 		OrderInfo orderInfo = new OrderInfo();
 		orderInfo.setUserId(userInfo.getUserId());
-		orderInfo.setOrderNo(GenerateOrderNo.generateOrderNo());
+
+        String orderNo = aticalCodeManager.getCode(ArticalCodeEnums.ORDER_CONDE.getCode(),ArticalCodeEnums.ORDER_CONDE.getName());
+
+		orderInfo.setOrderNo(orderNo);
 		orderInfo.setPeriodicalYear(periodicalYear);
 		orderInfo.setSubscribeNums(orderNums);
 		orderInfo.setOrderStatus(OrderStatusEnums.NONE.getCode());/**订单状态:N未付款订单*/
 		orderInfo.setPeriodicalId(periodicalId);
-		orderInfo.setAmount(Long.valueOf(orderNums*Integer.valueOf(singlPrice)));
+		orderInfo.setAmount(Long.valueOf(cycle*orderNums*Integer.valueOf(singlPrice)));
 		orderInfo.setCreateTime(new Date());
 		orderInfoManager.saveOrderInfo(orderInfo);
 		return mav;

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cn.periodical.manager.*;
 import com.cn.periodical.pojo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +22,6 @@ import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.enums.RoleIdEnums;
 import com.cn.periodical.enums.SystemIdEnums;
-import com.cn.periodical.manager.ArticleFlowsManager;
-import com.cn.periodical.manager.ArticleInfoManager;
-import com.cn.periodical.manager.UserInfoManager;
-import com.cn.periodical.manager.UserQueryManager;
 import com.cn.periodical.request.AritcleWorkFlowReqDto;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.request.UserQueryReqDto;
@@ -61,25 +58,10 @@ public class ArticleRefundDealController extends EditorController{
 	
 	@Autowired 
 	UserQueryManager userQueryManager;
+
+    @Autowired
+    PeriodicalChongtouLogManager periodicalChongtouLogManager;
 	
-//	/**
-//	 * toReturnedArticlePage
-//	 * 退稿
-//	 */
-//	@RequestMapping(value="/toReturnedArticlePage",method = RequestMethod.GET)
-//	public ModelAndView toReturnedArticlePage(HttpServletRequest request) {
-//		logger.info("退稿PageList in:[]");
-//		UserInfo userInfo = getUserInfo(request);
-//		ModelAndView mav = new ModelAndView("editor_returnedArticlePage");
-//		ArticleQueryReqDto reqDto= new ArticleQueryReqDto();
-//		reqDto.setEditorState(ArticleStateEnums.END_ARTICLE.getCode());
-//		reqDto.setExpertState(ArticleStateEnums.RETURNED_ARTICLE.getCode());
-//		reqDto.setRoleId(userInfo.getRoleId());
-//		List<ArticleQueryRespDto> list =articleQueryService.queryArticleInfos(reqDto);
-//		mav.addObject("list", list);
-//		logger.info("退稿PageList out:["+JSON.toJSONString(list)+"]");
-//		return mav;
-//	}
 	/**
 	 * toReturnedArticlePage
 	 * 退稿
@@ -147,6 +129,15 @@ public class ArticleRefundDealController extends EditorController{
             reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**编辑和专家共用一个稿件目录*/
         }
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
+        PeriodicalChongtouLog periodicalChongtouLog = new PeriodicalChongtouLog () ;
+        periodicalChongtouLog.setArticleNo(articleId);
+        List<PeriodicalChongtouLog> listFanxiu = periodicalChongtouLogManager.selectByCondition(periodicalChongtouLog);
+        if(null!=listFanxiu && !listFanxiu.isEmpty()){
+            articleQueryRespDto.setArticleId(listFanxiu.get(0).getGroupFlag());
+        }else{
+            articleQueryRespDto.setArticleId(articleId);
+        }
+        articleQueryRespDto.setOriArticleId(articleId);
         Opinion opinion = articleFlowsManager.queryOpinion2(articleId);
 		mav.addObject("respDto", articleQueryRespDto);
 		mav.addObject("opinion", opinion);

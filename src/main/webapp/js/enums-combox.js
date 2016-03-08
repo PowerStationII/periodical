@@ -574,4 +574,59 @@ function getReadTye(){
         ] ;
     return data;
 }
- 
+function getDiJiQi(){
+    var data=[{
+        "value":'',
+        "text":"请选择",
+        "selected":true
+    }, {
+        "value":'1',
+        "text":"第一期"
+    },
+        {
+            "value":'2',
+            "text":"第二期"
+        } ,
+        {
+            "value":'3',
+            "text":"第三期"
+        },
+        {
+            "value":'4',
+            "text":"第四期"
+        },
+        {
+            "value":'5',
+            "text":"第五期"
+        },
+        {
+            "value":'6',
+            "text":"第六期"
+        },
+        {
+            "value":'7',
+            "text":"第七期"
+        },
+        {
+            "value":'8',
+            "text":"第八期"
+        },
+        {
+            "value":'9',
+            "text":"第九期"
+        },
+        {
+            "value":'10',
+            "text":"第十期"
+        },
+        {
+            "value":'11',
+            "text":"第十一期"
+        },
+        {
+            "value":'12',
+            "text":"第十二期"
+        }
+        ] ;
+    return data;
+}

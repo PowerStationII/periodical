@@ -27,8 +27,13 @@ $(function(){
         onLoadSuccess:function(){
             var rows = $('#table').datagrid('getRows');
             for(var i=0;i<rows.length;i++) {
-                rows[i].option='<a style="width:50px;" class="easyui-linkbutton" href="../editor/toRepairePage?articleId='+rows[i].articleId+'">返修</a>';
-                rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].articleId+'">'+rows[i].articleId+'</a>';
+                rows[i].option='<a style="width:50px;" class="easyui-linkbutton" href="../editor/toRepairePage?articleId='+rows[i].oriArticleId+'">返修</a>';
+                if(null==rows[i].articleId){
+                    rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].oriArticleId+'">'+rows[i].oriArticleId+'</a>';
+                } else{
+                    rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].oriArticleId+'">'+rows[i].articleId+'</a>';
+                    rows[i].title =    rows[i].title +"(返修稿"+rows[i].fanXiuCount+")"
+                }
                 $('#table').datagrid('refreshRow',i);
             }
         }

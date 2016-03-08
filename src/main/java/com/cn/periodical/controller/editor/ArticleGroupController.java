@@ -179,7 +179,7 @@ public class ArticleGroupController extends EditorController{
 			EditorArticleDealRespDto editorArticleDealRespDto = new EditorArticleDealRespDto();
 			ArticleInfo articleInfo = iters.next();
 			AuthorInfoQuery authorInfoQuery = new AuthorInfoQuery();
-			authorInfoQuery.setArticleId(articleInfo.getArticleId());
+			authorInfoQuery.setArticleId(articleInfo.getOriArticleId());
 			List<AuthorInfo> authorInfos = authorInfoManager.queryList(authorInfoQuery);
 			editorArticleDealRespDto.setArticleInfo(articleInfo);
 			editorArticleDealRespDto.setAuthorInfos(authorInfos);

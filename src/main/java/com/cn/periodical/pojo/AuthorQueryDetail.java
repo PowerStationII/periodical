@@ -61,6 +61,7 @@ public class AuthorQueryDetail implements Serializable {
     private String editorState ;
 
     private String fundTitle ;
+    private String oriArticleId  ;
 
 
 
@@ -272,5 +273,13 @@ public class AuthorQueryDetail implements Serializable {
 
     public void setFundTitle(String fundTitle) {
         this.fundTitle = fundTitle;
+    }
+
+    public String getOriArticleId() {
+        return oriArticleId;
+    }
+
+    public void setOriArticleId(String oriArticleId) {
+        this.oriArticleId = oriArticleId;
     }
 }

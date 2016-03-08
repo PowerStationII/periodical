@@ -37,7 +37,8 @@ public class BizDistribut extends PagingQuery implements Serializable {
 	private String oStatus;
 	private String pCnName;
 	private String pIsNo;
-	
+	private String extends2;
+
 	
 	
 	
@@ -182,4 +183,12 @@ public class BizDistribut extends PagingQuery implements Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
+    public String getExtends2() {
+        return extends2;
+    }
+
+    public void setExtends2(String extends2) {
+        this.extends2 = extends2;
+    }
 }

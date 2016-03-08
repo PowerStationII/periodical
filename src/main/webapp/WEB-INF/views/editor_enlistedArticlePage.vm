@@ -27,10 +27,23 @@
             onLoadSuccess:function(){
                 var rows = $('#table').datagrid('getRows');
                 for(var i=0;i<rows.length;i++) {
-                    rows[i].option='<a class="easyui-linkbutton"  style="width:50px;" href="../editor/toSubmitPage?articleId='+rows[i].articleId+'">送审</a>&nbsp;'+
-                    '<a class="easyui-linkbutton"  style="width:50px;" href="../editor/toRepairePage?articleId='+rows[i].articleId+'&flag=gaoJian">返修</a>&nbsp;'+
-                    '<a class="easyui-linkbutton"  style="width:50px;" href="../editor/toRefundPage?articleId='+rows[i].articleId+'&flag=gaoJian">退稿</a>';
-                    rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].articleId+'">'+rows[i].articleId+'</a>';
+
+                    if(null==rows[i].articleId){
+                        rows[i].option='<a class="easyui-linkbutton"  style="width:50px;" href="../editor/toSubmitPage?articleId='+rows[i].oriArticleId+'">送审</a>&nbsp;'+
+                                '<a class="easyui-linkbutton"  style="width:50px;" href="../editor/toRepairePage?articleId='+rows[i].oriArticleId+'&flag=gaoJian">返修</a>&nbsp;'+
+                                '<a class="easyui-linkbutton"  style="width:50px;" href="../editor/toRefundPage?articleId='+rows[i].oriArticleId+'&flag=gaoJian">退稿</a>';
+                        rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].oriArticleId+'">'+rows[i].oriArticleId+'</a>';
+
+
+                    }else{
+                        rows[i].option='<a class="easyui-linkbutton"  style="width:50px;" href="../editor/toSubmitPage?articleId='+rows[i].oriArticleId+'">送审</a>&nbsp;'+
+                                '<a class="easyui-linkbutton"  style="width:50px;" href="../editor/toRepairePage?articleId='+rows[i].oriArticleId+'&flag=gaoJian">返修</a>&nbsp;'+
+                                '<a class="easyui-linkbutton"  style="width:50px;" href="../editor/toRefundPage?articleId='+rows[i].oriArticleId+'&flag=gaoJian">退稿</a>';
+                        rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].oriArticleId+'">'+rows[i].articleId+'</a>';
+
+                        rows[i].title =  rows[i].title +"(返修稿"+rows[i].fanXiuCount+")"
+                    }
+
                     $('#table').datagrid('refreshRow',i);
                 }
             }

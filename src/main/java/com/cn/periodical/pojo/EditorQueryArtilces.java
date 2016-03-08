@@ -23,7 +23,9 @@ public class EditorQueryArtilces extends PagingQuery {
 	private String expertNames;
 	private String createTime;
 	private String expertState;
-	
+	private String oriArticleId;
+	private String fanXiuCount;
+
 	public String getExpertState() {
 		return expertState;
 	}
@@ -78,4 +80,20 @@ public class EditorQueryArtilces extends PagingQuery {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
+
+    public String getOriArticleId() {
+        return oriArticleId;
+    }
+
+    public void setOriArticleId(String oriArticleId) {
+        this.oriArticleId = oriArticleId;
+    }
+
+    public String getFanXiuCount() {
+        return fanXiuCount;
+    }
+
+    public void setFanXiuCount(String fanXiuCount) {
+        this.fanXiuCount = fanXiuCount;
+    }
 }

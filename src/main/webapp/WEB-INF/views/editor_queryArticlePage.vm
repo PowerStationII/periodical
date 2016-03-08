@@ -27,7 +27,14 @@
             onLoadSuccess:function(){
                 var rows = $('#table').datagrid('getRows');
                 for(var i=0;i<rows.length;i++) {
-                    rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].articleId+'">'+rows[i].articleId+'</a>';
+
+                    if(null!=rows[i].articleId){
+                        rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].oriArticleId+'">'+rows[i].articleId+'</a>';
+                        rows[i].cnTitle = rows[i].cnTitle +"(返修稿"+rows[i].fanXiuCount+")"
+                    } else{
+                        rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].oriArticleId+'">'+rows[i].oriArticleId+'</a>';
+                    }
+
                     rows[i].state =  ArticleStateEnumsEdit(rows[i].state,rows[i].expertState);
                     $('#table').datagrid('refreshRow',i);
                 }
@@ -68,15 +75,6 @@
 					<td><select name="state"  id="state" class="easyui-combobox"  editable="false" style="width:155px;">
 						</select>
 					</td>
-##					<td>稿件栏目：</td>
-##					<td><select name="section"   class="easyui-combobox"   style="width:155px;">
-##							<option value="" selected>全部</option>
-##							<option value="1">1</option>
-##							<option value="2">2</option>
-##							<option value="3">3</option>
-##						</select></td>
-##					<td>中文关键字：</td>
-##					<td><input type="text" class="easyui-textbox" name="cnKeywords" value=""></td>
 					<td>投稿时间：</td>
 					<td><input type="text"  class="easyui-textbox" name="createTime" value=""></td>
 				</tr>			

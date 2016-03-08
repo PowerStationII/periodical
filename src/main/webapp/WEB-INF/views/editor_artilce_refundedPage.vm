@@ -22,7 +22,7 @@
 </script>
 <body>
 	<form action="../editor/toRefundModify" method="POST">
-		<input type="hidden" name="articleId" value="${respDto.articleId}"/>
+		<input type="hidden" name="articleId" value="${respDto.oriArticleId}"/>
 		<div id="articleInfos">
 			<TABLE style="border: 1px solid green;margin-left:300px;margin-top:50px; " rules="all">
 				<tr>

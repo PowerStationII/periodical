@@ -58,12 +58,12 @@
 </script>
 <body>
 	<form action="../editor/toRepaireModify" method="POST">
-	<input type="hidden" name="articleId" id="articleId" value="${respDto.articleId}">
+	<input type="hidden" name="articleId" id="articleId" value="${respDto.oriArticleId}">
 		<div id="articleInfos">
 			<TABLE style="border: 1px solid green;margin-left:300px;margin-top:50px; " rules="all">
 				<tr>
 					<td width = "">稿件编号:</td>
-					<td>$!{respDto.articleId}</td>
+					<td> $!{respDto.articleId}</td>
 				</tr>
 				<tr>
 					<td width = "">稿件状态:</td>
@@ -87,7 +87,7 @@
 				</tr>
 				<tr>
 					<td width = "">专家返修意见:</td>
-					<td>$!{opinion.opinion}</td>
+					<td><TEXTAREA  ROWS="10" COLS="70" readonly="true">$!{opinion.opinion}</TEXTAREA></td>
 				</tr>
                 <tr>
                     <td>上传附件:</td>

@@ -38,6 +38,7 @@
 		<input type="hidden" name="periodicalId" value="${periodicalInfo.periodicalId}">
 		<input type="hidden" name="singlPrice" value="${periodicalInfo.inFixPrice}">
 		<input type="hidden" name="payeeId" value="${periodicalInfo.payeeId}">
+		<input type="hidden" name="cycle" value="${periodicalInfo.cycle}">
 		<table style="border: 1px solid green;" rules="all">
 			<tr>
 				<th>期刊信息</th>

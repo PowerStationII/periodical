@@ -37,7 +37,7 @@
                 secureuri:false,
                 fileElementId:'files',                  //文件选择框的id属性
                 dataType: 'json',                      //服务器返回的格式，可以是json, xml
-                data:{filePath:"editorPath",articleId:'$!{respDto.articleId}',dealOption:daikanyijian},
+                data:{filePath:"editorPath",articleId:'$!{respDto.oriArticleId}',dealOption:daikanyijian},
                 success: function (data, status){     //相当于java中try语句块的用法
                     if (data.message == "success") {
                         alert('待刊成功');
@@ -48,16 +48,9 @@
                     alert(data);
                 }
             });
-			//$('form').submit();
-##			$.post('../expert/toPublishStateModify',{articleId:'$!{respDto.articleId}'},function(data){
-##				if (data=="true") {
-##					alert('待刊成功');
-##					window.location.href='../expert/toArticleAuditePage';
-##				}
-##			})
 		});
 		$('.down').click(function(){
-			window.location.href='../expert/toDownLoadArticle?isDown=true&articleId=${respDto.articleId}&expertDownload=${respDto.expertDownload}';
+			window.location.href='../expert/toDownLoadArticle?isDown=true&articleId=${respDto.oriArticleId}&expertDownload=${respDto.expertDownload}';
 		});
 		
 		//返回刷新后根据带过来的值进行判断，决定走向
@@ -83,11 +76,11 @@
 	});
 	
 	function fx () {
-		window.location.href='../expert/toExpertRepairedPage?articleId=${respDto.articleId}';
+		window.location.href='../expert/toExpertRepairedPage?articleId=${respDto.oriArticleId}';
 	}
 	
 	function tg () {
-		window.location.href='../expert/toExpertRefundPage?articleId=${respDto.articleId}';
+		window.location.href='../expert/toExpertRefundPage?articleId=${respDto.oriArticleId}';
 	}
 	
 	//真正的点击下载按钮(隐藏)
@@ -97,7 +90,7 @@
 </script>
 <body>
  <form action="../expert/toPublishStateModify" method="POST">
-<input type="hidden" name="articleId" value="$!{respDto.articleId}">
+<input type="hidden" name="articleId" value="$!{respDto.oriArticleId}">
 	<div>
 		<table id="grid" class="easyui-datagrid"   data-options="singleSelect:true" >
 		<thead>
@@ -171,7 +164,8 @@
 		<input type="button" id="tg" onclick="tg()" value="退稿">
 		#set($d=$!{respDto.attachPath})
 		<input type="button" class="down" value="下载">#set($d=$d.replace("\","\\"))
-		<input type="button" onclick="download('${respDto.articleId}','$!{respDto.attachName}','$d')" value="隐藏" id="hid" style="display:none;">
+		<input type="button" onclick="download('${respDto.oriArticleId}','$!{respDto.attachName}','$d')"
+               value="隐藏" id="hid" style="display:none;">
 	</div>
 </body>
 </html>

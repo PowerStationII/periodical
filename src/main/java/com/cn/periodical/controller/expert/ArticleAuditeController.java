@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cn.periodical.manager.*;
 import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.*;
 import org.slf4j.Logger;
@@ -22,13 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 import com.cn.periodical.enums.ArticleStateEnums;
 import com.cn.periodical.enums.RoleIdEnums;
-import com.cn.periodical.manager.ArticleFlowsManager;
-import com.cn.periodical.manager.ArticleInfoManager;
-import com.cn.periodical.manager.ArticleInfoStateManager;
-import com.cn.periodical.manager.ExpertInfoManager;
-import com.cn.periodical.manager.PayeeInfoManager;
-import com.cn.periodical.manager.UserInfoManager;
-import com.cn.periodical.manager.UserQueryManager;
 import com.cn.periodical.request.AritcleWorkFlowReqDto;
 import com.cn.periodical.request.ArticleQueryReqDto;
 import com.cn.periodical.response.ArticleQueryRespDto;
@@ -72,23 +66,9 @@ public class ArticleAuditeController extends ExpertController{
 
     @Autowired
     AuthorContributeService authorContributeService ;
-	
-//	/**
-//	 * toArticleAuditePage
-//	 * 去审稿页面
-//	 */
-//	@RequestMapping(value="/toArticleAuditePage")
-//	public ModelAndView toArticleAuditePage(HttpServletRequest request,@ModelAttribute ArticleQueryReqDto reqDto) {
-//		UserInfo userInfo = getUserInfo(request);
-//		logger.info("审稿Page:["+JSON.toJSONString(reqDto)+"]");
-//		ModelAndView mav = new ModelAndView("expert_articleAuditPage");
-//		reqDto.setUserId(userInfo.getUserId());
-//		logger.info("***********************");
-//		logger.info(JSON.toJSONString(reqDto));
-//		List<ArticleQueryRespDto> list =articleQueryService.expertQryArticleInfos(reqDto);
-//		mav.addObject("list", list);
-//		return mav;
-//	}
+    @Autowired
+    PeriodicalChongtouLogManager periodicalChongtouLogManager ;
+
 	/**
 	 * toArticleAuditePage
 	 * 去审稿页面
@@ -145,7 +125,17 @@ public class ArticleAuditeController extends ExpertController{
 		reqDto.setArticleId(articleId);
 		reqDto.setRoleId(RoleIdEnums.ARTICLE_EDITOR.getCode());/**专家下载编辑的稿件*/
 		ArticleQueryRespDto articleQueryRespDto =articleQueryService.queryArticleInfoDetail(reqDto);
-		mav.addObject("respDto", articleQueryRespDto);
+        PeriodicalChongtouLog periodicalChongtouLog = new PeriodicalChongtouLog () ;
+        periodicalChongtouLog.setArticleNo(articleId);
+        List<PeriodicalChongtouLog> listFanxiu = periodicalChongtouLogManager.selectByCondition(periodicalChongtouLog);
+        if(null!=listFanxiu && !listFanxiu.isEmpty()){
+            articleQueryRespDto.setArticleId(listFanxiu.get(0).getGroupFlag());
+        }else{
+            articleQueryRespDto.setArticleId(articleId);
+        }
+        articleQueryRespDto.setOriArticleId(articleId);
+
+        mav.addObject("respDto", articleQueryRespDto);
 		mav.addObject("isDown", isDown);
 		logger.info("审稿明细出参:["+JSON.toJSONString(articleQueryRespDto)+"]");
 		return mav;

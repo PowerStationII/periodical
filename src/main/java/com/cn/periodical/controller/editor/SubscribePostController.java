@@ -165,7 +165,7 @@ public class SubscribePostController extends EditorController {
                     bizDistribut.setrPostCode(songKanDetail.getYoubian()); // 邮编
                     bizDistribut.setrAddress(songKanDetail.getDizhi()); // 地址
                     bizDistribut.setcName(songKanDetail.getDanwei()); // 单位
-                    bizDistribut.setcName(songKanDetail.getXingming());// 联系人
+                    bizDistribut.setExtends2(songKanDetail.getXingming());// 联系人
                     bizDistribut.setcMobile(songKanDetail.getDianhua());
                     bizDistribut.setdNums(songKanDetail.getZengSonNum()); // 份数
                     bizDistribut.setNums(songKanDetail.getCycleNums());// 第几期
@@ -179,7 +179,7 @@ public class SubscribePostController extends EditorController {
                     bizDistribut.setrPostCode(songKanDetail.getYoubian()); // 邮编
                     bizDistribut.setrAddress(songKanDetail.getDizhi()); // 地址
                     bizDistribut.setcName(songKanDetail.getDanwei()); // 单位
-                    bizDistribut.setcName(songKanDetail.getXingming());// 联系人
+                    bizDistribut.setExtends2(songKanDetail.getXingming());// 联系人
                     bizDistribut.setcMobile(songKanDetail.getDianhua());
                     bizDistribut.setdNums(songKanDetail.getZengSonNum()); // 份数
                     bizDistribut.setNums(songKanDetail.getCycleNums());// 第几期
@@ -193,7 +193,7 @@ public class SubscribePostController extends EditorController {
                     bizDistribut.setrPostCode(songKanDetail.getYoubian()); // 邮编
                     bizDistribut.setrAddress(songKanDetail.getDizhi()); // 地址
                     bizDistribut.setcName(songKanDetail.getDanwei()); // 单位
-                    bizDistribut.setcName(songKanDetail.getXingming());// 联系人
+                    bizDistribut.setExtends2(songKanDetail.getXingming());// 联系人
                     bizDistribut.setcMobile(songKanDetail.getDianhua());
                     bizDistribut.setdNums(songKanDetail.getZengSonNum()); // 份数
                     bizDistribut.setNums(songKanDetail.getCycleNums());// 第几期
@@ -354,15 +354,23 @@ public class SubscribePostController extends EditorController {
                 BizDistribut bizDistribut = list.get(i);
                 //设置表头
                 StringBuffer strb = new StringBuffer();
-                strb.append(bizDistribut.getrPostCode()); // 邮编
+                strb.append(bizDistribut.getrPostCode().replaceAll("\n","")); // 邮编
                 strb.append("                                   印刷品");
                 strb.append("\r\n");
-                strb.append(bizDistribut.getrAddress()); // 地址
+                String addr = bizDistribut.getrAddress().replaceAll("\n","");
+                if(addr.length()>24){
+                    addr = addr.substring(0,24);
+                }
+                strb.append(addr); // 地址
                 strb.append("\r\n");
-                strb.append(bizDistribut.getcName()); // 单位
+                String name = bizDistribut.getcName().replaceAll("\n","");
+                if(name.length()>24){
+                    name = name.substring(0,24);
+                }
+                strb.append(name); // 单位
                 strb.append("\r\n");
-                strb.append(bizDistribut.getcName());// 联系人
-                strb.append("        "+bizDistribut.getcMobile());
+                strb.append(bizDistribut.getExtends2().replaceAll("\n",""));// 联系人
+                strb.append("        "+bizDistribut.getcMobile().replaceAll("\n",""));
                 strb.append("\r\n");
                 strb.append("\r\n");
                 strb.append("   科               北京朝阳区麦子店街22号");
@@ -387,15 +395,23 @@ public class SubscribePostController extends EditorController {
                 BizDistribut bizDistribut2 = list.get(i+1);
                 //设置表头
                 StringBuffer strb2 = new StringBuffer();
-                strb2.append(bizDistribut2.getrPostCode()); // 邮编
+                strb2.append(bizDistribut2.getrPostCode().replaceAll("\n","")); // 邮编
                 strb2.append("                                   印刷品");
                 strb2.append("\r\n");
-                strb2.append(bizDistribut2.getrAddress()); // 地址
+                String addr = bizDistribut2.getrAddress().replaceAll("\n","");
+                if(addr.length()>24){
+                    addr = addr.substring(0,24);
+                }
+                strb2.append(addr); // 地址
                 strb2.append("\r\n");
-                strb2.append(bizDistribut2.getcName()); // 单位
+                String name = bizDistribut2.getcName().replaceAll("\n","");
+                if(name.length()>24){
+                    name = name.substring(0,24);
+                }
+                strb2.append(name); // 单位
                 strb2.append("\r\n");
-                strb2.append(bizDistribut2.getcName());// 联系人
-                strb2.append("        "+bizDistribut2.getcMobile());
+                strb2.append(bizDistribut2.getExtends2().replaceAll("\n",""));// 联系人
+                strb2.append("        "+bizDistribut2.getcMobile().replaceAll("\n",""));
                 strb2.append("\r\n");
                 strb2.append("\r\n");
                 strb2.append("   科               北京朝阳区麦子店街22号");
@@ -491,13 +507,18 @@ public class SubscribePostController extends EditorController {
 //
 //    }
     public static void main(String[] args){
-        String file = "d:\\test.doc";
-        try {
-            SubscribePostController.createDocContext(file,null);
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+//        String file = "d:\\test.doc";
+//        try {
+//            SubscribePostController.createDocContext(file,null);
+//        } catch (DocumentException e) {
+//            e.printStackTraobPrintBackSupplyMList.jsce();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        String str = "北京市密云县穆家峪镇大石岭村北京付银德生产资料门市" ;
+        if(str.length()>24){
+            str = str.substring(0,24);
+            System.out.println(str);
         }
     }
 

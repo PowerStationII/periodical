@@ -43,6 +43,7 @@ public class BizOrderQuery extends PagingQuery {
 	private String distributId;
 	private String pIsNo;
 	private String extend4;
+	private Integer cycleNums;
 
 	
 	public String getpIsNo() {
@@ -238,5 +239,13 @@ public class BizOrderQuery extends PagingQuery {
 
     public void setExtend4(String extend4) {
         this.extend4 = extend4;
+    }
+
+    public Integer getCycleNums() {
+        return cycleNums;
+    }
+
+    public void setCycleNums(Integer cycleNums) {
+        this.cycleNums = cycleNums;
     }
 }

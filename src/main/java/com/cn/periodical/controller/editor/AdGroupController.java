@@ -147,7 +147,7 @@ public class AdGroupController extends EditorController{
 	 */
 	@RequestMapping(value="/toSaveAdGroup")
 	@ResponseBody
-	public ModelAndView toSaveAdGroup(
+	public Object toSaveAdGroup(
 			@RequestParam("str") String str,
 			@RequestParam("periodicalIssueNo") String periodicalIssueNo,
 			String leftArray,
@@ -155,9 +155,9 @@ public class AdGroupController extends EditorController{
 		logger.info("广告 广告进来的左右提交进来的:leftArray:["+leftArray+"]"
 				+ "&periodicalIssueNo:["+periodicalIssueNo+"]"
 						+ "&str["+str+"]&periodicalId:["+periodicalId+"]");
-		ModelAndView mav = new ModelAndView("redirect:../editor/toAdGroupDetailPage");
+        Map<String,String> map = new HashMap<String,String>();
         try{
-            mav.addObject("periodicalId", periodicalId);
+            map.put("periodicalId", periodicalId);
 
 
             UserInfo userInfo = getUserInfo(request);
@@ -209,11 +209,11 @@ public class AdGroupController extends EditorController{
                 p.setExtend2(PeriodicalStateEnums.AD_PART_DEALING.getCode());
             }
             periodicalManager.savePeriodical(p);
-            mav.addObject("message", "保存成功");
+            map.put("message", "保存成功");
         }catch (Exception e){
-            mav.addObject("message", e.getMessage());
+            map.put("message", e.getMessage());
         }
-		return mav;
+		return map;
 	}
 
 

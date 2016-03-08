@@ -20,6 +20,7 @@ public class ArticleInfo implements Serializable{
 	private java.lang.Long id;
 	private java.lang.String articleName;
 	private java.lang.String articleId;
+	private java.lang.String oriArticleId;
 	private java.lang.String articleType;
 	private java.lang.String articleCnTitle;
 	private java.lang.String articleEnTile;
@@ -579,4 +580,12 @@ public class ArticleInfo implements Serializable{
 	public java.util.Date getUpdateTime() {
 		return this.updateTime;
 	}
+
+    public String getOriArticleId() {
+        return oriArticleId;
+    }
+
+    public void setOriArticleId(String oriArticleId) {
+        this.oriArticleId = oriArticleId;
+    }
 }

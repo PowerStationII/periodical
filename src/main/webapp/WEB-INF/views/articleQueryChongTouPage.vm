@@ -51,24 +51,9 @@
             });
         });
 	});
-	function yijian(value) {
-		$.ajax({
-				url:'../author/toOpinionQueryPage',
-				data:{articleId:value},
-				type:'POST',
-				success:function(res){
-					if (res=='null') {
-						$.messager.alert('审稿意见','无');    
-					}
-					else {
-						$.messager.alert('审稿意见',eval('(' + res + ')').opinion); 
-					}
-				}	
-		});
-	}
 </script>
 <body>
-    <input type="hidden" value="$!{detail.articleId}" id="articleId">
+    <input type="hidden" value="$!{detail.oriArticleId}" id="articleId">
 	<div>
 		<table class="easyui-datagrid"   data-options="singleSelect:true,height:600" >
 		<thead>
@@ -116,7 +101,13 @@
             </tr>
             <tr>
                 <td>基金项目：</td>
-                <td>$!{detail.isfund}</td>
+                <td>
+                    #if($!{detail.isfund}=='Y')
+                        是 ($!{detail.fundTitle})
+                    #elseif($!{detail.isfund}=='N')
+                        否
+                    #end
+                </td>
             </tr>
             <tr>
                 <td>页数：</td>
@@ -138,7 +129,8 @@
                 <td>稿件下载：</td>
                 <td>
                     #foreach($dtos in ${listAttr})
-                        <a href="../downloadAttachment?fileName=$!{dtos.attachmentName}&filePath=$!{dtos.attachmentPath}" class="easyui-linkbutton" data-options="width:120">$!{dtos.extend1}</a>
+                        <a href="../downloadAttachment?fileName=$!{dtos.attachmentName}&filePath=$!{dtos.attachmentPath}"
+                           class="easyui-linkbutton" data-options="width:120">$!{dtos.extend1}</a>
                         &nbsp;&nbsp;&nbsp;
                     #end
                 </td>
@@ -147,10 +139,6 @@
                 <td>参考信息：</td>
                 <td><textarea readonly="readonly" style="height:100px;width:600px;">$!{detail.referenceDoc}</textarea></td>
             </tr>
-			<!-- tr>
-				<td>专家审稿：</td>
-				<td>审稿专家:$!{detail.expertName} 送审时间:$!{detail.dealStartTime} <a onclick="yijian('$!{detail.articleId}')" href="#" class="easyui-linkbutton" >查看审稿意见</a></td>
-			</tr-->
 
             <tr>
                 <td>重投稿件：</td>

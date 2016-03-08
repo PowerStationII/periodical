@@ -116,6 +116,10 @@ bug：
 8、四个统计下周完成
 
 
+INSERT INTO `zeng4kan_info` (periodical_id,periodical_issue_no,cycle_nums,zengSon_nums,order_no,YEAR)
+    SELECT periodical_id,periodical_issue_no,cycle_nums,0,'ZK20150001',periodical_year FROM `periodical`
+
+
 
 
 

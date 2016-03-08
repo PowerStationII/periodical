@@ -28,8 +28,14 @@
             onLoadSuccess:function(){
                 var rows = $('#table').datagrid('getRows');
                 for(var i=0;i<rows.length;i++) {
-                    rows[i].option='<a class="easyui-linkbutton"   style="width:50px;" href="../editor/toPublishPage?articleId='+rows[i].articleId+'">待刊</a>';
-                    rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].articleId+'">'+rows[i].articleId+'</a>';
+
+                    rows[i].option='<a class="easyui-linkbutton"   style="width:50px;" href="../editor/toPublishPage?articleId='+rows[i].oriArticleId+'">待刊</a>';
+                    if(null!=rows[i].articleId){
+                        rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].oriArticleId+'">'+rows[i].articleId+'</a>';
+                        rows[i].title= rows[i].title +"(重投稿"+rows[i].fanXiuCount+")"
+                    }else{
+                        rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].oriArticleId+'">'+rows[i].oriArticleId+'</a>';
+                    }
                     $('#table').datagrid('refreshRow',i);
                 }
             }

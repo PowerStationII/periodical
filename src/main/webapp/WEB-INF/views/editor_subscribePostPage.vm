@@ -38,11 +38,15 @@
         $('#extend4').combobox({
             data:getReadTye()
         });
+        $('#cycleNums').combobox({
+            data:getDiJiQi()
+        });
         function getUrl() {
             var url = {
                 'orderNo':$('input[name="orderNo"]').val(),
                 'readerName':$('input[name="readerName"]').val(),
                 'pYear':$('#pYear').combobox('getValue'),
+                'cycleNums':$('#cycleNums').combobox('getValue'),
                 'extend4':$('#extend4').combobox('getValue')
             };
             return url;
@@ -58,10 +62,14 @@
                     <td><input class="easyui-textbox" type="text" name="orderNo" value=""></td>
                     <td>单位/个人：</td>
                     <td><input class="easyui-textbox" type="text" name="readerName" value=""></td>
-                    <td>期刊年份：</td>
-                    <td><input class="easyui-combobox" type="text" name="pYear" editable="false" id = "pYear" value=""></td>
                     <td>读者类型：</td>
                     <td><input class="easyui-combobox" type="text" name="extend4" editable="false" id = "extend4" value=""></td>
+                </tr>
+                <tr>
+                    <td>期刊年份：</td>
+                    <td><input class="easyui-combobox" type="text" name="pYear" editable="false" id = "pYear" value=""></td>
+                    <td>第几期：</td>
+                    <td><input class="easyui-combobox" type="text" name="cycleNums" editable="false" id = "cycleNums" value=""></td>
                     <td style="text-align:left;"><a id="submit"  class="easyui-linkbutton"  style="width:50px;" href="#">查询</a></td>
                 </tr>
             </table>

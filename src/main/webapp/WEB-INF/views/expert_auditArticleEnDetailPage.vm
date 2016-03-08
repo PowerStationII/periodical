@@ -17,12 +17,6 @@
         $('#back').click(function(){
             window.location.href='../expert/auditPeriodicalDetailPage?periodicalId=${periodicalId}&periodicalIssueNo=${periodicalIssueNo}';
         });
-##        $('#yes').click(function(){
-##            window.location.href='../expert/toEnAuditAgreePage?articleId=${dto.articleId}&periodicalId=${periodicalId}&periodicalIssueNo=${periodicalIssueNo}';
-##        });
-//		$('#ok').click(function(){
-//			$('#formFile').submit();
-//		});
         $('#ok').click(function() {
             var dealOpinion =  $("#dealOpinion").val() ;
             var articleId =  $("#articleId").val() ;
@@ -63,7 +57,7 @@
 </script>
 <body>
 <div id="articleInfos"  style="margin-top:50px;">
-    <input type="hidden" id="articleId" value="${dto.articleId}">
+    <input type="hidden" id="articleId" value="${dto.oriArticleId}">
     <input type="hidden" id="periodicalId" value="${periodicalId}">
     <input type="hidden" id="periodicalIssueNo" value="${periodicalIssueNo}">
     <table  id="grid" class="easyui-datagrid"   data-options="fitColumns:true,singleSelect:true">
@@ -74,6 +68,10 @@
         </tr>
         </thead>
         <tbody>
+        <tr>
+            <td>稿件编号：</td>
+            <td>$!{dto.articleId}</td>
+        </tr>
         <tr>
             <td>中文标题：</td>
             <td>$!{dto.articleCnTitle}</td>

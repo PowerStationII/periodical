@@ -170,7 +170,7 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
     @Transactional(propagation= Propagation.REQUIRED)
     public void toUploadAddressPageOne(AddressInfo addressInfo, String orderNo , String periodicalId){
             addressInfo.setExtend1(orderNo);
-            addressInfo.setExtend2("");//excel名称
+//            addressInfo.setExtend2("");//excel名称
             addressInfo.setExtend3("");//excel全路径
             addressInfo.setAddressId(UUID.randomUUID().toString().replaceAll("-", ""));
             addressInfo.setCreateTime(new Date());

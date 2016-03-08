@@ -59,8 +59,8 @@
                         <td width = "70%">标题</td>
                     #foreach($it in ${item.list})
                         <tr class='selectAble'>
-                            <td>${it.article_id}</td>
-                            <td><a href="../author/toArticleQueryDetailPageNew?articleId=$!{it.article_id}">${it.article_cn_title}</a></td>
+                            <td>$!{it.articleId}</td>
+                            <td><a href="../author/toArticleQueryDetailPageNew?articleId=$!{it.oriArticleId}">${it.article_cn_title}</a></td>
                         </tr>
                     #end
                 </table>

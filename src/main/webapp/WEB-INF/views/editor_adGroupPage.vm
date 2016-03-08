@@ -55,7 +55,8 @@
                     </select>
                 </td>
                 <td>
-                    <a class="easyui-linkbutton" style="width: 100px;" href="javascript:paikan('${periodicalInfo.periodicalId}','$!{velocityCount}')">刊登广告</a>
+                    <a class="easyui-linkbutton" style="width: 100px;"
+                       href="javascript:paikan('${periodicalInfo.periodicalId}','$!{velocityCount}')">刊登广告</a>
                 </td>
 			</tr>
 			#end

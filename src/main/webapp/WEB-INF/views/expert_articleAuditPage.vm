@@ -28,9 +28,16 @@
                 var rows = $('#table').datagrid('getRows');
                 for(var i=0;i<rows.length;i++) {
                     if('0002' == rows[i].expertState){
-                        rows[i].remark='<a id="btn" href="../expert/toAuditeDetailPage?articleId='+rows[i].articleId+'&downloadState=N" class="easyui-linkbutton" data-options="width:50">审核</a>';
+                        rows[i].remark='<a id="btn" href="../expert/toAuditeDetailPage?articleId='+rows[i].oriArticleId+'&downloadState=N" class="easyui-linkbutton" data-options="width:50">审核</a>';
                     }
-                    rows[i].articleId='<a href="../author/toArticleQueryDetailPageZhuanJiaShenHe?articleId='+rows[i].articleId+'">'+rows[i].articleId+'</a>';
+                    if(null==rows[i].articleId){
+                        rows[i].articleId='<a href="../author/toArticleQueryDetailPageZhuanJiaShenHe?articleId='+rows[i].oriArticleId+'">'+rows[i].oriArticleId+'</a>';
+                    } else{
+                        rows[i].articleId='<a href="../author/toArticleQueryDetailPageZhuanJiaShenHe?articleId='+rows[i].oriArticleId+'">'+rows[i].articleId+'</a>';
+                        rows[i].title =  rows[i].title + "(重投搞"+rows[i].fanXiuCount+")"
+                    }
+
+
                     rows[i].expertState=ArticleStateEnums(rows[i].expertState)
                     $('#table').datagrid('refreshRow',i);
                 }

@@ -54,28 +54,10 @@
 	    $("#grid").datagrid("loadData", data);
 	});
 
-    function songshen(filePath,articleId){
-//        $.ajaxFileUpload({
-//                    url:'../editor/toSubmitState',            //需要链接到服务器地址
-//                    secureuri:false,
-//                    fileElementId:'files',                  //文件选择框的id属性
-//                    dataType: 'json',                      //服务器返回的格式，可以是json, xml
-//                    data:{filePath:filePath,articleId:articleId,eId:$("#eId").val()},
-//                    success: function (data, status){     //相当于java中try语句块的用法
-//                        if (data=="true") {
-//                            alert('稿件已送审');
-//                            window.location.href='../editor/toEnlistedArticlePage';
-//                        }
-//                    },
-//                    error: function (data, status, e){  //相当于java中catch语句块的用法
-//                        alert(data);
-//                    }
-//                });
-    }
 </script>
 <body>
 	<form enctype="multipart/form-data" action="../editor/toSubmitState"  method="POST">
-		<input type="hidden" name="articleId" id="articleId"  value="${respDto.articleId}">
+		<input type="hidden" name="articleId" id="articleId"  value="${respDto.oriArticleId}">
 		<table id="grid" class="easyui-datagrid"
 			data-options="singleSelect:true,toolbar:'#bt'">
 			<thead>
