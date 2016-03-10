@@ -15,6 +15,7 @@ import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.SongKanInfoService;
 import com.cn.periodical.service.Zeng1KanInfoService;
 import com.cn.periodical.service.Zeng4KanInfoService;
+import com.cn.periodical.utils.WriteExcel;
 import com.lowagie.text.rtf.RtfWriter2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,21 +67,6 @@ public class SubscribePostController extends EditorController {
 	@Autowired
     Zeng1KanInfoService zeng1KanInfoService;
 
-//	/**
-//	 * toSubscribePostPage 邮寄管理
-//	 */
-//	@RequestMapping(value = "/toSubscribePostPage", method = RequestMethod.GET)
-//	public ModelAndView toSubscribePostPage(HttpServletRequest request) {
-//		UserInfo userInfo = getUserInfo(request);
-//		logger.info("发行编辑-邮寄管理Page:[" + userInfo.getUserId() + "]");
-//		ModelAndView mav = new ModelAndView("editor_subscribePostPage");
-//		/**
-//		 * 订单信息
-//		 */
-//		List<BizOrder> list = bizOrderManager.queryOrderInfosForSubEditor(null);
-//		mav.addObject("list", list);
-//		return mav;
-//	}
 	/**
 	 * toSubscribePostPage 邮寄管理
 	 */
@@ -210,31 +196,6 @@ public class SubscribePostController extends EditorController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		String checkDate = request.getParameter("checkDate");
-//		OutputStream os = null;
-//		String fileName = periodicalIssueNo + ".doc";
-//		response.setContentType("application/msword");
-//		response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));
-//		InputStream inputStream = this.getWordFile(list);
-//		os = response.getOutputStream();
-//		byte[] b = new byte[10240];
-//		int length;
-//		while ((length = inputStream.read(b)) > 0) {
-//			os.write(b, 0, length);
-//		}
-//		os.flush();
-//		os.close();
-//		inputStream.close();
-		
-		
-		// BizDistribut distribut = new BizDistribut();
-		// distribut.setOrderNo(orderNo);
-		// List<BizDistribut> list =
-		// addressInfoManager.exportReaderAddressInfos(distribut);
-		// mav.addObject("list", list);
-		// mav.addObject("orderNo", orderNo);
-
-		//return mav;
 	}
 
 	/**
@@ -250,42 +211,6 @@ public class SubscribePostController extends EditorController {
 	}
 	
 	
-//	public InputStream getWordFile() throws Exception {
-//		Document doc = new Document(PageSize.A4);// 创建DOC
-//		ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();// 创建新字节输出流
-//		RtfWriter2.getInstance(doc, byteArrayOut);// 建立一个书写器与document对象关联，通过书写器可以将文档写入到输出流中
-//		doc.open();// 打开文档
-//		RtfFont titleFont = new RtfFont("宋体", 14, Font.NORMAL, Color.BLACK);// 标题字体
-//		RtfFont contextFont = new RtfFont("宋体", 12, Font.NORMAL, Color.BLACK);// 内容字体
-//		Table table = new Table(3, 11);
-//		// 设定没列宽度
-//		int[] widths = { 20, 20, 20 };
-//		table.setWidths(widths);
-//		table.setWidth(100);// 设置表格所在word宽度
-//		table.setAlignment(Element.ALIGN_CENTER);// 设置表格字体居中
-//		table.setAutoFillEmptyCells(true);// 设置表格自动填满
-//		String titleString = "机房维护值班检查表（上班）";
-//		Paragraph title = new Paragraph(titleString, titleFont);
-//		title.setAlignment(Element.ALIGN_CENTER);
-//		doc.add(title);
-//		// 设置表头
-//		Cell[] cellHeaders = new Cell[11];
-//		cellHeaders[0] = new Cell(new Phrase("检查区域", contextFont));
-//		cellHeaders[1] = new Cell(new Phrase("具体检查内容", contextFont));
-//		cellHeaders[2] = new Cell(new Phrase("状态确认", contextFont));
-//		for (int i = 0; i < 3; i++) {
-//			cellHeaders[i].setHorizontalAlignment(Element.ALIGN_CENTER);
-//			cellHeaders[i].setVerticalAlignment(Element.ALIGN_MIDDLE);
-//			table.addCell(cellHeaders[i]);
-//		}
-//
-//		doc.add(table);
-//		doc.close();
-//
-//		ByteArrayInputStream byteArray = new ByteArrayInputStream(byteArrayOut.toByteArray());
-//		byteArrayOut.close();
-//		return byteArray;
-//	}
 	public void createWord(List<BizDistribut> list) throws DocumentException, IOException{
 		   String excelPath = PropertiesInitManager.PROPERTIES.getProperty("postAddressPath") + "邮寄地址信息.doc"; //word路径设置
 		   Document document =new Document(PageSize.A4);//设置导出大小
@@ -438,74 +363,72 @@ public class SubscribePostController extends EditorController {
         document.close();
 
     }
-//    public static void createDocContext(String file,String contextString)throws DocumentException, IOException{
-//        //设置纸张大小
-//        Document document = new Document(PageSize.A4);
-//        //建立一个书写器，与document对象关联
-//        RtfWriter2.getInstance(document, new FileOutputStream(file));
-//        document.open();
-//        //设置中文字体
-////        BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
-//        //标题字体风格
-////        Font titleFont = new Font(bfChinese,12,Font.BOLD);
-////        //正文字体风格
-////        Font contextFont = new Font(bfChinese,10,Font.NORMAL);
-////        Paragraph title = new Paragraph("标题");
-//        //设置标题格式对齐方式
-////        document.add(title);
-//        Paragraph context = new Paragraph();
-//        context.setAlignment(Element.ALIGN_LEFT);
-////        context.setFont(contextFont);
-//        //段间距
-//        context.setSpacingBefore(1);
-//        //设置第一行空的列数
-//        context.setFirstLineIndent(20);
-//        document.add(context);
-//
-//
-//        for(int i = 0  ; i<100 ; i++){
-//            //设置Table表格,创建一个三列的表格
-//            Table table = new Table(3);
-//            int width[] = {50,1,50};//设置每列宽度比例
-//            table.setWidths(width);
-//            table.setWidth(100);//占页面宽度比例
-//            table.setAlignment(Element.ALIGN_CENTER);//居中
-//            table.setAlignment(Element.ALIGN_MIDDLE);//垂直居中
-//            table.setAutoFillEmptyCells(true);//自动填满
-//            table.setBorderWidth(1);//边框宽度
-//            //设置表头
-//            StringBuffer strb = new StringBuffer();
-//            strb.append("010010");
-//            strb.append("                                   印刷品");
-//            strb.append("\r\n");
-//            strb.append("黑龙江省牡丹江市");
-//            strb.append("\r\n");
-//            strb.append("市政府  ");
-//            strb.append("\r\n");
-//            strb.append("于国栋");
-//            strb.append("        13488855723");
-//            strb.append("\r\n");
-//            strb.append("\r\n");
-//            strb.append("   科               北京朝阳区麦子店街22号");
-//            strb.append("\r\n");
-//            strb.append("   5                农业部农药检定所信息处");
-//            strb.append("\r\n");
-//            strb.append("     第 1 期        邮政编码：100125");
-//
-//            Paragraph paragraph = new Paragraph(String.valueOf(strb));
-//            Cell cell1 = new Cell(paragraph);
-//            cell1.setVerticalAlignment(Element.ALIGN_LEFT);
-//            table.addCell(cell1);
-//            table.addCell(new Cell(""));
-//            table.addCell(cell1);
-//            document.add(table);
-//        }
-//
-//
-//
-//        document.close();
-//
-//    }
+
+
+    @RequestMapping(value = "/toExportReaderAddressInfoToExcel")
+    @ResponseBody
+    public void toExportReaderAddressInfoToExcel(HttpServletRequest request,HttpServletResponse response,
+                                          String orderNo,String periodicalId,String year,String flag) {
+        UserInfo userInfo = getUserInfo(request);
+        BizDistribut distribut = new BizDistribut();
+        distribut.setOrderNo(orderNo);
+        distribut.setpId(periodicalId);
+        distribut.setpIsNo(periodicalId+"-"+year.substring(2,4)+"01");
+        List<BizDistribut> list = addressInfoManager.exportReaderAddressInfos(distribut);
+
+        try {
+            if("songKan".equals(flag)){
+                list = new ArrayList<BizDistribut>();
+                List<SongKanDetail>  list_temp0 = songKanInfoService.selectByOrderNo(orderNo);
+                for(SongKanDetail songKanDetail : list_temp0){
+                    BizDistribut bizDistribut = new BizDistribut();
+                    bizDistribut.setrPostCode(songKanDetail.getYoubian()); // 邮编
+                    bizDistribut.setrAddress(songKanDetail.getDizhi()); // 地址
+                    bizDistribut.setcName(songKanDetail.getDanwei()); // 单位
+                    bizDistribut.setExtends2(songKanDetail.getXingming());// 联系人
+                    bizDistribut.setcMobile(songKanDetail.getDianhua());
+                    bizDistribut.setdNums(songKanDetail.getZengSonNum()); // 份数
+                    bizDistribut.setNums(songKanDetail.getCycleNums());// 第几期
+                    list.add(bizDistribut);
+                }
+            }else if("zeng4Kan".equals(flag)){
+                list = new ArrayList<BizDistribut>();
+                List<Zeng4KanDetail>  list_temp0 = zeng4KanInfoService.selectByOrderNo(orderNo);
+                for(Zeng4KanDetail songKanDetail : list_temp0){
+                    BizDistribut bizDistribut = new BizDistribut();
+                    bizDistribut.setrPostCode(songKanDetail.getYoubian()); // 邮编
+                    bizDistribut.setrAddress(songKanDetail.getDizhi()); // 地址
+                    bizDistribut.setcName(songKanDetail.getDanwei()); // 单位
+                    bizDistribut.setExtends2(songKanDetail.getXingming());// 联系人
+                    bizDistribut.setcMobile(songKanDetail.getDianhua());
+                    bizDistribut.setdNums(songKanDetail.getZengSonNum()); // 份数
+                    bizDistribut.setNums(songKanDetail.getCycleNums());// 第几期
+                    list.add(bizDistribut);
+                }
+            }else if("zeng1Kan".equals(flag)){
+                list = new ArrayList<BizDistribut>();
+                List<Zeng1KanDetail>  list_temp0 = zeng1KanInfoService.selectByOrderNo(orderNo);
+                for(Zeng1KanDetail songKanDetail : list_temp0){
+                    BizDistribut bizDistribut = new BizDistribut();
+                    bizDistribut.setrPostCode(songKanDetail.getYoubian()); // 邮编
+                    bizDistribut.setrAddress(songKanDetail.getDizhi()); // 地址
+                    bizDistribut.setcName(songKanDetail.getDanwei()); // 单位
+                    bizDistribut.setExtends2(songKanDetail.getXingming());// 联系人
+                    bizDistribut.setcMobile(songKanDetail.getDianhua());
+                    bizDistribut.setdNums(songKanDetail.getZengSonNum()); // 份数
+                    bizDistribut.setNums(songKanDetail.getCycleNums());// 第几期
+                    list.add(bizDistribut);
+                }
+            }
+
+            new WriteExcel().WriteExcel(list);
+            UtilLoad.fileDownload(request, response, "订单地址信息.xls", PropertiesInitManager.PROPERTIES.getProperty("postAddressPathExcel"));
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args){
 //        String file = "d:\\test.doc";
 //        try {

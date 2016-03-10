@@ -1,18 +1,16 @@
 package com.cn.periodical.service.impl;
 
-import java.beans.Transient;
-import java.util.*;
-
 import com.cn.periodical.manager.*;
 import com.cn.periodical.pojo.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.cn.periodical.request.EditorArticleDealReqDto;
 import com.cn.periodical.response.EditorArticleDealRespDto;
 import com.cn.periodical.service.EditorArticleDealService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
 
 
 @Service
@@ -30,9 +28,7 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 	@Autowired
 	ArticleFlowsManager articleFlowsManager;
 	
-//	@Autowired
-//	ArticleFlowsExtendManager articleFlowsExtendManager;
-	
+
 	@Autowired
 	ArticleInfoExtendManager articleInfoExtendManager;
 
@@ -110,44 +106,6 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
 	 * 稿件处理流程流水
 	 * */
 	public int registeOperationFlows(EditorArticleDealReqDto obj) {
-//		/**
-//		 * 1,article_info_extend role_id和userId是唯一索引,使用articleId关联articleInfo
-//		 *  此表来控制articleInfo数据的访问权限.
-//		 *  主编默认可以访问所有articleInfo数据.
-//		 * 2,article_flows_extend 存储articleId一条最新的article_flows的id 
-//		 * 	articleId是唯一,article_flows每变动一次更新此表的lately_flows_id一次.
-//		 *  以最新的lately_flows_id做为article_flows表的pid
-//		 * 3,article_flows表的id与pid是父子关系
-//		 * */
-//		
-//		
-//		
-//		ArticleFlowsExtendQuery articleFlowsExtendQuery =  new ArticleFlowsExtendQuery();
-//		articleFlowsExtendQuery.setArticleId(obj.getArticleId());
-//		List<ArticleFlowsExtend> articleFlowsExtends = articleFlowsExtendManager.queryList(articleFlowsExtendQuery);
-//		
-//		
-//		
-//		
-//		ArticleFlowsExtend articleFlowsExtend= articleFlowsExtends.get(0);
-//		articleFlowsExtend.setArticleId(obj.getArticleId());
-//		articleFlowsExtend.setId(articleFlowsExtends.get(0).getId());
-//		articleFlowsExtend.setLatelyFlowsId(articleFlowsExtend.getLatelyFlowsId()+1);
-//		articleFlowsExtendManager.saveArticleFlowsExtend(articleFlowsExtend);
-//		
-//		ArticleFlows articleFlows = new ArticleFlows();
-//		articleFlows.setId(articleFlowsExtend.getLatelyFlowsId()+1);
-//		articleFlows.setPid(articleFlowsExtend.getLatelyFlowsId());
-//		articleFlows.setArticleId(obj.getArticleId());
-//		articleFlows.setDealState(obj.getDealState());
-//		articleFlows.setDealOpinion(obj.getDealOpinion());
-//		articleFlows.setUserId(obj.getUserId());
-//		articleFlows.setRoleId(obj.getRoleId());
-//		articleFlows.setRefId("");
-//		articleFlows.setCreateTime(new Date());
-//		
-//		articleFlowsManager.saveArticleFlows(articleFlows);
-//		
 		return 0;
 	}
 

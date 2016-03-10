@@ -23,13 +23,12 @@
         	 data.push({  
                  "id":rows[i].id,  
                  "aId":rows[i].aId,
-                 "rAddress":rows[i].rAddress,  
+                 "rPostCode":rows[i].rPostCode,
+                 "rAddress":rows[i].rAddress,
                  "cName":rows[i].cName,
+                 "extends2":rows[i].extends2,
                  "cMobile":rows[i].cMobile,
-                 "dNums":rows[i].dNums,
-                 "sIdNums1":rows[i].sIdNums1,
-                 "sIdNums2":rows[i].sIdNums2,
-                 "sIdNums3":rows[i].sIdNums3
+                 "dNums":rows[i].dNums
              }) ; 
 		}
         $("#editTable").datagrid("loadData", data.slice(0, 15));
@@ -56,28 +55,26 @@
 		    <thead>   
 		        <tr>   
 		            <th data-options="field:'id',width:50">序号</th>   
-		            <th data-options="field:'aId',width:200">地址id</th>   
-		            <th data-options="field:'rAddress',width:200">详细地址</th>   
-		            <th data-options="field:'cName',width:100">联系人</th>   
-		            <th data-options="field:'cMobile',width:100">联系电话</th>   
+		            <th data-options="field:'aId',width:200" hidden="true">地址id</th>
+		            <th data-options="field:'rPostCode',width:100">邮编</th>
+		            <th data-options="field:'rAddress',width:300">详细地址</th>
+		            <th data-options="field:'cName',width:200">单位名称</th>
+		            <th data-options="field:'extends2',width:100">联系人</th>
+		            <th data-options="field:'cMobile',width:100">联系电话</th>
 		            <th data-options="field:'dNums',width:100" >邮寄本数</th> 
-##		            <th data-options="field:'sIdNums1',width:100" >增刊1</th>
-##		            <th data-options="field:'sIdNums2',width:100" >增刊2</th>
-##		            <th data-options="field:'sIdNums3',width:100" >增刊3</th>
-		        </tr>   
+		        </tr>
 		    </thead>   
 		    <tbody>   
 		    	#foreach($dtos in ${list})
 				<tr>
 					<td>$!{velocityCount}</td>
-					<td>$!{dtos.aId}</td>
+					<td hidden="true">$!{dtos.aId}</td>
+					<td>$!{dtos.rPostCode}</td>
 					<td>$!{dtos.rAddress}</td>
 					<td>$!{dtos.cName}</td>
+					<td>$!{dtos.extends2}</td>
 					<td>$!{dtos.cMobile}</td>
 					<td>$!{dtos.dNums}</td>
-##					<td>$!{dtos.sIdNums1}</td>
-##					<td>$!{dtos.sIdNums2}</td>
-##					<td>$!{dtos.sIdNums3}</td>
 				</tr>
 				#end
 		    </tbody>   

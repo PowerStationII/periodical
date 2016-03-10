@@ -20,8 +20,10 @@
         	 data.push({  
 		 		 "id":rows[i].id,  
                  "aId":rows[i].aId,  
+                 "rPostCode":rows[i].rPostCode,
                  "rAddress":rows[i].rAddress,
-                 "rContacter":rows[i].rContacter,  
+                 "rContacter":rows[i].rContacter,
+                 "extends2":rows[i].extends2,
                  "cMobile":rows[i].cMobile,
                  "dNums":rows[i].dNums,
                  "sIdNums1":rows[i].sIdNums1,
@@ -83,10 +85,12 @@
 		    <thead>   
 		        <tr>   
 		            <th data-options="field:'id',width:50">序号</th>   
-		            <th data-options="field:'aId',width:200">地址id</th>   
-		            <th data-options="field:'rAddress',width:200">详细地址</th>   
-		            <th data-options="field:'rContacter',width:100">联系人</th>   
-		            <th data-options="field:'cMobile',width:100">联系电话</th>   
+		            <th data-options="field:'aId',width:200" hidden="true">地址id</th>
+		            <th data-options="field:'rPostCode',width:100">邮编</th>
+		            <th data-options="field:'rAddress',width:300">详细地址</th>
+		            <th data-options="field:'rContacter',width:300">单位名称</th>
+		            <th data-options="field:'extends2',width:100">联系人</th>
+		            <th data-options="field:'cMobile',width:100">联系电话</th>
 		            <th data-options="field:'dNums',width:100 ,editor:'numberbox'" >邮寄本数</th>
 		            <th data-options="field:'sIdNums1',width:100,editor:'numberbox'" hidden="true">增刊1</th>
 		            <th data-options="field:'sIdNums2',width:100,editor:'numberbox'" hidden="true">增刊2</th>
@@ -97,9 +101,11 @@
 		    	#foreach($dtos in ${list})
 				<tr>
 					<td>$!{velocityCount}</td>
-					<td>$!{dtos.aId}</td>
+					<td hidden="true">$!{dtos.aId}</td>
+					<td>$!{dtos.rPostCode}</td>
 					<td>$!{dtos.rAddress}</td>
 					<td>$!{dtos.rContacter}</td>
+					<td>$!{dtos.extends2}</td>
 					<td>$!{dtos.cMobile}</td>
 					<td>$!{dtos.dNums}</td>
 					<td hidden="true">$!{dtos.sIdNums1}</td>
@@ -113,6 +119,8 @@
 		<a id="submit" class="easyui-linkbutton"  style="50px;">保存</a> 
 		<a id="add" class="easyui-linkbutton"  style="50px;" href="../reader/inToUploadAddressPageOne?orderNo=$!{orderNo}&periodicalId=$!{pId}">新增邮寄信息</a>
 		<span style="font-size:10px;color:red;">修改后请保存 </span>
+        <a class="easyui-linkbutton"
+           href="../editor/toExportReaderAddressInfoToExcel?orderNo=${orderNo}&periodicalId=$!{periodicalId}&year=${year}">导出订单地址</a>
 	</div>
 </body>
 </html>

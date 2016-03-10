@@ -152,7 +152,9 @@ public class SubscribeOrderManageController extends EditorController{
 	 * 发行编辑编辑订单赠刊信息
 	 */
 	@RequestMapping(value="/toSubSupplementManagePage")
-	public ModelAndView toSubSupplementManagePage(HttpServletRequest request,String orderNo) {
+	public ModelAndView toSubSupplementManagePage(HttpServletRequest request,String orderNo
+            ,String periodicalId
+            ,String year ) {
 		logger.info("编辑订单赠刊信息 Page:orderNo:[ "+orderNo+" ]");
 		ModelAndView mav = new ModelAndView("editor_toSubOrderDetailPage");
 		/**
@@ -164,6 +166,8 @@ public class SubscribeOrderManageController extends EditorController{
 		List<BizDistribut> list = addressInfoManager.queryAddressListForSubEditor(distribut);
 		mav.addObject("list", list);
 		mav.addObject("orderNo", orderNo);
+		mav.addObject("periodicalId", periodicalId);
+		mav.addObject("year", year);
         if(null!=list && !list.isEmpty()){
             mav.addObject("pId",list.get(0).getpId()) ;
         }

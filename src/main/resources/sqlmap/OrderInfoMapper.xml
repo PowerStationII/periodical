@@ -65,7 +65,8 @@
 		oi.periodical_year as pYear,oi.subscribe_nums as subNums,oi.user_id as
 		userId,pi.periodical_cn_name as pCnName, DATE_FORMAT(oi.audit_time, '%Y-%m-%d') as auditTime,
 		pi.cycle as cycle,pi.in_fix_price as iFprice,oi.amount as
-		oAmount,ri.reader_name as readerName,pi.in_fix_price as iFprice
+		oAmount,ri.reader_name as readerName,pi.in_fix_price as iFprice ,
+        oi.periodical_id as periodicalId
 		from order_info oi,periodical_info pi,user_info ui,reader_info ri where
 		oi.periodical_id=pi.periodical_id
 		and oi.user_id=ui.user_id and ui.ref_id=ri.reader_id

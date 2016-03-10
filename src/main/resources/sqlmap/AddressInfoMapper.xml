@@ -75,7 +75,8 @@
 		pdis.distribute_nums as dNums,pdis.distribute_status as dStatus,pdis.periodical_id as pId,pdis.supplement_id1 as sId1,pdis.supplement_id1_nums as sIdNums1,
 		pdis.supplement_id2 as sId2,pdis.supplement_id2_nums as sIdNums2,
 		pdis.supplement_id3 as sId3,pdis.supplement_id3_nums as sIdNums3,pi.periodical_cn_name as pCnName,
-		oi.amount as amount,oi.order_no as orderNo,oi.order_status as oStatus,oi.subscribe_nums as nums,oi.user_id as userId
+		oi.amount as amount,oi.order_no as orderNo,oi.order_status as oStatus,oi.subscribe_nums as nums,oi.user_id as userId ,
+		addi.extend_2 as extends2
 		from periodical_distribut pdis,periodical_info pi,order_info oi,address_info addi
 		where oi.order_no=pdis.ref_id and  pdis.periodical_id=pi.periodical_id and addi.address_id=pdis.address_id
 		and oi.order_no=#{orderNo,jdbcType=VARCHAR}  order by addi.update_time
@@ -93,8 +94,10 @@
 		pdis.supplement_id3 as sId3,pdis.supplement_id3_nums as sIdNums3,
 		p.cycle_nums as nums   ,  addi.extend_2 as extends2 ,
 		pi.periodical_cn_name as pCnName,oi.order_no as orderNo,p.periodical_issue_no as pIsNo
+		,addi.extend_2 as extends2
 		from address_info addi,periodical_distribut pdis,periodical_info pi,order_info oi,periodical p
-		where pdis.address_id=addi.address_id and pdis.periodical_id=pi.periodical_id and pdis.ref_id=oi.order_no and pi.periodical_id=p.periodical_id 
+		where pdis.address_id=addi.address_id and pdis.periodical_id=pi.periodical_id and pdis.ref_id=oi.order_no
+		and pi.periodical_id=p.periodical_id
 		and p.periodical_issue_no=#{pIsNo,jdbcType=VARCHAR}
 		and oi.order_no=#{orderNo,jdbcType=VARCHAR}
 		and p.periodical_id=#{pId,jdbcType=VARCHAR}

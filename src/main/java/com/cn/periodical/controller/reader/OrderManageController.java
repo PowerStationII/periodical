@@ -11,6 +11,7 @@ import com.cn.periodical.pojo.*;
 import com.cn.periodical.service.SongKanInfoService;
 import com.cn.periodical.service.Zeng1KanInfoService;
 import com.cn.periodical.service.Zeng4KanInfoService;
+import com.cn.periodical.utils.WriteExcel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -402,20 +403,10 @@ public class OrderManageController extends ReaderController{
 		List<OrderInfo> orderInfos = orderInfoManager.queryList(orderQuery);
 		OrderInfo orderInfo = orderInfos.get(0);
 		mav.addObject("orderInfo", orderInfo);
-//		
-//		
-//		
-//		AddressInfoQuery query = new AddressInfoQuery();
-//		query.setRefId(userInfo.getRefId());
-//		query.setRefRoleId(userInfo.getRoleId());
-//		List<AddressInfo> list = addressInfoManager.queryList(query);
-//		mav.addObject("list", list);
-//		
 		BizOrder bizOrder = new BizOrder();
 		bizOrder.setOrderNo(orderNo);
 		List<BizOrder> list = bizOrderManager.queryDistributeOrderInfos(bizOrder);
 		mav.addObject("list", list);
-		
 		return mav;
 	}
 	
