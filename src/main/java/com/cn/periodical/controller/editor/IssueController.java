@@ -140,8 +140,15 @@ public class IssueController extends EditorController{
                 // 一个栏目下所有的文章
                 List<Map<String, Object>> articleList = sectionInfo.getList();
                 for(Map<String, Object> article : articleList){
-                    articleTitleInfo.append("\r\n      文章标题："+article.get("article_cn_title")+"；      文章编号："+article.get("articleId"));
-                    articleId_list.add(String.valueOf(article.get("oriArticleId")));
+                    if(null==article.get("articleId")){
+                        articleTitleInfo.append("\r\n      文章标题："+article.get("article_cn_title")+"；      文章编号："
+                                +article.get("oriArticleId"));
+                        articleId_list.add(String.valueOf(article.get("oriArticleId")));
+                    }else{
+                        articleTitleInfo.append("\r\n      文章标题："+article.get("article_cn_title")+"；      文章编号："
+                                +article.get("articleId"));
+                        articleId_list.add(String.valueOf(article.get("oriArticleId")));
+                    }
                 }
             }
 
@@ -257,13 +264,17 @@ public class IssueController extends EditorController{
                 }
             }
 
-            // 查出所有附件地址
-            List<AdInfo> articleAttr_list = adInfoManager.selectByadids(articleId_list);
-            String m = this.zipFileGG(request, response, "广告.zip", articleAttr_list, String.valueOf(articleTitleInfo));
-            if(null==m){
-                map.put("message","导出成功");
-            }else{
-                map.put("message","导出失败");
+            if(articleId_list.size()==0) {
+                map.put("message","没有需呀导出的内容");
+            } else{
+                // 查出所有附件地址
+                List<AdInfo> articleAttr_list = adInfoManager.selectByadids(articleId_list);
+                String m = this.zipFileGG(request, response, "广告.zip", articleAttr_list, String.valueOf(articleTitleInfo));
+                if(null==m){
+                    map.put("message","导出成功");
+                }else{
+                    map.put("message","导出失败");
+                }
             }
         }catch (Exception e){
             map.put("message",e.getMessage());

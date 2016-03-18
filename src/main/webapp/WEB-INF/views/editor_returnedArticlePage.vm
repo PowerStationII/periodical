@@ -27,8 +27,12 @@ $(function(){
         onLoadSuccess:function(){
             var rows = $('#table').datagrid('getRows');
             for(var i=0;i<rows.length;i++) {
-                rows[i].option='<a style="width:50px;" class="easyui-linkbutton" href="../editor/toRefundPage?articleId='+rows[i].articleId+'">退稿</a>';
-                rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].articleId+'">'+rows[i].articleId+'</a>';
+                rows[i].option='<a style="width:50px;" class="easyui-linkbutton" href="../editor/toRefundPage?articleId='+rows[i].oriArticleId+'">退稿</a>';
+                if(null==rows[i].articleId){
+                    rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].oriArticleId+'">'+rows[i].oriArticleId+'</a>';
+                } else{
+                    rows[i].articleId='<a href="../author/toArticleQueryDetailPageNew?articleId='+rows[i].articleId+'">'+rows[i].oriArticleId+'</a>';
+                }
                 $('#table').datagrid('refreshRow',i);
             }
         }

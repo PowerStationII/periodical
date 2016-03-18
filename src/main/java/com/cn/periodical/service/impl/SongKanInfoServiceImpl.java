@@ -44,7 +44,7 @@ public class SongKanInfoServiceImpl implements SongKanInfoService {
         for(Map<String,Object> m : articleIds){
             String articleid = (String)m.get("articleId");
             int zengSonNums = Integer.parseInt(String.valueOf(m.get("nums")));
-            List<Object> list_temp0 = authorInfoManager.selectAuthorByArticl(articleid);
+            List<Object> list_temp0 = authorInfoManager.selectAuthorByArticl1(articleid);
             SongKanDetail songKanDetail = new SongKanDetail();
             songKanDetail.setPeriodicalId(songKanInfo.getPeriodicalId());
             songKanDetail.setPeriodicalIssueNo(songKanInfo.getPeriodicalIssueNo());

@@ -87,7 +87,7 @@
 				<td>${periodical.periodicalYear}</td>
 				<td>${periodical.cycleNums}</td>
 				<td>${periodical.extend2}</td>
-				#if(${periodical.extend2}==''||   ${periodical.extend2}=='N' || ${periodical.extend2}=='ADPD')
+				#if(${periodical.extend2}=='' || ${periodical.extend2}=='null' || ${periodical.extend2}=='NULL' ||   ${periodical.extend2}=='N' || ${periodical.extend2}=='ADPD')
 				    <td><a class="easyui-linkbutton"
                            href="../editor/toAdGroupInfosPage?periodicalIssueNo=${periodical.periodicalIssueNo}&periodicalId=${periodical.periodicalId}&articleId=&title=&adType=">刊登广告</a></td>
 				#elseif(${periodical.extend2}=='ADPO')

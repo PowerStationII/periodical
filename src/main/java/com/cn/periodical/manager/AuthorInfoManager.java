@@ -28,4 +28,5 @@ public interface AuthorInfoManager {
 	AuthorInfoPage queryPageList(AuthorInfoQuery query);
 
     public List<Object> selectAuthorByArticl(String atricleId);
+    public List<Object> selectAuthorByArticl1(String atricleId);
 }

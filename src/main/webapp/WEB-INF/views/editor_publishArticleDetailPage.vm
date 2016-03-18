@@ -155,30 +155,30 @@
 					value="$!{articleInfo.referenceDoc}" id="referenceDoc"
 					name="referenceDoc"></td>
 			</tr>
-			<tr>
-				<td><label>
-						<span class="right">图（片）数：</span>
-				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.totalPics}" id="totalPics" name="totalPics">
-				</td>
-			</tr>
-			<tr>
-				<td><label>
-						<span class="right">表格数：</span>
-				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.totalTabs}" id="totalTabs" name="totalTabs">
-				</td>
-			</tr>
-			<tr>
-				<td><label>
-						<span class="right">页数：</span>
-				</label></td>
-				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
-					value="$!{articleInfo.totalPages}" id="totalPages"
-					name="totalPages"></td>
-			</tr>
+##			<tr>
+##				<td><label>
+##						<span class="right">图（片）数：</span>
+##				</label></td>
+##				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+##					value="$!{articleInfo.totalPics}" id="totalPics" name="totalPics">
+##				</td>
+##			</tr>
+##			<tr>
+##				<td><label>
+##						<span class="right">表格数：</span>
+##				</label></td>
+##				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+##					value="$!{articleInfo.totalTabs}" id="totalTabs" name="totalTabs">
+##				</td>
+##			</tr>
+##			<tr>
+##				<td><label>
+##						<span class="right">页数：</span>
+##				</label></td>
+##				<td><input maxlength="30" class="wid333 ip_input_con lightgrey"
+##					value="$!{articleInfo.totalPages}" id="totalPages"
+##					name="totalPages"></td>
+##			</tr>
 			<tr>
 				<td><label>
 						<span class="right">基金项目中文名称：</span>

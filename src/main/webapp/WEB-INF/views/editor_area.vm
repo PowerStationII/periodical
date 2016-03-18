@@ -392,7 +392,7 @@ a {
 
 <body style="margin:0px;">
 	<div class="top">
-		<a>欢迎访问《 农药科学与管理 》网站！</a> <a href="logout"
+		<a>欢迎访问《 农药科学与管理 》网站 </a> <a href="logout"
 			style='text-decoration: none;'>退出系统</a>
 	</div>
 	<div class="buttom">

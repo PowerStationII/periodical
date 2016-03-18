@@ -10,6 +10,7 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
 </head>
 <script type="text/javascript">
 	$(function(){
@@ -56,31 +57,64 @@
 		for(var i=0;i<rows.length;i++) {
 			$('#editTable').datagrid('beginEdit',i);
 		}
-		$('#submit').click(function(){
-			var array=[];
-			var data = $('#editTable').datagrid('getData');
-			for(var i=0;i<data.rows.length;i++) {
-				$('#editTable').datagrid('endEdit',i);
-				var json={};
-				json.aId = data.rows[i].aId;
-				json.dNums = data.rows[i].dNums;
-				json.sIdNums1 = data.rows[i].sIdNums1;
-				json.sIdNums2 = data.rows[i].sIdNums2;
-				json.sIdNums3 = data.rows[i].sIdNums3;
-				array.push(JSON.stringify(json));
-			}
-			window.location.href='../editor/toSubSupplement?array=['+array+']&orderNo=${orderNo}';
-		});
+##		$('#submit').click(function(){
+##			var array=[];
+##			var data = $('#editTable').datagrid('getData');
+##			for(var i=0;i<data.rows.length;i++) {
+##				$('#editTable').datagrid('endEdit',i);
+##				var json={};
+##				json.aId = data.rows[i].aId;
+##				json.dNums = data.rows[i].dNums;
+##				json.sIdNums1 = data.rows[i].sIdNums1;
+##				json.sIdNums2 = data.rows[i].sIdNums2;
+##				json.sIdNums3 = data.rows[i].sIdNums3;
+##				array.push(JSON.stringify(json));
+##			}
+##			window.location.href='../editor/toSubSupplement?array=['+array+']&orderNo=${orderNo}';
+##		});
 		$('#back').click(function(){
 			history.go(-1);
 		});
         $('#add').click(function(){
 
         });
+
+        $('#submit').click(function(){
+            var orderNo = $("#orderNo").val();
+            var periodicalId = $("#periodicalId").val();
+            var files = $("#files").val();
+            if(files== ""){
+                alert("请上传附件");
+                return ;
+            }
+            if(!checkFile(files)){
+                return ;
+            }
+
+            $.ajaxFileUpload({
+                url:'../reader/toUploadAddressPage',            //需要链接到服务器地址
+                secureuri:false,
+                fileElementId:'files',                  //文件选择框的id属性
+                dataType: 'json',                      //服务器返回的格式，可以是json, xml
+                data:{orderNo:orderNo,periodicalId:periodicalId},
+                success: function (data, status){     //相当于java中try语句块的用法
+                    if (data.message == "success") {
+                        alert('上传成功');
+                    }else{
+                        alert(data.message);
+                    }
+                },
+                error: function (data, status, e){  //相当于java中catch语句块的用法
+                    alert(data);
+                }
+            });
+        });
 	});
 </script>
 <body>
 	<div>
+        <input type="hidden" value="$!{periodicalId}" id="periodicalId">
+        <input type="hidden" value="$!{orderNo}" id="orderNo">
 		 <table id="editTable" class="easyui-datagrid" data-options="singleSelect:true,pagination:true">   
 		    <thead>   
 		        <tr>   
@@ -115,10 +149,12 @@
 				#end
 		    </tbody>   
 		</table>
-		<a id="back" class="easyui-linkbutton"  style="50px;">返回</a> 
+		<a id="back" class="easyui-linkbutton"  style="50px;">返回</a>
+        <input type="file" name="files" id="files"  value="">
 		<a id="submit" class="easyui-linkbutton"  style="50px;">保存</a> 
-		<a id="add" class="easyui-linkbutton"  style="50px;" href="../reader/inToUploadAddressPageOne?orderNo=$!{orderNo}&periodicalId=$!{pId}">新增邮寄信息</a>
-		<span style="font-size:10px;color:red;">修改后请保存 </span>
+##		<a id="add" class="easyui-linkbutton"
+##           style="50px;" href="../reader/inToUploadAddressPageOne?orderNo=$!{orderNo}&periodicalId=$!{pId}">新增邮寄信息</a>
+##		<span style="font-size:10px;color:red;">修改后请保存 </span>
         <a class="easyui-linkbutton"
            href="../editor/toExportReaderAddressInfoToExcel?orderNo=${orderNo}&periodicalId=$!{periodicalId}&year=${year}">导出订单地址</a>
 	</div>

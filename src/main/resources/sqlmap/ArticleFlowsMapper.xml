@@ -407,7 +407,10 @@
 	<select id="selectOpinion" parameterType="Opinion" resultMap="OpinionMap">
 		select article_id,extend_2,deal_opinion as opinion from
 		article_flows where article_id=#{articleId,jdbcType=VARCHAR} and extend_2='Y'
-		and role_id = '1006' AND deal_state = #{status,jdbcType=VARCHAR};
+
+		and role_id = '1006'
+
+		 AND deal_state = #{status,jdbcType=VARCHAR};
 	</select>
 	<select id="selectOpinion1" parameterType="String" resultMap="OpinionMap">
 		select article_id,extend_2,deal_opinion as opinion from

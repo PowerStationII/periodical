@@ -109,7 +109,8 @@
                 <td>稿件下载：</td>
                 <td>
                     #foreach($dtos in ${listAttr})
-                        <a href="../downloadAttachment?fileName=$!{dtos.attachmentName}&filePath=$!{dtos.attachmentPath}" class="easyui-linkbutton" data-options="width:120">$!{dtos.extend1}</a>
+                        <a href="../downloadAttachment?fileName=$!{dtos.attachmentName}&filePath=$!{dtos.attachmentPath}"
+                           class="easyui-linkbutton" data-options="width:120">$!{dtos.extend1}</a>
                         &nbsp;&nbsp;&nbsp;
                     #end
                 </td>

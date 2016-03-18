@@ -69,7 +69,14 @@
 				#foreach($articleQueryRespDto in ${list})
 				<tr class='selectAble'>
 					<td style="display:none">${articleQueryRespDto.articleInfo.oriArticleId}</td>
-					<td>${articleQueryRespDto.articleInfo.articleId}</td>
+					<td>
+                        #if(!${articleQueryRespDto.articleInfo.articleId})
+                            ${articleQueryRespDto.articleInfo.oriArticleId}
+                        #else
+                            ${articleQueryRespDto.articleInfo.articleId}
+                        #end
+
+                    </td>
 					<td>${articleQueryRespDto.articleInfo.articleCnTitle}</td>
 				</tr>
 				#end
@@ -93,7 +100,13 @@
 				#foreach($it in ${item.list})
 				<tr class='selectAble'>
 					<td style="display:none">${it.oriArticleId}</td>
-					<td>${it.articleId}</td>
+					<td>
+                        #if(!${it.articleId})
+                            ${it.oriArticleId}
+                        #else
+                            ${it.articleId}
+                        #end
+                    </td>
 					<td>${it.article_cn_title}</td>
 				</tr>
 				#end

@@ -68,6 +68,9 @@ public class OrderInfoDaoImpl extends BaseDao implements OrderInfoDao {
 	public int updateByPrimaryKey(OrderInfo record) {
 		return super.getSqlSession().update("OrderInfoMapper.updateByPrimaryKey", record);
 	}
+	public int updateByOrderNo(OrderInfo record) {
+		return super.getSqlSession().update("OrderInfoMapper.updateByOrderNo", record);
+	}
 
 
 	public List<BizOrder> queryOrderList(BizOrder bizOrder) {

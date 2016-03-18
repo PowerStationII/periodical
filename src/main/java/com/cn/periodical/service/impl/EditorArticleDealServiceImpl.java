@@ -36,7 +36,11 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
     AddressInfoManager addressInfoManager;
     @Autowired
     PeriodicalDistributManager periodicalDistributManager;
-	
+    @Autowired
+    PeriodicalInfoManager periodicalInfoManager;
+    @Autowired
+    OrderInfoManager orderInfoManager;
+
 	
 	
 	public EditorArticleDealServiceImpl() {
@@ -120,10 +124,21 @@ public class EditorArticleDealServiceImpl implements EditorArticleDealService {
           */
         addressInfoManager.deleteByOrderNo(orderNo);
         periodicalDistributManager.deletePeriodicalDistributByOrderNo(orderNo);
-
+        int allCount = 0  ;
+        long allMoney = 0l  ;
         for(AddressInfo addressInfo:list){
            this.toUploadAddressPageOne(addressInfo, orderNo , periodicalId);
+            allCount = allCount + addressInfo.getSubscribeNums().intValue();
         }
+        PeriodicalInfoQuery periodicalInfoQuery = new PeriodicalInfoQuery ();
+        periodicalInfoQuery.setPeriodicalId(periodicalId);
+        PeriodicalInfo periodicalInfo = periodicalInfoManager.selectByPeriodicalId(periodicalInfoQuery) ;
+        allMoney = periodicalInfo.getInFixPrice()*periodicalInfo.getCycle()*allCount;
+        OrderInfo orderInfo = new OrderInfo ();
+        orderInfo.setAmount(allMoney);
+        orderInfo.setSubscribeNums(allCount);
+        orderInfo.setOrderNo(orderNo);
+        orderInfoManager.updateByOrderNo(orderInfo);
     }
     @Transactional(propagation= Propagation.REQUIRED)
     public void toUploadAddressPageOne(AddressInfo addressInfo, String orderNo , String periodicalId){

@@ -74,8 +74,8 @@
 	       <div class="cLeft">
 	       		<div  class="mode_name">稿件管理</div>
        			<div  class="li1"  id="tougao">投稿</div>
-		        <div  class="li2" id="gaojianchaxun">稿件查询</div>
-		        <div  class="li3" id="gaofeichaxun">稿费查询</div>
+		        <div  class="li3" id="gaojianchaxun">稿件查询</div>
+##		        <div  class="li3" id="gaofeichaxun">稿费查询</div>
 		        <div  class="mode_name"  style="margin-top:10px;">个人信息设置</div>
 	       		<div  class="li2"  style="margin-top:10px;" id="xiugaixinxi">修改个人信息</div>
 			    <div  class="li3" id="xiugaimima">修改密码</div>

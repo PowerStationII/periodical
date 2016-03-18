@@ -36,7 +36,8 @@ public interface OrderInfoDao {
 	int updateByPrimaryKeySelective(OrderInfo record);
 	
 	int updateByPrimaryKey(OrderInfo record);
-	
+	int updateByOrderNo(OrderInfo record);
+
 	List<BizOrder> queryPayInfoLists(BizOrder bizOrder);
 	List<BizOrder> editorQryOrderInfos(BizOrder bizOrder);
 	List<BizOrder> editorQryOrderInfosPage(BizOrderQuery bizOrder);

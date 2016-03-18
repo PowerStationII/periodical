@@ -748,7 +748,10 @@
                     and article_name = #{articleName,jdbcType=VARCHAR}
                 </if>
                 <if test="articleId != null">
-                    and article_id like  CONCAT( '%',#{articleId,jdbcType=VARCHAR} ,'%')
+                    and
+                    (article_id like  CONCAT( '%',#{articleId,jdbcType=VARCHAR} ,'%')
+                    or
+                    article_id in ( SELECT MAX(article_no) FROM periodical_fanxiu_log WHERE group_flag = #{articleId,jdbcType=VARCHAR}) )
                 </if>
                 <if test="articleType != null">
                     and article_type = #{articleType,jdbcType=VARCHAR}

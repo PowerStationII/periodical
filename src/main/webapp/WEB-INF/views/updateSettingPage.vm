@@ -262,7 +262,7 @@
 				 <input type="button" value="返回"  id="back" ><input type="submit" value="保存">
 			</div>
 		</div>
-		#elseif($!{userInfo.roleId}=='1002')
+		#elseif($!{userInfo.roleId}=='1002' || $!{userInfo.roleId}=='1011' )
 		<div id="articleInfos">
 			<input type="hidden" value="$!{readerInfo.id}" id="id" name="id">
 			<table style="border: 1px solid green; width: 800px;" rules="all">

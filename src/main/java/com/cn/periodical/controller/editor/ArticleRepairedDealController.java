@@ -158,7 +158,7 @@ public class ArticleRepairedDealController extends EditorController{
 			HttpServletRequest request,@ModelAttribute AritcleWorkFlowReqDto aritcleWorkFlowReqDto
             ,@RequestParam(value="files", required=true) MultipartFile[] files) {
 		logger.info("返修Action in:articleId:["+articleId+"]&aritcleWorkFlowReqDto:["+JSON.toJSONString(aritcleWorkFlowReqDto)+"]");
-//		ModelAndView mav = new ModelAndView("redirect:../editor/toRepaireArticlePage");
+
         Map<String , Object> map = new HashMap<String ,Object>();
 		ArticleInfoQuery query= new ArticleInfoQuery();
 		query.setArticleId(articleId);

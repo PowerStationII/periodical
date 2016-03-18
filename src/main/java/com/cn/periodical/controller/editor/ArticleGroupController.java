@@ -113,6 +113,7 @@ public class ArticleGroupController extends EditorController{
                 }
 //				periodical.setPeriodicalIssueNo(periodicalInfo.getCnNo());
                 periodical.setPeriodicalState(PeriodicalStateEnums.NEW.getCode());
+                periodical.setExtend2(PeriodicalStateEnums.NEW.getCode());
                 periodical.setCycleNums(i);
                 periodical.setPeriodicalYear(periodicalYear);
 //				periodical.setPublishNums(periodicalInfo.getPublishNums()==null?10000:periodicalInfo.get);
@@ -274,30 +275,48 @@ public class ArticleGroupController extends EditorController{
 		query.setPeriodicalId(periodicalId);
 		query.setPeriodicalIssueNo(periodicalIssueNo);
 		query.setExtend1("N");
+        List<HashMap<String,Object>> showList = new ArrayList<HashMap<String, Object>>() ;
 		List<SectionInfo> sectionInfos = sectionInfoManager.queryListForGroupAticle(query);
         for(SectionInfo sectionInfo : sectionInfos){
             List<Map<String, Object>> list = sectionInfo.getList();
             for(Map<String, Object> map : list){
-                  String article_id = (String)map.get("article_id");// 文章id
+                  String article_id = (String)map.get("articleId");// 文章显示的（第一次投的）
+                String oriArticleId = (String)map.get("oriArticleId");// 文章id
+                String title = (String)map.get("article_cn_title");// 文章标题
+
                 AuthorInfoQuery authorInfoQuery = new AuthorInfoQuery();
-                authorInfoQuery.setArticleId(article_id);
+                authorInfoQuery.setArticleId(oriArticleId);
                 List<AuthorInfo> authorInfos = authorInfoManager.queryList(authorInfoQuery);
-                SongKanDetail songKanDetail = songKanDetailManager.selectArticle(article_id);
-                StringBuilder strb_aurhor = new StringBuilder();
+
                 for(AuthorInfo authorInfo : authorInfos){
-                    strb_aurhor.append(","+authorInfo.getAuthorName());
+                    HashMap<String,Object> m = new HashMap<String,Object>();
+                    m.put("article_id",article_id);
+                    m.put("oriArticleId",oriArticleId);
+                    m.put("title",title);
+                    m.put("authorName",authorInfo.getAuthorName());
+                    m.put("count",1);
+                    showList.add(m);
                 }
-                map.put("author",String.valueOf(strb_aurhor).replaceFirst(",",""));
-                map.put("authroCount",authorInfos.size());
-                if(null==songKanDetail){
-                    map.put("nums",0);
-                } else{
-                    map.put("nums",songKanDetail.getZengSonNum());
+
+                SongKanDetail songKanDetail = songKanDetailManager.selectArticle(article_id);
+                if(null!=songKanDetail){
                     orderNo =  songKanDetail.getOrderNo() ;
                 }
+//                StringBuilder strb_aurhor = new StringBuilder();
+//                for(AuthorInfo authorInfo : authorInfos){
+//                    strb_aurhor.append(","+authorInfo.getAuthorName());
+//                }
+//                map.put("author",String.valueOf(strb_aurhor).replaceFirst(",",""));
+//                map.put("authroCount",authorInfos.size());
+//                if(null==songKanDetail){
+//                    map.put("nums",0);
+//                } else{
+//                    map.put("nums",songKanDetail.getZengSonNum());
+//                    orderNo =  songKanDetail.getOrderNo() ;
+//                }
             }
         }
-		mav.addObject("sList", sectionInfos);
+		mav.addObject("showList", showList);
 
 		mav.addObject("periodicalIssueNo", periodicalIssueNo);
 		mav.addObject("periodicalId", periodicalId);

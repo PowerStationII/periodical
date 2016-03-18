@@ -760,7 +760,12 @@
 		<include refid="Base_Set_Clause" />
 		where ID = #{id,jdbcType=DECIMAL}
 	</update>
-
+    <update id="updateByOrderNo" parameterType="OrderInfo">
+        update order_info
+        set amount = #{amount,jdbcType=DECIMAL},
+        subscribe_nums = #{subscribeNums,jdbcType=DECIMAL}
+        where order_no = #{orderNo,jdbcType=VARCHAR}
+    </update>
 	<select id="selectPageByExample" parameterType="OrderInfoQuery"
 		resultMap="BaseResultMap">
 		<include refid="Page_Query_Begin" />

@@ -93,7 +93,7 @@ public class PInfoSettingServiceImpl implements PInfoSettingService {
 			List<AuthorInfo> authorInfos= authorInfoManager.queryList(authorInfoQuery);
 			AuthorInfo authorInfo = authorInfos.get(0);
 			return authorInfo;
-		}else if(RoleIdEnums.READER_P.getCode().equals(userInfo.getRoleId())){
+		}else if(RoleIdEnums.READER_P.getCode().equals(userInfo.getRoleId()) || RoleIdEnums.READER_E.getCode().equals(userInfo.getRoleId())){
 			//TODO:
 			ReaderInfoQuery readerInfoQuery= new ReaderInfoQuery();
 			readerInfoQuery.setReaderId(userInfo.getRefId());

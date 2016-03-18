@@ -76,5 +76,8 @@ public class AuthorInfoManagerImpl implements AuthorInfoManager {
     public List<Object> selectAuthorByArticl(String atricleId){
         return authorInfoDao.selectAuthorByArticl(atricleId);
     }
+    public List<Object> selectAuthorByArticl1(String atricleId){
+        return authorInfoDao.selectAuthorByArticl1(atricleId);
+    }
 }
 

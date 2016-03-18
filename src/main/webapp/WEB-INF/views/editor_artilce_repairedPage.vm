@@ -95,7 +95,7 @@
                 </tr>
                 <tr>
                     <td width = "">返修意见:</td>
-                    <td><TEXTAREA NAME="dealOpinion" ROWS="10" COLS="70"></TEXTAREA></td>
+                    <td><TEXTAREA id="dealOpinion" NAME="dealOpinion" ROWS="10" COLS="70"></TEXTAREA></td>
                 </tr>
 			</table>
 			<div style="margin-left:300px;">

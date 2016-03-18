@@ -146,7 +146,7 @@ public class OrderManageController extends ReaderController{
 	 */
 	@RequestMapping(value="/toCreatOrder",method ={ RequestMethod.POST ,RequestMethod.GET})
 	public ModelAndView toCreatOrder(HttpServletRequest request,String periodicalId,String singlPrice
-            ,String periodicalYear,int orderNums,int cycle) {
+            ,String periodicalYear) {
 		UserInfo userInfo = getUserInfo(request);
 		logger.info("新建读者订单Page:["+userInfo.getUserId()+"]&["+periodicalId+"]");
 		ModelAndView mav = new ModelAndView("redirect:../reader/toOrderManagePage");
@@ -157,10 +157,10 @@ public class OrderManageController extends ReaderController{
 
 		orderInfo.setOrderNo(orderNo);
 		orderInfo.setPeriodicalYear(periodicalYear);
-		orderInfo.setSubscribeNums(orderNums);
+		orderInfo.setSubscribeNums(0);
 		orderInfo.setOrderStatus(OrderStatusEnums.NONE.getCode());/**订单状态:N未付款订单*/
 		orderInfo.setPeriodicalId(periodicalId);
-		orderInfo.setAmount(Long.valueOf(cycle*orderNums*Integer.valueOf(singlPrice)));
+		orderInfo.setAmount(0l);
 		orderInfo.setCreateTime(new Date());
 		orderInfoManager.saveOrderInfo(orderInfo);
 		return mav;

@@ -31,7 +31,10 @@ public class OrderInfoManagerImpl implements OrderInfoManager {
 			orderInfoDao.updateByPrimaryKeySelective(orderInfo);
 		}
 	}
-	
+	public void updateByOrderNo(OrderInfo orderInfo) {
+        orderInfoDao.updateByOrderNo(orderInfo);
+	}
+
 	
 	public OrderInfo findOrderInfoById(Long id) {
 		return orderInfoDao.selectByPrimaryKey(id);

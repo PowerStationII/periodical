@@ -117,7 +117,8 @@ public class ArticleQueryController extends AuthorController{
 
         Set<String> set = new HashSet<String>();
         set.add(RoleIdEnums.AUTHOR_ATTR.getCode());
-        if(ArticleStateEnums.END_ARTICLE.getCode().equals(detail.getEditorState())){ // 稿件处理完成了， 作者才可以看审核之后的附件
+        if(ArticleStateEnums.END_ARTICLE.getCode().equals(detail.getEditorState())
+                || ArticleStateEnums.REPAIR_ARTICLE.getCode().equals(detail.getEditorState())){ // 稿件处理完成了， 作者才可以看审核之后的附件
             set.add(RoleIdEnums.ARTICLE_EDITOR_ATTR.getCode());
         }
         List<ArticleAttachmentInfo> listAttr = articleQueryService.queryAttByArtcicle(articleId, set);

@@ -10,30 +10,8 @@
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 </head>
-<script>
-	$(function(){
-		var priceAllYear = ${periodicalInfo.inFixPrice} * ${periodicalInfo.cycle};
-		$('#priceAllYear').text('全年定价：'+priceAllYear);
-		
-		$('#orderNums').blur(function(){
-			if(!isNaN($('#orderNums').val())){
-##			    var price = ${periodicalInfo.inFixPrice} * parseInt($('#orderNums').val());
-			    var price = priceAllYear * parseInt($('#orderNums').val());
-				$('#price').text('金额：'+price);
-			}
-			else {
-				alert('请输入正确数字');
-				$('#orderNums').val('0');
-				$('#price').text('金额：0');
-			}
-			
-		});
-
-
-    }) ;
-</script>
 <body>
-	<div id="articleInfos"  style="margin-left:300px;margin-top:50px;">
+	<div id="articleInfos"  style="margin-left:30px;margin-top:10px;width=500px">
 	<form action="../reader/toCreatOrder" method="POST">
 		<input type="hidden" name="periodicalId" value="${periodicalInfo.periodicalId}">
 		<input type="hidden" name="singlPrice" value="${periodicalInfo.inFixPrice}">
@@ -90,12 +68,6 @@
                 	<option value="2022">2022</option>
                 	<option value="2023">2023</option>
                 </select></td>
-            </tr>
-            <tr>
-                <td>订阅数：<input type="text" name="orderNums" id="orderNums" value="0"></td>
-            </tr>
-            <tr>
-                <td id="price">金额：0</td>
             </tr>
             <tr>
                 <td>

@@ -74,11 +74,13 @@
                 #end
 				#if(${dtos.extend1}=='Y')
                 <td>
-                    <a	class="easyui-linkbutton" href="../expert/auditArticleEnDetailPage?articleId=${dtos.aId}&periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">重新审核</a>
+                    <a	class="easyui-linkbutton"
+                          href="../expert/auditArticleEnDetailPage?articleId=${dtos.aId}&periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">重新审核</a>
 				</td>
 				#else
 				<td>
-                    <a	class="easyui-linkbutton" href="../expert/auditArticleEnDetailPage?articleId=${dtos.aId}&periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">审核稿件</a>
+                    <a	class="easyui-linkbutton"
+                          href="../expert/auditArticleEnDetailPage?articleId=${dtos.aId}&periodicalIssueNo=${dtos.pIsNo}&periodicalId=${dtos.pId}">审核稿件</a>
                 </td>
 				#end
 			</tr>

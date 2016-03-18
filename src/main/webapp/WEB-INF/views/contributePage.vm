@@ -137,15 +137,15 @@
   				else if ($("input[name='articleEnKeywords']").val()=='') {
   					alert('英文关键词不允许为空');
   				}
-  				else if ($("input[name='totalPages']").val()=='') {
-  					alert('页数不允许为空');
-  				}
-  				else if ($("input[name='totalPics']").val()=='') {
-  					alert('图（片）数不允许为空');
-  				}
-  				else if ($("input[name='totalTabs']").val()=='') {
-  					alert('表格数不允许为空');
-  				}
+//  				else if ($("input[name='totalPages']").val()=='') {
+//  					alert('页数不允许为空');
+//  				}
+//  				else if ($("input[name='totalPics']").val()=='') {
+//  					alert('图（片）数不允许为空');
+//  				}
+//  				else if ($("input[name='totalTabs']").val()=='') {
+//  					alert('表格数不允许为空');
+//  				}
   				else if ($("textarea[name='remark']").val()=='') {
   					alert('论文用途及期刊要求备注不允许为空');
   				}
@@ -155,15 +155,15 @@
   				else if ($("textarea[name='referenceDoc']").val()=='') {
   					alert('参考信息不允许为空');
   				}
-  				else if (intNotZeroCheck($("input[name='totalPages']"))==false) {
-  					alert('页数必须是整数');
-  				}
-  				else if (intNotZeroCheck($("input[name='totalPics']"))==false) {
-  					alert('图（片）数必须是整数');
-  				}
-  				else if (intNotZeroCheck($("input[name='totalTabs']"))==false) {
-  					alert('表格数必须是整数');
-  				}
+//  				else if (intNotZeroCheck($("input[name='totalPages']"))==false) {
+//  					alert('页数必须是整数');
+//  				}
+//  				else if (intNotZeroCheck($("input[name='totalPics']"))==false) {
+//  					alert('图（片）数必须是整数');
+//  				}
+//  				else if (intNotZeroCheck($("input[name='totalTabs']"))==false) {
+//  					alert('表格数必须是整数');
+//  				}
   				else if ($("#investSection").combobox("getText")=="") {
   					alert('请选择拟投栏目');
   				}
@@ -211,8 +211,8 @@
                         var authorName = $("input[name='authorList["+i+"].authorName']");
                         var authorNamev =  authorName[0].value.trim() ;
 
-                        var extend = $("input[name='addressInfos["+i+"].extend']");
-                        var extendv =  extend[0].value.trim() ;
+                        var receivePostcode = $("input[name='addressInfos["+i+"].receivePostcode']");
+                        var extendv =  receivePostcode[0].value.trim() ;
 
                         var receiveAddress = $("input[name='addressInfos["+i+"].receiveAddress']");
                         var receiveAddressv =  receiveAddress[0].value.trim() ;
@@ -498,24 +498,24 @@
 							<a class="txtSize">【从下拉列表框中选择最适合或最接近您论文的栏目】</a>
   						</td>
   					</tr>
-  					<tr>
-  						<td>页数</td>
-  						<td>
-  							<input  type="text"   name="totalPages"/><br>
-  						</td>
-  					</tr>
-  					<tr>
-  						<td>图（片）数</td>
-  						<td>
-  							<input  type="text"   name="totalPics"/><br>
-  						</td>
-  					</tr>
-  					<tr>
-  						<td>表格数</td>
-  						<td>
-  							<input  type="text"   name="totalTabs"/><br>
-  						</td>
-  					</tr>
+##  					<tr>
+##  						<td>页数</td>
+##  						<td>
+##  							<input  type="text"   name="totalPages"/><br>
+##  						</td>
+##  					</tr>
+##  					<tr>
+##  						<td>图（片）数</td>
+##  						<td>
+##  							<input  type="text"   name="totalPics"/><br>
+##  						</td>
+##  					</tr>
+##  					<tr>
+##  						<td>表格数</td>
+##  						<td>
+##  							<input  type="text"   name="totalTabs"/><br>
+##  						</td>
+##  					</tr>
   					<tr>
   						<td>论文用途及期刊要求备注</td>
   						<td>
@@ -576,7 +576,7 @@
   					<tr>
   						<td>邮编</td>
   						<td>
-  							<input  type="text" name="addressInfos[0].extend" maxlength="50"/>
+  							<input  type="text" name="addressInfos[0].receivePostcode" maxlength="50"/>
   						</td>
   					</tr>
   					<tr>

@@ -132,7 +132,7 @@ function getPeriodicalType(status){
 
 //广告类型
 function getGuangGaoType(status){
-    if("N" == status || null==status || "null"==status || ""==status){
+    if("N" == status || null==status || "null"==status || "NULL"==status || ""==status){
         return '新刊';
     }else if("APD" == status){
         return '稿件部分组刊中';

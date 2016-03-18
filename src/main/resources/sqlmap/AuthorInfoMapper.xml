@@ -550,5 +550,13 @@
 		ON aui.author_id = adi.ref_id
         WHERE  aui.article_id = #{articleId,jdbcType=VARCHAR} AND aui.isContacter = 'Y'
     </select>
+    <select id="selectAuthorByArticl1" parameterType="java.lang.String" resultMap="SelectByArticleMap">
+        SELECT aui.author_name AS author_name ,aui.company_name AS company_name,
+                 adi.contacter_mobile AS contacter_mobile, adi.receive_address AS receive_address,
+                 adi.receive_postcode  AS receive_postcode
+        FROM author_info aui  LEFT JOIN address_info adi
+		ON aui.author_id = adi.ref_id
+        WHERE  aui.article_id = #{articleId,jdbcType=VARCHAR}
+    </select>
 
 </mapper>

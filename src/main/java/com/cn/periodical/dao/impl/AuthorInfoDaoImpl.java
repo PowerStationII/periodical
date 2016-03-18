@@ -74,5 +74,8 @@ public class AuthorInfoDaoImpl extends BaseDao implements AuthorInfoDao {
     public List<Object> selectAuthorByArticl(String articleId){
         return super.getSqlSession().selectList("AuthorInfoMapper.selectAuthorByArticl", articleId);
     }
-	
+    public List<Object> selectAuthorByArticl1(String articleId){
+        return super.getSqlSession().selectList("AuthorInfoMapper.selectAuthorByArticl1", articleId);
+    }
+
 }

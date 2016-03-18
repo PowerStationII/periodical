@@ -107,7 +107,9 @@
             and ai.expert_state = #{expertState,jdbcType=VARCHAR}
         </if>
         <if test="articleId != null and ''!=articleId">
-            and ai.article_id like CONCAT( '%',#{articleId,jdbcType=VARCHAR} ,'%')
+            and ( ai.article_id like CONCAT( '%',#{articleId,jdbcType=VARCHAR} ,'%')
+            or
+            ai.article_id in ( SELECT MAX(article_no) FROM periodical_fanxiu_log WHERE group_flag = #{articleId,jdbcType=VARCHAR}) )
         </if>
         <if test="articleCnTitle != null and ''!=articleCnTitle">
             and ai.article_cn_title like CONCAT( '%',#{articleCnTitle,jdbcType=VARCHAR} ,'%')
@@ -150,7 +152,9 @@
             and ai.expert_state = #{expertState,jdbcType=VARCHAR}
         </if>
         <if test="articleId != null and ''!=articleId">
-            and ai.article_id like CONCAT( '%',#{articleId,jdbcType=VARCHAR} ,'%')
+            and ( ai.article_id like CONCAT( '%',#{articleId,jdbcType=VARCHAR} ,'%')
+            or
+            ai.article_id in ( SELECT MAX(article_no) FROM periodical_fanxiu_log WHERE group_flag = #{articleId,jdbcType=VARCHAR}) )
         </if>
         <if test="articleCnTitle != null and ''!=articleCnTitle">
             and ai.article_cn_title like CONCAT( '%',#{articleCnTitle,jdbcType=VARCHAR} ,'%')
@@ -548,7 +552,10 @@
 			and auLin.article_cn_title= #{cnTitle,jdbcType=VARCHAR}
 		</if>
 		<if test="articleId != null  and ''!= articleId">
-			and auLin.article_id= #{articleId,jdbcType=VARCHAR}
+			and
+            (auLin.article_id = #{articleId,jdbcType=VARCHAR}
+            or
+            auLin.article_id in ( SELECT MAX(article_no) FROM periodical_fanxiu_log WHERE group_flag = #{articleId,jdbcType=VARCHAR}) )
 		</if>
 		<if test="state != null  and ''!= state">
 			and auLin.editor_state= #{state,jdbcType=VARCHAR}
@@ -596,7 +603,10 @@
 			and auLin.article_cn_title= #{cnTitle,jdbcType=VARCHAR}
 		</if>
 		<if test="articleId != null  and ''!= articleId">
-			and auLin.article_id= #{articleId,jdbcType=VARCHAR}
+            and
+            (auLin.article_id= #{articleId,jdbcType=VARCHAR}
+            or
+            auLin.article_id in ( SELECT MAX(article_no) FROM periodical_fanxiu_log WHERE group_flag = #{articleId,jdbcType=VARCHAR}) )
 		</if>
 		<if test="state != null  and ''!= state">
 			and auLin.editor_state= #{state,jdbcType=VARCHAR}

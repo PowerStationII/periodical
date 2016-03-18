@@ -35,4 +35,5 @@ public interface AuthorInfoDao {
 	int updateByPrimaryKey(AuthorInfo record);
 
 	public List<Object> selectAuthorByArticl(String articleId);
+	public List<Object> selectAuthorByArticl1(String articleId);
 }

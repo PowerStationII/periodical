@@ -11,6 +11,7 @@ import com.cn.periodical.pojo.*;
 
 public interface OrderInfoManager {
 	void saveOrderInfo(OrderInfo orderInfo);
+	void updateByOrderNo(OrderInfo orderInfo);
 
 	OrderInfo findOrderInfoById(Long id);
 	
