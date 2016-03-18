@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="../css/easyui.css" type="text/css" rel="stylesheet" />
+    <link href="../css/icon.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+</head>
+<script>
+    $(function() {
+        $('#back').click(function() {
+            history.go(-1);
+        }) ;
+
+        $("#save").click(function(){
+            var year = $("#year").val();
+            var periodicalIssueNo = $("#periodicalIssueNo").val();
+            if(""==year){
+                alert("请选择年份");
+                return ;
+            }
+            if(""==periodicalIssueNo){
+                alert("请输入增刊名称");
+                return ;
+            }
+            $("form").submit();
+        }) ;
+    })
+</script>
+<body>
+<div>
+    <form action="../reader/saveZeng1KanPageOne" method="POST">
+
+        <table style="border: 1px solid green;width:100%" rules="all">
+            <tr>
+                <td >增刊年份：</td>
+                <td>
+                    <select  name="year" id="year">
+                        <option value="">请选择</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+                <td>增刊名称：</td>
+                <td><input type="text" name="periodicalIssueNo" id="periodicalIssueNo" ></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="返回" id="back" /></td>
+                <td colspan="4"><input type="button" id="save" value="保存"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

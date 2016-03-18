@@ -73,20 +73,6 @@ public class OrderManageController extends ReaderController{
 	 * toOrderManagePage
 	 * 订单管理页面
 	 */
-//	@RequestMapping(value="/toOrderManagePage")
-//	public ModelAndView toOrderManagePage(HttpServletRequest request,BizOrder bizOrder) {
-//		UserInfo userInfo = getUserInfo(request);
-//		logger.info("订单管理Page:[ ]");
-//		bizOrder.setUserId(userInfo.getUserId());
-//		List<BizOrder> list = orderInfoManager.queryOrderList(bizOrder);
-//		ModelAndView mav = new ModelAndView("reader_orderManagePage");
-//		mav.addObject("list", list);
-//		return mav;
-//	}
-	/**
-	 * toOrderManagePage
-	 * 订单管理页面
-	 */
 	@RequestMapping(value="/toOrderManagePage")
 	public ModelAndView toOrderManagePage(HttpServletRequest request,BizOrder bizOrder) {
 		ModelAndView mav = new ModelAndView("reader_orderManagePage");
@@ -444,5 +430,61 @@ public class OrderManageController extends ReaderController{
 		ModelAndView mav = new ModelAndView("redirect:../reader/toOrderManagePage");
 		return mav;
 	}
-    
+
+
+    /**
+     *
+     * 进入增刊信息页面
+     */
+    @RequestMapping(value="/inToZeng1KanPageOne")
+    public ModelAndView inToZeng1KanPageOne(HttpServletRequest request) {
+        logger.info("进入增刊信息页面");
+        ModelAndView mav = new ModelAndView("inToZeng1KanPageOne");
+        return mav;
+    }
+    /**
+     *
+     * 保存增刊信息
+     */
+    @RequestMapping(value="/saveZeng1KanPageOne")
+    public ModelAndView saveZeng1KanPageOne(HttpServletRequest request,Zeng1KanInfo zeng1KanInfo) {
+        logger.info("增刊保存");
+        ModelAndView mav = new ModelAndView("redirect:../reader/toZeng1KanYouJiPage");
+        String orderNo = articalCodeManager.getCode(ArticalCodeEnums.ZENG1KAN_CONDE.getCode()
+                ,ArticalCodeEnums.ZENG1KAN_CONDE.getName()) ;
+        zeng1KanInfo.setOrderNo(orderNo);
+        zeng1KanInfo.setPeriodicalId(orderNo);
+        zeng1KanInfo.setCycleNums(1);
+        zeng1KanInfo.setZengSonNums(0);
+        zeng1KanInfoService.insert(zeng1KanInfo);
+        return mav;
+    }
+    /**
+     *
+     * 进入增刊信息页面
+     */
+    @RequestMapping(value="/inToZeng4KanPageOne")
+    public ModelAndView inToZeng4KanPageOne(HttpServletRequest request) {
+        logger.info("进入增刊信息页面");
+        ModelAndView mav = new ModelAndView("inToZeng4KanPageOne");
+        return mav;
+    }
+    /**
+     *
+     * 保存增刊信息
+     */
+    @RequestMapping(value="/saveZeng4KanPageOne")
+    public ModelAndView saveZeng4KanPageOne(HttpServletRequest request,Zeng4KanInfo zeng4KanInfo) {
+        logger.info("增刊保存");
+        ModelAndView mav = new ModelAndView("redirect:../reader/toZeng4KanYouJiPage");
+        String orderNo = articalCodeManager.getCode(ArticalCodeEnums.ZENGKAN_CONDE.getCode()
+                ,ArticalCodeEnums.ZENGKAN_CONDE.getName()) ;
+        zeng4KanInfo.setOrderNo(orderNo);
+        zeng4KanInfo.setPeriodicalId(orderNo);
+        zeng4KanInfo.setPeriodicalIssueNo(orderNo);
+        zeng4KanInfo.setZengSonNums(0);
+        zeng4KanInfoService.insert(zeng4KanInfo);
+        return mav;
+    }
+
 }

@@ -17,4 +17,5 @@ public interface Zeng1KanDetailManager {
     public Zeng1KanDetail selectArticle(String articleId);
 
     public List<Zeng1KanDetail> selectByOrderNo(String orderNo);
+    public int deleteByorderNo(String orderNo);
 }

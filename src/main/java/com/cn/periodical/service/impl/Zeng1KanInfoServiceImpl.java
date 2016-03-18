@@ -5,6 +5,7 @@ import com.cn.periodical.manager.Zeng1KanDetailManager;
 import com.cn.periodical.manager.Zeng1KanInfoManager;
 import com.cn.periodical.pojo.Zeng1KanDetail;
 import com.cn.periodical.pojo.Zeng1KanInfo;
+import com.cn.periodical.pojo.Zeng4KanDetail;
 import com.cn.periodical.service.Zeng1KanInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -111,21 +112,7 @@ public class Zeng1KanInfoServiceImpl implements Zeng1KanInfoService {
      */
     @Override
     public int insert(final Zeng1KanInfo zeng1KanInfo) {
-        int k =(Integer) transactionTemplate.execute(new TransactionCallback<Object>(){
-            public Object doInTransaction(TransactionStatus status) {
-                try{
-                  for(int i = 1 ; i<=12 ; i++){
-                      zeng1KanInfoManager.insert(zeng1KanInfo) ;
-                  }
-                    return 1 ;
-                }catch (Exception e){
-                    status.setRollbackOnly();
-                    return 0 ;
-                }
-
-            }
-        });
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return zeng1KanInfoManager.insert(zeng1KanInfo) ;
     }
 
     @Override
@@ -133,6 +120,10 @@ public class Zeng1KanInfoServiceImpl implements Zeng1KanInfoService {
         int k =(Integer) transactionTemplate.execute(new TransactionCallback<Object>(){
             public Object doInTransaction(TransactionStatus status) {
                 try{
+                    if(list.size()>0){
+                        Zeng1KanDetail zeng1KanDetail = list.get(0);
+                        zeng1KanDetailManager.deleteByorderNo(zeng1KanDetail.getOrderNo());
+                    }
                     for(Zeng1KanDetail zeng1KanDetail :list){
                         int i = zeng1KanDetailManager.insert(zeng1KanDetail) ;
                         if(1!=1){

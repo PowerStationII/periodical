@@ -135,5 +135,8 @@
         from zeng1Kan_detail
         where orderNo =  #{orderNo,jdbcType=VARCHAR}
     </select>
-
+    <delete id="deleteByorderNo" parameterType="java.lang.String">
+        delete from zeng1Kan_detail
+        where orderNo = #{orderNo,jdbcType=VARCHAR}
+    </delete>
 </mapper>

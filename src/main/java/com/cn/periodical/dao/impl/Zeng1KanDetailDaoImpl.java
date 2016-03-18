@@ -31,5 +31,10 @@ public class Zeng1KanDetailDaoImpl extends BaseDao implements Zeng1KanDetailDao 
         return super.getSqlSession().selectList("Zeng1KanDetailMapper.selectByOrderNo", orderNo);
     }
 
+    @Override
+    public int deleteByorderNo(String orderNo) {
+        return super.getSqlSession().delete("Zeng1KanDetailMapper.deleteByorderNo", orderNo);
+    }
+
 
 }

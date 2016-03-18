@@ -283,9 +283,4 @@ public class PeriodicalDistributController extends ReaderController{
         return mav ;
     }
 
-    @RequestMapping(value="/inToZeng4KanPageOne")
-    public @ResponseBody Object inToZeng4KanPageOne(){
-
-        return null ;
-    }
 }

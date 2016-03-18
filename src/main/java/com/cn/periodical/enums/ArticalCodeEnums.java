@@ -14,7 +14,8 @@ public enum ArticalCodeEnums {
     QIKAN_CONDE1("4","QK"),// 期刊编号 periodical
     SONGKAN_CONDE("5","SK"),// 送刊生成的订单编号
     ZENGKAN_CONDE("6","ZK"),// 赠刊生成的订单编号
-    ORDER_CONDE("7","ORDER");// 期刊订单编号
+    ORDER_CONDE("7","ORDER"),// 期刊订单编号
+    ZENG1KAN_CONDE("8","ADD");// 增刊订单号
 
     private String code;
     private String name;

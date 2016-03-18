@@ -111,21 +111,7 @@ public class Zeng4KanInfoServiceImpl implements Zeng4KanInfoService {
      */
     @Override
     public int insert(final Zeng4KanInfo zeng4KanInfo) {
-        int k =(Integer) transactionTemplate.execute(new TransactionCallback<Object>(){
-            public Object doInTransaction(TransactionStatus status) {
-                try{
-                  for(int i = 1 ; i<=12 ; i++){
-                      zeng4KanInfoManager.insert(zeng4KanInfo) ;
-                  }
-                    return 1 ;
-                }catch (Exception e){
-                    status.setRollbackOnly();
-                    return 0 ;
-                }
-
-            }
-        });
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return          zeng4KanInfoManager.insert(zeng4KanInfo) ;
     }
 
     @Override
@@ -133,6 +119,10 @@ public class Zeng4KanInfoServiceImpl implements Zeng4KanInfoService {
         int k =(Integer) transactionTemplate.execute(new TransactionCallback<Object>(){
             public Object doInTransaction(TransactionStatus status) {
                 try{
+                    if(list.size()>0){
+                        Zeng4KanDetail zeng4KanDetail = list.get(0);
+                        zeng4KanDetailManager.deleteByorderNo(zeng4KanDetail.getOrderNo());
+                    }
                     for(Zeng4KanDetail zeng4KanDetail :list){
                         int i = zeng4KanDetailManager.insert(zeng4KanDetail) ;
                         if(1!=1){

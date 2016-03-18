@@ -205,13 +205,20 @@ public class ReadExcel {
                 } else {
                     zeng4KanDetail.setDianhua(getValue(hssfCell4));
                 }
-//				// 订阅数量
+				// 订阅数量
                 Cell hssfCell5 = hssfRow.getCell(5);
                 if (hssfCell5 == null || "".equals(hssfCell5)) {
                     zeng4KanDetail.setZengSonNum(0);
                 } else {
                     String value = getValue(hssfCell5);
                     zeng4KanDetail.setZengSonNum(getIntVal(value));
+                }
+                // 联系人
+                Cell hssfCell6 = hssfRow.getCell(6);
+                if (hssfCell6 == null || "".equals(hssfCell6)) {
+                    zeng4KanDetail.setArticleId("");
+                } else {
+                    zeng4KanDetail.setArticleId(getValue(hssfCell6));
                 }
                 if ("".equals(zeng4KanDetail.getXingming()) && "".equals(zeng4KanDetail.getDanwei())
                         && "".equals(zeng4KanDetail.getDianhua()) && "".equals(zeng4KanDetail.getDizhi())

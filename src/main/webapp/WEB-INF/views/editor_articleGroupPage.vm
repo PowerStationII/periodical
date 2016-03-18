@@ -60,7 +60,8 @@
                     </select>
                 </td>
 				<td>
-                    <a class="easyui-linkbutton" style="width: 50px;" href="javascript:paikan('${periodicalInfo.periodicalId}','$!{velocityCount}')">排刊</a>
+                    <a class="easyui-linkbutton" style="width: 50px;"
+                       href="javascript:paikan('${periodicalInfo.periodicalId}','$!{velocityCount}')">排刊</a>
                 </td>
 			</tr>
 			#end

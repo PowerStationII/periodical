@@ -34,5 +34,8 @@ public class Zeng1KanDetailMangerImpl implements Zeng1KanDetailManager {
     public List<Zeng1KanDetail> selectByOrderNo(String orderNo) {
         return zeng1KanDetailDao.selectByOrderNo(orderNo);
     }
+    public int deleteByorderNo(String orderNo) {
+        return zeng1KanDetailDao.deleteByorderNo(orderNo);
+    }
 
 }
